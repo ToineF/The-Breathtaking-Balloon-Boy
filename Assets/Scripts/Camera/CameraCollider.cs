@@ -9,6 +9,8 @@ public class NewBehaviourScript : MonoBehaviour
 
     private void OnTriggerEnter(Collider collision)
     {
+        if (collision.GetComponent<CharacterControllerTest>() == null) return;
+
         _virtualCamera.gameObject.SetActive(false);
         _virtualCamera.gameObject.SetActive(true);
     }

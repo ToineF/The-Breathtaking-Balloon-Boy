@@ -5,8 +5,15 @@ using UnityEngine.UI;
 
 public class AirManager : MonoBehaviour
 {
+    public static AirManager Instance;
+
     private float _currentAir = 1;
     [SerializeField] private Image _currentAirGauge;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     public void SetCurrentAir(float percentage)
     {
