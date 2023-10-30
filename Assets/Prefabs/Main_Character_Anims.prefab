@@ -11,7 +11,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 8507ab4bf41c4774e892b7b880a0ff7a,
         type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8507ab4bf41c4774e892b7b880a0ff7a,
         type: 3}
@@ -93,6 +93,10 @@ PrefabInstance:
       addedObject: {fileID: 6539601315103415620}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8507ab4bf41c4774e892b7b880a0ff7a,
         type: 3}
+      insertIndex: 2
+      addedObject: {fileID: 3293357717306609732}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8507ab4bf41c4774e892b7b880a0ff7a,
+        type: 3}
       insertIndex: -1
       addedObject: {fileID: 9058936854868484476}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8507ab4bf41c4774e892b7b880a0ff7a,
@@ -129,6 +133,18 @@ MonoBehaviour:
   Speed: 0.025
   _animator: {fileID: 7764913791779809622}
   _animatorWalkBool: IsRunning
+--- !u!114 &3293357717306609732
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3920805190166161814}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2e68ae6e014f6747b04d55430ebb87c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!143 &9058936854868484476
 CharacterController:
   m_ObjectHideFlags: 0
