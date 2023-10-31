@@ -6,9 +6,11 @@ using System;
 [RequireComponent(typeof(Collider))]
 public class WindZone : MonoBehaviour
 {
-    [SerializeField][Tooltip("The magnitude of the applied force, as a positive number")] private float _forceMagnitude;
+    [SerializeField] private Vector3 _pushVector;
     [SerializeField] private float _airPercentageAddedOnContact;
     [SerializeField] private float _timeBetweenAdditions;
+    [SerializeField][Range(0, 1)] private float _startLerpValue;
+    [SerializeField][Range(0, 1)] private float _stopLerpValue;
     private float _timer;
 
     private void Start()
@@ -22,17 +24,22 @@ public class WindZone : MonoBehaviour
 
         if (other.GetComponent<CharacterControllerTest>() == null) return;
 
-        other.GetComponent<CharacterControllerTest>().SetForce(_forceMagnitude * Time.deltaTime);
         AirManager.Instance.AddAir(_airPercentageAddedOnContact);
         _timer = _timeBetweenAdditions;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.GetComponent<CharacterControllerTest>() == null) return;
+
+        other.GetComponent<CharacterControllerTest>().SetForce(_pushVector * Time.deltaTime, _startLerpValue);
     }
 
     private void OnTriggerExit(Collider other)
     {
         if (other.GetComponent<CharacterControllerTest>() == null) return;
 
-        if (Mathf.Abs(other.GetComponent<CharacterControllerTest>().Force) > 0.1f) return;
-        other.GetComponent<CharacterControllerTest>().SetForce(0);
+        other.GetComponent<CharacterControllerTest>().SetForce(Vector3.zero, _stopLerpValue);
     }
 
     private void Update()

@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using static UnityEngine.Rendering.DebugUI;
 
-[RequireComponent(typeof(CharacterController))] [HelpURL("https://antoine-foucault.itch.io/")]
-public class CharacterControllerTest: MonoBehaviour
+[RequireComponent(typeof(CharacterController))]
+[HelpURL("https://antoine-foucault.itch.io/")]
+public class CharacterControllerTest : MonoBehaviour
 {
 
     [SerializeField] private float Speed;
@@ -14,10 +15,9 @@ public class CharacterControllerTest: MonoBehaviour
     private Vector3 _lastDirection;
     private Vector3 _moveVector;
     [SerializeField] private float Gravity;
-    public float Force;
-    private float _currentForce;
-    [SerializeField] [Range(0,1)] private float _startLerpValue;
-    [SerializeField] [Range(0,1)] private float _stopLerpValue;
+    public Vector3 Force;
+    private Vector3 _currentForce;
+    private float _lerpValue;
 
     void Start()
     {
@@ -37,14 +37,12 @@ public class CharacterControllerTest: MonoBehaviour
 
     void FixedUpdate()
     {
-        float gravity = Gravity - Force;
+        Vector3 gravity = new Vector3(Force.x, Force.y - Gravity, Force.z);
 
-        _characterController.Move(Vector3.up * gravity * Time.deltaTime);
+        _characterController.Move(gravity * Time.deltaTime);
 
-        var force = Force;
-        var lerp = _currentForce >= 0 ? _stopLerpValue : _startLerpValue;
-        Force = Mathf.Lerp(Force, _currentForce, lerp);
-        if (Mathf.Abs(force - Force) < 0.001f && _currentForce != 0) _currentForce = 0;
+        var forceSign = Mathf.Sign(_currentForce.x) * Mathf.Sign(_currentForce.x) * Mathf.Sign(_currentForce.x);
+        Force = Vector3.Lerp(Force, _currentForce, _lerpValue);
     }
 
     private void SetAnimation(Vector3 moveVector)
@@ -54,8 +52,14 @@ public class CharacterControllerTest: MonoBehaviour
         transform.LookAt(transform.position + moveVector);
     }
 
-    public void SetForce(float value)
+    public void SetForce(Vector3 force, float value)
     {
-        _currentForce = value;
+        _currentForce = force;
+        _lerpValue = value;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        Debug.Log(collision.gameObject);
     }
 }
