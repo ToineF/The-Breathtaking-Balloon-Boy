@@ -1,25 +1,41 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.Rendering.DebugUI;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(CharacterController))]
 [HelpURL("https://antoine-foucault.itch.io/")]
 public class CharacterControllerTest : MonoBehaviour
 {
-    private PlayerInputs _inputs;
+    public Action OnGroundEnter;
 
+    [Header("Walk")]
     [SerializeField] private float Speed;
     [SerializeField] private Animator _animator;
     [SerializeField] private string _animatorWalkBool;
-    private CharacterController _characterController;
-    private Vector3 _lastDirection;
-    private Vector3 _moveVector = Vector3.zero;
+
+    [Header("Gravity")]
     [SerializeField] private float Gravity;
+
+    [Header("Ground Check")]
+    [SerializeField] private float _groundCheckDistance;
+    [SerializeField] private float _sphereRadius;
+    [SerializeField] private LayerMask _playerLayer;
+    public bool IsGrounded;
+
+    // References
+    private PlayerInputs _inputs;
+    private CharacterController _characterController;
+
+    // Walk
+    private Vector3 _moveVector = Vector3.zero;
     public Vector3 Force;
     private Vector3 _currentForce;
     private float _lerpValue;
+
+    // Ground Check
+    private RaycastHit[] _groundHitResults;
 
     private void Awake()
     {
@@ -30,6 +46,7 @@ public class CharacterControllerTest : MonoBehaviour
     {
         _characterController = GetComponent<CharacterController>();
         _currentForce = Force;
+        _groundHitResults = new RaycastHit[2];
     }
 
     private void OnEnable()
@@ -51,6 +68,10 @@ public class CharacterControllerTest : MonoBehaviour
     {
         SetAnimation(_moveVector);
         _characterController.Move(_moveVector);
+
+        var grounded = IsGrounded;
+        IsGrounded = Physics.SphereCastNonAlloc(transform.position, _sphereRadius, Vector3.down, _groundHitResults, _groundCheckDistance, _playerLayer) > 0;
+        if (grounded != IsGrounded && IsGrounded) OnGroundEnter?.Invoke();
     }
 
     private void StartMove(InputAction.CallbackContext context)
@@ -77,7 +98,6 @@ public class CharacterControllerTest : MonoBehaviour
 
     private void SetAnimation(Vector3 moveVector)
     {
-        if (moveVector != Vector3.zero) _lastDirection = moveVector;
         _animator.SetBool(_animatorWalkBool, moveVector != Vector3.zero);
         transform.LookAt(transform.position + moveVector);
     }
@@ -88,8 +108,15 @@ public class CharacterControllerTest : MonoBehaviour
         _lerpValue = value;
     }
 
-    private void OnCollisionEnter(Collision collision)
+    public void SetForceForTime(Vector3 force, float time, float startLerp, float endLerp)
     {
-        Debug.Log(collision.gameObject);
+        SetForce(force, startLerp);
+        StartCoroutine(WaitForAction(time, () => SetForce(-force, endLerp)));
+    }
+
+    private IEnumerator WaitForAction(float time, Action action)
+    {
+        yield return new WaitForSeconds(time);
+        action?.Invoke();
     }
 }
