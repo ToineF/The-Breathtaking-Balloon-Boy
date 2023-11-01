@@ -47,9 +47,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd9afc4667d9c5944b00eca651e05d17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _forceMagnitude: -450
+  _pushVector: {x: 0, y: 550, z: 0}
   _airPercentageAddedOnContact: -0.2
   _timeBetweenAdditions: 0.002
+  _startLerpValue: 0.872
+  _stopLerpValue: 0.042
 --- !u!33 &7790392574977382518
 MeshFilter:
   m_ObjectHideFlags: 0

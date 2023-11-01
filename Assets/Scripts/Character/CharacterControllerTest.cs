@@ -2,22 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static UnityEngine.Rendering.DebugUI;
+using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(CharacterController))]
 [HelpURL("https://antoine-foucault.itch.io/")]
 public class CharacterControllerTest : MonoBehaviour
 {
+    private PlayerInputs _inputs;
 
     [SerializeField] private float Speed;
     [SerializeField] private Animator _animator;
     [SerializeField] private string _animatorWalkBool;
     private CharacterController _characterController;
     private Vector3 _lastDirection;
-    private Vector3 _moveVector;
+    private Vector3 _moveVector = Vector3.zero;
     [SerializeField] private float Gravity;
     public Vector3 Force;
     private Vector3 _currentForce;
     private float _lerpValue;
+
+    private void Awake()
+    {
+        _inputs = new PlayerInputs();
+    }
 
     void Start()
     {
@@ -25,14 +32,37 @@ public class CharacterControllerTest : MonoBehaviour
         _currentForce = Force;
     }
 
+    private void OnEnable()
+    {
+        _inputs.Enable();
+        _inputs.Player.Move.performed += StartMove;
+        _inputs.Player.Move.canceled += StopMove;
+    }
+
+    private void OnDisable()
+    {
+        _inputs.Disable();
+        _inputs.Player.Move.performed -= StartMove;
+        _inputs.Player.Move.canceled -= StopMove;
+
+    }
+
     private void Update()
     {
-        float xPosition = (Input.GetKey(KeyCode.RightArrow) ? 1 : 0) - (Input.GetKey(KeyCode.LeftArrow) ? 1 : 0);
-        float zPosition = (Input.GetKey(KeyCode.UpArrow) ? 1 : 0) - (Input.GetKey(KeyCode.DownArrow) ? 1 : 0);
-        _moveVector = new Vector3(xPosition * Speed, 0, zPosition * Speed) * Time.deltaTime;
         SetAnimation(_moveVector);
         _characterController.Move(_moveVector);
+    }
 
+    private void StartMove(InputAction.CallbackContext context)
+    {
+        float xPosition = context.ReadValue<Vector2>().x;
+        float zPosition = context.ReadValue<Vector2>().y;
+        _moveVector = new Vector3(xPosition * Speed, 0, zPosition * Speed) * Time.deltaTime;
+    }
+
+    private void StopMove(InputAction.CallbackContext context)
+    {
+        _moveVector = Vector3.zero;
     }
 
     void FixedUpdate()
