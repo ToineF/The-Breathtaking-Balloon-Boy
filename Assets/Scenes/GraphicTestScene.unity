@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 0
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.5446778, g: 0.6041228, b: 0.754717, a: 1}
-  m_SkyboxMaterial: {fileID: 2100000, guid: f7a46cfb71390c24daf23b24b8f7a83c, type: 2}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 7ff78d34084fddf40b143fa8b3bcfb0f, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.41623783, g: 0.7423893, b: 0.9833995, a: 1}
+  m_IndirectSpecularColor: {r: 0.23214373, g: 0.23133326, b: 0.23782283, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -512,14 +512,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
-  m_LocalRotation: {x: 0.13138954, y: -0.7024074, z: 0.13084166, w: 0.68719804}
-  m_LocalPosition: {x: 4.84, y: 18.4, z: 1.97}
+  m_LocalRotation: {x: 0.0053272266, y: -0.7155764, z: 0.0082415715, w: 0.6984655}
+  m_LocalPosition: {x: 4.84, y: 12.63, z: 3.63}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 21.37, y: -91.309, z: -0.292}
+  m_LocalEulerAnglesHint: {x: 1.102, y: -91.384, z: 0.223}
 --- !u!114 &330585547
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -606,7 +606,7 @@ Skybox:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   m_Enabled: 1
-  m_CustomSkybox: {fileID: 2100000, guid: f7a46cfb71390c24daf23b24b8f7a83c, type: 2}
+  m_CustomSkybox: {fileID: 2100000, guid: 7ff78d34084fddf40b143fa8b3bcfb0f, type: 2}
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -636,7 +636,7 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.6854307, g: 0.6886792, b: 0.6886792, a: 1}
   m_Intensity: 2
   m_Range: 10
   m_SpotAngle: 30
@@ -680,7 +680,7 @@ Light:
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
-  m_ColorTemperature: 5000
+  m_ColorTemperature: 10747
   m_UseColorTemperature: 1
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
