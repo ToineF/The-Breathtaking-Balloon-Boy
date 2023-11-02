@@ -6,20 +6,20 @@ using System;
 [RequireComponent(typeof(Collider))]
 public class WindZone : MonoBehaviour
 {
-    [SerializeField] private float _pushMagnitude;
-    [SerializeField] private Vector3 _pushVector;
-    [SerializeField] private bool _isHot;
-    [SerializeField] private float _airPercentageAddedOnContact;
-    [SerializeField] private float _timeBetweenAdditions;
-    [SerializeField] [Range(0, 1)] private float _startLerpValue;
-    [SerializeField] [Range(0, 1)] private float _stopLerpValue;
+    [SerializeField] [Tooltip("The Magnitude at which the Wind pushes the Player")] private float _pushMagnitude;
+    [SerializeField] [Tooltip("The normalized direction of the Wind")] private Vector3 _pushVector;
+    [SerializeField] [Tooltip("Is the Wind hot or cold?")] private bool _isHot;
+    [SerializeField] [Tooltip("The percentage of air the player gains or loses with every contact (postive only)")] private float _airPercentageAddedOnContact;
+    [SerializeField] [Tooltip("The interval of time in seconds at which the wind collides with the player")] private float _timeBetweenAdditions;
+    [SerializeField] [Tooltip("The acceleration of the force towards the magnitude given to the player")] [Range(0, 1)] private float _startLerpValue;
+    [SerializeField] [Tooltip("The deceleration of the force from the magnitude given to the player")] [Range(0, 1)] private float _stopLerpValue;
     private float _timer;
 
     [Header("FX")]
-    [SerializeField] private GameObject _FXWind;
-    [SerializeField] private ParticleSystem[] _FXWinds;
-    [SerializeField] private Color _HotColor;
-    [SerializeField] private Color _ColdColor;
+    [SerializeField] [Tooltip("A reference to the Particule Effect of the Wind")] private GameObject _FXWind;
+    [SerializeField] [Tooltip("A reference to all of the Particules of the Effect")] private ParticleSystem[] _FXWinds;
+    [SerializeField] [Tooltip("The Color of the Hot Air")] private Color _HotColor;
+    [SerializeField] [Tooltip("The Color of the Cold Air")] private Color _ColdColor;
 
     private void Start()
     {
@@ -44,7 +44,8 @@ public class WindZone : MonoBehaviour
 
         if (other.GetComponent<CharacterControllerTest>() == null) return;
 
-        AirManager.Instance.AddAir(_airPercentageAddedOnContact);
+        int airSign = _isHot ? 1 : -1;
+        AirManager.Instance.AddAir(_airPercentageAddedOnContact * airSign);
         _timer = _timeBetweenAdditions;
     }
 

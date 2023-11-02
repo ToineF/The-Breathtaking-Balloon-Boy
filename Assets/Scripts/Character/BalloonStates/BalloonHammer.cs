@@ -30,6 +30,7 @@ public class BalloonHammer : BalloonBaseState
             float endLerp = _balloonStageManager.HammerGroundDecel;
             float time = _balloonStageManager.HammerGroundJumpTime;
             _balloonStageManager.CharaController.SetForceForTime(hit, time, startLerp, endLerp);
+            CreateHammerFX();
         }
         else
         {
@@ -55,5 +56,12 @@ public class BalloonHammer : BalloonBaseState
         float endLerp = _balloonStageManager.HammerAirJumpDecel;
         float time = _balloonStageManager.HammerAirJumpTime;
         _balloonStageManager.CharaController.SetForceForTime(hit, time, startLerp, endLerp);
+        CreateHammerFX();
+    }
+
+    private void CreateHammerFX()
+    {
+        Collider collider = _balloonStageManager.CharaController.GetComponent<Collider>();
+        GameObject.Instantiate(_balloonStageManager.HammerFXGroundPrefab, collider.bounds.center - collider.bounds.extents.y * Vector3.up, _balloonStageManager.HammerFXGroundPrefab.transform.rotation);
     }
 }

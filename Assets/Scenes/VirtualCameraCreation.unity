@@ -176,6 +176,12 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2011098725}
     m_Modifications:
+    - target: {fileID: 3293357717306609732, guid: 9b8a7cab4931b114ea7ea6d12fb24627,
+        type: 3}
+      propertyPath: HammerFXGroundPrefab
+      value: 
+      objectReference: {fileID: 3432958286849152088, guid: 87ee7299dd44ed747af24dbb91bcd33b,
+        type: 3}
     - target: {fileID: 3920805190166161814, guid: 9b8a7cab4931b114ea7ea6d12fb24627,
         type: 3}
       propertyPath: m_Name
@@ -311,7 +317,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 279113127}
   m_LocalRotation: {x: 0.28607702, y: -0.059812453, z: 0.015335728, w: 0.9562151}
-  m_LocalPosition: {x: 0.451, y: 1.57, z: -0.914}
+  m_LocalPosition: {x: 0.594, y: 1.881, z: -1.08}
   m_LocalScale: {x: 0.109927975, y: 0.14829306, z: 0.14347754}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -511,7 +517,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   m_LocalRotation: {x: 0.28607702, y: -0.059812453, z: 0.015335728, w: 0.9562151}
-  m_LocalPosition: {x: -2.41693, y: 7.1578007, z: -9.5398}
+  m_LocalPosition: {x: -1.4774201, y: 8.88074, z: -11.316001}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2142,6 +2148,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: CameraCollider
       objectReference: {fileID: 0}
+    - target: {fileID: 1235058413813149026, guid: 70d7232e83f203640ae88452f6b0715c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2968094124737542356, guid: 70d7232e83f203640ae88452f6b0715c,
         type: 3}
       propertyPath: m_IsActive
@@ -2155,7 +2166,7 @@ PrefabInstance:
     - target: {fileID: 4863803595871450241, guid: 70d7232e83f203640ae88452f6b0715c,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.71
+      value: 1.4
       objectReference: {fileID: 0}
     - target: {fileID: 4863803595871450241, guid: 70d7232e83f203640ae88452f6b0715c,
         type: 3}
@@ -2330,10 +2341,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -90.034
       objectReference: {fileID: 0}
+    - target: {fileID: 4682096212596296195, guid: 35848f470bb43064db91c9249abff1c6,
+        type: 3}
+      propertyPath: m_RenderMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4682096212596296195, guid: 35848f470bb43064db91c9249abff1c6,
+        type: 3}
+      propertyPath: m_RenderAlignment
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5641208428131602413, guid: 35848f470bb43064db91c9249abff1c6,
         type: 3}
       propertyPath: m_Name
       value: WindZone (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6072378085367455556, guid: 35848f470bb43064db91c9249abff1c6,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 89.61
+      objectReference: {fileID: 0}
+    - target: {fileID: 6072378085367455556, guid: 35848f470bb43064db91c9249abff1c6,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 99.22
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

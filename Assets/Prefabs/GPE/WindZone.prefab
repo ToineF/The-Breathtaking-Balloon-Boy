@@ -50,7 +50,7 @@ MonoBehaviour:
   _pushMagnitude: 550
   _pushVector: {x: 0, y: 1, z: 0}
   _isHot: 0
-  _airPercentageAddedOnContact: -0.2
+  _airPercentageAddedOnContact: 0.2
   _timeBetweenAdditions: 0.002
   _startLerpValue: 0.872
   _stopLerpValue: 0.042
@@ -173,6 +173,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3510686471849438033}
     m_Modifications:
+    - target: {fileID: 656800892558548187, guid: 2f611fd7e1257f249bda44a57ed8f275,
+        type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 6880802126659063863, guid: 2f611fd7e1257f249bda44a57ed8f275,
         type: 3}
       propertyPath: m_RootOrder
@@ -228,10 +233,35 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7109363534158216370, guid: 2f611fd7e1257f249bda44a57ed8f275,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071079
+      objectReference: {fileID: 0}
+    - target: {fileID: 7109363534158216370, guid: 2f611fd7e1257f249bda44a57ed8f275,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.70710576
+      objectReference: {fileID: 0}
+    - target: {fileID: 7109363534158216370, guid: 2f611fd7e1257f249bda44a57ed8f275,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 90
+      objectReference: {fileID: 0}
     - target: {fileID: 7258745179160865236, guid: 2f611fd7e1257f249bda44a57ed8f275,
         type: 3}
       propertyPath: m_Name
       value: Wind_Particles
+      objectReference: {fileID: 0}
+    - target: {fileID: 8509206761787173365, guid: 2f611fd7e1257f249bda44a57ed8f275,
+        type: 3}
+      propertyPath: m_RenderMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8509206761787173365, guid: 2f611fd7e1257f249bda44a57ed8f275,
+        type: 3}
+      propertyPath: m_RenderAlignment
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

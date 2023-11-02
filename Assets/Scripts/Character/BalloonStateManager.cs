@@ -19,6 +19,7 @@ public class BalloonStateManager : MonoBehaviour
     public Animator Animator;
     public string AnimatorHammerTrigger;
     public bool IsHammerFalling = false;
+    public GameObject HammerFXGroundPrefab;
     [Space(25)]
     public float HammerGroundForce;
     public float HammerGroundJumpTime;
