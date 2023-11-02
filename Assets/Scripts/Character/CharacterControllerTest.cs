@@ -16,7 +16,10 @@ public class CharacterControllerTest : MonoBehaviour
     [SerializeField] private string _animatorWalkBool;
 
     [Header("Gravity")]
-    [SerializeField] private float Gravity;
+    [SerializeField] private float BaseGravity;
+    [SerializeField] private float MaxGravity;
+    [SerializeField] private float _gravityIncreaseByFrame;
+    private float _currentGravity;
 
     [Header("Ground Check")]
     [SerializeField] private float _groundCheckDistance;
@@ -47,6 +50,7 @@ public class CharacterControllerTest : MonoBehaviour
         _characterController = GetComponent<CharacterController>();
         _currentForce = Force;
         _groundHitResults = new RaycastHit[2];
+        _currentGravity = BaseGravity;
     }
 
     private void OnEnable()
@@ -71,7 +75,11 @@ public class CharacterControllerTest : MonoBehaviour
 
         var grounded = IsGrounded;
         IsGrounded = Physics.SphereCastNonAlloc(transform.position, _sphereRadius, Vector3.down, _groundHitResults, _groundCheckDistance, _playerLayer) > 0;
-        if (grounded != IsGrounded && IsGrounded) OnGroundEnter?.Invoke();
+        if (grounded != IsGrounded && IsGrounded)
+        {
+            OnGroundEnter?.Invoke();
+            _currentGravity = BaseGravity;
+        }
     }
 
     private void StartMove(InputAction.CallbackContext context)
@@ -88,7 +96,12 @@ public class CharacterControllerTest : MonoBehaviour
 
     void FixedUpdate()
     {
-        Vector3 gravity = new Vector3(Force.x, Force.y - Gravity, Force.z);
+        if (!IsGrounded)
+        {
+            _currentGravity = Mathf.Clamp(_currentGravity + _gravityIncreaseByFrame, BaseGravity, MaxGravity);
+        }
+
+        Vector3 gravity = new Vector3(Force.x, Force.y - _currentGravity, Force.z);
 
         _characterController.Move(gravity * Time.deltaTime);
 
@@ -111,7 +124,7 @@ public class CharacterControllerTest : MonoBehaviour
     public void SetForceForTime(Vector3 force, float time, float startLerp, float endLerp)
     {
         SetForce(force, startLerp);
-        StartCoroutine(WaitForAction(time, () => SetForce(-force, endLerp)));
+        StartCoroutine(WaitForAction(time, () => SetForce(_currentForce-force, endLerp)));
     }
 
     private IEnumerator WaitForAction(float time, Action action)

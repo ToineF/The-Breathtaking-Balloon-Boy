@@ -10,16 +10,18 @@ public class BalloonStateManager : MonoBehaviour
     public CharacterControllerTest CharaController;
 
     private BalloonBaseState _currentState;
-    private BalloonNone _balloonNone = new BalloonNone();
-    private BalloonFlower _balloonFlower = new BalloonFlower();
-    private BalloonHammer _balloonHammer = new BalloonHammer();
+    public BalloonNone BalloonNone = new BalloonNone();
+    public BalloonFlower BalloonFlower = new BalloonFlower();
+    public BalloonHammer BalloonHammer = new BalloonHammer();
 
 
     [Header("Hammer")]
     public Animator Animator;
     public string AnimatorHammerTrigger;
-    public bool IsHammerFalling = false;
     public GameObject HammerFXGroundPrefab;
+    public HammerCollision HammerSideCollider;
+    public float HammerAirPercentageUsed;
+    public bool IsHammerFalling = false;
     [Space(25)]
     public float HammerGroundForce;
     public float HammerGroundJumpTime;
@@ -43,9 +45,10 @@ public class BalloonStateManager : MonoBehaviour
 
     private void Start()
     {
-        _currentState = _balloonHammer;
+        _currentState = BalloonHammer;
         _currentState.StartState(this);
         Inputs.Player.Action.performed += _currentState.OnActionPressed;
+        Inputs.Player.SecondaryAction.performed += _currentState.OnSecondaryActionPressed;
     }
 
     private void Update()
@@ -60,5 +63,6 @@ public class BalloonStateManager : MonoBehaviour
         _currentState = state;
         _currentState.StartState(this);
         Inputs.Player.Action.performed += _currentState.OnActionPressed;
+        Inputs.Player.SecondaryAction.performed -= _currentState.OnSecondaryActionPressed;
     }
 }

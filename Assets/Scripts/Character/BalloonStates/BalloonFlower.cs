@@ -20,4 +20,9 @@ public class BalloonFlower : BalloonBaseState
     {
 
     }
+
+    public override void OnSecondaryActionPressed(InputAction.CallbackContext context)
+    {
+
+    }
 }

@@ -15,7 +15,7 @@ public class AirManager : MonoBehaviour
         Instance = this;
     }
 
-    public void SetCurrentAir(float percentage)
+    public void SetAir(float percentage)
     {
         _currentAir = percentage / 100;
         _currentAir = Mathf.Clamp(_currentAir, 0, 1);

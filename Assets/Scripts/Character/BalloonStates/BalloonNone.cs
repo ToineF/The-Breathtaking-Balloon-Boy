@@ -19,4 +19,9 @@ public class BalloonNone : BalloonBaseState
     {
 
     }
+
+    public override void OnSecondaryActionPressed(InputAction.CallbackContext context)
+    {
+
+    }
 }
