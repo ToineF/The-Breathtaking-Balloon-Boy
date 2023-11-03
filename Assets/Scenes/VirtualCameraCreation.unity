@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028334, g: 0.2257134, b: 0.30692226, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -176,6 +176,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2011098725}
     m_Modifications:
+    - target: {fileID: 812185274378441984, guid: 9b8a7cab4931b114ea7ea6d12fb24627,
+        type: 3}
+      propertyPath: m_Size.z
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 812185274378441984, guid: 9b8a7cab4931b114ea7ea6d12fb24627,
+        type: 3}
+      propertyPath: m_Offset.z
+      value: 150
+      objectReference: {fileID: 0}
     - target: {fileID: 3293357717306609732, guid: 9b8a7cab4931b114ea7ea6d12fb24627,
         type: 3}
       propertyPath: HammerSideCollider
@@ -1856,7 +1866,6 @@ MonoBehaviour:
   _wallLayer:
     serializedVersion: 2
     m_Bits: 128
-  valeu: 0
 --- !u!54 &1490153816
 Rigidbody:
   m_ObjectHideFlags: 0

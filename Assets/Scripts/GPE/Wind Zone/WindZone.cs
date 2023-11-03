@@ -43,6 +43,8 @@ public class WindZone : MonoBehaviour
         if (_timer > 0) return;
 
         if (other.GetComponent<CharacterControllerTest>() == null) return;
+        if (other.GetComponent<BalloonStateManager>().GetState() != other.GetComponent<BalloonStateManager>().BalloonFlower) return;
+
 
         int airSign = _isHot ? 1 : -1;
         AirManager.Instance.AddAir(_airPercentageAddedOnContact * airSign);
@@ -52,6 +54,8 @@ public class WindZone : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.GetComponent<CharacterControllerTest>() == null) return;
+        if (other.GetComponent<BalloonStateManager>().GetState() != other.GetComponent<BalloonStateManager>().BalloonFlower) return;
+
 
         other.GetComponent<CharacterControllerTest>().SetForce(_pushVector * _pushMagnitude * Time.deltaTime, _startLerpValue);
     }
@@ -59,6 +63,8 @@ public class WindZone : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         if (other.GetComponent<CharacterControllerTest>() == null) return;
+        if (other.GetComponent<BalloonStateManager>().GetState() != other.GetComponent<BalloonStateManager>().BalloonFlower) return;
+
 
         other.GetComponent<CharacterControllerTest>().SetForce(Vector3.zero, _stopLerpValue);
     }
