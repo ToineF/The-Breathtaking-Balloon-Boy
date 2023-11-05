@@ -11,6 +11,7 @@ public class BalloonHammer : BalloonBaseState
     {
         _balloonStageManager = balloonStateManager;
         _balloonStageManager.CharaController.OnGroundEnter += PlayerEnterGround;
+        _balloonStageManager.HammerModelisation.SetActive(true);
     }
 
     public override void UpdateState(BalloonStateManager balloonStateManager)

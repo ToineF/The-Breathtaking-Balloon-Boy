@@ -115,10 +115,16 @@ public class CharacterControllerTest : MonoBehaviour
         transform.LookAt(transform.position + moveVector);
     }
 
-    public void SetForce(Vector3 force, float value)
+    public void AddForce(Vector3 force, float lerp)
+    {
+        _currentForce += force;
+        _lerpValue = lerp;
+    }
+
+    public void SetForce(Vector3 force, float lerp)
     {
         _currentForce = force;
-        _lerpValue = value;
+        _lerpValue = lerp;
     }
 
     public void SetForceForTime(Vector3 force, float time, float startLerp, float endLerp)

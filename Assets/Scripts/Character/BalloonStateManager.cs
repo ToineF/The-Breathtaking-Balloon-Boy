@@ -13,7 +13,9 @@ public class BalloonStateManager : MonoBehaviour
     public BalloonFlower BalloonFlower = new BalloonFlower();
     public BalloonHammer BalloonHammer = new BalloonHammer();
 
+
     [Header("Hammer")]
+    public GameObject HammerModelisation;
     public Animator Animator;
     public string AnimatorHammerTrigger;
     public GameObject HammerFXGroundPrefab;
@@ -23,8 +25,8 @@ public class BalloonStateManager : MonoBehaviour
     [Space(25)]
     public float HammerGroundForce;
     public float HammerGroundJumpTime;
-    [Range(0,1)] public float HammerGroundAccel;
-    [Range(0,1)] public float HammerGroundDecel;
+    [Range(0, 1)] public float HammerGroundAccel;
+    [Range(0, 1)] public float HammerGroundDecel;
     [Space(25)]
     public float HammerAirFallForce;
     [Range(0, 1)] public float HammerAirFallAccel;
@@ -33,6 +35,15 @@ public class BalloonStateManager : MonoBehaviour
     public float HammerAirJumpTime;
     [Range(0, 1)] public float HammerAirJumpAccel;
     [Range(0, 1)] public float HammerAirJumpDecel;
+
+    [Header("Flower")]
+    public GameObject FlowerModelisation;
+    public float FlowerAirPercentageUsed;
+    public float FlowerJumpForce;
+    public float FlowerJumpTime;
+    [Range(0, 1)] public float FlowerJumpAccel;
+    [Range(0, 1)] public float FlowerJumpDecel;
+    // force with wind
 
     private void Awake()
     {
@@ -43,6 +54,7 @@ public class BalloonStateManager : MonoBehaviour
 
     private void Start()
     {
+        DisableAllObjects();
         _currentState = BalloonHammer;
         _currentState.StartState(this);
         Inputs.Player.Action.performed += _currentState.OnActionPressed;
@@ -57,19 +69,32 @@ public class BalloonStateManager : MonoBehaviour
 
     public void SwitchState(BalloonBaseState state)
     {
+        DisableAllObjects();
         Inputs.Player.Action.performed -= _currentState.OnActionPressed;
 
         _currentState = state;
         _currentState.StartState(this);
         Inputs.Player.Action.performed += _currentState.OnActionPressed;
         Inputs.Player.SecondaryAction.performed -= _currentState.OnSecondaryActionPressed;
+
     }
 
     private void ChangeState(InputAction.CallbackContext context)
     {
         var changeVector = context.ReadValue<Vector2>();
-        if (changeVector == Vector2.down) SwitchState(BalloonHammer);
-        if (changeVector == Vector2.up) SwitchState(BalloonFlower);
+
+        if (changeVector == Vector2.down)
+            SwitchState(BalloonHammer);
+
+        if (changeVector == Vector2.up)
+            SwitchState(BalloonFlower);
+
+    }
+
+    private void DisableAllObjects()
+    {
+        HammerModelisation.SetActive(false);
+        FlowerModelisation.SetActive(false);
     }
 
     public BalloonBaseState GetState()

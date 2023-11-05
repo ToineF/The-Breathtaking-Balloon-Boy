@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028334, g: 0.2257134, b: 0.30692226, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -176,21 +176,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2011098725}
     m_Modifications:
-    - target: {fileID: 812185274378441984, guid: 9b8a7cab4931b114ea7ea6d12fb24627,
-        type: 3}
-      propertyPath: m_Size.z
-      value: 300
-      objectReference: {fileID: 0}
-    - target: {fileID: 812185274378441984, guid: 9b8a7cab4931b114ea7ea6d12fb24627,
-        type: 3}
-      propertyPath: m_Offset.z
-      value: 150
-      objectReference: {fileID: 0}
-    - target: {fileID: 3293357717306609732, guid: 9b8a7cab4931b114ea7ea6d12fb24627,
-        type: 3}
-      propertyPath: HammerSideCollider
-      value: 
-      objectReference: {fileID: 1490153815}
     - target: {fileID: 3920805190166161814, guid: 9b8a7cab4931b114ea7ea6d12fb24627,
         type: 3}
       propertyPath: m_Name
@@ -204,17 +189,17 @@ PrefabInstance:
     - target: {fileID: 4405275939843142444, guid: 9b8a7cab4931b114ea7ea6d12fb24627,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.46
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4405275939843142444, guid: 9b8a7cab4931b114ea7ea6d12fb24627,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.87
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4405275939843142444, guid: 9b8a7cab4931b114ea7ea6d12fb24627,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -3.28
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4405275939843142444, guid: 9b8a7cab4931b114ea7ea6d12fb24627,
         type: 3}
@@ -254,15 +239,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 7411734961390928132, guid: 9b8a7cab4931b114ea7ea6d12fb24627,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1490153815}
-    - targetCorrespondingSourceObject: {fileID: 7411734961390928132, guid: 9b8a7cab4931b114ea7ea6d12fb24627,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1490153816}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9b8a7cab4931b114ea7ea6d12fb24627, type: 3}
 --- !u!4 &257525890 stripped
 Transform:
@@ -1845,54 +1822,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1490153810 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7411734961390928132, guid: 9b8a7cab4931b114ea7ea6d12fb24627,
-    type: 3}
-  m_PrefabInstance: {fileID: 257525889}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1490153815
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1490153810}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d8aadd7917d8f614198cc94ced3073a8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _wallLayer:
-    serializedVersion: 2
-    m_Bits: 128
---- !u!54 &1490153816
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1490153810}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 118
-  m_CollisionDetection: 0
 --- !u!1 &1596997337
 GameObject:
   m_ObjectHideFlags: 0
