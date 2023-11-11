@@ -178,8 +178,8 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3293357717306609732, guid: 9b8a7cab4931b114ea7ea6d12fb24627,
         type: 3}
-      propertyPath: HammerGravityAccel
-      value: 0.1
+      propertyPath: HammerAirFallForce
+      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 3920805190166161814, guid: 9b8a7cab4931b114ea7ea6d12fb24627,
         type: 3}
@@ -1373,6 +1373,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: WindZone (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 6372854966776169412, guid: ee4923b9eb67d4e43ac287bd2a29164c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2216,6 +2221,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: WindZone
       objectReference: {fileID: 0}
+    - target: {fileID: 6372854966776169412, guid: ee4923b9eb67d4e43ac287bd2a29164c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2519,6 +2529,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: WindZone (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5641208428131602413, guid: 35848f470bb43064db91c9249abff1c6,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6072378085367455556, guid: 35848f470bb43064db91c9249abff1c6,
         type: 3}

@@ -10,7 +10,6 @@ public class BalloonHammer : BalloonBaseState
     public override void StartState(BalloonStateManager balloonStateManager)
     {
         _balloonStageManager = balloonStateManager;
-        _balloonStageManager.CharaController.OnGroundEnter += PlayerEnterGround;
         _balloonStageManager.HammerModelisation.SetActive(true);
     }
 
@@ -22,6 +21,7 @@ public class BalloonHammer : BalloonBaseState
 
     public override void OnActionPressed(InputAction.CallbackContext context)
     {
+        _balloonStageManager.CharaController.OnGroundEnter += PlayerEnterGround;
         _balloonStageManager.Animator.SetTrigger(_balloonStageManager.AnimatorHammerTrigger);
 
         if (_balloonStageManager.CharaController.IsGrounded)
@@ -49,6 +49,9 @@ public class BalloonHammer : BalloonBaseState
 
     private void PlayerEnterGround()
     {
+        _balloonStageManager.CharaController.OnGroundEnter -= PlayerEnterGround;
+        if (_balloonStageManager.GetState() != _balloonStageManager.BalloonHammer) return;
+
         if (!_balloonStageManager.IsHammerFalling) return;
 
         _balloonStageManager.IsHammerFalling = false;

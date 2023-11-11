@@ -21,6 +21,9 @@ public class WindZone : MonoBehaviour
     [SerializeField] [Tooltip("The Color of the Hot Air")] private Color _HotColor;
     [SerializeField] [Tooltip("The Color of the Cold Air")] private Color _ColdColor;
 
+    private Vector3 _lastForce;
+    private bool _isPlayerIn;
+
     private void Start()
     {
         _timer = _timeBetweenAdditions;
@@ -47,7 +50,9 @@ public class WindZone : MonoBehaviour
         if (other.GetComponent<CharacterControllerTest>() == null) return;
         if (other.GetComponent<BalloonStateManager>().GetState() != other.GetComponent<BalloonStateManager>().BalloonFlower) return;
 
+        if (!_isPlayerIn) _lastForce = other.GetComponent<CharacterControllerTest>().CurrentForce;
         other.GetComponent<CharacterControllerTest>().SetForce(_pushVector * _pushMagnitude * Time.deltaTime, _startLerpValue);
+        _isPlayerIn = true;
 
         int airSign = _isHot ? 1 : -1;
         AirManager.Instance.AddAir(_airPercentageAddedOnContact * airSign);
@@ -59,8 +64,10 @@ public class WindZone : MonoBehaviour
         if (other.GetComponent<CharacterControllerTest>() == null) return;
         if (other.GetComponent<BalloonStateManager>().GetState() != other.GetComponent<BalloonStateManager>().BalloonFlower) return;
 
-
+        if (!_isPlayerIn) _lastForce = other.GetComponent<CharacterControllerTest>().CurrentForce;
         other.GetComponent<CharacterControllerTest>().SetForce(_pushVector * _pushMagnitude * Time.deltaTime, _startLerpValue);
+        _isPlayerIn = true;
+
     }
 
     private void OnTriggerExit(Collider other)
@@ -69,7 +76,8 @@ public class WindZone : MonoBehaviour
         if (other.GetComponent<BalloonStateManager>().GetState() != other.GetComponent<BalloonStateManager>().BalloonFlower) return;
 
 
-        other.GetComponent<CharacterControllerTest>().SetForce(Vector3.zero, _stopLerpValue);
+        other.GetComponent<CharacterControllerTest>().SetForce(_lastForce, _stopLerpValue);
+        _isPlayerIn = false;
     }
 
     private void Update()

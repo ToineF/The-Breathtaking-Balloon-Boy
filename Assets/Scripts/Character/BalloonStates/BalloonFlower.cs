@@ -21,6 +21,7 @@ public class BalloonFlower : BalloonBaseState
 
     public override void OnActionPressed(InputAction.CallbackContext context)
     {
+        _balloonStageManager.CharaController.OnGroundEnter += PlayerEnterGround;
         Vector3 hit = Vector3.up * _balloonStageManager.FlowerJumpForce;
         float startLerp = _balloonStageManager.FlowerJumpAccel;
         float endLerp = _balloonStageManager.FlowerJumpDecel;
@@ -35,5 +36,13 @@ public class BalloonFlower : BalloonBaseState
     public override void OnSecondaryActionPressed(InputAction.CallbackContext context)
     {
 
+    }
+
+    private void PlayerEnterGround()
+    {
+        _balloonStageManager.CharaController.OnGroundEnter -= PlayerEnterGround;
+
+        if (_balloonStageManager.GetState() != _balloonStageManager.BalloonFlower) return;
+        _balloonStageManager.CharaController.SetForce(Vector3.zero, 1);
     }
 }

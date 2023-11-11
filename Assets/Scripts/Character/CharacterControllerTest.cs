@@ -13,6 +13,7 @@ public class CharacterControllerTest : MonoBehaviour
     public Action OnGroundEnter;
 
     [ReadOnly] public Vector3 Force;
+    [ReadOnly] public Vector3 CurrentForce;
 
     [Header("Walk")]
     [SerializeField] private float Speed;
@@ -38,7 +39,6 @@ public class CharacterControllerTest : MonoBehaviour
 
     // Walk
     private Vector3 _moveVector = Vector3.zero;
-    private Vector3 _currentForce;
     private float _lerpValue;
 
     // Ground Check
@@ -54,7 +54,7 @@ public class CharacterControllerTest : MonoBehaviour
     {
         _characterController = GetComponent<CharacterController>();
         _balloonStateManager = GetComponent<BalloonStateManager>();
-        _currentForce = Force;
+        CurrentForce = Force;
         _groundHitResults = new RaycastHit[2];
         CurrentGravity = BaseGravity;
     }
@@ -111,8 +111,8 @@ public class CharacterControllerTest : MonoBehaviour
 
         _characterController.Move(gravity * Time.deltaTime);
 
-        var forceSign = Mathf.Sign(_currentForce.x) * Mathf.Sign(_currentForce.x) * Mathf.Sign(_currentForce.x);
-        Force = Vector3.Lerp(Force, _currentForce, _lerpValue);
+        var forceSign = Mathf.Sign(CurrentForce.x) * Mathf.Sign(CurrentForce.x) * Mathf.Sign(CurrentForce.x);
+        Force = Vector3.Lerp(Force, CurrentForce, _lerpValue);
     }
 
     private void SetAnimation(Vector3 moveVector)
@@ -123,20 +123,20 @@ public class CharacterControllerTest : MonoBehaviour
 
     public void AddForce(Vector3 force, float lerp)
     {
-        _currentForce += force;
+        CurrentForce += force;
         _lerpValue = lerp;
     }
 
     public void SetForce(Vector3 force, float lerp)
     {
-        _currentForce = force;
+        CurrentForce = force;
         _lerpValue = lerp;
     }
 
     public void SetForceForTime(Vector3 force, float time, float startLerp, float endLerp)
     {
         SetForce(force, startLerp);
-        StartCoroutine(WaitForAction(time, () => SetForce(_currentForce-force, endLerp)));
+        StartCoroutine(WaitForAction(time, () => SetForce(CurrentForce-force, endLerp)));
     }
 
     private IEnumerator WaitForAction(float time, Action action)

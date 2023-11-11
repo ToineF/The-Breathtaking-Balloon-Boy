@@ -74,14 +74,14 @@ public class BalloonStateManager : MonoBehaviour
     public void SwitchState(BalloonBaseState state)
     {
         DisableAllObjects();
-        CharacterControllerTest.Instance.SetForce(Vector3.zero, 1);
 
         Inputs.Player.Action.performed -= _currentState.OnActionPressed;
+        Inputs.Player.SecondaryAction.performed -= _currentState.OnSecondaryActionPressed;
 
         _currentState = state;
         _currentState.StartState(this);
         Inputs.Player.Action.performed += _currentState.OnActionPressed;
-        Inputs.Player.SecondaryAction.performed -= _currentState.OnSecondaryActionPressed;
+        Inputs.Player.SecondaryAction.performed += _currentState.OnSecondaryActionPressed;
 
     }
 
