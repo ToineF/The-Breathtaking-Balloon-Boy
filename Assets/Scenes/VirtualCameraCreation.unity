@@ -176,6 +176,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2011098725}
     m_Modifications:
+    - target: {fileID: 3293357717306609732, guid: 9b8a7cab4931b114ea7ea6d12fb24627,
+        type: 3}
+      propertyPath: HammerGravityAccel
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 3920805190166161814, guid: 9b8a7cab4931b114ea7ea6d12fb24627,
         type: 3}
       propertyPath: m_Name
@@ -1300,6 +1305,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1849760159469199333, guid: ee4923b9eb67d4e43ac287bd2a29164c,
         type: 3}
+      propertyPath: _pushMagnitude
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 1849760159469199333, guid: ee4923b9eb67d4e43ac287bd2a29164c,
+        type: 3}
       propertyPath: _airPercentageAddedOnContact
       value: 0.6
       objectReference: {fileID: 0}
@@ -2136,6 +2146,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1849760159469199333, guid: ee4923b9eb67d4e43ac287bd2a29164c,
+        type: 3}
+      propertyPath: _pushMagnitude
+      value: 300
+      objectReference: {fileID: 0}
     - target: {fileID: 1849760159469199333, guid: ee4923b9eb67d4e43ac287bd2a29164c,
         type: 3}
       propertyPath: _airPercentageAddedOnContact

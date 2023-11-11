@@ -1008,19 +1008,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c37dd1ccae88b2b4a87a8241ba98de03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Force: {x: 0, y: 0, z: 0}
   Speed: 3.2
   _animator: {fileID: 7764913791779809622}
   _animatorWalkBool: IsRunning
+  CurrentGravity: 0
   BaseGravity: 7
   MaxGravity: 15
-  _gravityIncreaseByFrame: 0.03
+  _gravityIncreaseByFrame: 0.1
   _groundCheckDistance: 0.1
   _sphereRadius: 0.24
   _playerLayer:
     serializedVersion: 2
     m_Bits: 128
   IsGrounded: 0
-  Force: {x: 0, y: 0, z: 0}
 --- !u!114 &3293357717306609732
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1052,12 +1053,15 @@ MonoBehaviour:
   HammerAirJumpTime: 0.4
   HammerAirJumpAccel: 1
   HammerAirJumpDecel: 0.064
+  HammerGravityAccel: 0.1
   FlowerModelisation: {fileID: 7628894813681554592}
   FlowerAirPercentageUsed: 0
   FlowerJumpForce: 12
   FlowerJumpTime: 0.3
   FlowerJumpAccel: 1
   FlowerJumpDecel: 0.058
+  FlowerGlideForce: 4
+  FlowerGlideAccel: 0.661
 --- !u!143 &9058936854868484476
 CharacterController:
   m_ObjectHideFlags: 0

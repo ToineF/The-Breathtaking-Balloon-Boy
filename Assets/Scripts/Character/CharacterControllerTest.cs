@@ -8,7 +8,11 @@ using UnityEngine.InputSystem;
 [HelpURL("https://antoine-foucault.itch.io/")]
 public class CharacterControllerTest : MonoBehaviour
 {
+    public static CharacterControllerTest Instance;
+
     public Action OnGroundEnter;
+
+    [ReadOnly] public Vector3 Force;
 
     [Header("Walk")]
     [SerializeField] private float Speed;
@@ -16,24 +20,24 @@ public class CharacterControllerTest : MonoBehaviour
     [SerializeField] private string _animatorWalkBool;
 
     [Header("Gravity")]
+    [ReadOnly] public float CurrentGravity;
     [SerializeField] private float BaseGravity;
     [SerializeField] private float MaxGravity;
     [SerializeField] private float _gravityIncreaseByFrame;
-    private float _currentGravity;
 
     [Header("Ground Check")]
     [SerializeField] private float _groundCheckDistance;
     [SerializeField] private float _sphereRadius;
     [SerializeField] private LayerMask _playerLayer;
-    public bool IsGrounded;
+    [ReadOnly] public bool IsGrounded;
 
     // References
     private PlayerInputs _inputs;
     private CharacterController _characterController;
+    private BalloonStateManager _balloonStateManager;
 
     // Walk
     private Vector3 _moveVector = Vector3.zero;
-    public Vector3 Force;
     private Vector3 _currentForce;
     private float _lerpValue;
 
@@ -42,15 +46,17 @@ public class CharacterControllerTest : MonoBehaviour
 
     private void Awake()
     {
+        Instance = this;
         _inputs = new PlayerInputs();
     }
 
     void Start()
     {
         _characterController = GetComponent<CharacterController>();
+        _balloonStateManager = GetComponent<BalloonStateManager>();
         _currentForce = Force;
         _groundHitResults = new RaycastHit[2];
-        _currentGravity = BaseGravity;
+        CurrentGravity = BaseGravity;
     }
 
     private void OnEnable()
@@ -78,7 +84,7 @@ public class CharacterControllerTest : MonoBehaviour
         if (grounded != IsGrounded && IsGrounded)
         {
             OnGroundEnter?.Invoke();
-            _currentGravity = BaseGravity;
+            CurrentGravity = BaseGravity;
         }
     }
 
@@ -96,12 +102,12 @@ public class CharacterControllerTest : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (!IsGrounded)
+        if (!IsGrounded && _balloonStateManager.GetState() == _balloonStateManager.BalloonHammer)
         {
-            _currentGravity = Mathf.Clamp(_currentGravity + _gravityIncreaseByFrame, BaseGravity, MaxGravity);
+            CurrentGravity = Mathf.Clamp(CurrentGravity + _gravityIncreaseByFrame, BaseGravity, MaxGravity);
         }
 
-        Vector3 gravity = new Vector3(Force.x, Force.y - _currentGravity, Force.z);
+        Vector3 gravity = new Vector3(Force.x, Force.y - CurrentGravity, Force.z);
 
         _characterController.Move(gravity * Time.deltaTime);
 

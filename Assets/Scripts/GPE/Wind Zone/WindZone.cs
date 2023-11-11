@@ -24,11 +24,13 @@ public class WindZone : MonoBehaviour
     private void Start()
     {
         _timer = _timeBetweenAdditions;
+        _pushVector = new Vector3(_pushVector.x, _isHot?1:-1 * Math.Abs(_pushVector.y), _pushVector.z);
 
         var fxWindZ = _pushVector.x > 0 ? -90 : _pushVector.x < 0 ? 90 : 0;
         var fxWindX = _pushVector.z < 0 ? -90 : _pushVector.z > 0 ? 90 : 0;
         fxWindZ = _pushVector.y < 0 ? 180 : fxWindZ;
         _FXWind.transform.eulerAngles = new Vector3(fxWindX, 0, fxWindZ);
+        _FXWind.transform.position += _pushVector.y < 0 ? Vector3.up * GetComponent<Collider>().bounds.size.y : Vector3.zero;
 
         foreach (var fx in _FXWinds)
         {
@@ -45,6 +47,7 @@ public class WindZone : MonoBehaviour
         if (other.GetComponent<CharacterControllerTest>() == null) return;
         if (other.GetComponent<BalloonStateManager>().GetState() != other.GetComponent<BalloonStateManager>().BalloonFlower) return;
 
+        other.GetComponent<CharacterControllerTest>().SetForce(_pushVector * _pushMagnitude * Time.deltaTime, _startLerpValue);
 
         int airSign = _isHot ? 1 : -1;
         AirManager.Instance.AddAir(_airPercentageAddedOnContact * airSign);

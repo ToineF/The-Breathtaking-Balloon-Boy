@@ -26,6 +26,10 @@ public class BalloonFlower : BalloonBaseState
         float endLerp = _balloonStageManager.FlowerJumpDecel;
         float time = _balloonStageManager.FlowerJumpTime;
         _balloonStageManager.CharaController.SetForceForTime(hit, time, startLerp, endLerp);
+
+        Vector3 glideForce = Vector3.up * _balloonStageManager.FlowerGlideForce;
+        float glideAccel = _balloonStageManager.FlowerGlideAccel;
+        _balloonStageManager.CharaController.AddForce(glideForce, glideAccel);
     }
 
     public override void OnSecondaryActionPressed(InputAction.CallbackContext context)

@@ -35,6 +35,8 @@ public class BalloonStateManager : MonoBehaviour
     public float HammerAirJumpTime;
     [Range(0, 1)] public float HammerAirJumpAccel;
     [Range(0, 1)] public float HammerAirJumpDecel;
+    [Space(25)]
+    public float HammerGravityAccel;
 
     [Header("Flower")]
     public GameObject FlowerModelisation;
@@ -43,6 +45,8 @@ public class BalloonStateManager : MonoBehaviour
     public float FlowerJumpTime;
     [Range(0, 1)] public float FlowerJumpAccel;
     [Range(0, 1)] public float FlowerJumpDecel;
+    public float FlowerGlideForce;
+    [Range(0, 1)] public float FlowerGlideAccel;
     // force with wind
 
     private void Awake()
@@ -70,6 +74,8 @@ public class BalloonStateManager : MonoBehaviour
     public void SwitchState(BalloonBaseState state)
     {
         DisableAllObjects();
+        CharacterControllerTest.Instance.SetForce(Vector3.zero, 1);
+
         Inputs.Player.Action.performed -= _currentState.OnActionPressed;
 
         _currentState = state;
