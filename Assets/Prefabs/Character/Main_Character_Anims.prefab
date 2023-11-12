@@ -1011,12 +1011,12 @@ MonoBehaviour:
   Force: {x: 0, y: 0, z: 0}
   CurrentForce: {x: 0, y: 0, z: 0}
   IsGrounded: 0
-  _speed: 0.1
+  _speed: 5
   _animator: {fileID: 7764913791779809622}
   _animatorWalkBool: IsRunning
   CurrentGravity: 0
   BaseGravity: 7
-  MaxGravity: 15
+  MaxGravity: 30
   _gravityIncreaseByFrame: 0.1
   _groundCheckDistance: 0.1
   _sphereRadius: 0.24
@@ -1056,6 +1056,8 @@ MonoBehaviour:
   HammerAirJumpDecel: 0.064
   HammerGravityAccel: 0.1
   FlowerModelisation: {fileID: 7628894813681554592}
+  FlowerJumpFXPrefab: {fileID: 7226888052703040409, guid: 6194680d73ef64f49a8c0732aa2ae803,
+    type: 3}
   FlowerAirPercentageUsed: 0
   FlowerJumpForce: 12
   FlowerJumpTime: 0.3
@@ -1063,6 +1065,8 @@ MonoBehaviour:
   FlowerJumpDecel: 0.058
   FlowerGlideForce: 4
   FlowerGlideAccel: 0.661
+  FlowerJumps: 0
+  FlowerMaxJumps: 1
 --- !u!143 &9058936854868484476
 CharacterController:
   m_ObjectHideFlags: 0

@@ -27,7 +27,8 @@ public class BalloonHammer : BalloonBaseState
         if (_balloonStageManager.CharaController.IsGrounded)
         {
             float gravityAccel = CharacterControllerTest.Instance.CurrentGravity * _balloonStageManager.HammerGravityAccel;
-            Vector3 hit = Vector3.up * _balloonStageManager.HammerGroundForce * gravityAccel;
+            Vector3 windForce = Vector3.up * _balloonStageManager.HammerWindForce * _balloonStageManager.HammerWindForceMultiplier;
+            Vector3 hit = Vector3.up * _balloonStageManager.HammerGroundForce * gravityAccel + windForce;
             float startLerp = _balloonStageManager.HammerGroundAccel;
             float endLerp = _balloonStageManager.HammerGroundDecel;
             float time = _balloonStageManager.HammerGroundJumpTime;
@@ -57,7 +58,8 @@ public class BalloonHammer : BalloonBaseState
         _balloonStageManager.IsHammerFalling = false;
 
         float gravityAccel = CharacterControllerTest.Instance.CurrentGravity * _balloonStageManager.HammerGravityAccel;
-        Vector3 hit = Vector3.up * _balloonStageManager.HammerAirJumpForce * gravityAccel;
+        Vector3 windForce = Vector3.up * _balloonStageManager.HammerWindForce * _balloonStageManager.HammerWindForceMultiplier;
+        Vector3 hit = Vector3.up * _balloonStageManager.HammerAirJumpForce * gravityAccel + windForce;
         float startLerp = _balloonStageManager.HammerAirJumpAccel;
         float endLerp = _balloonStageManager.HammerAirJumpDecel;
         float time = _balloonStageManager.HammerAirJumpTime;

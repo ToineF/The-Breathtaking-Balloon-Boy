@@ -42,13 +42,27 @@ public class WindZone : MonoBehaviour
         }
         
     }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.GetComponent<CharacterControllerTest>() == null) return;
+        BalloonStateManager balloonStateManager = other.GetComponent<BalloonStateManager>();
+        SetHammerBalloonForce(balloonStateManager, _pushVector.y);
+        if (balloonStateManager.GetState() != balloonStateManager.BalloonFlower) return;
+
+        if (!_isPlayerIn) _lastForce = other.GetComponent<CharacterControllerTest>().CurrentForce;
+        other.GetComponent<CharacterControllerTest>().SetForce(_pushVector * _pushMagnitude * Time.deltaTime, _startLerpValue);
+        _isPlayerIn = true;
+
+    }
 
     private void OnTriggerStay(Collider other)
     {
         if (_timer > 0) return;
 
         if (other.GetComponent<CharacterControllerTest>() == null) return;
-        if (other.GetComponent<BalloonStateManager>().GetState() != other.GetComponent<BalloonStateManager>().BalloonFlower) return;
+        BalloonStateManager balloonStateManager = other.GetComponent<BalloonStateManager>();
+        SetHammerBalloonForce(balloonStateManager, _pushVector.y);
+        if (balloonStateManager.GetState() != balloonStateManager.BalloonFlower) return;
 
         if (!_isPlayerIn) _lastForce = other.GetComponent<CharacterControllerTest>().CurrentForce;
         other.GetComponent<CharacterControllerTest>().SetForce(_pushVector * _pushMagnitude * Time.deltaTime, _startLerpValue);
@@ -59,21 +73,20 @@ public class WindZone : MonoBehaviour
         _timer = _timeBetweenAdditions;
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void SetHammerBalloonForce(BalloonStateManager balloonStateManager, float force)
     {
-        if (other.GetComponent<CharacterControllerTest>() == null) return;
-        if (other.GetComponent<BalloonStateManager>().GetState() != other.GetComponent<BalloonStateManager>().BalloonFlower) return;
-
-        if (!_isPlayerIn) _lastForce = other.GetComponent<CharacterControllerTest>().CurrentForce;
-        other.GetComponent<CharacterControllerTest>().SetForce(_pushVector * _pushMagnitude * Time.deltaTime, _startLerpValue);
-        _isPlayerIn = true;
-
+        if (balloonStateManager.GetState() == balloonStateManager.BalloonHammer)
+        {
+            balloonStateManager.HammerWindForce = force;
+        }
     }
 
     private void OnTriggerExit(Collider other)
     {
         if (other.GetComponent<CharacterControllerTest>() == null) return;
-        if (other.GetComponent<BalloonStateManager>().GetState() != other.GetComponent<BalloonStateManager>().BalloonFlower) return;
+        BalloonStateManager balloonStateManager = other.GetComponent<BalloonStateManager>();
+        SetHammerBalloonForce(balloonStateManager, 0);
+        if (balloonStateManager.GetState() != balloonStateManager.BalloonFlower) return;
 
 
         other.GetComponent<CharacterControllerTest>().SetForce(_lastForce, _stopLerpValue);
