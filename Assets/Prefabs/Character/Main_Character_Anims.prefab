@@ -1009,7 +1009,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Force: {x: 0, y: 0, z: 0}
-  Speed: 3.2
+  CurrentForce: {x: 0, y: 0, z: 0}
+  IsGrounded: 0
+  _speed: 0.1
   _animator: {fileID: 7764913791779809622}
   _animatorWalkBool: IsRunning
   CurrentGravity: 0
@@ -1021,7 +1023,6 @@ MonoBehaviour:
   _playerLayer:
     serializedVersion: 2
     m_Bits: 128
-  IsGrounded: 0
 --- !u!114 &3293357717306609732
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1047,7 +1048,7 @@ MonoBehaviour:
   HammerGroundJumpTime: 0.225
   HammerGroundAccel: 1
   HammerGroundDecel: 0.063
-  HammerAirFallForce: -15
+  HammerAirFallForce: -10
   HammerAirFallAccel: 1
   HammerAirJumpForce: 15
   HammerAirJumpTime: 0.4

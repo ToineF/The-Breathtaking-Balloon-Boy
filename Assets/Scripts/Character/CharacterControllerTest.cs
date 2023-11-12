@@ -5,7 +5,6 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(CharacterController))]
-[HelpURL("https://antoine-foucault.itch.io/")]
 public class CharacterControllerTest : MonoBehaviour
 {
     public static CharacterControllerTest Instance;
@@ -14,9 +13,10 @@ public class CharacterControllerTest : MonoBehaviour
 
     [ReadOnly] public Vector3 Force;
     [ReadOnly] public Vector3 CurrentForce;
+    [ReadOnly] public bool IsGrounded;
 
     [Header("Walk")]
-    [SerializeField] private float Speed;
+    [SerializeField] private float _speed;
     [SerializeField] private Animator _animator;
     [SerializeField] private string _animatorWalkBool;
 
@@ -30,7 +30,6 @@ public class CharacterControllerTest : MonoBehaviour
     [SerializeField] private float _groundCheckDistance;
     [SerializeField] private float _sphereRadius;
     [SerializeField] private LayerMask _playerLayer;
-    [ReadOnly] public bool IsGrounded;
 
     // References
     private PlayerInputs _inputs;
@@ -77,7 +76,7 @@ public class CharacterControllerTest : MonoBehaviour
     private void Update()
     {
         SetAnimation(_moveVector);
-        _characterController.Move(_moveVector);
+        _characterController.Move(_moveVector * Time.deltaTime);
 
         var grounded = IsGrounded;
         IsGrounded = Physics.SphereCastNonAlloc(transform.position, _sphereRadius, Vector3.down, _groundHitResults, _groundCheckDistance, _playerLayer) > 0;
@@ -92,7 +91,7 @@ public class CharacterControllerTest : MonoBehaviour
     {
         float xPosition = context.ReadValue<Vector2>().x;
         float zPosition = context.ReadValue<Vector2>().y;
-        _moveVector = new Vector3(xPosition * Speed, 0, zPosition * Speed) * Time.deltaTime;
+        _moveVector = new Vector3(xPosition * _speed, 0, zPosition * _speed);
     }
 
     private void StopMove(InputAction.CallbackContext context)

@@ -40,6 +40,7 @@ public class BalloonStateManager : MonoBehaviour
 
     [Header("Flower")]
     public GameObject FlowerModelisation;
+    public GameObject FlowerJumpFXPrefab;
     public float FlowerAirPercentageUsed;
     public float FlowerJumpForce;
     public float FlowerJumpTime;
@@ -47,6 +48,9 @@ public class BalloonStateManager : MonoBehaviour
     [Range(0, 1)] public float FlowerJumpDecel;
     public float FlowerGlideForce;
     [Range(0, 1)] public float FlowerGlideAccel;
+    [Space(25)]
+    [ReadOnly] public int FlowerJumps;
+    public int FlowerMaxJumps = 1;
     // force with wind
 
     private void Awake()
@@ -64,6 +68,8 @@ public class BalloonStateManager : MonoBehaviour
         Inputs.Player.Action.performed += _currentState.OnActionPressed;
         Inputs.Player.SecondaryAction.performed += _currentState.OnSecondaryActionPressed;
         Inputs.Player.ChangeBalloon.performed += ChangeState;
+
+        FlowerJumps = FlowerMaxJumps;
     }
 
     private void Update()
