@@ -20,6 +20,8 @@ public class BouncyBalloon : MonoBehaviour
     {
         if (!other.TryGetComponent(out CharacterControllerTest characterController)) return;
         if (_isPlayerIn) return;
+        if (characterController.GetComponent<BalloonStateManager>().IsHammerFalling) return;
+        Debug.Log("C");
         _isPlayerIn = true;
         characterController.SetForce(_force, _forceAccel);
         transform.DOComplete();
@@ -29,6 +31,11 @@ public class BouncyBalloon : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         if (!other.TryGetComponent(out CharacterControllerTest characterController)) return;
+        if (!_isPlayerIn) return;
+        if (characterController.GetComponent<BalloonStateManager>().IsHammerFalling) return;
+
+        Debug.Log("D");
+
         _isPlayerIn = false;
         characterController.SetForce(Vector3.zero, _forceDecel);
 

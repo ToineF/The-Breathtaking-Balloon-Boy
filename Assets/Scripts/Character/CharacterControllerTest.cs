@@ -1,8 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+
 
 [RequireComponent(typeof(CharacterController))]
 public class CharacterControllerTest : MonoBehaviour

@@ -25,8 +25,9 @@ public class BalloonFlower : BalloonBaseState
         if (_balloonStageManager.FlowerJumps <= 0) return;
 
         _balloonStageManager.CharaController.OnGroundEnter += PlayerEnterGround;
-        if (!CharacterControllerTest.Instance.IsGrounded)
+        if (!CharacterControllerTest.Instance.IsGrounded) // also is force of wind is null
             _balloonStageManager.FlowerJumps--;
+
 
         Vector3 hit = Vector3.up * _balloonStageManager.FlowerJumpForce;
         float startLerp = _balloonStageManager.FlowerJumpAccel;

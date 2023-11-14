@@ -37,6 +37,7 @@ public class BalloonHammer : BalloonBaseState
             float endLerp = _balloonStageManager.HammerGroundDecel;
             float time = _balloonStageManager.HammerGroundJumpTime;
             _balloonStageManager.CharaController.SetForceForTime(hit, time, startLerp, endLerp);
+            Debug.Log("B");
             HitGround();
         }
         else
@@ -72,6 +73,7 @@ public class BalloonHammer : BalloonBaseState
         float endLerp = _balloonStageManager.HammerAirJumpDecel;
         float time = _balloonStageManager.HammerAirJumpTime;
         _balloonStageManager.CharaController.SetForceForTime(hit, time, startLerp, endLerp);
+        Debug.Log("A");
         HitGround();
     }
 
@@ -81,10 +83,13 @@ public class BalloonHammer : BalloonBaseState
 
         Collider collider = _balloonStageManager.CharaController.GetComponent<Collider>();
         GameObject.Instantiate(_balloonStageManager.HammerFXGroundPrefab, collider.bounds.center - collider.bounds.extents.y * Vector3.up, _balloonStageManager.HammerFXGroundPrefab.transform.rotation);
+        HapticManager.Instance.VibrateForTime(0.123f, 0.234f, 0.05f);
     }
 
     public override void OnSecondaryActionPressed(InputAction.CallbackContext context)
     {
         _balloonStageManager.HammerSideCollider.gameObject.SetActive(!_balloonStageManager.HammerSideCollider.gameObject.activeInHierarchy);
     }
+
+    
 }

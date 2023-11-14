@@ -32,6 +32,6 @@ public class AirManager : MonoBehaviour
     {
         _currentAirGauge.fillAmount = _currentAir;
 
-        if (Input.GetKeyDown(KeyCode.K)) AddAir(-10);
+        //if (Input.GetKeyDown(KeyCode.K)) AddAir(-10);
     }
 }

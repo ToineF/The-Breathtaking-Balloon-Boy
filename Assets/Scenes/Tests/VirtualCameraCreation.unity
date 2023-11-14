@@ -618,6 +618,79 @@ Transform:
   m_Father: {fileID: 444492376}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: -2.335, y: -9.577, z: -0.765}
+--- !u!1001 &296887796
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 939570268957118656, guid: 38e15cd532bbef14aac6436fb0655b36,
+        type: 3}
+      propertyPath: m_Name
+      value: Debug
+      objectReference: {fileID: 0}
+    - target: {fileID: 6778081252579641978, guid: 38e15cd532bbef14aac6436fb0655b36,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 6778081252579641978, guid: 38e15cd532bbef14aac6436fb0655b36,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -5.576238
+      objectReference: {fileID: 0}
+    - target: {fileID: 6778081252579641978, guid: 38e15cd532bbef14aac6436fb0655b36,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 14.894002
+      objectReference: {fileID: 0}
+    - target: {fileID: 6778081252579641978, guid: 38e15cd532bbef14aac6436fb0655b36,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -13.034538
+      objectReference: {fileID: 0}
+    - target: {fileID: 6778081252579641978, guid: 38e15cd532bbef14aac6436fb0655b36,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6778081252579641978, guid: 38e15cd532bbef14aac6436fb0655b36,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6778081252579641978, guid: 38e15cd532bbef14aac6436fb0655b36,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6778081252579641978, guid: 38e15cd532bbef14aac6436fb0655b36,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6778081252579641978, guid: 38e15cd532bbef14aac6436fb0655b36,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6778081252579641978, guid: 38e15cd532bbef14aac6436fb0655b36,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6778081252579641978, guid: 38e15cd532bbef14aac6436fb0655b36,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 38e15cd532bbef14aac6436fb0655b36, type: 3}
 --- !u!4 &309303890 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2774501321303435128, guid: 35848f470bb43064db91c9249abff1c6,
@@ -1839,6 +1912,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: MainCharacterWithUI
       objectReference: {fileID: 0}
+    - target: {fileID: 6698193637203676343, guid: ab2b93e3cb0dd61429afe42097c8fa74,
+        type: 3}
+      propertyPath: HammerBouncyBalloonForce
+      value: 90
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3050,6 +3128,84 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!1001 &1727655189
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4186949206593270676, guid: 4dd067902fe3d344d988937921de4026,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6624244758085674138, guid: 4dd067902fe3d344d988937921de4026,
+        type: 3}
+      propertyPath: m_Name
+      value: DeathZone
+      objectReference: {fileID: 0}
+    - target: {fileID: 6896996511163087729, guid: 4dd067902fe3d344d988937921de4026,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 6896996511163087729, guid: 4dd067902fe3d344d988937921de4026,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6896996511163087729, guid: 4dd067902fe3d344d988937921de4026,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.69
+      objectReference: {fileID: 0}
+    - target: {fileID: 6896996511163087729, guid: 4dd067902fe3d344d988937921de4026,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -4.27
+      objectReference: {fileID: 0}
+    - target: {fileID: 6896996511163087729, guid: 4dd067902fe3d344d988937921de4026,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6896996511163087729, guid: 4dd067902fe3d344d988937921de4026,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6896996511163087729, guid: 4dd067902fe3d344d988937921de4026,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6896996511163087729, guid: 4dd067902fe3d344d988937921de4026,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6896996511163087729, guid: 4dd067902fe3d344d988937921de4026,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6896996511163087729, guid: 4dd067902fe3d344d988937921de4026,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6896996511163087729, guid: 4dd067902fe3d344d988937921de4026,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4dd067902fe3d344d988937921de4026, type: 3}
 --- !u!4 &1753428308 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8074371388347209662, guid: c1f5aa26ae4b78448ada918421cd105c,
@@ -3929,6 +4085,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 826831046}
     m_Modifications:
+    - target: {fileID: 2444871583457029077, guid: d254650c6f1fee2478ce4f3d6f4210ef,
+        type: 3}
+      propertyPath: m_Radius
+      value: 0.013065833
+      objectReference: {fileID: 0}
     - target: {fileID: 6140601514877303316, guid: d254650c6f1fee2478ce4f3d6f4210ef,
         type: 3}
       propertyPath: m_Name
@@ -4061,6 +4222,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: BouncyMovableBalloon
+      objectReference: {fileID: 0}
+    - target: {fileID: 4632599687783439377, guid: 62f9f98653cb16a41a37c6440a64fe61,
+        type: 3}
+      propertyPath: m_Radius
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
