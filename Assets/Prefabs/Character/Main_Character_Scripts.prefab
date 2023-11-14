@@ -453,7 +453,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 8507ab4bf41c4774e892b7b880a0ff7a,
         type: 3}
       propertyPath: m_RootOrder
-      value: -1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8507ab4bf41c4774e892b7b880a0ff7a,
         type: 3}
@@ -737,7 +737,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 8507ab4bf41c4774e892b7b880a0ff7a,
         type: 3}
       propertyPath: m_Name
-      value: Main_Character_Anims
+      value: Main_Character_Scripts
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 8507ab4bf41c4774e892b7b880a0ff7a,
         type: 3}
@@ -1057,6 +1057,7 @@ MonoBehaviour:
   HammerGravityAccel: 0.1
   HammerWindForce: 0
   HammerWindForceMultiplier: 1.4
+  HammerBouncyBalloonForce: 2
   FlowerModelisation: {fileID: 7628894813681554592}
   FlowerJumpFXPrefab: {fileID: 7226888052703040409, guid: 6194680d73ef64f49a8c0732aa2ae803,
     type: 3}
@@ -1069,6 +1070,8 @@ MonoBehaviour:
   FlowerGlideAccel: 0.661
   FlowerJumps: 0
   FlowerMaxJumps: 1
+  UIStateHammer: {fileID: 0}
+  UIStateFlower: {fileID: 0}
 --- !u!143 &9058936854868484476
 CharacterController:
   m_ObjectHideFlags: 0

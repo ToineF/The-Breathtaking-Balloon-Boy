@@ -39,6 +39,8 @@ public class BalloonStateManager : MonoBehaviour
     public float HammerGravityAccel;
     [ReadOnly] public float HammerWindForce;
     public float HammerWindForceMultiplier = 1;
+    [Space(25)]
+    public float HammerBouncyBalloonForce;
 
     [Header("Flower")]
     public GameObject FlowerModelisation;

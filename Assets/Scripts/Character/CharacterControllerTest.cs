@@ -14,6 +14,7 @@ public class CharacterControllerTest : MonoBehaviour
     [ReadOnly] public Vector3 Force;
     [ReadOnly] public Vector3 CurrentForce;
     [ReadOnly] public bool IsGrounded;
+    [HideInInspector] public RaycastHit LastGround;
 
     [Header("Walk")]
     [SerializeField] private float _speed;
@@ -83,6 +84,7 @@ public class CharacterControllerTest : MonoBehaviour
         IsGrounded = Physics.SphereCastNonAlloc(transform.position, _sphereRadius, Vector3.down, _groundHitResults, _groundCheckDistance, _playerLayer) > 0;
         if (grounded != IsGrounded && IsGrounded)
         {
+            LastGround = _groundHitResults[0];
             OnGroundEnter?.Invoke();
             CurrentGravity = BaseGravity;
         }

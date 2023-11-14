@@ -66,7 +66,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1e56880d68b6aed4f8c4ebb749299993,
         type: 3}
       propertyPath: m_Name
-      value: Main_Character
+      value: Main_Character_Model
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -115,7 +115,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c37dd1ccae88b2b4a87a8241ba98de03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 0.025
+  Force: {x: 0, y: 0, z: 0}
+  CurrentForce: {x: 0, y: 0, z: 0}
+  IsGrounded: 0
+  _speed: 0
+  _animator: {fileID: 0}
+  _animatorWalkBool: 
+  CurrentGravity: 0
+  BaseGravity: 0
+  MaxGravity: 0
+  _gravityIncreaseByFrame: 0
+  _groundCheckDistance: 0
+  _sphereRadius: 0
+  _playerLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!143 &6181580028446267269
 CharacterController:
   m_ObjectHideFlags: 0

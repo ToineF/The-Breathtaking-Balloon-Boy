@@ -16,8 +16,7 @@ public class BalloonHammer : BalloonBaseState
 
     public override void UpdateState(BalloonStateManager balloonStateManager)
     {
-        // UNSUBSCRIBE WHEN STATE CHANGE
-        // _balloonStageManager.CharaController.OnGroundEnter -= PlayerEnterGround;
+
     }
 
     public override void OnActionPressed(InputAction.CallbackContext context)
@@ -27,9 +26,13 @@ public class BalloonHammer : BalloonBaseState
 
         if (_balloonStageManager.CharaController.IsGrounded)
         {
+            bool groundIsBouncy = CharacterControllerTest.Instance.LastGround.collider.GetComponent<BouncyBalloon>();
+            Vector3 bounceForce = (groundIsBouncy ? _balloonStageManager.HammerBouncyBalloonForce : 0) * Vector3.up;
+
             float gravityAccel = CharacterControllerTest.Instance.CurrentGravity * _balloonStageManager.HammerGravityAccel;
             Vector3 windForce = Vector3.up * _balloonStageManager.HammerWindForce * _balloonStageManager.HammerWindForceMultiplier;
-            Vector3 hit = Vector3.up * _balloonStageManager.HammerGroundForce * gravityAccel + windForce;
+
+            Vector3 hit = Vector3.up * _balloonStageManager.HammerGroundForce * gravityAccel + windForce + bounceForce;
             float startLerp = _balloonStageManager.HammerGroundAccel;
             float endLerp = _balloonStageManager.HammerGroundDecel;
             float time = _balloonStageManager.HammerGroundJumpTime;
@@ -58,9 +61,13 @@ public class BalloonHammer : BalloonBaseState
 
         _balloonStageManager.IsHammerFalling = false;
 
+        bool groundIsBouncy = CharacterControllerTest.Instance.LastGround.collider.GetComponent<BouncyBalloon>();
+        Vector3 bounceForce = (groundIsBouncy ? _balloonStageManager.HammerBouncyBalloonForce : 0) * Vector3.up;
+
         float gravityAccel = CharacterControllerTest.Instance.CurrentGravity * _balloonStageManager.HammerGravityAccel;
         Vector3 windForce = Vector3.up * _balloonStageManager.HammerWindForce * _balloonStageManager.HammerWindForceMultiplier;
-        Vector3 hit = Vector3.up * _balloonStageManager.HammerAirJumpForce * gravityAccel + windForce;
+
+        Vector3 hit = Vector3.up * _balloonStageManager.HammerAirJumpForce * gravityAccel + windForce + bounceForce;
         float startLerp = _balloonStageManager.HammerAirJumpAccel;
         float endLerp = _balloonStageManager.HammerAirJumpDecel;
         float time = _balloonStageManager.HammerAirJumpTime;
