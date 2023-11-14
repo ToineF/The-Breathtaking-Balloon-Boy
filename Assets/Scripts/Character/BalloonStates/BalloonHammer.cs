@@ -11,6 +11,7 @@ public class BalloonHammer : BalloonBaseState
     {
         _balloonStageManager = balloonStateManager;
         _balloonStageManager.HammerModelisation.SetActive(true);
+        _balloonStageManager.UIStateHammer.SetActive(true);
     }
 
     public override void UpdateState(BalloonStateManager balloonStateManager)

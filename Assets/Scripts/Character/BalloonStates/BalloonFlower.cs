@@ -12,6 +12,7 @@ public class BalloonFlower : BalloonBaseState
     {
         _balloonStageManager = balloonStateManager;
         _balloonStageManager.FlowerModelisation.SetActive(true);
+        _balloonStageManager.UIStateFlower.SetActive(true);
     }
 
     public override void UpdateState(BalloonStateManager balloonStateManager)

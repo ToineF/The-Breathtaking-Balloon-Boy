@@ -55,6 +55,10 @@ public class BalloonStateManager : MonoBehaviour
     public int FlowerMaxJumps = 1;
     // force with wind
 
+    [Header("UI")]
+    public GameObject UIStateHammer;
+    public GameObject UIStateFlower;
+
     private void Awake()
     {
         Inputs = new PlayerInputs();
@@ -109,6 +113,8 @@ public class BalloonStateManager : MonoBehaviour
     {
         HammerModelisation.SetActive(false);
         FlowerModelisation.SetActive(false);
+        UIStateHammer.SetActive(false);
+        UIStateFlower.SetActive(false);
     }
 
     public BalloonBaseState GetState()

@@ -42,6 +42,7 @@ public class CharacterControllerTest : MonoBehaviour
 
     // Ground Check
     private RaycastHit[] _groundHitResults;
+    private IEnumerator _currentForceCoroutine;
 
     private void Awake()
     {
@@ -128,6 +129,7 @@ public class CharacterControllerTest : MonoBehaviour
 
     public void SetForce(Vector3 force, float lerp)
     {
+        if (_currentForceCoroutine != null) StopCoroutine(_currentForceCoroutine);
         CurrentForce = force;
         _lerpValue = lerp;
     }
@@ -135,7 +137,8 @@ public class CharacterControllerTest : MonoBehaviour
     public void SetForceForTime(Vector3 force, float time, float startLerp, float endLerp)
     {
         SetForce(force, startLerp);
-        StartCoroutine(WaitForAction(time, () => SetForce(CurrentForce-force, endLerp)));
+        _currentForceCoroutine = WaitForAction(time, () => SetForce(CurrentForce - force, endLerp));
+        StartCoroutine(_currentForceCoroutine);
     }
 
     private IEnumerator WaitForAction(float time, Action action)
