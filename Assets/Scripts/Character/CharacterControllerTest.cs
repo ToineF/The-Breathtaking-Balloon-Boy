@@ -79,8 +79,10 @@ public class CharacterControllerTest : MonoBehaviour
 
     private void Update()
     {
-        SetAnimation(_moveVector);
-        _characterController.Move(_moveVector * Time.deltaTime);
+        Vector3 moveDirection = Camera.main.transform.forward * _moveVector.z + Camera.main.transform.right * _moveVector.x;
+        moveDirection = Vector3.Scale(moveDirection, new Vector3(1, 0, 1));
+        SetAnimation(moveDirection);
+        _characterController.Move(moveDirection * Time.deltaTime);
 
         var grounded = IsGrounded;
         IsGrounded = Physics.SphereCastNonAlloc(transform.position, _sphereRadius, Vector3.down, _groundHitResults, _groundCheckDistance, _playerLayer) > 0;
