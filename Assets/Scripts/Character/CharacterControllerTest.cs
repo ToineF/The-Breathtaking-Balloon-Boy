@@ -152,4 +152,19 @@ public class CharacterControllerTest : MonoBehaviour
         yield return new WaitForSeconds(time);
         action?.Invoke();
     }
+
+    #region BuildingManager
+    private void OnTriggerEnter(Collider other)
+    {
+        if (!other.TryGetComponent(out BuildingManager buildingManager)) return;
+        buildingManager.IsActivatable = true;
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (!other.TryGetComponent(out BuildingManager buildingManager)) return;
+        buildingManager.IsActivatable = false;
+    }
+
+    #endregion
 }
