@@ -19,6 +19,7 @@ public class CharacterControllerTest : MonoBehaviour
     [HideInInspector] public RaycastHit LastGround;
 
     [Header("Walk")]
+    public bool CanMove = true;
     [SerializeField] private float _speed;
     [SerializeField] private Animator _animator;
     [SerializeField] private string _animatorWalkBool;
@@ -60,6 +61,7 @@ public class CharacterControllerTest : MonoBehaviour
         CurrentForce = Force;
         _groundHitResults = new RaycastHit[2];
         CurrentGravity = BaseGravity;
+        CanMove = true;
     }
 
     private void OnEnable()
@@ -79,6 +81,12 @@ public class CharacterControllerTest : MonoBehaviour
 
     private void Update()
     {
+        if (!CanMove)
+        {
+            SetAnimation(Vector3.zero);
+            return;
+        }
+
         Vector3 moveDirection = Camera.main.transform.forward * _moveVector.z + Camera.main.transform.right * _moveVector.x;
         moveDirection = Vector3.Scale(moveDirection, new Vector3(1, 0, 1));
         SetAnimation(moveDirection);
@@ -152,19 +160,4 @@ public class CharacterControllerTest : MonoBehaviour
         yield return new WaitForSeconds(time);
         action?.Invoke();
     }
-
-    #region BuildingManager
-    private void OnTriggerEnter(Collider other)
-    {
-        if (!other.TryGetComponent(out BuildingManager buildingManager)) return;
-        buildingManager.IsActivatable = true;
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (!other.TryGetComponent(out BuildingManager buildingManager)) return;
-        buildingManager.IsActivatable = false;
-    }
-
-    #endregion
 }

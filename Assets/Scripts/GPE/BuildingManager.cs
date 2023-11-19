@@ -1,7 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using DG.Tweening;
 
 [RequireComponent(typeof(Collision))]
 public class BuildingManager : MonoBehaviour
@@ -17,16 +16,21 @@ public class BuildingManager : MonoBehaviour
     [SerializeField] private GameObject _UIIsActivatable;
 
     [Header("Properties")]
+    [SerializeField] private int _airFloorHeight = 3;
     [SerializeField] private int _inflationLevel;
     [SerializeField] private float[] _balloonScaleLevel;
 
-    private bool _isActivatable;
     private PlayerInputs _inputs;
+    private bool _isActivatable;
+    private int _minLevel = 0;
+    private int _maxLevel = 3;
+    private float _lowerPositionY;
 
     private void Awake()
     {
         _inputs = new PlayerInputs();
         IsActivatable = false;
+        _lowerPositionY = _building.transform.position.y - _inflationLevel * _airFloorHeight;
     }
 
     private void OnEnable()
@@ -43,8 +47,16 @@ public class BuildingManager : MonoBehaviour
 
     private void StartBuildingMoveState(InputAction.CallbackContext context)
     {
-        if (!IsActivatable) return;
-        Debug.Log("hey");
+        bool canPlayerMove = !CharacterBuildingManager.Instance.IsActive;
+        if (!IsActivatable && canPlayerMove) return;
+        CharacterBuildingManager.Instance.StartBuildingManager();
+    }
+
+    public void MoveBuilding(int value)
+    {
+        _inflationLevel = Mathf.Clamp(_inflationLevel + value, _minLevel, _maxLevel);
+        _balloon.transform.DOScale(_balloonScaleLevel[_inflationLevel], 1);
+        _building.transform.DOMoveY(_lowerPositionY + _inflationLevel * _airFloorHeight, 1);
     }
 
 }
