@@ -30,6 +30,7 @@ public class BuildingManager : MonoBehaviour
     private int _maxLevel = 3;
     private float _lowerPositionY;
     private float _startUIY;
+    private Vector3 _ballonBaseScale;
 
 
     private void Awake()
@@ -46,6 +47,7 @@ public class BuildingManager : MonoBehaviour
         _UIAirLevelArrow.transform.DOMoveY(_UIAirLevel.transform.position.y + _inflationLevel * _UIArrowincreaseHeight, 0);
         _UIAirLevel.SetActive(false);
         _UIAirLevelArrow.transform.DOMoveY(_startUIY + _inflationLevel * _UIArrowincreaseHeight * (Screen.height / _referenceScreenHeight), 1);
+        _ballonBaseScale = _balloon.transform.localScale;
     }
 
     private void OnEnable()
@@ -71,7 +73,7 @@ public class BuildingManager : MonoBehaviour
     public void MoveBuilding(int value)
     {
         _inflationLevel = Mathf.Clamp(_inflationLevel + value, _minLevel, _maxLevel);
-        _balloon.transform.DOScale(_balloonScaleLevel[_inflationLevel], 1);
+        _balloon.transform.DOScale(_ballonBaseScale * _balloonScaleLevel[_inflationLevel], 1);
         _building.transform.DOMoveY(_lowerPositionY + _inflationLevel * _airFloorHeight, 1);
         _UIAirLevelArrow.transform.DOMoveY(_startUIY + _inflationLevel * _UIArrowincreaseHeight * (Screen.height/ _referenceScreenHeight), 1);
     }
