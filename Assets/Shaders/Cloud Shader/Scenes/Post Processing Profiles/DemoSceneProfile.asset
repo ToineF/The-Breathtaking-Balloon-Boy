@@ -18,10 +18,10 @@ MonoBehaviour:
     m_Value: 1
   threshold:
     m_OverrideState: 1
-    m_Value: 0.06
+    m_Value: 0.89
   intensity:
     m_OverrideState: 1
-    m_Value: 0.24
+    m_Value: 1
   scatter:
     m_OverrideState: 0
     m_Value: 0.7
@@ -30,7 +30,7 @@ MonoBehaviour:
     m_Value: 65472
   tint:
     m_OverrideState: 1
-    m_Value: {r: 1, g: 0.9726173, b: 0.8349056, a: 1}
+    m_Value: {r: 1, g: 1, b: 1, a: 1}
   highQualityFiltering:
     m_OverrideState: 0
     m_Value: 0
@@ -62,7 +62,7 @@ MonoBehaviour:
   active: 1
   mode:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 2
   neutralHDRRangeReductionMode:
     m_OverrideState: 0
     m_Value: 2
@@ -104,6 +104,7 @@ MonoBehaviour:
   - {fileID: -7744973612682301149}
   - {fileID: 2907339787765031670}
   - {fileID: 3702129866813140171}
+  - {fileID: 8269942449439233323}
 --- !u!114 &2907339787765031670
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -162,7 +163,7 @@ MonoBehaviour:
     m_Value: 0
   focusDistance:
     m_OverrideState: 1
-    m_Value: 20
+    m_Value: 4.4
   aperture:
     m_OverrideState: 0
     m_Value: 5.6
@@ -178,3 +179,37 @@ MonoBehaviour:
   bladeRotation:
     m_OverrideState: 0
     m_Value: 0
+--- !u!114 &8269942449439233323
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 558a8e2b6826cf840aae193990ba9f2e, type: 3}
+  m_Name: ShadowsMidtonesHighlights
+  m_EditorClassIdentifier: 
+  active: 1
+  shadows:
+    m_OverrideState: 1
+    m_Value: {x: 0.7021358, y: 0.8838096, z: 1, w: 0.05655042}
+  midtones:
+    m_OverrideState: 1
+    m_Value: {x: 0.95087063, y: 0.965908, z: 1, w: 0.028275358}
+  highlights:
+    m_OverrideState: 1
+    m_Value: {x: 0.84251153, y: 1, z: 0.8597635, w: 0.9990577}
+  shadowsStart:
+    m_OverrideState: 0
+    m_Value: 0
+  shadowsEnd:
+    m_OverrideState: 0
+    m_Value: 0.3
+  highlightsStart:
+    m_OverrideState: 0
+    m_Value: 0.55
+  highlightsEnd:
+    m_OverrideState: 0
+    m_Value: 1
