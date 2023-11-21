@@ -43,7 +43,6 @@ public class BuildingManager : MonoBehaviour
         IsActivatable = false;
         _lowerPositionY = _building.transform.position.y - _inflationLevel * _airFloorHeight;
         _startUIY = _UIAirLevelArrow.transform.position.y;
-        Debug.Log(_startUIY);
         _UIAirLevelArrow.transform.DOMoveY(_UIAirLevel.transform.position.y + _inflationLevel * _UIArrowincreaseHeight, 0);
         _UIAirLevel.SetActive(false);
         _UIAirLevelArrow.transform.DOMoveY(_startUIY + _inflationLevel * _UIArrowincreaseHeight * (Screen.height / _referenceScreenHeight), 1);
