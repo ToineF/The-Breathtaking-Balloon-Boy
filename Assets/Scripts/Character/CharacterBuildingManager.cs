@@ -11,8 +11,8 @@ namespace BlownAway.Player
         public static CharacterBuildingManager Instance;
         public PlayerInputs _inputs;
         public bool IsActive;
+        public BuildingManager CurrentBuilding;
 
-        private BuildingManager _currentBuilding;
 
         private void Awake()
         {
@@ -37,14 +37,14 @@ namespace BlownAway.Player
         {
             if (!other.TryGetComponent(out BuildingManager buildingManager)) return;
             buildingManager.IsActivatable = true;
-            _currentBuilding = buildingManager;
+            CurrentBuilding = buildingManager;
         }
 
         private void OnTriggerExit(Collider other)
         {
             if (!other.TryGetComponent(out BuildingManager buildingManager)) return;
             buildingManager.IsActivatable = false;
-            _currentBuilding = null;
+            CurrentBuilding = null;
         }
 
         public void StartBuildingManager()
@@ -55,10 +55,10 @@ namespace BlownAway.Player
 
         private void MoveBuilding(InputAction.CallbackContext context)
         {
-            if (!_currentBuilding || !IsActive) return;
+            if (!CurrentBuilding || !IsActive) return;
 
             int direction = (int)context.ReadValue<Vector2>().normalized.y;
-            _currentBuilding.MoveBuilding(direction);
+            CurrentBuilding.MoveBuilding(direction);
         }
     }
 }

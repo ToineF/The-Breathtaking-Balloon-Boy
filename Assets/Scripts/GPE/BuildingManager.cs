@@ -71,10 +71,11 @@ namespace BlownAway.GPE.Buildings {
 
         private void StartBuildingMoveState(InputAction.CallbackContext context)
         {
-            bool canPlayerMove = !CharacterBuildingManager.Instance.IsActive;
-            if (!IsActivatable && canPlayerMove) return;
+            bool canPlayerMove = CharacterBuildingManager.Instance.IsActive;
+            bool isCurrentBuilding = CharacterBuildingManager.Instance.CurrentBuilding == this || CharacterBuildingManager.Instance.CurrentBuilding == null;
+            if (!IsActivatable || !isCurrentBuilding) return;
             CharacterBuildingManager.Instance.StartBuildingManager();
-            _UIAirLevel.SetActive(canPlayerMove);
+            _UIAirLevel.SetActive(!canPlayerMove);
         }
 
         public void MoveBuilding(int value)

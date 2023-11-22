@@ -334,7 +334,7 @@ Transform:
   - {fileID: 7069951482449762696}
   - {fileID: 1493684304320626450}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3457573465948048267
 GameObject:
@@ -1152,6 +1152,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6539601315103415620, guid: 9b8a7cab4931b114ea7ea6d12fb24627,
         type: 3}
+      propertyPath: BaseGravity
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6539601315103415620, guid: 9b8a7cab4931b114ea7ea6d12fb24627,
+        type: 3}
       propertyPath: _gameplayCamera
       value: 
       objectReference: {fileID: 4977468004285058893}
@@ -1192,6 +1197,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a6f448e8268fbb459471ec17955d285, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsActive: 0
 --- !u!4 &5504023105384247263 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4405275939843142444, guid: 9b8a7cab4931b114ea7ea6d12fb24627,
