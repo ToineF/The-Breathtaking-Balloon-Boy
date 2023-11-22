@@ -3,35 +3,38 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class AirManager : MonoBehaviour
+namespace BlownAway.Player
 {
-    public static AirManager Instance;
-
-    private float _currentAir = 1;
-    [SerializeField] private Image _currentAirGauge;
-
-    private void Awake()
+    public class AirManager : MonoBehaviour
     {
-        Instance = this;
-    }
+        public static AirManager Instance;
 
-    public void SetAir(float percentage)
-    {
-        _currentAir = percentage / 100;
-        _currentAir = Mathf.Clamp(_currentAir, 0, 1);
+        private float _currentAir = 1;
+        [SerializeField] private Image _currentAirGauge;
 
-    }
+        private void Awake()
+        {
+            Instance = this;
+        }
 
-    public void AddAir(float percentage)
-    {
-        _currentAir += percentage / 100;
-        _currentAir = Mathf.Clamp(_currentAir, 0, 1);
-    }
+        public void SetAir(float percentage)
+        {
+            _currentAir = percentage / 100;
+            _currentAir = Mathf.Clamp(_currentAir, 0, 1);
 
-    private void Update()
-    {
-        _currentAirGauge.fillAmount = _currentAir;
+        }
 
-        //if (Input.GetKeyDown(KeyCode.K)) AddAir(-10);
+        public void AddAir(float percentage)
+        {
+            _currentAir += percentage / 100;
+            _currentAir = Mathf.Clamp(_currentAir, 0, 1);
+        }
+
+        private void Update()
+        {
+            _currentAirGauge.fillAmount = _currentAir;
+
+            //if (Input.GetKeyDown(KeyCode.K)) AddAir(-10);
+        }
     }
 }

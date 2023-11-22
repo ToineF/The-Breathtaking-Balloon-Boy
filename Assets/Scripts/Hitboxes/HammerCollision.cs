@@ -2,30 +2,34 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HammerCollision : MonoBehaviour
+
+namespace BlownAway.Hitbox
 {
-    [SerializeField] private LayerMask _wallLayer;
-    private float _collisionTime = 2;
-    private Collider _collider;
-
-    private void OnEnable()
+    public class HammerCollision : MonoBehaviour
     {
-        _collider = null;
-        StartCoroutine(Disable());
-    }
+        [SerializeField] private LayerMask _wallLayer;
+        private float _collisionTime = 2;
+        private Collider _collider;
 
-    IEnumerator Disable()
-    {
-        yield return new WaitForSeconds(_collisionTime);
-        gameObject.SetActive(false);
-    }
+        private void OnEnable()
+        {
+            _collider = null;
+            StartCoroutine(Disable());
+        }
 
-    private void OnCollisionEnter(Collision other)
-    {
-        if (((int)Mathf.Pow(2,other.gameObject.layer) & _wallLayer.value) <= 0) return;
-        _collider = other.collider;
-        Debug.Log(other.gameObject.name);
-        // Return _collider HERE
-        gameObject.SetActive(false);
+        IEnumerator Disable()
+        {
+            yield return new WaitForSeconds(_collisionTime);
+            gameObject.SetActive(false);
+        }
+
+        private void OnCollisionEnter(Collision other)
+        {
+            if (((int)Mathf.Pow(2, other.gameObject.layer) & _wallLayer.value) <= 0) return;
+            _collider = other.collider;
+            Debug.Log(other.gameObject.name);
+            // Return _collider HERE
+            gameObject.SetActive(false);
+        }
     }
 }

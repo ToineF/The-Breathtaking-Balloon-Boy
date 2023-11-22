@@ -1,59 +1,64 @@
+using BlownAway.GPE.Buildings;
+using BlownAway.Player;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class CharacterBuildingManager : MonoBehaviour
+namespace BlownAway.Player
 {
-    public static CharacterBuildingManager Instance;
-    public PlayerInputs _inputs;
-    public bool IsActive;
-
-    private BuildingManager _currentBuilding;
-
-    private void Awake()
+    public class CharacterBuildingManager : MonoBehaviour
     {
-        Instance = this;
-        _inputs = new PlayerInputs();
-        IsActive = false;
-    }
+        public static CharacterBuildingManager Instance;
+        public PlayerInputs _inputs;
+        public bool IsActive;
 
-    private void OnEnable()
-    {
-        _inputs.Enable();
-        _inputs.Player.Move.performed += MoveBuilding;
-    }
+        private BuildingManager _currentBuilding;
 
-    private void OnDisable()
-    {
-        _inputs.Disable();
-        _inputs.Player.Move.performed -= MoveBuilding;
-    }
+        private void Awake()
+        {
+            Instance = this;
+            _inputs = new PlayerInputs();
+            IsActive = false;
+        }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (!other.TryGetComponent(out BuildingManager buildingManager)) return;
-        buildingManager.IsActivatable = true;
-        _currentBuilding = buildingManager;
-    }
+        private void OnEnable()
+        {
+            _inputs.Enable();
+            _inputs.Player.Move.performed += MoveBuilding;
+        }
 
-    private void OnTriggerExit(Collider other)
-    {
-        if (!other.TryGetComponent(out BuildingManager buildingManager)) return;
-        buildingManager.IsActivatable = false;
-        _currentBuilding = null;
-    }
+        private void OnDisable()
+        {
+            _inputs.Disable();
+            _inputs.Player.Move.performed -= MoveBuilding;
+        }
 
-    public void StartBuildingManager()
-    {
-        IsActive = !IsActive;
-        GetComponent<CharacterControllerTest>().CanMove = !IsActive;
-    }
+        private void OnTriggerEnter(Collider other)
+        {
+            if (!other.TryGetComponent(out BuildingManager buildingManager)) return;
+            buildingManager.IsActivatable = true;
+            _currentBuilding = buildingManager;
+        }
 
-    private void MoveBuilding(InputAction.CallbackContext context)
-    {
-        if (!_currentBuilding || !IsActive) return;
+        private void OnTriggerExit(Collider other)
+        {
+            if (!other.TryGetComponent(out BuildingManager buildingManager)) return;
+            buildingManager.IsActivatable = false;
+            _currentBuilding = null;
+        }
 
-        int direction = (int)context.ReadValue<Vector2>().normalized.y;
-        _currentBuilding.MoveBuilding(direction);
+        public void StartBuildingManager()
+        {
+            IsActive = !IsActive;
+            GetComponent<CharacterControllerTest>().CanMove = !IsActive;
+        }
+
+        private void MoveBuilding(InputAction.CallbackContext context)
+        {
+            if (!_currentBuilding || !IsActive) return;
+
+            int direction = (int)context.ReadValue<Vector2>().normalized.y;
+            _currentBuilding.MoveBuilding(direction);
+        }
     }
 }

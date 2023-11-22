@@ -62,6 +62,15 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Cancel"",
+                    ""type"": ""Button"",
+                    ""id"": ""01db0c3f-8330-42b2-91d4-cdeac986164a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -449,6 +458,28 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""action"": ""ChangeBalloon"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""40d28d95-0ae6-439c-8096-70dc640f2fab"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Cancel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f2ff20ad-0e25-44e1-b778-8c91a7bfbbaf"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Cancel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -461,6 +492,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         m_Player_Action = m_Player.FindAction("Action", throwIfNotFound: true);
         m_Player_SecondaryAction = m_Player.FindAction("SecondaryAction", throwIfNotFound: true);
         m_Player_ChangeBalloon = m_Player.FindAction("ChangeBalloon", throwIfNotFound: true);
+        m_Player_Cancel = m_Player.FindAction("Cancel", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -526,6 +558,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Action;
     private readonly InputAction m_Player_SecondaryAction;
     private readonly InputAction m_Player_ChangeBalloon;
+    private readonly InputAction m_Player_Cancel;
     public struct PlayerActions
     {
         private @PlayerInputs m_Wrapper;
@@ -534,6 +567,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         public InputAction @Action => m_Wrapper.m_Player_Action;
         public InputAction @SecondaryAction => m_Wrapper.m_Player_SecondaryAction;
         public InputAction @ChangeBalloon => m_Wrapper.m_Player_ChangeBalloon;
+        public InputAction @Cancel => m_Wrapper.m_Player_Cancel;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -555,6 +589,9 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
             @ChangeBalloon.started += instance.OnChangeBalloon;
             @ChangeBalloon.performed += instance.OnChangeBalloon;
             @ChangeBalloon.canceled += instance.OnChangeBalloon;
+            @Cancel.started += instance.OnCancel;
+            @Cancel.performed += instance.OnCancel;
+            @Cancel.canceled += instance.OnCancel;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -571,6 +608,9 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
             @ChangeBalloon.started -= instance.OnChangeBalloon;
             @ChangeBalloon.performed -= instance.OnChangeBalloon;
             @ChangeBalloon.canceled -= instance.OnChangeBalloon;
+            @Cancel.started -= instance.OnCancel;
+            @Cancel.performed -= instance.OnCancel;
+            @Cancel.canceled -= instance.OnCancel;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -594,5 +634,6 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         void OnAction(InputAction.CallbackContext context);
         void OnSecondaryAction(InputAction.CallbackContext context);
         void OnChangeBalloon(InputAction.CallbackContext context);
+        void OnCancel(InputAction.CallbackContext context);
     }
 }

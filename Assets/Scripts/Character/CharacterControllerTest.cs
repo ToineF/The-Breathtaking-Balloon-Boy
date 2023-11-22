@@ -1,163 +1,190 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using Unity.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-
-[RequireComponent(typeof(CharacterController))]
-public class CharacterControllerTest : MonoBehaviour
+namespace BlownAway.Player
 {
-    public static CharacterControllerTest Instance;
-
-    public Action OnGroundEnter;
-
-    [ReadOnly] public Vector3 Force;
-    [ReadOnly] public Vector3 CurrentForce;
-    [ReadOnly] public bool IsGrounded;
-    [HideInInspector] public RaycastHit LastGround;
-
-    [Header("Walk")]
-    public bool CanMove = true;
-    [SerializeField] private float _speed;
-    [SerializeField] private Animator _animator;
-    [SerializeField] private string _animatorWalkBool;
-
-    [Header("Gravity")]
-    [ReadOnly] public float CurrentGravity;
-    [SerializeField] private float BaseGravity;
-    [SerializeField] private float MaxGravity;
-    [SerializeField] private float _gravityIncreaseByFrame;
-
-    [Header("Ground Check")]
-    [SerializeField] private float _groundCheckDistance;
-    [SerializeField] private float _sphereRadius;
-    [SerializeField] private LayerMask _playerLayer;
-
-    // References
-    private PlayerInputs _inputs;
-    private CharacterController _characterController;
-    private BalloonStateManager _balloonStateManager;
-
-    // Walk
-    private Vector3 _moveVector = Vector3.zero;
-    private float _lerpValue;
-
-    // Ground Check
-    private RaycastHit[] _groundHitResults;
-    private IEnumerator _currentForceCoroutine;
-
-    private void Awake()
+    [RequireComponent(typeof(CharacterController))]
+    public class CharacterControllerTest : MonoBehaviour
     {
-        Instance = this;
-        _inputs = new PlayerInputs();
-    }
+        public static CharacterControllerTest Instance;
 
-    void Start()
-    {
-        _characterController = GetComponent<CharacterController>();
-        _balloonStateManager = GetComponent<BalloonStateManager>();
-        CurrentForce = Force;
-        _groundHitResults = new RaycastHit[2];
-        CurrentGravity = BaseGravity;
-        CanMove = true;
-    }
+        public Action OnGroundEnter;
 
-    private void OnEnable()
-    {
-        _inputs.Enable();
-        _inputs.Player.Move.performed += StartMove;
-        _inputs.Player.Move.canceled += StopMove;
-    }
-
-    private void OnDisable()
-    {
-        _inputs.Disable();
-        _inputs.Player.Move.performed -= StartMove;
-        _inputs.Player.Move.canceled -= StopMove;
-
-    }
-
-    private void Update()
-    {
-        if (!CanMove)
+        public bool CanMove
         {
-            SetAnimation(Vector3.zero);
-            return;
+            get => _canMove; set
+            {
+                _canMove = value;
+                SwitchCamera(_canMove);
+            }
         }
 
-        Vector3 moveDirection = Camera.main.transform.forward * _moveVector.z + Camera.main.transform.right * _moveVector.x;
-        moveDirection = Vector3.Scale(moveDirection, new Vector3(1, 0, 1));
-        SetAnimation(moveDirection);
-        _characterController.Move(moveDirection * Time.deltaTime);
+        [ReadOnly] public Vector3 Force;
+        [ReadOnly] public Vector3 CurrentForce;
+        [ReadOnly] public bool IsGrounded;
+        [HideInInspector] public RaycastHit LastGround;
 
-        var grounded = IsGrounded;
-        IsGrounded = Physics.SphereCastNonAlloc(transform.position, _sphereRadius, Vector3.down, _groundHitResults, _groundCheckDistance, _playerLayer) > 0;
-        if (grounded != IsGrounded && IsGrounded)
+
+        [Header("Walk")]
+        [SerializeField] private float _speed;
+        [SerializeField] private Animator _animator;
+        [SerializeField] private string _animatorWalkBool;
+
+        [Header("Gravity")]
+        [ReadOnly] public float CurrentGravity;
+        [SerializeField] private float BaseGravity;
+        [SerializeField] private float MaxGravity;
+        [SerializeField] private float _gravityIncreaseByFrame;
+
+        [Header("Ground Check")]
+        [SerializeField] private float _groundCheckDistance;
+        [SerializeField] private float _sphereRadius;
+        [SerializeField] private LayerMask _playerLayer;
+
+        [Header("Cameras")]
+        [SerializeField] private GameObject _gameplayCamera;
+        [SerializeField] private GameObject _buildingManagerCamera;
+
+        // References
+        private bool _canMove;
+        private PlayerInputs _inputs;
+        private CharacterController _characterController;
+        private BalloonStateManager _balloonStateManager;
+
+        // Walk
+        private Vector3 _moveVector = Vector3.zero;
+        private float _lerpValue;
+
+        // Ground Check
+        private RaycastHit[] _groundHitResults;
+        private IEnumerator _currentForceCoroutine;
+
+        private void Awake()
         {
-            LastGround = _groundHitResults[0];
-            OnGroundEnter?.Invoke();
+            Instance = this;
+            _inputs = new PlayerInputs();
+        }
+
+        void Start()
+        {
+            _characterController = GetComponent<CharacterController>();
+            _balloonStateManager = GetComponent<BalloonStateManager>();
+            CurrentForce = Force;
+            _groundHitResults = new RaycastHit[2];
             CurrentGravity = BaseGravity;
+            CanMove = true;
         }
-    }
 
-    private void StartMove(InputAction.CallbackContext context)
-    {
-        float xPosition = context.ReadValue<Vector2>().x;
-        float zPosition = context.ReadValue<Vector2>().y;
-        _moveVector = new Vector3(xPosition * _speed, 0, zPosition * _speed);
-    }
-
-    private void StopMove(InputAction.CallbackContext context)
-    {
-        _moveVector = Vector3.zero;
-    }
-
-    void FixedUpdate()
-    {
-        if (!IsGrounded && _balloonStateManager.GetState() == _balloonStateManager.BalloonHammer)
+        private void OnEnable()
         {
-            CurrentGravity = Mathf.Clamp(CurrentGravity + _gravityIncreaseByFrame, BaseGravity, MaxGravity);
+            _inputs.Enable();
+            _inputs.Player.Move.performed += StartMove;
+            _inputs.Player.Move.canceled += StopMove;
         }
 
-        Vector3 gravity = new Vector3(Force.x, Force.y - CurrentGravity, Force.z);
+        private void OnDisable()
+        {
+            _inputs.Disable();
+            _inputs.Player.Move.performed -= StartMove;
+            _inputs.Player.Move.canceled -= StopMove;
 
-        _characterController.Move(gravity * Time.deltaTime);
+        }
 
-        var forceSign = Mathf.Sign(CurrentForce.x) * Mathf.Sign(CurrentForce.x) * Mathf.Sign(CurrentForce.x);
-        Force = Vector3.Lerp(Force, CurrentForce, _lerpValue);
-    }
+        private void Update()
+        {
+            if (!CanMove)
+            {
+                SetAnimation(Vector3.zero);
+                return;
+            }
 
-    private void SetAnimation(Vector3 moveVector)
-    {
-        _animator.SetBool(_animatorWalkBool, moveVector != Vector3.zero);
-        transform.LookAt(transform.position + moveVector);
-    }
+            Vector3 moveDirection = UnityEngine.Camera.main.transform.forward * _moveVector.z + UnityEngine.Camera.main.transform.right * _moveVector.x;
+            moveDirection = Vector3.Scale(moveDirection, new Vector3(1, 0, 1));
+            SetAnimation(moveDirection);
+            _characterController.Move(moveDirection * Time.deltaTime);
 
-    public void AddForce(Vector3 force, float lerp)
-    {
-        CurrentForce += force;
-        _lerpValue = lerp;
-    }
+            var grounded = IsGrounded;
+            IsGrounded = Physics.SphereCastNonAlloc(transform.position, _sphereRadius, Vector3.down, _groundHitResults, _groundCheckDistance, _playerLayer) > 0;
+            if (grounded != IsGrounded && IsGrounded)
+            {
+                LastGround = _groundHitResults[0];
+                OnGroundEnter?.Invoke();
+                CurrentGravity = BaseGravity;
+            }
+        }
 
-    public void SetForce(Vector3 force, float lerp)
-    {
-        if (_currentForceCoroutine != null) StopCoroutine(_currentForceCoroutine);
-        CurrentForce = force;
-        _lerpValue = lerp;
-    }
+        private void StartMove(InputAction.CallbackContext context)
+        {
+            float xPosition = context.ReadValue<Vector2>().x;
+            float zPosition = context.ReadValue<Vector2>().y;
+            _moveVector = new Vector3(xPosition * _speed, 0, zPosition * _speed);
+        }
 
-    public void SetForceForTime(Vector3 force, float time, float startLerp, float endLerp)
-    {
-        SetForce(force, startLerp);
-        _currentForceCoroutine = WaitForAction(time, () => SetForce(CurrentForce - force, endLerp));
-        StartCoroutine(_currentForceCoroutine);
-    }
+        private void StopMove(InputAction.CallbackContext context)
+        {
+            _moveVector = Vector3.zero;
+        }
 
-    private IEnumerator WaitForAction(float time, Action action)
-    {
-        yield return new WaitForSeconds(time);
-        action?.Invoke();
+        void FixedUpdate()
+        {
+            if (!IsGrounded && _balloonStateManager.GetState() == _balloonStateManager.BalloonHammer)
+            {
+                CurrentGravity = Mathf.Clamp(CurrentGravity + _gravityIncreaseByFrame, BaseGravity, MaxGravity);
+            }
+
+            Vector3 gravity = new Vector3(Force.x, Force.y - CurrentGravity, Force.z);
+
+            _characterController.Move(gravity * Time.deltaTime);
+
+            var forceSign = Mathf.Sign(CurrentForce.x) * Mathf.Sign(CurrentForce.x) * Mathf.Sign(CurrentForce.x);
+            Force = Vector3.Lerp(Force, CurrentForce, _lerpValue);
+        }
+
+        private void SetAnimation(Vector3 moveVector)
+        {
+            _animator.SetBool(_animatorWalkBool, moveVector != Vector3.zero);
+            transform.LookAt(transform.position + moveVector);
+        }
+
+        public void AddForce(Vector3 force, float lerp)
+        {
+            CurrentForce += force;
+            _lerpValue = lerp;
+        }
+
+        public void SetForce(Vector3 force, float lerp)
+        {
+            if (_currentForceCoroutine != null) StopCoroutine(_currentForceCoroutine);
+            CurrentForce = force;
+            _lerpValue = lerp;
+        }
+
+        public void SetForceForTime(Vector3 force, float time, float startLerp, float endLerp)
+        {
+            SetForce(force, startLerp);
+            _currentForceCoroutine = WaitForAction(time, () => SetForce(CurrentForce - force, endLerp));
+            StartCoroutine(_currentForceCoroutine);
+        }
+
+        private IEnumerator WaitForAction(float time, Action action)
+        {
+            yield return new WaitForSeconds(time);
+            action?.Invoke();
+        }
+
+        private void ActivateCamera(GameObject camera)
+        {
+            camera.SetActive(false);
+            camera.SetActive(true);
+        }
+
+        private void SwitchCamera(bool canMove)
+        {
+            GameObject camera = canMove ? _gameplayCamera : _buildingManagerCamera;
+            ActivateCamera(camera);
+        }
     }
 }

@@ -1,14 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using BlownAway.Player;
 
-public class DeathZone : MonoBehaviour
+namespace BlownAway.Hitbox
 {
-    private void OnTriggerEnter(Collider other)
+    public class DeathZone : MonoBehaviour
     {
-        if (!other.GetComponent<CharacterControllerTest>()) return;
+        private void OnTriggerEnter(Collider other)
+        {
+            if (!other.GetComponent<CharacterControllerTest>()) return;
 
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
     }
 }
