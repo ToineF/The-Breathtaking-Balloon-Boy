@@ -71,6 +71,15 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""DistanceView"",
+                    ""type"": ""Button"",
+                    ""id"": ""aa0f9346-62de-468a-b4f7-a64f2a9b2d5c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -317,6 +326,28 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 },
                 {
+                    ""name"": """",
+                    ""id"": ""40d28d95-0ae6-439c-8096-70dc640f2fab"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Cancel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f2ff20ad-0e25-44e1-b778-8c91a7bfbbaf"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Cancel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
                     ""name"": ""Arrow Keys"",
                     ""id"": ""e34e9995-75db-4a89-b285-7730204c858d"",
                     ""path"": ""2DVector"",
@@ -461,23 +492,23 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""40d28d95-0ae6-439c-8096-70dc640f2fab"",
-                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""id"": ""c9ca2d62-e206-4656-9257-7c26c7c52492"",
+                    ""path"": ""<Keyboard>/q"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Cancel"",
+                    ""action"": ""DistanceView"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""f2ff20ad-0e25-44e1-b778-8c91a7bfbbaf"",
-                    ""path"": ""<Keyboard>/escape"",
+                    ""id"": ""9f7cba86-d75e-4336-a594-ff1456945bac"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Cancel"",
+                    ""action"": ""DistanceView"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -493,6 +524,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         m_Player_SecondaryAction = m_Player.FindAction("SecondaryAction", throwIfNotFound: true);
         m_Player_ChangeBalloon = m_Player.FindAction("ChangeBalloon", throwIfNotFound: true);
         m_Player_Cancel = m_Player.FindAction("Cancel", throwIfNotFound: true);
+        m_Player_DistanceView = m_Player.FindAction("DistanceView", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -559,6 +591,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_SecondaryAction;
     private readonly InputAction m_Player_ChangeBalloon;
     private readonly InputAction m_Player_Cancel;
+    private readonly InputAction m_Player_DistanceView;
     public struct PlayerActions
     {
         private @PlayerInputs m_Wrapper;
@@ -568,6 +601,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         public InputAction @SecondaryAction => m_Wrapper.m_Player_SecondaryAction;
         public InputAction @ChangeBalloon => m_Wrapper.m_Player_ChangeBalloon;
         public InputAction @Cancel => m_Wrapper.m_Player_Cancel;
+        public InputAction @DistanceView => m_Wrapper.m_Player_DistanceView;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -592,6 +626,9 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
             @Cancel.started += instance.OnCancel;
             @Cancel.performed += instance.OnCancel;
             @Cancel.canceled += instance.OnCancel;
+            @DistanceView.started += instance.OnDistanceView;
+            @DistanceView.performed += instance.OnDistanceView;
+            @DistanceView.canceled += instance.OnDistanceView;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -611,6 +648,9 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
             @Cancel.started -= instance.OnCancel;
             @Cancel.performed -= instance.OnCancel;
             @Cancel.canceled -= instance.OnCancel;
+            @DistanceView.started -= instance.OnDistanceView;
+            @DistanceView.performed -= instance.OnDistanceView;
+            @DistanceView.canceled -= instance.OnDistanceView;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -635,5 +675,6 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         void OnSecondaryAction(InputAction.CallbackContext context);
         void OnChangeBalloon(InputAction.CallbackContext context);
         void OnCancel(InputAction.CallbackContext context);
+        void OnDistanceView(InputAction.CallbackContext context);
     }
 }

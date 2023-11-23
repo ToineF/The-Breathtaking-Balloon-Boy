@@ -58,7 +58,9 @@ namespace BlownAway.Player
             if (!CurrentBuilding || !IsActive) return;
 
             int direction = (int)context.ReadValue<Vector2>().normalized.y;
-            CurrentBuilding.MoveBuilding(direction);
+            if (direction == 0) return;
+
+            CurrentBuilding.MovePreviewBuilding(direction);
         }
     }
 }

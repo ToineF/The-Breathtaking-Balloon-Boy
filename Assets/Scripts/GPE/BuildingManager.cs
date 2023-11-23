@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using DG.Tweening;
 using BlownAway.Player;
+using AntoineFoucault.Utilities;
 
 namespace BlownAway.GPE.Buildings {
 
@@ -19,6 +20,7 @@ namespace BlownAway.GPE.Buildings {
 
         [Header("References")]
         [SerializeField] private GameObject _building;
+        [SerializeField] private GameObject _ghostBuilding;
         [SerializeField] private GameObject _balloon;
         [SerializeField] private GameObject _UIIsActivatable;
 
@@ -39,6 +41,7 @@ namespace BlownAway.GPE.Buildings {
         private float _lowerPositionY;
         private float _startUIY;
         private Vector3 _ballonBaseScale;
+        private int _startInflationLevel;
 
 
         private void Awake()
@@ -60,30 +63,51 @@ namespace BlownAway.GPE.Buildings {
         private void OnEnable()
         {
             _inputs.Enable();
-            _inputs.Player.Action.performed += StartBuildingMoveState;
+            _inputs.Player.Action.performed += CheckCanMoveBuilding;
+            _inputs.Player.Cancel.performed += CheckCanMoveBuilding;
         }
 
         private void OnDisable()
         {
             _inputs.Disable();
-            _inputs.Player.Action.performed -= StartBuildingMoveState;
+            _inputs.Player.Action.performed -= CheckCanMoveBuilding;
+            _inputs.Player.Cancel.performed -= CheckCanMoveBuilding;
         }
 
-        private void StartBuildingMoveState(InputAction.CallbackContext context)
+        private void CheckCanMoveBuilding(InputAction.CallbackContext context)
         {
             bool canPlayerMove = CharacterBuildingManager.Instance.IsActive;
             bool isCurrentBuilding = CharacterBuildingManager.Instance.CurrentBuilding == this || CharacterBuildingManager.Instance.CurrentBuilding == null;
             if (!IsActivatable || !isCurrentBuilding) return;
+
             CharacterBuildingManager.Instance.StartBuildingManager();
+
             _UIAirLevel.SetActive(!canPlayerMove);
+            _ghostBuilding.SetActive(!canPlayerMove);
+            _startInflationLevel = _inflationLevel;
+            ResetGhostBuildingPosition();
+            if (canPlayerMove) MoveBuilding();
         }
 
-        public void MoveBuilding(int value)
+        public void MovePreviewBuilding(int value)
         {
             _inflationLevel = Mathf.Clamp(_inflationLevel + value, _minLevel, _maxLevel);
             _balloon.transform.DOScale(_ballonBaseScale * _balloonScaleLevel[_inflationLevel], _buildingMoveSpeed);
-            _building.transform.DOMoveY(_lowerPositionY + _inflationLevel * _airFloorHeight, _buildingMoveSpeed);
+            ResetGhostBuildingPosition();
+            _ghostBuilding.transform.DOMoveY(_lowerPositionY + _inflationLevel * _airFloorHeight, _buildingMoveSpeed).SetLoops(-1, LoopType.Restart);
+
             _UIAirLevelArrow.transform.DOMoveY(_startUIY + _inflationLevel * _UIArrowincreaseHeight * (Screen.height / _referenceScreenHeight), _buildingMoveSpeed);
+        }
+
+        private void ResetGhostBuildingPosition()
+        {
+            _ghostBuilding.transform.DOKill();
+            _ghostBuilding.transform.position = new Vector3(_ghostBuilding.transform.position.x, _lowerPositionY + _startInflationLevel * _airFloorHeight, _ghostBuilding.transform.position.z);
+        }
+
+        private void MoveBuilding()
+        {
+            _building.transform.DOMoveY(_lowerPositionY + _inflationLevel * _airFloorHeight, _buildingMoveSpeed);
         }
     }
 }

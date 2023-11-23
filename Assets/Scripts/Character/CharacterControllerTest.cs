@@ -47,6 +47,7 @@ namespace BlownAway.Player
         [Header("Cameras")]
         [SerializeField] private GameObject _gameplayCamera;
         [SerializeField] private GameObject _buildingManagerCamera;
+        [SerializeField] private GameObject _birdViewCamera;
 
         // References
         private bool _canMove;
@@ -61,6 +62,9 @@ namespace BlownAway.Player
         // Ground Check
         private RaycastHit[] _groundHitResults;
         private IEnumerator _currentForceCoroutine;
+
+        // Camera
+        private bool _isViewing;
 
         private void Awake()
         {
@@ -83,6 +87,7 @@ namespace BlownAway.Player
             _inputs.Enable();
             _inputs.Player.Move.performed += StartMove;
             _inputs.Player.Move.canceled += StopMove;
+            _inputs.Player.DistanceView.performed += BirdEyeView;
         }
 
         private void OnDisable()
@@ -90,12 +95,14 @@ namespace BlownAway.Player
             _inputs.Disable();
             _inputs.Player.Move.performed -= StartMove;
             _inputs.Player.Move.canceled -= StopMove;
+            _inputs.Player.DistanceView.performed -= BirdEyeView;
+
 
         }
 
         private void Update()
         {
-            if (!CanMove)
+            if (!CanMove || _isViewing)
             {
                 SetAnimation(Vector3.zero);
                 return;
@@ -185,6 +192,12 @@ namespace BlownAway.Player
         {
             GameObject camera = canMove ? _gameplayCamera : _buildingManagerCamera;
             ActivateCamera(camera);
+        }
+
+        private void BirdEyeView(InputAction.CallbackContext context)
+        {
+            _isViewing = !_isViewing;
+            _birdViewCamera.SetActive(_isViewing);
         }
     }
 }
