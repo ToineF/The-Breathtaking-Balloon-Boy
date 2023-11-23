@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using Unity.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -65,6 +66,7 @@ namespace BlownAway.Player
 
         // Camera
         private bool _isViewing;
+        private GameObject _currentCamera;
 
         private void Awake()
         {
@@ -184,6 +186,7 @@ namespace BlownAway.Player
 
         private void ActivateCamera(GameObject camera)
         {
+            _currentCamera = camera;
             camera.SetActive(false);
             camera.SetActive(true);
         }
@@ -196,8 +199,10 @@ namespace BlownAway.Player
 
         private void BirdEyeView(InputAction.CallbackContext context)
         {
+            if (!CanMove) return;
+            GameObject camera = _isViewing ? _gameplayCamera : _birdViewCamera;
             _isViewing = !_isViewing;
-            _birdViewCamera.SetActive(_isViewing);
+            ActivateCamera(camera);
         }
     }
 }

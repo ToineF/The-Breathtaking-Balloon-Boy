@@ -110,7 +110,7 @@ namespace BlownAway.GPE.Buildings {
 
         private void SetUpBuildingCubes()
         {
-            _ghostBuilding = Instantiate(_building, _building.transform.position, _building.transform.rotation, _building.transform.parent);
+            _ghostBuilding = Instantiate(_buildingCubesParent, _buildingCubesParent.transform.position, _buildingCubesParent.transform.rotation, _buildingCubesParent.transform.parent);
             int childCount = _ghostBuilding.transform.childCount;
             for (int i = 0; i < childCount; i++)
             {
