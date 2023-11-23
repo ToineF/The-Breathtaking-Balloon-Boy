@@ -80,6 +80,15 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""CameraMove"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""ca75b410-b717-4001-b182-926a73e9559d"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -511,6 +520,72 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""action"": ""DistanceView"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""97d9a6d9-e238-402f-bc83-df1ab7d3f152"",
+                    ""path"": ""<Mouse>/delta"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CameraMove"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""Gamepad"",
+                    ""id"": ""74326ff4-c4c8-4637-b0ba-50da06fdc27d"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CameraMove"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""7dfeaf4c-08c3-4886-97e8-f040c072228d"",
+                    ""path"": ""<Gamepad>/rightStick/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CameraMove"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""591e3479-c5c9-4f4c-b730-74468b00775a"",
+                    ""path"": ""<Gamepad>/rightStick/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CameraMove"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""b7696fbf-5d7f-4752-b217-470f89110e76"",
+                    ""path"": ""<Gamepad>/rightStick/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CameraMove"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""a191e088-9e14-4859-ac81-581390c4287b"",
+                    ""path"": ""<Gamepad>/rightStick/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CameraMove"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -525,6 +600,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         m_Player_ChangeBalloon = m_Player.FindAction("ChangeBalloon", throwIfNotFound: true);
         m_Player_Cancel = m_Player.FindAction("Cancel", throwIfNotFound: true);
         m_Player_DistanceView = m_Player.FindAction("DistanceView", throwIfNotFound: true);
+        m_Player_CameraMove = m_Player.FindAction("CameraMove", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -592,6 +668,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_ChangeBalloon;
     private readonly InputAction m_Player_Cancel;
     private readonly InputAction m_Player_DistanceView;
+    private readonly InputAction m_Player_CameraMove;
     public struct PlayerActions
     {
         private @PlayerInputs m_Wrapper;
@@ -602,6 +679,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         public InputAction @ChangeBalloon => m_Wrapper.m_Player_ChangeBalloon;
         public InputAction @Cancel => m_Wrapper.m_Player_Cancel;
         public InputAction @DistanceView => m_Wrapper.m_Player_DistanceView;
+        public InputAction @CameraMove => m_Wrapper.m_Player_CameraMove;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -629,6 +707,9 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
             @DistanceView.started += instance.OnDistanceView;
             @DistanceView.performed += instance.OnDistanceView;
             @DistanceView.canceled += instance.OnDistanceView;
+            @CameraMove.started += instance.OnCameraMove;
+            @CameraMove.performed += instance.OnCameraMove;
+            @CameraMove.canceled += instance.OnCameraMove;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -651,6 +732,9 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
             @DistanceView.started -= instance.OnDistanceView;
             @DistanceView.performed -= instance.OnDistanceView;
             @DistanceView.canceled -= instance.OnDistanceView;
+            @CameraMove.started -= instance.OnCameraMove;
+            @CameraMove.performed -= instance.OnCameraMove;
+            @CameraMove.canceled -= instance.OnCameraMove;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -676,5 +760,6 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         void OnChangeBalloon(InputAction.CallbackContext context);
         void OnCancel(InputAction.CallbackContext context);
         void OnDistanceView(InputAction.CallbackContext context);
+        void OnCameraMove(InputAction.CallbackContext context);
     }
 }

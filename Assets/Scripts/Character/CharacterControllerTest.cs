@@ -4,6 +4,7 @@ using Unity.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using AntoineFoucault.Utilities;
 
 namespace BlownAway.Player
 {
@@ -49,6 +50,7 @@ namespace BlownAway.Player
         [SerializeField] private GameObject _gameplayCamera;
         [SerializeField] private GameObject _buildingManagerCamera;
         [SerializeField] private GameObject _birdViewCamera;
+        [SerializeField] private float _mouseSpeed = 1;
 
         // References
         private bool _canMove;
@@ -67,6 +69,7 @@ namespace BlownAway.Player
         // Camera
         private bool _isViewing;
         private GameObject _currentCamera;
+        private float _currentCameraAngle;
 
         private void Awake()
         {
@@ -82,6 +85,7 @@ namespace BlownAway.Player
             _groundHitResults = new RaycastHit[2];
             CurrentGravity = BaseGravity;
             CanMove = true;
+            ActivateCamera(_gameplayCamera);
         }
 
         private void OnEnable()
@@ -90,6 +94,7 @@ namespace BlownAway.Player
             _inputs.Player.Move.performed += StartMove;
             _inputs.Player.Move.canceled += StopMove;
             _inputs.Player.DistanceView.performed += BirdEyeView;
+            _inputs.Player.CameraMove.performed += CameraMove;
         }
 
         private void OnDisable()
@@ -98,12 +103,13 @@ namespace BlownAway.Player
             _inputs.Player.Move.performed -= StartMove;
             _inputs.Player.Move.canceled -= StopMove;
             _inputs.Player.DistanceView.performed -= BirdEyeView;
-
-
+            _inputs.Player.CameraMove.performed -= CameraMove;
         }
 
         private void Update()
         {
+            _currentCamera.transform.position = new Vector3((float)Math.Cos(_currentCameraAngle), _currentCamera.transform.position.y, (float)Math.Sin(_currentCameraAngle));
+
             if (!CanMove || _isViewing)
             {
                 SetAnimation(Vector3.zero);
@@ -203,6 +209,12 @@ namespace BlownAway.Player
             GameObject camera = _isViewing ? _gameplayCamera : _birdViewCamera;
             _isViewing = !_isViewing;
             ActivateCamera(camera);
+        }
+
+        private void CameraMove(InputAction.CallbackContext context)
+        {
+            Vector2 value = context.ReadValue<Vector2>() * _mouseSpeed;
+            _currentCameraAngle += value.x;
         }
     }
 }

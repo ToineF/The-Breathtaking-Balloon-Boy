@@ -499,6 +499,13 @@ namespace AntoineFoucault.Utilities
             transform.rotation = rotation;
             transform.localScale = scale;
         }
+
+        public static void SetTransform(this Transform transform, Transform targetTransform)
+        {
+            transform.position = targetTransform.position;
+            transform.rotation = targetTransform.rotation;
+            transform.localScale = targetTransform.localScale;
+        }
     }
 
 }
