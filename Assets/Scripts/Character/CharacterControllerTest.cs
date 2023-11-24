@@ -47,9 +47,9 @@ namespace BlownAway.Player
         [SerializeField] private LayerMask _playerLayer;
 
         [Header("Cameras")]
-        [SerializeField] private GameObject _gameplayCamera;
-        [SerializeField] private GameObject _buildingManagerCamera;
-        [SerializeField] private GameObject _birdViewCamera;
+        [SerializeField] private EntityCamera _gameplayCamera;
+        [SerializeField] private EntityCamera _buildingManagerCamera;
+        [SerializeField] private EntityCamera _birdViewCamera;
         [SerializeField] private float _mouseSpeed = 1;
 
         // References
@@ -68,7 +68,7 @@ namespace BlownAway.Player
 
         // Camera
         private bool _isViewing;
-        private GameObject _currentCamera;
+        private EntityCamera _currentCamera;
         private float _currentCameraAngle;
 
         private void Awake()
@@ -108,11 +108,12 @@ namespace BlownAway.Player
 
         private void Update()
         {
-            _currentCamera.transform.position = new Vector3((float)Math.Cos(_currentCameraAngle), _currentCamera.transform.position.y, (float)Math.Sin(_currentCameraAngle));
 
             if (!CanMove || _isViewing)
             {
                 SetAnimation(Vector3.zero);
+                UpdateCamera();
+
                 return;
             }
 
@@ -120,6 +121,8 @@ namespace BlownAway.Player
             moveDirection = Vector3.Scale(moveDirection, new Vector3(1, 0, 1));
             SetAnimation(moveDirection);
             _characterController.Move(moveDirection * Time.deltaTime);
+            UpdateCamera();
+
 
             var grounded = IsGrounded;
             IsGrounded = Physics.SphereCastNonAlloc(transform.position, _sphereRadius, Vector3.down, _groundHitResults, _groundCheckDistance, _playerLayer) > 0;
@@ -129,6 +132,14 @@ namespace BlownAway.Player
                 OnGroundEnter?.Invoke();
                 CurrentGravity = BaseGravity;
             }
+        }
+
+        private void UpdateCamera()
+        {
+            Vector3 cameraVector = new Vector3((float)Math.Cos(_currentCameraAngle), 0, (float)Math.Sin(_currentCameraAngle)).normalized;
+            Vector3 upOffset = new Vector3(0, _currentCamera.YPosition, 0);
+            Vector3 newPosition = transform.position + cameraVector * _currentCamera.DistanceFromEntity + upOffset;
+            _currentCamera.transform.position = newPosition;
         }
 
         private void StartMove(InputAction.CallbackContext context)
@@ -190,23 +201,23 @@ namespace BlownAway.Player
             action?.Invoke();
         }
 
-        private void ActivateCamera(GameObject camera)
+        private void ActivateCamera(EntityCamera camera)
         {
             _currentCamera = camera;
-            camera.SetActive(false);
-            camera.SetActive(true);
+            camera.gameObject.SetActive(false);
+            camera.gameObject.SetActive(true);
         }
 
         private void SwitchCamera(bool canMove)
         {
-            GameObject camera = canMove ? _gameplayCamera : _buildingManagerCamera;
+            EntityCamera camera = canMove ? _gameplayCamera : _buildingManagerCamera;
             ActivateCamera(camera);
         }
 
         private void BirdEyeView(InputAction.CallbackContext context)
         {
             if (!CanMove) return;
-            GameObject camera = _isViewing ? _gameplayCamera : _birdViewCamera;
+            EntityCamera camera = _isViewing ? _gameplayCamera : _birdViewCamera;
             _isViewing = !_isViewing;
             ActivateCamera(camera);
         }
