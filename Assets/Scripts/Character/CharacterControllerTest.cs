@@ -1,10 +1,9 @@
 using System;
 using System.Collections;
 using Unity.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using AntoineFoucault.Utilities;
+using Cinemachine;
 
 namespace BlownAway.Player
 {
@@ -50,7 +49,6 @@ namespace BlownAway.Player
         [SerializeField] private EntityCamera _gameplayCamera;
         [SerializeField] private EntityCamera _buildingManagerCamera;
         [SerializeField] private EntityCamera _birdViewCamera;
-        [SerializeField] private float _mouseSpeed = 1;
 
         // References
         private bool _canMove;
@@ -69,7 +67,7 @@ namespace BlownAway.Player
         // Camera
         private bool _isViewing;
         private EntityCamera _currentCamera;
-        private float _currentCameraAngle;
+        private Vector2 _currentCameraAngle;
 
         private void Awake()
         {
@@ -117,10 +115,11 @@ namespace BlownAway.Player
                 return;
             }
 
-            Vector3 moveDirection = UnityEngine.Camera.main.transform.forward * _moveVector.z + UnityEngine.Camera.main.transform.right * _moveVector.x;
+            Vector3 moveDirection = (UnityEngine.Camera.main.transform.forward * _moveVector.z + UnityEngine.Camera.main.transform.right * _moveVector.x).normalized;
+            Debug.Log(moveDirection);
             moveDirection = Vector3.Scale(moveDirection, new Vector3(1, 0, 1));
             SetAnimation(moveDirection);
-            _characterController.Move(moveDirection * Time.deltaTime);
+            _characterController.Move(moveDirection * _speed * Time.deltaTime);
             UpdateCamera();
 
 
@@ -136,17 +135,20 @@ namespace BlownAway.Player
 
         private void UpdateCamera()
         {
-            Vector3 cameraVector = new Vector3((float)Math.Cos(_currentCameraAngle), 0, (float)Math.Sin(_currentCameraAngle)).normalized;
-            Vector3 upOffset = new Vector3(0, _currentCamera.YPosition, 0);
-            Vector3 newPosition = transform.position + cameraVector * _currentCamera.DistanceFromEntity + upOffset;
+            float YPosition = _currentCamera.YOffset + _currentCameraAngle.y;
+            Vector3 cameraVector = new Vector3((float)Math.Cos(_currentCameraAngle.x), YPosition, (float)Math.Sin(_currentCameraAngle.x)).normalized * int.MaxValue;
+            Vector3 newPosition = transform.position + cameraVector;
             _currentCamera.transform.position = newPosition;
+
+            _currentCamera.GetComponent<CinemachineVirtualCamera>().GetCinemachineComponent<CinemachineFramingTransposer>().m_TrackedObjectOffset = _currentCamera.PositionOffset;
+            _currentCamera.GetComponent<CinemachineVirtualCamera>().GetCinemachineComponent<CinemachineFramingTransposer>().m_CameraDistance = _currentCamera.CameraDistance;
         }
 
         private void StartMove(InputAction.CallbackContext context)
         {
             float xPosition = context.ReadValue<Vector2>().x;
             float zPosition = context.ReadValue<Vector2>().y;
-            _moveVector = new Vector3(xPosition * _speed, 0, zPosition * _speed);
+            _moveVector = new Vector3(xPosition, 0, zPosition);
         }
 
         private void StopMove(InputAction.CallbackContext context)
@@ -224,8 +226,11 @@ namespace BlownAway.Player
 
         private void CameraMove(InputAction.CallbackContext context)
         {
-            Vector2 value = context.ReadValue<Vector2>() * _mouseSpeed;
-            _currentCameraAngle += value.x;
+            Vector2 value = context.ReadValue<Vector2>() * _currentCamera.MouseSpeed;
+            float xSign = _currentCamera.IsXInverted ? -1 : 1;
+            float ySign = _currentCamera.IsYInverted ? -1 : 1;
+            _currentCameraAngle += new Vector2(value.x * xSign, value.y * ySign);
+            _currentCameraAngle.y = Math.Clamp(_currentCameraAngle.y, -_currentCamera.YDeadZone, _currentCamera.YDeadZone);
         }
     }
 }
