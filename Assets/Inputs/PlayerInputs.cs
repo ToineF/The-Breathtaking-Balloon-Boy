@@ -89,6 +89,15 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""TakePicture"",
+                    ""type"": ""Button"",
+                    ""id"": ""a517e3e5-ae3b-4908-8d94-d7eb191187ba"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -586,6 +595,28 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""action"": ""CameraMove"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e6b7aa1d-3706-4f56-a361-12b778a5a2ad"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TakePicture"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4479449f-e71f-4b44-a517-aaf6bc6019c9"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TakePicture"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -601,6 +632,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         m_Player_Cancel = m_Player.FindAction("Cancel", throwIfNotFound: true);
         m_Player_DistanceView = m_Player.FindAction("DistanceView", throwIfNotFound: true);
         m_Player_CameraMove = m_Player.FindAction("CameraMove", throwIfNotFound: true);
+        m_Player_TakePicture = m_Player.FindAction("TakePicture", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -669,6 +701,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Cancel;
     private readonly InputAction m_Player_DistanceView;
     private readonly InputAction m_Player_CameraMove;
+    private readonly InputAction m_Player_TakePicture;
     public struct PlayerActions
     {
         private @PlayerInputs m_Wrapper;
@@ -680,6 +713,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         public InputAction @Cancel => m_Wrapper.m_Player_Cancel;
         public InputAction @DistanceView => m_Wrapper.m_Player_DistanceView;
         public InputAction @CameraMove => m_Wrapper.m_Player_CameraMove;
+        public InputAction @TakePicture => m_Wrapper.m_Player_TakePicture;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -710,6 +744,9 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
             @CameraMove.started += instance.OnCameraMove;
             @CameraMove.performed += instance.OnCameraMove;
             @CameraMove.canceled += instance.OnCameraMove;
+            @TakePicture.started += instance.OnTakePicture;
+            @TakePicture.performed += instance.OnTakePicture;
+            @TakePicture.canceled += instance.OnTakePicture;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -735,6 +772,9 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
             @CameraMove.started -= instance.OnCameraMove;
             @CameraMove.performed -= instance.OnCameraMove;
             @CameraMove.canceled -= instance.OnCameraMove;
+            @TakePicture.started -= instance.OnTakePicture;
+            @TakePicture.performed -= instance.OnTakePicture;
+            @TakePicture.canceled -= instance.OnTakePicture;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -761,5 +801,6 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         void OnCancel(InputAction.CallbackContext context);
         void OnDistanceView(InputAction.CallbackContext context);
         void OnCameraMove(InputAction.CallbackContext context);
+        void OnTakePicture(InputAction.CallbackContext context);
     }
 }
