@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 
 public class PictureController : MonoBehaviour
 {
+    [SerializeField] private GameObject _picturePlanePrefab;
     [SerializeField] private Animator _pictureAnimator;
     [SerializeField] private string _pictureAnimationName;
 
@@ -30,5 +31,6 @@ public class PictureController : MonoBehaviour
     {
         if (!CharacterControllerTest.Instance.CanMove) return;
         _pictureAnimator.SetTrigger(_pictureAnimationName);
+        Instantiate(_picturePlanePrefab, transform.position, Quaternion.identity);
     }
 }
