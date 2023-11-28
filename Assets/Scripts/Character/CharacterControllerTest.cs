@@ -116,7 +116,6 @@ namespace BlownAway.Player
             }
 
             Vector3 moveDirection = (UnityEngine.Camera.main.transform.forward * _moveVector.z + UnityEngine.Camera.main.transform.right * _moveVector.x).normalized;
-            Debug.Log(moveDirection);
             moveDirection = Vector3.Scale(moveDirection, new Vector3(1, 0, 1));
             SetAnimation(moveDirection);
             _characterController.Move(moveDirection * _speed * Time.deltaTime);

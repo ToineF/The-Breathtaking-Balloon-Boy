@@ -1769,6 +1769,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 314642490151783020}
+  - component: {fileID: 448037377169745319}
   m_Layer: 0
   m_Name: Building
   m_TagString: Untagged
@@ -1793,8 +1794,22 @@ Transform:
   - {fileID: 6038732217073533404}
   - {fileID: 1834197998579938218}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &448037377169745319
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 282437920729704493}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 102765b7b7b1c20448816c528acc1804, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _buildingCubesParent: {fileID: 6850749526867755714}
+  _ghostMaterial: {fileID: 2100000, guid: b104534b9eee44e4d9e52aa357e6e475, type: 2}
 --- !u!1 &286922167671942271
 GameObject:
   m_ObjectHideFlags: 0
@@ -64147,7 +64162,7 @@ PrefabInstance:
         type: 3}
       propertyPath: _building
       value: 
-      objectReference: {fileID: 282437920729704493}
+      objectReference: {fileID: 448037377169745319}
     - target: {fileID: 3093400111583976761, guid: 6fd8c31fbfaaaec43aa0bf11617c9e9b,
         type: 3}
       propertyPath: _ghostMaterial
