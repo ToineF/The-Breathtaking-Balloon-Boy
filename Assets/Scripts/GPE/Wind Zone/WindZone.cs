@@ -48,9 +48,9 @@ namespace BlownAway.GPE
         private void OnTriggerEnter(Collider other)
         {
             if (other.GetComponent<CharacterControllerTest>() == null) return;
-            BalloonStateManager balloonStateManager = other.GetComponent<BalloonStateManager>();
+           /* BalloonStateManager balloonStateManager = other.GetComponent<BalloonStateManager>();
             SetHammerBalloonForce(balloonStateManager, _pushVector.y);
-            if (balloonStateManager.GetState() != balloonStateManager.BalloonFlower) return;
+            if (balloonStateManager.GetState() != balloonStateManager.BalloonFlower) return;*/
 
             if (!_isPlayerIn) _lastForce = other.GetComponent<CharacterControllerTest>().CurrentForce;
             other.GetComponent<CharacterControllerTest>().SetForce(_pushVector * _pushMagnitude * Time.deltaTime, _startLerpValue);
@@ -63,16 +63,16 @@ namespace BlownAway.GPE
             if (_timer > 0) return;
 
             if (other.GetComponent<CharacterControllerTest>() == null) return;
-            BalloonStateManager balloonStateManager = other.GetComponent<BalloonStateManager>();
+            /*BalloonStateManager balloonStateManager = other.GetComponent<BalloonStateManager>();
             SetHammerBalloonForce(balloonStateManager, _pushVector.y);
-            if (balloonStateManager.GetState() != balloonStateManager.BalloonFlower) return;
+            if (balloonStateManager.GetState() != balloonStateManager.BalloonFlower) return;*/
 
             if (!_isPlayerIn) _lastForce = other.GetComponent<CharacterControllerTest>().CurrentForce;
             other.GetComponent<CharacterControllerTest>().SetForce(_pushVector * _pushMagnitude * Time.deltaTime, _startLerpValue);
             _isPlayerIn = true;
 
-            int airSign = _isHot ? 1 : -1;
-            AirManager.Instance.AddAir(_airPercentageAddedOnContact * airSign);
+            /*int airSign = _isHot ? 1 : -1;
+            AirManager.Instance.AddAir(_airPercentageAddedOnContact * airSign);*/
             _timer = _timeBetweenAdditions;
         }
 
@@ -87,9 +87,9 @@ namespace BlownAway.GPE
         private void OnTriggerExit(Collider other)
         {
             if (other.GetComponent<CharacterControllerTest>() == null) return;
-            BalloonStateManager balloonStateManager = other.GetComponent<BalloonStateManager>();
+            /*BalloonStateManager balloonStateManager = other.GetComponent<BalloonStateManager>();
             SetHammerBalloonForce(balloonStateManager, 0);
-            if (balloonStateManager.GetState() != balloonStateManager.BalloonFlower) return;
+            if (balloonStateManager.GetState() != balloonStateManager.BalloonFlower) return;*/
 
 
             other.GetComponent<CharacterControllerTest>().SetForce(_lastForce, _stopLerpValue);
