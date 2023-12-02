@@ -49,6 +49,7 @@ namespace BlownAway.Player
         [SerializeField] private EntityCamera _gameplayCamera;
         [SerializeField] private EntityCamera _buildingManagerCamera;
         [SerializeField] private EntityCamera _birdViewCamera;
+        [SerializeField] private EntityCamera _floatingCamera;
 
         // References
         private bool _canMove;
@@ -220,6 +221,13 @@ namespace BlownAway.Player
             if (!CanMove) return;
             EntityCamera camera = _isViewing ? _gameplayCamera : _birdViewCamera;
             _isViewing = !_isViewing;
+            ActivateCamera(camera);
+        }
+
+        public void SetFloatingCamera(bool isActive)
+        {
+            if (!CanMove || _isViewing) return;
+            EntityCamera camera = isActive ? _floatingCamera : _gameplayCamera;
             ActivateCamera(camera);
         }
 

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using DG.Tweening;
+using System;
 
 public class BalloonBoyController : MonoBehaviour
 {
@@ -19,6 +20,10 @@ public class BalloonBoyController : MonoBehaviour
     [Header("Air")]
     [SerializeField] private float _maxAir;
     [SerializeField] private float _airReductionSpeed;
+    [SerializeField] private float _airDashReductionSpeed;
+
+    [Header("Dash")]
+    [SerializeField] private float _dashForce;
 
     [Header("Visuals")]
     [SerializeField] private GameObject _jumpFXPrefab;
@@ -28,7 +33,10 @@ public class BalloonBoyController : MonoBehaviour
 
     private int _jumps;
     private float _currentAir;
+    private bool _isFloating;
     private Vector3 _balloonOriginalScale;
+    private Vector3 _currentDashDirection;
+    private Vector3 _lateralMovementDirection;
 
     private PlayerInputs _inputs;
 
@@ -40,31 +48,54 @@ public class BalloonBoyController : MonoBehaviour
     private void Start()
     {
         _jumps = _maxJumps;
-        _currentAir = _maxAir;
+        _currentAir = 0;
         _balloonOriginalScale = _balloonVisual.transform.localScale;
+        _currentDashDirection = Vector3.zero;
+        _lateralMovementDirection = Vector3.zero;
     }
 
     private void OnEnable()
     {
         _inputs.Enable();
         _inputs.Player.Action.performed += BalloonBump;
+        _inputs.Player.Action.canceled += StopBalloonFloating;
+        _inputs.Player.Move.performed += GetMoveValue;
+        _inputs.Player.Move.canceled += GetMoveValue;
     }
 
     private void OnDisable()
     {
         _inputs.Disable();
         _inputs.Player.Action.performed -= BalloonBump;
+        _inputs.Player.Action.canceled -= StopBalloonFloating;
+        _inputs.Player.Move.performed -= GetMoveValue;
+        _inputs.Player.Move.canceled -= GetMoveValue;
+
     }
 
     private void Update()
     {
-        if (_currentAir < 0) return;
-            _currentAir -= _airReductionSpeed*Time.deltaTime;
-        if (_currentAir < 0) ResetBalloonScale();
+        if (_currentAir <= 0) return;
+
+        float airReductionSpeed = _airReductionSpeed;
+        if (_isFloating)
+        {
+            airReductionSpeed += _airDashReductionSpeed;
+            Vector3 lateralMoveDirection = (Camera.main.transform.forward * _lateralMovementDirection.z + Camera.main.transform.right * _lateralMovementDirection.x).normalized;
+            Vector3 direction = (lateralMoveDirection == Vector3.zero) ? Vector3.up : lateralMoveDirection;
+            Vector3 hit = direction * _dashForce;
+            CharacterControllerTest.Instance.AddForce(hit - _currentDashDirection, _jumpDecel);
+            _currentDashDirection = hit;
+        }
+        _currentAir -= airReductionSpeed * Time.deltaTime;
+        if (_currentAir <= 0) ResetBalloonScale();
     }
 
     private void BalloonBump(InputAction.CallbackContext context)
     {
+        _currentDashDirection = Vector3.zero;
+        _isFloating = true;
+
         if (_jumps <= 0) return;
 
         CharacterControllerTest.Instance.OnGroundEnter += PlayerEnterGround;
@@ -88,6 +119,8 @@ public class BalloonBoyController : MonoBehaviour
 
         // Air
         _currentAir = _maxAir;
+
+        CharacterControllerTest.Instance.SetFloatingCamera(true);
     }
 
     private void PlayerEnterGround()
@@ -102,5 +135,20 @@ public class BalloonBoyController : MonoBehaviour
     {
         CharacterControllerTest.Instance.SetForce(Vector3.zero, 1);
         _balloonVisual.transform.DOScale(_balloonOriginalScale, _balloonScaleTime);
+        _currentDashDirection = Vector3.zero;
+        CharacterControllerTest.Instance.SetFloatingCamera(false);
+
     }
+
+    private void StopBalloonFloating(InputAction.CallbackContext context)
+    {
+        _isFloating = false;
+        CharacterControllerTest.Instance.AddForce(- _currentDashDirection, _jumpDecel);
+        _currentDashDirection = Vector3.zero;
+    }
+    private void GetMoveValue(InputAction.CallbackContext context)
+    {
+        _lateralMovementDirection = context.ReadValue<Vector2>();
+    }
+
 }
