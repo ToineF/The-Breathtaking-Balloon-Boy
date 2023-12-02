@@ -27,6 +27,7 @@ public class BalloonBoyController : MonoBehaviour
 
     [Header("Visuals")]
     [SerializeField] private GameObject _jumpFXPrefab;
+    [SerializeField] private GameObject _floatFXPrefab;
     [SerializeField] private GameObject _balloonVisual;
     [SerializeField] private float _balloonScaleValue = 1f;
     [SerializeField] private float _balloonScaleTime = 1f;
@@ -86,6 +87,10 @@ public class BalloonBoyController : MonoBehaviour
             Vector3 hit = direction * _dashForce;
             CharacterControllerTest.Instance.AddForce(hit - _currentDashDirection, _jumpDecel);
             _currentDashDirection = hit;
+
+            Collider collider = CharacterControllerTest.Instance.GetComponent<Collider>();
+            Instantiate(_floatFXPrefab, collider.bounds.center - collider.bounds.extents.y * hit.normalized, _floatFXPrefab.transform.rotation);
+
         }
         _currentAir -= airReductionSpeed * Time.deltaTime;
         if (_currentAir <= 0) ResetBalloonScale();

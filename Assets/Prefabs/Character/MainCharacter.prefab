@@ -86,6 +86,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8456772996452215776}
   - component: {fileID: 5797132968251152483}
+  - component: {fileID: 4046617585180275660}
   - component: {fileID: 7345157796437708085}
   m_Layer: 0
   m_Name: BuildingManagerCamera
@@ -149,6 +150,23 @@ MonoBehaviour:
         m_Calls: []
   m_LegacyBlendHint: 0
   m_ComponentOwner: {fileID: 5659898883518581374}
+--- !u!114 &4046617585180275660
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1452265400087243825}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 449ef5ebbe24720439ec31d15f7b6f3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_FocusTracksTarget: 0
+  m_FocusTracking: 0
+  m_FocusTarget: {fileID: 0}
+  m_FocusOffset: 0
+  m_Profile: {fileID: 11400000, guid: a6560a915ef98420e9faacc1c7438823, type: 2}
 --- !u!114 &7345157796437708085
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1224,6 +1242,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8199842157403767141}
   - component: {fileID: 522281030359275161}
+  - component: {fileID: 2815449027014679409}
   - component: {fileID: 7979472475085822547}
   m_Layer: 0
   m_Name: GameplayCamera
@@ -1239,8 +1258,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4977468004285058893}
-  m_LocalRotation: {x: 0.7008872, y: 0.005646217, z: -0.0055485205, w: 0.7132282}
-  m_LocalPosition: {x: -0.0034542084, y: 12.498098, z: -0.2181263}
+  m_LocalRotation: {x: 0.7008873, y: 0.005646512, z: -0.00554881, w: 0.71322817}
+  m_LocalPosition: {x: -0.0034542084, y: 12.498098, z: -0.21812439}
   m_LocalScale: {x: 1.1157299, y: 0.8743498, z: 0.9705198}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1287,6 +1306,23 @@ MonoBehaviour:
         m_Calls: []
   m_LegacyBlendHint: 0
   m_ComponentOwner: {fileID: 7374987067996859493}
+--- !u!114 &2815449027014679409
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4977468004285058893}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 449ef5ebbe24720439ec31d15f7b6f3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_FocusTracksTarget: 0
+  m_FocusTracking: 0
+  m_FocusTarget: {fileID: 0}
+  m_FocusOffset: 0
+  m_Profile: {fileID: 11400000, guid: a6560a915ef98420e9faacc1c7438823, type: 2}
 --- !u!114 &7979472475085822547
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1305,7 +1341,7 @@ MonoBehaviour:
   IsXInverted: 1
   IsYInverted: 1
   MouseSpeed: 0.005
-  YDeadZone: 0.8
+  YDeadZone: 3
 --- !u!1 &5530616790484933008
 GameObject:
   m_ObjectHideFlags: 0
@@ -1316,6 +1352,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1746439125810337819}
   - component: {fileID: 745485524370571552}
+  - component: {fileID: 8727665268858909486}
   - component: {fileID: 415644780931165722}
   m_Layer: 0
   m_Name: FloatingCamera
@@ -1331,8 +1368,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5530616790484933008}
-  m_LocalRotation: {x: 0.70088744, y: 0.005639005, z: -0.005541435, w: 0.71322817}
-  m_LocalPosition: {x: -0.00344944, y: 12.498098, z: -0.21812248}
+  m_LocalRotation: {x: 0.7008874, y: 0.005639215, z: -0.0055416417, w: 0.7132282}
+  m_LocalPosition: {x: -0.00344944, y: 12.498098, z: -0.21812439}
   m_LocalScale: {x: 1.1157299, y: 0.8743498, z: 0.9705198}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1379,6 +1416,23 @@ MonoBehaviour:
         m_Calls: []
   m_LegacyBlendHint: 0
   m_ComponentOwner: {fileID: 2210995304339546162}
+--- !u!114 &8727665268858909486
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5530616790484933008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 449ef5ebbe24720439ec31d15f7b6f3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_FocusTracksTarget: 0
+  m_FocusTracking: 0
+  m_FocusTarget: {fileID: 0}
+  m_FocusOffset: 0
+  m_Profile: {fileID: 11400000, guid: a6560a915ef98420e9faacc1c7438823, type: 2}
 --- !u!114 &415644780931165722
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1391,13 +1445,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2be082d9494b7344a8aadff8589ab9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CameraDistance: 17
+  CameraDistance: 22
   YOffset: 1.5
   PositionOffset: {x: 0, y: 2, z: 0}
   IsXInverted: 1
   IsYInverted: 1
   MouseSpeed: 0.005
-  YDeadZone: 2
+  YDeadZone: 3
 --- !u!1 &5631242954786477175
 GameObject:
   m_ObjectHideFlags: 0
@@ -1795,6 +1849,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9107394299019700772}
   - component: {fileID: 8648184934646252415}
+  - component: {fileID: 5691866951920877099}
   - component: {fileID: 3032998595340285643}
   m_Layer: 0
   m_Name: BirdEyeViewCamera
@@ -1858,6 +1913,23 @@ MonoBehaviour:
         m_Calls: []
   m_LegacyBlendHint: 0
   m_ComponentOwner: {fileID: 4271741483798976594}
+--- !u!114 &5691866951920877099
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8004644851768779477}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 449ef5ebbe24720439ec31d15f7b6f3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_FocusTracksTarget: 0
+  m_FocusTracking: 0
+  m_FocusTarget: {fileID: 0}
+  m_FocusOffset: 0
+  m_Profile: {fileID: 11400000, guid: a6560a915ef98420e9faacc1c7438823, type: 2}
 --- !u!114 &3032998595340285643
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2160,6 +2232,8 @@ MonoBehaviour:
   _airDashReductionSpeed: 2
   _dashForce: 6
   _jumpFXPrefab: {fileID: 7226888052703040409, guid: 6194680d73ef64f49a8c0732aa2ae803,
+    type: 3}
+  _floatFXPrefab: {fileID: 7226888052703040409, guid: ac4154b52f0cedb4889c62556dac9cd8,
     type: 3}
   _balloonVisual: {fileID: 8939632305816812876}
   _balloonScaleValue: 5
