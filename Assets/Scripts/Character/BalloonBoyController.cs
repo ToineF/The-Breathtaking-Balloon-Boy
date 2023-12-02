@@ -35,6 +35,8 @@ public class BalloonBoyController : MonoBehaviour
     private int _jumps;
     private float _currentAir;
     private bool _isFloating;
+    private bool _isDashing;
+    private bool _isFloatCanceled;
     private Vector3 _balloonOriginalScale;
     private Vector3 _currentDashDirection;
     private Vector3 _lateralMovementDirection;
@@ -58,31 +60,34 @@ public class BalloonBoyController : MonoBehaviour
     private void OnEnable()
     {
         _inputs.Enable();
-        _inputs.Player.Action.performed += BalloonBump;
+        _inputs.Player.Action.performed += BalloonPump;
         _inputs.Player.Action.canceled += StopBalloonFloating;
         _inputs.Player.Move.performed += GetMoveValue;
         _inputs.Player.Move.canceled += GetMoveValue;
+        _inputs.Player.SecondaryAction.performed += CancelBalloonFloating;
     }
 
     private void OnDisable()
     {
         _inputs.Disable();
-        _inputs.Player.Action.performed -= BalloonBump;
+        _inputs.Player.Action.performed -= BalloonPump;
         _inputs.Player.Action.canceled -= StopBalloonFloating;
         _inputs.Player.Move.performed -= GetMoveValue;
         _inputs.Player.Move.canceled -= GetMoveValue;
+        _inputs.Player.SecondaryAction.performed -= CancelBalloonFloating;
 
     }
 
     private void Update()
     {
+        if (!_isFloating) return;
         if (_currentAir <= 0) return;
 
         float airReductionSpeed = _airReductionSpeed;
-        if (_isFloating)
+        if (_isDashing)
         {
             airReductionSpeed += _airDashReductionSpeed;
-            Vector3 lateralMoveDirection = (Camera.main.transform.forward * _lateralMovementDirection.z + Camera.main.transform.right * _lateralMovementDirection.x).normalized;
+            Vector3 lateralMoveDirection = (Vector3.Scale(Camera.main.transform.forward, new Vector3(1,0,1)) * _lateralMovementDirection.y + Vector3.Scale(Camera.main.transform.right, new Vector3(1, 0, 1)) * _lateralMovementDirection.x).normalized;
             Vector3 direction = (lateralMoveDirection == Vector3.zero) ? Vector3.up : lateralMoveDirection;
             Vector3 hit = direction * _dashForce;
             CharacterControllerTest.Instance.AddForce(hit - _currentDashDirection, _jumpDecel);
@@ -90,16 +95,22 @@ public class BalloonBoyController : MonoBehaviour
 
             Collider collider = CharacterControllerTest.Instance.GetComponent<Collider>();
             Instantiate(_floatFXPrefab, collider.bounds.center - collider.bounds.extents.y * hit.normalized, _floatFXPrefab.transform.rotation);
-
         }
         _currentAir -= airReductionSpeed * Time.deltaTime;
         if (_currentAir <= 0) ResetBalloonScale();
     }
 
-    private void BalloonBump(InputAction.CallbackContext context)
+    private void BalloonPump(InputAction.CallbackContext context)
     {
+        if (_isFloatCanceled)
+        {
+            AfterFloatCancelJump();
+        }
+
         _currentDashDirection = Vector3.zero;
         _isFloating = true;
+        _isDashing = true;
+        _isFloatCanceled = false;
 
         if (_jumps <= 0) return;
 
@@ -120,10 +131,27 @@ public class BalloonBoyController : MonoBehaviour
         Collider collider = CharacterControllerTest.Instance.GetComponent<Collider>();
         Instantiate(_jumpFXPrefab, collider.bounds.center - collider.bounds.extents.y * Vector3.up, _jumpFXPrefab.transform.rotation);
 
-        _balloonVisual.transform.DOScale(Vector3.one * _balloonScaleValue, _balloonScaleTime);
-
         // Air
         _currentAir = _maxAir;
+
+        _balloonVisual.transform.DOScale(Vector3.one * _balloonScaleValue, _balloonScaleTime);
+
+        CharacterControllerTest.Instance.SetFloatingCamera(true);
+    }
+
+    private void AfterFloatCancelJump()
+    {
+        if (_currentAir <= 0) return;
+
+        _currentDashDirection = Vector3.zero;
+        _isFloating = true;
+        _isDashing = true;
+
+        Vector3 glideForce = Vector3.up * _glideForce;
+        float glideAccel = _glideAccel;
+        CharacterControllerTest.Instance.AddForce(glideForce, glideAccel);
+
+        _balloonVisual.transform.DOScale(Vector3.one * _balloonScaleValue, _balloonScaleTime);
 
         CharacterControllerTest.Instance.SetFloatingCamera(true);
     }
@@ -141,16 +169,26 @@ public class BalloonBoyController : MonoBehaviour
         CharacterControllerTest.Instance.SetForce(Vector3.zero, 1);
         _balloonVisual.transform.DOScale(_balloonOriginalScale, _balloonScaleTime);
         _currentDashDirection = Vector3.zero;
+        _isFloating = false;
         CharacterControllerTest.Instance.SetFloatingCamera(false);
 
     }
 
     private void StopBalloonFloating(InputAction.CallbackContext context)
     {
-        _isFloating = false;
+        _isDashing = false;
         CharacterControllerTest.Instance.AddForce(- _currentDashDirection, _jumpDecel);
         _currentDashDirection = Vector3.zero;
     }
+
+    private void CancelBalloonFloating(InputAction.CallbackContext context)
+    {
+        _isDashing = false;
+        _isFloating = false;
+        _isFloatCanceled = true;
+        ResetBalloonScale();
+    }
+
     private void GetMoveValue(InputAction.CallbackContext context)
     {
         _lateralMovementDirection = context.ReadValue<Vector2>();
