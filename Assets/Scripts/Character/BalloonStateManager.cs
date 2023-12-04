@@ -77,7 +77,7 @@ namespace BlownAway.Player
             _currentState.StartState(this);
             Inputs.Player.Action.performed += _currentState.OnActionPressed;
             Inputs.Player.SecondaryAction.performed += _currentState.OnSecondaryActionPressed;
-            Inputs.Player.ChangeBalloon.performed += ChangeState;
+            Inputs.Player_Archive.ChangeBalloon.performed += ChangeState;
 
             FlowerJumps = FlowerMaxJumps;
         }

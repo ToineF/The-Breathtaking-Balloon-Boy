@@ -18,13 +18,13 @@ public class PictureController : MonoBehaviour
     private void OnEnable()
     {
         _inputs.Enable();
-        _inputs.Player.TakePicture.performed += TakePicture;
+        _inputs.Player_Archive.TakePicture.performed += TakePicture;
     }
 
     private void OnDisable()
     {
         _inputs.Disable();
-        _inputs.Player.TakePicture.performed -= TakePicture;
+        _inputs.Player_Archive.TakePicture.performed -= TakePicture;
     }
 
     private void TakePicture(InputAction.CallbackContext context)

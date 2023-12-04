@@ -92,7 +92,7 @@ namespace BlownAway.Player
             _inputs.Enable();
             _inputs.Player.Move.performed += StartMove;
             _inputs.Player.Move.canceled += StopMove;
-            _inputs.Player.DistanceView.performed += BirdEyeView;
+            _inputs.Player_Archive.DistanceView.performed += BirdEyeView;
             _inputs.Player.CameraMove.performed += CameraMove;
         }
 
@@ -101,7 +101,7 @@ namespace BlownAway.Player
             _inputs.Disable();
             _inputs.Player.Move.performed -= StartMove;
             _inputs.Player.Move.canceled -= StopMove;
-            _inputs.Player.DistanceView.performed -= BirdEyeView;
+            _inputs.Player_Archive.DistanceView.performed -= BirdEyeView;
             _inputs.Player.CameraMove.performed -= CameraMove;
         }
 
