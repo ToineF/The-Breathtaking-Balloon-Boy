@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using DG.Tweening;
 using System;
+using UnityEngine.UI;
 
 public class BalloonBoyController : MonoBehaviour
 {
@@ -23,10 +24,12 @@ public class BalloonBoyController : MonoBehaviour
     [SerializeField] private float _airDashReductionSpeed;
 
     [Header("Dash")]
-    [SerializeField] private float _dashForce;
+    [SerializeField] private float _verticalDashForce;
+    [SerializeField] private float _lateralDashForce;
     [Range(0, 1)][SerializeField] private float _dashDecel;
 
     [Header("Visuals")]
+    [SerializeField] private Image _airUI;
     [SerializeField] private GameObject _jumpFXPrefab;
     [SerializeField] private GameObject _floatFXPrefab;
     [SerializeField] private GameObject _balloonVisual;
@@ -52,7 +55,7 @@ public class BalloonBoyController : MonoBehaviour
     private void Start()
     {
         _jumps = _maxJumps;
-        _currentAir = 0;
+        _currentAir = _maxAir;
         _balloonOriginalScale = _balloonVisual.transform.localScale;
         _currentDashDirection = Vector3.zero;
         _lateralMovementDirection = Vector3.zero;
@@ -81,6 +84,8 @@ public class BalloonBoyController : MonoBehaviour
 
     private void Update()
     {
+        UpdateUI();
+
         if (!_isFloating) return;
         if (_currentAir <= 0) return;
 
@@ -89,16 +94,20 @@ public class BalloonBoyController : MonoBehaviour
         {
             airReductionSpeed += _airDashReductionSpeed;
             Vector3 lateralMoveDirection = (Vector3.Scale(Camera.main.transform.forward, new Vector3(1,0,1)) * _lateralMovementDirection.y + Vector3.Scale(Camera.main.transform.right, new Vector3(1, 0, 1)) * _lateralMovementDirection.x).normalized;
-            Vector3 direction = (lateralMoveDirection == Vector3.zero) ? Vector3.up : lateralMoveDirection;
-            Vector3 hit = direction * _dashForce;
-            CharacterControllerTest.Instance.AddForce(hit - _currentDashDirection, _jumpDecel);
-            _currentDashDirection = hit;
+            Vector3 direction = (lateralMoveDirection == Vector3.zero) ? Vector3.up * _verticalDashForce : lateralMoveDirection * _lateralDashForce;
+            CharacterControllerTest.Instance.AddForce(direction - _currentDashDirection, _jumpDecel);
+            _currentDashDirection = direction;
 
             Collider collider = CharacterControllerTest.Instance.GetComponent<Collider>();
-            Instantiate(_floatFXPrefab, collider.bounds.center - collider.bounds.extents.y * hit.normalized, _floatFXPrefab.transform.rotation);
+            Instantiate(_floatFXPrefab, collider.bounds.center - collider.bounds.extents.y * direction.normalized, _floatFXPrefab.transform.rotation);
         }
         _currentAir -= airReductionSpeed * Time.deltaTime;
         if (_currentAir <= 0) ResetBalloonScale();
+    }
+
+    private void UpdateUI()
+    {
+        _airUI.fillAmount = _currentAir / _maxAir;
     }
 
     private void BalloonPump(InputAction.CallbackContext context)
@@ -160,6 +169,7 @@ public class BalloonBoyController : MonoBehaviour
     private void PlayerEnterGround()
     {
         _jumps = _maxJumps;
+        _currentAir = _maxAir;
         CharacterControllerTest.Instance.OnGroundEnter -= PlayerEnterGround;
         ResetBalloonScale();
 
