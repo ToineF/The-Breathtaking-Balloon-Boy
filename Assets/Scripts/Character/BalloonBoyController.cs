@@ -24,6 +24,7 @@ public class BalloonBoyController : MonoBehaviour
 
     [Header("Dash")]
     [SerializeField] private float _dashForce;
+    [Range(0, 1)][SerializeField] private float _dashDecel;
 
     [Header("Visuals")]
     [SerializeField] private GameObject _jumpFXPrefab;
@@ -177,7 +178,7 @@ public class BalloonBoyController : MonoBehaviour
     private void StopBalloonFloating(InputAction.CallbackContext context)
     {
         _isDashing = false;
-        CharacterControllerTest.Instance.AddForce(- _currentDashDirection, _jumpDecel);
+        CharacterControllerTest.Instance.AddForce(- _currentDashDirection, _dashDecel);
         _currentDashDirection = Vector3.zero;
     }
 
