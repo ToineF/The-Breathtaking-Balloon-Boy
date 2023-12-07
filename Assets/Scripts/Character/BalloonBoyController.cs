@@ -197,12 +197,12 @@ public class BalloonBoyController : MonoBehaviour
         Vector3 newDashdirection;
         if (_type == ControllerType.Type1)
         {
-            Vector3 lateralMoveDirection = (Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1)) * _lateralInputDirection.y + Vector3.Scale(Camera.main.transform.right, new Vector3(1, 0, 1)) * _lateralInputDirection.x).normalized;
+            Vector3 lateralMoveDirection = (Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1)).normalized * _lateralInputDirection.y + Vector3.Scale(Camera.main.transform.right, new Vector3(1, 0, 1)) * _lateralInputDirection.x).normalized;
             newDashdirection = (lateralMoveDirection == Vector3.zero) ? Vector3.up * _verticalDashForce : lateralMoveDirection * _lateralDashForce; // this one for type 2 & 3
         }
         else
         {
-            newDashdirection = _forwardInputDirection * _lateralDashForce + _verticalInputDirection * _verticalDashForce;
+            newDashdirection = Vector3.Scale(Camera.main.transform.forward, _forwardInputDirection).normalized * _lateralDashForce + _verticalInputDirection * _verticalDashForce;
         }
         return newDashdirection;
     }
@@ -330,8 +330,6 @@ public class BalloonBoyController : MonoBehaviour
 
     private void GetForwardInput(InputAction.CallbackContext context)
     {
-        Vector3 lateralMoveDirection = (Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1)) + Vector3.Scale(Camera.main.transform.right, new Vector3(1, 0, 1))).normalized;
-
-        _forwardInputDirection = lateralMoveDirection;
+        _forwardInputDirection = new Vector3(1, 0, 1);
     }
 }
