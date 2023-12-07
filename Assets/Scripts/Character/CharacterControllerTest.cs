@@ -38,6 +38,7 @@ namespace BlownAway.Player
         [ReadOnly] public float CurrentGravity;
         [SerializeField] private float BaseGravity;
         [SerializeField] private float MaxGravity;
+        [SerializeField] private float FloatingGravity;
         [SerializeField] private float _gravityIncreaseByFrame;
 
         [Header("Ground Check")]
@@ -131,13 +132,13 @@ namespace BlownAway.Player
                 OnGroundEnter?.Invoke();
                 CurrentGravity = BaseGravity;
             }
-
             SetGravity();
         }
 
+
         private void SetGravity()
         {
-            if (!IsGrounded && _balloonStateManager.GetState() == _balloonStateManager.BalloonHammer)
+            if (!IsGrounded) // && _balloonStateManager.GetState() == _balloonStateManager.BalloonHammer
             {
                 CurrentGravity = Mathf.Clamp(CurrentGravity + _gravityIncreaseByFrame, BaseGravity, MaxGravity);
             }
