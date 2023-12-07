@@ -47,6 +47,7 @@ public class BalloonBoyController : MonoBehaviour
     private Vector3 _currentDashDirection;
     private Vector3 _lateralInputDirection;
     private Vector3 _verticalInputDirection;
+    private Vector3 _forwardInputDirection;
 
     private PlayerInputs _inputs;
 
@@ -89,13 +90,15 @@ public class BalloonBoyController : MonoBehaviour
                 break;
             case ControllerType.Type2:
                 _inputs.Player_1.LateralPropulsion.performed += BalloonPump;
-                _inputs.Player_1.LateralPropulsion.performed += ResetMoveInput;
+                _inputs.Player_1.LateralPropulsion.performed += GetForwardInput;
+                _inputs.Player_1.LateralPropulsion.canceled += ResetMoveInput;
                 _inputs.Player_1.LateralPropulsion.canceled += StopBalloonFloating;
                 _inputs.Player_1.UpPropulsion.performed += BalloonPump;
                 _inputs.Player_1.UpPropulsion.performed += GetMoveInputUp;
                 _inputs.Player_1.UpPropulsion.canceled += ResetMoveInput;
                 _inputs.Player_1.UpPropulsion.canceled += StopBalloonFloating;
                 _inputs.Player_1.DownPropulsion.performed += GetMoveInputDown;
+                _inputs.Player_1.DownPropulsion.performed += StartBalloonFloating;
                 _inputs.Player_1.DownPropulsion.canceled += ResetMoveInput;
                 _inputs.Player_1.DownPropulsion.canceled += StopBalloonFloating;
                 _inputs.Player_1.Move.performed += GetMoveValue;
@@ -140,13 +143,15 @@ public class BalloonBoyController : MonoBehaviour
                 break;
             case ControllerType.Type2:
                 _inputs.Player_1.LateralPropulsion.performed -= BalloonPump;
-                _inputs.Player_1.LateralPropulsion.performed -= ResetMoveInput;
+                _inputs.Player_1.LateralPropulsion.performed -= GetForwardInput;
+                _inputs.Player_1.LateralPropulsion.canceled -= ResetMoveInput;
                 _inputs.Player_1.LateralPropulsion.canceled -= StopBalloonFloating;
                 _inputs.Player_1.UpPropulsion.performed -= BalloonPump;
                 _inputs.Player_1.UpPropulsion.performed -= GetMoveInputUp;
                 _inputs.Player_1.UpPropulsion.canceled -= ResetMoveInput;
                 _inputs.Player_1.UpPropulsion.canceled -= StopBalloonFloating;
                 _inputs.Player_1.DownPropulsion.performed -= GetMoveInputDown;
+                _inputs.Player_1.DownPropulsion.performed -= StartBalloonFloating;
                 _inputs.Player_1.DownPropulsion.canceled -= ResetMoveInput;
                 _inputs.Player_1.DownPropulsion.canceled -= StopBalloonFloating;
                 _inputs.Player_1.Move.performed -= GetMoveValue;
@@ -189,9 +194,16 @@ public class BalloonBoyController : MonoBehaviour
 
     private Vector3 SetNewDashDirection()
     {
-        Vector3 lateralMoveDirection = (Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1)) * _lateralInputDirection.y + Vector3.Scale(Camera.main.transform.right, new Vector3(1, 0, 1)) * _lateralInputDirection.x).normalized;
-        Vector3 newDashdirection = (lateralMoveDirection == Vector3.zero) ? Vector3.up * _verticalDashForce : lateralMoveDirection * _lateralDashForce; // this one for type 2 & 3
-        //Vector3 newDashdirection = lateralMoveDirection * _lateralDashForce + _verticalInputDirection * _verticalDashForce;
+        Vector3 newDashdirection;
+        if (_type == ControllerType.Type1)
+        {
+            Vector3 lateralMoveDirection = (Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1)) * _lateralInputDirection.y + Vector3.Scale(Camera.main.transform.right, new Vector3(1, 0, 1)) * _lateralInputDirection.x).normalized;
+            newDashdirection = (lateralMoveDirection == Vector3.zero) ? Vector3.up * _verticalDashForce : lateralMoveDirection * _lateralDashForce; // this one for type 2 & 3
+        }
+        else
+        {
+            newDashdirection = _forwardInputDirection * _lateralDashForce + _verticalInputDirection * _verticalDashForce;
+        }
         return newDashdirection;
     }
 
@@ -275,11 +287,11 @@ public class BalloonBoyController : MonoBehaviour
 
     }
 
-    //private void StartBalloonFloating(InputAction.CallbackContext context)
-    //{
-    //    _isDashing = true;
-    //    _currentDashDirection = Vector3.zero;
-    //}
+    private void StartBalloonFloating(InputAction.CallbackContext context)
+    {
+        _isDashing = true;
+        _currentDashDirection = Vector3.zero;
+    }
 
     private void StopBalloonFloating(InputAction.CallbackContext context)
     {
@@ -313,5 +325,13 @@ public class BalloonBoyController : MonoBehaviour
     private void ResetMoveInput(InputAction.CallbackContext context)
     {
         _verticalInputDirection = Vector2.zero;
+        _forwardInputDirection = Vector2.zero;
+    }
+
+    private void GetForwardInput(InputAction.CallbackContext context)
+    {
+        Vector3 lateralMoveDirection = (Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1)) + Vector3.Scale(Camera.main.transform.right, new Vector3(1, 0, 1))).normalized;
+
+        _forwardInputDirection = lateralMoveDirection;
     }
 }

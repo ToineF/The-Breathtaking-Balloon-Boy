@@ -116,7 +116,7 @@ namespace BlownAway.Player
                 return;
             }
 
-            Vector3 moveDirection = (Vector3.Scale(UnityEngine.Camera.main.transform.forward, new Vector3(1,0,1)) * _moveVector.z + Vector3.Scale(UnityEngine.Camera.main.transform.right, new Vector3(1, 0, 1)) * _moveVector.x).normalized;
+            Vector3 moveDirection = (Vector3.Scale(UnityEngine.Camera.main.transform.forward, new Vector3(1, 0, 1)) * _moveVector.z + Vector3.Scale(UnityEngine.Camera.main.transform.right, new Vector3(1, 0, 1)) * _moveVector.x).normalized;
             moveDirection = Vector3.Scale(moveDirection, new Vector3(1, 0, 1));
             SetAnimation(moveDirection);
             _characterController.Move(moveDirection * _speed * Time.deltaTime);
@@ -131,6 +131,23 @@ namespace BlownAway.Player
                 OnGroundEnter?.Invoke();
                 CurrentGravity = BaseGravity;
             }
+
+            SetGravity();
+        }
+
+        private void SetGravity()
+        {
+            if (!IsGrounded && _balloonStateManager.GetState() == _balloonStateManager.BalloonHammer)
+            {
+                CurrentGravity = Mathf.Clamp(CurrentGravity + _gravityIncreaseByFrame, BaseGravity, MaxGravity);
+            }
+
+            Vector3 gravity = new Vector3(Force.x, Force.y - CurrentGravity, Force.z);
+
+            _characterController.Move(gravity * Time.deltaTime);
+
+            var forceSign = Mathf.Sign(CurrentForce.x) * Mathf.Sign(CurrentForce.x) * Mathf.Sign(CurrentForce.x);
+            Force = Vector3.Lerp(Force, CurrentForce, _lerpValue);
         }
 
         private void UpdateCamera()
@@ -154,21 +171,6 @@ namespace BlownAway.Player
         private void StopMove(InputAction.CallbackContext context)
         {
             _moveVector = Vector3.zero;
-        }
-
-        void FixedUpdate()
-        {
-            if (!IsGrounded && _balloonStateManager.GetState() == _balloonStateManager.BalloonHammer)
-            {
-                CurrentGravity = Mathf.Clamp(CurrentGravity + _gravityIncreaseByFrame, BaseGravity, MaxGravity);
-            }
-
-            Vector3 gravity = new Vector3(Force.x, Force.y - CurrentGravity, Force.z);
-
-            _characterController.Move(gravity * Time.deltaTime);
-
-            var forceSign = Mathf.Sign(CurrentForce.x) * Mathf.Sign(CurrentForce.x) * Mathf.Sign(CurrentForce.x);
-            Force = Vector3.Lerp(Force, CurrentForce, _lerpValue);
         }
 
         private void SetAnimation(Vector3 moveVector)
