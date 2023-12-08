@@ -93,7 +93,7 @@ namespace BlownAway.GPE
 
 
             //character.SetForce(_lastForce, _stopLerpValue);
-            character.RemoveAdditionalForce(gameObject);
+            character.AddAdditionalForce(gameObject, Vector3.zero ,_stopLerpValue);
             _isPlayerIn = false;
         }
 
