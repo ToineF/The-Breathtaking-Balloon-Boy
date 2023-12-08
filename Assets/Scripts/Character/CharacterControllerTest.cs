@@ -4,6 +4,9 @@ using Unity.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Cinemachine;
+using System.Collections.Generic;
+using BlownAway.GPE;
+using System.Linq;
 
 namespace BlownAway.Player
 {
@@ -72,7 +75,7 @@ namespace BlownAway.Player
         private Vector2 _currentCameraAngle;
 
         // External
-        private Vector3 _airForce;
+        private Dictionary<GameObject, ForceData> _additionnalForces = new Dictionary<GameObject, ForceData>();
 
         private void Awake()
         {
@@ -146,11 +149,18 @@ namespace BlownAway.Player
                 CurrentGravity = Mathf.Clamp(CurrentGravity + _gravityIncreaseByFrame, BaseGravity, MaxGravity);
             }
 
-            Vector3 gravity = new Vector3(Force.x, Force.y - CurrentGravity, Force.z);
+            Vector3 additionalForces = Vector3.zero;
+            foreach (var force in _additionnalForces)
+            {
+                additionalForces += force.Value.CurrentForce;
+                force.Value.CurrentForce = Vector3.Lerp(force.Value.CurrentForce, force.Value.TargetForce, force.Value.ForceLerp);
+            }
+            Vector3 gravity = - CurrentGravity * new Vector3(0, 1, 0);
+            Vector3 allForces = Force + additionalForces + gravity;
 
-            _characterController.Move(gravity * Time.deltaTime);
+            _characterController.Move(allForces * Time.deltaTime);
 
-            var forceSign = Mathf.Sign(CurrentForce.x) * Mathf.Sign(CurrentForce.x) * Mathf.Sign(CurrentForce.x);
+            // var forceSign = Mathf.Sign(CurrentForce.x) * Mathf.Sign(CurrentForce.x) * Mathf.Sign(CurrentForce.x);
             Force = Vector3.Lerp(Force, CurrentForce, _lerpValue);
         }
 
@@ -244,6 +254,22 @@ namespace BlownAway.Player
             float ySign = _currentCamera.IsYInverted ? -1 : 1;
             _currentCameraAngle += new Vector2(value.x * xSign, value.y * ySign);
             _currentCameraAngle.y = Math.Clamp(_currentCameraAngle.y, -_currentCamera.YDeadZone, _currentCamera.YDeadZone);
+        }
+
+        public void AddAdditionalForce(GameObject parent, Vector3 force, float lerp)
+        {
+            if (!_additionnalForces.ContainsKey(parent))
+                _additionnalForces.Add(parent, new ForceData(force, lerp));
+            else
+            {
+                _additionnalForces[parent].TargetForce = force;
+                _additionnalForces[parent].ForceLerp = lerp;
+            }
+        }
+
+        public void RemoveAdditionalForce(GameObject parent)
+        {
+            _additionnalForces.Remove(parent);
         }
     }
 }
