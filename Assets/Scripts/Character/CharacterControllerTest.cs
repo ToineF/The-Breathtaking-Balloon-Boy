@@ -162,14 +162,14 @@ namespace BlownAway.Player
             _currentCamera.GetComponent<CinemachineVirtualCamera>().GetCinemachineComponent<CinemachineFramingTransposer>().m_CameraDistance = _currentCamera.CameraDistance;
         }
 
-        private void StartMove(InputAction.CallbackContext context)
+        public void StartMove(InputAction.CallbackContext context)
         {
             float xPosition = context.ReadValue<Vector2>().x;
             float zPosition = context.ReadValue<Vector2>().y;
             _moveVector = new Vector3(xPosition, 0, zPosition);
         }
 
-        private void StopMove(InputAction.CallbackContext context)
+        public void StopMove(InputAction.CallbackContext context)
         {
             _moveVector = Vector3.zero;
         }

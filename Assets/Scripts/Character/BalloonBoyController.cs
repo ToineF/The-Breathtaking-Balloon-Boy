@@ -7,7 +7,7 @@ namespace BlownAway.Player
 {
     public class BalloonBoyController : MonoBehaviour
     {
-        
+
         [Header("Controller Type")]
         [SerializeField] private ControllerType _type;
 
@@ -46,6 +46,7 @@ namespace BlownAway.Player
         private Vector3 _balloonOriginalScale;
         private Vector3 _currentDashDirection;
         private Vector3 _lateralInputDirection;
+        private Vector3 _lastLateralInputDirection;
         private Vector3 _verticalInputDirection;
         private Vector3 _forwardInputDirection;
 
@@ -64,6 +65,7 @@ namespace BlownAway.Player
             _balloonOriginalScale = _balloonVisual.transform.localScale;
             _currentDashDirection = Vector3.zero;
             _lateralInputDirection = Vector3.zero;
+            _lastLateralInputDirection = Vector3.zero;
             _verticalInputDirection = Vector3.zero;
         }
 
@@ -193,11 +195,14 @@ namespace BlownAway.Player
             if (_type == ControllerType.Type1)
             {
                 Vector3 lateralMoveDirection = (Vector3.Scale(UnityEngine.Camera.main.transform.forward, new Vector3(1, 0, 1)).normalized * _lateralInputDirection.y + Vector3.Scale(UnityEngine.Camera.main.transform.right, new Vector3(1, 0, 1)) * _lateralInputDirection.x).normalized;
+
                 newDashdirection = (lateralMoveDirection == Vector3.zero) ? Vector3.up * _verticalDashForce : lateralMoveDirection * _lateralDashForce; // this one for type 2 & 3
             }
             else
             {
-                newDashdirection = Vector3.Scale(UnityEngine.Camera.main.transform.forward, _forwardInputDirection).normalized * _lateralDashForce + _verticalInputDirection * _verticalDashForce;
+                Vector3 lateralMoveDirection = (Vector3.Scale(UnityEngine.Camera.main.transform.forward, new Vector3(1, 0, 1)).normalized * _lastLateralInputDirection.y + Vector3.Scale(UnityEngine.Camera.main.transform.right, new Vector3(1, 0, 1)) * _lastLateralInputDirection.x).normalized;
+
+                newDashdirection = Vector3.Scale(lateralMoveDirection, _forwardInputDirection).normalized * _lateralDashForce + _verticalInputDirection * _verticalDashForce;
             }
             return newDashdirection;
         }
@@ -312,6 +317,7 @@ namespace BlownAway.Player
         private void GetMoveValue(InputAction.CallbackContext context)
         {
             _lateralInputDirection = context.ReadValue<Vector2>();
+            if (_lateralInputDirection != Vector3.zero ) _lastLateralInputDirection  = _lateralInputDirection;
         }
 
         private void GetMoveInputUp(InputAction.CallbackContext context)
