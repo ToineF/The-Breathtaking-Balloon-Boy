@@ -22,7 +22,7 @@ namespace BlownAway.Player
             get => _canMove; set
             {
                 _canMove = value;
-                SwitchCamera(_canMove);
+                //SwitchCamera(_canMove);
             }
         }
 
@@ -228,8 +228,8 @@ namespace BlownAway.Player
 
         private void SwitchCamera(bool canMove)
         {
-            EntityCamera camera = canMove ? _gameplayCamera : _buildingManagerCamera;
-            ActivateCamera(camera);
+            //EntityCamera camera = canMove ? _gameplayCamera : _buildingManagerCamera;
+            //ActivateCamera(camera);
         }
 
         private void BirdEyeView(InputAction.CallbackContext context)
@@ -237,14 +237,14 @@ namespace BlownAway.Player
             if (!CanMove) return;
             EntityCamera camera = _isViewing ? _gameplayCamera : _birdViewCamera;
             _isViewing = !_isViewing;
-            ActivateCamera(camera);
+            //ActivateCamera(camera);
         }
 
         public void SetFloatingCamera(bool isActive)
         {
             if (!CanMove || _isViewing) return;
             EntityCamera camera = isActive ? _floatingCamera : _gameplayCamera;
-            ActivateCamera(camera);
+            //ActivateCamera(camera);
         }
 
         private void CameraMove(InputAction.CallbackContext context)

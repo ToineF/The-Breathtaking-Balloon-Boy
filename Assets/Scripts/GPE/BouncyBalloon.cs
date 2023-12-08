@@ -23,10 +23,11 @@ namespace BlownAway.GPE
         {
             if (!other.TryGetComponent(out CharacterControllerTest characterController)) return;
             if (_isPlayerIn) return;
-            if (characterController.GetComponent<BalloonStateManager>().IsHammerFalling) return;
+            //if (characterController.GetComponent<BalloonStateManager>().IsHammerFalling) return;
             Debug.Log("C");
             _isPlayerIn = true;
-            characterController.SetForce(_force, _forceAccel);
+            characterController.AddAdditionalForce(gameObject, _force, _forceAccel);
+            //characterController.SetForce(_force, _forceAccel);
             transform.DOComplete();
             transform.DOPunchScale(_vector3Up * _scaleMultiplier, _scaleTime, 0, 0);
         }
@@ -35,12 +36,13 @@ namespace BlownAway.GPE
         {
             if (!other.TryGetComponent(out CharacterControllerTest characterController)) return;
             if (!_isPlayerIn) return;
-            if (characterController.GetComponent<BalloonStateManager>().IsHammerFalling) return;
+            //if (characterController.GetComponent<BalloonStateManager>().IsHammerFalling) return;
 
             Debug.Log("D");
 
             _isPlayerIn = false;
-            characterController.SetForce(Vector3.zero, _forceDecel);
+            characterController.AddAdditionalForce(gameObject, Vector3.zero, _forceDecel);
+            //characterController.SetForce(Vector3.zero, _forceDecel);
 
         }
     }

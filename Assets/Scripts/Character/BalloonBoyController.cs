@@ -293,6 +293,9 @@ namespace BlownAway.Player
 
         private void StartBalloonFloating(InputAction.CallbackContext context)
         {
+            if (!_isFloating) return;
+            if (_isFloatCanceled) return;
+
             _isDashing = true;
             _currentDashDirection = Vector3.zero;
         }
@@ -305,7 +308,8 @@ namespace BlownAway.Player
             _currentDashDirection = Vector3.zero;
 
             if (_currentAir <= 0) return;
-            CharacterControllerTest.Instance.SetForce(Vector3.up * _glideForce, _dashDecel); // AddForce(-_currentDashDirection, _dashDecel);
+            Vector3 force = _isFloatCanceled ? Vector3.zero : Vector3.up * _glideForce;
+            CharacterControllerTest.Instance.SetForce(force, _dashDecel); // AddForce(-_currentDashDirection, _dashDecel);
         }
 
         private void CancelBalloonFloating(InputAction.CallbackContext context)
