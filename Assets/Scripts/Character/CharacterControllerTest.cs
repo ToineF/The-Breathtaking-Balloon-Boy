@@ -71,6 +71,9 @@ namespace BlownAway.Player
         private EntityCamera _currentCamera;
         private Vector2 _currentCameraAngle;
 
+        // External
+        private Vector3 _airForce;
+
         private void Awake()
         {
             Instance = this;

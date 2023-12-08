@@ -226,6 +226,11 @@ namespace BlownAway.Player
             _currentDashDirection = Vector3.zero;
             _isFloatCanceled = false;
 
+            if (_currentAir <= 0) return;
+
+            _balloonVisual.transform.DOScale(Vector3.one * _balloonScaleValue, _balloonScaleTime);
+
+
             if (_jumps <= 0) return;
 
             CharacterControllerTest.Instance.OnGroundEnter += PlayerEnterGround;
@@ -245,10 +250,7 @@ namespace BlownAway.Player
             Collider collider = CharacterControllerTest.Instance.GetComponent<Collider>();
             Instantiate(_jumpFXPrefab, collider.bounds.center - collider.bounds.extents.y * Vector3.up, _jumpFXPrefab.transform.rotation);
 
-            // Air
-            _currentAir = _maxAir;
-
-            _balloonVisual.transform.DOScale(Vector3.one * _balloonScaleValue, _balloonScaleTime);
+            RefreshAir();
 
             CharacterControllerTest.Instance.SetFloatingCamera(true);
         }
@@ -273,7 +275,7 @@ namespace BlownAway.Player
         private void PlayerEnterGround()
         {
             _jumps = _maxJumps;
-            _currentAir = _maxAir;
+            RefreshAir();
             CharacterControllerTest.Instance.OnGroundEnter -= PlayerEnterGround;
             ResetBalloonScale();
 
@@ -344,6 +346,11 @@ namespace BlownAway.Player
         private void GetForwardInput(InputAction.CallbackContext context)
         {
             _forwardInputDirection = new Vector3(1, 0, 1);
+        }
+
+        public void RefreshAir()
+        {
+            _currentAir = _maxAir;
         }
     }
 }
