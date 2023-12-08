@@ -83,22 +83,22 @@ namespace BlownAway.Player
                     _inputs.Player.Action.performed += GetMoveInputUp;
                     //_inputs.Player.Action.performed += StartBalloonFloating;
                     _inputs.Player.Action.canceled += StopBalloonFloating;
-                    _inputs.Player.Action.canceled += ResetMoveInput;
+                    _inputs.Player.Action.canceled += ResetVerticalMoveInput;
                     _inputs.Player.Move.performed += GetMoveValue;
-                    _inputs.Player.Move.performed += ResetMoveInput;
+                    _inputs.Player.Move.performed += ResetLateralMoveInput;
                     _inputs.Player.Move.canceled += GetMoveValue;
                     _inputs.Player.SecondaryAction.performed += CancelBalloonFloating;
                     break;
                 case ControllerType.Type2:
                     _inputs.Player_1.LateralPropulsion.performed += BalloonPump;
                     _inputs.Player_1.LateralPropulsion.performed += GetForwardInput;
-                    _inputs.Player_1.LateralPropulsion.canceled += ResetMoveInput;
+                    _inputs.Player_1.LateralPropulsion.canceled += ResetLateralMoveInput;
                     _inputs.Player_1.UpPropulsion.performed += BalloonPump;
                     _inputs.Player_1.UpPropulsion.performed += GetMoveInputUp;
-                    _inputs.Player_1.UpPropulsion.canceled += ResetMoveInput;
+                    _inputs.Player_1.UpPropulsion.canceled += ResetVerticalMoveInput;
                     _inputs.Player_1.DownPropulsion.performed += GetMoveInputDown;
                     _inputs.Player_1.DownPropulsion.performed += StartBalloonFloating;
-                    _inputs.Player_1.DownPropulsion.canceled += ResetMoveInput;
+                    _inputs.Player_1.DownPropulsion.canceled += ResetVerticalMoveInput;
                     _inputs.Player_1.Move.performed += GetMoveValue;
                     _inputs.Player_1.Move.canceled += GetMoveValue;
                     _inputs.Player_1.CancelPropulsion.performed += CancelBalloonFloating;
@@ -133,22 +133,22 @@ namespace BlownAway.Player
                     _inputs.Player.Action.performed -= GetMoveInputUp;
                     //_inputs.Player.Action.performed -= StartBalloonFloating;
                     _inputs.Player.Action.canceled -= StopBalloonFloating;
-                    _inputs.Player.Action.canceled -= ResetMoveInput;
+                    _inputs.Player.Action.canceled -= ResetVerticalMoveInput;
                     _inputs.Player.Move.performed -= GetMoveValue;
-                    _inputs.Player.Move.performed -= ResetMoveInput;
+                    _inputs.Player.Move.performed -= ResetLateralMoveInput;
                     _inputs.Player.Move.canceled -= GetMoveValue;
                     _inputs.Player.SecondaryAction.performed -= CancelBalloonFloating;
                     break;
                 case ControllerType.Type2:
                     _inputs.Player_1.LateralPropulsion.performed -= BalloonPump;
                     _inputs.Player_1.LateralPropulsion.performed -= GetForwardInput;
-                    _inputs.Player_1.LateralPropulsion.canceled -= ResetMoveInput;
+                    _inputs.Player_1.LateralPropulsion.canceled -= ResetLateralMoveInput;
                     _inputs.Player_1.UpPropulsion.performed -= BalloonPump;
                     _inputs.Player_1.UpPropulsion.performed -= GetMoveInputUp;
-                    _inputs.Player_1.UpPropulsion.canceled -= ResetMoveInput;
+                    _inputs.Player_1.UpPropulsion.canceled -= ResetVerticalMoveInput;
                     _inputs.Player_1.DownPropulsion.performed -= GetMoveInputDown;
                     _inputs.Player_1.DownPropulsion.performed -= StartBalloonFloating;
-                    _inputs.Player_1.DownPropulsion.canceled -= ResetMoveInput;
+                    _inputs.Player_1.DownPropulsion.canceled -= ResetVerticalMoveInput;
                     _inputs.Player_1.Move.performed -= GetMoveValue;
                     _inputs.Player_1.Move.canceled -= GetMoveValue;
                     _inputs.Player_1.CancelPropulsion.performed -= CancelBalloonFloating;
@@ -209,6 +209,8 @@ namespace BlownAway.Player
 
         private void BalloonPump(InputAction.CallbackContext context)
         {
+            if (_verticalInputDirection != Vector3.zero || _forwardInputDirection != Vector3.zero) return;
+
             if (_isFloatCanceled)
             {
                 AfterFloatCancelJump();
@@ -290,6 +292,8 @@ namespace BlownAway.Player
 
         private void StopBalloonFloating(InputAction.CallbackContext context)
         {
+            if (_verticalInputDirection != Vector3.zero && _forwardInputDirection != Vector3.zero) return;
+
             _isDashing = false;
             _currentDashDirection = Vector3.zero;
 
@@ -319,10 +323,15 @@ namespace BlownAway.Player
         {
             _verticalInputDirection = Vector2.down;
         }
-        private void ResetMoveInput(InputAction.CallbackContext context)
+        private void ResetVerticalMoveInput(InputAction.CallbackContext context)
         {
             StopBalloonFloating(context);
             _verticalInputDirection = Vector2.zero;
+        }
+
+        private void ResetLateralMoveInput(InputAction.CallbackContext context)
+        {
+            StopBalloonFloating(context);
             _forwardInputDirection = Vector2.zero;
         }
 
