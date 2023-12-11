@@ -11,7 +11,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: eff93da95c895844a9423be214ed3422,
         type: 3}
       propertyPath: m_RootOrder
-      value: 12
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: eff93da95c895844a9423be214ed3422,
         type: 3}
@@ -66,7 +66,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: eff93da95c895844a9423be214ed3422,
         type: 3}
       propertyPath: m_Name
-      value: AirBalloon
+      value: BouncyMovableBalloon
       objectReference: {fileID: 0}
     - target: {fileID: 2055382282107649181, guid: eff93da95c895844a9423be214ed3422,
         type: 3}
@@ -113,7 +113,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebbaa255671acf1418c5f69c2a55ace2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _force: {x: 0, y: 22, z: 0}
+  _force: 10
+  _direction: {x: 0, y: 1, z: 0}
   _forceAccel: 1
   _forceDecel: 0.031
   _vector3Up: {x: 0, y: 0, z: 1}
