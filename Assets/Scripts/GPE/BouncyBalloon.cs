@@ -7,7 +7,8 @@ namespace BlownAway.GPE
     public class BouncyBalloon : MonoBehaviour
     {
         [Header("Force")]
-        [SerializeField] private Vector3 _force;
+        [SerializeField] private float _force;
+        [SerializeField] private Vector3 _direction;
         [SerializeField] [Range(0, 1)] private float _forceAccel;
         [SerializeField] [Range(0, 1)] private float _forceDecel;
         [SerializeField] private Vector3 _vector3Up;
@@ -26,7 +27,8 @@ namespace BlownAway.GPE
             //if (characterController.GetComponent<BalloonStateManager>().IsHammerFalling) return;
             Debug.Log("C");
             _isPlayerIn = true;
-            characterController.AddAdditionalForce(gameObject, _force, _forceAccel);
+            Vector3 direction = characterController.transform.position - transform.position;
+            characterController.AddAdditionalForce(gameObject, direction * _force, _forceAccel);
             //characterController.SetForce(_force, _forceAccel);
             transform.DOComplete();
             transform.DOPunchScale(_vector3Up * _scaleMultiplier, _scaleTime, 0, 0);
