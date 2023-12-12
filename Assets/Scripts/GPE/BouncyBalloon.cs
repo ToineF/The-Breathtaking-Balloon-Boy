@@ -25,7 +25,6 @@ namespace BlownAway.GPE
             if (!other.TryGetComponent(out CharacterControllerTest characterController)) return;
             if (_isPlayerIn) return;
             //if (characterController.GetComponent<BalloonStateManager>().IsHammerFalling) return;
-            Debug.Log("C");
             _isPlayerIn = true;
             Vector3 direction = characterController.transform.position - transform.position;
             characterController.AddAdditionalForce(gameObject, direction * _force, _forceAccel);
@@ -40,7 +39,6 @@ namespace BlownAway.GPE
             if (!_isPlayerIn) return;
             //if (characterController.GetComponent<BalloonStateManager>().IsHammerFalling) return;
 
-            Debug.Log("D");
 
             _isPlayerIn = false;
             characterController.AddAdditionalForce(gameObject, Vector3.zero, _forceDecel);
