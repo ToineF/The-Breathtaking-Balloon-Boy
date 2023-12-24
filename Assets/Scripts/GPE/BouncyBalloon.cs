@@ -27,7 +27,9 @@ namespace BlownAway.GPE
             //if (characterController.GetComponent<BalloonStateManager>().IsHammerFalling) return;
             _isPlayerIn = true;
             Vector3 direction = characterController.transform.position - transform.position;
-            characterController.AddAdditionalForce(gameObject, direction * _force, _forceAccel);
+            Vector3 normalizedDirection = direction.normalized;
+            normalizedDirection = new Vector3(Mathf.Round(normalizedDirection.x), Mathf.Round(normalizedDirection.y), Mathf.Round(normalizedDirection.z));
+            characterController.AddAdditionalForce(gameObject, normalizedDirection * _force, _forceAccel);
             //characterController.SetForce(_force, _forceAccel);
             transform.DOComplete();
             transform.DOPunchScale(_vector3Up * _scaleMultiplier, _scaleTime, 0, 0);

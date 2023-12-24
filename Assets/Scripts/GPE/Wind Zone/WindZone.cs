@@ -14,6 +14,7 @@ namespace BlownAway.GPE
         [SerializeField] [Tooltip("The interval of time in seconds at which the wind collides with the player")] private float _timeBetweenAdditions;
         [SerializeField] [Tooltip("The acceleration of the force towards the magnitude given to the player")] [Range(0, 1)] private float _startLerpValue;
         [SerializeField] [Tooltip("The deceleration of the force from the magnitude given to the player")] [Range(0, 1)] private float _stopLerpValue;
+        [SerializeField] [Tooltip("The original scale used for reference to scale the VFX")] private Vector3 _targetScale;
         private float _timer;
 
         [Header("FX")]
@@ -40,6 +41,7 @@ namespace BlownAway.GPE
             {
                 Color color = _isHot ? _HotColor : _ColdColor;
                 fx.startColor = color;
+                fx.transform.localScale = new Vector3(transform.localScale.x / _targetScale.x, transform.localScale.y / _targetScale.y, transform.localScale.z / _targetScale.z);
             }
 
         }
