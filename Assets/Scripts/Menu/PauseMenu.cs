@@ -1,23 +1,12 @@
 using UnityEngine;
-using TMPro;
-using UnityEngine.UI;
-
+using AntoineFoucault.Utilities;
 public class PauseMenu : MonoBehaviour
 {
     public static bool GameIsPaused = false;
 
     [Header("General")]
     [SerializeField] private GameObject PauseUIMenu;
-
-    [Header("Sound")]
-    [SerializeField] private Slider Slider;
-    [SerializeField] private TMP_Text SoundLevelText;
-
-    private void Start()
-    {
-        if (AudioManager.Instance.MainMusicSource != null)
-            Slider.value = AudioManager.Instance.MainMusicSource.volume;
-    }
+    [SerializeField] private GameObject[] PauseUISubMenus;
 
     private void Update()
     {
@@ -28,9 +17,8 @@ public class PauseMenu : MonoBehaviour
             else
                 Pause();
         }
-
-        SoundLevelText.text = Mathf.Round(Slider.value * 100).ToString();
         //SPECIFIC SCENES WHERE WE DONT WANT THE PLAYER TO PAUSE
+        // + specific moments when you don't want the player to be able to pause (ex : Quit Game Transition)
     }
 
     public void Resume()
@@ -38,6 +26,7 @@ public class PauseMenu : MonoBehaviour
         GameIsPaused = false;
         Time.timeScale = 1f;
         PauseUIMenu.SetActive(false);
+        PauseUISubMenus.SetActive(false);
     }
 
     public void Pause()

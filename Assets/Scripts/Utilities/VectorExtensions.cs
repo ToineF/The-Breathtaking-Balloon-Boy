@@ -508,4 +508,15 @@ namespace AntoineFoucault.Utilities
         }
     }
 
+    public static class GameObjectExtensions
+    {
+        public static void SetActive(this IList<GameObject> gameObjects, bool value)
+        {
+            foreach (GameObject go in gameObjects)
+            {
+                go.SetActive(value);
+            }
+        }
+    }
+
 }

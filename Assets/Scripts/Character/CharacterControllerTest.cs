@@ -114,6 +114,7 @@ namespace BlownAway.Player
 
         private void Update()
         {
+            if (Time.timeScale == 0) return;
 
             if (!CanMove || _isViewing)
             {
