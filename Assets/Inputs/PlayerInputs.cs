@@ -55,9 +55,18 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""CameraMove"",
+                    ""name"": ""CameraMoveMouse"",
                     ""type"": ""PassThrough"",
                     ""id"": ""ca75b410-b717-4001-b182-926a73e9559d"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""CameraMoveController"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""0fdec9db-91fd-4dee-b09b-2c1cb202e3fc"",
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -176,61 +185,6 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": ""Joystick"",
-                    ""id"": ""12603a12-5ff0-437f-afce-b428490e1796"",
-                    ""path"": ""2DVector(mode=2)"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Move"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""up"",
-                    ""id"": ""febc44bb-6999-4075-a9bf-3743d0756131"",
-                    ""path"": ""<Joystick>/stick/up"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""down"",
-                    ""id"": ""ed85bc8d-24a6-43d5-b216-bf66c56b9260"",
-                    ""path"": ""<Joystick>/stick/down"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""left"",
-                    ""id"": ""cd9f8219-980c-4bfb-a501-6e41cc6f13ee"",
-                    ""path"": ""<Joystick>/stick/left"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""right"",
-                    ""id"": ""bcd0760c-2545-440e-aadd-3f89a32d193d"",
-                    ""path"": ""<Joystick>/stick/right"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
                     ""name"": """",
                     ""id"": ""1f0d3964-0bf8-4963-b5b0-58a567ae3fff"",
                     ""path"": ""<Keyboard>/space"",
@@ -314,7 +268,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""CameraMove"",
+                    ""action"": ""CameraMoveMouse"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -325,7 +279,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""CameraMove"",
+                    ""action"": ""CameraMoveController"",
                     ""isComposite"": true,
                     ""isPartOfComposite"": false
                 },
@@ -336,7 +290,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""CameraMove"",
+                    ""action"": ""CameraMoveController"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -347,7 +301,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""CameraMove"",
+                    ""action"": ""CameraMoveController"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -358,7 +312,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""CameraMove"",
+                    ""action"": ""CameraMoveController"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -369,7 +323,62 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""CameraMove"",
+                    ""action"": ""CameraMoveController"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""Joystick"",
+                    ""id"": ""12603a12-5ff0-437f-afce-b428490e1796"",
+                    ""path"": ""2DVector(mode=2)"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CameraMoveController"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""febc44bb-6999-4075-a9bf-3743d0756131"",
+                    ""path"": ""<Joystick>/stick/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CameraMoveController"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""ed85bc8d-24a6-43d5-b216-bf66c56b9260"",
+                    ""path"": ""<Joystick>/stick/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CameraMoveController"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""cd9f8219-980c-4bfb-a501-6e41cc6f13ee"",
+                    ""path"": ""<Joystick>/stick/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CameraMoveController"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""bcd0760c-2545-440e-aadd-3f89a32d193d"",
+                    ""path"": ""<Joystick>/stick/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CameraMoveController"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 }
@@ -1808,7 +1817,8 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
         m_Player_Action = m_Player.FindAction("Action", throwIfNotFound: true);
         m_Player_SecondaryAction = m_Player.FindAction("SecondaryAction", throwIfNotFound: true);
-        m_Player_CameraMove = m_Player.FindAction("CameraMove", throwIfNotFound: true);
+        m_Player_CameraMoveMouse = m_Player.FindAction("CameraMoveMouse", throwIfNotFound: true);
+        m_Player_CameraMoveController = m_Player.FindAction("CameraMoveController", throwIfNotFound: true);
         // Player_1
         m_Player_1 = asset.FindActionMap("Player_1", throwIfNotFound: true);
         m_Player_1_Move = m_Player_1.FindAction("Move", throwIfNotFound: true);
@@ -1899,7 +1909,8 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Move;
     private readonly InputAction m_Player_Action;
     private readonly InputAction m_Player_SecondaryAction;
-    private readonly InputAction m_Player_CameraMove;
+    private readonly InputAction m_Player_CameraMoveMouse;
+    private readonly InputAction m_Player_CameraMoveController;
     public struct PlayerActions
     {
         private @PlayerInputs m_Wrapper;
@@ -1907,7 +1918,8 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         public InputAction @Move => m_Wrapper.m_Player_Move;
         public InputAction @Action => m_Wrapper.m_Player_Action;
         public InputAction @SecondaryAction => m_Wrapper.m_Player_SecondaryAction;
-        public InputAction @CameraMove => m_Wrapper.m_Player_CameraMove;
+        public InputAction @CameraMoveMouse => m_Wrapper.m_Player_CameraMoveMouse;
+        public InputAction @CameraMoveController => m_Wrapper.m_Player_CameraMoveController;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1926,9 +1938,12 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
             @SecondaryAction.started += instance.OnSecondaryAction;
             @SecondaryAction.performed += instance.OnSecondaryAction;
             @SecondaryAction.canceled += instance.OnSecondaryAction;
-            @CameraMove.started += instance.OnCameraMove;
-            @CameraMove.performed += instance.OnCameraMove;
-            @CameraMove.canceled += instance.OnCameraMove;
+            @CameraMoveMouse.started += instance.OnCameraMoveMouse;
+            @CameraMoveMouse.performed += instance.OnCameraMoveMouse;
+            @CameraMoveMouse.canceled += instance.OnCameraMoveMouse;
+            @CameraMoveController.started += instance.OnCameraMoveController;
+            @CameraMoveController.performed += instance.OnCameraMoveController;
+            @CameraMoveController.canceled += instance.OnCameraMoveController;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -1942,9 +1957,12 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
             @SecondaryAction.started -= instance.OnSecondaryAction;
             @SecondaryAction.performed -= instance.OnSecondaryAction;
             @SecondaryAction.canceled -= instance.OnSecondaryAction;
-            @CameraMove.started -= instance.OnCameraMove;
-            @CameraMove.performed -= instance.OnCameraMove;
-            @CameraMove.canceled -= instance.OnCameraMove;
+            @CameraMoveMouse.started -= instance.OnCameraMoveMouse;
+            @CameraMoveMouse.performed -= instance.OnCameraMoveMouse;
+            @CameraMoveMouse.canceled -= instance.OnCameraMoveMouse;
+            @CameraMoveController.started -= instance.OnCameraMoveController;
+            @CameraMoveController.performed -= instance.OnCameraMoveController;
+            @CameraMoveController.canceled -= instance.OnCameraMoveController;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -2241,7 +2259,8 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnAction(InputAction.CallbackContext context);
         void OnSecondaryAction(InputAction.CallbackContext context);
-        void OnCameraMove(InputAction.CallbackContext context);
+        void OnCameraMoveMouse(InputAction.CallbackContext context);
+        void OnCameraMoveController(InputAction.CallbackContext context);
     }
     public interface IPlayer_1Actions
     {

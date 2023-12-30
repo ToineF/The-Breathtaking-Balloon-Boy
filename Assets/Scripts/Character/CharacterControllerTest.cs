@@ -73,6 +73,8 @@ namespace BlownAway.Player
         private bool _isViewing;
         private EntityCamera _currentCamera;
         private Vector2 _currentCameraAngle;
+        private Vector2 _cameraMoveVector;
+        private bool _isMouse;
 
         // External
         private Dictionary<GameObject, ForceData> _additionnalForces = new Dictionary<GameObject, ForceData>();
@@ -100,7 +102,10 @@ namespace BlownAway.Player
             _inputs.Player.Move.performed += StartMove;
             _inputs.Player.Move.canceled += StopMove;
             _inputs.Player_Archive.DistanceView.performed += BirdEyeView;
-            _inputs.Player.CameraMove.performed += CameraMove;
+            _inputs.Player.CameraMoveMouse.performed += SetCameraTypeMouse;
+            _inputs.Player.CameraMoveMouse.canceled += SetCameraTypeMouse;
+            _inputs.Player.CameraMoveController.performed += SetCameraTypeController;
+            _inputs.Player.CameraMoveController.canceled += SetCameraTypeController;
         }
 
         private void OnDisable()
@@ -109,7 +114,10 @@ namespace BlownAway.Player
             _inputs.Player.Move.performed -= StartMove;
             _inputs.Player.Move.canceled -= StopMove;
             _inputs.Player_Archive.DistanceView.performed -= BirdEyeView;
-            _inputs.Player.CameraMove.performed -= CameraMove;
+            _inputs.Player.CameraMoveMouse.performed -= SetCameraTypeMouse;
+            _inputs.Player.CameraMoveMouse.canceled -= SetCameraTypeMouse;
+            _inputs.Player.CameraMoveController.performed -= SetCameraTypeController;
+            _inputs.Player.CameraMoveController.canceled -= SetCameraTypeController;
         }
 
         private void Update()
@@ -140,6 +148,11 @@ namespace BlownAway.Player
                 CurrentGravity = BaseGravity;
             }
             SetGravity();
+        }
+
+        private void LateUpdate()
+        {
+            CameraMove();
         }
 
 
@@ -248,13 +261,28 @@ namespace BlownAway.Player
             //ActivateCamera(camera);
         }
 
-        private void CameraMove(InputAction.CallbackContext context)
+        private void CameraMove()
         {
-            Vector2 value = context.ReadValue<Vector2>() * _currentCamera.MouseSpeed;
+            if (Time.timeScale == 0) return;
+
+            float sensitivity = _isMouse ? _currentCamera.MouseSensitivity : _currentCamera.ControllerSensitivity;
             float xSign = _currentCamera.IsXInverted ? -1 : 1;
             float ySign = _currentCamera.IsYInverted ? -1 : 1;
-            _currentCameraAngle += new Vector2(value.x * xSign, value.y * ySign);
+            _currentCameraAngle += new Vector2(_cameraMoveVector.x * xSign, _cameraMoveVector.y * ySign) * sensitivity;
             _currentCameraAngle.y = Math.Clamp(_currentCameraAngle.y, -_currentCamera.YDeadZone, _currentCamera.YDeadZone);
+
+        }
+
+        private void SetCameraTypeMouse(InputAction.CallbackContext context)
+        {
+            _isMouse = true;
+            _cameraMoveVector = context.ReadValue<Vector2>();
+        }
+
+        private void SetCameraTypeController(InputAction.CallbackContext context)
+        {
+            _isMouse = false;
+            _cameraMoveVector = context.ReadValue<Vector2>();
         }
 
         public void AddAdditionalForce(GameObject parent, Vector3 force, float lerp)

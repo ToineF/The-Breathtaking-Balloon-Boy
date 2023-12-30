@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 
@@ -14,6 +12,7 @@ public class EntityCamera : MonoBehaviour
     [Header("Mouse")]
     [Tooltip("Is the X-Axis Inverted")] public bool IsXInverted;
     [Tooltip("Is the Y-Axis Inverted")] public bool IsYInverted;
-    [Tooltip("The influence of the mouse on the camera speed")] public float MouseSpeed = 1;
+    [Tooltip("The influence of the mouse on the camera speed")] public float MouseSensitivity = 1;
+    [Tooltip("The influence of the controller on the camera speed")] public float ControllerSensitivity = 1;
     [Tooltip("The range of Y movements allowed with the mouse")] public float YDeadZone;
 }
