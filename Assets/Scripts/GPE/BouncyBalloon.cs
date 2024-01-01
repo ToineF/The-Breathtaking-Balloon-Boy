@@ -13,6 +13,11 @@ namespace BlownAway.GPE
         [SerializeField] [Range(0, 1)] private float _forceDecel;
         [SerializeField] private Vector3 _vector3Up;
 
+        [Header("Directions")]
+        [SerializeField] [Range(0, 1)] private float _upThreshold;
+        [SerializeField] [Range(-1, 0)] private float _downThreshold;
+
+
         [Header("Timer")]
         private bool _isPlayerIn;
 
@@ -28,7 +33,12 @@ namespace BlownAway.GPE
             _isPlayerIn = true;
             Vector3 direction = characterController.transform.position - transform.position;
             Vector3 normalizedDirection = direction.normalized;
-            normalizedDirection = new Vector3(Mathf.Round(normalizedDirection.x), Mathf.Round(normalizedDirection.y), Mathf.Round(normalizedDirection.z));
+
+            if (normalizedDirection.y > _upThreshold) normalizedDirection = Vector3.up; // UP
+            else if (normalizedDirection.y < _downThreshold) normalizedDirection = Vector3.down; // DOWN
+            else if (Mathf.Abs(normalizedDirection.x) > Mathf.Abs(normalizedDirection.z)) normalizedDirection = new Vector3(Mathf.Round(normalizedDirection.x),0,0); // LEFT - RIGHT
+            else normalizedDirection = new Vector3(0, 0, Mathf.Round(normalizedDirection.z)); // FORWARD - BACKWARD
+
             characterController.AddAdditionalForce(gameObject, normalizedDirection * _force, _forceAccel);
             //characterController.SetForce(_force, _forceAccel);
             transform.DOComplete();

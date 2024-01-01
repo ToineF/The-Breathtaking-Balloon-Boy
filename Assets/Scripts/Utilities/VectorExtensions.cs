@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace AntoineFoucault.Utilities
@@ -481,6 +482,11 @@ namespace AntoineFoucault.Utilities
             T value = list[i1];
             list[i1] = list[i2];
             list[i2] = value;
+        }
+
+        public static int[] FindAllIndexof<T>(this IEnumerable<T> values, T val)
+        {
+            return values.Select((b, i) => object.Equals(b, val) ? i : -1).Where(i => i != -1).ToArray();
         }
     }
 
