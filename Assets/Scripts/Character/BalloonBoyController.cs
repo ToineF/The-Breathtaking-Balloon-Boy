@@ -29,6 +29,7 @@ namespace BlownAway.Player
         [SerializeField] private float _verticalDashForce;
         [SerializeField] private float _lateralDashForce;
         [Range(0, 1)] [SerializeField] private float _dashDecel;
+        [Range(0, 1)] [SerializeField] private float _groundEnterDecel;
 
         [Header("Visuals")]
         [SerializeField] private RadialUI _airUI;
@@ -283,7 +284,7 @@ namespace BlownAway.Player
 
         private void ResetBalloonScale()
         {
-            CharacterControllerTest.Instance.SetForce(Vector3.zero, 1);
+            CharacterControllerTest.Instance.SetForce(Vector3.zero, _groundEnterDecel);
             _balloonVisual.transform.DOScale(_balloonOriginalScale, _balloonScaleTime);
             _currentDashDirection = Vector3.zero;
             _isFloating = false;
