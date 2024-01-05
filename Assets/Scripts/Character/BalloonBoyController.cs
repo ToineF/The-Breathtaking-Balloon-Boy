@@ -26,10 +26,16 @@ namespace BlownAway.Player
         [SerializeField] private float _airDashReductionSpeed;
 
         [Header("Dash")]
-        [SerializeField] private float _verticalDashForce;
-        [SerializeField] private float _lateralDashForce;
-        [Range(0, 1)] [SerializeField] private float _dashDecel;
-        [Range(0, 1)] [SerializeField] private float _groundEnterDecel;
+        [Tooltip("The vertical speed of the dash at its start")] [SerializeField] private float _baseVerticalDashForce;
+        [Tooltip("The lateral speed of the dash at its start")] [SerializeField] private float _baseLateralDashForce;
+        [Tooltip("The speed at which the player loses velocity when stopping the dash")] [Range(0, 1)] [SerializeField] private float _dashDecel;
+        [Tooltip("The speed at which the player loses velocity when touching the ground")] [Range(0, 1)] [SerializeField] private float _groundEnterDecel;
+        [Tooltip("The force at which the player gains velocity when starting the dash")] [SerializeField] private float _accelerationDashForce;
+        [Tooltip("The force at which the player loses velocity when stopping the dash")] [SerializeField] private float _deccelerationDashForce;
+        [Tooltip("The speed at which the player gains velocity during the dash")] [Range(0, 1)] [SerializeField] private float _accelerationDashAccel;
+        [Tooltip("The speed at which the player loses velocity after the dash")] [Range(0, 1)] [SerializeField] private float _deccelerationDashAccel;
+        [Tooltip("The maximum vertical speed of the dash")] [SerializeField] private float _maxVerticalDashForce;
+        [Tooltip("The maximum lateral speed of the dash")] [SerializeField] private float _maxLateralDashForce;
 
         [Header("Visuals")]
         [SerializeField] private RadialUI _airUI;
@@ -50,6 +56,8 @@ namespace BlownAway.Player
         private Vector3 _lastLateralInputDirection;
         private Vector3 _verticalInputDirection;
         private Vector3 _forwardInputDirection;
+        private float _verticalDashForce;
+        private float _lateralDashForce;
 
         private PlayerInputs _inputs;
 
@@ -176,6 +184,7 @@ namespace BlownAway.Player
             if (_currentAir <= 0) return;
 
             float airReductionSpeed = _airReductionSpeed;
+            UpdateDashSpeed();
             if (_isDashing)
             {
                 airReductionSpeed += _airDashReductionSpeed;
@@ -187,7 +196,23 @@ namespace BlownAway.Player
                 Instantiate(_floatFXPrefab, collider.bounds.center - collider.bounds.extents.y * newDashdirection.normalized, _floatFXPrefab.transform.rotation);
             }
             _currentAir -= airReductionSpeed * Time.deltaTime;
-            if (_currentAir <= 0) ResetBalloonScale();
+            if (_currentAir <= 0) ResetBalloonScale(); 
+        }
+
+        private void UpdateDashSpeed()
+        {
+            if (_isDashing)
+            {
+                _verticalDashForce = Mathf.Lerp(_verticalDashForce, _verticalDashForce + _accelerationDashForce, _accelerationDashAccel);
+                _lateralDashForce = Mathf.Lerp(_lateralDashForce, _lateralDashForce + _accelerationDashForce, _accelerationDashAccel);
+            } else
+            {
+                _verticalDashForce = Mathf.Lerp(_verticalDashForce, _verticalDashForce - _deccelerationDashForce, _deccelerationDashAccel);
+                _lateralDashForce = Mathf.Lerp(_lateralDashForce, _lateralDashForce - _deccelerationDashForce, _deccelerationDashAccel);
+            }
+            _verticalDashForce = Mathf.Clamp(_verticalDashForce, _baseVerticalDashForce, _maxVerticalDashForce);
+            _lateralDashForce = Mathf.Clamp(_lateralDashForce, _baseLateralDashForce, _maxLateralDashForce);
+
         }
 
         private Vector3 SetNewDashDirection()
