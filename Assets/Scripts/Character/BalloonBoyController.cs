@@ -47,6 +47,8 @@ namespace BlownAway.Player
 
         [Header("Sounds")]
         [SerializeField] private AudioClip _inflateSound;
+        [SerializeField] private AudioSource _dashSound;
+        [SerializeField] private float _dashSoundFadeSpeed;
 
         private int _jumps;
         private float _currentAir;
@@ -199,7 +201,17 @@ namespace BlownAway.Player
                 Instantiate(_floatFXPrefab, collider.bounds.center - collider.bounds.extents.y * newDashdirection.normalized, _floatFXPrefab.transform.rotation);
             }
             _currentAir -= airReductionSpeed * Time.deltaTime;
-            if (_currentAir <= 0) ResetBalloonScale(); 
+            if (_currentAir <= 0) ResetBalloonScale();
+
+            UpdateSounds();
+        }
+
+        private void UpdateSounds()
+        {
+            int volume = _isDashing ? 1 : 0;
+
+            if (AudioManager.Instance != null)
+                AudioManager.Instance.FadeAudioSourceVolume(_dashSound, _dashSoundFadeSpeed, volume);
         }
 
         private void UpdateDashSpeed()

@@ -55,6 +55,9 @@ namespace BlownAway.Player
         [SerializeField] private EntityCamera _birdViewCamera;
         [SerializeField] private EntityCamera _floatingCamera;
 
+        [Header("Sounds")]
+        [SerializeField] private AudioClip _enterGroundSound;
+
         // References
         private bool _canMove;
         private PlayerInputs _inputs;
@@ -146,6 +149,10 @@ namespace BlownAway.Player
                 LastGround = _groundHitResults[0];
                 OnGroundEnter?.Invoke();
                 CurrentGravity = BaseGravity;
+
+                // Sound
+                if (AudioManager.Instance != null)
+                    AudioManager.Instance.PlayClip(_enterGroundSound);
             }
             SetGravity();
         }

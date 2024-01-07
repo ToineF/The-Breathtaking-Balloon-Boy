@@ -23,6 +23,11 @@ namespace BlownAway.GPE
         [SerializeField] [Tooltip("The Color of the Hot Air")] private Color _HotColor;
         [SerializeField] [Tooltip("The Color of the Cold Air")] private Color _ColdColor;
 
+        [Header("Sound")]
+        [SerializeField] private AudioSource _windBlowingSound;
+        [SerializeField] private float _audioStartFadeTime;
+        [SerializeField] private float _audioEndFadeTime;
+
         private Vector3 _lastForce;
         private bool _isPlayerIn;
 
@@ -56,6 +61,10 @@ namespace BlownAway.GPE
             //character.SetForce(_pushVector * _pushMagnitude * Time.deltaTime, _startLerpValue);
             character.AddAdditionalForce(gameObject, _pushVector * _pushMagnitude * Time.deltaTime, _startLerpValue);
             _isPlayerIn = true;
+
+            // Sound
+            if (AudioManager.Instance != null)
+                AudioManager.Instance.FadeAudioSourceVolume(_windBlowingSound, _audioStartFadeTime, 1);
 
         }
 
@@ -97,6 +106,10 @@ namespace BlownAway.GPE
             //character.SetForce(_lastForce, _stopLerpValue);
             character.AddAdditionalForce(gameObject, Vector3.zero ,_stopLerpValue);
             _isPlayerIn = false;
+
+            // Sound
+            if (AudioManager.Instance != null)
+                AudioManager.Instance.FadeAudioSourceVolume(_windBlowingSound, _audioEndFadeTime, 0);
         }
 
         private void Update()
