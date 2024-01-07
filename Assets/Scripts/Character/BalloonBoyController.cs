@@ -45,6 +45,9 @@ namespace BlownAway.Player
         [SerializeField] private float _balloonScaleValue = 1f;
         [SerializeField] private float _balloonScaleTime = 1f;
 
+        [Header("Sounds")]
+        [SerializeField] private AudioClip _inflateSound;
+
         private int _jumps;
         private float _currentAir;
         private bool _isFloating;
@@ -256,7 +259,6 @@ namespace BlownAway.Player
 
             _balloonVisual.transform.DOScale(Vector3.one * _balloonScaleValue, _balloonScaleTime);
 
-
             if (_jumps <= 0) return;
 
             CharacterControllerTest.Instance.OnGroundEnter += PlayerEnterGround;
@@ -276,9 +278,14 @@ namespace BlownAway.Player
             Collider collider = CharacterControllerTest.Instance.GetComponent<Collider>();
             Instantiate(_jumpFXPrefab, collider.bounds.center - collider.bounds.extents.y * Vector3.up, _jumpFXPrefab.transform.rotation);
 
+            // Sound
+            if (AudioManager.Instance != null)
+                AudioManager.Instance.PlayClip(_inflateSound);
+
             RefreshAir();
 
             CharacterControllerTest.Instance.SetFloatingCamera(true);
+            
         }
 
         private void AfterFloatCancelJump()
@@ -294,6 +301,10 @@ namespace BlownAway.Player
             CharacterControllerTest.Instance.AddForce(glideForce, glideAccel);
 
             _balloonVisual.transform.DOScale(Vector3.one * _balloonScaleValue, _balloonScaleTime);
+
+            // Sound
+            if (AudioManager.Instance != null)
+                AudioManager.Instance.PlayClip(_inflateSound);
 
             CharacterControllerTest.Instance.SetFloatingCamera(true);
         }

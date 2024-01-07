@@ -10,6 +10,9 @@ namespace BlownAway.GPE
         [SerializeField] [Range(0,1)] float _acceleration;
         [SerializeField] [Range(0,1)] float _deceleration;
 
+        [Header("Sound")]
+        [SerializeField] private AudioClip _playerThrust;
+
         private bool _isPlayerIn;
 
         private void OnTriggerEnter(Collider other)
@@ -18,13 +21,16 @@ namespace BlownAway.GPE
             if (_isPlayerIn) return;
             _isPlayerIn = true;
 
-            //int direction = Mathf.Sign(characterController.transform.position.z - transform.position.z);
             Vector3 targetDir = characterController.transform.position - transform.position;
             float angle = Vector3.Angle(targetDir, transform.up);
             float direction = angle > 90 ? 1 : -1;
             Debug.Log(angle);
 
             characterController.AddAdditionalForce(gameObject, direction * _force * transform.up, _acceleration);
+
+            // Sound
+            if (AudioManager.Instance != null)
+                AudioManager.Instance.PlayClip(_playerThrust);
 
         }
 

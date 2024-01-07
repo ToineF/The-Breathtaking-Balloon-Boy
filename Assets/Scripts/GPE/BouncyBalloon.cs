@@ -25,6 +25,9 @@ namespace BlownAway.GPE
         [SerializeField] private float _scaleMultiplier = 1;
         [SerializeField] private float _scaleTime;
 
+        [Header("Sounds")]
+        [SerializeField] private AudioClip _collisionSound;
+
         private void OnTriggerEnter(Collider other)
         {
             if (!other.TryGetComponent(out CharacterControllerTest characterController)) return;
@@ -43,6 +46,10 @@ namespace BlownAway.GPE
             //characterController.SetForce(_force, _forceAccel);
             transform.DOComplete();
             transform.DOPunchScale(_vector3Up * _scaleMultiplier, _scaleTime, 0, 0);
+
+            // Sound
+            if (AudioManager.Instance != null)
+                AudioManager.Instance.PlayClip(_collisionSound);
         }
 
         private void OnTriggerExit(Collider other)
