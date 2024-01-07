@@ -13,8 +13,7 @@ GameObject:
   - component: {fileID: 3940791252610277688}
   - component: {fileID: 7561825249213901965}
   - component: {fileID: 4632599687783439377}
-  - component: {fileID: 3435013983731213037}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: BouncyBalloon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -34,7 +33,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2175461097110569981
 MonoBehaviour:
@@ -48,14 +47,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebbaa255671acf1418c5f69c2a55ace2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _force: 10
+  _force: 30
   _direction: {x: 0, y: 1, z: 0}
-  _forceAccel: 1
-  _forceDecel: 0.031
-  _vector3Up: {x: 0, y: 1, z: 0}
-  _upThreshold: 0
-  _downThreshold: 0
-  _scaleMultiplier: -1
+  _forceAccel: 0.482
+  _forceDecel: 0.036
+  _vector3Up: {x: 0, y: 5, z: 0}
+  _upThreshold: 0.503
+  _downThreshold: -0.497
+  _scaleMultiplier: 1.1
   _scaleTime: 0.5
   _collisionSound: {fileID: 8300000, guid: 321eb223f36a65045a1d4932144a4dce, type: 3}
 --- !u!33 &3940791252610277688
@@ -128,25 +127,4 @@ SphereCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Radius: 0.54
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!135 &3435013983731213037
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1776224438120880610}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
