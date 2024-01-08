@@ -216,7 +216,7 @@ namespace BlownAway.Player
 
         private void UpdateDashSpeed()
         {
-            if (_isDashing)
+            if (_isFloating && _isDashing)
             {
                 _verticalDashForce = Mathf.Lerp(_verticalDashForce, _verticalDashForce + _accelerationDashForce, _accelerationDashAccel);
                 _lateralDashForce = Mathf.Lerp(_lateralDashForce, _lateralDashForce + _accelerationDashForce, _accelerationDashAccel);
