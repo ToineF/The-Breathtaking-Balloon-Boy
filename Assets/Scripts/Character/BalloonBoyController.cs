@@ -24,6 +24,8 @@ namespace BlownAway.Player
         [SerializeField] private float _maxAir;
         [SerializeField] private float _airReductionSpeed;
         [SerializeField] private float _airDashReductionSpeed;
+        [SerializeField] private float _airRefillSpeed;
+        [SerializeField] private float _airRefillStart;
 
         [Header("Dash")]
         [Tooltip("The vertical speed of the dash at its start")] [SerializeField] private float _baseVerticalDashForce;
@@ -52,6 +54,8 @@ namespace BlownAway.Player
 
         private int _jumps;
         private float _currentAir;
+        private float _currentFillingAir;
+        private float _airRefillTime;
         private bool _isFloating;
         private bool _isDashing;
         private bool _isFloatCanceled;
@@ -76,6 +80,7 @@ namespace BlownAway.Player
         {
             _jumps = _maxJumps;
             _currentAir = _maxAir;
+            _currentFillingAir = 0;
             _balloonOriginalScale = _balloonVisual.transform.localScale;
             _currentDashDirection = Vector3.zero;
             _lateralInputDirection = Vector3.zero;
@@ -185,8 +190,12 @@ namespace BlownAway.Player
         {
             UpdateUI();
 
+            if (_currentAir <= 0)
+            {
+                StartAirRefill();
+                return;
+            }
             if (!_isFloating) return;
-            if (_currentAir <= 0) return;
 
             float airReductionSpeed = _airReductionSpeed;
             UpdateDashSpeed();
@@ -250,7 +259,10 @@ namespace BlownAway.Player
 
         private void UpdateUI()
         {
-            _airUI.SetFillAmount(_currentAir / _maxAir);
+            if (_currentAir <= 0)
+                _airUI.SetFillAmount(_currentFillingAir / _maxAir);
+            else
+                _airUI.SetFillAmount(_currentAir / _maxAir);
         }
 
         private void BalloonPump(InputAction.CallbackContext context)
@@ -336,6 +348,8 @@ namespace BlownAway.Player
             _balloonVisual.transform.DOScale(_balloonOriginalScale, _balloonScaleTime);
             _currentDashDirection = Vector3.zero;
             _isFloating = false;
+            _currentFillingAir = 0;
+            _airRefillTime = _airRefillStart;
             CharacterControllerTest.Instance.SetFloatingCamera(false);
 
         }
@@ -404,6 +418,19 @@ namespace BlownAway.Player
         public void RefreshAir()
         {
             _currentAir = _maxAir;
+        }
+
+        private void StartAirRefill()
+        {
+            _airRefillTime -= Time.deltaTime;
+            if (_airRefillTime > 0) return;
+
+            _currentFillingAir += Time.deltaTime * _airRefillSpeed;
+            if (_currentFillingAir >= _maxAir)
+            {
+                RefreshAir();
+                _currentFillingAir = 0;
+            }
         }
     }
 }
