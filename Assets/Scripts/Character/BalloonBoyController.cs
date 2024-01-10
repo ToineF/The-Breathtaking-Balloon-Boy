@@ -269,7 +269,7 @@ namespace BlownAway.Player
         {
             if (_verticalInputDirection != Vector3.zero || _forwardInputDirection != Vector3.zero) return;
 
-            if (_isFloatCanceled)
+            if (_isFloatCanceled) //  || _currentFillingAir > 0
             {
                 AfterFloatCancelJump();
             }
