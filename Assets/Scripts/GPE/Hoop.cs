@@ -24,7 +24,6 @@ namespace BlownAway.GPE
             Vector3 targetDir = characterController.transform.position - transform.position;
             float angle = Vector3.Angle(targetDir, transform.up);
             float direction = angle > 90 ? 1 : -1;
-            Debug.Log(angle);
 
             characterController.AddAdditionalForce(gameObject, direction * _force * transform.up, _acceleration);
 
