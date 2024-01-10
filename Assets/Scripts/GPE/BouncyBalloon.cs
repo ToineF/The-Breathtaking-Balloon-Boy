@@ -45,7 +45,7 @@ namespace BlownAway.GPE
             characterController.AddAdditionalForce(gameObject, normalizedDirection * _force, _forceAccel);
             //characterController.SetForce(_force, _forceAccel);
             transform.DOComplete();
-            transform.DOPunchScale(_vector3Up * _scaleMultiplier, _scaleTime, 0, 0);
+            transform.DOPunchScale(normalizedDirection * _scaleMultiplier, _scaleTime, 0, 0);
 
             // Sound
             if (AudioManager.Instance != null)
