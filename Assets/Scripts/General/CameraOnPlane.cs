@@ -49,6 +49,6 @@ public class CameraOnPlane : MonoBehaviour
     {
         if (!_takeScreenshot) return;
         ScreenCapture.CaptureScreenshot(Application.dataPath + "/Screenshots/" + DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss") + ".png");
-        UnityEditor.AssetDatabase.Refresh();
+        //UnityEditor.AssetDatabase.Refresh();
     }
 }
