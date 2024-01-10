@@ -190,7 +190,7 @@ namespace BlownAway.Player
         {
             UpdateUI();
 
-            if (_currentAir <= 0)
+            if (_currentAir <= 0 || _currentFillingAir > 0)
             {
                 StartAirRefill();
                 return;
@@ -274,6 +274,7 @@ namespace BlownAway.Player
                 AfterFloatCancelJump();
             }
 
+            _currentFillingAir = 0;
             _isFloating = true;
             _isDashing = true;
             _currentDashDirection = Vector3.zero;
@@ -426,6 +427,7 @@ namespace BlownAway.Player
             if (_airRefillTime > 0) return;
 
             _currentFillingAir += Time.deltaTime * _airRefillSpeed;
+            _currentAir = _currentFillingAir;
             if (_currentFillingAir >= _maxAir)
             {
                 RefreshAir();
