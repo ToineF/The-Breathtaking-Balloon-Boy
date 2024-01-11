@@ -50,7 +50,7 @@ AudioSource:
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 176
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500
@@ -1559,8 +1559,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4977468004285058893}
-  m_LocalRotation: {x: 0.7008871, y: 0.005661003, z: -0.0055630505, w: 0.7132281}
-  m_LocalPosition: {x: -0.0034627914, y: 12.498096, z: -0.21813107}
+  m_LocalRotation: {x: -0.024801334, y: 0.9498817, z: 0.30168134, w: 0.07809013}
+  m_LocalPosition: {x: 3.771637, y: -7.23246, z: 18.372253}
   m_LocalScale: {x: 1.1157299, y: 0.8743498, z: 0.9705198}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1591,7 +1591,7 @@ MonoBehaviour:
   m_Lens:
     FieldOfView: 40
     OrthographicSize: 10
-    NearClipPlane: 8
+    NearClipPlane: 1
     FarClipPlane: 5000
     Dutch: 0
     ModeOverride: 0
@@ -2604,6 +2604,16 @@ PrefabInstance:
       objectReference: {fileID: 8599071698629913865}
     - target: {fileID: 3293357717306609732, guid: 9b8a7cab4931b114ea7ea6d12fb24627,
         type: 3}
+      propertyPath: FlowerModelisation
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3293357717306609732, guid: 9b8a7cab4931b114ea7ea6d12fb24627,
+        type: 3}
+      propertyPath: HammerModelisation
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3293357717306609732, guid: 9b8a7cab4931b114ea7ea6d12fb24627,
+        type: 3}
       propertyPath: HammerBouncyBalloonForce
       value: 90
       objectReference: {fileID: 0}
@@ -2620,17 +2630,17 @@ PrefabInstance:
     - target: {fileID: 4405275939843142444, guid: 9b8a7cab4931b114ea7ea6d12fb24627,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 5.439
       objectReference: {fileID: 0}
     - target: {fileID: 4405275939843142444, guid: 9b8a7cab4931b114ea7ea6d12fb24627,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.02
       objectReference: {fileID: 0}
     - target: {fileID: 4405275939843142444, guid: 9b8a7cab4931b114ea7ea6d12fb24627,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 8.3
       objectReference: {fileID: 0}
     - target: {fileID: 4405275939843142444, guid: 9b8a7cab4931b114ea7ea6d12fb24627,
         type: 3}
@@ -2723,7 +2733,9 @@ PrefabInstance:
       value: 0.6572
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 527498998038605498, guid: 9b8a7cab4931b114ea7ea6d12fb24627, type: 3}
+    - {fileID: 7628894813681554592, guid: 9b8a7cab4931b114ea7ea6d12fb24627, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 3920805190166161814, guid: 9b8a7cab4931b114ea7ea6d12fb24627,
@@ -2776,12 +2788,12 @@ MonoBehaviour:
   _airRefillStart: 1
   _baseVerticalDashForce: 14
   _baseLateralDashForce: 11
-  _dashDecel: 0.036
-  _groundEnterDecel: 0.058
-  _accelerationDashForce: 0.06
-  _deccelerationDashForce: 0.3
-  _accelerationDashAccel: 0.187
-  _deccelerationDashAccel: 0.541
+  _dashDecel: 0.07727862
+  _groundEnterDecel: 0.33421114
+  _accelerationDashForce: 0.08
+  _deccelerationDashForce: 0.81
+  _accelerationDashAccel: 0.233
+  _deccelerationDashAccel: 0.891
   _maxVerticalDashForce: 100
   _maxLateralDashForce: 100
   _airUI: {fileID: 8348480032531419197}
