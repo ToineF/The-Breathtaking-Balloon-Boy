@@ -1,12 +1,8 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace CustomProperties
+namespace Attributes.ReadOnly
 {
-    public class ReadOnlyAttribute : PropertyAttribute
-    {
-
-    }
 
     [CustomPropertyDrawer(typeof(ReadOnlyAttribute))]
     public class ReadOnly : PropertyDrawer
