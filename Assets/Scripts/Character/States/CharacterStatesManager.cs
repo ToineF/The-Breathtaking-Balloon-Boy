@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Character.States
@@ -17,9 +15,27 @@ namespace Character.States
         public CharacterDeathState DeathState = new CharacterDeathState();
         public CharacterCutsceneState CutsceneState = new CharacterCutsceneState();
 
+        // Inputs
+        public PlayerInputs InputActions { get; private set; }
+
 
         private CharacterBaseState _currentState;
 
+        #region Inputs
+        private void Awake()
+        {
+            InputActions = new PlayerInputs();
+        }
+        private void OnEnable()
+        {
+            InputActions.Enable();
+        }
+
+        private void OnDisable()
+        {
+            InputActions.Disable();
+        }
+        #endregion
 
         private void Start()
         {
@@ -32,6 +48,11 @@ namespace Character.States
             _currentState.UpdateState(this);
         }
 
+        private void FixedUpdate()
+        {
+            _currentState.FixedUpdateState(this);
+        }
+
         public void SwitchState(CharacterBaseState state)
         {
             _currentState.ExitState(this);
@@ -40,6 +61,5 @@ namespace Character.States
 
             _currentState.EnterState(this);
         }
-
     }
 }

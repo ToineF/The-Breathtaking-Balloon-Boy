@@ -31,11 +31,7 @@ public abstract class Singleton<TClass> : MonoBehaviour where TClass : class
         }
 
         Application.quitting += ResetInstance;
-
-        InternalAwake();
     }
-
-    protected abstract void InternalAwake();
 
     protected virtual void OnDestroy()
     {
