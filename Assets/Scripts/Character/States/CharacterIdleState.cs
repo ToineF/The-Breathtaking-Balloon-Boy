@@ -1,6 +1,4 @@
 using UnityEngine;
-using Character;
-using UnityEngine.InputSystem;
 
 
 namespace Character.States
@@ -10,14 +8,14 @@ namespace Character.States
         public override void EnterState(CharacterStatesManager manager)
         {
             Debug.Log("IDLE");
-            manager.InputActions.Player.Move.performed += OnMoveInput;
-            manager.InputActions.Player.Move.canceled += OnMoveInput;
+            manager.InputActions.Player.Move.performed += CharacterManager.Instance.OnMoveInput;
+            manager.InputActions.Player.Move.canceled += CharacterManager.Instance.OnMoveInput;
         }
 
         public override void ExitState(CharacterStatesManager manager)
         {
-            manager.InputActions.Player.Move.performed -= OnMoveInput;
-            manager.InputActions.Player.Move.canceled -= OnMoveInput;
+            manager.InputActions.Player.Move.performed -= CharacterManager.Instance.OnMoveInput;
+            manager.InputActions.Player.Move.canceled -= CharacterManager.Instance.OnMoveInput;
         }
 
         public override void UpdateState(CharacterStatesManager manager)
@@ -27,18 +25,15 @@ namespace Character.States
                 manager.SwitchState(manager.WalkingState);
                 return;
             }
+            CharacterManager.Instance.CheckIfGrounded(manager);
         }
 
         public override void FixedUpdateState(CharacterStatesManager manager)
         {
-            CharacterManager.Instance.Rigidbody.velocity = Vector3.zero;
+            CharacterManager.Instance.CharacterRigidbody.velocity = Vector3.zero;
         }
-
-        private void OnMoveInput(InputAction.CallbackContext context)
+        public override void LateUpdateState(CharacterStatesManager manager)
         {
-            float xPosition = context.ReadValue<Vector2>().x;
-            float zPosition = context.ReadValue<Vector2>().y;
-            CharacterManager.Instance.MoveInputDirection = new Vector3(xPosition, 0, zPosition);
         }
     }
 

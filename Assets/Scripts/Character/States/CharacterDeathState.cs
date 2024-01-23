@@ -19,5 +19,8 @@ namespace Character.States
         public override void FixedUpdateState(CharacterStatesManager manager)
         {
         }
+        public override void LateUpdateState(CharacterStatesManager manager)
+        {
+        }
     }
 }

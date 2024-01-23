@@ -39,7 +39,7 @@ namespace Character.States
 
         private void Start()
         {
-            _currentState = IdleState;
+            _currentState = FallingState;
             _currentState.EnterState(this);
         }
 
@@ -51,6 +51,11 @@ namespace Character.States
         private void FixedUpdate()
         {
             _currentState.FixedUpdateState(this);
+        }
+
+        private void LateUpdate()
+        {
+            _currentState.LateUpdateState(this);
         }
 
         public void SwitchState(CharacterBaseState state)
