@@ -29,14 +29,9 @@ namespace Character.States
 
         public override void FixedUpdateState(CharacterStatesManager manager)
         {
-            
-            Vector3 moveDirection = (Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1)) * CharacterManager.Instance.MoveInputDirection.z + Vector3.Scale(Camera.main.transform.right, new Vector3(1, 0, 1)) * CharacterManager.Instance.MoveInputDirection.x).normalized;
-            moveDirection = Vector3.Scale(moveDirection, new Vector3(1, 0, 1));
-            //SetAnimation(moveDirection);
-            CharacterManager.Instance.CharacterRigidbody.velocity = moveDirection * CharacterManager.Instance.BaseWalkSpeed * Time.deltaTime;
-            Debug.Log(moveDirection * CharacterManager.Instance.BaseWalkSpeed * Time.deltaTime);
-            //UpdateCamera();
+            CharacterManager.Instance.MoveAtSpeed(CharacterManager.Instance.BaseWalkSpeed);
         }
+
         public override void LateUpdateState(CharacterStatesManager manager)
         {
         }

@@ -50,7 +50,9 @@ namespace Character.States
 
         private void FixedUpdate()
         {
+            CharacterManager.Instance.ResetVelocity();
             _currentState.FixedUpdateState(this);
+            CharacterManager.Instance.ApplyVelocity();
         }
 
         private void LateUpdate()

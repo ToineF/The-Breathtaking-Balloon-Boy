@@ -17,7 +17,10 @@ namespace Character
         // Idle Data
         /// /////////////////////////////////////////////////////////// PUT IN A SCRIPTABLE OBJECT
         [field:SerializeField, Tooltip("The walking speed the character starts moving at")] public float BaseWalkSpeed { get; set; }
+        [field:SerializeField, Tooltip("The lateral speed the character moves at while falling")] public float FallDeplacementSpeed { get; set; }
         public Vector3 MoveInputDirection { get; set; }
+        public Vector3 CurrentVelocity { get; set; }
+
 
         [Header("Gravity")]
         [ReadOnly] public float CurrentGravity;
@@ -64,16 +67,30 @@ namespace Character
                 }
             }
         }
+        public void MoveAtSpeed(float moveSpeed)
+        {
+            Vector3 moveDirection = (Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1)) * MoveInputDirection.z + Vector3.Scale(Camera.main.transform.right, new Vector3(1, 0, 1)) * MoveInputDirection.x).normalized;
+            moveDirection = Vector3.Scale(moveDirection, new Vector3(1, 0, 1));
+            //SetAnimation(moveDirection);
+            CurrentVelocity += moveDirection * moveSpeed * Time.deltaTime;
+            //UpdateCamera();
+        }
 
-        // HERE REMOVE START AND UPDATE  (SHOULD ONLY CONTAINS INFORMATIONS)
+        public void ApplyVelocity()
+        {
+            CharacterRigidbody.velocity = CurrentVelocity;
+        }
+
+        public void ResetVelocity()
+        {
+            CurrentVelocity = Vector3.zero;
+        }
+
+        // HERE REMOVE START/UPDATE...  (SHOULD ONLY CONTAINS INFORMATIONS)
         private void Start()
         {
             GroundHitResults = new RaycastHit[2];
             CurrentGravity = BaseGravity;
-        }
-        private void Update()
-        {
-            Debug.Log(IsGrounded);
         }
 
     }
