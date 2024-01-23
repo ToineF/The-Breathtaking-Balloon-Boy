@@ -8,20 +8,16 @@ namespace BlownAway.Character.States
         public override void EnterState(CharacterStatesManager manager)
         {
             Debug.Log("IDLE");
-            manager.InputActions.Player.Move.performed += CharacterManager.Instance.OnMoveInput;
-            manager.InputActions.Player.Move.canceled += CharacterManager.Instance.OnMoveInput;
         }
 
         public override void ExitState(CharacterStatesManager manager)
         {
-            manager.InputActions.Player.Move.performed -= CharacterManager.Instance.OnMoveInput;
-            manager.InputActions.Player.Move.canceled -= CharacterManager.Instance.OnMoveInput;
         }
 
         public override void UpdateState(CharacterStatesManager manager)
         {
-            CharacterManager.Instance.UpdateCamera();
-            if (CharacterManager.Instance.MoveInputDirection.magnitude > 0.0001f)
+            CharacterManager.Instance.UpdateCameraPosition();
+            if (CharacterManager.Instance.Inputs.MoveInputDirection.magnitude > 0.0001f)
             {
                 manager.SwitchState(manager.WalkingState);
                 return;
@@ -35,7 +31,7 @@ namespace BlownAway.Character.States
         }
         public override void LateUpdateState(CharacterStatesManager manager)
         {
-            CharacterManager.Instance.MoveCamera();
+            CharacterManager.Instance.UpdateCameraAngle();
         }
     }
 

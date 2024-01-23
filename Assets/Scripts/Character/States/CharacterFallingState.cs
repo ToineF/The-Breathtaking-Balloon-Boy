@@ -8,19 +8,15 @@ namespace BlownAway.Character.States
         public override void EnterState(CharacterStatesManager manager)
         {
             Debug.Log("FALLING");
-            manager.InputActions.Player.Move.performed += CharacterManager.Instance.OnMoveInput;
-            manager.InputActions.Player.Move.canceled += CharacterManager.Instance.OnMoveInput;
         }
 
         public override void ExitState(CharacterStatesManager manager)
         {
-            manager.InputActions.Player.Move.performed -= CharacterManager.Instance.OnMoveInput;
-            manager.InputActions.Player.Move.canceled -= CharacterManager.Instance.OnMoveInput;
         }
 
         public override void UpdateState(CharacterStatesManager manager)
         {
-            CharacterManager.Instance.UpdateCamera();
+            CharacterManager.Instance.UpdateCameraPosition();
 
             CharacterManager.Instance.CheckIfGrounded(manager);
         }
@@ -34,7 +30,7 @@ namespace BlownAway.Character.States
 
         public override void LateUpdateState(CharacterStatesManager manager)
         {
-            CharacterManager.Instance.MoveCamera();
+            CharacterManager.Instance.UpdateCameraAngle();
 
         }
 

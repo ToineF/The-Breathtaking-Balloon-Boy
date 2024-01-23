@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Windows;
 
 namespace BlownAway.Character.States
 {
@@ -16,45 +15,14 @@ namespace BlownAway.Character.States
         public CharacterDeathState DeathState = new CharacterDeathState();
         public CharacterCutsceneState CutsceneState = new CharacterCutsceneState();
 
-        // Inputs
-        public PlayerInputs InputActions { get; private set; }
-
 
         private CharacterBaseState _currentState;
 
 
-        /// MOVE INPUTS IN ANOTHER SCRIPT
-        #region Inputs 
-        private void Awake()
-        {
-            InputActions = new PlayerInputs();
-        }
-        private void OnEnable()
-        {
-            InputActions.Enable();
-        }
-
-        private void OnDisable()
-        {
-            InputActions.Disable();
-            InputActions.Player.CameraMoveMouse.performed -= CharacterManager.Instance.SetCameraTypeMouse;
-            InputActions.Player.CameraMoveMouse.canceled -= CharacterManager.Instance.SetCameraTypeMouse;
-            InputActions.Player.CameraMoveController.performed -= CharacterManager.Instance.SetCameraTypeController;
-            InputActions.Player.CameraMoveController.canceled -= CharacterManager.Instance.SetCameraTypeController;
-        }
-        #endregion
-
         private void Start()
         {
-            // Inputs (move in another state)
-            InputActions.Player.CameraMoveMouse.performed += CharacterManager.Instance.SetCameraTypeMouse;
-            InputActions.Player.CameraMoveMouse.canceled += CharacterManager.Instance.SetCameraTypeMouse;
-            InputActions.Player.CameraMoveController.performed += CharacterManager.Instance.SetCameraTypeController;
-            InputActions.Player.CameraMoveController.canceled += CharacterManager.Instance.SetCameraTypeController;
-
             _currentState = FallingState;
             _currentState.EnterState(this);
-           
         }
 
         private void Update()

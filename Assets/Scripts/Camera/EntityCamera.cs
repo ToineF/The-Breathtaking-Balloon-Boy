@@ -7,6 +7,8 @@ namespace BlownAway.Camera
     [RequireComponent(typeof(CinemachineVirtualCamera))]
     public class EntityCamera : MonoBehaviour
     {
+        public CinemachineFramingTransposer FramingTransposer { get; private set; }
+
         [Header("Camera")]
         [Tooltip("The distance from the focus point")] public float CameraDistance;
         [Tooltip("The added height of the camera")] public float YOffset;
@@ -18,5 +20,10 @@ namespace BlownAway.Camera
         [Tooltip("The influence of the mouse on the camera speed")] public float MouseSensitivity = 1;
         [Tooltip("The influence of the controller on the camera speed")] public float ControllerSensitivity = 1;
         [Tooltip("The range of Y movements allowed with the mouse")] public float YDeadZone;
+
+        private void Awake()
+        {
+            FramingTransposer = GetComponent<CinemachineVirtualCamera>().GetCinemachineComponent<CinemachineFramingTransposer>();
+        }
     }
 }
