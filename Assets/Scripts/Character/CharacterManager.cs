@@ -1,12 +1,11 @@
-using System;
 using UnityEngine;
-using BlownAway.Character.States;
 using BlownAway.Character.Inputs;
 using BlownAway.Camera;
+using BlownAway.Character.Movements;
 
 namespace BlownAway.Character
 {
-    public class CharacterManager : Singleton<CharacterManager> /// CLEAN UP THIS MESS OF A CLASS
+    public class CharacterManager : Singleton<CharacterManager>
     {
         [field: SerializeField] public Rigidbody CharacterRigidbody { get; set; }
         [field: SerializeField] public Transform CharacterTransform { get; set; }

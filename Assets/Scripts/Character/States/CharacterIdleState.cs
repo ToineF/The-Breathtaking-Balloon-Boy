@@ -22,7 +22,11 @@ namespace BlownAway.Character.States
                 manager.SwitchState(manager.WalkingState);
                 return;
             }
+
             CharacterManager.Instance.MovementManager.CheckIfGrounded(manager);
+
+            CharacterManager.Instance.MovementManager.CheckForPropulsionStart(manager);
+
         }
 
         public override void FixedUpdateState(CharacterStatesManager manager)
