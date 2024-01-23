@@ -6,6 +6,7 @@ using Cinemachine;
 using System.Collections.Generic;
 using BlownAway.GPE;
 using BlownAway.Camera;
+using UnityEngine.Windows;
 
 namespace BlownAway.Player
 {
@@ -272,8 +273,8 @@ namespace BlownAway.Player
             if (Time.timeScale == 0) return;
 
             float sensitivity = _isMouse ? _currentCamera.MouseSensitivity : _currentCamera.ControllerSensitivity;
-            float xSign = _currentCamera.IsXInverted ? -1 : 1;
-            float ySign = _currentCamera.IsYInverted ? -1 : 1;
+            float xSign = (_isMouse ? _currentCamera.IsMouseXInverted : _currentCamera.IsControllerXInverted) ? -1 : 1;
+            float ySign = (_isMouse ? _currentCamera.IsMouseYInverted : _currentCamera.IsControllerXInverted) ? -1 : 1;
             _currentCameraAngle += new Vector2(_cameraMoveVector.x * xSign, _cameraMoveVector.y * ySign) * sensitivity;
             _currentCameraAngle.y = Math.Clamp(_currentCameraAngle.y, -_currentCamera.YDeadZone, _currentCamera.YDeadZone);
 

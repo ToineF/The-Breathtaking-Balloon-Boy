@@ -32,9 +32,9 @@ namespace BlownAway.Character.States
 
         private void FixedUpdate()
         {
-            CharacterManager.Instance.ResetVelocity();
+            CharacterManager.Instance.MovementManager.ResetVelocity();
             _currentState.FixedUpdateState(this);
-            CharacterManager.Instance.ApplyVelocity();
+            CharacterManager.Instance.MovementManager.ApplyVelocity();
         }
 
         private void LateUpdate()

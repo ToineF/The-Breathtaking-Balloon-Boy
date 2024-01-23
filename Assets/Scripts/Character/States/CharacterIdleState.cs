@@ -16,13 +16,13 @@ namespace BlownAway.Character.States
 
         public override void UpdateState(CharacterStatesManager manager)
         {
-            CharacterManager.Instance.UpdateCameraPosition();
+            CharacterManager.Instance.CameraManager.UpdateCameraPosition();
             if (CharacterManager.Instance.Inputs.MoveInputDirection.magnitude > 0.0001f)
             {
                 manager.SwitchState(manager.WalkingState);
                 return;
             }
-            CharacterManager.Instance.CheckIfGrounded(manager);
+            CharacterManager.Instance.MovementManager.CheckIfGrounded(manager);
         }
 
         public override void FixedUpdateState(CharacterStatesManager manager)
@@ -31,7 +31,7 @@ namespace BlownAway.Character.States
         }
         public override void LateUpdateState(CharacterStatesManager manager)
         {
-            CharacterManager.Instance.UpdateCameraAngle();
+            CharacterManager.Instance.CameraManager.UpdateCameraAngle();
         }
     }
 

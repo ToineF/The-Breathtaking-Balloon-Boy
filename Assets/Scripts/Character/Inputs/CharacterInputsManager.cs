@@ -1,52 +1,55 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class CharacterInputsManager : MonoBehaviour
+namespace BlownAway.Character.Inputs
 {
-    public Vector3 MoveInputDirection { get; private set; }
-    public bool IsMouse { get; private set; }
-    public Vector2 CameraMoveVector { get; private set; }
-
-    private PlayerInputs _inputs;
-
-    private void Awake()
+    public class CharacterInputsManager : MonoBehaviour
     {
-        _inputs = new PlayerInputs();
-    }
+        public Vector3 MoveInputDirection { get; private set; }
+        public bool IsMouse { get; private set; }
+        public Vector2 CameraMoveVector { get; private set; }
 
-    private void OnEnable()
-    {
-        _inputs.Enable();
-        _inputs.Player.Move.performed += OnMoveInput;
-        _inputs.Player.Move.canceled += OnMoveInput;
-        _inputs.Player.CameraMoveMouse.performed += SetCameraTypeMouse;
-        _inputs.Player.CameraMoveController.performed += SetCameraTypeController;
-    }
+        private PlayerInputs _inputs;
 
-    private void OnDisable()
-    {
-        _inputs.Disable();
-        _inputs.Player.Move.performed -= OnMoveInput;
-        _inputs.Player.Move.canceled -= OnMoveInput;
-        _inputs.Player.CameraMoveMouse.performed -= SetCameraTypeMouse;
-        _inputs.Player.CameraMoveController.performed -= SetCameraTypeController;
-    }
+        private void Awake()
+        {
+            _inputs = new PlayerInputs();
+        }
 
-    public void OnMoveInput(InputAction.CallbackContext context)
-    {
-        float xPosition = context.ReadValue<Vector2>().x;
-        float zPosition = context.ReadValue<Vector2>().y;
-        MoveInputDirection = new Vector3(xPosition, 0, zPosition);
-    }
-    public void SetCameraTypeMouse(InputAction.CallbackContext context)
-    {
-        IsMouse = true;
-        CameraMoveVector = context.ReadValue<Vector2>();
-    }
+        private void OnEnable()
+        {
+            _inputs.Enable();
+            _inputs.Player.Move.performed += OnMoveInput;
+            _inputs.Player.Move.canceled += OnMoveInput;
+            _inputs.Player.CameraMoveMouse.performed += SetCameraTypeMouse;
+            _inputs.Player.CameraMoveController.performed += SetCameraTypeController;
+        }
 
-    public void SetCameraTypeController(InputAction.CallbackContext context)
-    {
-        IsMouse = false;
-        CameraMoveVector = context.ReadValue<Vector2>();
+        private void OnDisable()
+        {
+            _inputs.Disable();
+            _inputs.Player.Move.performed -= OnMoveInput;
+            _inputs.Player.Move.canceled -= OnMoveInput;
+            _inputs.Player.CameraMoveMouse.performed -= SetCameraTypeMouse;
+            _inputs.Player.CameraMoveController.performed -= SetCameraTypeController;
+        }
+
+        public void OnMoveInput(InputAction.CallbackContext context)
+        {
+            float xPosition = context.ReadValue<Vector2>().x;
+            float zPosition = context.ReadValue<Vector2>().y;
+            MoveInputDirection = new Vector3(xPosition, 0, zPosition);
+        }
+        public void SetCameraTypeMouse(InputAction.CallbackContext context)
+        {
+            IsMouse = true;
+            CameraMoveVector = context.ReadValue<Vector2>();
+        }
+
+        public void SetCameraTypeController(InputAction.CallbackContext context)
+        {
+            IsMouse = false;
+            CameraMoveVector = context.ReadValue<Vector2>();
+        }
     }
 }
