@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Character.States
+namespace BlownAway.Character.States
 {
     public class CharacterFallingState : CharacterBaseState
     {
@@ -20,6 +20,8 @@ namespace Character.States
 
         public override void UpdateState(CharacterStatesManager manager)
         {
+            CharacterManager.Instance.UpdateCamera();
+
             CharacterManager.Instance.CheckIfGrounded(manager);
         }
 
@@ -32,6 +34,8 @@ namespace Character.States
 
         public override void LateUpdateState(CharacterStatesManager manager)
         {
+            CharacterManager.Instance.MoveCamera();
+
         }
 
         private void SetGravity()

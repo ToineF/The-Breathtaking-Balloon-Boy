@@ -1,6 +1,7 @@
 using UnityEngine;
+using UnityEngine.Windows;
 
-namespace Character.States
+namespace BlownAway.Character.States
 {
 
     public class CharacterStatesManager : MonoBehaviour
@@ -21,7 +22,9 @@ namespace Character.States
 
         private CharacterBaseState _currentState;
 
-        #region Inputs
+
+        /// MOVE INPUTS IN ANOTHER SCRIPT
+        #region Inputs 
         private void Awake()
         {
             InputActions = new PlayerInputs();
@@ -34,13 +37,24 @@ namespace Character.States
         private void OnDisable()
         {
             InputActions.Disable();
+            InputActions.Player.CameraMoveMouse.performed -= CharacterManager.Instance.SetCameraTypeMouse;
+            InputActions.Player.CameraMoveMouse.canceled -= CharacterManager.Instance.SetCameraTypeMouse;
+            InputActions.Player.CameraMoveController.performed -= CharacterManager.Instance.SetCameraTypeController;
+            InputActions.Player.CameraMoveController.canceled -= CharacterManager.Instance.SetCameraTypeController;
         }
         #endregion
 
         private void Start()
         {
+            // Inputs (move in another state)
+            InputActions.Player.CameraMoveMouse.performed += CharacterManager.Instance.SetCameraTypeMouse;
+            InputActions.Player.CameraMoveMouse.canceled += CharacterManager.Instance.SetCameraTypeMouse;
+            InputActions.Player.CameraMoveController.performed += CharacterManager.Instance.SetCameraTypeController;
+            InputActions.Player.CameraMoveController.canceled += CharacterManager.Instance.SetCameraTypeController;
+
             _currentState = FallingState;
             _currentState.EnterState(this);
+           
         }
 
         private void Update()

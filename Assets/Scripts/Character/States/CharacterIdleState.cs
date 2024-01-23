@@ -1,7 +1,7 @@
 using UnityEngine;
 
 
-namespace Character.States
+namespace BlownAway.Character.States
 {
     public class CharacterIdleState : CharacterBaseState
     {
@@ -20,6 +20,7 @@ namespace Character.States
 
         public override void UpdateState(CharacterStatesManager manager)
         {
+            CharacterManager.Instance.UpdateCamera();
             if (CharacterManager.Instance.MoveInputDirection.magnitude > 0.0001f)
             {
                 manager.SwitchState(manager.WalkingState);
@@ -34,6 +35,7 @@ namespace Character.States
         }
         public override void LateUpdateState(CharacterStatesManager manager)
         {
+            CharacterManager.Instance.MoveCamera();
         }
     }
 

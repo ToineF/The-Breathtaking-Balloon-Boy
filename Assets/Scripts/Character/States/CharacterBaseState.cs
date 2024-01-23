@@ -1,7 +1,7 @@
 using UnityEngine;
 
 
-namespace Character.States
+namespace BlownAway.Character.States
 {
     public abstract class CharacterBaseState
     {

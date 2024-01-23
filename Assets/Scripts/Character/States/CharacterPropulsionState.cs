@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Character.States
+namespace BlownAway.Character.States
 {
     public class CharacterPropulsionState : CharacterBaseState
     {

@@ -1,9 +1,11 @@
-using Character.States;
+using BlownAway.Character.States;
+using Cinemachine;
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using BlownAway.Camera;
 
-namespace Character
+namespace BlownAway.Character
 {
     public class CharacterManager : Singleton<CharacterManager> /// CLEAN UP THIS MESS OF A CLASS
     {
@@ -20,6 +22,12 @@ namespace Character
         [field:SerializeField, Tooltip("The lateral speed the character moves at while falling")] public float FallDeplacementSpeed { get; set; }
         public Vector3 MoveInputDirection { get; set; }
         public Vector3 CurrentVelocity { get; set; }
+
+        // Camera Data
+        [SerializeField] private EntityCamera CameraParams;
+        private Vector2 CameraMoveVector;
+        private bool IsMouse;
+        private Vector2 _currentCameraAngle;
 
 
         [Header("Gravity")]
@@ -47,6 +55,21 @@ namespace Character
             float zPosition = context.ReadValue<Vector2>().y;
             MoveInputDirection = new Vector3(xPosition, 0, zPosition);
         }
+        public void SetCameraTypeMouse(InputAction.CallbackContext context)
+        {
+            IsMouse = true;
+            CameraMoveVector = context.ReadValue<Vector2>();
+        }
+
+        public void SetCameraTypeController(InputAction.CallbackContext context)
+        {
+            Debug
+                .Log
+                    ('d')
+                        ;
+            IsMouse = false;
+            CameraMoveVector = context.ReadValue<Vector2>();
+        }
 
         public void CheckIfGrounded(CharacterStatesManager manager)
         {
@@ -69,7 +92,7 @@ namespace Character
         }
         public void MoveAtSpeed(float moveSpeed)
         {
-            Vector3 moveDirection = (Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1)) * MoveInputDirection.z + Vector3.Scale(Camera.main.transform.right, new Vector3(1, 0, 1)) * MoveInputDirection.x).normalized;
+            Vector3 moveDirection = (Vector3.Scale(UnityEngine.Camera.main.transform.forward, new Vector3(1, 0, 1)) * MoveInputDirection.z + Vector3.Scale(UnityEngine.Camera.main.transform.right, new Vector3(1, 0, 1)) * MoveInputDirection.x).normalized;
             moveDirection = Vector3.Scale(moveDirection, new Vector3(1, 0, 1));
             //SetAnimation(moveDirection);
             CurrentVelocity += moveDirection * moveSpeed * Time.deltaTime;
@@ -85,6 +108,30 @@ namespace Character
         {
             CurrentVelocity = Vector3.zero;
         }
+
+        public void UpdateCamera() // IN update
+        {
+            float YPosition = CameraParams.YOffset + _currentCameraAngle.y;
+            Vector3 cameraVector = new Vector3((float)Math.Cos(_currentCameraAngle.x), YPosition, (float)Math.Sin(_currentCameraAngle.x)).normalized * int.MaxValue;
+            Vector3 newPosition = transform.position + cameraVector;
+            CameraParams.transform.position = newPosition;
+
+            CameraParams.GetComponent<CinemachineVirtualCamera>().GetCinemachineComponent<CinemachineFramingTransposer>().m_TrackedObjectOffset = CameraParams.PositionOffset;
+            CameraParams.GetComponent<CinemachineVirtualCamera>().GetCinemachineComponent<CinemachineFramingTransposer>().m_CameraDistance = CameraParams.CameraDistance;
+        }
+
+        public void MoveCamera() // in late update
+        {
+            if (Time.timeScale == 0) return;
+
+            float sensitivity = IsMouse ? CameraParams.MouseSensitivity : CameraParams.ControllerSensitivity;
+            float xSign = CameraParams.IsXInverted ? -1 : 1;
+            float ySign = CameraParams.IsYInverted ? -1 : 1;
+            _currentCameraAngle += new Vector2(CameraMoveVector.x * xSign, CameraMoveVector.y * ySign) * sensitivity;
+            _currentCameraAngle.y = Math.Clamp(_currentCameraAngle.y, -CameraParams.YDeadZone, CameraParams.YDeadZone);
+
+        }
+
 
         // HERE REMOVE START/UPDATE...  (SHOULD ONLY CONTAINS INFORMATIONS)
         private void Start()
