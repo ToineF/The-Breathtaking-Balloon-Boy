@@ -17,14 +17,15 @@ namespace BlownAway.Character.Inputs
     public class CharacterInputsManager : MonoBehaviour
     {
         // Movements
-        public Vector3 MoveInputDirection { get; private set; }
+        [Tooltip("The input direction for the movement")] public Vector3 MoveInputDirection { get; private set; }
+        [Tooltip("The last non-null input direction for the movement")] public Vector3 LastMoveInputDirection { get; private set; }
 
         // Camera
         public bool IsMouse { get; private set; }
         public Vector2 CameraMoveVector { get; private set; }
 
         // Propulsion
-        public PropulsionDirection PropulsionDirection { get; private set; }
+        public PropulsionDirection PropulsionType { get; private set; }
 
 
         private PlayerInputs _inputs;
@@ -75,6 +76,7 @@ namespace BlownAway.Character.Inputs
             float xPosition = context.ReadValue<Vector2>().x;
             float zPosition = context.ReadValue<Vector2>().y;
             MoveInputDirection = new Vector3(xPosition, 0, zPosition);
+            if (MoveInputDirection != Vector3.zero) LastMoveInputDirection = MoveInputDirection;
         }
         private void SetCameraTypeMouse(InputAction.CallbackContext context)
         {
@@ -90,32 +92,32 @@ namespace BlownAway.Character.Inputs
 
         private void SetUpPropulsion(InputAction.CallbackContext context)
         {
-            PropulsionDirection |= PropulsionDirection.Up;
+            PropulsionType |= Inputs.PropulsionDirection.Up;
         }
 
         private void UnsetUpPropulsion(InputAction.CallbackContext context)
         {
-            PropulsionDirection &= ~PropulsionDirection.Up;
+            PropulsionType &= ~Inputs.PropulsionDirection.Up;
         }
 
         private void SetDownPropulsion(InputAction.CallbackContext context)
         {
-            PropulsionDirection |= PropulsionDirection.Down;
+            PropulsionType |= Inputs.PropulsionDirection.Down;
         }
 
         private void UnsetDownPropulsion(InputAction.CallbackContext context)
         {
-            PropulsionDirection &= ~PropulsionDirection.Down;
+            PropulsionType &= ~Inputs.PropulsionDirection.Down;
         }
 
         private void SetLateralPropulsion(InputAction.CallbackContext context)
         {
-            PropulsionDirection |= PropulsionDirection.Lateral;
+            PropulsionType |= Inputs.PropulsionDirection.Lateral;
         }
 
         private void UnsetLateralPropulsion(InputAction.CallbackContext context)
         {
-            PropulsionDirection &= ~PropulsionDirection.Lateral;
+            PropulsionType &= ~Inputs.PropulsionDirection.Lateral;
         }
     }
 }

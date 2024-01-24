@@ -1,3 +1,4 @@
+using BlownAway.Character.Inputs;
 using BlownAway.Character.States;
 using System;
 using UnityEngine;
@@ -14,29 +15,36 @@ namespace BlownAway.Character.Movements
         /// /////////////////////////////////////////////////////////// PUT IN A SCRIPTABLE OBJECT
         [field: SerializeField, Tooltip("The walking speed the character starts moving at")] public float BaseWalkSpeed { get; set; }
         [field: SerializeField, Tooltip("The lateral speed the character moves at while falling")] public float FallDeplacementSpeed { get; set; }
-        public Vector3 CurrentVelocity { get; set; }
+        [Tooltip("The current global velocity of the character (movements, gravity, forces...)")] public Vector3 CurrentVelocity { get; set; }
 
         [Header("Gravity")] // ADD TOOLTIPS
-        [ReadOnly] public float CurrentGravity;
-        [ReadOnly] public float MinGravity;
-        [ReadOnly] public float MaxGravity;
-        public float BaseGravity;
-        public float BaseMaxGravity;
-        public float GravityIncreaseByFrame;
-        public float FloatingGravity;
-        public float FloatingMaxGravity;
+
+        [ReadOnly, Tooltip("The current gravity the character falls at")] public float CurrentGravity;
+        [ReadOnly, Tooltip("The minimum gravity the character can fall at")] public float MinGravity;
+        [ReadOnly, Tooltip("The maximum gravity the character can fall at")] public float MaxGravity;
+        [Tooltip("The gravity the character falls at while not floating")] public float BaseGravity;
+        [Tooltip("The maximum gravity the character can fall at while not floating")] public float BaseMaxGravity;
+        [Tooltip("The increase of gravity added at each frame")] public float GravityIncreaseByFrame;
+
+        [Tooltip("The gravity the character falls at while floating")] public float FloatingGravity;
+        [Tooltip("The maximum gravity the character can fall at while floating")] public float FloatingMaxGravity;
 
         [Header("Ground Check")]
-        public float GroundCheckDistance;
-        public float GroundDetectionSphereRadius;
-        public LayerMask GroundLayer;
-        public RaycastHit[] GroundHitResults { get; set; }
-
-        [Header("Forces")]
-        [ReadOnly] public Vector3 Force;
-        [ReadOnly] public Vector3 CurrentForce;
+        [Tooltip("The distance offset of the ground detection check from the character")] public float GroundCheckDistance;
+        [Tooltip("The radius of the ground detection sphere collider")] public float GroundDetectionSphereRadius;
+        [Tooltip("The layer of the ground the character can walk on")] public LayerMask GroundLayer;
+        [Tooltip("The raycast hits stocked while looking for ground")] public RaycastHit[] GroundHitResults { get; set; }
         [ReadOnly] public bool IsGrounded;
         [HideInInspector] public RaycastHit LastGround;
+
+        [Header("Propulsion")]
+        [Tooltip("The base speed the character moves at while propulsing")] public float BasePropulsionSpeed;
+
+        /*
+        [Header("Forces")]
+        [ReadOnly] public Vector3 Force;
+        [ReadOnly] public Vector3 CurrentForce;*/
+
 
         private void Start()
         {
@@ -118,7 +126,7 @@ namespace BlownAway.Character.Movements
         // Float & Propulsion
         public void CheckForPropulsionStart(CharacterStatesManager manager)
         {
-            if (CharacterManager.Instance.Inputs.PropulsionDirection != 0)
+            if (CharacterManager.Instance.Inputs.PropulsionType != 0)
             {
                 manager.SwitchState(manager.PropulsionState);
             }
@@ -126,10 +134,29 @@ namespace BlownAway.Character.Movements
 
         public void CheckForPropulsionEnd(CharacterStatesManager manager)
         {
-            if (CharacterManager.Instance.Inputs.PropulsionDirection == 0)
+            if (CharacterManager.Instance.Inputs.PropulsionType == 0)
             {
                 manager.SwitchState(manager.FloatingState);
             }
+        }
+
+        public void UpdatePropulsionMovement()
+        {
+            PropulsionDirection propulsionType = CharacterManager.Instance.Inputs.PropulsionType;
+            Vector3 propulsionDirection = Vector3.zero;
+            // Case LastMoveInputDirection is Vector3.zero (if player never moved)
+            Vector3 lateralMoveDirection = (Vector3.Scale(UnityEngine.Camera.main.transform.forward, new Vector3(1, 0, 1)).normalized * CharacterManager.Instance.Inputs.LastMoveInputDirection.z + Vector3.Scale(UnityEngine.Camera.main.transform.right, new Vector3(1, 0, 1)) * CharacterManager.Instance.Inputs.LastMoveInputDirection.x).normalized;
+
+
+            if (propulsionType.HasFlag(PropulsionDirection.Up)) propulsionDirection += Vector3.up;
+            if (propulsionType.HasFlag(PropulsionDirection.Down)) propulsionDirection += Vector3.down;
+            if (propulsionType.HasFlag(PropulsionDirection.Lateral)) propulsionDirection += lateralMoveDirection;
+            propulsionDirection.Normalize();
+
+
+            Vector3 propulsionMovement = propulsionDirection * BasePropulsionSpeed;
+            CurrentVelocity += propulsionMovement;
+
         }
 
     }

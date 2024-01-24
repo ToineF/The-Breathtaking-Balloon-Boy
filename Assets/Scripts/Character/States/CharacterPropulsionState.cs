@@ -24,6 +24,8 @@ namespace BlownAway.Character.States
 
         public override void FixedUpdateState(CharacterStatesManager manager)
         {
+            CharacterManager.Instance.MovementManager.UpdatePropulsionMovement();
+
             CharacterManager.Instance.MovementManager.UpdateGravity();
         }
         public override void LateUpdateState(CharacterStatesManager manager)
