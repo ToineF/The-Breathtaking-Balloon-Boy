@@ -8,7 +8,7 @@ namespace BlownAway.Character.States
         public override void EnterState(CharacterManager manager)
         {
             Debug.Log("FALLING");
-            manager.MovementManager.SetGravityTo(manager.MovementManager.BaseGravity, manager.MovementManager.BaseMaxGravity);
+            manager.MovementManager.SetGravityTo(manager, manager.MovementManager.BaseGravity, manager.MovementManager.BaseMaxGravity);
         }
 
         public override void ExitState(CharacterManager manager)
@@ -19,22 +19,22 @@ namespace BlownAway.Character.States
         {
             manager.CameraManager.UpdateCameraPosition();
 
-            manager.MovementManager.CheckIfGrounded(manager.States);
+            manager.MovementManager.CheckIfGrounded(manager);
 
-            manager.MovementManager.CheckForPropulsionStart(manager.States);
+            manager.MovementManager.CheckForPropulsionStartOnAir(manager);
         }
 
 
         public override void FixedUpdateState(CharacterManager manager)
         {
-            manager.MovementManager.MoveAtSpeed(manager.MovementManager.FallDeplacementSpeed);
+            manager.MovementManager.MoveAtSpeed(manager, manager.MovementManager.FallDeplacementSpeed);
 
-            manager.MovementManager.UpdateGravity();
+            manager.MovementManager.UpdateGravity(manager);
         }
 
         public override void LateUpdateState(CharacterManager manager)
         {
-            manager.CameraManager.UpdateCameraAngle();
+            manager.CameraManager.UpdateCameraAngle(manager);
 
         }
     }

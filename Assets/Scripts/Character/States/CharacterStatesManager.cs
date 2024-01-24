@@ -17,38 +17,40 @@ namespace BlownAway.Character.States
 
 
         private CharacterBaseState _currentState;
+        private CharacterManager _manager;
 
 
         private void Start()
         {
+            _manager = CharacterManager.Instance;
             _currentState = FallingState;
-            _currentState.EnterState(CharacterManager.Instance);
+            _currentState.EnterState(_manager);
         }
 
         private void Update()
         {
-            _currentState.UpdateState(CharacterManager.Instance);
+            _currentState.UpdateState(_manager);
         }
 
         private void FixedUpdate()
         {
-            CharacterManager.Instance.MovementManager.ResetVelocity();
-            _currentState.FixedUpdateState(CharacterManager.Instance);
-            CharacterManager.Instance.MovementManager.ApplyVelocity();
+            _manager.MovementManager.ResetVelocity();
+            _currentState.FixedUpdateState(_manager);
+            _manager.MovementManager.ApplyVelocity(_manager);
         }
 
         private void LateUpdate()
         {
-            _currentState.LateUpdateState(CharacterManager.Instance);
+            _currentState.LateUpdateState(_manager);
         }
 
         public void SwitchState(CharacterBaseState state)
         {
-            _currentState.ExitState(CharacterManager.Instance);
+            _currentState.ExitState(_manager);
 
             _currentState = state;
 
-            _currentState.EnterState(CharacterManager.Instance);
+            _currentState.EnterState(_manager);
         }
     }
 }

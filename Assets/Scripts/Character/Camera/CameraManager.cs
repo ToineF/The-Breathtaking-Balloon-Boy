@@ -21,14 +21,14 @@ namespace BlownAway.Camera
             CameraParams.FramingTransposer.m_CameraDistance = CameraParams.CameraDistance;
         }
 
-        public void UpdateCameraAngle() // Late Update
+        public void UpdateCameraAngle(CharacterManager manager) // Late Update
         {
             if (Time.timeScale == 0) return;
 
-            float sensitivity = CharacterManager.Instance.Inputs.IsMouse ? CameraParams.MouseSensitivity : CameraParams.ControllerSensitivity;
-            float xSign = (CharacterManager.Instance.Inputs.IsMouse ? CameraParams.IsMouseXInverted : CameraParams.IsControllerXInverted) ? -1 : 1;
-            float ySign = (CharacterManager.Instance.Inputs.IsMouse ? CameraParams.IsMouseYInverted : CameraParams.IsControllerXInverted) ? -1 : 1;
-            _currentCameraAngle += new Vector2(CharacterManager.Instance.Inputs.CameraMoveVector.x * xSign, CharacterManager.Instance.Inputs.CameraMoveVector.y * ySign) * sensitivity;
+            float sensitivity = manager.Inputs.IsMouse ? CameraParams.MouseSensitivity : CameraParams.ControllerSensitivity;
+            float xSign = (manager.Inputs.IsMouse ? CameraParams.IsMouseXInverted : CameraParams.IsControllerXInverted) ? -1 : 1;
+            float ySign = (manager.Inputs.IsMouse ? CameraParams.IsMouseYInverted : CameraParams.IsControllerXInverted) ? -1 : 1;
+            _currentCameraAngle += new Vector2(manager.Inputs.CameraMoveVector.x * xSign, manager.Inputs.CameraMoveVector.y * ySign) * sensitivity;
             _currentCameraAngle.y = Math.Clamp(_currentCameraAngle.y, -CameraParams.YDeadZone, CameraParams.YDeadZone);
         }
     }

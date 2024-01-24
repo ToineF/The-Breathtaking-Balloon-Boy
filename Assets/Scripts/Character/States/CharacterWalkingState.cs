@@ -23,20 +23,20 @@ namespace BlownAway.Character.States
                 return;
             }
 
-            manager.MovementManager.CheckIfGrounded(manager.States);
+            manager.MovementManager.CheckIfGrounded(manager);
 
-            manager.MovementManager.CheckForPropulsionStart(manager.States);
+            manager.MovementManager.CheckForPropulsionStartOnGround(manager);
 
         }
 
         public override void FixedUpdateState(CharacterManager manager)
         {
-            manager.MovementManager.MoveAtSpeed(manager.MovementManager.BaseWalkSpeed);
+            manager.MovementManager.MoveAtSpeed(manager, manager.MovementManager.BaseWalkSpeed);
         }
 
         public override void LateUpdateState(CharacterManager manager)
         {
-            manager.CameraManager.UpdateCameraAngle();
+            manager.CameraManager.UpdateCameraAngle(manager);
 
         }
     }
