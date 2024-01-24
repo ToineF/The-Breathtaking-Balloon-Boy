@@ -44,6 +44,8 @@ GameObject:
   - component: {fileID: 6348225905439228519}
   - component: {fileID: 1215609012679441032}
   - component: {fileID: 7507358721281837289}
+  - component: {fileID: 8945431584733059684}
+  - component: {fileID: 7865403362446753878}
   m_Layer: 0
   m_Name: CharacterController
   m_TagString: Untagged
@@ -83,23 +85,10 @@ MonoBehaviour:
   isPersistant: 0
   <CharacterRigidbody>k__BackingField: {fileID: 1342601025657824065}
   <CharacterTransform>k__BackingField: {fileID: 2298817516175696517}
-  <BaseWalkSpeed>k__BackingField: 200
-  <FallDeplacementSpeed>k__BackingField: 100
-  CameraParams: {fileID: 4974291801837491406}
   <Inputs>k__BackingField: {fileID: 7507358721281837289}
-  CurrentGravity: 0
-  BaseGravity: 60
-  MaxGravity: 100
-  FloatingGravity: 7
-  GravityIncreaseByFrame: 0
-  GroundCheckDistance: 0.01
-  GroundDetectionSphereRadius: 0.1
-  GroundLayer:
-    serializedVersion: 2
-    m_Bits: 128
-  Force: {x: 0, y: 0, z: 0}
-  CurrentForce: {x: 0, y: 0, z: 0}
-  IsGrounded: 0
+  <CameraManager>k__BackingField: {fileID: 8945431584733059684}
+  <MovementManager>k__BackingField: {fileID: 7865403362446753878}
+  <States>k__BackingField: {fileID: 1215609012679441032}
 --- !u!114 &1215609012679441032
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -124,6 +113,48 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7469231b6636adb4787321e30b282b0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8945431584733059684
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2112151245869228761}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f4dd29b0e4448a46b15204aa9e2c2cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CameraParams: {fileID: 4974291801837491406}
+--- !u!114 &7865403362446753878
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2112151245869228761}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d58fd51571b3e74ea1c67f1f8dbc22c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <BaseWalkSpeed>k__BackingField: 200
+  <FallDeplacementSpeed>k__BackingField: 100
+  CurrentGravity: 0
+  MinGravity: 0
+  MaxGravity: 100
+  BaseGravity: 60
+  BaseMaxGravity: 100
+  GravityIncreaseByFrame: 0
+  FloatingGravity: 20
+  FloatingMaxGravity: 100
+  GroundCheckDistance: 0.01
+  GroundDetectionSphereRadius: 0.1
+  GroundLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  IsGrounded: 0
+  BasePropulsionSpeed: 15
 --- !u!1 &5937500286042893197
 GameObject:
   m_ObjectHideFlags: 0
@@ -150,8 +181,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5937500286042893197}
-  m_LocalRotation: {x: 0.5135369, y: 0.02620483, z: -0.015693033, w: 0.85752374}
-  m_LocalPosition: {x: -2.4468546, y: 10.774103, z: -6.542038}
+  m_LocalRotation: {x: 0.5135369, y: 0.0262048, z: -0.015693013, w: 0.85752374}
+  m_LocalPosition: {x: -2.4468546, y: 10.774103, z: -6.542037}
   m_LocalScale: {x: 1.1157299, y: 0.8743498, z: 0.97051996}
   m_ConstrainProportionsScale: 0
   m_Children:

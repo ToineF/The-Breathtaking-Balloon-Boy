@@ -29,7 +29,12 @@ namespace BlownAway.Character.Inputs
         public bool StartedPropulsion { get; private set; }
 
 
+        // Inputs
         private PlayerInputs _inputs;
+
+
+        // Propulsion
+        private static Vector3 _propulsionDefaultDirection = Vector3.forward;
 
         private void Awake()
         {
@@ -74,7 +79,7 @@ namespace BlownAway.Character.Inputs
 
         private void Start()
         {
-            LastMoveInputDirection = Vector3.forward;
+            LastMoveInputDirection = _propulsionDefaultDirection;
         }
 
         private void OnMoveInput(InputAction.CallbackContext context)
@@ -83,11 +88,12 @@ namespace BlownAway.Character.Inputs
             float zPosition = context.ReadValue<Vector2>().y;
             MoveInputDirection = new Vector3(xPosition, 0, zPosition);
             if (MoveInputDirection != Vector3.zero) LastMoveInputDirection = MoveInputDirection;
+            else LastMoveInputDirection = _propulsionDefaultDirection;
         }
 
         public void ResetLastMoveInputDirection()
         {
-            LastMoveInputDirection = Vector3.zero;
+            PropulsionType = 0;
         }
 
         private void SetCameraTypeMouse(InputAction.CallbackContext context)
