@@ -100,39 +100,39 @@ namespace BlownAway.Player
             switch (_type)
             {
                 case ControllerType.Type1:
-                    _inputs.Player_1.Action.performed += BalloonPump;
-                    _inputs.Player_1.Action.performed += GetMoveInputUp;
+                    _inputs.OLD_Player_Archive_2.Action.performed += BalloonPump;
+                    _inputs.OLD_Player_Archive_2.Action.performed += GetMoveInputUp;
                     //_inputs.Player.Action.performed += StartBalloonFloating;
-                    _inputs.Player_1.Action.canceled += StopBalloonFloating;
-                    _inputs.Player_1.Action.canceled += ResetVerticalMoveInput;
+                    _inputs.OLD_Player_Archive_2.Action.canceled += StopBalloonFloating;
+                    _inputs.OLD_Player_Archive_2.Action.canceled += ResetVerticalMoveInput;
                     _inputs.Player.Move.performed += GetMoveValue;
                     _inputs.Player.Move.performed += ResetLateralMoveInput;
                     _inputs.Player.Move.canceled += GetMoveValue;
-                    _inputs.Player_1.SecondaryAction.performed += CancelBalloonFloating;
+                    _inputs.OLD_Player_Archive_2.SecondaryAction.performed += CancelBalloonFloating;
                     break;
                 case ControllerType.Type2:
-                    _inputs.Player_1.LateralPropulsion.performed += BalloonPump;
-                    _inputs.Player_1.LateralPropulsion.performed += GetForwardInput;
-                    _inputs.Player_1.LateralPropulsion.canceled += ResetLateralMoveInput;
-                    _inputs.Player_1.UpPropulsion.performed += BalloonPump;
-                    _inputs.Player_1.UpPropulsion.performed += GetMoveInputUp;
-                    _inputs.Player_1.UpPropulsion.canceled += ResetVerticalMoveInput;
-                    _inputs.Player_1.DownPropulsion.performed += GetMoveInputDown;
-                    _inputs.Player_1.DownPropulsion.performed += StartBalloonFloating;
-                    _inputs.Player_1.DownPropulsion.canceled += ResetVerticalMoveInput;
-                    _inputs.Player_1.Move.performed += GetMoveValue;
-                    _inputs.Player_1.Move.canceled += GetMoveValue;
-                    _inputs.Player_1.CancelPropulsion.performed += CancelBalloonFloating;
+                    _inputs.OLD_Player_Archive_2.LateralPropulsion.performed += BalloonPump;
+                    _inputs.OLD_Player_Archive_2.LateralPropulsion.performed += GetForwardInput;
+                    _inputs.OLD_Player_Archive_2.LateralPropulsion.canceled += ResetLateralMoveInput;
+                    _inputs.OLD_Player_Archive_2.UpPropulsion.performed += BalloonPump;
+                    _inputs.OLD_Player_Archive_2.UpPropulsion.performed += GetMoveInputUp;
+                    _inputs.OLD_Player_Archive_2.UpPropulsion.canceled += ResetVerticalMoveInput;
+                    _inputs.OLD_Player_Archive_2.DownPropulsion.performed += GetMoveInputDown;
+                    _inputs.OLD_Player_Archive_2.DownPropulsion.performed += StartBalloonFloating;
+                    _inputs.OLD_Player_Archive_2.DownPropulsion.canceled += ResetVerticalMoveInput;
+                    _inputs.OLD_Player_Archive_2.Move.performed += GetMoveValue;
+                    _inputs.OLD_Player_Archive_2.Move.canceled += GetMoveValue;
+                    _inputs.OLD_Player_Archive_2.CancelPropulsion.performed += CancelBalloonFloating;
                     break;
                 case ControllerType.Type3:
                     break;
                 default:
-                    _inputs.Player_1.Action.performed += BalloonPump;
+                    _inputs.OLD_Player_Archive_2.Action.performed += BalloonPump;
                     //_inputs.Player.Action.performed += StartBalloonFloating;
-                    _inputs.Player_1.Action.canceled += StopBalloonFloating;
+                    _inputs.OLD_Player_Archive_2.Action.canceled += StopBalloonFloating;
                     _inputs.Player.Move.performed += GetMoveValue;
                     _inputs.Player.Move.canceled += GetMoveValue;
-                    _inputs.Player_1.SecondaryAction.performed += CancelBalloonFloating;
+                    _inputs.OLD_Player_Archive_2.SecondaryAction.performed += CancelBalloonFloating;
                     break;
             }
 
@@ -150,38 +150,38 @@ namespace BlownAway.Player
             switch (_type)
             {
                 case ControllerType.Type1:
-                    _inputs.Player_1.Action.performed -= BalloonPump;
-                    _inputs.Player_1.Action.performed -= GetMoveInputUp;
+                    _inputs.OLD_Player_Archive_2.Action.performed -= BalloonPump;
+                    _inputs.OLD_Player_Archive_2.Action.performed -= GetMoveInputUp;
                     //_inputs.Player.Action.performed -= StartBalloonFloating;
-                    _inputs.Player_1.Action.canceled -= StopBalloonFloating;
-                    _inputs.Player_1.Action.canceled -= ResetVerticalMoveInput;
+                    _inputs.OLD_Player_Archive_2.Action.canceled -= StopBalloonFloating;
+                    _inputs.OLD_Player_Archive_2.Action.canceled -= ResetVerticalMoveInput;
                     _inputs.Player.Move.performed -= GetMoveValue;
                     _inputs.Player.Move.performed -= ResetLateralMoveInput;
                     _inputs.Player.Move.canceled -= GetMoveValue;
-                    _inputs.Player_1.SecondaryAction.performed -= CancelBalloonFloating;
+                    _inputs.OLD_Player_Archive_2.SecondaryAction.performed -= CancelBalloonFloating;
                     break;
                 case ControllerType.Type2:
-                    _inputs.Player_1.LateralPropulsion.performed -= BalloonPump;
-                    _inputs.Player_1.LateralPropulsion.performed -= GetForwardInput;
-                    _inputs.Player_1.LateralPropulsion.canceled -= ResetLateralMoveInput;
-                    _inputs.Player_1.UpPropulsion.performed -= BalloonPump;
-                    _inputs.Player_1.UpPropulsion.performed -= GetMoveInputUp;
-                    _inputs.Player_1.UpPropulsion.canceled -= ResetVerticalMoveInput;
-                    _inputs.Player_1.DownPropulsion.performed -= GetMoveInputDown;
-                    _inputs.Player_1.DownPropulsion.performed -= StartBalloonFloating;
-                    _inputs.Player_1.DownPropulsion.canceled -= ResetVerticalMoveInput;
-                    _inputs.Player_1.Move.performed -= GetMoveValue;
-                    _inputs.Player_1.Move.canceled -= GetMoveValue;
-                    _inputs.Player_1.CancelPropulsion.performed -= CancelBalloonFloating;
+                    _inputs.OLD_Player_Archive_2.LateralPropulsion.performed -= BalloonPump;
+                    _inputs.OLD_Player_Archive_2.LateralPropulsion.performed -= GetForwardInput;
+                    _inputs.OLD_Player_Archive_2.LateralPropulsion.canceled -= ResetLateralMoveInput;
+                    _inputs.OLD_Player_Archive_2.UpPropulsion.performed -= BalloonPump;
+                    _inputs.OLD_Player_Archive_2.UpPropulsion.performed -= GetMoveInputUp;
+                    _inputs.OLD_Player_Archive_2.UpPropulsion.canceled -= ResetVerticalMoveInput;
+                    _inputs.OLD_Player_Archive_2.DownPropulsion.performed -= GetMoveInputDown;
+                    _inputs.OLD_Player_Archive_2.DownPropulsion.performed -= StartBalloonFloating;
+                    _inputs.OLD_Player_Archive_2.DownPropulsion.canceled -= ResetVerticalMoveInput;
+                    _inputs.OLD_Player_Archive_2.Move.performed -= GetMoveValue;
+                    _inputs.OLD_Player_Archive_2.Move.canceled -= GetMoveValue;
+                    _inputs.OLD_Player_Archive_2.CancelPropulsion.performed -= CancelBalloonFloating;
                     break;
                 case ControllerType.Type3:
                     break;
                 default:
-                    _inputs.Player_1.Action.performed -= BalloonPump;
-                    _inputs.Player_1.Action.canceled -= StopBalloonFloating;
+                    _inputs.OLD_Player_Archive_2.Action.performed -= BalloonPump;
+                    _inputs.OLD_Player_Archive_2.Action.canceled -= StopBalloonFloating;
                     _inputs.Player.Move.performed -= GetMoveValue;
                     _inputs.Player.Move.canceled -= GetMoveValue;
-                    _inputs.Player_1.SecondaryAction.performed -= CancelBalloonFloating;
+                    _inputs.OLD_Player_Archive_2.SecondaryAction.performed -= CancelBalloonFloating;
                     break;
             }
         }

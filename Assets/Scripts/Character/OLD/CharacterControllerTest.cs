@@ -104,7 +104,7 @@ namespace BlownAway.Player
             _inputs.Enable();
             _inputs.Player.Move.performed += StartMove;
             _inputs.Player.Move.canceled += StopMove;
-            _inputs.Player_Archive.DistanceView.performed += BirdEyeView;
+            _inputs.OLD_Player_Archive_1.DistanceView.performed += BirdEyeView;
             _inputs.Player.CameraMoveMouse.performed += SetCameraTypeMouse;
             _inputs.Player.CameraMoveMouse.canceled += SetCameraTypeMouse;
             _inputs.Player.CameraMoveController.performed += SetCameraTypeController;
@@ -116,7 +116,7 @@ namespace BlownAway.Player
             _inputs.Disable();
             _inputs.Player.Move.performed -= StartMove;
             _inputs.Player.Move.canceled -= StopMove;
-            _inputs.Player_Archive.DistanceView.performed -= BirdEyeView;
+            _inputs.OLD_Player_Archive_1.DistanceView.performed -= BirdEyeView;
             _inputs.Player.CameraMoveMouse.performed -= SetCameraTypeMouse;
             _inputs.Player.CameraMoveMouse.canceled -= SetCameraTypeMouse;
             _inputs.Player.CameraMoveController.performed -= SetCameraTypeController;
