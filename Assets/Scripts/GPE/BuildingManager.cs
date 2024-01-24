@@ -62,14 +62,14 @@ namespace BlownAway.GPE.Buildings {
         private void OnEnable()
         {
             _inputs.Enable();
-            _inputs.Player.Action.performed += CheckCanMoveBuilding;
+            _inputs.Player_1.Action.performed += CheckCanMoveBuilding;
             _inputs.Player_Archive.Cancel.performed += CheckCanMoveBuilding;
         }
 
         private void OnDisable()
         {
             _inputs.Disable();
-            _inputs.Player.Action.performed -= CheckCanMoveBuilding;
+            _inputs.Player_1.Action.performed -= CheckCanMoveBuilding;
             _inputs.Player_Archive.Cancel.performed -= CheckCanMoveBuilding;
         }
 

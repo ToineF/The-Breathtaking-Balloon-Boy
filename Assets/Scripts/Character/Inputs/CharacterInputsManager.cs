@@ -26,15 +26,17 @@ namespace BlownAway.Character.Inputs
 
         // Propulsion
         public PropulsionDirection PropulsionType { get; private set; }
-        public bool StartedPropulsion { get; private set; }
+
+        // Falling
+        public bool StartedFalling { get; private set; }
 
 
         // Inputs
         private PlayerInputs _inputs;
 
-
         // Propulsion
         private static Vector3 _propulsionDefaultDirection = Vector3.forward;
+
 
         private void Awake()
         {
@@ -57,6 +59,8 @@ namespace BlownAway.Character.Inputs
             _inputs.Player.UpPropulsion.canceled += UnsetUpPropulsion;
             _inputs.Player.DownPropulsion.canceled += UnsetDownPropulsion;
             _inputs.Player.LateralPropulsion.canceled += UnsetLateralPropulsion;
+
+            _inputs.Player.CancelPropulsion.performed += StartFalling;
         }
 
         private void OnDisable()
@@ -75,6 +79,8 @@ namespace BlownAway.Character.Inputs
             _inputs.Player.UpPropulsion.canceled -= UnsetUpPropulsion;
             _inputs.Player.DownPropulsion.canceled -= UnsetDownPropulsion;
             _inputs.Player.LateralPropulsion.canceled -= UnsetLateralPropulsion;
+
+            _inputs.Player.CancelPropulsion.performed -= StartFalling;
         }
 
         private void Start()
@@ -110,40 +116,42 @@ namespace BlownAway.Character.Inputs
 
         private void SetUpPropulsion(InputAction.CallbackContext context)
         {
-            PropulsionType |= Inputs.PropulsionDirection.Up;
-            StartedPropulsion = true;
+            PropulsionType |= PropulsionDirection.Up;
         }
 
         private void UnsetUpPropulsion(InputAction.CallbackContext context)
         {
-            PropulsionType &= ~Inputs.PropulsionDirection.Up;
-            StartedPropulsion = true;
+            PropulsionType &= ~PropulsionDirection.Up;
         }
 
         private void SetDownPropulsion(InputAction.CallbackContext context)
         {
-            PropulsionType |= Inputs.PropulsionDirection.Down;
-            StartedPropulsion = true;
+            PropulsionType |= PropulsionDirection.Down;
         }
 
         private void UnsetDownPropulsion(InputAction.CallbackContext context)
         {
-            PropulsionType &= ~Inputs.PropulsionDirection.Down;
+            PropulsionType &= ~PropulsionDirection.Down;
         }
 
         private void SetLateralPropulsion(InputAction.CallbackContext context)
         {
-            PropulsionType |= Inputs.PropulsionDirection.Lateral;
+            PropulsionType |= PropulsionDirection.Lateral;
         }
 
         private void UnsetLateralPropulsion(InputAction.CallbackContext context)
         {
-            PropulsionType &= ~Inputs.PropulsionDirection.Lateral;
+            PropulsionType &= ~PropulsionDirection.Lateral;
         }
 
         private void LateUpdate()
         {
-            StartedPropulsion = false;
+            StartedFalling = false;
+        }
+
+        private void StartFalling(InputAction.CallbackContext context)
+        {
+            StartedFalling = true;
         }
     }
 }

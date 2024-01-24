@@ -100,15 +100,15 @@ namespace BlownAway.Player
             switch (_type)
             {
                 case ControllerType.Type1:
-                    _inputs.Player.Action.performed += BalloonPump;
-                    _inputs.Player.Action.performed += GetMoveInputUp;
+                    _inputs.Player_1.Action.performed += BalloonPump;
+                    _inputs.Player_1.Action.performed += GetMoveInputUp;
                     //_inputs.Player.Action.performed += StartBalloonFloating;
-                    _inputs.Player.Action.canceled += StopBalloonFloating;
-                    _inputs.Player.Action.canceled += ResetVerticalMoveInput;
+                    _inputs.Player_1.Action.canceled += StopBalloonFloating;
+                    _inputs.Player_1.Action.canceled += ResetVerticalMoveInput;
                     _inputs.Player.Move.performed += GetMoveValue;
                     _inputs.Player.Move.performed += ResetLateralMoveInput;
                     _inputs.Player.Move.canceled += GetMoveValue;
-                    _inputs.Player.SecondaryAction.performed += CancelBalloonFloating;
+                    _inputs.Player_1.SecondaryAction.performed += CancelBalloonFloating;
                     break;
                 case ControllerType.Type2:
                     _inputs.Player_1.LateralPropulsion.performed += BalloonPump;
@@ -127,12 +127,12 @@ namespace BlownAway.Player
                 case ControllerType.Type3:
                     break;
                 default:
-                    _inputs.Player.Action.performed += BalloonPump;
+                    _inputs.Player_1.Action.performed += BalloonPump;
                     //_inputs.Player.Action.performed += StartBalloonFloating;
-                    _inputs.Player.Action.canceled += StopBalloonFloating;
+                    _inputs.Player_1.Action.canceled += StopBalloonFloating;
                     _inputs.Player.Move.performed += GetMoveValue;
                     _inputs.Player.Move.canceled += GetMoveValue;
-                    _inputs.Player.SecondaryAction.performed += CancelBalloonFloating;
+                    _inputs.Player_1.SecondaryAction.performed += CancelBalloonFloating;
                     break;
             }
 
@@ -150,15 +150,15 @@ namespace BlownAway.Player
             switch (_type)
             {
                 case ControllerType.Type1:
-                    _inputs.Player.Action.performed -= BalloonPump;
-                    _inputs.Player.Action.performed -= GetMoveInputUp;
+                    _inputs.Player_1.Action.performed -= BalloonPump;
+                    _inputs.Player_1.Action.performed -= GetMoveInputUp;
                     //_inputs.Player.Action.performed -= StartBalloonFloating;
-                    _inputs.Player.Action.canceled -= StopBalloonFloating;
-                    _inputs.Player.Action.canceled -= ResetVerticalMoveInput;
+                    _inputs.Player_1.Action.canceled -= StopBalloonFloating;
+                    _inputs.Player_1.Action.canceled -= ResetVerticalMoveInput;
                     _inputs.Player.Move.performed -= GetMoveValue;
                     _inputs.Player.Move.performed -= ResetLateralMoveInput;
                     _inputs.Player.Move.canceled -= GetMoveValue;
-                    _inputs.Player.SecondaryAction.performed -= CancelBalloonFloating;
+                    _inputs.Player_1.SecondaryAction.performed -= CancelBalloonFloating;
                     break;
                 case ControllerType.Type2:
                     _inputs.Player_1.LateralPropulsion.performed -= BalloonPump;
@@ -177,11 +177,11 @@ namespace BlownAway.Player
                 case ControllerType.Type3:
                     break;
                 default:
-                    _inputs.Player.Action.performed -= BalloonPump;
-                    _inputs.Player.Action.canceled -= StopBalloonFloating;
+                    _inputs.Player_1.Action.performed -= BalloonPump;
+                    _inputs.Player_1.Action.canceled -= StopBalloonFloating;
                     _inputs.Player.Move.performed -= GetMoveValue;
                     _inputs.Player.Move.canceled -= GetMoveValue;
-                    _inputs.Player.SecondaryAction.performed -= CancelBalloonFloating;
+                    _inputs.Player_1.SecondaryAction.performed -= CancelBalloonFloating;
                     break;
             }
         }

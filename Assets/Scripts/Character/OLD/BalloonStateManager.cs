@@ -75,8 +75,8 @@ namespace BlownAway.Player
             DisableAllObjects();
             _currentState = BalloonHammer;
             _currentState.StartState(this);
-            Inputs.Player.Action.performed += _currentState.OnActionPressed;
-            Inputs.Player.SecondaryAction.performed += _currentState.OnSecondaryActionPressed;
+            Inputs.Player_1.Action.performed += _currentState.OnActionPressed;
+            Inputs.Player_1.SecondaryAction.performed += _currentState.OnSecondaryActionPressed;
             Inputs.Player_Archive.ChangeBalloon.performed += ChangeState;
 
             FlowerJumps = FlowerMaxJumps;
@@ -91,13 +91,13 @@ namespace BlownAway.Player
         {
             DisableAllObjects();
 
-            Inputs.Player.Action.performed -= _currentState.OnActionPressed;
-            Inputs.Player.SecondaryAction.performed -= _currentState.OnSecondaryActionPressed;
+            Inputs.Player_1.Action.performed -= _currentState.OnActionPressed;
+            Inputs.Player_1.SecondaryAction.performed -= _currentState.OnSecondaryActionPressed;
 
             _currentState = state;
             _currentState.StartState(this);
-            Inputs.Player.Action.performed += _currentState.OnActionPressed;
-            Inputs.Player.SecondaryAction.performed += _currentState.OnSecondaryActionPressed;
+            Inputs.Player_1.Action.performed += _currentState.OnActionPressed;
+            Inputs.Player_1.SecondaryAction.performed += _currentState.OnSecondaryActionPressed;
 
         }
 

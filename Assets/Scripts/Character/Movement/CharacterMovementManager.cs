@@ -1,5 +1,4 @@
 using BlownAway.Character.Inputs;
-using BlownAway.Character.States;
 using System;
 using UnityEngine;
 
@@ -49,21 +48,21 @@ namespace BlownAway.Character.Movements
         private void Start()
         {
             GroundHitResults = new RaycastHit[2];
-            SetGravityTo(BaseGravity, BaseMaxGravity);
+            SetGravityTo(CharacterManager.Instance, BaseGravity, BaseMaxGravity);
         }
 
         
-        public void MoveAtSpeed(float moveSpeed)
+        public void MoveAtSpeed(CharacterManager manager, float moveSpeed)
         {
-            Vector3 moveDirection = (Vector3.Scale(UnityEngine.Camera.main.transform.forward, new Vector3(1, 0, 1)) * CharacterManager.Instance.Inputs.MoveInputDirection.z + Vector3.Scale(UnityEngine.Camera.main.transform.right, new Vector3(1, 0, 1)) * CharacterManager.Instance.Inputs.MoveInputDirection.x).normalized;
+            Vector3 moveDirection = (Vector3.Scale(UnityEngine.Camera.main.transform.forward, new Vector3(1, 0, 1)) * manager.Inputs.MoveInputDirection.z + Vector3.Scale(UnityEngine.Camera.main.transform.right, new Vector3(1, 0, 1)) * manager.Inputs.MoveInputDirection.x).normalized;
             moveDirection = Vector3.Scale(moveDirection, new Vector3(1, 0, 1));
             //SetAnimation(moveDirection);
             CurrentVelocity += moveDirection * moveSpeed * Time.deltaTime;
         }
 
-        public void ApplyVelocity()
+        public void ApplyVelocity(CharacterManager manager)
         {
-            CharacterManager.Instance.CharacterRigidbody.velocity = CurrentVelocity;
+            manager.CharacterRigidbody.velocity = CurrentVelocity;
         }
 
         public void ResetVelocity()
@@ -71,10 +70,10 @@ namespace BlownAway.Character.Movements
             CurrentVelocity = Vector3.zero;
         }
 
-        public void CheckIfGrounded(CharacterStatesManager manager)
+        public void CheckIfGrounded(CharacterManager manager)
         {
             var lastGrounded = IsGrounded;
-            IsGrounded = Physics.SphereCastNonAlloc(CharacterManager.Instance.CharacterTransform.position, GroundDetectionSphereRadius, Vector3.down, GroundHitResults, GroundCheckDistance, GroundLayer) > 0;
+            IsGrounded = Physics.SphereCastNonAlloc(manager.CharacterTransform.position, GroundDetectionSphereRadius, Vector3.down, GroundHitResults, GroundCheckDistance, GroundLayer) > 0;
             if (lastGrounded != IsGrounded)
             {
                 if (IsGrounded) // On Ground Enter
@@ -82,21 +81,21 @@ namespace BlownAway.Character.Movements
                     LastGround = GroundHitResults[0];
                     OnGroundEnter?.Invoke();
                     CurrentGravity = BaseGravity;
-                    manager.SwitchState(manager.IdleState);
+                    manager.States.SwitchState(manager.States.IdleState);
                 }
                 else // On Ground Leave
                 {
                     OnGroundExit?.Invoke();
-                    manager.SwitchState(manager.FallingState); // HERE DISSOCIATE FALLING FROM PROPULSION
+                    manager.States.SwitchState(manager.States.FallingState); // HERE DISSOCIATE FALLING FROM PROPULSION
                 }
             }
         }
 
-        public void UpdateGravity()
+        public void UpdateGravity(CharacterManager manager)
         {
-            if (!CharacterManager.Instance.MovementManager.IsGrounded)
+            if (!manager.MovementManager.IsGrounded)
             {
-                CharacterManager.Instance.MovementManager.CurrentGravity = Mathf.Clamp(CharacterManager.Instance.MovementManager.CurrentGravity + CharacterManager.Instance.MovementManager.GravityIncreaseByFrame, CharacterManager.Instance.MovementManager.MinGravity, CharacterManager.Instance.MovementManager.MaxGravity);
+                manager.MovementManager.CurrentGravity = Mathf.Clamp(manager.MovementManager.CurrentGravity + manager.MovementManager.GravityIncreaseByFrame, manager.MovementManager.MinGravity, manager.MovementManager.MaxGravity);
             }
 
             /*Vector3 additionalForces = Vector3.zero;
@@ -105,47 +104,53 @@ namespace BlownAway.Character.Movements
                 additionalForces += force.Value.CurrentForce;
                 force.Value.CurrentForce = Vector3.Lerp(force.Value.CurrentForce, force.Value.TargetForce, force.Value.ForceLerp);
             }*/
-            Vector3 gravity = -CharacterManager.Instance.MovementManager.CurrentGravity * Vector3.up;
+            Vector3 gravity = -manager.MovementManager.CurrentGravity * Vector3.up;
             //Vector3 allForces = CharacterManager.Instance + additionalForces + gravity;
 
             //_characterController.Move(allForces * Time.deltaTime);
 
-            CharacterManager.Instance.MovementManager.CurrentVelocity += gravity * Time.deltaTime;
+            manager.MovementManager.CurrentVelocity += gravity * Time.deltaTime;
             //CharacterManager.Instance.Force = Vector3.Lerp(CharacterManager.Instance.Force, CharacterManager.Instance.CurrentGravity, _lerpValue);
         }
 
-        public void SetGravityTo(float targetGravity, float maxGravity)
+        public void SetGravityTo(CharacterManager manager, float targetGravity, float maxGravity)
         {
-            CharacterManager.Instance.MovementManager.CurrentGravity = targetGravity;
-            CharacterManager.Instance.MovementManager.MinGravity = targetGravity;
-            CharacterManager.Instance.MovementManager.MaxGravity = maxGravity;
+            manager.MovementManager.CurrentGravity = targetGravity;
+            manager.MovementManager.MinGravity = targetGravity;
+            manager.MovementManager.MaxGravity = maxGravity;
         }
 
+        public void CheckForFloatCancel(CharacterManager manager)
+        {
+            if (!manager.Inputs.StartedFalling) return;
+
+            manager.States.SwitchState(manager.States.FallingState);
+        }
 
 
         // Float & Propulsion
-        public void CheckForPropulsionStart(CharacterStatesManager manager)
+        public void CheckForPropulsionStart(CharacterManager manager)
         {
-            if (CharacterManager.Instance.Inputs.PropulsionType != 0)
+            if (manager.Inputs.PropulsionType != 0)
             {
-                manager.SwitchState(manager.PropulsionState);
+                manager.States.SwitchState(manager.States.PropulsionState);
             }
         }
 
-        public void CheckForPropulsionEnd(CharacterStatesManager manager)
+        public void CheckForPropulsionEnd(CharacterManager manager)
         {
-            if (CharacterManager.Instance.Inputs.PropulsionType == 0)
+            if (manager.Inputs.PropulsionType == 0)
             {
-                manager.SwitchState(manager.FloatingState);
+                manager.States.SwitchState(manager.States.FloatingState);
             }
         }
 
-        public void UpdatePropulsionMovement()
+        public void UpdatePropulsionMovement(CharacterManager manager)
         {
-            PropulsionDirection propulsionType = CharacterManager.Instance.Inputs.PropulsionType;
+            PropulsionDirection propulsionType = manager.Inputs.PropulsionType;
             Vector3 propulsionDirection = Vector3.zero;
             // Case LastMoveInputDirection is Vector3.zero (if player never moved)
-            Vector3 lateralMoveInput = CharacterManager.Instance.Inputs.LastMoveInputDirection != Vector3.zero ? CharacterManager.Instance.Inputs.LastMoveInputDirection : Vector3.forward;
+            Vector3 lateralMoveInput = manager.Inputs.LastMoveInputDirection != Vector3.zero ? manager.Inputs.LastMoveInputDirection : Vector3.forward;
             Vector3 lateralMoveDirection = (Vector3.Scale(UnityEngine.Camera.main.transform.forward, new Vector3(1, 0, 1)).normalized * lateralMoveInput.z + Vector3.Scale(UnityEngine.Camera.main.transform.right, new Vector3(1, 0, 1)) * lateralMoveInput.x).normalized;
 
 
