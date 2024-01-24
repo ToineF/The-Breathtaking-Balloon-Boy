@@ -22,33 +22,33 @@ namespace BlownAway.Character.States
         private void Start()
         {
             _currentState = FallingState;
-            _currentState.EnterState(this);
+            _currentState.EnterState(CharacterManager.Instance);
         }
 
         private void Update()
         {
-            _currentState.UpdateState(this);
+            _currentState.UpdateState(CharacterManager.Instance);
         }
 
         private void FixedUpdate()
         {
             CharacterManager.Instance.MovementManager.ResetVelocity();
-            _currentState.FixedUpdateState(this);
+            _currentState.FixedUpdateState(CharacterManager.Instance);
             CharacterManager.Instance.MovementManager.ApplyVelocity();
         }
 
         private void LateUpdate()
         {
-            _currentState.LateUpdateState(this);
+            _currentState.LateUpdateState(CharacterManager.Instance);
         }
 
         public void SwitchState(CharacterBaseState state)
         {
-            _currentState.ExitState(this);
+            _currentState.ExitState(CharacterManager.Instance);
 
             _currentState = state;
 
-            _currentState.EnterState(this);
+            _currentState.EnterState(CharacterManager.Instance);
         }
     }
 }

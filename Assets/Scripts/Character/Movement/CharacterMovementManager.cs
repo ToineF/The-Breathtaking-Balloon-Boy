@@ -145,7 +145,8 @@ namespace BlownAway.Character.Movements
             PropulsionDirection propulsionType = CharacterManager.Instance.Inputs.PropulsionType;
             Vector3 propulsionDirection = Vector3.zero;
             // Case LastMoveInputDirection is Vector3.zero (if player never moved)
-            Vector3 lateralMoveDirection = (Vector3.Scale(UnityEngine.Camera.main.transform.forward, new Vector3(1, 0, 1)).normalized * CharacterManager.Instance.Inputs.LastMoveInputDirection.z + Vector3.Scale(UnityEngine.Camera.main.transform.right, new Vector3(1, 0, 1)) * CharacterManager.Instance.Inputs.LastMoveInputDirection.x).normalized;
+            Vector3 lateralMoveInput = CharacterManager.Instance.Inputs.LastMoveInputDirection != Vector3.zero ? CharacterManager.Instance.Inputs.LastMoveInputDirection : Vector3.forward;
+            Vector3 lateralMoveDirection = (Vector3.Scale(UnityEngine.Camera.main.transform.forward, new Vector3(1, 0, 1)).normalized * lateralMoveInput.z + Vector3.Scale(UnityEngine.Camera.main.transform.right, new Vector3(1, 0, 1)) * lateralMoveInput.x).normalized;
 
 
             if (propulsionType.HasFlag(PropulsionDirection.Up)) propulsionDirection += Vector3.up;

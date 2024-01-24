@@ -4,33 +4,34 @@ namespace BlownAway.Character.States
 {
     public class CharacterPropulsionState : CharacterBaseState
     {
-        public override void EnterState(CharacterStatesManager manager)
+        public override void EnterState(CharacterManager manager)
         {
             Debug.Log("PROPULSION");
         }
 
-        public override void ExitState(CharacterStatesManager manager)
+        public override void ExitState(CharacterManager manager)
         {
         }
 
-        public override void UpdateState(CharacterStatesManager manager)
+        public override void UpdateState(CharacterManager manager)
         {
-            CharacterManager.Instance.CameraManager.UpdateCameraPosition();
+            manager.CameraManager.UpdateCameraPosition();
 
-            CharacterManager.Instance.MovementManager.CheckIfGrounded(manager);
+            manager.MovementManager.CheckForPropulsionEnd(manager.States);
 
-            CharacterManager.Instance.MovementManager.CheckForPropulsionEnd(manager);
+            manager.MovementManager.CheckIfGrounded(manager.States);
+
         }
 
-        public override void FixedUpdateState(CharacterStatesManager manager)
+        public override void FixedUpdateState(CharacterManager manager)
         {
-            CharacterManager.Instance.MovementManager.UpdatePropulsionMovement();
+            manager.MovementManager.UpdatePropulsionMovement();
 
-            CharacterManager.Instance.MovementManager.UpdateGravity();
+            manager.MovementManager.UpdateGravity();
         }
-        public override void LateUpdateState(CharacterStatesManager manager)
+        public override void LateUpdateState(CharacterManager manager)
         {
-            CharacterManager.Instance.CameraManager.UpdateCameraAngle();
+            manager.CameraManager.UpdateCameraAngle();
         }
     }
 }

@@ -2,6 +2,7 @@ using UnityEngine;
 using BlownAway.Character.Inputs;
 using BlownAway.Camera;
 using BlownAway.Character.Movements;
+using BlownAway.Character.States;
 
 namespace BlownAway.Character
 {
@@ -18,7 +19,10 @@ namespace BlownAway.Character
         [field: SerializeField, Tooltip("The reference to the class that contains the logic about the camera")] public CameraManager CameraManager { get; private set; }
 
         // Movement
-        [field: SerializeField, Tooltip("The reference to the class that contains the movement of the player")] public CharacterMovementManager MovementManager { get; private set; }
+        [field: SerializeField, Tooltip("The reference to the class that contains the movement of the character")] public CharacterMovementManager MovementManager { get; private set; }
+
+        //States
+        [field: SerializeField, Tooltip("The reference to the class that the states of the character")] public CharacterStatesManager States { get; private set; }
 
 
     }

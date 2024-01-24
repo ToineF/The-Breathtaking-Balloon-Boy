@@ -5,37 +5,39 @@ namespace BlownAway.Character.States
 {
     public class CharacterIdleState : CharacterBaseState
     {
-        public override void EnterState(CharacterStatesManager manager)
+        public override void EnterState(CharacterManager manager)
         {
             Debug.Log("IDLE");
+            manager.Inputs.ResetLastMoveInputDirection();
+
         }
 
-        public override void ExitState(CharacterStatesManager manager)
+        public override void ExitState(CharacterManager manager)
         {
         }
 
-        public override void UpdateState(CharacterStatesManager manager)
+        public override void UpdateState(CharacterManager manager)
         {
-            CharacterManager.Instance.CameraManager.UpdateCameraPosition();
-            if (CharacterManager.Instance.Inputs.MoveInputDirection.magnitude > 0.0001f)
+            manager.CameraManager.UpdateCameraPosition();
+            if (manager.Inputs.MoveInputDirection.magnitude > 0.0001f)
             {
-                manager.SwitchState(manager.WalkingState);
+                manager.States.SwitchState(manager.States.WalkingState);
                 return;
             }
 
-            CharacterManager.Instance.MovementManager.CheckIfGrounded(manager);
+            manager.MovementManager.CheckForPropulsionStart(manager.States);
 
-            CharacterManager.Instance.MovementManager.CheckForPropulsionStart(manager);
+            manager.MovementManager.CheckIfGrounded(manager.States);
 
         }
 
-        public override void FixedUpdateState(CharacterStatesManager manager)
+        public override void FixedUpdateState(CharacterManager manager)
         {
-            CharacterManager.Instance.CharacterRigidbody.velocity = Vector3.zero;
+            manager.CharacterRigidbody.velocity = Vector3.zero;
         }
-        public override void LateUpdateState(CharacterStatesManager manager)
+        public override void LateUpdateState(CharacterManager manager)
         {
-            CharacterManager.Instance.CameraManager.UpdateCameraAngle();
+            manager.CameraManager.UpdateCameraAngle();
         }
     }
 

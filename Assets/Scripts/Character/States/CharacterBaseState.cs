@@ -5,10 +5,10 @@ namespace BlownAway.Character.States
 {
     public abstract class CharacterBaseState
     {
-        public abstract void EnterState(CharacterStatesManager manager);
-        public abstract void UpdateState(CharacterStatesManager manager);
-        public abstract void FixedUpdateState(CharacterStatesManager manager);
-        public abstract void LateUpdateState(CharacterStatesManager manager);
-        public abstract void ExitState(CharacterStatesManager manager);
+        public abstract void EnterState(CharacterManager manager);
+        public abstract void UpdateState(CharacterManager manager);
+        public abstract void FixedUpdateState(CharacterManager manager);
+        public abstract void LateUpdateState(CharacterManager manager);
+        public abstract void ExitState(CharacterManager manager);
     }
 }

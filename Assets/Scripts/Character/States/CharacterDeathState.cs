@@ -4,22 +4,22 @@ namespace BlownAway.Character.States
 {
     public class CharacterDeathState : CharacterBaseState
     {
-        public override void EnterState(CharacterStatesManager manager)
+        public override void EnterState(CharacterManager manager)
         {
         }
 
-        public override void ExitState(CharacterStatesManager manager)
+        public override void ExitState(CharacterManager manager)
         {
         }
 
-        public override void UpdateState(CharacterStatesManager manager)
+        public override void UpdateState(CharacterManager manager)
         {
         }
 
-        public override void FixedUpdateState(CharacterStatesManager manager)
+        public override void FixedUpdateState(CharacterManager manager)
         {
         }
-        public override void LateUpdateState(CharacterStatesManager manager)
+        public override void LateUpdateState(CharacterManager manager)
         {
         }
     }
