@@ -129,7 +129,15 @@ namespace BlownAway.Character.Movements
 
 
         // Float & Propulsion
-        public void CheckForPropulsionStart(CharacterManager manager)
+        public void CheckForPropulsionStartOnGround(CharacterManager manager)
+        {
+            if (manager.Inputs.PropulsionType.HasFlag(PropulsionDirection.Up) || manager.Inputs.PropulsionType.HasFlag(PropulsionDirection.Lateral))
+            {
+                manager.States.SwitchState(manager.States.PropulsionState);
+            }
+        }
+
+        public void CheckForPropulsionStartOnAir(CharacterManager manager)
         {
             if (manager.Inputs.PropulsionType != 0)
             {

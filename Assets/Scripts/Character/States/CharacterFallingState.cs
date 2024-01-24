@@ -21,7 +21,7 @@ namespace BlownAway.Character.States
 
             manager.MovementManager.CheckIfGrounded(manager);
 
-            manager.MovementManager.CheckForPropulsionStart(manager);
+            manager.MovementManager.CheckForPropulsionStartOnAir(manager);
         }
 
 
