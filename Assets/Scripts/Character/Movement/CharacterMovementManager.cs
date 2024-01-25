@@ -28,6 +28,9 @@ namespace BlownAway.Character.Movements
         [Tooltip("The gravity the character falls at while floating")] public float FloatingGravity;
         [Tooltip("The maximum gravity the character can fall at while floating")] public float FloatingMaxGravity;
 
+        [Tooltip("The gravity the character falls at while propulsing")] public float PropulsionGravity;
+        [Tooltip("The maximum gravity the character can fall at while propulsing")] public float PropulsionMaxGravity;
+
         [Header("Ground Check")]
         [Tooltip("The distance offset of the ground detection check from the character")] public float GroundCheckDistance;
         [Tooltip("The radius of the ground detection sphere collider")] public float GroundDetectionSphereRadius;

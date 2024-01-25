@@ -1,14 +1,17 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace BlownAway.DebugMode {
-
-public class DebugMode : MonoBehaviour
+namespace BlownAway.DebugMode
 {
-    private void Awake()
+
+    public class DebugMode : MonoBehaviour
     {
-        DontDestroyOnLoad(this);
-    }
+        private void Awake()
+        {
+            DontDestroyOnLoad(this);
+        }
+
+#if UNITY_EDITOR
 
         private void Update()
         {
@@ -27,5 +30,7 @@ public class DebugMode : MonoBehaviour
                     SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
             }
         }
+#endif
+
     }
 }
