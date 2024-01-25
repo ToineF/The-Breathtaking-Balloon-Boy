@@ -9,6 +9,7 @@ namespace BlownAway.Character.States
         {
             Debug.Log("IDLE");
             manager.Inputs.ResetLastMoveInputDirection();
+            manager.AirManager.RefreshAir();
 
         }
 

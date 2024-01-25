@@ -142,6 +142,8 @@ namespace BlownAway.Character.Movements
 
         public void CheckForPropulsionStartOnAir(CharacterManager manager)
         {
+            if (manager.AirManager.CurrentAir <= 0.0001f) return;
+
             if (manager.Inputs.PropulsionType != 0)
             {
                 manager.States.SwitchState(manager.States.PropulsionState);
@@ -160,7 +162,6 @@ namespace BlownAway.Character.Movements
         {
             PropulsionDirection propulsionType = manager.Inputs.PropulsionType;
             Vector3 propulsionDirection = Vector3.zero;
-            // Case LastMoveInputDirection is Vector3.zero (if player never moved)
             Vector3 lateralMoveInput = manager.Inputs.LastMoveInputDirection != Vector3.zero ? manager.Inputs.LastMoveInputDirection : Vector3.forward;
             Vector3 lateralMoveDirection = (Vector3.Scale(UnityEngine.Camera.main.transform.forward, new Vector3(1, 0, 1)).normalized * lateralMoveInput.z + Vector3.Scale(UnityEngine.Camera.main.transform.right, new Vector3(1, 0, 1)) * lateralMoveInput.x).normalized;
 
@@ -174,6 +175,13 @@ namespace BlownAway.Character.Movements
             Vector3 propulsionMovement = propulsionDirection * BasePropulsionSpeed;
             CurrentVelocity += propulsionMovement;
 
+        }
+
+        public void CheckIfAirEmpty(CharacterManager manager)
+        {
+            if (manager.AirManager.CurrentAir > 0.0001f) return;
+
+            manager.States.SwitchState(manager.States.FallingState);
         }
 
     }

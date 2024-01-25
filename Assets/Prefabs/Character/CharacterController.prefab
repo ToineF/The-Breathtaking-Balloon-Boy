@@ -153,7 +153,7 @@ MonoBehaviour:
   PropulsionGravity: 0
   PropulsionMaxGravity: 0
   GroundCheckDistance: 0.1
-  GroundDetectionSphereRadius: 0.01
+  GroundDetectionSphereRadius: 0
   GroundLayer:
     serializedVersion: 2
     m_Bits: 128
@@ -171,10 +171,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c19eea4798d3e3940a9829298b3b9745, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _airReductionSpeed: 0.4
-  _airDashReductionSpeed: 2
-  _airRefillSpeed: 3.5
-  _airRefillStart: 1
+  <FloatingAirReductionSpeed>k__BackingField: 0.025
+  <PropulsionAirReductionSpeed>k__BackingField: 0.1
+  <AirRefillSpeed>k__BackingField: 0
+  <AirRefillStart>k__BackingField: 0
 --- !u!1 &5937500286042893197
 GameObject:
   m_ObjectHideFlags: 0

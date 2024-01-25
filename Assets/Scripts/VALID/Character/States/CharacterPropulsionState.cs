@@ -16,6 +16,8 @@ namespace BlownAway.Character.States
 
         public override void UpdateState(CharacterManager manager)
         {
+            manager.AirManager.ReduceAir(manager.AirManager.PropulsionAirReductionSpeed);
+
             manager.CameraManager.UpdateCameraPosition();
 
             manager.MovementManager.CheckForPropulsionEnd(manager);
@@ -23,6 +25,8 @@ namespace BlownAway.Character.States
             manager.MovementManager.CheckIfGrounded(manager);
 
             manager.MovementManager.CheckForFloatCancel(manager);
+
+            manager.MovementManager.CheckIfAirEmpty(manager);
 
         }
 
