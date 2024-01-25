@@ -9,10 +9,12 @@ namespace BlownAway.Character.States
         {
             Debug.Log("FALLING");
             manager.MovementManager.SetGravityTo(manager, manager.MovementManager.BaseGravity, manager.MovementManager.BaseMaxGravity);
+            manager.AirManager.AddAirUntilFullIfEmpty(manager, manager.AirManager.FallingAirRefillSpeed, manager.AirManager.FallingAirRefillDelay);
         }
 
         public override void ExitState(CharacterManager manager)
         {
+            manager.AirManager.StopAddingAir();
         }
 
         public override void UpdateState(CharacterManager manager)

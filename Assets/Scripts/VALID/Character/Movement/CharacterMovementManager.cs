@@ -142,7 +142,7 @@ namespace BlownAway.Character.Movements
 
         public void CheckForPropulsionStartOnAir(CharacterManager manager)
         {
-            if (manager.AirManager.CurrentAir <= 0.0001f) return;
+            if (manager.AirManager.AirIsEmpty) return;
 
             if (manager.Inputs.PropulsionType != 0)
             {
@@ -179,7 +179,7 @@ namespace BlownAway.Character.Movements
 
         public void CheckIfAirEmpty(CharacterManager manager)
         {
-            if (manager.AirManager.CurrentAir > 0.0001f) return;
+            if (!manager.AirManager.AirIsEmpty) return;
 
             manager.States.SwitchState(manager.States.FallingState);
         }
