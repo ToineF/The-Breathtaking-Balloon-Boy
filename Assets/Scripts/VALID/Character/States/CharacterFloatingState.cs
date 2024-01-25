@@ -32,6 +32,8 @@ namespace BlownAway.Character.States
 
         public override void FixedUpdateState(CharacterManager manager)
         {
+            manager.MovementManager.MoveAtSpeed(manager, manager.MovementManager.FloatDeplacementSpeed);
+
             manager.MovementManager.UpdateGravity(manager);
         }
         public override void LateUpdateState(CharacterManager manager)

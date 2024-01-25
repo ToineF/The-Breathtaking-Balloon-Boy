@@ -1,6 +1,7 @@
 using BlownAway.Character.Inputs;
 using System;
 using UnityEngine;
+using DG.Tweening;
 
 namespace BlownAway.Character.Movements
 {
@@ -13,7 +14,10 @@ namespace BlownAway.Character.Movements
         // Idle Data
         /// /////////////////////////////////////////////////////////// PUT IN A SCRIPTABLE OBJECT
         [field: SerializeField, Tooltip("The walking speed the character starts moving at")] public float BaseWalkSpeed { get; set; }
+        [field: SerializeField] public float BaseWalkTime { get; set; }
+        [field: SerializeField] public Ease BaseWalkEase { get; set; }
         [field: SerializeField, Tooltip("The lateral speed the character moves at while falling")] public float FallDeplacementSpeed { get; set; }
+        [field: SerializeField, Tooltip("The lateral speed the character moves at while floating")] public float FloatDeplacementSpeed { get; set; }
         [Tooltip("The current global velocity of the character (movements, gravity, forces...)")] public Vector3 CurrentVelocity { get; set; }
 
         [Header("Gravity")] // ADD TOOLTIPS
@@ -42,6 +46,8 @@ namespace BlownAway.Character.Movements
         [Header("Propulsion")]
         [Tooltip("The base speed the character moves at while propulsing")] public float BasePropulsionSpeed;
 
+        public float CurrentDeplacementSpeed;
+
         /*
         [Header("Forces")]
         [ReadOnly] public Vector3 Force;
@@ -61,6 +67,14 @@ namespace BlownAway.Character.Movements
             moveDirection = Vector3.Scale(moveDirection, new Vector3(1, 0, 1));
             //SetAnimation(moveDirection);
             CurrentVelocity += moveDirection * moveSpeed * Time.deltaTime;
+        }
+
+        public void MoveAtLerpedSpeed(CharacterManager manager, float moveSpeed, float transitionTime, Ease ease)
+        {
+            // HERE TWEEN THE SPEED (ONLY ONCE)
+            //CurrentDeplacementSpeed.DOFloat(moveSpeed, transitionTime, ease);
+            //Debug.Log(CurrentDeplacementSpeed);
+            MoveAtSpeed(manager, CurrentDeplacementSpeed);
         }
 
         public void ApplyVelocity(CharacterManager manager)
