@@ -52,7 +52,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &496894185485964188
 Transform:
   m_ObjectHideFlags: 0
@@ -126,7 +126,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f4dd29b0e4448a46b15204aa9e2c2cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CameraParams: {fileID: 4974291801837491406}
+  CameraParams: {fileID: 6520907870663314107}
 --- !u!114 &7865403362446753878
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -149,6 +149,8 @@ MonoBehaviour:
   GravityIncreaseByFrame: 0
   FloatingGravity: 20
   FloatingMaxGravity: 100
+  PropulsionGravity: 0
+  PropulsionMaxGravity: 0
   GroundCheckDistance: 0.1
   GroundDetectionSphereRadius: 0.01
   GroundLayer:
@@ -167,7 +169,7 @@ GameObject:
   - component: {fileID: 3634015137965557653}
   - component: {fileID: 5270527230717150973}
   - component: {fileID: 8778713179353680526}
-  - component: {fileID: 4974291801837491406}
+  - component: {fileID: 6520907870663314107}
   m_Layer: 0
   m_Name: GameplayCamera
   m_TagString: Untagged
@@ -247,7 +249,7 @@ MonoBehaviour:
   m_FocusTarget: {fileID: 0}
   m_FocusOffset: 0
   m_Profile: {fileID: 11400000, guid: a6560a915ef98420e9faacc1c7438823, type: 2}
---- !u!114 &4974291801837491406
+--- !u!114 &6520907870663314107
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -256,7 +258,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5937500286042893197}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e2be082d9494b7344a8aadff8589ab9e, type: 3}
+  m_Script: {fileID: 11500000, guid: 53b81e00f7c28d94e93c2b50b78b9d6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   CameraDistance: 12.5
