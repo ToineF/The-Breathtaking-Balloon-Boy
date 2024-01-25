@@ -6,7 +6,6 @@ using Cinemachine;
 using System.Collections.Generic;
 using BlownAway.GPE;
 using BlownAway.Camera;
-using UnityEngine.Windows;
 
 namespace BlownAway.Player
 {

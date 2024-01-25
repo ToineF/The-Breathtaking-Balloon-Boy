@@ -46,13 +46,14 @@ GameObject:
   - component: {fileID: 7507358721281837289}
   - component: {fileID: 8945431584733059684}
   - component: {fileID: 7865403362446753878}
+  - component: {fileID: 4325485606811522093}
   m_Layer: 0
   m_Name: CharacterController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &496894185485964188
 Transform:
   m_ObjectHideFlags: 0
@@ -83,13 +84,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8591fcf340878104e96a45912f6900f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isPersistant: 0
   <CharacterRigidbody>k__BackingField: {fileID: 1342601025657824065}
   <CharacterTransform>k__BackingField: {fileID: 2298817516175696517}
   <Inputs>k__BackingField: {fileID: 7507358721281837289}
   <CameraManager>k__BackingField: {fileID: 8945431584733059684}
   <MovementManager>k__BackingField: {fileID: 7865403362446753878}
   <States>k__BackingField: {fileID: 1215609012679441032}
+  <AirManager>k__BackingField: {fileID: 4325485606811522093}
 --- !u!114 &1215609012679441032
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -158,6 +159,22 @@ MonoBehaviour:
     m_Bits: 128
   IsGrounded: 0
   BasePropulsionSpeed: 15
+--- !u!114 &4325485606811522093
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2112151245869228761}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c19eea4798d3e3940a9829298b3b9745, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _airReductionSpeed: 0.4
+  _airDashReductionSpeed: 2
+  _airRefillSpeed: 3.5
+  _airRefillStart: 1
 --- !u!1 &5937500286042893197
 GameObject:
   m_ObjectHideFlags: 0
@@ -751,10 +768,15 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3237609745779814660, guid: a8f3537f9fd352944bc0255417cb2cb9, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3177921140503270161, guid: a8f3537f9fd352944bc0255417cb2cb9,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3243565344976669594}
   m_SourcePrefab: {fileID: 100100000, guid: a8f3537f9fd352944bc0255417cb2cb9, type: 3}
 --- !u!224 &2472065978774590689 stripped
 RectTransform:
@@ -762,3 +784,45 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 6530744587674667808}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7433609365637031664 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4433971733491920336, guid: a8f3537f9fd352944bc0255417cb2cb9,
+    type: 3}
+  m_PrefabInstance: {fileID: 6530744587674667808}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &8555682509080336433 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3177921140503270161, guid: a8f3537f9fd352944bc0255417cb2cb9,
+    type: 3}
+  m_PrefabInstance: {fileID: 6530744587674667808}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3243565344976669594
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8555682509080336433}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 555b57d74dc363f4c9509423bc3394e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _allUIImages: []
+  _filledImage: {fileID: 7433609365637031664}
+  _hideOnFull: 1
+  _appearSpeed: 0.05
+  _appearDelay: 0.3
+  _hideSpeed: 0.3
+  _hideDelay: 0.2
+  _naturalColor: {r: 0.74509805, g: 0.30588236, b: 0.30588236, a: 1}
+  _fullColor: {r: 1, g: 1, b: 1, a: 1}
+  _fullColorTime: 0.05
+  _fullColorDelay: 0.05
+  _fullToNaturalColorSpeed: 0.5

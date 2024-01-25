@@ -22,7 +22,7 @@ namespace BlownAway.Character.States
 
         private void Start()
         {
-            _manager = CharacterManager.Instance;
+            _manager = GameManager.Instance.CharacterManager;
             _currentState = FallingState;
             _currentState.EnterState(_manager);
         }

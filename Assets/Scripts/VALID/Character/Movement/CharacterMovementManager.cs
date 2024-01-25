@@ -51,7 +51,7 @@ namespace BlownAway.Character.Movements
         private void Start()
         {
             GroundHitResults = new RaycastHit[2];
-            SetGravityTo(CharacterManager.Instance, BaseGravity, BaseMaxGravity);
+            SetGravityTo(GameManager.Instance.CharacterManager, BaseGravity, BaseMaxGravity);
         }
 
         
