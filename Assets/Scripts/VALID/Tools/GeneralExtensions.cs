@@ -1,7 +1,7 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using DG.Tweening;
 
 namespace AntoineFoucault.Utilities
 {
@@ -516,13 +516,46 @@ namespace AntoineFoucault.Utilities
 
     public static class GameObjectExtensions
     {
-        public static void SetAllActive(this IList<GameObject> gameObjects, bool value)
+        /// <summary>
+        /// ActivatesDeactivates all GameObjects from a IEnumerable, depending on the given true or false/ value.
+        /// </summary>
+        /// <param name="gameObjects"></param>
+        /// <param name="value"></param>
+        public static void SetAllActive(this IEnumerable<GameObject> gameObjects, bool value)
         {
             foreach (GameObject go in gameObjects)
             {
                 go.SetActive(value);
             }
         }
+    }
+
+    public static class Tween
+    {
+        /// <summary>
+        /// Tweens a float to a given value
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="target"></param>
+        /// <param name="time"></param>
+        /// <param name="ease"></param>
+        public static void DOFloat(this float value, float target, float time, Ease ease = Ease.Unset)
+        {
+            DOTween.To(() => value, x => value = x, target, time).SetEase(ease);
+        }
+
+        /// <summary>
+        /// Tweens an int to a given value
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="target"></param>
+        /// <param name="time"></param>
+        /// <param name="ease"></param>
+        public static void DOInt(this int value, int target, float time, Ease ease = Ease.Unset)
+        {
+            DOTween.To(() => value, x => value = x, target, time).SetEase(ease);
+        }
+
     }
 
 }

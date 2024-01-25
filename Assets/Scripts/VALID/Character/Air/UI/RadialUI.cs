@@ -63,7 +63,6 @@ public class RadialUI : MonoBehaviour
 
     private void HideUI()
     {
-        StopAllCoroutines();
         StartCoroutine(ChangeColorOverTime(_filledImage, _fullColor, _naturalColor, _fullColorTime, _fullToNaturalColorSpeed, _fullColorDelay));
 
         foreach (var ui in _allUIImages)
@@ -75,7 +74,7 @@ public class RadialUI : MonoBehaviour
 
     private void UnhideUI()
     {
-        StopAllCoroutines();
+        //StopAllCoroutines();
         foreach (var ui in _allUIImages)
         {
             StartCoroutine(FadeWithDelay(ui, 1, _appearSpeed, _appearDelay));

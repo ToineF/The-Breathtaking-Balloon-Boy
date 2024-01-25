@@ -368,6 +368,17 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 },
                 {
+                    ""name"": """",
+                    ""id"": ""85f95b03-4a7e-4085-83c8-2c2dde40ff32"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DownPropulsion"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
                     ""name"": ""Joystick"",
                     ""id"": ""12603a12-5ff0-437f-afce-b428490e1796"",
                     ""path"": ""2DVector(mode=2)"",
