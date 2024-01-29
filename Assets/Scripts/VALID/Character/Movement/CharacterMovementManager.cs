@@ -2,6 +2,7 @@ using BlownAway.Character.Inputs;
 using System;
 using UnityEngine;
 using DG.Tweening;
+using AntoineFoucault.Utilities;
 
 namespace BlownAway.Character.Movements
 {
@@ -72,9 +73,9 @@ namespace BlownAway.Character.Movements
         public void MoveAtLerpedSpeed(CharacterManager manager, float moveSpeed, float transitionTime, Ease ease)
         {
             // HERE TWEEN THE SPEED (ONLY ONCE)
-            //CurrentDeplacementSpeed.DOFloat(moveSpeed, transitionTime, ease);
+            CurrentDeplacementSpeed.DOFloat(moveSpeed, transitionTime, ease);
             //Debug.Log(CurrentDeplacementSpeed);
-            MoveAtSpeed(manager, CurrentDeplacementSpeed);
+            //MoveAtSpeed(manager, CurrentDeplacementSpeed);
         }
 
         public void ApplyVelocity(CharacterManager manager)

@@ -49,10 +49,10 @@ namespace BlownAway.Player
         [SerializeField] private LayerMask _playerLayer;
 
         [Header("Cameras")]
-        [SerializeField] private EntityCamera _gameplayCamera;
-        [SerializeField] private EntityCamera _buildingManagerCamera;
-        [SerializeField] private EntityCamera _birdViewCamera;
-        [SerializeField] private EntityCamera _floatingCamera;
+        [SerializeField] private CameraEntity _gameplayCamera;
+        [SerializeField] private CameraEntity _buildingManagerCamera;
+        [SerializeField] private CameraEntity _birdViewCamera;
+        [SerializeField] private CameraEntity _floatingCamera;
 
         [Header("Sounds")]
         [SerializeField] private AudioClip _enterGroundSound;
@@ -73,7 +73,7 @@ namespace BlownAway.Player
 
         // Camera
         private bool _isViewing;
-        private EntityCamera _currentCamera;
+        private CameraEntity _currentCamera;
         private Vector2 _currentCameraAngle;
         private Vector2 _cameraMoveVector;
         private bool _isMouse;
@@ -239,7 +239,7 @@ namespace BlownAway.Player
             action?.Invoke();
         }
 
-        private void ActivateCamera(EntityCamera camera)
+        private void ActivateCamera(CameraEntity camera)
         {
             _currentCamera = camera;
             camera.gameObject.SetActive(false);
@@ -255,7 +255,7 @@ namespace BlownAway.Player
         private void BirdEyeView(InputAction.CallbackContext context)
         {
             if (!CanMove) return;
-            EntityCamera camera = _isViewing ? _gameplayCamera : _birdViewCamera;
+            CameraEntity camera = _isViewing ? _gameplayCamera : _birdViewCamera;
             _isViewing = !_isViewing;
             //ActivateCamera(camera);
         }
@@ -263,7 +263,7 @@ namespace BlownAway.Player
         public void SetFloatingCamera(bool isActive)
         {
             if (!CanMove || _isViewing) return;
-            EntityCamera camera = isActive ? _floatingCamera : _gameplayCamera;
+            CameraEntity camera = isActive ? _floatingCamera : _gameplayCamera;
             //ActivateCamera(camera);
         }
 

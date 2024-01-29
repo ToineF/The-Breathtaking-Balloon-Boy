@@ -5,7 +5,7 @@ namespace BlownAway.Camera
 {
 
     [RequireComponent(typeof(CinemachineVirtualCamera))]
-    public class EntityCamera : MonoBehaviour
+    public class CameraEntity : MonoBehaviour
     {
         public CinemachineFramingTransposer FramingTransposer { get; private set; }
 

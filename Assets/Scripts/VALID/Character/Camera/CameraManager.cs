@@ -6,7 +6,7 @@ namespace BlownAway.Camera
 {
     public class CameraManager : MonoBehaviour
     {
-        [SerializeField] private EntityCamera CameraParams;
+        [SerializeField] private CameraEntity CameraParams;
         private Vector2 _currentCameraAngle;
 
 
