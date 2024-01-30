@@ -8,6 +8,7 @@ namespace BlownAway.Character.States
         {
             Debug.Log("PROPULSION");
             manager.MovementManager.SetGravityTo(manager, manager.MovementManager.PropulsionGravity, manager.MovementManager.PropulsionMaxGravity);
+            manager.MovementManager.LerpDeplacementSpeed(manager, manager.MovementManager.LateralMovementData.BasePropulsionLateralDeplacementSpeed, manager.MovementManager.LateralMovementData.BasePropulsionDeplacementTime, manager.MovementManager.LateralMovementData.BasePropulsionDeplacementCurve);
         }
 
         public override void ExitState(CharacterManager manager)
@@ -32,6 +33,8 @@ namespace BlownAway.Character.States
 
         public override void FixedUpdateState(CharacterManager manager)
         {
+            manager.MovementManager.MoveAtSpeed(manager, manager.MovementManager.LateralMovementData.PropulsionDirectionTurnSpeed);
+
             manager.MovementManager.UpdatePropulsionMovement(manager);
 
             manager.MovementManager.UpdateGravity(manager);

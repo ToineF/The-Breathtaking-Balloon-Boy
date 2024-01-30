@@ -3,7 +3,6 @@ using UnityEngine;
 using System.Collections;
 using BlownAway.Character.Inputs;
 using BlownAway.Character.Movements.Data;
-using UnityEditor.ShaderGraph;
 
 namespace BlownAway.Character.Movements
 {
@@ -14,7 +13,7 @@ namespace BlownAway.Character.Movements
         public Action OnGroundExit;
 
         // Idle & Walk Data
-        [field: SerializeField] public CharacterGroundMovementsData GroundData { get; private set; }
+        [field: SerializeField] public CharacterLateralMovementsData LateralMovementData { get; private set; }
 
 
         // Fall Data

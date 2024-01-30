@@ -12,7 +12,7 @@ namespace BlownAway.Character.States
 
             // Movements
             manager.Inputs.ResetLastMoveInputDirection();
-            manager.MovementManager.LerpDeplacementSpeed(manager, 0, manager.MovementManager.GroundData.BaseIdleTime, manager.MovementManager.GroundData.BaseIdleCurve);
+            manager.MovementManager.LerpDeplacementSpeed(manager, 0, manager.MovementManager.LateralMovementData.BaseIdleTime, manager.MovementManager.LateralMovementData.BaseIdleCurve);
 
             // Air
             manager.AirManager.RefreshAir();
@@ -40,7 +40,7 @@ namespace BlownAway.Character.States
         public override void FixedUpdateState(CharacterManager manager)
         {
             
-            manager.MovementManager.MoveAtSpeed(manager, manager.MovementManager.GroundData.IdleDirectionTurnSpeed, false);
+            manager.MovementManager.MoveAtSpeed(manager, manager.MovementManager.LateralMovementData.IdleDirectionTurnSpeed, false);
         }
         public override void LateUpdateState(CharacterManager manager)
         {

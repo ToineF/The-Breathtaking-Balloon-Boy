@@ -8,7 +8,7 @@ namespace BlownAway.Character.States
         {
             Debug.Log("FLOATING");
             manager.MovementManager.SetGravityTo(manager, manager.MovementManager.FloatingGravity, manager.MovementManager.FloatingMaxGravity);
-            manager.MovementManager.LerpDeplacementSpeed(manager, manager.MovementManager.GroundData.BaseWalkSpeed, manager.MovementManager.GroundData.BaseWalkTime, manager.MovementManager.GroundData.BaseWalkCurve);
+            manager.MovementManager.LerpDeplacementSpeed(manager, manager.MovementManager.LateralMovementData.BaseFallLateralSpeed, manager.MovementManager.LateralMovementData.BaseFallTime, manager.MovementManager.LateralMovementData.BaseFallCurve);
 
         }
 
@@ -33,7 +33,7 @@ namespace BlownAway.Character.States
 
         public override void FixedUpdateState(CharacterManager manager)
         {
-            manager.MovementManager.MoveAtSpeed(manager, manager.MovementManager.FloatDeplacementSpeed);
+            manager.MovementManager.MoveAtSpeed(manager, manager.MovementManager.LateralMovementData.FallDirectionTurnSpeed);
 
             manager.MovementManager.UpdateGravity(manager);
         }

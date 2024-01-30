@@ -8,7 +8,7 @@ namespace BlownAway.Character.States
         public override void EnterState(CharacterManager manager)
         {
             Debug.Log("WALK");
-            manager.MovementManager.LerpDeplacementSpeed(manager, manager.MovementManager.GroundData.BaseWalkSpeed, manager.MovementManager.GroundData.BaseWalkTime, manager.MovementManager.GroundData.BaseWalkCurve);
+            manager.MovementManager.LerpDeplacementSpeed(manager, manager.MovementManager.LateralMovementData.BaseWalkSpeed, manager.MovementManager.LateralMovementData.BaseWalkTime, manager.MovementManager.LateralMovementData.BaseWalkCurve);
         }
 
         public override void ExitState(CharacterManager manager)
@@ -32,7 +32,7 @@ namespace BlownAway.Character.States
 
         public override void FixedUpdateState(CharacterManager manager)
         {
-            manager.MovementManager.MoveAtSpeed(manager, manager.MovementManager.GroundData.WalkDirectionTurnSpeed);
+            manager.MovementManager.MoveAtSpeed(manager, manager.MovementManager.LateralMovementData.WalkDirectionTurnSpeed);
         }
 
         public override void LateUpdateState(CharacterManager manager)

@@ -8,9 +8,11 @@ namespace BlownAway.Character.States
         public override void EnterState(CharacterManager manager)
         {
             Debug.Log("FALLING");
+            // Movements
             manager.MovementManager.SetGravityTo(manager, manager.MovementManager.BaseGravity, manager.MovementManager.BaseMaxGravity);
-            manager.MovementManager.LerpDeplacementSpeed(manager, manager.MovementManager.GroundData.BaseWalkSpeed, manager.MovementManager.GroundData.BaseWalkTime, manager.MovementManager.GroundData.BaseWalkCurve);
+            manager.MovementManager.LerpDeplacementSpeed(manager, manager.MovementManager.LateralMovementData.BaseFallLateralSpeed, manager.MovementManager.LateralMovementData.BaseFallTime, manager.MovementManager.LateralMovementData.BaseFallCurve);
 
+            // Air
             manager.AirManager.AddAirUntilFullIfEmpty(manager, manager.AirManager.FallingAirRefillSpeed, manager.AirManager.FallingAirRefillDelay);
         }
 
@@ -31,7 +33,7 @@ namespace BlownAway.Character.States
 
         public override void FixedUpdateState(CharacterManager manager)
         {
-            manager.MovementManager.MoveAtSpeed(manager, manager.MovementManager.FallDeplacementSpeed);
+            manager.MovementManager.MoveAtSpeed(manager, manager.MovementManager.LateralMovementData.FallDirectionTurnSpeed);
 
             manager.MovementManager.UpdateGravity(manager);
         }
