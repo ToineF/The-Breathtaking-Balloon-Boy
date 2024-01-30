@@ -1,10 +1,8 @@
-using BlownAway.Character.Inputs;
 using System;
 using UnityEngine;
-using DG.Tweening;
-using AntoineFoucault.Utilities;
 using System.Collections;
-using TMPro;
+using BlownAway.Character.Inputs;
+using BlownAway.Character.Movements.Data;
 
 namespace BlownAway.Character.Movements
 {
@@ -14,14 +12,11 @@ namespace BlownAway.Character.Movements
         public Action OnGroundEnter;
         public Action OnGroundExit;
 
-        // Idle Data
-        /// /////////////////////////////////////////////////////////// PUT IN A SCRIPTABLE OBJECT
-        [field: SerializeField, Tooltip("The walking speed the character starts moving at")] public float BaseWalkSpeed { get; set; }
-        [field: SerializeField] public float BaseWalkTime { get; set; }
-        [field: SerializeField] public AnimationCurve BaseWalkCurve { get; set; }
-        [field: SerializeField] public float BaseIdleTime { get; set; }
-        [field: SerializeField] public AnimationCurve BaseIdleCurve { get; set; }
-        [field: SerializeField, Range(0,1)] public float WalkDirectionTransitionSpeed{ get; set; }
+        // Idle & Walk Data
+        [field: SerializeField] public CharacterGroundMovementsData GroundData { get; private set; }
+
+
+        // Fall Data
         [field: SerializeField, Tooltip("The lateral speed the character moves at while falling")] public float FallDeplacementSpeed { get; set; }
         [field: SerializeField, Tooltip("The lateral speed the character moves at while floating")] public float FloatDeplacementSpeed { get; set; }
         [Tooltip("The current global velocity of the character (movements, gravity, forces...)")] public Vector3 CurrentVelocity { get; private set; }
@@ -78,7 +73,7 @@ namespace BlownAway.Character.Movements
                 deplacementDirection = (Vector3.Scale(UnityEngine.Camera.main.transform.forward, new Vector3(1, 0, 1)) * manager.Inputs.MoveInputDirection.z + Vector3.Scale(UnityEngine.Camera.main.transform.right, new Vector3(1, 0, 1)) * manager.Inputs.MoveInputDirection.x).normalized;
                 deplacementDirection = Vector3.Scale(deplacementDirection, new Vector3(1, 0, 1));
             }
-            _currentDeplacementDirection = Vector3.Lerp(_currentDeplacementDirection, deplacementDirection, WalkDirectionTransitionSpeed);
+            _currentDeplacementDirection = Vector3.Lerp(_currentDeplacementDirection, deplacementDirection, GroundData.WalkDirectionTransitionSpeed);
             //SetAnimation(moveDirection);
             Debug.Log(_currentDeplacementDirection);
             //Debug.Log(_currentDeplacementSpeed);

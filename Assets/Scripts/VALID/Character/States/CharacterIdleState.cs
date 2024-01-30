@@ -11,7 +11,7 @@ namespace BlownAway.Character.States
 
             // Movements
             manager.Inputs.ResetLastMoveInputDirection();
-            manager.MovementManager.LerpDeplacementSpeed(manager, 0, manager.MovementManager.BaseIdleTime, manager.MovementManager.BaseIdleCurve);
+            manager.MovementManager.LerpDeplacementSpeed(manager, 0, manager.MovementManager.GroundData.BaseIdleTime, manager.MovementManager.GroundData.BaseIdleCurve);
 
             // Air
             manager.AirManager.RefreshAir();
