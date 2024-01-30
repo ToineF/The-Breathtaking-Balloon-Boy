@@ -8,9 +8,13 @@ namespace BlownAway.Character.States
         public override void EnterState(CharacterManager manager)
         {
             Debug.Log("IDLE");
-            manager.Inputs.ResetLastMoveInputDirection();
-            manager.AirManager.RefreshAir();
 
+            // Movements
+            manager.Inputs.ResetLastMoveInputDirection();
+            manager.MovementManager.LerpDeplacementSpeed(manager, 0, manager.MovementManager.BaseIdleTime, manager.MovementManager.BaseIdleCurve);
+
+            // Air
+            manager.AirManager.RefreshAir();
         }
 
         public override void ExitState(CharacterManager manager)
@@ -34,7 +38,7 @@ namespace BlownAway.Character.States
 
         public override void FixedUpdateState(CharacterManager manager)
         {
-            manager.CharacterRigidbody.velocity = Vector3.zero;
+            manager.MovementManager.MoveAtSpeed(manager, 0, false);
         }
         public override void LateUpdateState(CharacterManager manager)
         {

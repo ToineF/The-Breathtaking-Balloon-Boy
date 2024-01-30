@@ -8,6 +8,7 @@ namespace BlownAway.Character.States
         public override void EnterState(CharacterManager manager)
         {
             Debug.Log("WALK");
+            manager.MovementManager.LerpDeplacementSpeed(manager, manager.MovementManager.BaseWalkSpeed, manager.MovementManager.BaseWalkTime, manager.MovementManager.BaseWalkCurve);
         }
 
         public override void ExitState(CharacterManager manager)
