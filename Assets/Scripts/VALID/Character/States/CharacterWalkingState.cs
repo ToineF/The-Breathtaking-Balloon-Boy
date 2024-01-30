@@ -32,7 +32,7 @@ namespace BlownAway.Character.States
 
         public override void FixedUpdateState(CharacterManager manager)
         {
-            manager.MovementManager.MoveAtSpeed(manager, manager.MovementManager.GroundData.BaseWalkSpeed);
+            manager.MovementManager.MoveAtSpeed(manager, manager.MovementManager.GroundData.WalkDirectionTurnSpeed);
         }
 
         public override void LateUpdateState(CharacterManager manager)

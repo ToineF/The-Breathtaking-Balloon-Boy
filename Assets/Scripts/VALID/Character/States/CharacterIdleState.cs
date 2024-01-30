@@ -1,3 +1,4 @@
+using UnityEditor.ShaderGraph;
 using UnityEngine;
 
 
@@ -38,7 +39,8 @@ namespace BlownAway.Character.States
 
         public override void FixedUpdateState(CharacterManager manager)
         {
-            manager.MovementManager.MoveAtSpeed(manager, 0, false);
+            
+            manager.MovementManager.MoveAtSpeed(manager, manager.MovementManager.GroundData.IdleDirectionTurnSpeed, false);
         }
         public override void LateUpdateState(CharacterManager manager)
         {

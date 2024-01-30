@@ -3,6 +3,7 @@ using UnityEngine;
 using System.Collections;
 using BlownAway.Character.Inputs;
 using BlownAway.Character.Movements.Data;
+using UnityEditor.ShaderGraph;
 
 namespace BlownAway.Character.Movements
 {
@@ -65,7 +66,7 @@ namespace BlownAway.Character.Movements
         }
 
         
-        public void MoveAtSpeed(CharacterManager manager, float moveSpeed, bool includesInputs = true)
+        public void MoveAtSpeed(CharacterManager manager, float walkTurnSpeed, bool includesInputs = true)
         {
             Vector3 deplacementDirection = _currentDeplacementDirection;
             if (includesInputs) // Updates the Current Deplacement Value
@@ -73,10 +74,8 @@ namespace BlownAway.Character.Movements
                 deplacementDirection = (Vector3.Scale(UnityEngine.Camera.main.transform.forward, new Vector3(1, 0, 1)) * manager.Inputs.MoveInputDirection.z + Vector3.Scale(UnityEngine.Camera.main.transform.right, new Vector3(1, 0, 1)) * manager.Inputs.MoveInputDirection.x).normalized;
                 deplacementDirection = Vector3.Scale(deplacementDirection, new Vector3(1, 0, 1));
             }
-            _currentDeplacementDirection = Vector3.Lerp(_currentDeplacementDirection, deplacementDirection, GroundData.WalkDirectionTransitionSpeed);
+            _currentDeplacementDirection = Vector3.Lerp(_currentDeplacementDirection, deplacementDirection, walkTurnSpeed);
             //SetAnimation(moveDirection);
-            Debug.Log(_currentDeplacementDirection);
-            //Debug.Log(_currentDeplacementSpeed);
 
             ApplyForce(_currentDeplacementDirection * _currentDeplacementSpeed * Time.deltaTime);
         }
@@ -106,11 +105,6 @@ namespace BlownAway.Character.Movements
                 updateValueAction?.Invoke(value);
                 yield return null;
             }
-        }
-
-        private Vector3 LerpDirection(Vector3 currentDirection, Vector3 targetDirection, float speed)
-        {
-            return Vector3.Lerp(currentDirection, targetDirection, speed);
         }
 
 
