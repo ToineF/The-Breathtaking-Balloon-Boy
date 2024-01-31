@@ -35,6 +35,8 @@ namespace BlownAway.Character.States
         {
             manager.MovementManager.MoveAtSpeed(manager, manager.MovementManager.LateralMovementData.FallDirectionTurnSpeed);
 
+            manager.MovementManager.UpdatePropulsionMovement(manager, false);
+
             manager.MovementManager.UpdateGravity(manager);
         }
 

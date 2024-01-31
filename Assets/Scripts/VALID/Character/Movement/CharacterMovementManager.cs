@@ -15,6 +15,9 @@ namespace BlownAway.Character.Movements
         // Idle & Walk Data
         [field: SerializeField] public CharacterLateralMovementsData LateralMovementData { get; private set; }
 
+        // Propulsion Data
+        [field: SerializeField] public CharacterPropulsionData PropulsionData { get; private set; }
+
 
         // Fall Data
         [field: SerializeField, Tooltip("The lateral speed the character moves at while falling")] public float FallDeplacementSpeed { get; set; }
@@ -44,13 +47,20 @@ namespace BlownAway.Character.Movements
         [ReadOnly] public bool IsGrounded;
         [HideInInspector] public RaycastHit LastGround;
 
-        [Header("Propulsion")]
-        [Tooltip("The base speed the character moves at while propulsing")] public float BasePropulsionSpeed;
+
+        [field:Header("Propulsion")]
+        [field: SerializeField, Tooltip("The base speed the character moves at while propulsing")] public float BasePropulsionSpeed { get; set; }
+
 
         // Lateral Inputs (Idle, Walk, WASD) - Have this as a generic version for other movements
         private float _currentDeplacementSpeed;
         private Vector3 _currentDeplacementDirection;
         private Coroutine _currentDeplacementCoroutine;
+
+        // Propulsion Inputs (Propulsion) - Have this as a generic version for other movements
+        private float _currentPropulsionSpeed;
+        private Vector3 _currentPropulsionDirection;
+        private Coroutine _currentPropulsionCoroutine;
 
         /*
         [Header("Forces")]
@@ -76,12 +86,7 @@ namespace BlownAway.Character.Movements
             _currentDeplacementDirection = Vector3.Lerp(_currentDeplacementDirection, deplacementDirection, walkTurnSpeed);
             //SetAnimation(moveDirection);
 
-            ApplyForce(_currentDeplacementDirection * _currentDeplacementSpeed * Time.deltaTime);
-        }
-
-        public void ApplyForce(Vector3 force)
-        {
-            CurrentVelocity += force;
+            CurrentVelocity += _currentDeplacementDirection* _currentDeplacementSpeed * Time.deltaTime;
         }
 
         // Generalize this to be more reusable (DO THIS ON STATE START)
@@ -107,6 +112,12 @@ namespace BlownAway.Character.Movements
         }
 
 
+        // PROPULSION
+        public void LerpPropulsionSpeed(CharacterManager manager, float targetValue, float lerpSpeed, AnimationCurve curve)
+        {
+            if (_currentPropulsionCoroutine != null) StopCoroutine(_currentPropulsionCoroutine);
+            _currentPropulsionCoroutine = StartCoroutine(LerpWithEase(_currentPropulsionSpeed, targetValue, lerpSpeed, curve, (result) => _currentPropulsionSpeed = result));
+        }
 
 
         public void ApplyVelocity(CharacterManager manager)
@@ -204,7 +215,7 @@ namespace BlownAway.Character.Movements
             }
         }
 
-        public void UpdatePropulsionMovement(CharacterManager manager)
+        public void UpdatePropulsionMovement(CharacterManager manager, bool includesInputs = true)
         {
             PropulsionDirection propulsionType = manager.Inputs.PropulsionType;
             Vector3 propulsionDirection = Vector3.zero;
@@ -217,13 +228,20 @@ namespace BlownAway.Character.Movements
             if (propulsionType.HasFlag(PropulsionDirection.Lateral)) propulsionDirection += lateralMoveDirection;
             propulsionDirection.Normalize();
 
+            if (!includesInputs) propulsionDirection = _currentPropulsionDirection;
+            _currentDeplacementDirection = Vector3.Lerp(_currentDeplacementDirection, propulsionDirection, PropulsionData.PropulsionDirectionTurnSpeed);
 
-            Vector3 propulsionMovement = propulsionDirection * BasePropulsionSpeed;
+
+            Vector3 propulsionMovement = _currentDeplacementDirection * _currentPropulsionSpeed;
             CurrentVelocity += propulsionMovement;
-
         }
 
-        public void CheckIfAirEmpty(CharacterManager manager)
+        //public void PropulsionJump(CharacterManager manager)
+        //{
+        //    CurrentVelocity += Vector3.up * ;
+        //}
+
+        public void FallfAirEmpty(CharacterManager manager)
         {
             if (!manager.AirManager.AirIsEmpty) return;
 

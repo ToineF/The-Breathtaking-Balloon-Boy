@@ -8,11 +8,15 @@ namespace BlownAway.Character.States
         {
             Debug.Log("PROPULSION");
             manager.MovementManager.SetGravityTo(manager, manager.MovementManager.PropulsionGravity, manager.MovementManager.PropulsionMaxGravity);
-            manager.MovementManager.LerpDeplacementSpeed(manager, manager.MovementManager.LateralMovementData.BasePropulsionLateralDeplacementSpeed, manager.MovementManager.LateralMovementData.BasePropulsionDeplacementTime, manager.MovementManager.LateralMovementData.BasePropulsionDeplacementCurve);
+
+            //manager.MovementManager.LerpDeplacementSpeed(manager, manager.MovementManager.LateralMovementData.BasePropulsionLateralDeplacementSpeed, manager.MovementManager.LateralMovementData.BasePropulsionDeplacementTime, manager.MovementManager.LateralMovementData.BasePropulsionDeplacementCurve);
+            
+            manager.MovementManager.LerpPropulsionSpeed(manager, manager.MovementManager.PropulsionData.BasePropulsionSpeed, manager.MovementManager.PropulsionData.BasePropulsionAccelTime, manager.MovementManager.PropulsionData.BasePropulsionAccelCurve);
         }
 
         public override void ExitState(CharacterManager manager)
         {
+            manager.MovementManager.LerpPropulsionSpeed(manager, 0, manager.MovementManager.PropulsionData.BasePropulsionDecelTime, manager.MovementManager.PropulsionData.BasePropulsionDecelCurve);
         }
 
         public override void UpdateState(CharacterManager manager)
@@ -27,7 +31,7 @@ namespace BlownAway.Character.States
 
             manager.MovementManager.CheckForFloatCancel(manager);
 
-            manager.MovementManager.CheckIfAirEmpty(manager);
+            manager.MovementManager.FallfAirEmpty(manager);
 
         }
 
