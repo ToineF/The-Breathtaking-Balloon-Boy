@@ -23,8 +23,6 @@ namespace BlownAway.Character.States
 
         public override void UpdateState(CharacterManager manager)
         {
-            manager.CameraManager.UpdateCameraPosition();
-
             manager.MovementManager.CheckIfGrounded(manager);
 
             manager.MovementManager.CheckForPropulsionStartOnAir(manager);
@@ -42,8 +40,6 @@ namespace BlownAway.Character.States
 
         public override void LateUpdateState(CharacterManager manager)
         {
-            manager.CameraManager.UpdateCameraAngle(manager);
-
         }
     }
 }

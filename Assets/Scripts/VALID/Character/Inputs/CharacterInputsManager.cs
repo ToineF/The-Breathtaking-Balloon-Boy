@@ -51,7 +51,9 @@ namespace BlownAway.Character.Inputs
             _inputs.Player.Move.canceled += OnMoveInput;
 
             _inputs.Player.CameraMoveMouse.performed += SetCameraTypeMouse;
+            _inputs.Player.CameraMoveMouse.canceled += SetCameraTypeMouse;
             _inputs.Player.CameraMoveController.performed += SetCameraTypeController;
+            _inputs.Player.CameraMoveController.canceled += SetCameraTypeController;
 
             _inputs.Player.UpPropulsion.performed += SetUpPropulsion;
             _inputs.Player.DownPropulsion.performed += SetDownPropulsion;
@@ -71,7 +73,9 @@ namespace BlownAway.Character.Inputs
             _inputs.Player.Move.canceled -= OnMoveInput;
 
             _inputs.Player.CameraMoveMouse.performed -= SetCameraTypeMouse;
+            _inputs.Player.CameraMoveMouse.canceled -= SetCameraTypeMouse;
             _inputs.Player.CameraMoveController.performed -= SetCameraTypeController;
+            _inputs.Player.CameraMoveController.canceled -= SetCameraTypeController;
 
             _inputs.Player.UpPropulsion.performed -= SetUpPropulsion;
             _inputs.Player.DownPropulsion.performed -= SetDownPropulsion;

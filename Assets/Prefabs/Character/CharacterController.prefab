@@ -140,25 +140,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d58fd51571b3e74ea1c67f1f8dbc22c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <BaseWalkSpeed>k__BackingField: 200
-  <FallDeplacementSpeed>k__BackingField: 100
+  <LateralMovementData>k__BackingField: {fileID: 11400000, guid: 7f443f46d0ce00744a88875dcc46ee92,
+    type: 2}
+  <PropulsionData>k__BackingField: {fileID: 11400000, guid: ececa92c454fd3f4b9a45daedfd93ab0,
+    type: 2}
+  <FallDeplacementSpeed>k__BackingField: 150
+  <FloatDeplacementSpeed>k__BackingField: 200
   CurrentGravity: 0
   MinGravity: 0
   MaxGravity: 100
-  BaseGravity: 150
+  BaseGravity: 500
   BaseMaxGravity: 500
   GravityIncreaseByFrame: 0
-  FloatingGravity: 25
+  FloatingGravity: 75
   FloatingMaxGravity: 100
   PropulsionGravity: 0
   PropulsionMaxGravity: 0
   GroundCheckDistance: 0.1
-  GroundDetectionSphereRadius: 0
+  GroundDetectionSphereRadius: 0.1
   GroundLayer:
     serializedVersion: 2
     m_Bits: 128
   IsGrounded: 0
-  BasePropulsionSpeed: 15
+  <BasePropulsionSpeed>k__BackingField: 15
 --- !u!114 &4325485606811522093
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -201,15 +205,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5937500286042893197}
-  m_LocalRotation: {x: 0.29973346, y: 0.014322675, z: -0.0045004333, w: 0.95390487}
-  m_LocalPosition: {x: -2.3943853, y: 1.6645408, z: -10.901076}
-  m_LocalScale: {x: 1.1157299, y: 0.8743498, z: 0.97051996}
+  m_LocalRotation: {x: 0.26091647, y: -0.42535734, z: 0.12952182, w: 0.8568651}
+  m_LocalPosition: {x: 6.1804404, y: 1.4815822, z: -6.9270506}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 981549501677962056}
   m_Father: {fileID: 1245727516111365879}
   m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 89, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -27.244, z: 0}
 --- !u!114 &5270527230717150973
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -233,7 +237,7 @@ MonoBehaviour:
   m_Lens:
     FieldOfView: 40
     OrthographicSize: 10
-    NearClipPlane: 8
+    NearClipPlane: 0.1
     FarClipPlane: 5000
     Dutch: 0
     ModeOverride: 0
@@ -285,9 +289,9 @@ MonoBehaviour:
   MouseSensitivity: 0.008
   IsMouseXInverted: 1
   IsMouseYInverted: 1
-  ControllerSensitivity: 0.06
+  ControllerSensitivity: 0.02
   IsControllerXInverted: 1
-  IsControllerYInverted: 0
+  IsControllerYInverted: 1
 --- !u!1 &5962432275768030687
 GameObject:
   m_ObjectHideFlags: 0
@@ -618,7 +622,7 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 0
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!136 &8485049045919423203

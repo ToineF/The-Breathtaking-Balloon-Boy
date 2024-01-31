@@ -62,6 +62,11 @@ namespace BlownAway.Character.Movements
         private Vector3 _currentPropulsionDirection;
         private Coroutine _currentPropulsionCoroutine;
 
+        private float _currentPropulsionTakeOffSpeed;
+        private Coroutine _currentPropulsionTakeOffCoroutine;
+
+
+
         /*
         [Header("Forces")]
         [ReadOnly] public Vector3 Force;
@@ -97,26 +102,20 @@ namespace BlownAway.Character.Movements
         }
         
         // HERE SORT AS A GENERIC THING
-        private IEnumerator LerpWithEase(float value, float target, float speed, AnimationCurve curve, Action<float> updateValueAction)
+        private IEnumerator LerpWithEase(float value, float targetValue, float targetTime, AnimationCurve curve, Action<float> updateAction, IEnumerator endCoroutine = null)
         {
             float time = 0;
 
-            while (time < speed)
+            while (time < targetTime)
             {
                 time += Time.deltaTime;
-                float weight = curve.Evaluate(time / speed);
-                value = Mathf.Lerp(value, target, weight);
-                updateValueAction?.Invoke(value);
+                float weight = curve.Evaluate(time / targetTime);
+                value = Mathf.Lerp(value, targetValue, weight);
+                updateAction?.Invoke(value);
                 yield return null;
             }
-        }
 
-
-        // PROPULSION
-        public void LerpPropulsionSpeed(CharacterManager manager, float targetValue, float lerpSpeed, AnimationCurve curve)
-        {
-            if (_currentPropulsionCoroutine != null) StopCoroutine(_currentPropulsionCoroutine);
-            _currentPropulsionCoroutine = StartCoroutine(LerpWithEase(_currentPropulsionSpeed, targetValue, lerpSpeed, curve, (result) => _currentPropulsionSpeed = result));
+            if (endCoroutine != null) StartCoroutine(endCoroutine);
         }
 
 
@@ -189,11 +188,27 @@ namespace BlownAway.Character.Movements
 
 
         // Float & Propulsion
+        public void LerpPropulsionSpeed(CharacterManager manager, float targetValue, float lerpSpeed, AnimationCurve curve)
+        {
+            if (_currentPropulsionCoroutine != null) StopCoroutine(_currentPropulsionCoroutine);
+            _currentPropulsionCoroutine = StartCoroutine(LerpWithEase(_currentPropulsionSpeed, targetValue, lerpSpeed, curve, (result) => _currentPropulsionSpeed = result));
+        }
+
+        public void LerpPropulsionTakeOffSpeed(CharacterManager manager, float startTargetValue, float startLerpSpeed, AnimationCurve startCurve, float endTargetValue, float endLerpSpeed, AnimationCurve endCurve)
+        {
+            if (_currentPropulsionTakeOffCoroutine != null) StopCoroutine(_currentPropulsionTakeOffCoroutine);
+            IEnumerator endCoroutine = LerpWithEase(_currentPropulsionTakeOffSpeed, endTargetValue, endLerpSpeed, endCurve, (result) => _currentPropulsionTakeOffSpeed = result);
+            IEnumerator startCoroutine = LerpWithEase(_currentPropulsionTakeOffSpeed, startTargetValue, startLerpSpeed, startCurve, (result) => _currentPropulsionTakeOffSpeed = result, endCoroutine);
+            _currentPropulsionTakeOffCoroutine = StartCoroutine(startCoroutine);
+           // manager.MovementManager.LerpPropulsionTakeOffSpeed(manager, 0, manager.MovementManager.PropulsionData.PropulsionTakeOffDecelTime, manager.MovementManager.PropulsionData.PropulsionTakeOffDecelCurve);
+
+        }
+
         public void CheckForPropulsionStartOnGround(CharacterManager manager)
         {
             if (manager.Inputs.PropulsionType.HasFlag(PropulsionDirection.Up) || manager.Inputs.PropulsionType.HasFlag(PropulsionDirection.Lateral))
             {
-                manager.States.SwitchState(manager.States.PropulsionState);
+                 PropulsionStart(manager);
             }
         }
 
@@ -203,8 +218,14 @@ namespace BlownAway.Character.Movements
 
             if (manager.Inputs.PropulsionType != 0)
             {
-                manager.States.SwitchState(manager.States.PropulsionState);
+                PropulsionStart(manager);
             }
+        }
+
+        private void PropulsionStart(CharacterManager manager)
+        {
+            manager.States.SwitchState(manager.States.PropulsionState);
+
         }
 
         public void CheckForPropulsionEnd(CharacterManager manager)
@@ -216,6 +237,12 @@ namespace BlownAway.Character.Movements
         }
 
         public void UpdatePropulsionMovement(CharacterManager manager, bool includesInputs = true)
+        {
+            UpdateContinuousPropulsionMovement(manager, includesInputs);
+            UpdateTakeOffPropulsionMovement(manager);
+        }
+
+        private void UpdateContinuousPropulsionMovement(CharacterManager manager, bool includesInputs)
         {
             PropulsionDirection propulsionType = manager.Inputs.PropulsionType;
             Vector3 propulsionDirection = Vector3.zero;
@@ -236,10 +263,10 @@ namespace BlownAway.Character.Movements
             CurrentVelocity += propulsionMovement;
         }
 
-        //public void PropulsionJump(CharacterManager manager)
-        //{
-        //    CurrentVelocity += Vector3.up * ;
-        //}
+        public void UpdateTakeOffPropulsionMovement(CharacterManager manager)
+        {
+            CurrentVelocity += Vector3.up * _currentPropulsionTakeOffSpeed;
+        }
 
         public void FallfAirEmpty(CharacterManager manager)
         {

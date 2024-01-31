@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65f1056132fa75d40bf6dcd598859a0b, type: 3}
   m_Name: PropulsionData
   m_EditorClassIdentifier: 
-  <BasePropulsionSpeed>k__BackingField: 15
-  <BasePropulsionAccelTime>k__BackingField: 3
+  <BasePropulsionSpeed>k__BackingField: 20
+  <BasePropulsionAccelTime>k__BackingField: 0.1
   <BasePropulsionAccelCurve>k__BackingField:
     serializedVersion: 2
     m_Curve:
@@ -64,3 +64,63 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   <PropulsionDirectionTurnSpeed>k__BackingField: 0.069
+  <PropulsionTakeOffSpeed>k__BackingField: 7
+  <PropulsionTakeOffAccelTime>k__BackingField: 0.3
+  <PropulsionTakeOffAccelCurve>k__BackingField:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 7.5883145
+      outSlope: 7.5883145
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.016891893
+    - serializedVersion: 3
+      time: 0.10950835
+      value: 0.72048455
+      inSlope: 1.1905751
+      outSlope: 1.1905751
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 1
+      outWeight: 0.13089657
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0.108497076
+      outSlope: 0.108497076
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.2974688
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  <PropulsionTakeOffDecelTime>k__BackingField: 1
+  <PropulsionTakeOffDecelCurve>k__BackingField:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4

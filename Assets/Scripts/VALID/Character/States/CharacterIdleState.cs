@@ -24,7 +24,6 @@ namespace BlownAway.Character.States
 
         public override void UpdateState(CharacterManager manager)
         {
-            manager.CameraManager.UpdateCameraPosition();
             if (manager.Inputs.MoveInputDirection.magnitude > 0.0001f)
             {
                 manager.States.SwitchState(manager.States.WalkingState);
@@ -45,7 +44,6 @@ namespace BlownAway.Character.States
         }
         public override void LateUpdateState(CharacterManager manager)
         {
-            manager.CameraManager.UpdateCameraAngle(manager);
         }
     }
 
