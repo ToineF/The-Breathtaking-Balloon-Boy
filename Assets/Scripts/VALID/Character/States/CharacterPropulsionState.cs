@@ -12,7 +12,6 @@ namespace BlownAway.Character.States
             //manager.MovementManager.LerpDeplacementSpeed(manager, manager.MovementManager.LateralMovementData.BasePropulsionLateralDeplacementSpeed, manager.MovementManager.LateralMovementData.BasePropulsionDeplacementTime, manager.MovementManager.LateralMovementData.BasePropulsionDeplacementCurve);
             
             manager.MovementManager.LerpPropulsionSpeed(manager, manager.MovementManager.PropulsionData.BasePropulsionSpeed, manager.MovementManager.PropulsionData.BasePropulsionAccelTime, manager.MovementManager.PropulsionData.BasePropulsionAccelCurve);
-            manager.MovementManager.LerpPropulsionTakeOffSpeed(manager, manager.MovementManager.PropulsionData.PropulsionTakeOffSpeed, manager.MovementManager.PropulsionData.PropulsionTakeOffAccelTime, manager.MovementManager.PropulsionData.PropulsionTakeOffAccelCurve, 0, manager.MovementManager.PropulsionData.PropulsionTakeOffDecelTime, manager.MovementManager.PropulsionData.PropulsionTakeOffDecelCurve);
         }
 
         public override void ExitState(CharacterManager manager)

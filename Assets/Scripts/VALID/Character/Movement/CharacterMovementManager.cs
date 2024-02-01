@@ -7,7 +7,7 @@ using BlownAway.Character.Movements.Data;
 namespace BlownAway.Character.Movements
 {
 
-    public class CharacterMovementManager : MonoBehaviour
+    public class CharacterMovementManager : MonoBehaviour // RANGER CE SCRIPT !!!
     {
         public Action OnGroundEnter;
         public Action OnGroundExit;
@@ -110,12 +110,22 @@ namespace BlownAway.Character.Movements
             {
                 time += Time.deltaTime;
                 float weight = curve.Evaluate(time / targetTime);
+                Debug.Log(time / targetTime);
                 value = Mathf.Lerp(value, targetValue, weight);
                 updateAction?.Invoke(value);
                 yield return null;
             }
 
             if (endCoroutine != null) StartCoroutine(endCoroutine);
+        }
+
+        private IEnumerator LerpWithEaseBack(float value, float targetValue, float inTime, float outTime, AnimationCurve inCurve, AnimationCurve outCurve, Action<float> updateAction, IEnumerator endCoroutine = null)
+        {
+            StartCoroutine(LerpWithEase(value, targetValue, inTime, inCurve, updateAction, endCoroutine));
+
+            yield return new WaitForSeconds(inTime);
+
+            StartCoroutine(LerpWithEase(value, value, outTime, outCurve, updateAction, endCoroutine));
         }
 
 
@@ -197,10 +207,15 @@ namespace BlownAway.Character.Movements
         public void LerpPropulsionTakeOffSpeed(CharacterManager manager, float startTargetValue, float startLerpSpeed, AnimationCurve startCurve, float endTargetValue, float endLerpSpeed, AnimationCurve endCurve)
         {
             if (_currentPropulsionTakeOffCoroutine != null) StopCoroutine(_currentPropulsionTakeOffCoroutine);
-            IEnumerator endCoroutine = LerpWithEase(_currentPropulsionTakeOffSpeed, endTargetValue, endLerpSpeed, endCurve, (result) => _currentPropulsionTakeOffSpeed = result);
-            IEnumerator startCoroutine = LerpWithEase(_currentPropulsionTakeOffSpeed, startTargetValue, startLerpSpeed, startCurve, (result) => _currentPropulsionTakeOffSpeed = result, endCoroutine);
-            _currentPropulsionTakeOffCoroutine = StartCoroutine(startCoroutine);
-           // manager.MovementManager.LerpPropulsionTakeOffSpeed(manager, 0, manager.MovementManager.PropulsionData.PropulsionTakeOffDecelTime, manager.MovementManager.PropulsionData.PropulsionTakeOffDecelCurve);
+            //IEnumerator endCoroutine = LerpWithEase(_currentPropulsionTakeOffSpeed, endTargetValue, endLerpSpeed, endCurve, (result) => _currentPropulsionTakeOffSpeed = result);
+            //IEnumerator startCoroutine = LerpWithEase(_currentPropulsionTakeOffSpeed, startTargetValue, startLerpSpeed, startCurve, (result) => _currentPropulsionTakeOffSpeed = result, endCoroutine);
+
+
+            _currentPropulsionTakeOffCoroutine = StartCoroutine(LerpWithEaseBack(_currentPropulsionTakeOffSpeed, startTargetValue, startLerpSpeed, endLerpSpeed, startCurve, endCurve, (result) => _currentPropulsionTakeOffSpeed = result));
+            // Start two coroutines
+            //_currentPropulsionTakeOffCoroutine = StartCoroutine(startCoroutine);
+            //_currentPropulsionTakeOffCoroutine = StartCoroutine(WaitForAction(2, () => ));
+            // manager.MovementManager.LerpPropulsionTakeOffSpeed(manager, 0, manager.MovementManager.PropulsionData.PropulsionTakeOffDecelTime, manager.MovementManager.PropulsionData.PropulsionTakeOffDecelCurve);
 
         }
 
@@ -209,6 +224,7 @@ namespace BlownAway.Character.Movements
             if (manager.Inputs.PropulsionType.HasFlag(PropulsionDirection.Up) || manager.Inputs.PropulsionType.HasFlag(PropulsionDirection.Lateral))
             {
                  PropulsionStart(manager);
+                 LerpPropulsionTakeOffSpeed(manager, PropulsionData.PropulsionTakeOffSpeed, PropulsionData.PropulsionTakeOffAccelTime, PropulsionData.PropulsionTakeOffAccelCurve, 0, PropulsionData.PropulsionTakeOffDecelTime, PropulsionData.PropulsionTakeOffDecelCurve);
             }
         }
 
@@ -273,6 +289,13 @@ namespace BlownAway.Character.Movements
             if (!manager.AirManager.AirIsEmpty) return;
 
             manager.States.SwitchState(manager.States.FallingState);
+        }
+
+
+        private IEnumerator WaitForAction(float time, Action action)
+        {
+            yield return new WaitForSeconds(time);
+            action?.Invoke();
         }
 
     }

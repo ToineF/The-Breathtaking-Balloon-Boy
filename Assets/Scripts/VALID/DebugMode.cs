@@ -11,7 +11,7 @@ namespace BlownAway.DebugMode
             DontDestroyOnLoad(this);
         }
 
-#if UNITY_EDITOR
+//#if UNITY_EDITOR
 
         private void Update()
         {
@@ -30,7 +30,7 @@ namespace BlownAway.DebugMode
                     SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
             }
         }
-#endif
+//#endif
 
     }
 }

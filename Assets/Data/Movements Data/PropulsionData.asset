@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PropulsionData
   m_EditorClassIdentifier: 
   <BasePropulsionSpeed>k__BackingField: 20
-  <BasePropulsionAccelTime>k__BackingField: 0.1
+  <BasePropulsionAccelTime>k__BackingField: 5
   <BasePropulsionAccelCurve>k__BackingField:
     serializedVersion: 2
     m_Curve:
@@ -38,8 +38,44 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  <BasePropulsionDecelTime>k__BackingField: 500
+  <BasePropulsionDecelTime>k__BackingField: 50
   <BasePropulsionDecelCurve>k__BackingField:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0.02264151
+      outSlope: 0.02264151
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.41666666
+    - serializedVersion: 3
+      time: 0.9080126
+      value: 0.25142696
+      inSlope: 1.0101879
+      outSlope: 1.0101879
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  <PropulsionDirectionTurnSpeed>k__BackingField: 0.032
+  <PropulsionTakeOffSpeed>k__BackingField: 0
+  <PropulsionTakeOffAccelTime>k__BackingField: 0
+  <PropulsionTakeOffAccelCurve>k__BackingField:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
@@ -63,43 +99,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  <PropulsionDirectionTurnSpeed>k__BackingField: 0.069
-  <PropulsionTakeOffSpeed>k__BackingField: 7
-  <PropulsionTakeOffAccelTime>k__BackingField: 0.3
-  <PropulsionTakeOffAccelCurve>k__BackingField:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 7.5883145
-      outSlope: 7.5883145
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.016891893
-    - serializedVersion: 3
-      time: 0.10950835
-      value: 0.72048455
-      inSlope: 1.1905751
-      outSlope: 1.1905751
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 1
-      outWeight: 0.13089657
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0.108497076
-      outSlope: 0.108497076
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.2974688
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  <PropulsionTakeOffDecelTime>k__BackingField: 1
+  <PropulsionTakeOffDecelTime>k__BackingField: 0
   <PropulsionTakeOffDecelCurve>k__BackingField:
     serializedVersion: 2
     m_Curve:
