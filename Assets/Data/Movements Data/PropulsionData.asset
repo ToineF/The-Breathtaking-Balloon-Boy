@@ -13,32 +13,32 @@ MonoBehaviour:
   m_Name: PropulsionData
   m_EditorClassIdentifier: 
   <BasePropulsionSpeed>k__BackingField: 20
-  <BasePropulsionAccelTime>k__BackingField: 5
+  <BasePropulsionAccelTime>k__BackingField: 0.2
   <BasePropulsionAccelCurve>k__BackingField:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 2
-      outSlope: 2
-      tangentMode: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
       weightedMode: 0
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
       time: 1
       value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
       weightedMode: 0
       inWeight: 0
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  <BasePropulsionDecelTime>k__BackingField: 50
+  <BasePropulsionDecelTime>k__BackingField: 1
   <BasePropulsionDecelCurve>k__BackingField:
     serializedVersion: 2
     m_Curve:
@@ -73,51 +73,51 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   <PropulsionDirectionTurnSpeed>k__BackingField: 0.032
-  <PropulsionTakeOffSpeed>k__BackingField: 0
-  <PropulsionTakeOffAccelTime>k__BackingField: 0
+  <PropulsionTakeOffSpeed>k__BackingField: 10
+  <PropulsionTakeOffAccelTime>k__BackingField: 0.2
   <PropulsionTakeOffAccelCurve>k__BackingField:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 2
-      outSlope: 2
-      tangentMode: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
       weightedMode: 0
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
       time: 1
       value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
       weightedMode: 0
       inWeight: 0
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  <PropulsionTakeOffDecelTime>k__BackingField: 0
+  <PropulsionTakeOffDecelTime>k__BackingField: 0.2
   <PropulsionTakeOffDecelCurve>k__BackingField:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
       weightedMode: 0
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
       time: 1
       value: 1
-      inSlope: 2
-      outSlope: 2
-      tangentMode: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
       weightedMode: 0
       inWeight: 0
       outWeight: 0
