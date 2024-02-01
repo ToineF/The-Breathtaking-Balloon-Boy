@@ -7,7 +7,7 @@ namespace BlownAway.Character.States
         public override void EnterState(CharacterManager manager)
         {
             Debug.Log("FLOATING");
-            manager.MovementManager.SetGravityTo(manager, manager.MovementManager.FloatingGravity, manager.MovementManager.FloatingMaxGravity);
+            manager.MovementManager.SetGravityTo(manager, manager.MovementManager.FallData.FloatingGravity, manager.MovementManager.FallData.FloatingMaxGravity);
             
             manager.MovementManager.LerpDeplacementSpeed(manager, manager.MovementManager.LateralMovementData.BaseFallLateralSpeed, manager.MovementManager.LateralMovementData.BaseFallTime, manager.MovementManager.LateralMovementData.BaseFallCurve);
 

@@ -15,6 +15,9 @@ namespace BlownAway.Character.Movements
         // Idle & Walk Data
         [field: SerializeField] public CharacterLateralMovementsData LateralMovementData { get; private set; }
 
+        // Fall Data
+        [field: SerializeField] public CharacterFallingData FallData { get; private set; }
+
         // Propulsion Data
         [field: SerializeField] public CharacterPropulsionData PropulsionData { get; private set; }
 
@@ -23,21 +26,6 @@ namespace BlownAway.Character.Movements
         [field: SerializeField, Tooltip("The lateral speed the character moves at while falling")] public float FallDeplacementSpeed { get; set; }
         [field: SerializeField, Tooltip("The lateral speed the character moves at while floating")] public float FloatDeplacementSpeed { get; set; }
         [Tooltip("The current global velocity of the character (movements, gravity, forces...)")] public Vector3 CurrentVelocity { get; private set; }
-
-        [Header("Gravity")] // ADD TOOLTIPS
-
-        [ReadOnly, Tooltip("The current gravity the character falls at")] public float CurrentGravity;
-        [ReadOnly, Tooltip("The minimum gravity the character can fall at")] public float MinGravity;
-        [ReadOnly, Tooltip("The maximum gravity the character can fall at")] public float MaxGravity;
-        [Tooltip("The gravity the character falls at while not floating")] public float BaseGravity;
-        [Tooltip("The maximum gravity the character can fall at while not floating")] public float BaseMaxGravity;
-        [Tooltip("The increase of gravity added at each frame")] public float GravityIncreaseByFrame;
-
-        [Tooltip("The gravity the character falls at while floating")] public float FloatingGravity;
-        [Tooltip("The maximum gravity the character can fall at while floating")] public float FloatingMaxGravity;
-
-        [Tooltip("The gravity the character falls at while propulsing")] public float PropulsionGravity;
-        [Tooltip("The maximum gravity the character can fall at while propulsing")] public float PropulsionMaxGravity;
 
         [Header("Ground Check")]
         [Tooltip("The distance offset of the ground detection check from the character")] public float GroundCheckDistance;
@@ -56,6 +44,11 @@ namespace BlownAway.Character.Movements
         private float _currentDeplacementSpeed;
         private Vector3 _currentDeplacementDirection;
         private Coroutine _currentDeplacementCoroutine;
+
+        // Fall
+        [Tooltip("The current gravity the character falls at")] public float CurrentGravity { get; set; }
+        [Tooltip("The minimum gravity the character can fall at")] public float MinGravity { get; set; }
+        [Tooltip("The maximum gravity the character can fall at")] public float MaxGravity { get; set; }
 
         // Propulsion Inputs (Propulsion) - Have this as a generic version for other movements
         private float _currentPropulsionSpeed;
@@ -76,7 +69,7 @@ namespace BlownAway.Character.Movements
         private void Start()
         {
             GroundHitResults = new RaycastHit[2];
-            SetGravityTo(GameManager.Instance.CharacterManager, BaseGravity, BaseMaxGravity);
+            SetGravityTo(GameManager.Instance.CharacterManager, FallData.BaseGravity, FallData.BaseMaxGravity);
         }
 
         
@@ -149,7 +142,7 @@ namespace BlownAway.Character.Movements
                 {
                     LastGround = GroundHitResults[0];
                     OnGroundEnter?.Invoke();
-                    CurrentGravity = BaseGravity;
+                    CurrentGravity = FallData.BaseGravity;
                     manager.States.SwitchState(manager.States.IdleState);
                 }
                 else // On Ground Leave
@@ -164,7 +157,7 @@ namespace BlownAway.Character.Movements
         {
             if (!manager.MovementManager.IsGrounded)
             {
-                manager.MovementManager.CurrentGravity = Mathf.Clamp(manager.MovementManager.CurrentGravity + manager.MovementManager.GravityIncreaseByFrame, manager.MovementManager.MinGravity, manager.MovementManager.MaxGravity);
+                manager.MovementManager.CurrentGravity = Mathf.Clamp(manager.MovementManager.CurrentGravity + manager.MovementManager.FallData.GravityIncreaseByFrame, manager.MovementManager.MinGravity, manager.MovementManager.MaxGravity);
             }
 
             /*Vector3 additionalForces = Vector3.zero;
@@ -209,16 +202,8 @@ namespace BlownAway.Character.Movements
         public void LerpPropulsionTakeOffSpeed(CharacterManager manager, float startTargetValue, float startLerpSpeed, AnimationCurve startCurve, float endTargetValue, float endLerpSpeed, AnimationCurve endCurve)
         {
             if (_currentPropulsionTakeOffCoroutine != null) StopCoroutine(_currentPropulsionTakeOffCoroutine);
-            //IEnumerator endCoroutine = LerpWithEase(_currentPropulsionTakeOffSpeed, endTargetValue, endLerpSpeed, endCurve, (result) => _currentPropulsionTakeOffSpeed = result);
-            //IEnumerator startCoroutine = LerpWithEase(_currentPropulsionTakeOffSpeed, startTargetValue, startLerpSpeed, startCurve, (result) => _currentPropulsionTakeOffSpeed = result, endCoroutine);
-
 
             _currentPropulsionTakeOffCoroutine = StartCoroutine(LerpWithEaseBack(_currentPropulsionTakeOffSpeed, startTargetValue, startLerpSpeed, endLerpSpeed, startCurve, endCurve, (result) => _currentPropulsionTakeOffSpeed = result));
-            // Start two coroutines
-            //_currentPropulsionTakeOffCoroutine = StartCoroutine(startCoroutine);
-            //_currentPropulsionTakeOffCoroutine = StartCoroutine(WaitForAction(2, () => ));
-            // manager.MovementManager.LerpPropulsionTakeOffSpeed(manager, 0, manager.MovementManager.PropulsionData.PropulsionTakeOffDecelTime, manager.MovementManager.PropulsionData.PropulsionTakeOffDecelCurve);
-
         }
 
         public void CheckForPropulsionStartOnGround(CharacterManager manager)
