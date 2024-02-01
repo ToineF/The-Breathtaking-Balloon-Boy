@@ -193,6 +193,8 @@ namespace BlownAway.Character.Movements
         {
             if (!manager.Inputs.StartedFalling) return;
 
+            manager.Inputs.ResetLastPropulsionInputDirection();
+
             manager.States.SwitchState(manager.States.FallingState);
         }
 
@@ -292,13 +294,6 @@ namespace BlownAway.Character.Movements
             if (!manager.AirManager.AirIsEmpty) return;
 
             manager.States.SwitchState(manager.States.FallingState);
-        }
-
-
-        private IEnumerator WaitForAction(float time, Action action)
-        {
-            yield return new WaitForSeconds(time);
-            action?.Invoke();
         }
 
     }

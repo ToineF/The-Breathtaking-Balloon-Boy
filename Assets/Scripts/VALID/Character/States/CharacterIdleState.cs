@@ -10,7 +10,7 @@ namespace BlownAway.Character.States
             Debug.Log("IDLE");
 
             // Movements
-            manager.Inputs.ResetLastMoveInputDirection();
+            manager.Inputs.ResetLastPropulsionInputDirection();
             manager.MovementManager.LerpDeplacementSpeed(manager, 0, manager.MovementManager.LateralMovementData.BaseIdleTime, manager.MovementManager.LateralMovementData.BaseIdleCurve);
 
             // Air

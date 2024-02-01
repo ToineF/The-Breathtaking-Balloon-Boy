@@ -45,7 +45,7 @@ namespace BlownAway.Character.Air
         {
             if (!manager.AirManager.AirIsEmpty) return;
 
-            manager.Inputs.ResetLastMoveInputDirection();
+            manager.Inputs.ResetLastPropulsionInputDirection();
 
             _refillAirCoroutine = StartCoroutine(AddAirUntilFull(airAddSpeed, delay));
         }

@@ -101,7 +101,7 @@ namespace BlownAway.Character.Inputs
             //else LastMoveInputDirection = _propulsionDefaultDirection; // Uncomment if you want transform.forward to be the default position
         }
 
-        public void ResetLastMoveInputDirection()
+        public void ResetLastPropulsionInputDirection()
         {
             PropulsionType = 0;
         }
