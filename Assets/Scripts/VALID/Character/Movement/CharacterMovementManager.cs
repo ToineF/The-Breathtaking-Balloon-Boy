@@ -36,7 +36,7 @@ namespace BlownAway.Character.Movements
         [HideInInspector] public RaycastHit LastGround;
 
 
-        [field:Header("Propulsion")]
+        [field: Header("Propulsion")]
         [field: SerializeField, Tooltip("The base speed the character moves at while propulsing")] public float BasePropulsionSpeed { get; set; }
 
 
@@ -46,9 +46,11 @@ namespace BlownAway.Character.Movements
         private Coroutine _currentDeplacementCoroutine;
 
         // Fall
-        [Tooltip("The current gravity the character falls at")] public float CurrentGravity { get; set; }
-        [Tooltip("The minimum gravity the character can fall at")] public float MinGravity { get; set; }
-        [Tooltip("The maximum gravity the character can fall at")] public float MaxGravity { get; set; }
+        private float _currentGravity { get; set; }
+        private float _minGravity { get; set; }
+        private float _maxGravity { get; set; }
+
+        private Coroutine _currentFallCoroutine;
 
         // Propulsion Inputs (Propulsion) - Have this as a generic version for other movements
         private float _currentPropulsionSpeed;
@@ -69,10 +71,10 @@ namespace BlownAway.Character.Movements
         private void Start()
         {
             GroundHitResults = new RaycastHit[2];
-            SetGravityTo(GameManager.Instance.CharacterManager, FallData.BaseGravity, FallData.BaseMaxGravity);
+            SetGravityTo(GameManager.Instance.CharacterManager, FallData.BaseGravity, FallData.BaseMinGravity, FallData.BaseMaxGravity);
         }
 
-        
+
         public void MoveAtSpeed(CharacterManager manager, float walkTurnSpeed, bool includesInputs = true)
         {
             Vector3 deplacementDirection = _currentDeplacementDirection;
@@ -84,7 +86,7 @@ namespace BlownAway.Character.Movements
             _currentDeplacementDirection = Vector3.Lerp(_currentDeplacementDirection, deplacementDirection, walkTurnSpeed);
             //SetAnimation(moveDirection);
 
-            CurrentVelocity += _currentDeplacementDirection* _currentDeplacementSpeed * Time.deltaTime;
+            CurrentVelocity += _currentDeplacementDirection * _currentDeplacementSpeed * Time.deltaTime;
         }
 
         // Generalize this to be more reusable (DO THIS ON STATE START)
@@ -93,7 +95,7 @@ namespace BlownAway.Character.Movements
             if (_currentDeplacementCoroutine != null) StopCoroutine(_currentDeplacementCoroutine);
             _currentDeplacementCoroutine = StartCoroutine(LerpWithEase(_currentDeplacementSpeed, targetValue, lerpSpeed, curve, (result) => _currentDeplacementSpeed = result));
         }
-        
+
         // HERE SORT AS A GENERIC THING
         private IEnumerator LerpWithEase(float value, float targetValue, float targetTime, AnimationCurve curve, Action<float> updateAction, IEnumerator endCoroutine = null)
         {
@@ -142,7 +144,7 @@ namespace BlownAway.Character.Movements
                 {
                     LastGround = GroundHitResults[0];
                     OnGroundEnter?.Invoke();
-                    CurrentGravity = FallData.BaseGravity;
+                    _currentGravity = FallData.BaseGravity;
                     manager.States.SwitchState(manager.States.IdleState);
                 }
                 else // On Ground Leave
@@ -157,7 +159,7 @@ namespace BlownAway.Character.Movements
         {
             if (!manager.MovementManager.IsGrounded)
             {
-                manager.MovementManager.CurrentGravity = Mathf.Clamp(manager.MovementManager.CurrentGravity + manager.MovementManager.FallData.GravityIncreaseByFrame, manager.MovementManager.MinGravity, manager.MovementManager.MaxGravity);
+                manager.MovementManager._currentGravity = Mathf.Clamp(manager.MovementManager._currentGravity + manager.MovementManager.FallData.GravityIncreaseByFrame, manager.MovementManager._minGravity, manager.MovementManager._maxGravity);
             }
 
             /*Vector3 additionalForces = Vector3.zero;
@@ -166,7 +168,7 @@ namespace BlownAway.Character.Movements
                 additionalForces += force.Value.CurrentForce;
                 force.Value.CurrentForce = Vector3.Lerp(force.Value.CurrentForce, force.Value.TargetForce, force.Value.ForceLerp);
             }*/
-            Vector3 gravity = -manager.MovementManager.CurrentGravity * Vector3.up;
+            Vector3 gravity = -manager.MovementManager._currentGravity * Vector3.up;
             //Vector3 allForces = CharacterManager.Instance + additionalForces + gravity;
 
             //_characterController.Move(allForces * Time.deltaTime);
@@ -175,11 +177,23 @@ namespace BlownAway.Character.Movements
             //CharacterManager.Instance.Force = Vector3.Lerp(CharacterManager.Instance.Force, CharacterManager.Instance.CurrentGravity, _lerpValue);
         }
 
-        public void SetGravityTo(CharacterManager manager, float targetGravity, float maxGravity)
+        public void SetGravityTo(CharacterManager manager, float targetGravity, float minGravity, float maxGravity)
         {
-            manager.MovementManager.CurrentGravity = targetGravity;
-            manager.MovementManager.MinGravity = targetGravity;
-            manager.MovementManager.MaxGravity = maxGravity;
+            manager.MovementManager._currentGravity = targetGravity;
+            SetGravityMinMax(manager, targetGravity, minGravity, maxGravity);
+        }
+
+        public void SetGravityMinMax(CharacterManager manager, float targetGravity, float minGravity, float maxGravity)
+        {
+            manager.MovementManager._minGravity = minGravity;
+            manager.MovementManager._maxGravity = maxGravity;
+        }
+
+        public void LerpGravityTo(CharacterManager manager, float targetGravity, float minGravity, float maxGravity, float time, AnimationCurve curve)
+        {
+            if (_currentFallCoroutine != null) StopCoroutine(_currentFallCoroutine);
+            SetGravityMinMax(manager, targetGravity, minGravity, maxGravity);
+            _currentFallCoroutine = StartCoroutine(LerpWithEase(_currentGravity, targetGravity, time, curve, (result) => _currentGravity = result));
         }
 
         public void CheckForFloatCancel(CharacterManager manager)
@@ -210,8 +224,8 @@ namespace BlownAway.Character.Movements
         {
             if (manager.Inputs.PropulsionType.HasFlag(PropulsionDirection.Up) || manager.Inputs.PropulsionType.HasFlag(PropulsionDirection.Lateral))
             {
-                 PropulsionStart(manager);
-                 LerpPropulsionTakeOffSpeed(manager, PropulsionData.PropulsionTakeOffSpeed, PropulsionData.PropulsionTakeOffAccelTime, PropulsionData.PropulsionTakeOffAccelCurve, 0, PropulsionData.PropulsionTakeOffDecelTime, PropulsionData.PropulsionTakeOffDecelCurve);
+                PropulsionStart(manager);
+                LerpPropulsionTakeOffSpeed(manager, PropulsionData.PropulsionTakeOffSpeed, PropulsionData.PropulsionTakeOffAccelTime, PropulsionData.PropulsionTakeOffAccelCurve, 0, PropulsionData.PropulsionTakeOffDecelTime, PropulsionData.PropulsionTakeOffDecelCurve);
             }
         }
 

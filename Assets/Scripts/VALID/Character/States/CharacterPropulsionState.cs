@@ -7,10 +7,11 @@ namespace BlownAway.Character.States
         public override void EnterState(CharacterManager manager)
         {
             Debug.Log("PROPULSION");
-            manager.MovementManager.SetGravityTo(manager, manager.MovementManager.FallData.PropulsionGravity, manager.MovementManager.FallData.PropulsionMaxGravity);
+            manager.MovementManager.LerpGravityTo(manager, manager.MovementManager.FallData.PropulsionGravity, manager.MovementManager.FallData.PropulsionMinGravity, manager.MovementManager.FallData.PropulsionMaxGravity, manager.MovementManager.FallData.PropulsionGravityTime, manager.MovementManager.FallData.PropulsionGravityAccel);
+
 
             //manager.MovementManager.LerpDeplacementSpeed(manager, manager.MovementManager.LateralMovementData.BasePropulsionLateralDeplacementSpeed, manager.MovementManager.LateralMovementData.BasePropulsionDeplacementTime, manager.MovementManager.LateralMovementData.BasePropulsionDeplacementCurve);
-            
+
             manager.MovementManager.LerpPropulsionSpeed(manager, 1, manager.MovementManager.PropulsionData.BasePropulsionAccelTime, manager.MovementManager.PropulsionData.BasePropulsionAccelCurve);
         }
 
