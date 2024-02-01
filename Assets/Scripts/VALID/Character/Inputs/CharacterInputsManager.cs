@@ -98,7 +98,7 @@ namespace BlownAway.Character.Inputs
             float zPosition = context.ReadValue<Vector2>().y;
             MoveInputDirection = new Vector3(xPosition, 0, zPosition);
             if (MoveInputDirection != Vector3.zero) LastMoveInputDirection = MoveInputDirection;
-            else LastMoveInputDirection = _propulsionDefaultDirection;
+            //else LastMoveInputDirection = _propulsionDefaultDirection; // Uncomment if you want transform.forward to be the default position
         }
 
         public void ResetLastMoveInputDirection()

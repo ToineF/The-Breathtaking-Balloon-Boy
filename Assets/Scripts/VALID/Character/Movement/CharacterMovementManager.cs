@@ -275,7 +275,10 @@ namespace BlownAway.Character.Movements
             _currentDeplacementDirection = Vector3.Lerp(_currentDeplacementDirection, propulsionDirection, PropulsionData.PropulsionDirectionTurnSpeed);
 
 
-            Vector3 propulsionMovement = _currentDeplacementDirection * _currentPropulsionSpeed;
+            float horizontalSpeed = _currentPropulsionSpeed * PropulsionData.HorizontalPropulsionSpeed;
+            float verticalSpeed = _currentPropulsionSpeed * PropulsionData.VerticalPropulsionSpeed;
+
+            Vector3 propulsionMovement = new Vector3(_currentDeplacementDirection.x * horizontalSpeed, _currentDeplacementDirection.y * verticalSpeed, _currentDeplacementDirection.z * horizontalSpeed);
             CurrentVelocity += propulsionMovement;
         }
 
