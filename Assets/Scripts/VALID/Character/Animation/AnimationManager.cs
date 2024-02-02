@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace BlownAway.Character.Animations
 {
@@ -11,8 +12,14 @@ namespace BlownAway.Character.Animations
 
         private void Update()
         {
-            // here process animations
-            GameManager.Instance.CharacterManager.CharacterTransform.LookAt(GameManager.Instance.CharacterManager.CharacterTransform.position - GameManager.Instance.CharacterManager.MovementManager.CurrentVelocity);
+            RotateDirection();
+        }
+
+        private static void RotateDirection()
+        {
+            Vector3 moveDirection = GameManager.Instance.CharacterManager.MovementManager.CurrentVelocity;
+            moveDirection = Vector3.Scale(moveDirection, new Vector3(1, 0, 1));
+            GameManager.Instance.CharacterManager.CharacterTransform.LookAt(GameManager.Instance.CharacterManager.CharacterTransform.position - moveDirection);
         }
     }
 }
