@@ -18,7 +18,7 @@ namespace BlownAway.Camera
 
         private void Start()
         {
-            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.lockState = _setCursorVisible ? CursorLockMode.None : CursorLockMode.Locked;
             Cursor.visible = _setCursorVisible;
         }
 
@@ -27,29 +27,30 @@ namespace BlownAway.Camera
             float YPosition = _cameraParams.YOffset + _currentCameraAngle.y;
             Vector3 cameraVector = new Vector3((float)Math.Cos(_currentCameraAngle.x), YPosition, (float)Math.Sin(_currentCameraAngle.x)).normalized * int.MaxValue;
             Vector3 newPosition = _cameraParams.transform.position + cameraVector;
-            //if (!Physics.SphereCast(_cameraParams.transform.position, _cameraCollisionRadius, cameraVector.normalized, out RaycastHit hit, cameraVector.magnitude, solidsMask, QueryTriggerInteraction.Ignore))
-            //{
-                _cameraParams.transform.position = newPosition;
-            //} else
-           // {
-           //     _cameraParams.transform.position = hit.point + (_cameraParams.transform.position - newPosition).normalized * hitOffset;
-           // }
-               
-                //if (!Physics.Linecast(_cameraParams.transform.position, newPosition, out RaycastHit hit, solidsMask, QueryTriggerInteraction.Ignore))
+            if (!Physics.SphereCast(_cameraParams.transform.position, _cameraCollisionRadius, cameraVector.normalized, out RaycastHit hit, cameraVector.magnitude, solidsMask, QueryTriggerInteraction.Ignore))
+            {
+              _cameraParams.transform.position = newPosition;
+              _cameraParams.FramingTransposer.m_TrackedObjectOffset = _cameraParams.PositionOffset;
+              _cameraParams.FramingTransposer.m_CameraDistance = _cameraParams.CameraDistance;
+            } else
+            {
+              _cameraParams.transform.position = hit.point + (_cameraParams.transform.position - newPosition).normalized * hitOffset;
+            }
+
+            //if (!Physics.Linecast(_cameraParams.transform.position, newPosition, out RaycastHit hit, solidsMask, QueryTriggerInteraction.Ignore))
 
             //
 
-                //Vector3 direction = GameManager.Instance.CharacterManager.CharacterTransform.position - _cameraParams.transform.position;
-                // Debug.Log (Physics.SphereCast(_cameraParams.transform.position, _cameraCollisionRadius, direction, out RaycastHit hit, int.MaxValue, solidsMask, QueryTriggerInteraction.Ignore)) ;
-                // if (Physics.Linecast(_cameraParams.transform.position, newPosition, out RaycastHit hit, solidsMask, QueryTriggerInteraction.Ignore))
-                //_cameraParams.transform.position = hit.point + (_cameraParams.transform.position - newPosition).normalized * hitOffset;
-                //else
-                //    _cameraParams.transform.position = newPosition;
-                //
+            //Vector3 direction = GameManager.Instance.CharacterManager.CharacterTransform.position - _cameraParams.transform.position;
+            // Debug.Log (Physics.SphereCast(_cameraParams.transform.position, _cameraCollisionRadius, direction, out RaycastHit hit, int.MaxValue, solidsMask, QueryTriggerInteraction.Ignore)) ;
+            // if (Physics.Linecast(_cameraParams.transform.position, newPosition, out RaycastHit hit, solidsMask, QueryTriggerInteraction.Ignore))
+            //_cameraParams.transform.position = hit.point + (_cameraParams.transform.position - newPosition).normalized * hitOffset;
+            //else
+            //    _cameraParams.transform.position = newPosition;
+            //
 
 
-                _cameraParams.FramingTransposer.m_TrackedObjectOffset = _cameraParams.PositionOffset;
-            _cameraParams.FramingTransposer.m_CameraDistance = _cameraParams.CameraDistance;
+
         }
 
         public void UpdateCameraAngle(CharacterManager manager) // Late Update

@@ -36,8 +36,10 @@ namespace BlownAway.Character.Movements
         [HideInInspector] public RaycastHit LastGround;
 
 
-        [field: Header("Propulsion")]
-        [field: SerializeField, Tooltip("The base speed the character moves at while propulsing")] public float BasePropulsionSpeed { get; set; }
+        // Jump buffer
+        public bool CanJumpBuffer { get; private set; }
+        [Tooltip("The distance offset of the jump buffer detection check from the character")] public float JumpBufferCheckDistance;
+        [Tooltip("The raycast hits stocked while looking for jump buffer")] public RaycastHit[] JumpBufferHitResults { get; private set; }
 
 
         // Lateral Inputs (Idle, Walk, WASD) - Have this as a generic version for other movements
@@ -58,7 +60,8 @@ namespace BlownAway.Character.Movements
         private Coroutine _currentPropulsionCoroutine;
 
         private float _currentPropulsionTakeOffSpeed;
-        private Coroutine _currentPropulsionTakeOffCoroutine;
+        private Coroutine _currentPropulsionTakeOffSubCoroutine1;
+        private Coroutine _currentPropulsionTakeOffSubCoroutine2;
 
 
 
@@ -71,6 +74,7 @@ namespace BlownAway.Character.Movements
         private void Start()
         {
             GroundHitResults = new RaycastHit[2];
+            JumpBufferHitResults = new RaycastHit[2];
             SetGravityTo(GameManager.Instance.CharacterManager, FallData.BaseGravity, FallData.BaseMinGravity, FallData.BaseMaxGravity);
         }
 
@@ -116,11 +120,11 @@ namespace BlownAway.Character.Movements
 
         private IEnumerator LerpWithEaseBack(float value, float targetValue, float inTime, float outTime, AnimationCurve inCurve, AnimationCurve outCurve, Action<float> updateAction, IEnumerator endCoroutine = null)
         {
-            StartCoroutine(LerpWithEase(value, targetValue, inTime, inCurve, updateAction, endCoroutine));
+            _currentPropulsionTakeOffSubCoroutine1 = StartCoroutine(LerpWithEase(value, targetValue, inTime, inCurve, updateAction, endCoroutine));
 
             yield return new WaitForSeconds(inTime);
 
-            StartCoroutine(LerpWithEase(value, value, outTime, outCurve, updateAction, endCoroutine));
+            _currentPropulsionTakeOffSubCoroutine2 = StartCoroutine(LerpWithEase(value, value, outTime, outCurve, updateAction, endCoroutine));
         }
 
 
@@ -138,6 +142,7 @@ namespace BlownAway.Character.Movements
         {
             var lastGrounded = IsGrounded;
             IsGrounded = Physics.SphereCastNonAlloc(manager.CharacterTransform.position, GroundDetectionSphereRadius, Vector3.down, GroundHitResults, GroundCheckDistance, GroundLayer) > 0;
+            CanJumpBuffer = Physics.SphereCastNonAlloc(manager.CharacterTransform.position, GroundDetectionSphereRadius, Vector3.down, JumpBufferHitResults, JumpBufferCheckDistance, GroundLayer) > 0;
             if (lastGrounded != IsGrounded)
             {
                 if (IsGrounded) // On Ground Enter
@@ -215,15 +220,23 @@ namespace BlownAway.Character.Movements
 
         public void LerpPropulsionTakeOffSpeed(CharacterManager manager, float startTargetValue, float startLerpSpeed, AnimationCurve startCurve, float endTargetValue, float endLerpSpeed, AnimationCurve endCurve)
         {
-            if (_currentPropulsionTakeOffCoroutine != null) StopCoroutine(_currentPropulsionTakeOffCoroutine);
+            if (_currentPropulsionTakeOffSubCoroutine1 != null)
+            {
+                _currentPropulsionTakeOffSpeed = 0;
+                StopCoroutine(_currentPropulsionTakeOffSubCoroutine1);
+            }
+            if (_currentPropulsionTakeOffSubCoroutine2 != null) StopCoroutine(_currentPropulsionTakeOffSubCoroutine2);
 
-            _currentPropulsionTakeOffCoroutine = StartCoroutine(LerpWithEaseBack(_currentPropulsionTakeOffSpeed, startTargetValue, startLerpSpeed, endLerpSpeed, startCurve, endCurve, (result) => _currentPropulsionTakeOffSpeed = result));
+            StartCoroutine(LerpWithEaseBack(_currentPropulsionTakeOffSpeed, startTargetValue, startLerpSpeed, endLerpSpeed, startCurve, endCurve, (result) => _currentPropulsionTakeOffSpeed = result));
         }
 
         public void CheckForPropulsionStartOnGround(CharacterManager manager)
         {
             if (manager.Inputs.PropulsionType.HasFlag(PropulsionDirection.Up) || manager.Inputs.PropulsionType.HasFlag(PropulsionDirection.Lateral))
             {
+                Debug.Log("start");
+
+                manager.AirManager.RefreshAir();
                 PropulsionStart(manager);
                 LerpPropulsionTakeOffSpeed(manager, PropulsionData.PropulsionTakeOffSpeed, PropulsionData.PropulsionTakeOffAccelTime, PropulsionData.PropulsionTakeOffAccelCurve, 0, PropulsionData.PropulsionTakeOffDecelTime, PropulsionData.PropulsionTakeOffDecelCurve);
             }
@@ -231,6 +244,14 @@ namespace BlownAway.Character.Movements
 
         public void CheckForPropulsionStartOnAir(CharacterManager manager)
         {
+            if (CanJumpBuffer && !manager.AirManager.AirIsFull)
+            {
+                Debug.Log("1");
+                CheckForPropulsionStartOnGround(manager);
+                return;
+            }
+            Debug.Log("2");
+
             if (manager.AirManager.AirIsEmpty) return;
 
             if (manager.Inputs.PropulsionType != 0)
