@@ -10,6 +10,7 @@ namespace BlownAway.Character
     public class CharacterManager : MonoBehaviour
     {
         [field: SerializeField] public Rigidbody CharacterRigidbody { get; set; }
+        [field: SerializeField] public Collider CharacterCollider { get; set; }
         [field: SerializeField] public Transform CharacterTransform { get; set; }
 
 

@@ -71,7 +71,7 @@ Transform:
   - {fileID: 2067144079398581976}
   - {fileID: 1245727516111365879}
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6348225905439228519
 MonoBehaviour:
@@ -86,6 +86,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <CharacterRigidbody>k__BackingField: {fileID: 1342601025657824065}
+  <CharacterCollider>k__BackingField: {fileID: 0}
   <CharacterTransform>k__BackingField: {fileID: 2298817516175696517}
   <Inputs>k__BackingField: {fileID: 7507358721281837289}
   <CameraManager>k__BackingField: {fileID: 8945431584733059684}
@@ -184,6 +185,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2702a2a0c1c391743a140cbd4eedf14c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _speed: 0
 --- !u!1 &5937500286042893197
 GameObject:
   m_ObjectHideFlags: 0
@@ -193,9 +195,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3634015137965557653}
+  - component: {fileID: 6520907870663314107}
   - component: {fileID: 5270527230717150973}
   - component: {fileID: 8778713179353680526}
-  - component: {fileID: 6520907870663314107}
   m_Layer: 0
   m_Name: GameplayCamera
   m_TagString: Untagged
@@ -219,6 +221,28 @@ Transform:
   m_Father: {fileID: 1245727516111365879}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: -27.244, z: 0}
+--- !u!114 &6520907870663314107
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5937500286042893197}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53b81e00f7c28d94e93c2b50b78b9d6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CameraDistance: 12.5
+  YOffset: 0.2
+  PositionOffset: {x: 0, y: 2, z: 0}
+  YDeadZone: 3
+  MouseSensitivity: 0.008
+  IsMouseXInverted: 1
+  IsMouseYInverted: 1
+  ControllerSensitivity: 0.02
+  IsControllerXInverted: 1
+  IsControllerYInverted: 1
 --- !u!114 &5270527230717150973
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -275,28 +299,6 @@ MonoBehaviour:
   m_FocusTarget: {fileID: 0}
   m_FocusOffset: 0
   m_Profile: {fileID: 11400000, guid: a6560a915ef98420e9faacc1c7438823, type: 2}
---- !u!114 &6520907870663314107
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5937500286042893197}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 53b81e00f7c28d94e93c2b50b78b9d6e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CameraDistance: 12.5
-  YOffset: 0.2
-  PositionOffset: {x: 0, y: 2, z: 0}
-  YDeadZone: 3
-  MouseSensitivity: 0.008
-  IsMouseXInverted: 1
-  IsMouseYInverted: 1
-  ControllerSensitivity: 0.02
-  IsControllerXInverted: 1
-  IsControllerYInverted: 1
 --- !u!1 &5962432275768030687
 GameObject:
   m_ObjectHideFlags: 0

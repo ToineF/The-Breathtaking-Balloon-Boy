@@ -105,7 +105,7 @@ namespace BlownAway.Character.Movements
             {
                 time += Time.deltaTime;
                 float weight = curve.Evaluate(time / targetTime);
-                Debug.Log(time / targetTime);
+                //Debug.Log(time / targetTime);
                 value = Mathf.Lerp(value, targetValue, weight);
                 updateAction?.Invoke(value);
                 yield return null;
