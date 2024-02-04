@@ -21,7 +21,7 @@ namespace BlownAway.Character.States
         {
             manager.AirManager.ReduceAir(manager.AirManager.FloatingAirReductionSpeed);
 
-            manager.MovementManager.CheckIfGrounded(manager);
+            manager.MovementManager.CheckIfGrounded(manager, true);
 
             manager.MovementManager.CheckForPropulsionStartOnAir(manager);
 

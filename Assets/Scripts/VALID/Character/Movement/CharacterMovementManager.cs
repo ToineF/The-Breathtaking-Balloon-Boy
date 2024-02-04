@@ -138,7 +138,7 @@ namespace BlownAway.Character.Movements
             CurrentVelocity = Vector3.zero;
         }
 
-        public void CheckIfGrounded(CharacterManager manager)
+        public void CheckIfGrounded(CharacterManager manager, bool isPropulsing = false)
         {
             var lastGrounded = IsGrounded;
             IsGrounded = Physics.SphereCastNonAlloc(manager.CharacterTransform.position, GroundDetectionSphereRadius, Vector3.down, GroundHitResults, GroundCheckDistance, GroundLayer) > 0;
@@ -155,7 +155,14 @@ namespace BlownAway.Character.Movements
                 else // On Ground Leave
                 {
                     OnGroundExit?.Invoke();
-                    manager.States.SwitchState(manager.States.FallingState); // HERE DISSOCIATE FALLING FROM PROPULSION
+                    if (isPropulsing)
+                    {
+                        manager.States.SwitchState(manager.States.FloatingState); // FLOATING & PROPLUSION
+                    }
+                    else
+                    {
+                        manager.States.SwitchState(manager.States.FallingState); // IDLE, WALK & FALL
+                    }
                 }
             }
         }
@@ -234,8 +241,6 @@ namespace BlownAway.Character.Movements
         {
             if (manager.Inputs.PropulsionType.HasFlag(PropulsionDirection.Up) || manager.Inputs.PropulsionType.HasFlag(PropulsionDirection.Lateral))
             {
-                Debug.Log("start");
-
                 manager.AirManager.RefreshAir();
                 PropulsionStart(manager);
                 LerpPropulsionTakeOffSpeed(manager, PropulsionData.PropulsionTakeOffSpeed, PropulsionData.PropulsionTakeOffAccelTime, PropulsionData.PropulsionTakeOffAccelCurve, 0, PropulsionData.PropulsionTakeOffDecelTime, PropulsionData.PropulsionTakeOffDecelCurve);
@@ -246,11 +251,9 @@ namespace BlownAway.Character.Movements
         {
             if (CanJumpBuffer && !manager.AirManager.AirIsFull)
             {
-                Debug.Log("1");
                 CheckForPropulsionStartOnGround(manager);
                 return;
             }
-            Debug.Log("2");
 
             if (manager.AirManager.AirIsEmpty) return;
 

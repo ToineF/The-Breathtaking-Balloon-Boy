@@ -26,7 +26,7 @@ namespace BlownAway.Character.States
 
             manager.MovementManager.CheckForPropulsionEnd(manager);
 
-            manager.MovementManager.CheckIfGrounded(manager);
+            manager.MovementManager.CheckIfGrounded(manager, true);
 
             manager.MovementManager.CheckForFloatCancel(manager);
 
