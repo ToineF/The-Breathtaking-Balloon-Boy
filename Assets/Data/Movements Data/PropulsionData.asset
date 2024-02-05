@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65f1056132fa75d40bf6dcd598859a0b, type: 3}
   m_Name: PropulsionData
   m_EditorClassIdentifier: 
-  <VerticalPropulsionSpeed>k__BackingField: 30
-  <HorizontalPropulsionSpeed>k__BackingField: 20
+  <VerticalPropulsionSpeed>k__BackingField: 1800
+  <HorizontalPropulsionSpeed>k__BackingField: 1200
   <BasePropulsionAccelTime>k__BackingField: 0.2
   <BasePropulsionAccelCurve>k__BackingField:
     serializedVersion: 2
@@ -74,8 +74,8 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   <PropulsionDirectionTurnSpeed>k__BackingField: 0.032
-  <PropulsionTakeOffSpeed>k__BackingField: 10
-  <PropulsionTakeOffAccelTime>k__BackingField: 0.1
+  <PropulsionTakeOffSpeed>k__BackingField: 600
+  <PropulsionTakeOffAccelTime>k__BackingField: 0.15
   <PropulsionTakeOffAccelCurve>k__BackingField:
     serializedVersion: 2
     m_Curve:
@@ -100,7 +100,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  <PropulsionTakeOffDecelTime>k__BackingField: 0.0001
+  <PropulsionTakeOffDecelTime>k__BackingField: 0.001
   <PropulsionTakeOffDecelCurve>k__BackingField:
     serializedVersion: 2
     m_Curve:

@@ -38,6 +38,7 @@ namespace BlownAway.Character.States
             _manager.MovementManager.ResetVelocity();
             _currentState.FixedUpdateState(_manager);
             _manager.MovementManager.ApplyVelocity(_manager);
+            Debug.Log(_manager.CharacterRigidbody.velocity);
         }
 
         private void LateUpdate()

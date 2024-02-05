@@ -21,25 +21,13 @@ namespace BlownAway.Character.Movements
         // Propulsion Data
         [field: SerializeField] public CharacterPropulsionData PropulsionData { get; private set; }
 
+        // Ground Detection Data
+        [field: SerializeField] public CharacterGroundDetectionData GroundDetectionData { get; private set; }
 
-        // Fall Data
-        [field: SerializeField, Tooltip("The lateral speed the character moves at while falling")] public float FallDeplacementSpeed { get; set; }
-        [field: SerializeField, Tooltip("The lateral speed the character moves at while floating")] public float FloatDeplacementSpeed { get; set; }
+
+
         [Tooltip("The current global velocity of the character (movements, gravity, forces...)")] public Vector3 CurrentVelocity { get; private set; }
 
-        [Header("Ground Check")]
-        [Tooltip("The distance offset of the ground detection check from the character")] public float GroundCheckDistance;
-        [Tooltip("The radius of the ground detection sphere collider")] public float GroundDetectionSphereRadius;
-        [Tooltip("The layer of the ground the character can walk on")] public LayerMask GroundLayer;
-        [Tooltip("The raycast hits stocked while looking for ground")] public RaycastHit[] GroundHitResults { get; set; }
-        [ReadOnly] public bool IsGrounded;
-        [HideInInspector] public RaycastHit LastGround;
-
-
-        // Jump buffer
-        public bool CanJumpBuffer { get; private set; }
-        [Tooltip("The distance offset of the jump buffer detection check from the character")] public float JumpBufferCheckDistance;
-        [Tooltip("The raycast hits stocked while looking for jump buffer")] public RaycastHit[] JumpBufferHitResults { get; private set; }
 
 
         // Lateral Inputs (Idle, Walk, WASD) - Have this as a generic version for other movements
@@ -63,6 +51,16 @@ namespace BlownAway.Character.Movements
         private Coroutine _currentPropulsionTakeOffSubCoroutine1;
         private Coroutine _currentPropulsionTakeOffSubCoroutine2;
 
+
+        // Ground Detection
+        [Tooltip("The raycast hits stocked while looking for ground")] public RaycastHit[] GroundHitResults { get; private set; }
+        [ReadOnly] public bool IsGrounded;
+        [HideInInspector] public RaycastHit LastGround;
+
+
+        // Jump buffer
+        public bool CanJumpBuffer { get; private set; }
+        [Tooltip("The raycast hits stocked while looking for jump buffer")] public RaycastHit[] JumpBufferHitResults { get; private set; }
 
 
         /*
@@ -141,8 +139,8 @@ namespace BlownAway.Character.Movements
         public void CheckIfGrounded(CharacterManager manager, bool isPropulsing = false)
         {
             var lastGrounded = IsGrounded;
-            IsGrounded = Physics.SphereCastNonAlloc(manager.CharacterTransform.position, GroundDetectionSphereRadius, Vector3.down, GroundHitResults, GroundCheckDistance, GroundLayer) > 0;
-            CanJumpBuffer = Physics.SphereCastNonAlloc(manager.CharacterTransform.position, GroundDetectionSphereRadius, Vector3.down, JumpBufferHitResults, JumpBufferCheckDistance, GroundLayer) > 0;
+            IsGrounded = Physics.SphereCastNonAlloc(manager.CharacterTransform.position, GroundDetectionData.GroundDetectionSphereRadius, Vector3.down, GroundHitResults, GroundDetectionData.GroundCheckDistance, GroundDetectionData.GroundLayer) > 0;
+            CanJumpBuffer = Physics.SphereCastNonAlloc(manager.CharacterTransform.position, GroundDetectionData.GroundDetectionSphereRadius, Vector3.down, JumpBufferHitResults, GroundDetectionData.JumpBufferCheckDistance, GroundDetectionData.GroundLayer) > 0;
             if (lastGrounded != IsGrounded)
             {
                 if (IsGrounded) // On Ground Enter
@@ -304,12 +302,12 @@ namespace BlownAway.Character.Movements
             float verticalSpeed = _currentPropulsionSpeed * PropulsionData.VerticalPropulsionSpeed;
 
             Vector3 propulsionMovement = new Vector3(_currentDeplacementDirection.x * horizontalSpeed, _currentDeplacementDirection.y * verticalSpeed, _currentDeplacementDirection.z * horizontalSpeed);
-            CurrentVelocity += propulsionMovement;
+            CurrentVelocity += propulsionMovement * Time.deltaTime;
         }
 
         public void UpdateTakeOffPropulsionMovement(CharacterManager manager)
         {
-            CurrentVelocity += Vector3.up * _currentPropulsionTakeOffSpeed;
+            CurrentVelocity += Vector3.up * _currentPropulsionTakeOffSpeed * Time.deltaTime;
         }
 
         public void FallfAirEmpty(CharacterManager manager)
