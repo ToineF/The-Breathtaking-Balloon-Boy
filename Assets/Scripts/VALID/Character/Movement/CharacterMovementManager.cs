@@ -36,9 +36,10 @@ namespace BlownAway.Character.Movements
         private Coroutine _currentDeplacementCoroutine;
 
         // Fall
-        private float _currentGravity { get; set; }
-        private float _minGravity { get; set; }
-        private float _maxGravity { get; set; }
+        public float CurrentGravity { get; private set; }
+        public float MinGravity { get; private set; }
+        public float MaxGravity { get; private set; }
+        public float CurrentGravityIncreaseByFrame { get; private set; }
 
         private Coroutine _currentFallCoroutine;
 
@@ -73,7 +74,7 @@ namespace BlownAway.Character.Movements
         {
             GroundHitResults = new RaycastHit[2];
             JumpBufferHitResults = new RaycastHit[2];
-            SetGravityTo(GameManager.Instance.CharacterManager, FallData.BaseGravity, FallData.BaseMinGravity, FallData.BaseMaxGravity);
+            SetGravityTo(GameManager.Instance.CharacterManager, FallData.BaseGravity, FallData.BaseMinGravity, FallData.BaseMaxGravity, FallData.BaseGravityIncreaseByFrame);
         }
 
 
@@ -88,7 +89,7 @@ namespace BlownAway.Character.Movements
             _currentDeplacementDirection = Vector3.Lerp(_currentDeplacementDirection, deplacementDirection, walkTurnSpeed);
             //SetAnimation(moveDirection);
 
-            CurrentVelocity += _currentDeplacementDirection * _currentDeplacementSpeed * Time.deltaTime;
+            CurrentVelocity += _currentDeplacementDirection * _currentDeplacementSpeed * Time.fixedDeltaTime;
         }
 
         // Generalize this to be more reusable (DO THIS ON STATE START)
@@ -147,7 +148,7 @@ namespace BlownAway.Character.Movements
                 {
                     LastGround = GroundHitResults[0];
                     OnGroundEnter?.Invoke();
-                    _currentGravity = FallData.BaseGravity;
+                    CurrentGravity = FallData.BaseGravity;
                     manager.States.SwitchState(manager.States.IdleState);
                 }
                 else // On Ground Leave
@@ -169,7 +170,8 @@ namespace BlownAway.Character.Movements
         {
             if (!manager.MovementManager.IsGrounded)
             {
-                manager.MovementManager._currentGravity = Mathf.Clamp(manager.MovementManager._currentGravity + manager.MovementManager.FallData.GravityIncreaseByFrame, manager.MovementManager._minGravity, manager.MovementManager._maxGravity);
+                Debug.Log('h');
+                manager.MovementManager.CurrentGravity = Mathf.Clamp(manager.MovementManager.CurrentGravity + manager.MovementManager.CurrentGravityIncreaseByFrame, manager.MovementManager.MinGravity, manager.MovementManager.MaxGravity);
             }
 
             /*Vector3 additionalForces = Vector3.zero;
@@ -178,32 +180,33 @@ namespace BlownAway.Character.Movements
                 additionalForces += force.Value.CurrentForce;
                 force.Value.CurrentForce = Vector3.Lerp(force.Value.CurrentForce, force.Value.TargetForce, force.Value.ForceLerp);
             }*/
-            Vector3 gravity = -manager.MovementManager._currentGravity * Vector3.up;
+            Vector3 gravity = -manager.MovementManager.CurrentGravity * Vector3.up;
             //Vector3 allForces = CharacterManager.Instance + additionalForces + gravity;
 
             //_characterController.Move(allForces * Time.deltaTime);
 
-            manager.MovementManager.CurrentVelocity += gravity * Time.deltaTime;
+            manager.MovementManager.CurrentVelocity += gravity * Time.fixedDeltaTime;
             //CharacterManager.Instance.Force = Vector3.Lerp(CharacterManager.Instance.Force, CharacterManager.Instance.CurrentGravity, _lerpValue);
         }
 
-        public void SetGravityTo(CharacterManager manager, float targetGravity, float minGravity, float maxGravity)
+        public void SetGravityTo(CharacterManager manager, float targetGravity, float minGravity, float maxGravity, float gravityIncreaseByFrame)
         {
-            manager.MovementManager._currentGravity = targetGravity;
-            SetGravityMinMax(manager, targetGravity, minGravity, maxGravity);
+            manager.MovementManager.CurrentGravity = targetGravity;
+            SetGravityMinMax(manager, targetGravity, minGravity, maxGravity, gravityIncreaseByFrame);
         }
 
-        public void SetGravityMinMax(CharacterManager manager, float targetGravity, float minGravity, float maxGravity)
+        public void SetGravityMinMax(CharacterManager manager, float targetGravity, float minGravity, float maxGravity, float gravityIncreaseByFrame)
         {
-            manager.MovementManager._minGravity = minGravity;
-            manager.MovementManager._maxGravity = maxGravity;
+            manager.MovementManager.MinGravity = minGravity;
+            manager.MovementManager.MaxGravity = maxGravity;
+            manager.MovementManager.CurrentGravityIncreaseByFrame = gravityIncreaseByFrame;
         }
 
-        public void LerpGravityTo(CharacterManager manager, float targetGravity, float minGravity, float maxGravity, float time, AnimationCurve curve)
+        public void LerpGravityTo(CharacterManager manager, float targetGravity, float minGravity, float maxGravity, float gravityIncreaseByFrame, float time, AnimationCurve curve)
         {
             if (_currentFallCoroutine != null) StopCoroutine(_currentFallCoroutine);
-            SetGravityMinMax(manager, targetGravity, minGravity, maxGravity);
-            _currentFallCoroutine = StartCoroutine(LerpWithEase(_currentGravity, targetGravity, time, curve, (result) => _currentGravity = result));
+            SetGravityMinMax(manager, targetGravity, minGravity, maxGravity, gravityIncreaseByFrame);
+            _currentFallCoroutine = StartCoroutine(LerpWithEase(CurrentGravity, targetGravity, time, curve, (result) => CurrentGravity = result));
         }
 
         public void CheckForFloatCancel(CharacterManager manager)
@@ -302,12 +305,12 @@ namespace BlownAway.Character.Movements
             float verticalSpeed = _currentPropulsionSpeed * PropulsionData.VerticalPropulsionSpeed;
 
             Vector3 propulsionMovement = new Vector3(_currentDeplacementDirection.x * horizontalSpeed, _currentDeplacementDirection.y * verticalSpeed, _currentDeplacementDirection.z * horizontalSpeed);
-            CurrentVelocity += propulsionMovement * Time.deltaTime;
+            CurrentVelocity += propulsionMovement * Time.fixedDeltaTime;
         }
 
         public void UpdateTakeOffPropulsionMovement(CharacterManager manager)
         {
-            CurrentVelocity += Vector3.up * _currentPropulsionTakeOffSpeed * Time.deltaTime;
+            CurrentVelocity += Vector3.up * _currentPropulsionTakeOffSpeed * Time.fixedDeltaTime;
         }
 
         public void FallfAirEmpty(CharacterManager manager)

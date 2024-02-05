@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <BaseGravity>k__BackingField: 1500
   <BaseMinGravity>k__BackingField: 0
-  <BaseMaxGravity>k__BackingField: 1500
-  <BaseGravityTime>k__BackingField: 3
+  <BaseMaxGravity>k__BackingField: 2000
+  <BaseGravityTime>k__BackingField: 1
   <BaseGravityAccel>k__BackingField:
     serializedVersion: 2
     m_Curve:
@@ -40,7 +40,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  <GravityIncreaseByFrame>k__BackingField: 0
+  <BaseGravityIncreaseByFrame>k__BackingField: 1
   <FloatingGravity>k__BackingField: 375
   <FloatingMinGravity>k__BackingField: 0
   <FloatingMaxGravity>k__BackingField: 500
@@ -69,6 +69,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  <FloatingGravityIncreaseByFrame>k__BackingField: 0
   <PropulsionGravity>k__BackingField: 250
   <PropulsionMinGravity>k__BackingField: 0
   <PropulsionMaxGravity>k__BackingField: 500
@@ -97,3 +98,4 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  <PropulsionGravityIncreaseByFrame>k__BackingField: 0
