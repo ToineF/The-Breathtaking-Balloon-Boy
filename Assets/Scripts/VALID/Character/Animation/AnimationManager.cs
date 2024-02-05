@@ -4,7 +4,7 @@ namespace BlownAway.Character.Animations
 {
     public class AnimationManager : MonoBehaviour
     {
-        [SerializeField] private float _speed;
+        [SerializeField] private bool _isOrientationInverted;
         private Vector3 _lastDirection;
 
         public void RotateTowards(Vector3 target)
@@ -22,8 +22,9 @@ namespace BlownAway.Character.Animations
             Vector3 moveDirection = GameManager.Instance.CharacterManager.MovementManager.CurrentVelocity;
             moveDirection = Vector3.Scale(moveDirection, new Vector3(1, 0, 1));
             if (moveDirection != Vector3.zero) _lastDirection = moveDirection;
+            int orientation = _isOrientationInverted ? -1 : 1;
 
-            GameManager.Instance.CharacterManager.CharacterTransform.LookAt(GameManager.Instance.CharacterManager.CharacterTransform.position - _lastDirection);
+            GameManager.Instance.CharacterManager.CharacterTransform.LookAt(GameManager.Instance.CharacterManager.CharacterTransform.position - _lastDirection * orientation);
 
             //transform.rotation = Quaternion.identity;
             // transform.RotateAround(collider, Vector3.forward, Vector3.Angle(position, position + _lastDirection));
