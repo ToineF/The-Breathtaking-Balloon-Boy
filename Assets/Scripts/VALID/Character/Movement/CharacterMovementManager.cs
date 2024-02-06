@@ -170,7 +170,7 @@ namespace BlownAway.Character.Movements
         {
             if (!manager.MovementManager.IsGrounded)
             {
-                Debug.Log('h');
+                //Debug.Log('h');
                 manager.MovementManager.CurrentGravity = Mathf.Clamp(manager.MovementManager.CurrentGravity + manager.MovementManager.CurrentGravityIncreaseByFrame, manager.MovementManager.MinGravity, manager.MovementManager.MaxGravity);
             }
 

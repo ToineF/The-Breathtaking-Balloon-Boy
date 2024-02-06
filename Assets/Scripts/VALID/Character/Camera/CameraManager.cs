@@ -29,9 +29,9 @@ namespace BlownAway.Camera
             Vector3 newPosition = _cameraParams.transform.position + cameraVector;
             //if (!Physics.SphereCast(_cameraParams.transform.position, _cameraCollisionRadius, cameraVector.normalized, out RaycastHit hit, cameraVector.magnitude, solidsMask, QueryTriggerInteraction.Ignore))
             //{
-              _cameraParams.transform.position = newPosition;
-              _cameraParams.FramingTransposer.m_TrackedObjectOffset = _cameraParams.PositionOffset;
-              _cameraParams.FramingTransposer.m_CameraDistance = _cameraParams.CameraDistance;
+                _cameraParams.transform.position = newPosition;
+                _cameraParams.FramingTransposer.m_TrackedObjectOffset = _cameraParams.PositionOffset;
+                _cameraParams.FramingTransposer.m_CameraDistance = _cameraParams.CameraDistance;
             //} else
             //{
             //  _cameraParams.transform.position = hit.point + (_cameraParams.transform.position - newPosition).normalized * hitOffset;
