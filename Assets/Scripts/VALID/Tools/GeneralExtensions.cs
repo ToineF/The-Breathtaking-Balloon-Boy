@@ -528,6 +528,24 @@ namespace AntoineFoucault.Utilities
                 go.SetActive(value);
             }
         }
+        public static Transform Clear(this Transform transform)
+        {
+            while (transform.childCount > 0)
+            {
+                GameObject.Destroy(transform.GetChild(0).gameObject);
+            }
+            return transform;
+        }
+
+        public static Transform ClearImmediate(this Transform transform)
+        {
+            while (transform.childCount > 0)
+            {
+                GameObject.DestroyImmediate(transform.GetChild(0).gameObject);
+            }
+
+            return transform;
+        }
     }
 
     public static class Tween
