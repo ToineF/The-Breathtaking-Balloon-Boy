@@ -64,12 +64,12 @@ namespace BlownAway.Camera
             _currentCameraAngle.y = Math.Clamp(_currentCameraAngle.y, -_cameraParams.YDeadZone, _cameraParams.YDeadZone);
         }
 
-#if UNITY_EDITOR
-        private void OnDrawGizmosSelected()
-        {
-            Gizmos.color = Color.red;
-            Gizmos.DrawRay(_cameraParams.transform.position, GameManager.Instance.CharacterManager.CharacterTransform.position - _cameraParams.transform.position);
-        }
-#endif
+//#if UNITY_EDITOR
+//        private void OnDrawGizmosSelected()
+//        {
+//            Gizmos.color = Color.red;
+//            Gizmos.DrawRay(_cameraParams.transform.position, GameManager.Instance.CharacterManager.CharacterTransform.position - _cameraParams.transform.position);
+//        }
+//#endif
     }
 }
