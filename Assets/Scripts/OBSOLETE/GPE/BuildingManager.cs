@@ -5,7 +5,7 @@ using BlownAway.Player;
 
 namespace BlownAway.GPE.Buildings {
 
-    [RequireComponent(typeof(Collision))]
+    [RequireComponent(typeof(UnityEngine.Collision))]
     public class BuildingManager : MonoBehaviour
     {
         public bool IsActivatable

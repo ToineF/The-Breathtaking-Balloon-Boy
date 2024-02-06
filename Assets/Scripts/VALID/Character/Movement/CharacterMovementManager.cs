@@ -25,6 +25,8 @@ namespace BlownAway.Character.Movements
         [field: SerializeField] public CharacterGroundDetectionData GroundDetectionData { get; private set; }
 
 
+        [field: SerializeField] public bool UseAddForce { get; private set; }
+        [field: SerializeField] public ForceMode ForceMode { get; private set; }
 
         [Tooltip("The current global velocity of the character (movements, gravity, forces...)")] public Vector3 CurrentVelocity { get; private set; }
 
@@ -129,7 +131,12 @@ namespace BlownAway.Character.Movements
 
         public void ApplyVelocity(CharacterManager manager)
         {
-            manager.CharacterRigidbody.velocity = CurrentVelocity;
+            manager.CharacterRigidbody.velocity = Vector3.zero;
+            
+            if (!UseAddForce)
+                manager.CharacterRigidbody.velocity += CurrentVelocity;
+            else
+                manager.CharacterRigidbody.AddForce(CurrentVelocity, ForceMode);
         }
 
         public void ResetVelocity()

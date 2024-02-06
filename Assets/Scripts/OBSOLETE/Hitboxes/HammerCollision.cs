@@ -23,7 +23,7 @@ namespace BlownAway.Hitbox
             gameObject.SetActive(false);
         }
 
-        private void OnCollisionEnter(Collision other)
+        private void OnCollisionEnter(UnityEngine.Collision other)
         {
             if (((int)Mathf.Pow(2, other.gameObject.layer) & _wallLayer.value) <= 0) return;
             _collider = other.collider;
