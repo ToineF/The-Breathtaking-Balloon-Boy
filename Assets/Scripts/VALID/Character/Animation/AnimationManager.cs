@@ -9,7 +9,7 @@ namespace BlownAway.Character.Animations
 
         public void RotateTowards(Vector3 target)
         {
-            GameManager.Instance.CharacterManager.CharacterTransform.LookAt(target);
+            GameManager.Instance.CharacterManager.CharacterVisual.LookAt(target);
         }
 
         private void LateUpdate()
@@ -24,7 +24,7 @@ namespace BlownAway.Character.Animations
             if (moveDirection != Vector3.zero) _lastDirection = moveDirection;
             int orientation = _isOrientationInverted ? -1 : 1;
 
-            GameManager.Instance.CharacterManager.CharacterTransform.LookAt(GameManager.Instance.CharacterManager.CharacterTransform.position - _lastDirection * orientation);
+            GameManager.Instance.CharacterManager.CharacterVisual.LookAt(GameManager.Instance.CharacterManager.CharacterVisual.position - _lastDirection * orientation);
 
             //transform.rotation = Quaternion.identity;
             // transform.RotateAround(collider, Vector3.forward, Vector3.Angle(position, position + _lastDirection));

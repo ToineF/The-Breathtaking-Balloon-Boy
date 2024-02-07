@@ -35,11 +35,12 @@ namespace BlownAway.Character.States
 
             _manager.MovementManager.ResetVelocity();
             _currentState.FixedUpdateState(_manager);
+
+            _manager.CharacterVisual.transform.position = _manager.CharacterRigidbody.transform.position;
         }
 
         private void FixedUpdate()
         {
-            //Debug.Log(_manager.CharacterRigidbody.velocity);
             _manager.MovementManager.ApplyVelocity(_manager);
         }
 
