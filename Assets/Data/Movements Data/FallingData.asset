@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dae2168b982dd0e4097cc130a49ab7e9, type: 3}
   m_Name: FallingData
   m_EditorClassIdentifier: 
-  <BaseGravity>k__BackingField: 1500
+  <BaseGravity>k__BackingField: 25
   <BaseMinGravity>k__BackingField: 0
   <BaseMaxGravity>k__BackingField: 2000
   <BaseGravityTime>k__BackingField: 1
@@ -40,8 +40,8 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  <BaseGravityIncreaseByFrame>k__BackingField: 1
-  <FloatingGravity>k__BackingField: 375
+  <BaseGravityIncreaseByFrame>k__BackingField: 0.01
+  <FloatingGravity>k__BackingField: 6
   <FloatingMinGravity>k__BackingField: 0
   <FloatingMaxGravity>k__BackingField: 500
   <FloatingGravityTime>k__BackingField: 0.1
@@ -70,7 +70,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   <FloatingGravityIncreaseByFrame>k__BackingField: 0
-  <PropulsionGravity>k__BackingField: 250
+  <PropulsionGravity>k__BackingField: 4
   <PropulsionMinGravity>k__BackingField: 0
   <PropulsionMaxGravity>k__BackingField: 500
   <PropulsionGravityTime>k__BackingField: 0.1

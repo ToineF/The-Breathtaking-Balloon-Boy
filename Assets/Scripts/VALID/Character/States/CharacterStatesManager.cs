@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace BlownAway.Character.States
@@ -31,14 +32,15 @@ namespace BlownAway.Character.States
         {
             _manager.CameraManager.UpdateCameraPosition();
             _currentState.UpdateState(_manager);
+
+            _manager.MovementManager.ResetVelocity();
+            _currentState.FixedUpdateState(_manager);
         }
 
         private void FixedUpdate()
         {
-            _manager.MovementManager.ResetVelocity();
-            _currentState.FixedUpdateState(_manager);
-            _manager.MovementManager.ApplyVelocity(_manager);
             //Debug.Log(_manager.CharacterRigidbody.velocity);
+            _manager.MovementManager.ApplyVelocity(_manager);
         }
 
         private void LateUpdate()

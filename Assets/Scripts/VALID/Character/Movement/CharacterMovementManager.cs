@@ -91,7 +91,7 @@ namespace BlownAway.Character.Movements
             _currentDeplacementDirection = Vector3.Lerp(_currentDeplacementDirection, deplacementDirection, walkTurnSpeed);
             //SetAnimation(moveDirection);
 
-            CurrentVelocity += _currentDeplacementDirection * _currentDeplacementSpeed * Time.fixedDeltaTime;
+            CurrentVelocity += _currentDeplacementDirection * _currentDeplacementSpeed;
         }
 
         // Generalize this to be more reusable (DO THIS ON STATE START)
@@ -192,7 +192,7 @@ namespace BlownAway.Character.Movements
 
             //_characterController.Move(allForces * Time.deltaTime);
 
-            manager.MovementManager.CurrentVelocity += gravity * Time.fixedDeltaTime;
+            manager.MovementManager.CurrentVelocity += gravity;
             //CharacterManager.Instance.Force = Vector3.Lerp(CharacterManager.Instance.Force, CharacterManager.Instance.CurrentGravity, _lerpValue);
         }
 
@@ -312,12 +312,12 @@ namespace BlownAway.Character.Movements
             float verticalSpeed = _currentPropulsionSpeed * PropulsionData.VerticalPropulsionSpeed;
 
             Vector3 propulsionMovement = new Vector3(_currentDeplacementDirection.x * horizontalSpeed, _currentDeplacementDirection.y * verticalSpeed, _currentDeplacementDirection.z * horizontalSpeed);
-            CurrentVelocity += propulsionMovement * Time.fixedDeltaTime;
+            CurrentVelocity += propulsionMovement;
         }
 
         public void UpdateTakeOffPropulsionMovement(CharacterManager manager)
         {
-            CurrentVelocity += Vector3.up * _currentPropulsionTakeOffSpeed * Time.fixedDeltaTime;
+            CurrentVelocity += Vector3.up * _currentPropulsionTakeOffSpeed;
         }
 
         public void FallfAirEmpty(CharacterManager manager)

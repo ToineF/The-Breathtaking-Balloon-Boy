@@ -12,7 +12,6 @@ namespace BlownAway.Character
         [field: SerializeField] public Rigidbody CharacterRigidbody { get; set; }
         [field: SerializeField] public Collider CharacterCollider { get; set; }
         [field: SerializeField] public Transform CharacterTransform { get; set; }
-        [field: SerializeField] public CharacterController CharacterController { get; set; }
 
 
         // Inputs
