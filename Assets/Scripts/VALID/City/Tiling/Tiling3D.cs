@@ -44,7 +44,7 @@ public class Tiling3D : MonoBehaviour
                     GameObject block = GetBlockType(x,y,z);
                     Vector3 position = new Vector3(x, y, z) * TilesetData.BlockSize;
                     Vector3 rotation = GetRotation(x, y, z);
-                    GameObject newBlock = Instantiate(block, transform.position + position, Quaternion.Euler(TilesetData.BlockRotation), transform);
+                    GameObject newBlock = Instantiate(block, transform.position + position, Quaternion.Euler(TilesetData.BlockRotation + rotation), transform);
                     _buildingBlocks.Add(newBlock);
                 }
             }
@@ -111,9 +111,9 @@ public class Tiling3D : MonoBehaviour
         int targetY = 0;
         int targetZ = 0;
 
-        if (x == Width - 1) targetX = 180;
-        if (z == Length - 1) targetX = 90;
-        if (z == 0) targetX = 270;
+        if (x == Width - 1) targetY = 180;
+        if (z == Length - 1) targetY = 90;
+        if (z == 0) targetY = 270;
 
         return new Vector3(targetX, targetY, targetZ);
     }

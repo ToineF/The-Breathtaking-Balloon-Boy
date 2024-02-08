@@ -24,6 +24,9 @@ namespace BlownAway.Character.Movements
         // Ground Detection Data
         [field: SerializeField] public CharacterGroundDetectionData GroundDetectionData { get; private set; }
 
+        // Slopes Data
+        [field: SerializeField] public CharacterSlopesData SlopeData { get; private set; }
+
 
         [field: SerializeField] public bool UseAddForce { get; private set; }
         [field: SerializeField] public ForceMode ForceMode { get; private set; }
@@ -132,7 +135,7 @@ namespace BlownAway.Character.Movements
         public void ApplyVelocity(CharacterManager manager)
         {
             manager.CharacterRigidbody.velocity = Vector3.zero;
-            
+
             if (!UseAddForce)
                 manager.CharacterRigidbody.velocity += CurrentVelocity;
             else
@@ -149,11 +152,14 @@ namespace BlownAway.Character.Movements
             var lastGrounded = IsGrounded;
             IsGrounded = Physics.SphereCastNonAlloc(manager.CharacterVisual.position, GroundDetectionData.GroundDetectionSphereRadius, Vector3.down, GroundHitResults, GroundDetectionData.GroundCheckDistance, GroundDetectionData.GroundLayer) > 0;
             CanJumpBuffer = Physics.SphereCastNonAlloc(manager.CharacterVisual.position, GroundDetectionData.GroundDetectionSphereRadius, Vector3.down, JumpBufferHitResults, GroundDetectionData.JumpBufferCheckDistance, GroundDetectionData.GroundLayer) > 0;
+            
+            if (IsGrounded)
+                LastGround = GroundHitResults[0];
+
             if (lastGrounded != IsGrounded)
             {
                 if (IsGrounded) // On Ground Enter
                 {
-                    LastGround = GroundHitResults[0];
                     OnGroundEnter?.Invoke();
                     CurrentGravity = FallData.BaseGravity;
                     manager.States.SwitchState(manager.States.IdleState);
@@ -322,6 +328,38 @@ namespace BlownAway.Character.Movements
 
             manager.States.SwitchState(manager.States.FallingState);
         }
+
+
+        #region Slopes
+        // Slopes
+        private bool OnSlope()
+        {
+            if (LastGround.collider == null) return false;
+
+            float angle = Vector3.Angle(Vector3.up, LastGround.normal);
+            return angle < SlopeData.MaxSlopeAngle && angle != 0;
+        }
+
+        private Vector3 GetSlopeMoveDirection()
+        {
+            return Vector3.ProjectOnPlane(_currentDeplacementDirection, LastGround.normal).normalized;
+        }
+
+        private void OnDrawGizmos()
+        {
+            Gizmos.color = Color.white;
+
+            if (OnSlope())
+            {
+                Gizmos.color = Color.red;
+                Debug.Log("slope");
+            }
+
+            Vector3 direction = GetSlopeMoveDirection();
+            Vector3 position = GameManager.Instance.CharacterManager.CharacterRigidbody.position;
+            Gizmos.DrawLine(position, position + direction);
+        }
+        #endregion
 
     }
 
