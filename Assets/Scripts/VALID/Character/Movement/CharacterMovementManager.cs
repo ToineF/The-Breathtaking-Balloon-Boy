@@ -153,8 +153,8 @@ namespace BlownAway.Character.Movements
             IsGrounded = Physics.SphereCastNonAlloc(manager.CharacterVisual.position, GroundDetectionData.GroundDetectionSphereRadius, Vector3.down, GroundHitResults, GroundDetectionData.GroundCheckDistance, GroundDetectionData.GroundLayer) > 0;
             CanJumpBuffer = Physics.SphereCastNonAlloc(manager.CharacterVisual.position, GroundDetectionData.GroundDetectionSphereRadius, Vector3.down, JumpBufferHitResults, GroundDetectionData.JumpBufferCheckDistance, GroundDetectionData.GroundLayer) > 0;
             
-            if (IsGrounded)
-                LastGround = GroundHitResults[0];
+            //if (IsGrounded)
+            LastGround = GroundHitResults[0];
 
             if (lastGrounded != IsGrounded)
             {
@@ -345,14 +345,19 @@ namespace BlownAway.Character.Movements
             return Vector3.ProjectOnPlane(_currentDeplacementDirection, LastGround.normal).normalized;
         }
 
+
+        // REMOVE THIS
         private void OnDrawGizmos()
         {
+            if (GameManager.Instance == null) return;
+
             Gizmos.color = Color.white;
 
             if (OnSlope())
             {
                 Gizmos.color = Color.red;
-                Debug.Log("slope");
+                Debug.Log(LastGround.normal);
+                if (LastGround.collider == null) Gizmos.color = Color.green;
             }
 
             Vector3 direction = GetSlopeMoveDirection();
