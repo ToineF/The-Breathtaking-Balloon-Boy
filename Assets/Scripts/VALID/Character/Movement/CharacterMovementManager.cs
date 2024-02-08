@@ -161,11 +161,7 @@ namespace BlownAway.Character.Movements
                 else // On Ground Leave
                 {
                     OnGroundExit?.Invoke();
-                    if (isPropulsing)
-                    {
-                        manager.States.SwitchState(manager.States.FloatingState); // FLOATING & PROPLUSION
-                    }
-                    else
+                    if (!isPropulsing)
                     {
                         manager.States.SwitchState(manager.States.FallingState); // IDLE, WALK & FALL
                     }
@@ -305,13 +301,13 @@ namespace BlownAway.Character.Movements
             propulsionDirection.Normalize();
 
             if (!includesInputs) propulsionDirection = _currentPropulsionDirection;
-            _currentDeplacementDirection = Vector3.Lerp(_currentDeplacementDirection, propulsionDirection, PropulsionData.PropulsionDirectionTurnSpeed);
+            _currentPropulsionDirection = Vector3.Lerp(_currentPropulsionDirection, propulsionDirection, PropulsionData.PropulsionDirectionTurnSpeed);
 
 
             float horizontalSpeed = _currentPropulsionSpeed * PropulsionData.HorizontalPropulsionSpeed;
             float verticalSpeed = _currentPropulsionSpeed * PropulsionData.VerticalPropulsionSpeed;
 
-            Vector3 propulsionMovement = new Vector3(_currentDeplacementDirection.x * horizontalSpeed, _currentDeplacementDirection.y * verticalSpeed, _currentDeplacementDirection.z * horizontalSpeed);
+            Vector3 propulsionMovement = new Vector3(_currentPropulsionDirection.x * horizontalSpeed, _currentPropulsionDirection.y * verticalSpeed, _currentPropulsionDirection.z * horizontalSpeed);
             CurrentVelocity += propulsionMovement;
         }
 
