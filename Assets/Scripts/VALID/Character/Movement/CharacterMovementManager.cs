@@ -276,7 +276,7 @@ namespace BlownAway.Character.Movements
         private void PropulsionStart(CharacterManager manager)
         {
             manager.States.SwitchState(manager.States.PropulsionState);
-            CurrentPropulsionIncreaseByFrame = PropulsionData.CurrentPropulsionIncreaseByFrame;
+            CurrentPropulsionIncreaseByFrame = PropulsionData.PropulsionIncreaseByFrame;
             Debug.Log("start");
 
         }
@@ -311,7 +311,7 @@ namespace BlownAway.Character.Movements
             if (includesInputs)
             {
                 // Increase speed over time
-                CurrentPropulsionIncreaseByFrame = Math.Max(CurrentPropulsionIncreaseByFrame - PropulsionData.CurrentPropulsionIncreaseDeceleration, 0);
+                CurrentPropulsionIncreaseByFrame = Math.Max(CurrentPropulsionIncreaseByFrame - PropulsionData.PropulsionIncreaseDeceleration, 0);
                 _currentPropulsionSpeed = Math.Min(_currentPropulsionSpeed + CurrentPropulsionIncreaseByFrame / 100, PropulsionData.MaxPropulsionSpeed);
             }
             else
