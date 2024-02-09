@@ -548,6 +548,14 @@ namespace AntoineFoucault.Utilities
         }
     }
 
+    public static class LayerExtensions
+    {
+        public static bool IsInLayerMask(int layer, LayerMask layermask)
+        {
+            return layermask == (layermask | (1 << layer));
+        }
+    }
+
     public static class Tween
     {
         /// <summary>

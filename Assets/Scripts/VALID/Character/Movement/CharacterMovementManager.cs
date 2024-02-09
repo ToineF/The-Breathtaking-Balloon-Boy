@@ -150,8 +150,8 @@ namespace BlownAway.Character.Movements
         public void CheckIfGrounded(CharacterManager manager, bool isPropulsing = false)
         {
             var lastGrounded = IsGrounded;
-            IsGrounded = Physics.SphereCastNonAlloc(manager.CharacterVisual.position, GroundDetectionData.GroundDetectionSphereRadius, Vector3.down, GroundHitResults, GroundDetectionData.GroundCheckDistance, GroundDetectionData.GroundLayer) > 0;
             CanJumpBuffer = Physics.SphereCastNonAlloc(manager.CharacterVisual.position, GroundDetectionData.GroundDetectionSphereRadius, Vector3.down, JumpBufferHitResults, GroundDetectionData.JumpBufferCheckDistance, GroundDetectionData.GroundLayer) > 0;
+            IsGrounded = Physics.SphereCastNonAlloc(manager.CharacterVisual.position, GroundDetectionData.GroundDetectionSphereRadius, Vector3.down, GroundHitResults, GroundDetectionData.GroundCheckDistance, GroundDetectionData.GroundLayer) > 0;
 
             //if (IsGrounded)
             LastGround = GroundHitResults[0];
@@ -359,6 +359,7 @@ namespace BlownAway.Character.Movements
             if (LastGround.collider == null) return false;
 
             float angle = Vector3.Angle(Vector3.up, LastGround.normal);
+            Debug.Log(angle);
             return angle < SlopeData.MaxSlopeAngle && angle != 0;
         }
 
@@ -385,6 +386,12 @@ namespace BlownAway.Character.Movements
             Vector3 direction = GetSlopeMoveDirection();
             Vector3 position = GameManager.Instance.CharacterManager.CharacterRigidbody.position;
             Gizmos.DrawLine(position, position + direction);
+
+            //if (Physics.SphereCast(transform.position, 0.5f, -transform.up, out hit, 0.25f))
+            //Gizmos.DrawWireSphere(transform.position - transform.up * 0.25f, 0.5f);
+            //
+            //Physics.SphereCastNonAlloc(manager.CharacterVisual.position, GroundDetectionData.GroundDetectionSphereRadius, Vector3.down, GroundHitResults, GroundDetectionData.GroundCheckDistance, GroundDetectionData.GroundLayer) > 0;
+            Gizmos.DrawWireSphere(GameManager.Instance.CharacterManager.CharacterVisual.position + Vector3.down * GroundDetectionData.GroundCheckDistance, GroundDetectionData.GroundDetectionSphereRadius);
         }
         #endregion
 

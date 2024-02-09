@@ -9,6 +9,7 @@ public abstract class Singleton<TClass> : MonoBehaviour where TClass : class
     protected Singleton() { }
     protected Singleton(bool isPersistant) { this.isPersistant = isPersistant; }
 
+    [RuntimeInitializeOnLoadMethod]
     protected virtual void Awake()
     {
         if (Instance != null)
