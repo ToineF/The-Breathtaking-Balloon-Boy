@@ -54,6 +54,7 @@ namespace BlownAway.Character.Movements
         private float _currentPropulsionTakeOffSpeed;
         private Coroutine _currentPropulsionTakeOffSubCoroutine1;
         private Coroutine _currentPropulsionTakeOffSubCoroutine2;
+        public float CurrentPropulsionIncreaseByFrame { get; private set; }
 
 
         // Ground Detection
@@ -151,7 +152,7 @@ namespace BlownAway.Character.Movements
             var lastGrounded = IsGrounded;
             IsGrounded = Physics.SphereCastNonAlloc(manager.CharacterVisual.position, GroundDetectionData.GroundDetectionSphereRadius, Vector3.down, GroundHitResults, GroundDetectionData.GroundCheckDistance, GroundDetectionData.GroundLayer) > 0;
             CanJumpBuffer = Physics.SphereCastNonAlloc(manager.CharacterVisual.position, GroundDetectionData.GroundDetectionSphereRadius, Vector3.down, JumpBufferHitResults, GroundDetectionData.JumpBufferCheckDistance, GroundDetectionData.GroundLayer) > 0;
-            
+
             //if (IsGrounded)
             LastGround = GroundHitResults[0];
 
@@ -275,6 +276,8 @@ namespace BlownAway.Character.Movements
         private void PropulsionStart(CharacterManager manager)
         {
             manager.States.SwitchState(manager.States.PropulsionState);
+            CurrentPropulsionIncreaseByFrame = PropulsionData.CurrentPropulsionIncreaseByFrame;
+            Debug.Log("start");
 
         }
 
@@ -305,12 +308,21 @@ namespace BlownAway.Character.Movements
             if (propulsionType.HasFlag(PropulsionDirection.Lateral)) propulsionDirection += lateralMoveDirection;
             propulsionDirection.Normalize();
 
-            if (!includesInputs) propulsionDirection = _currentPropulsionDirection;
+            if (includesInputs)
+            {
+                // Increase speed over time
+                CurrentPropulsionIncreaseByFrame = Math.Max(CurrentPropulsionIncreaseByFrame - PropulsionData.CurrentPropulsionIncreaseDeceleration, 0);
+                _currentPropulsionSpeed = Math.Min(_currentPropulsionSpeed + CurrentPropulsionIncreaseByFrame / 100, PropulsionData.MaxPropulsionSpeed);
+            }
+            else
+            {
+                propulsionDirection = _currentPropulsionDirection;
+            }
             _currentPropulsionDirection = Vector3.Lerp(_currentPropulsionDirection, propulsionDirection, PropulsionData.PropulsionDirectionTurnSpeed);
 
 
-            float horizontalSpeed = _currentPropulsionSpeed * PropulsionData.HorizontalPropulsionSpeed;
-            float verticalSpeed = _currentPropulsionSpeed * PropulsionData.VerticalPropulsionSpeed;
+            float horizontalSpeed = _currentPropulsionSpeed * PropulsionData.HorizontalPropulsionMultiplier;
+            float verticalSpeed = _currentPropulsionSpeed * PropulsionData.VerticalPropulsionMultiplier;
 
             Vector3 propulsionMovement = new Vector3(_currentPropulsionDirection.x * horizontalSpeed, _currentPropulsionDirection.y * verticalSpeed, _currentPropulsionDirection.z * horizontalSpeed);
             CurrentVelocity += propulsionMovement;
