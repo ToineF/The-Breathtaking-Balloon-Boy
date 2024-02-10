@@ -126,16 +126,17 @@ namespace BlownAway.Character.Movements
         #region Deplacement
         public void MoveAtSpeed(CharacterManager manager, float walkTurnSpeed, bool includesInputs = true)
         {
-            UpdateSlopes(manager);
-
             Vector3 deplacementDirection = _currentDeplacementDirection;
             if (includesInputs) // Updates the Current Deplacement Value
             {
                 deplacementDirection = (Vector3.Scale(UnityEngine.Camera.main.transform.forward, new Vector3(1, 0, 1)) * manager.Inputs.MoveInputDirection.z + Vector3.Scale(UnityEngine.Camera.main.transform.right, new Vector3(1, 0, 1)) * manager.Inputs.MoveInputDirection.x).normalized;
+
                 deplacementDirection = Vector3.Scale(deplacementDirection, new Vector3(1, 0, 1));
             }
             _currentDeplacementDirection = Vector3.Lerp(_currentDeplacementDirection, deplacementDirection, walkTurnSpeed);
-            //SetAnimation(moveDirection);
+
+            _currentDeplacementDirection = GetSlopeMoveDirection(); // HERE SEE SLOPES
+
 
             CurrentVelocity += _currentDeplacementDirection * _currentDeplacementSpeed;
         }
@@ -378,9 +379,11 @@ namespace BlownAway.Character.Movements
             var collider = LastGround.collider;
             var angle = Vector3.Angle(Vector3.up, LastGround.normal);
             //Debug.DrawLine(LastGround.point, LastGround.point + LastGround.normal, Color.black, 3f);
-            Debug.DrawLine(castOrigin, castOrigin + LastGround.normal, Color.black, 3f);
+            //Debug.DrawLine(castOrigin, castOrigin + LastGround.normal, Color.black, 3f);
 
-            Debug.LogWarning(LastGround.point);
+            Debug.DrawLine(manager.CharacterRigidbody.position, manager.CharacterRigidbody.position + GetSlopeMoveDirection(), Color.black, 3f);
+
+
 
         }
 
@@ -389,8 +392,9 @@ namespace BlownAway.Character.Movements
             if (LastGround.collider == null) return false;
 
             float angle = Vector3.Angle(Vector3.up, LastGround.normal);
-            //Debug.Log(angle);
+            Debug.LogWarning(angle);
             return angle < SlopeData.MaxSlopeAngle && angle != 0;
+
         }
 
         private Vector3 GetSlopeMoveDirection()
@@ -410,7 +414,6 @@ namespace BlownAway.Character.Movements
             {
                 Gizmos.color = Color.red;
                 //Debug.Log(LastGround.normal);
-                if (LastGround.collider == null) Gizmos.color = Color.green;
             }
 
             Vector3 direction = GetSlopeMoveDirection();
