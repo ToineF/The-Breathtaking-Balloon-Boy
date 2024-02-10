@@ -4,11 +4,10 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using DG.Tweening;
+using UnityEngine.UI;
 
 public class MenuButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    private MenuManager _menuManager;
-
     [Header("Button Parameters")]
     [SerializeField] private string _targetScene;
     [SerializeField] private float _originalScale = 1;
@@ -16,9 +15,13 @@ public class MenuButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     [SerializeField] private float _hoverScaleDuration = 0.3f;
     [SerializeField] private float _notHoverScaleDuration = 0.5f;
 
+    private MenuManager _menuManager;
+    private Button _button;
+
     private void Start()
     {
         _menuManager = MenuManager.MenuManagerInstance;
+        _button = GetComponent<Button>();
     }
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -27,6 +30,7 @@ public class MenuButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         {
             transform.DOKill();
             transform.DOScale(new Vector3(_hoverScale, _hoverScale), _hoverScaleDuration);
+            _button.Select();
         }
     }
 
