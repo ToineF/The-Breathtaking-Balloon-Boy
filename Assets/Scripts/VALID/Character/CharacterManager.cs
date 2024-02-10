@@ -4,6 +4,7 @@ using BlownAway.Camera;
 using BlownAway.Character.Movements;
 using BlownAway.Character.States;
 using BlownAway.Character.Air;
+using BlownAway.Character.Animations;
 
 namespace BlownAway.Character
 {
@@ -24,10 +25,13 @@ namespace BlownAway.Character
         [field: SerializeField, Tooltip("The reference to the class that contains the movement of the character")] public CharacterMovementManager MovementManager { get; private set; }
 
         //States
-        [field: SerializeField, Tooltip("The reference to the class that the states of the character")] public CharacterStatesManager States { get; private set; }
+        [field: SerializeField, Tooltip("The reference to the class that contains the states of the character")] public CharacterStatesManager States { get; private set; }
 
         // Air
-        [field: SerializeField, Tooltip("The reference to the class that the logic of the air")] public CharacterAirManager AirManager { get; private set; }
+        [field: SerializeField, Tooltip("The reference to the class that containsthe logic of the air")] public CharacterAirManager AirManager { get; private set; }
+
+        // Animations
+        [field: SerializeField, Tooltip("The reference to the class that contains the logic of the animations")] public CharacterAnimationManager AnimationManager { get; private set; }
 
 
     }

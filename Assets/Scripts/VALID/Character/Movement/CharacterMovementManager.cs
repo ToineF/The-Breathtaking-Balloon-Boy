@@ -60,7 +60,7 @@ namespace BlownAway.Character.Movements
         // Ground Detection
         [Tooltip("The raycast hits stocked while looking for ground")] public RaycastHit[] GroundHitResults { get; private set; }
         [ReadOnly] public bool IsGrounded;
-        [HideInInspector] public RaycastHit LastGround;
+        public RaycastHit LastGround { get; private set; }
 
 
         // Jump buffer
@@ -126,6 +126,8 @@ namespace BlownAway.Character.Movements
         #region Deplacement
         public void MoveAtSpeed(CharacterManager manager, float walkTurnSpeed, bool includesInputs = true)
         {
+            UpdateSlopes(manager);
+
             Vector3 deplacementDirection = _currentDeplacementDirection;
             if (includesInputs) // Updates the Current Deplacement Value
             {
@@ -150,8 +152,8 @@ namespace BlownAway.Character.Movements
         public void CheckIfGrounded(CharacterManager manager, bool isPropulsing = false)
         {
             var lastGrounded = IsGrounded;
-            CanJumpBuffer = Physics.SphereCastNonAlloc(manager.CharacterVisual.position, GroundDetectionData.GroundDetectionSphereRadius, Vector3.down, JumpBufferHitResults, GroundDetectionData.JumpBufferCheckDistance, GroundDetectionData.GroundLayer) > 0;
-            IsGrounded = Physics.SphereCastNonAlloc(manager.CharacterVisual.position, GroundDetectionData.GroundDetectionSphereRadius, Vector3.down, GroundHitResults, GroundDetectionData.GroundCheckDistance, GroundDetectionData.GroundLayer) > 0;
+            CanJumpBuffer = Physics.SphereCastNonAlloc(manager.CharacterRigidbody.position, GroundDetectionData.GroundDetectionSphereRadius, Vector3.down, JumpBufferHitResults, GroundDetectionData.JumpBufferCheckDistance, GroundDetectionData.GroundLayer) > 0;
+            IsGrounded = Physics.SphereCastNonAlloc(manager.CharacterRigidbody.position, GroundDetectionData.GroundDetectionSphereRadius, Vector3.down, GroundHitResults, GroundDetectionData.GroundCheckDistance, GroundDetectionData.GroundLayer) > 0;
 
             //if (IsGrounded)
             LastGround = GroundHitResults[0];
@@ -277,7 +279,6 @@ namespace BlownAway.Character.Movements
         {
             manager.States.SwitchState(manager.States.PropulsionState);
             CurrentPropulsionIncreaseByFrame = PropulsionData.PropulsionIncreaseByFrame;
-            Debug.Log("start");
 
         }
 
@@ -354,12 +355,41 @@ namespace BlownAway.Character.Movements
 
         #region Slopes
         // Slopes
+
+        private void UpdateSlopes(CharacterManager manager)
+        {
+            if (!IsGrounded) return;
+
+            var height = manager.CharacterCollider.bounds.center.y;
+            var radius = manager.CharacterCollider.bounds.extents.magnitude;
+            //var SphereCastVerticalOffset = height / 2 - radius;
+            var castOrigin = manager.CharacterRigidbody.position;
+
+            //IsGrounded = Physics.SphereCastNonAlloc(manager.CharacterRigidbody.position, GroundDetectionData.GroundDetectionSphereRadius, Vector3.down, GroundHitResults, GroundDetectionData.GroundCheckDistance, GroundDetectionData.GroundLayer) > 0;
+
+            //if (Physics.SphereCast(castOrigin, GroundDetectionData.GroundDetectionSphereRadius - 0.01f, Vector3.down, out var hit, GroundDetectionData.GroundCheckDistance + 1f, GroundDetectionData.GroundLayer, QueryTriggerInteraction.Ignore))
+            //{
+            //    var collider = hit.collider;
+            //    var angle = Vector3.Angle(Vector3.up, hit.normal);
+            //    Debug.DrawLine(hit.point, hit.point + hit.normal, Color.black, 3f);
+            //}
+
+
+            var collider = LastGround.collider;
+            var angle = Vector3.Angle(Vector3.up, LastGround.normal);
+            //Debug.DrawLine(LastGround.point, LastGround.point + LastGround.normal, Color.black, 3f);
+            Debug.DrawLine(castOrigin, castOrigin + LastGround.normal, Color.black, 3f);
+
+            Debug.LogWarning(LastGround.point);
+
+        }
+
         private bool OnSlope()
         {
             if (LastGround.collider == null) return false;
 
             float angle = Vector3.Angle(Vector3.up, LastGround.normal);
-            Debug.Log(angle);
+            //Debug.Log(angle);
             return angle < SlopeData.MaxSlopeAngle && angle != 0;
         }
 
@@ -379,7 +409,7 @@ namespace BlownAway.Character.Movements
             if (OnSlope())
             {
                 Gizmos.color = Color.red;
-                Debug.Log(LastGround.normal);
+                //Debug.Log(LastGround.normal);
                 if (LastGround.collider == null) Gizmos.color = Color.green;
             }
 

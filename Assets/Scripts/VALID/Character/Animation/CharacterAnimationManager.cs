@@ -2,14 +2,27 @@ using UnityEngine;
 
 namespace BlownAway.Character.Animations
 {
-    public class AnimationManager : MonoBehaviour
+    public class CharacterAnimationManager : MonoBehaviour
     {
         [SerializeField] private bool _isOrientationInverted;
+        [SerializeField] private Vector3 _offsetFromRigidbody;
         private Vector3 _lastDirection;
+
+        private CharacterManager _manager;
+
+        private void Start()
+        {
+            _manager = GameManager.Instance.CharacterManager;
+        }
 
         public void RotateTowards(Vector3 target)
         {
             GameManager.Instance.CharacterManager.CharacterVisual.LookAt(target);
+        }
+
+        private void Update()
+        {
+            _manager.CharacterVisual.transform.position = _manager.CharacterRigidbody.transform.position + _offsetFromRigidbody;
         }
 
         private void LateUpdate()
