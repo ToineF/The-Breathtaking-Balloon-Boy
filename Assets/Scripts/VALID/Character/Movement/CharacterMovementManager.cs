@@ -135,7 +135,8 @@ namespace BlownAway.Character.Movements
             }
             _currentDeplacementDirection = Vector3.Lerp(_currentDeplacementDirection, deplacementDirection, walkTurnSpeed);
 
-            _currentDeplacementDirection = GetSlopeMoveDirection(); // HERE SEE SLOPES
+            //if (OnSlope() && IsGrounded)
+                //_currentDeplacementDirection = GetSlopeMoveDirection(); // HERE SEE SLOPES
 
 
             CurrentVelocity += _currentDeplacementDirection * _currentDeplacementSpeed;
