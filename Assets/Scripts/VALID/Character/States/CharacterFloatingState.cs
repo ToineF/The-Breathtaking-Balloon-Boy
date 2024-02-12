@@ -19,7 +19,7 @@ namespace BlownAway.Character.States
 
         public override void UpdateState(CharacterManager manager)
         {
-            manager.AirManager.ReduceAir(manager.AirManager.FloatingAirReductionSpeed);
+            manager.AirManager.ReduceAir(manager.AirManager.AirData.FloatingAirReductionSpeed);
 
             manager.MovementManager.CheckIfGrounded(manager, true);
 

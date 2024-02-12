@@ -1,7 +1,6 @@
-using JetBrains.Annotations;
 using System.Collections;
 using UnityEngine;
-using static UnityEngine.Rendering.DebugUI;
+using BlownAway.Character.Air.Data;
 
 namespace BlownAway.Character.Air
 {
@@ -11,11 +10,8 @@ namespace BlownAway.Character.Air
         public bool AirIsFull { get => _currentAir >= 1;}
         public bool AirIsEmpty { get => _currentAir <= 0.00001f;}
 
-        // Variable (Put in a ScriptableObject)
-        [field:SerializeField, Tooltip("The speed at which the air reduces while floating")] public float FloatingAirReductionSpeed { get; private set; }
-        [field:SerializeField, Tooltip("The speed at which the air reduces while propulsing")] public float PropulsionAirReductionSpeed {get; private set;}
-        [field:SerializeField, Tooltip("The speed at which the air refills while falling")] public float FallingAirRefillSpeed {get; private set;}
-        [field:SerializeField, Tooltip("The delay at which the air refills while falling")] public float FallingAirRefillDelay {get; private set;}
+
+        [field:SerializeField] public CharacterAirData AirData { get; private set; }
 
         private float _currentAir;
 

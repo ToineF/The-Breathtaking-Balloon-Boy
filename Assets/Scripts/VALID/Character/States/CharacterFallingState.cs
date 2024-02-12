@@ -13,7 +13,7 @@ namespace BlownAway.Character.States
             manager.MovementManager.LerpDeplacementSpeed(manager, manager.MovementManager.LateralMovementData.BaseFallLateralSpeed, manager.MovementManager.LateralMovementData.BaseFallTime, manager.MovementManager.LateralMovementData.BaseFallCurve);
 
             // Air
-            manager.AirManager.AddAirUntilFullIfEmpty(manager, manager.AirManager.FallingAirRefillSpeed, manager.AirManager.FallingAirRefillDelay);
+            manager.AirManager.AddAirUntilFullIfEmpty(manager, manager.AirManager.AirData.FallingAirRefillSpeed, manager.AirManager.AirData.FallingAirRefillDelay);
         }
 
         public override void ExitState(CharacterManager manager)

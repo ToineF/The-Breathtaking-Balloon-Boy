@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1816818144299226447}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.187}
+  m_LocalPosition: {x: 23.7, y: 23, z: -313.62}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -126,6 +126,7 @@ MonoBehaviour:
   <MovementManager>k__BackingField: {fileID: 7865403362446753878}
   <States>k__BackingField: {fileID: 1215609012679441032}
   <AirManager>k__BackingField: {fileID: 4325485606811522093}
+  <AnimationManager>k__BackingField: {fileID: 2324459326877564572}
 --- !u!114 &1215609012679441032
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -191,8 +192,6 @@ MonoBehaviour:
     type: 2}
   <SlopeData>k__BackingField: {fileID: 11400000, guid: 68fb3b1f3a9396145bc754ed34fb6a68,
     type: 2}
-  <UseAddForce>k__BackingField: 0
-  <ForceMode>k__BackingField: 1
   IsGrounded: 0
 --- !u!114 &4325485606811522093
 MonoBehaviour:
@@ -206,10 +205,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c19eea4798d3e3940a9829298b3b9745, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <FloatingAirReductionSpeed>k__BackingField: 0.075
-  <PropulsionAirReductionSpeed>k__BackingField: 0.3
-  <FallingAirRefillSpeed>k__BackingField: 1
-  <FallingAirRefillDelay>k__BackingField: 3.402823e+38
+  <AirData>k__BackingField: {fileID: 11400000, guid: 08a246c4d6886f247a03b9a183a4ad4c,
+    type: 2}
 --- !u!114 &2324459326877564572
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -223,6 +220,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isOrientationInverted: 1
+  _offsetFromRigidbody: {x: 0.09, y: -0.01, z: 0.01}
 --- !u!1 &5937500286042893197
 GameObject:
   m_ObjectHideFlags: 0
@@ -250,8 +248,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5937500286042893197}
-  m_LocalRotation: {x: 0.00021988274, y: 0.9043331, z: -0.42682716, w: 0.000465873}
-  m_LocalPosition: {x: -0.008216858, y: 21.849922, z: -224.7944}
+  m_LocalRotation: {x: 0.379874, y: 0.1614821, z: -0.06753385, w: 0.90832734}
+  m_LocalPosition: {x: 20.674397, y: 31.898872, z: -321.86047}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -837,12 +835,12 @@ PrefabInstance:
     - target: {fileID: 4405275939843142444, guid: 9b8a7cab4931b114ea7ea6d12fb24627,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 12.199997
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4405275939843142444, guid: 9b8a7cab4931b114ea7ea6d12fb24627,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -232.927
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4405275939843142444, guid: 9b8a7cab4931b114ea7ea6d12fb24627,
         type: 3}
@@ -962,17 +960,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 1e56880d68b6aed4f8c4ebb749299993,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.14099884
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1e56880d68b6aed4f8c4ebb749299993,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 12.199997
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1e56880d68b6aed4f8c4ebb749299993,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -233
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1e56880d68b6aed4f8c4ebb749299993,
         type: 3}
@@ -1279,6 +1277,6 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.24
-  m_Height: 1.15
+  m_Height: 1
   m_Direction: 1
   m_Center: {x: 0.105, y: 0.56, z: 0.015}

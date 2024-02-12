@@ -22,7 +22,7 @@ namespace BlownAway.Character.States
 
         public override void UpdateState(CharacterManager manager)
         {
-            manager.AirManager.ReduceAir(manager.AirManager.PropulsionAirReductionSpeed);
+            manager.AirManager.ReduceAir(manager.AirManager.AirData.PropulsionAirReductionSpeed);
 
             manager.MovementManager.CheckForPropulsionEnd(manager);
 
