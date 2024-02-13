@@ -12,35 +12,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dae2168b982dd0e4097cc130a49ab7e9, type: 3}
   m_Name: FallingData
   m_EditorClassIdentifier: 
-  <BaseGravity>k__BackingField: 30
+  <BaseGravity>k__BackingField: 0
   <BaseMinGravity>k__BackingField: 0
-  <BaseMaxGravity>k__BackingField: 90
-  <BaseGravityTime>k__BackingField: 0.1
+  <BaseMaxGravity>k__BackingField: 160
+  <BaseGravityTime>k__BackingField: 0.01
   <BaseGravityAccel>k__BackingField:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 2.9559674
-      outSlope: 2.9559674
-      tangentMode: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
       weightedMode: 0
       inWeight: 0
-      outWeight: 0.037500095
+      outWeight: 0
     - serializedVersion: 3
       time: 1
       value: 1
-      inSlope: -0.024086773
-      outSlope: -0.024086773
-      tangentMode: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
       weightedMode: 0
-      inWeight: 0.3916666
+      inWeight: 0
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  <BaseGravityIncreaseByFrame>k__BackingField: 1
+  <BaseGravityIncreaseByFrame>k__BackingField: 0.25
   <BaseGravityIncreaseDecelerationByFrame>k__BackingField: 0.00005
   <FloatingGravity>k__BackingField: 12
   <FloatingMinGravity>k__BackingField: 0
@@ -75,7 +75,7 @@ MonoBehaviour:
   <PropulsionGravity>k__BackingField: 3
   <PropulsionMinGravity>k__BackingField: 0
   <PropulsionMaxGravity>k__BackingField: 500
-  <PropulsionGravityTime>k__BackingField: 0.1
+  <PropulsionGravityTime>k__BackingField: 0.4
   <PropulsionGravityAccel>k__BackingField:
     serializedVersion: 2
     m_Curve:
