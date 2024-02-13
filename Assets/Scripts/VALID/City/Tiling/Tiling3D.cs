@@ -116,6 +116,8 @@ public class Tiling3D : MonoBehaviour
         if (x == Width - 1) targetY = 180;
         if (z == Length - 1) targetY = 90;
         if (z == 0) targetY = 270;
+
+        // Corners
         if (x == 0 && z == Length - 1) targetY -= 45;
         if (x == Width - 1 && z == 0) targetY -= 45;
         if (x == 0 && z == 0) targetY += 45;

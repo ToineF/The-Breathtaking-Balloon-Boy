@@ -27,7 +27,6 @@ namespace BlownAway.Character.Movements
         // Slopes Data
         [field: SerializeField] public CharacterSlopesData SlopeData { get; private set; }
 
-
         [Tooltip("The current global velocity of the character (movements, gravity, forces...)")] public Vector3 CurrentVelocity { get; private set; }
 
 
@@ -113,9 +112,10 @@ namespace BlownAway.Character.Movements
 
         public void ApplyVelocity(CharacterManager manager)
         {
-            manager.CharacterRigidbody.velocity = Vector3.zero;
+            //manager.CharacterRigidbody.velocity = Vector3.zero;
 
-            manager.CharacterRigidbody.velocity += CurrentVelocity;
+            manager.CharacterRigidbody.velocity = CurrentVelocity;
+            Debug.Log(CurrentGravity);
         }
 
         public void ResetVelocity()
@@ -137,7 +137,7 @@ namespace BlownAway.Character.Movements
 
             if (OnSlope() && IsGrounded)
                 _currentDeplacementDirection = GetSlopeMoveDirection(); // HERE SEE SLOPES
-
+            Debug.LogWarning(_currentDeplacementDirection * _currentDeplacementSpeed);
 
             CurrentVelocity += _currentDeplacementDirection * _currentDeplacementSpeed;
         }
@@ -184,7 +184,7 @@ namespace BlownAway.Character.Movements
             if (!manager.MovementManager.IsGrounded)
             {
                 manager.MovementManager.CurrentGravityIncreaseByFrame = Mathf.Max(manager.MovementManager.CurrentGravityIncreaseByFrame - manager.MovementManager.CurrentGravityIncreaseDeceleration, 0);
-                manager.MovementManager.CurrentGravity = Mathf.Clamp(manager.MovementManager.CurrentGravity + manager.MovementManager.CurrentGravityIncreaseByFrame, manager.MovementManager.MinGravity, manager.MovementManager.MaxGravity);
+                manager.MovementManager.CurrentGravity = Mathf.Clamp(manager.MovementManager.CurrentGravity + manager.MovementManager.CurrentGravityIncreaseByFrame * Time.deltaTime, manager.MovementManager.MinGravity, manager.MovementManager.MaxGravity);
             }
 
             /*Vector3 additionalForces = Vector3.zero;
@@ -315,7 +315,7 @@ namespace BlownAway.Character.Movements
             {
                 // Increase speed over time
                 CurrentPropulsionIncreaseByFrame = Math.Max(CurrentPropulsionIncreaseByFrame - PropulsionData.PropulsionIncreaseDeceleration, 0);
-                _currentPropulsionSpeed = Math.Min(_currentPropulsionSpeed + CurrentPropulsionIncreaseByFrame / 100, PropulsionData.MaxPropulsionSpeed);
+                _currentPropulsionSpeed = Math.Min(_currentPropulsionSpeed + (CurrentPropulsionIncreaseByFrame / 100 * Time.deltaTime), PropulsionData.MaxPropulsionSpeed);
             }
             else
             {
@@ -393,7 +393,7 @@ namespace BlownAway.Character.Movements
             if (LastGround.collider == null) return false;
 
             float angle = Vector3.Angle(Vector3.up, LastGround.normal);
-            Debug.LogWarning(angle);
+            //Debug.LogWarning(angle);
             return angle < SlopeData.MaxSlopeAngle && angle != 0;
 
         }

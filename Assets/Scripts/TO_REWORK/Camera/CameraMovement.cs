@@ -72,9 +72,11 @@ public class CameraMovement : MonoBehaviour
         obj.transform.localPosition = new Vector3(Camera.transform.localPosition.x, Camera.transform.localPosition.y,
             Camera.transform.localPosition.z - collisionSensitivity);
 
-        Debug.DrawLine(CameraCenter.transform.position, obj.transform.position, Color.red);
+        Vector3 direction = obj.transform.position - Camera.transform.position;
+        direction.Normalize();
+        Debug.DrawLine(Camera.transform.position, CameraCenter.transform.position + direction * collisionSensitivity, Color.red);
 
-        if (Physics.Linecast(CameraCenter.transform.position, obj.transform.position, out _camHit, ~PlayerLayer, QueryTriggerInteraction.Ignore))
+        if (Physics.Linecast(CameraCenter.transform.position + direction * collisionSensitivity, Camera.transform.position, out _camHit, ~PlayerLayer, QueryTriggerInteraction.Ignore))
         {
             Camera.transform.position = _camHit.point;
 
