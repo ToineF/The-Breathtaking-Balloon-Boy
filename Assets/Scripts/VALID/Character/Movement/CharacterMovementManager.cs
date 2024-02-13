@@ -58,7 +58,7 @@ namespace BlownAway.Character.Movements
 
         // Ground Detection
         [Tooltip("The raycast hits stocked while looking for ground")] public RaycastHit[] GroundHitResults { get; private set; }
-        [ReadOnly] public bool IsGrounded;
+        public bool IsGrounded { get; private set; }
         public RaycastHit LastGround { get; private set; }
 
 
@@ -281,7 +281,7 @@ namespace BlownAway.Character.Movements
         {
             manager.States.SwitchState(manager.States.PropulsionState);
             CurrentPropulsionIncreaseByFrame = PropulsionData.PropulsionIncreaseByFrame;
-
+            _currentPropulsionDirection = _currentDeplacementDirection;
         }
 
         public void CheckForPropulsionEnd(CharacterManager manager)
@@ -316,6 +316,7 @@ namespace BlownAway.Character.Movements
                 // Increase speed over time
                 CurrentPropulsionIncreaseByFrame = Math.Max(CurrentPropulsionIncreaseByFrame - PropulsionData.PropulsionIncreaseDeceleration, 0);
                 _currentPropulsionSpeed = Math.Min(_currentPropulsionSpeed + (CurrentPropulsionIncreaseByFrame / 100 * Time.deltaTime), PropulsionData.MaxPropulsionSpeed);
+                
             }
             else
             {
