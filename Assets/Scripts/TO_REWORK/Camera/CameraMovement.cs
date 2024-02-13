@@ -7,8 +7,7 @@ namespace BlownAway.Camera
     public class CameraMovement : MonoBehaviour
     {
         // LINK THIS TO THE PLAYER CLASS
-        // ADD A NAMESPACE
-        // ADD THE CONTROLLER SUPPORT
+        // MAKE A SCRIPTABLE OBJECT OF THE DATA FOR THE GAME DESIGNERS
 
         [SerializeField] GameObject Player;
         [SerializeField] GameObject CameraCenter;
@@ -36,6 +35,7 @@ namespace BlownAway.Camera
         [SerializeField] float zoomDistance;
 
         [SerializeField] float collisionSensitivity = 4.5f;
+        [SerializeField] float collisionDistance = 4.5f;
 
         [SerializeField] float yUpLimit = 89.9f;
         [SerializeField] float yDownLimit = -89.9f;
@@ -127,7 +127,7 @@ namespace BlownAway.Camera
             _sensitivity = manager.Inputs.IsMouse ? _mouseSensitivity : _controllerSensitivity;
             float xSign = (manager.Inputs.IsMouse ? _isMouseXInverted : _isControllerXInverted) ? -1 : 1;
             float ySign = (manager.Inputs.IsMouse ? _isMouseYInverted : _isControllerYInverted) ? -1 : 1;
-            _cameraMoveVector = manager.Inputs.CameraMoveVector.normalized;
+            _cameraMoveVector = manager.Inputs.CameraMoveVector;
             _cameraMoveVector = new Vector3(_cameraMoveVector.x * xSign, _cameraMoveVector.y * ySign);
             //_currentCameraAngle += new Vector2(manager.Inputs.CameraMoveVector.x * xSign, manager.Inputs.CameraMoveVector.y * ySign % 360) * sensitivity;
             //_currentCameraAngle.y = Math.Clamp(_currentCameraAngle.y, -_cameraParams.YDeadZone, _cameraParams.YDeadZone);
