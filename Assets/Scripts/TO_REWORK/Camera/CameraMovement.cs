@@ -1,98 +1,136 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using AntoineFoucault.Utilities;
+using BlownAway.Character;
 
-public class CameraMovement : MonoBehaviour
+namespace BlownAway.Camera
 {
-    public GameObject Player;
-    public GameObject CameraCenter;
-    public float yOffset = 1f;
-    public float sensitivity = 3f;
-    public Camera Camera;
-    public LayerMask PlayerLayer;
-
-    public float scrollSensitivity = 5f;
-    public float scrollDampening = 6f;
-
-    public float zoomMin = 3.5f;
-    public float zoomMax = 15f;
-    public float zoomDefault = 10f;
-    public float zoomDistance;
-
-    public float collisionSensitivity = 4.5f;
-
-    public float yUpLimit = 89.9f;
-    public float yDownLimit = -89.9f;
-
-    private RaycastHit _camHit;
-    private Vector3 _camDist;
-
-    private void Start()
+    public class CameraMovement : MonoBehaviour
     {
-        _camDist = Camera.transform.localPosition;
-        zoomDistance = zoomDefault;
-        _camDist.z = -zoomDistance;
+        // LINK THIS TO THE PLAYER CLASS
+        // ADD A NAMESPACE
+        // ADD THE CONTROLLER SUPPORT
 
-        //Cursor.visible = false;
-    }
+        [SerializeField] GameObject Player;
+        [SerializeField] GameObject CameraCenter;
+        [SerializeField] float _yOffset = 1f;
 
-    private void LateUpdate()
-    {
-        CameraCenter.transform.position = new Vector3(Player.transform.position.x,
-            Player.transform.position.y + yOffset, Player.transform.position.z);
+        //[Header("Mouse")]
+        [SerializeField, Tooltip("The influence of the mouse on the camera speed")] private float _mouseSensitivity = 1;
+        [SerializeField, Tooltip("Is the X-Axis Inverted")] private bool _isMouseXInverted;
+        [SerializeField, Tooltip("Is the Y-Axis Inverted")] private bool _isMouseYInverted;
 
-        float xAngle = CameraCenter.transform.rotation.eulerAngles.x - Input.GetAxis("Mouse Y") * sensitivity / 2;
-        float yAngle = CameraCenter.transform.rotation.eulerAngles.y + Input.GetAxis("Mouse X") * sensitivity;
+        //[Header("Controller")]
+        [SerializeField, Tooltip("The influence of the controller on the camera speed")] private float _controllerSensitivity = 1;
+        [SerializeField, Tooltip("Is the X-Axis Inverted")] private bool _isControllerXInverted;
+        [SerializeField, Tooltip("Is the Y-Axis Inverted")] private bool _isControllerYInverted;
 
-        var rotation = Quaternion.Euler(
-            MathExtentions.ClampAngle(xAngle, yDownLimit, yUpLimit),
-            yAngle,
-            CameraCenter.transform.rotation.eulerAngles.z);
+        [SerializeField] UnityEngine.Camera Camera;
+        [SerializeField] LayerMask PlayerLayer;
 
-        CameraCenter.transform.rotation = rotation;
+        [SerializeField] float scrollSensitivity = 5f;
+        [SerializeField] float scrollDampening = 6f;
 
-        if (Input.GetAxis("Mouse ScrollWheel") != 0f)
+        [SerializeField] float zoomMin = 3.5f;
+        [SerializeField] float zoomMax = 15f;
+        [SerializeField] float zoomDefault = 10f;
+        [SerializeField] float zoomDistance;
+
+        [SerializeField] float collisionSensitivity = 4.5f;
+
+        [SerializeField] float yUpLimit = 89.9f;
+        [SerializeField] float yDownLimit = -89.9f;
+
+        private CharacterManager _manager;
+        private Vector3 _cameraMoveVector;
+
+        private RaycastHit _camHit;
+        private Vector3 _camDist;
+        private float _sensitivity;
+
+        private void Start()
         {
-            var scrollAmount = Input.GetAxis("Mouse ScrollWheel") * scrollSensitivity;
-            scrollAmount *= zoomDistance * 0.3f;
-            zoomDistance -= scrollAmount;
-            zoomDistance = Mathf.Clamp(zoomDistance, zoomMin, zoomMax);
+            _camDist = Camera.transform.localPosition;
+            zoomDistance = zoomDefault;
+            _camDist.z = -zoomDistance;
+
+            _manager = GameManager.Instance.CharacterManager;
+
+            //Cursor.visible = false;
         }
 
-        if (_camDist.z != -zoomDistance)
+        private void LateUpdate()
         {
-            _camDist.z = Mathf.Lerp(_camDist.z, -zoomDistance, Time.deltaTime * scrollDampening);
+            UpdateCameraAngle(_manager);
+            UpdateCameraPosition();
         }
 
-        Camera.transform.localPosition = _camDist;
-
-        GameObject obj = new GameObject();
-        obj.transform.SetParent(Camera.transform.parent);
-        obj.transform.localPosition = new Vector3(Camera.transform.localPosition.x, Camera.transform.localPosition.y,
-            Camera.transform.localPosition.z - collisionSensitivity);
-
-        Vector3 direction = obj.transform.position - Camera.transform.position;
-        direction.Normalize();
-        Debug.DrawLine(Camera.transform.position, CameraCenter.transform.position + direction * collisionSensitivity, Color.red);
-
-        if (Physics.Linecast(CameraCenter.transform.position + direction * collisionSensitivity, Camera.transform.position, out _camHit, ~PlayerLayer, QueryTriggerInteraction.Ignore))
+        private void UpdateCameraPosition()
         {
-            Camera.transform.position = _camHit.point;
+            CameraCenter.transform.position = new Vector3(Player.transform.position.x,
+                            Player.transform.position.y + _yOffset, Player.transform.position.z);
 
-            var localPosition = new Vector3(Camera.transform.localPosition.x, Camera.transform.localPosition.y,
-                Camera.transform.localPosition.z + collisionSensitivity);
+            float xAngle = CameraCenter.transform.rotation.eulerAngles.x - _cameraMoveVector.y * _sensitivity / 2;
+            float yAngle = CameraCenter.transform.rotation.eulerAngles.y + _cameraMoveVector.x * _sensitivity;
 
-            Camera.transform.localPosition = localPosition;
+            var rotation = Quaternion.Euler(
+                MathExtentions.ClampAngle(xAngle, yDownLimit, yUpLimit),
+                yAngle,
+                CameraCenter.transform.rotation.eulerAngles.z);
 
+            CameraCenter.transform.rotation = rotation;
+
+            if (Input.GetAxis("Mouse ScrollWheel") != 0f)
+            {
+                var scrollAmount = Input.GetAxis("Mouse ScrollWheel") * scrollSensitivity;
+                scrollAmount *= zoomDistance * 0.3f;
+                zoomDistance -= scrollAmount;
+                zoomDistance = Mathf.Clamp(zoomDistance, zoomMin, zoomMax);
+            }
+
+            if (_camDist.z != -zoomDistance)
+            {
+                _camDist.z = Mathf.Lerp(_camDist.z, -zoomDistance, Time.deltaTime * scrollDampening);
+            }
+
+            Camera.transform.localPosition = _camDist;
+
+            GameObject obj = new GameObject();
+            obj.transform.SetParent(Camera.transform.parent);
+            obj.transform.localPosition = new Vector3(Camera.transform.localPosition.x, Camera.transform.localPosition.y,
+                Camera.transform.localPosition.z - collisionSensitivity);
+
+            Vector3 direction = obj.transform.position - Camera.transform.position;
+            direction.Normalize();
+            Debug.DrawLine(Camera.transform.position, CameraCenter.transform.position + direction * collisionSensitivity, Color.red);
+
+            if (Physics.Linecast(CameraCenter.transform.position + direction * collisionSensitivity, Camera.transform.position, out _camHit, ~PlayerLayer, QueryTriggerInteraction.Ignore))
+            {
+                Camera.transform.position = _camHit.point;
+
+                var localPosition = new Vector3(Camera.transform.localPosition.x, Camera.transform.localPosition.y,
+                    Camera.transform.localPosition.z + collisionSensitivity);
+
+                Camera.transform.localPosition = localPosition;
+
+            }
+
+            Destroy(obj);
+
+            if (Camera.transform.localPosition.z > -1f)
+            {
+                Camera.transform.localPosition = new Vector3(Camera.transform.localPosition.x, Camera.transform.localPosition.y, -1f);
+            }
         }
 
-        Destroy(obj);
-
-        if (Camera.transform.localPosition.z > -1f)
+        public void UpdateCameraAngle(CharacterManager manager) // Late Update
         {
-            Camera.transform.localPosition = new Vector3(Camera.transform.localPosition.x, Camera.transform.localPosition.y, -1f);
+            _sensitivity = manager.Inputs.IsMouse ? _mouseSensitivity : _controllerSensitivity;
+            float xSign = (manager.Inputs.IsMouse ? _isMouseXInverted : _isControllerXInverted) ? -1 : 1;
+            float ySign = (manager.Inputs.IsMouse ? _isMouseYInverted : _isControllerYInverted) ? -1 : 1;
+            _cameraMoveVector = manager.Inputs.CameraMoveVector.normalized;
+            _cameraMoveVector = new Vector3(_cameraMoveVector.x * xSign, _cameraMoveVector.y * ySign);
+            //_currentCameraAngle += new Vector2(manager.Inputs.CameraMoveVector.x * xSign, manager.Inputs.CameraMoveVector.y * ySign % 360) * sensitivity;
+            //_currentCameraAngle.y = Math.Clamp(_currentCameraAngle.y, -_cameraParams.YDeadZone, _cameraParams.YDeadZone);
         }
-
     }
 }

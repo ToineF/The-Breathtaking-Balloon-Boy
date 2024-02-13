@@ -59,7 +59,7 @@ namespace BlownAway.Camera
 
             float sensitivity = manager.Inputs.IsMouse ? _cameraParams.MouseSensitivity : _cameraParams.ControllerSensitivity;
             float xSign = (manager.Inputs.IsMouse ? _cameraParams.IsMouseXInverted : _cameraParams.IsControllerXInverted) ? -1 : 1;
-            float ySign = (manager.Inputs.IsMouse ? _cameraParams.IsMouseYInverted : _cameraParams.IsControllerXInverted) ? -1 : 1;
+            float ySign = (manager.Inputs.IsMouse ? _cameraParams.IsMouseYInverted : _cameraParams.IsControllerYInverted) ? -1 : 1;
             _currentCameraAngle += new Vector2(manager.Inputs.CameraMoveVector.x * xSign, manager.Inputs.CameraMoveVector.y * ySign % 360) * sensitivity;
             _currentCameraAngle.y = Math.Clamp(_currentCameraAngle.y, -_cameraParams.YDeadZone, _cameraParams.YDeadZone);
         }
