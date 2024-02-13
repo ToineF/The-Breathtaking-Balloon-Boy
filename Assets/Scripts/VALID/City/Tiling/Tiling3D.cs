@@ -107,6 +107,8 @@ public class Tiling3D : MonoBehaviour
 
     private Vector3 GetRotation(int x, int y, int z)
     {
+        int score = GetBlockScore(x, y, z);
+
         int targetX = 0;
         int targetY = 0;
         int targetZ = 0;
@@ -114,6 +116,10 @@ public class Tiling3D : MonoBehaviour
         if (x == Width - 1) targetY = 180;
         if (z == Length - 1) targetY = 90;
         if (z == 0) targetY = 270;
+        if (x == 0 && z == Length - 1) targetY -= 45;
+        if (x == Width - 1 && z == 0) targetY -= 45;
+        if (x == 0 && z == 0) targetY += 45;
+        if (x == Width - 1 && z == Length - 1) targetY += 45;
 
         return new Vector3(targetX, targetY, targetZ);
     }
