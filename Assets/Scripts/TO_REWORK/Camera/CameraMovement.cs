@@ -13,7 +13,7 @@ public class CameraMovement : MonoBehaviour
     public LayerMask PlayerLayer;
 
     public float scrollSensitivity = 5f;
-    public float scrollDamening = 6f;
+    public float scrollDampening = 6f;
 
     public float zoomMin = 3.5f;
     public float zoomMax = 15f;
@@ -21,9 +21,9 @@ public class CameraMovement : MonoBehaviour
     public float zoomDistance;
 
     public float collisionSensitivity = 4.5f;
-    public float CollisionDistance = 1f;
 
-    public float yLimit = 89.9f;
+    public float yUpLimit = 89.9f;
+    public float yDownLimit = -89.9f;
 
     private RaycastHit _camHit;
     private Vector3 _camDist;
@@ -32,9 +32,9 @@ public class CameraMovement : MonoBehaviour
     {
         _camDist = Camera.transform.localPosition;
         zoomDistance = zoomDefault;
-        _camDist.z = zoomDistance;
+        _camDist.z = -zoomDistance;
 
-        Cursor.visible = false;
+        //Cursor.visible = false;
     }
 
     private void LateUpdate()
@@ -46,7 +46,7 @@ public class CameraMovement : MonoBehaviour
         float yAngle = CameraCenter.transform.rotation.eulerAngles.y + Input.GetAxis("Mouse X") * sensitivity;
 
         var rotation = Quaternion.Euler(
-            MathExtentions.ClampAngle(xAngle, -yLimit, yLimit),
+            MathExtentions.ClampAngle(xAngle, yDownLimit, yUpLimit),
             yAngle,
             CameraCenter.transform.rotation.eulerAngles.z);
 
@@ -62,7 +62,7 @@ public class CameraMovement : MonoBehaviour
 
         if (_camDist.z != -zoomDistance)
         {
-            _camDist.z = Mathf.Lerp(_camDist.z, -zoomDistance, Time.deltaTime * scrollDamening);
+            _camDist.z = Mathf.Lerp(_camDist.z, -zoomDistance, Time.deltaTime * scrollDampening);
         }
 
         Camera.transform.localPosition = _camDist;
@@ -72,21 +72,16 @@ public class CameraMovement : MonoBehaviour
         obj.transform.localPosition = new Vector3(Camera.transform.localPosition.x, Camera.transform.localPosition.y,
             Camera.transform.localPosition.z - collisionSensitivity);
 
+        Debug.DrawLine(CameraCenter.transform.position, obj.transform.position, Color.red);
+
         if (Physics.Linecast(CameraCenter.transform.position, obj.transform.position, out _camHit, ~PlayerLayer, QueryTriggerInteraction.Ignore))
         {
-            float distance = Vector3.Distance(_camHit.point, CameraCenter.transform.position);
-            Debug.LogError(distance);
+            Camera.transform.position = _camHit.point;
 
-            if (distance < CollisionDistance)
-            {
-                Camera.transform.position = _camHit.point;
+            var localPosition = new Vector3(Camera.transform.localPosition.x, Camera.transform.localPosition.y,
+                Camera.transform.localPosition.z + collisionSensitivity);
 
-                var localPosition = new Vector3(Camera.transform.localPosition.x, Camera.transform.localPosition.y,
-                    Camera.transform.localPosition.z + collisionSensitivity);
-
-                Camera.transform.localPosition = localPosition;
-
-            }
+            Camera.transform.localPosition = localPosition;
 
         }
 
