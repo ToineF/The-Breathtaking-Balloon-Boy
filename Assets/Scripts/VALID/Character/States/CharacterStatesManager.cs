@@ -29,7 +29,7 @@ namespace BlownAway.Character.States
 
         private void Update()
         {
-            _manager.CameraManager.UpdateCameraPosition();
+            if (_manager.CameraManager) _manager.CameraManager.UpdateCameraPosition();
             _currentState.UpdateState(_manager);
 
             _manager.MovementManager.ResetVelocity();
@@ -44,7 +44,7 @@ namespace BlownAway.Character.States
         private void LateUpdate()
         {
             _currentState.LateUpdateState(_manager);
-            _manager.CameraManager.UpdateCameraAngle(_manager);
+            if (_manager.CameraManager) _manager.CameraManager.UpdateCameraAngle(_manager);
         }
 
         public void SwitchState(CharacterBaseState state)

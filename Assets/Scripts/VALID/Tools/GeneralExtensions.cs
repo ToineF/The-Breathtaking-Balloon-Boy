@@ -5,6 +5,49 @@ using DG.Tweening;
 
 namespace AntoineFoucault.Utilities
 {
+    public static class MathExtentions
+    {
+        /// <summary>
+        /// Normalize an angle between -180 and 180 degrees
+        /// </summary>
+        /// <param name="a"></param>
+        /// <returns></returns>
+        public static float NormalizeAngle(this float a)
+        {
+            return a - 180f * Mathf.Floor((a + 180f) / 180f);
+        }
+
+        /// <summary>
+        /// Correctly clamps an angle between a minimum and a maximum value
+        /// </summary>
+        /// <param name="current"></param>
+        /// <param name="min"></param>
+        /// <param name="max"></param>
+        /// <returns></returns>
+        public static float ClampAngle(float current, float min, float max)
+        {
+            float dtAngle = Mathf.Abs(((min - max) + 180) % 360 - 180);
+            float hdtAngle = dtAngle * 0.5f;
+            float midAngle = min + hdtAngle;
+
+            float offset = Mathf.Abs(Mathf.DeltaAngle(current, midAngle)) - hdtAngle;
+            if (offset > 0)
+                current = Mathf.MoveTowardsAngle(current, midAngle, offset);
+            return current;
+        }
+
+        /// <summary>
+        /// Returns the modulo of a postive or a negative integer
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="m"></param>
+        /// <returns></returns>
+        public static int Modulo(this int x, int m)
+        {
+            return (x % m + m) % m;
+        }
+    }
+
     public static class VectorExtensions
     {
         #region Set One Param
