@@ -35,7 +35,7 @@ namespace BlownAway.Camera
         [SerializeField] float zoomDistance;
 
         [SerializeField] float collisionSensitivity = 4.5f;
-        [SerializeField] float collisionDistance = 4.5f;
+        [SerializeField] float minCollisionDistance = 1.5f;
 
         [SerializeField] float yUpLimit = 89.9f;
         [SerializeField] float yDownLimit = -89.9f;
@@ -44,6 +44,7 @@ namespace BlownAway.Camera
         private Vector3 _cameraMoveVector;
 
         private RaycastHit _camHit;
+        private RaycastHit _camHit2;
         private Vector3 _camDist;
         private float _sensitivity;
 
@@ -105,12 +106,19 @@ namespace BlownAway.Camera
 
             if (Physics.Linecast(CameraCenter.transform.position + direction * collisionSensitivity, Camera.transform.position, out _camHit, ~PlayerLayer, QueryTriggerInteraction.Ignore))
             {
-                Camera.transform.position = _camHit.point;
+                Physics.Linecast(Camera.transform.position, CameraCenter.transform.position + direction * collisionSensitivity, out _camHit2, ~PlayerLayer, QueryTriggerInteraction.Ignore);
+                //Debug.Log("Distance : " + Vector3.Distance(_camHit.point, _camHit2.point));
 
-                var localPosition = new Vector3(Camera.transform.localPosition.x, Camera.transform.localPosition.y,
-                    Camera.transform.localPosition.z + collisionSensitivity);
+                if (Vector3.Distance(_camHit.point, _camHit2.point) > minCollisionDistance)
+                {
 
-                Camera.transform.localPosition = localPosition;
+                    Camera.transform.position = _camHit.point;
+
+                    var localPosition = new Vector3(Camera.transform.localPosition.x, Camera.transform.localPosition.y,
+                        Camera.transform.localPosition.z + collisionSensitivity);
+
+                    Camera.transform.localPosition = localPosition;
+                }
 
             }
 

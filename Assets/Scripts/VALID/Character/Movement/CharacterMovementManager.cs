@@ -115,7 +115,6 @@ namespace BlownAway.Character.Movements
             //manager.CharacterRigidbody.velocity = Vector3.zero;
 
             manager.CharacterRigidbody.velocity = CurrentVelocity;
-            Debug.Log(CurrentGravity);
         }
 
         public void ResetVelocity()
@@ -135,7 +134,7 @@ namespace BlownAway.Character.Movements
             }
             _currentDeplacementDirection = Vector3.Lerp(_currentDeplacementDirection, deplacementDirection, walkTurnSpeed);
 
-            if (OnSlope() && IsGrounded)
+            if (IsGrounded)
                 _currentDeplacementDirection = GetSlopeMoveDirection(); // HERE SEE SLOPES
             Debug.LogWarning(_currentDeplacementDirection * _currentDeplacementSpeed);
 
