@@ -19,7 +19,7 @@ namespace BlownAway.Character
         [field: SerializeField, Tooltip("The reference to the class that contains the inputs of the character")] public CharacterInputsManager Inputs { get; private set; }
 
         // Camera
-        [field: SerializeField, Tooltip("The reference to the class that contains the logic of the camera")] public CameraManager CameraManager { get; private set; }
+        [field: SerializeField, Tooltip("The reference to the class that contains the logic of the camera")] public CharacterCameraManager CameraManager { get; private set; }
 
         // Movement
         [field: SerializeField, Tooltip("The reference to the class that contains the movement of the character")] public CharacterMovementManager MovementManager { get; private set; }
@@ -32,6 +32,16 @@ namespace BlownAway.Character
 
         // Animations
         [field: SerializeField, Tooltip("The reference to the class that contains the logic of the animations")] public CharacterAnimationManager AnimationManager { get; private set; }
+
+
+        private void Awake()
+        {
+            CameraManager.Manager = this;
+            MovementManager.Manager = this;
+            States.Manager = this;
+            AirManager.Manager = this;
+            AnimationManager.Manager = this;
+        }
 
 
     }

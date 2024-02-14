@@ -81,6 +81,7 @@ GameObject:
   - component: {fileID: 7865403362446753878}
   - component: {fileID: 4325485606811522093}
   - component: {fileID: 2324459326877564572}
+  - component: {fileID: 8720038069001201682}
   m_Layer: 0
   m_Name: CharacterController
   m_TagString: Untagged
@@ -122,7 +123,7 @@ MonoBehaviour:
   <CharacterCollider>k__BackingField: {fileID: 4886940072450693899}
   <CharacterVisual>k__BackingField: {fileID: 7007994465779448743}
   <Inputs>k__BackingField: {fileID: 7507358721281837289}
-  <CameraManager>k__BackingField: {fileID: 0}
+  <CameraManager>k__BackingField: {fileID: 8720038069001201682}
   <MovementManager>k__BackingField: {fileID: 7865403362446753878}
   <States>k__BackingField: {fileID: 1215609012679441032}
   <AirManager>k__BackingField: {fileID: 4325485606811522093}
@@ -201,6 +202,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _isOrientationInverted: 1
   _offsetFromRigidbody: {x: 0.09, y: -0.01, z: 0.01}
+--- !u!114 &8720038069001201682
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2112151245869228761}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81079fe74570dc24dbeba7aa051dcef0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _cameraData: {fileID: 11400000, guid: c4dd2d1fdd0792d40bb28287be4b0d85, type: 2}
+  FocusPoint: {fileID: 7641119256232304925}
+  CameraCenter: {fileID: 9049657606848679487}
+  Camera: {fileID: 1012714471462903522}
 --- !u!1 &5937500286042893197
 GameObject:
   m_ObjectHideFlags: 0
@@ -464,7 +481,6 @@ GameObject:
   - component: {fileID: 1012714471462903522}
   - component: {fileID: 7546526075764463171}
   - component: {fileID: 8347043706421292560}
-  - component: {fileID: 8703868918798549054}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -590,41 +606,6 @@ MonoBehaviour:
     mipBias: 0
     varianceClampScale: 0.9
     contrastAdaptiveSharpening: 0
---- !u!114 &8703868918798549054
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8917476655852094964}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81079fe74570dc24dbeba7aa051dcef0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Player: {fileID: 7641119256232304925}
-  CameraCenter: {fileID: 9049657606848679487}
-  _yOffset: 1
-  _mouseSensitivity: 0.2
-  _isMouseXInverted: 0
-  _isMouseYInverted: 0
-  _controllerSensitivity: 4
-  _isControllerXInverted: 0
-  _isControllerYInverted: 1
-  Camera: {fileID: 1012714471462903522}
-  PlayerLayer:
-    serializedVersion: 2
-    m_Bits: 64
-  scrollSensitivity: 5
-  scrollDampening: 6
-  zoomMin: 3.5
-  zoomMax: 15
-  zoomDefault: 10
-  zoomDistance: 0
-  collisionSensitivity: 0.1
-  minCollisionDistance: 1.5
-  yUpLimit: 79.9
-  yDownLimit: -59.9
 --- !u!1 &9049657606848679487
 GameObject:
   m_ObjectHideFlags: 0
@@ -847,6 +828,7 @@ MonoBehaviour:
   _fullColorTime: 0.05
   _fullColorDelay: 0.05
   _fullToNaturalColorSpeed: 0.5
+  AirManager: {fileID: 4325485606811522093}
 --- !u!1001 &6657387835236223115
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -6,6 +6,8 @@ namespace BlownAway.Character.Air
 {
     public class CharacterAirManager : MonoBehaviour
     {
+        public CharacterManager Manager { get; set; }
+
         public float CurrentAir { get => _currentAir; private set => _currentAir = Mathf.Clamp(value, 0, 1); }
         public bool AirIsFull { get => _currentAir >= 1;}
         public bool AirIsEmpty { get => _currentAir <= 0.00001f;}

@@ -12,6 +12,9 @@ namespace BlownAway.Character.Movements
         public Action OnGroundEnter;
         public Action OnGroundExit;
 
+
+        public CharacterManager Manager { get; set; }
+
         // Idle & Walk Data
         [field: SerializeField] public CharacterLateralMovementsData LateralMovementData { get; private set; }
 
@@ -77,7 +80,7 @@ namespace BlownAway.Character.Movements
         {
             GroundHitResults = new RaycastHit[2];
             JumpBufferHitResults = new RaycastHit[2];
-            SetGravityTo(GameManager.Instance.CharacterManager, FallData.BaseGravity, FallData.BaseMinGravity, FallData.BaseMaxGravity, FallData.BaseGravityIncreaseByFrame, FallData.BaseGravityIncreaseDecelerationByFrame);
+            SetGravityTo(Manager, FallData.BaseGravity, FallData.BaseMinGravity, FallData.BaseMaxGravity, FallData.BaseGravityIncreaseByFrame, FallData.BaseGravityIncreaseDecelerationByFrame);
         }
 
 
@@ -407,7 +410,7 @@ namespace BlownAway.Character.Movements
         // REMOVE THIS
         private void OnDrawGizmos()
         {
-            if (GameManager.Instance == null) return;
+            if (Manager == null) return;
 
             Gizmos.color = Color.white;
 
@@ -418,14 +421,14 @@ namespace BlownAway.Character.Movements
             }
 
             Vector3 direction = GetSlopeMoveDirection();
-            Vector3 position = GameManager.Instance.CharacterManager.CharacterRigidbody.position;
+            Vector3 position = Manager.CharacterRigidbody.position;
             Gizmos.DrawLine(position, position + direction);
 
             //if (Physics.SphereCast(transform.position, 0.5f, -transform.up, out hit, 0.25f))
             //Gizmos.DrawWireSphere(transform.position - transform.up * 0.25f, 0.5f);
             //
             //Physics.SphereCastNonAlloc(manager.CharacterVisual.position, GroundDetectionData.GroundDetectionSphereRadius, Vector3.down, GroundHitResults, GroundDetectionData.GroundCheckDistance, GroundDetectionData.GroundLayer) > 0;
-            Gizmos.DrawWireSphere(GameManager.Instance.CharacterManager.CharacterVisual.position + Vector3.down * GroundDetectionData.GroundCheckDistance, GroundDetectionData.GroundDetectionSphereRadius);
+            Gizmos.DrawWireSphere(Manager.CharacterVisual.position + Vector3.down * GroundDetectionData.GroundCheckDistance, GroundDetectionData.GroundDetectionSphereRadius);
         }
         #endregion
 

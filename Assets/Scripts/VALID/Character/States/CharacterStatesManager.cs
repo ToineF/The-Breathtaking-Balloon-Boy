@@ -5,6 +5,7 @@ namespace BlownAway.Character.States
 
     public class CharacterStatesManager : MonoBehaviour
     {
+        public CharacterManager Manager { get; set; }
 
         // States Bank
         public CharacterIdleState IdleState = new CharacterIdleState();
@@ -17,43 +18,39 @@ namespace BlownAway.Character.States
 
 
         private CharacterBaseState _currentState;
-        private CharacterManager _manager;
 
 
         private void Start()
         {
-            _manager = GameManager.Instance.CharacterManager;
             _currentState = FallingState;
-            _currentState.EnterState(_manager);
+            _currentState.EnterState(Manager);
         }
 
         private void Update()
         {
-            if (_manager.CameraManager) _manager.CameraManager.UpdateCameraPosition();
-            _currentState.UpdateState(_manager);
+            _currentState.UpdateState(Manager);
 
-            _manager.MovementManager.ResetVelocity();
-            _currentState.FixedUpdateState(_manager);
+            Manager.MovementManager.ResetVelocity();
+            _currentState.FixedUpdateState(Manager);
         }
 
         private void FixedUpdate()
         {
-            _manager.MovementManager.ApplyVelocity(_manager);
+            Manager.MovementManager.ApplyVelocity(Manager);
         }
 
         private void LateUpdate()
         {
-            _currentState.LateUpdateState(_manager);
-            if (_manager.CameraManager) _manager.CameraManager.UpdateCameraAngle(_manager);
+            _currentState.LateUpdateState(Manager);
         }
 
         public void SwitchState(CharacterBaseState state)
         {
-            _currentState.ExitState(_manager);
+            _currentState.ExitState(Manager);
 
             _currentState = state;
 
-            _currentState.EnterState(_manager);
+            _currentState.EnterState(Manager);
         }
     }
 }
