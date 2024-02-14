@@ -5,7 +5,7 @@ namespace BlownAway
 {
     public class GameManager : Singleton<GameManager>
     {
-        // Character
+        // Character (Unused)
         [field: SerializeField] public CharacterManager CharacterManager { get; private set; }
 
     }
