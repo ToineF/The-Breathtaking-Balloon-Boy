@@ -115,8 +115,6 @@ namespace BlownAway.Character.Movements
 
         public void ApplyVelocity(CharacterManager manager)
         {
-            //manager.CharacterRigidbody.velocity = Vector3.zero;
-
             manager.CharacterRigidbody.velocity = CurrentVelocity;
         }
 
@@ -129,17 +127,20 @@ namespace BlownAway.Character.Movements
         public void MoveAtSpeed(CharacterManager manager, float walkTurnSpeed, bool includesInputs = true)
         {
             Vector3 deplacementDirection = _currentDeplacementDirection;
+            Vector3 groundDirection = new Vector3(1, 0, 1);
             if (includesInputs) // Updates the Current Deplacement Value
             {
                 deplacementDirection = (Vector3.Scale(UnityEngine.Camera.main.transform.forward, new Vector3(1, 0, 1)) * manager.Inputs.MoveInputDirection.z + Vector3.Scale(UnityEngine.Camera.main.transform.right, new Vector3(1, 0, 1)) * manager.Inputs.MoveInputDirection.x).normalized;
 
                 deplacementDirection = Vector3.Scale(deplacementDirection, new Vector3(1, 0, 1));
+                if (Vector3.Angle(_currentDeplacementDirection, deplacementDirection) < 0.001f) Debug.LogWarning("turn");
+                    //deplacementDirection = Quaternion.AngleAxis(-45, Vector3.up) * deplacementDirection;
             }
             _currentDeplacementDirection = Vector3.Lerp(_currentDeplacementDirection, deplacementDirection, walkTurnSpeed);
 
             //if (IsGrounded)
             //    _currentDeplacementDirection = GetSlopeMoveDirection(); // HERE SEE SLOPES
-            Debug.LogWarning(_currentDeplacementDirection * _currentDeplacementSpeed);
+            //Debug.LogWarning(_currentDeplacementDirection * _currentDeplacementSpeed);
 
             CurrentVelocity += _currentDeplacementDirection * _currentDeplacementSpeed;
         }
@@ -183,11 +184,11 @@ namespace BlownAway.Character.Movements
 
         public void UpdateGravity(CharacterManager manager)
         {
-            if (!manager.MovementManager.IsGrounded)
-            {
+            //if (!manager.MovementManager.IsGrounded)
+            //{
                 manager.MovementManager.CurrentGravityIncreaseByFrame = Mathf.Max(manager.MovementManager.CurrentGravityIncreaseByFrame - manager.MovementManager.CurrentGravityIncreaseDeceleration, 0);
                 manager.MovementManager.CurrentGravity = Mathf.Clamp(manager.MovementManager.CurrentGravity + manager.MovementManager.CurrentGravityIncreaseByFrame * Time.deltaTime, manager.MovementManager.MinGravity, manager.MovementManager.MaxGravity);
-            }
+            //}
 
             /*Vector3 additionalForces = Vector3.zero;
             foreach (var force in _additionnalForces)
