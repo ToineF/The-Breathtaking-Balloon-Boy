@@ -142,7 +142,6 @@ namespace BlownAway.Character.Movements
             //    _currentDeplacementDirection = GetSlopeMoveDirection(); // HERE SEE SLOPES
             //Debug.LogWarning(_currentDeplacementDirection * _currentDeplacementSpeed);
 
-            Debug.LogError(_currentDeplacementDirection);
             CurrentVelocity += _currentDeplacementDirection * _currentDeplacementSpeed;
         }
 
