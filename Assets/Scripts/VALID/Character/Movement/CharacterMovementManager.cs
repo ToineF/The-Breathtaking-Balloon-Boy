@@ -142,6 +142,7 @@ namespace BlownAway.Character.Movements
             //    _currentDeplacementDirection = GetSlopeMoveDirection(); // HERE SEE SLOPES
             //Debug.LogWarning(_currentDeplacementDirection * _currentDeplacementSpeed);
 
+            Debug.LogError(_currentDeplacementDirection);
             CurrentVelocity += _currentDeplacementDirection * _currentDeplacementSpeed;
         }
 
@@ -284,7 +285,8 @@ namespace BlownAway.Character.Movements
         {
             manager.States.SwitchState(manager.States.PropulsionState);
             CurrentPropulsionIncreaseByFrame = PropulsionData.PropulsionIncreaseByFrame;
-            _currentPropulsionDirection = _currentDeplacementDirection;
+            _currentPropulsionDirection = Vector3.zero;
+            //_currentPropulsionDirection = _currentDeplacementDirection;
         }
 
         public void CheckForPropulsionEnd(CharacterManager manager)

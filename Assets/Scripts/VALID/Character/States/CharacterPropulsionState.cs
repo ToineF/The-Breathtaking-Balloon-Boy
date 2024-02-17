@@ -9,8 +9,7 @@ namespace BlownAway.Character.States
             Debug.Log("PROPULSION");
             manager.MovementManager.LerpGravityTo(manager, manager.MovementManager.FallData.PropulsionGravity, manager.MovementManager.FallData.PropulsionMinGravity, manager.MovementManager.FallData.PropulsionMaxGravity, manager.MovementManager.FallData.PropulsionGravityIncreaseByFrame, manager.MovementManager.FallData.PropulsionGravityIncreaseDecelerationByFrame, manager.MovementManager.FallData.PropulsionGravityTime, manager.MovementManager.FallData.PropulsionGravityAccel);
 
-
-            //manager.MovementManager.LerpDeplacementSpeed(manager, manager.MovementManager.LateralMovementData.BasePropulsionLateralDeplacementSpeed, manager.MovementManager.LateralMovementData.BasePropulsionDeplacementTime, manager.MovementManager.LateralMovementData.BasePropulsionDeplacementCurve);
+            manager.MovementManager.LerpDeplacementSpeed(manager, manager.MovementManager.LateralMovementData.BasePropulsionLateralDeplacementSpeed, manager.MovementManager.LateralMovementData.BasePropulsionDeplacementTime, manager.MovementManager.LateralMovementData.BasePropulsionDeplacementCurve);
 
             manager.MovementManager.LerpPropulsionSpeed(manager, 1, manager.MovementManager.PropulsionData.BasePropulsionAccelTime, manager.MovementManager.PropulsionData.BasePropulsionAccelCurve);
         }
