@@ -6,7 +6,7 @@ using BlownAway.Hitbox;
 namespace BlownAway.GPE
 {
     [RequireComponent(typeof(Collider))]
-    public class WindZone : HitboxTrigger
+    public class WindZone : BoxTrigger
     {
         [SerializeField][Tooltip("The Magnitude at which the Wind pushes the Player")] private float _pushMagnitude;
         [SerializeField][Tooltip("The normalized direction of the Wind")] private Vector3 _pushVector;
@@ -29,54 +29,54 @@ namespace BlownAway.GPE
         [SerializeField] private float _audioStartFadeTime;
         [SerializeField] private float _audioEndFadeTime;
 
-        private bool _isPlayerIn;
+        //private bool _isPlayerIn;
 
-        private void Start()
-        {
-            //_timer = _timeBetweenAdditions;
-            _pushVector = new Vector3(_pushVector.x, _isHot ? 1 : -1 * Math.Abs(_pushVector.y), _pushVector.z);
-        }
-
-        override protected void OnTriggerEnter(Collider other)
-        {
-            if (!other.TryGetComponent(out CharacterControllerTest character)) return;
-
-            character.AddAdditionalForce(gameObject, _pushVector * _pushMagnitude * Time.deltaTime, _startLerpValue);
-            _isPlayerIn = true;
-
-            // Sound
-            if (AudioManager.Instance != null)
-                AudioManager.Instance.FadeAudioSourceVolume(_windBlowingSound, _audioStartFadeTime, 1);
-
-        }
-
-        //override protected void OnTriggerStay(Collider other)
+        //private void Start()
         //{
-        //    if (_timer > 0) return;
+        //    //_timer = _timeBetweenAdditions;
+        //    _pushVector = new Vector3(_pushVector.x, _isHot ? 1 : -1 * Math.Abs(_pushVector.y), _pushVector.z);
+        //}
 
+        //override protected void OnTriggerEnter(Collider other)
+        //{
         //    if (!other.TryGetComponent(out CharacterControllerTest character)) return;
 
         //    character.AddAdditionalForce(gameObject, _pushVector * _pushMagnitude * Time.deltaTime, _startLerpValue);
         //    _isPlayerIn = true;
 
-        //    _timer = _timeBetweenAdditions;
+        //    // Sound
+        //    if (AudioManager.Instance != null)
+        //        AudioManager.Instance.FadeAudioSourceVolume(_windBlowingSound, _audioStartFadeTime, 1);
+
         //}
 
-        override protected void OnTriggerExit(Collider other)
-        {
-            if (!other.TryGetComponent(out CharacterControllerTest character)) return;
+        ////override protected void OnTriggerStay(Collider other)
+        ////{
+        ////    if (_timer > 0) return;
 
-            character.AddAdditionalForce(gameObject, Vector3.zero, _stopLerpValue);
-            _isPlayerIn = false;
+        ////    if (!other.TryGetComponent(out CharacterControllerTest character)) return;
 
-            // Sound
-            if (AudioManager.Instance != null)
-                AudioManager.Instance.FadeAudioSourceVolume(_windBlowingSound, _audioEndFadeTime, 0);
-        }
+        ////    character.AddAdditionalForce(gameObject, _pushVector * _pushMagnitude * Time.deltaTime, _startLerpValue);
+        ////    _isPlayerIn = true;
 
-        //private void Update()
+        ////    _timer = _timeBetweenAdditions;
+        ////}
+
+        //override protected void OnTriggerExit(Collider other)
         //{
-        //    _timer -= Time.deltaTime;
+        //    if (!other.TryGetComponent(out CharacterControllerTest character)) return;
+
+        //    character.AddAdditionalForce(gameObject, Vector3.zero, _stopLerpValue);
+        //    _isPlayerIn = false;
+
+        //    // Sound
+        //    if (AudioManager.Instance != null)
+        //        AudioManager.Instance.FadeAudioSourceVolume(_windBlowingSound, _audioEndFadeTime, 0);
         //}
+
+        ////private void Update()
+        ////{
+        ////    _timer -= Time.deltaTime;
+        ////}
     }
 }
