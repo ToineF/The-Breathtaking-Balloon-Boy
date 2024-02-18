@@ -133,13 +133,22 @@ namespace BlownAway.Character.Movements
                 deplacementDirection = (Vector3.Scale(UnityEngine.Camera.main.transform.forward, new Vector3(1, 0, 1)) * manager.Inputs.MoveInputDirection.z + Vector3.Scale(UnityEngine.Camera.main.transform.right, new Vector3(1, 0, 1)) * manager.Inputs.MoveInputDirection.x).normalized;
 
                 deplacementDirection = Vector3.Scale(deplacementDirection, new Vector3(1, 0, 1));
-                if (Vector3.Angle(_currentDeplacementDirection, deplacementDirection) < 0.001f) Debug.LogWarning("turn");
-                    //deplacementDirection = Quaternion.AngleAxis(-45, Vector3.up) * deplacementDirection;
+
+                //if (Vector3.Angle(_currentDeplacementDirection, deplacementDirection) > 170f) Debug.LogWarning("turn");
+                //Debug.LogWarning(Vector3.Angle(_currentDeplacementDirection, deplacementDirection));
+                //if (Vector3.Angle(_currentDeplacementDirection, deplacementDirection) > 170f) 
+                //    deplacementDirection = Quaternion.AngleAxis(-70, Vector3.up) * deplacementDirection;
+
+                Debug.LogWarning(deplacementDirection);
             }
+
+            deplacementDirection = GetSlopeMoveDirection(deplacementDirection);
+
             _currentDeplacementDirection = Vector3.Lerp(_currentDeplacementDirection, deplacementDirection, walkTurnSpeed);
 
-            //if (IsGrounded)
-            //    _currentDeplacementDirection = GetSlopeMoveDirection(); // HERE SEE SLOPES
+           //if (IsGrounded && OnSlope())
+           //     _currentDeplacementDirection = GetSlopeMoveDirection(); // HERE SEE SLOPES
+
             //Debug.LogWarning(_currentDeplacementDirection * _currentDeplacementSpeed);
 
             CurrentVelocity += _currentDeplacementDirection * _currentDeplacementSpeed;
@@ -387,7 +396,7 @@ namespace BlownAway.Character.Movements
             //Debug.DrawLine(LastGround.point, LastGround.point + LastGround.normal, Color.black, 3f);
             //Debug.DrawLine(castOrigin, castOrigin + LastGround.normal, Color.black, 3f);
 
-            Debug.DrawLine(manager.CharacterRigidbody.position, manager.CharacterRigidbody.position + GetSlopeMoveDirection(), Color.black, 3f);
+            Debug.DrawLine(manager.CharacterRigidbody.position, manager.CharacterRigidbody.position + GetSlopeMoveDirection(_currentDeplacementDirection), Color.black, 3f);
 
 
 
@@ -403,9 +412,9 @@ namespace BlownAway.Character.Movements
 
         }
 
-        private Vector3 GetSlopeMoveDirection()
+        private Vector3 GetSlopeMoveDirection(Vector3 deplacementDirection)
         {
-            return Vector3.ProjectOnPlane(_currentDeplacementDirection, LastGround.normal).normalized;
+            return Vector3.ProjectOnPlane(deplacementDirection, LastGround.normal).normalized;
         }
 
 
@@ -422,7 +431,7 @@ namespace BlownAway.Character.Movements
                 //Debug.Log(LastGround.normal);
             }
 
-            Vector3 direction = GetSlopeMoveDirection();
+            Vector3 direction = GetSlopeMoveDirection(_currentDeplacementDirection);
             Vector3 position = Manager.CharacterRigidbody.position;
             Gizmos.DrawLine(position, position + direction);
 
