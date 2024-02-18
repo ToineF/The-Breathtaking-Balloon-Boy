@@ -5,6 +5,7 @@ using BlownAway.Character.Movements;
 using BlownAway.Character.States;
 using BlownAway.Character.Air;
 using BlownAway.Character.Animations;
+using BlownAway.Hitbox.Checkpoints;
 
 namespace BlownAway.Character
 {
@@ -32,6 +33,9 @@ namespace BlownAway.Character
 
         // Animations
         [field: SerializeField, Tooltip("The reference to the class that contains the logic of the animations")] public CharacterAnimationManager AnimationManager { get; private set; }
+
+        // Checkpoints
+        [field: SerializeField, Tooltip("The reference to the class that contains the logic of the checkpoint system")] public CheckpointManager CheckpointManager { get; private set; }
 
 
         private void Awake()

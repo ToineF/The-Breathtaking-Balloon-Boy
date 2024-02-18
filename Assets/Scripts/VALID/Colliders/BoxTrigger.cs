@@ -1,51 +1,55 @@
 using UnityEngine;
-using UnityEngine.Events;
+using AntoineFoucault.Utilities;
+using System;
 
 [DisallowMultipleComponent]
 [RequireComponent(typeof(BoxCollider))]
 public class BoxTrigger : MonoBehaviour
 {
-    [field: SerializeField] public UnityEvent OnEnterTrigger { get; private set; }
-    [field: SerializeField] public UnityEvent OnExitTrigger { get; private set; }
+    public Action OnEnterTrigger { get; protected set; }
+    public Action OnExitTrigger { get; protected set; }
 
     [Header("Settings")]
-    [SerializeField] private bool _oneShot = false;
-    [SerializeField] private bool _isTrigger = true;
+    [SerializeField] protected bool _oneShot = false;
+    [SerializeField] protected bool _isTrigger = true;
 
     [Header("Filters")]
-    [SerializeField] private GameObject[] _gameObjectsToIgnore;
-    [SerializeField] private LayerMask _layersToDetect = -1;
+    [SerializeField] protected GameObject[] _gameObjectsToIgnore;
+    [SerializeField] protected LayerMask _layersToDetect = -1;
 
     [Header("Gizmo Settings")]
-    [SerializeField] private bool _displayGizmos = false;
-    [SerializeField] private bool _showOnlyWhileSelected = true;
-    [SerializeField] private Color _gizmoColor = Color.green;
-    [SerializeField] private Color _gizmoSelectedColor = Color.red;
-    [SerializeField] private Color _gizmoWireColor = Color.black;
-    [SerializeField] private Color _gizmoSelectedWireColor = Color.white;
+    [SerializeField] protected bool _displayGizmos = true;
+    [SerializeField] protected bool _showOnlyWhileSelected = true;
+    [SerializeField] protected Color _gizmoColor = Color.green;
+    [SerializeField] protected Color _gizmoSelectedColor = Color.red;
+    [SerializeField] protected Color _gizmoWireColor = Color.black;
+    [SerializeField] protected Color _gizmoSelectedWireColor = Color.white;
 
-    private Collider _collider;
+    protected Collider _collider;
+    protected Collider _lastOtherCollider;
 
-    private void Awake()
+    protected void Awake()
     {
         _collider = GetComponent<Collider>();
         _collider.isTrigger = _isTrigger;
     }
 
     #region Trigger
-    private void OnTriggerEnter(Collider other)
+    protected void OnTriggerEnter(Collider other)
     {
         TriggerEnter(other);
     }
 
-    private void OnCollisionEnter(Collision collision)
+    protected void OnCollisionEnter(Collision collision)
     {
         TriggerEnter(collision.collider);
     }
 
-    private void TriggerEnter(Collider other)
+    protected void TriggerEnter(Collider other)
     {
         if (!IsCollisionValid(other)) return;
+
+        _lastOtherCollider = other;
 
         OnEnterTrigger?.Invoke();
 
@@ -53,24 +57,24 @@ public class BoxTrigger : MonoBehaviour
     }
 
 
-    private void OnTriggerExit(Collider other)
+    protected void OnTriggerExit(Collider other)
     {
         TriggerExit(other);
     }
 
-    private void OnCollisionExit(Collision collision)
+    protected void OnCollisionExit(Collision collision)
     {
         TriggerExit(collision.collider);
     }
 
-    private void TriggerExit(Collider other)
+    protected void TriggerExit(Collider other)
     {
         if (!IsCollisionValid(other)) return;
 
         OnExitTrigger?.Invoke();
     }
 
-    private bool IsCollisionValid(Collider other)
+    protected bool IsCollisionValid(Collider other)
     {
         // GameObject Check
         if (_gameObjectsToIgnore.Length > 0)
@@ -82,18 +86,14 @@ public class BoxTrigger : MonoBehaviour
         }
 
         // Layer Check
-        if (!IsInLayerMask(other.gameObject.layer, _layersToDetect)) return false;
+        if (!LayerExtensions.IsInLayerMask(other.gameObject.layer, _layersToDetect)) return false;
 
         return true;
-    }
-    public static bool IsInLayerMask(int layer, LayerMask layermask)
-    {
-        return layermask == (layermask | (1 << layer));
     }
     #endregion
 
     #region Gizmos
-    private void OnDrawGizmos()
+    protected void OnDrawGizmos()
     {
         if (!_displayGizmos) return;
         if (!_showOnlyWhileSelected) return;
@@ -101,13 +101,13 @@ public class BoxTrigger : MonoBehaviour
         DrawGizmos(_gizmoColor, _gizmoWireColor);
     }
 
-    private void OnDrawGizmosSelected()
+    protected void OnDrawGizmosSelected()
     {
         if (!_displayGizmos) return;
 
         DrawGizmos(_gizmoSelectedColor, _gizmoSelectedWireColor);
     }
-    private void DrawGizmos(Color boxColor, Color wireColor)
+    protected void DrawGizmos(Color boxColor, Color wireColor)
     {
         if (_collider == null)
             _collider = GetComponent<Collider>();
