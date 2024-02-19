@@ -361,7 +361,7 @@ namespace BlownAway.Character.Movements
         #endregion
 
         #region Air
-        public void FallfAirEmpty(CharacterManager manager)
+        public void FallIfAirEmpty(CharacterManager manager)
         {
             if (!manager.AirManager.AirIsEmpty) return;
 
