@@ -9,7 +9,7 @@ namespace BlownAway.Character.States
             Debug.Log("FLOATING");
             manager.MovementManager.LerpGravityTo(manager, manager.MovementManager.FallData.FloatingGravity, manager.MovementManager.FallData.FloatingMinGravity, manager.MovementManager.FallData.FloatingMaxGravity, manager.MovementManager.FallData.FloatingGravityIncreaseByFrame, manager.MovementManager.FallData.FloatingGravityIncreaseDecelerationByFrame, manager.MovementManager.FallData.FloatingGravityTime, manager.MovementManager.FallData.FloatingGravityAccel);
             
-            manager.MovementManager.LerpDeplacementSpeed(manager, manager.MovementManager.LateralMovementData.BaseFallLateralSpeed, manager.MovementManager.LateralMovementData.BaseFallTime, manager.MovementManager.LateralMovementData.BaseFallCurve);
+            manager.MovementManager.LerpDeplacementSpeed(manager, manager.MovementManager.LateralMovementData.BaseFloatLateralSpeed, manager.MovementManager.LateralMovementData.BaseFloatTime, manager.MovementManager.LateralMovementData.BaseFloatCurve);
 
         }
 
