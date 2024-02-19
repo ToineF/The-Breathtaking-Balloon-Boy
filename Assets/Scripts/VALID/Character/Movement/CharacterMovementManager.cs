@@ -196,7 +196,7 @@ namespace BlownAway.Character.Movements
             //if (!manager.MovementManager.IsGrounded)
             //{
                 manager.MovementManager.CurrentGravityIncreaseByFrame = Mathf.Max(manager.MovementManager.CurrentGravityIncreaseByFrame - manager.MovementManager.CurrentGravityIncreaseDeceleration, 0);
-                manager.MovementManager.CurrentGravity = Mathf.Clamp(manager.MovementManager.CurrentGravity + manager.MovementManager.CurrentGravityIncreaseByFrame * Time.deltaTime, manager.MovementManager.MinGravity, manager.MovementManager.MaxGravity);
+                manager.MovementManager.CurrentGravity = Mathf.Clamp(manager.MovementManager.CurrentGravity + manager.MovementManager.CurrentGravityIncreaseByFrame, manager.MovementManager.MinGravity, manager.MovementManager.MaxGravity);
             //}
 
             /*Vector3 additionalForces = Vector3.zero;
@@ -328,7 +328,7 @@ namespace BlownAway.Character.Movements
             {
                 // Increase speed over time
                 CurrentPropulsionIncreaseByFrame = Math.Max(CurrentPropulsionIncreaseByFrame - PropulsionData.PropulsionIncreaseDeceleration, 0);
-                _currentPropulsionSpeed = Math.Min(_currentPropulsionSpeed + (CurrentPropulsionIncreaseByFrame / 100 * Time.deltaTime), PropulsionData.MaxPropulsionSpeed);
+                _currentPropulsionSpeed = Math.Min(_currentPropulsionSpeed + (CurrentPropulsionIncreaseByFrame / 100), PropulsionData.MaxPropulsionSpeed);
                 
             }
             else

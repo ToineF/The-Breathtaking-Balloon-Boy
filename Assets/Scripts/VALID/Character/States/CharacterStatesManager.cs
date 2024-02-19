@@ -28,15 +28,17 @@ namespace BlownAway.Character.States
 
         private void Update()
         {
-            _currentState.UpdateState(Manager);
-
-            Manager.MovementManager.ResetVelocity();
-            _currentState.FixedUpdateState(Manager);
+           
         }
 
         private void FixedUpdate()
         {
             Manager.MovementManager.ApplyVelocity(Manager);
+
+            _currentState.UpdateState(Manager);
+
+            Manager.MovementManager.ResetVelocity();
+            _currentState.FixedUpdateState(Manager);
         }
 
         private void LateUpdate()
