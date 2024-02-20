@@ -6,16 +6,22 @@ using BlownAway.Character.States;
 using BlownAway.Character.Air;
 using BlownAway.Character.Animations;
 using BlownAway.Hitbox.Checkpoints;
+using BlownAway.Character.Data;
 
 namespace BlownAway.Character
 {
     public class CharacterManager : MonoBehaviour
     {
+        [field: Header("References to data")]
         [field: SerializeField] public Rigidbody CharacterRigidbody { get; set; }
         [field: SerializeField] public Collider CharacterCollider { get; set; }
         [field: SerializeField] public Transform CharacterVisual { get; set; }
 
+        // Data
+        [field: SerializeField, Tooltip("The current data of the character")] public CharacterControllerData Data { get; private set; }
 
+
+        [field:Header("References to scripts")]
         // Inputs
         [field: SerializeField, Tooltip("The reference to the class that contains the inputs of the character")] public CharacterInputsManager Inputs { get; private set; }
 
@@ -36,6 +42,7 @@ namespace BlownAway.Character
 
         // Checkpoints
         [field: SerializeField, Tooltip("The reference to the class that contains the logic of the checkpoint system")] public CheckpointManager CheckpointManager { get; private set; }
+
 
 
         private void Awake()

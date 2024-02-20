@@ -2,7 +2,6 @@ using System;
 using UnityEngine;
 using System.Collections;
 using BlownAway.Character.Inputs;
-using BlownAway.Character.Movements.Data;
 
 namespace BlownAway.Character.Movements
 {
@@ -14,21 +13,6 @@ namespace BlownAway.Character.Movements
 
 
         public CharacterManager Manager { get; set; }
-
-        // Idle & Walk Data
-        [field: SerializeField] public CharacterLateralMovementsData LateralMovementData { get; private set; }
-
-        // Fall Data
-        [field: SerializeField] public CharacterFallingData FallData { get; private set; }
-
-        // Propulsion Data
-        [field: SerializeField] public CharacterPropulsionData PropulsionData { get; private set; }
-
-        // Ground Detection Data
-        [field: SerializeField] public CharacterGroundDetectionData GroundDetectionData { get; private set; }
-
-        // Slopes Data
-        [field: SerializeField] public CharacterSlopesData SlopeData { get; private set; }
 
         [Tooltip("The current global velocity of the character (movements, gravity, forces...)")] public Vector3 CurrentVelocity { get; private set; }
 
@@ -80,7 +64,7 @@ namespace BlownAway.Character.Movements
         {
             GroundHitResults = new RaycastHit[2];
             JumpBufferHitResults = new RaycastHit[2];
-            SetGravityTo(Manager, FallData.BaseGravity, FallData.BaseMinGravity, FallData.BaseMaxGravity, FallData.BaseGravityIncreaseByFrame, FallData.BaseGravityIncreaseDecelerationByFrame);
+            SetGravityTo(Manager, Manager.Data.FallData.BaseGravity, Manager.Data.FallData.BaseMinGravity, Manager.Data.FallData.BaseMaxGravity, Manager.Data.FallData.BaseGravityIncreaseByFrame, Manager.Data.FallData.BaseGravityIncreaseDecelerationByFrame);
         }
 
 
@@ -166,8 +150,8 @@ namespace BlownAway.Character.Movements
         public void CheckIfGrounded(CharacterManager manager, bool isPropulsing = false)
         {
             var lastGrounded = IsGrounded;
-            CanJumpBuffer = Physics.SphereCastNonAlloc(manager.CharacterRigidbody.position, GroundDetectionData.GroundDetectionSphereRadius, Vector3.down, JumpBufferHitResults, GroundDetectionData.JumpBufferCheckDistance, GroundDetectionData.GroundLayer) > 0;
-            IsGrounded = Physics.SphereCastNonAlloc(manager.CharacterRigidbody.position, GroundDetectionData.GroundDetectionSphereRadius, Vector3.down, GroundHitResults, GroundDetectionData.GroundCheckDistance, GroundDetectionData.GroundLayer) > 0;
+            CanJumpBuffer = Physics.SphereCastNonAlloc(manager.CharacterRigidbody.position, manager.Data.GroundDetectionData.GroundDetectionSphereRadius, Vector3.down, JumpBufferHitResults, manager.Data.GroundDetectionData.JumpBufferCheckDistance, manager.Data.GroundDetectionData.GroundLayer) > 0;
+            IsGrounded = Physics.SphereCastNonAlloc(manager.CharacterRigidbody.position, manager.Data.GroundDetectionData.GroundDetectionSphereRadius, Vector3.down, GroundHitResults, manager.Data.GroundDetectionData.GroundCheckDistance, manager.Data.GroundDetectionData.GroundLayer) > 0;
 
             //if (IsGrounded)
             LastGround = GroundHitResults[0];
@@ -177,7 +161,7 @@ namespace BlownAway.Character.Movements
                 if (IsGrounded) // On Ground Enter
                 {
                     OnGroundEnter?.Invoke();
-                    CurrentGravity = FallData.BaseGravity;
+                    CurrentGravity = manager.Data.FallData.BaseGravity;
                     manager.States.SwitchState(manager.States.IdleState);
                 }
                 else // On Ground Leave
@@ -269,7 +253,7 @@ namespace BlownAway.Character.Movements
             {
                 manager.AirManager.RefreshAir();
                 PropulsionStart(manager);
-                LerpPropulsionTakeOffSpeed(manager, PropulsionData.PropulsionTakeOffSpeed, PropulsionData.PropulsionTakeOffAccelTime, PropulsionData.PropulsionTakeOffAccelCurve, 0, PropulsionData.PropulsionTakeOffDecelTime, PropulsionData.PropulsionTakeOffDecelCurve);
+                LerpPropulsionTakeOffSpeed(manager, manager.Data.PropulsionData.PropulsionTakeOffSpeed, manager.Data.PropulsionData.PropulsionTakeOffAccelTime, manager.Data.PropulsionData.PropulsionTakeOffAccelCurve, 0, manager.Data.PropulsionData.PropulsionTakeOffDecelTime, manager.Data.PropulsionData.PropulsionTakeOffDecelCurve);
             }
         }
 
@@ -292,7 +276,7 @@ namespace BlownAway.Character.Movements
         private void PropulsionStart(CharacterManager manager)
         {
             manager.States.SwitchState(manager.States.PropulsionState);
-            CurrentPropulsionIncreaseByFrame = PropulsionData.PropulsionIncreaseByFrame;
+            CurrentPropulsionIncreaseByFrame = manager.Data.PropulsionData.PropulsionIncreaseByFrame;
             _currentPropulsionDirection = Vector3.zero;
             //_currentPropulsionDirection = _currentDeplacementDirection;
         }
@@ -327,19 +311,19 @@ namespace BlownAway.Character.Movements
             if (includesInputs)
             {
                 // Increase speed over time
-                CurrentPropulsionIncreaseByFrame = Math.Max(CurrentPropulsionIncreaseByFrame - PropulsionData.PropulsionIncreaseDeceleration, 0);
-                _currentPropulsionSpeed = Math.Min(_currentPropulsionSpeed + (CurrentPropulsionIncreaseByFrame / 100), PropulsionData.MaxPropulsionSpeed);
+                CurrentPropulsionIncreaseByFrame = Math.Max(CurrentPropulsionIncreaseByFrame - manager.Data.PropulsionData.PropulsionIncreaseDeceleration, 0);
+                _currentPropulsionSpeed = Math.Min(_currentPropulsionSpeed + (CurrentPropulsionIncreaseByFrame / 100), manager.Data.PropulsionData.MaxPropulsionSpeed);
                 
             }
             else
             {
                 propulsionDirection = _currentPropulsionDirection;
             }
-            _currentPropulsionDirection = Vector3.Lerp(_currentPropulsionDirection, propulsionDirection, PropulsionData.PropulsionDirectionTurnSpeed);
+            _currentPropulsionDirection = Vector3.Lerp(_currentPropulsionDirection, propulsionDirection, manager.Data.PropulsionData.PropulsionDirectionTurnSpeed);
 
 
-            float horizontalSpeed = _currentPropulsionSpeed * PropulsionData.HorizontalPropulsionMultiplier;
-            float verticalSpeed = _currentPropulsionSpeed * PropulsionData.VerticalPropulsionMultiplier;
+            float horizontalSpeed = _currentPropulsionSpeed * manager.Data.PropulsionData.HorizontalPropulsionMultiplier;
+            float verticalSpeed = _currentPropulsionSpeed * manager.Data.PropulsionData.VerticalPropulsionMultiplier;
 
             Vector3 propulsionMovement = new Vector3(_currentPropulsionDirection.x * horizontalSpeed, _currentPropulsionDirection.y * verticalSpeed, _currentPropulsionDirection.z * horizontalSpeed);
             CurrentVelocity += propulsionMovement;
@@ -408,7 +392,7 @@ namespace BlownAway.Character.Movements
 
             float angle = Vector3.Angle(Vector3.up, LastGround.normal);
             //Debug.LogWarning(angle);
-            return angle < SlopeData.MaxSlopeAngle && angle != 0;
+            return angle < Manager.Data.SlopeData.MaxSlopeAngle && angle != 0;
 
         }
 
@@ -439,7 +423,7 @@ namespace BlownAway.Character.Movements
             //Gizmos.DrawWireSphere(transform.position - transform.up * 0.25f, 0.5f);
             //
             //Physics.SphereCastNonAlloc(manager.CharacterVisual.position, GroundDetectionData.GroundDetectionSphereRadius, Vector3.down, GroundHitResults, GroundDetectionData.GroundCheckDistance, GroundDetectionData.GroundLayer) > 0;
-            Gizmos.DrawWireSphere(Manager.CharacterVisual.position + Vector3.down * GroundDetectionData.GroundCheckDistance, GroundDetectionData.GroundDetectionSphereRadius);
+            Gizmos.DrawWireSphere(Manager.CharacterVisual.position + Vector3.down * Manager.Data.GroundDetectionData.GroundCheckDistance, Manager.Data.GroundDetectionData.GroundDetectionSphereRadius);
         }
         #endregion
 

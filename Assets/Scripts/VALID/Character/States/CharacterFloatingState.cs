@@ -7,9 +7,9 @@ namespace BlownAway.Character.States
         public override void EnterState(CharacterManager manager)
         {
             Debug.Log("FLOATING");
-            manager.MovementManager.LerpGravityTo(manager, manager.MovementManager.FallData.FloatingGravity, manager.MovementManager.FallData.FloatingMinGravity, manager.MovementManager.FallData.FloatingMaxGravity, manager.MovementManager.FallData.FloatingGravityIncreaseByFrame, manager.MovementManager.FallData.FloatingGravityIncreaseDecelerationByFrame, manager.MovementManager.FallData.FloatingGravityTime, manager.MovementManager.FallData.FloatingGravityAccel);
+            manager.MovementManager.LerpGravityTo(manager, manager.Data.FallData.FloatingGravity, manager.Data.FallData.FloatingMinGravity, manager.Data.FallData.FloatingMaxGravity, manager.Data.FallData.FloatingGravityIncreaseByFrame, manager.Data.FallData.FloatingGravityIncreaseDecelerationByFrame, manager.Data.FallData.FloatingGravityTime, manager.Data.FallData.FloatingGravityAccel);
             
-            manager.MovementManager.LerpDeplacementSpeed(manager, manager.MovementManager.LateralMovementData.BaseFloatLateralSpeed, manager.MovementManager.LateralMovementData.BaseFloatTime, manager.MovementManager.LateralMovementData.BaseFloatCurve);
+            manager.MovementManager.LerpDeplacementSpeed(manager, manager.Data.LateralMovementData.BaseFloatLateralSpeed, manager.Data.LateralMovementData.BaseFloatTime, manager.Data.LateralMovementData.BaseFloatCurve);
 
         }
 
@@ -19,7 +19,7 @@ namespace BlownAway.Character.States
 
         public override void UpdateState(CharacterManager manager)
         {
-            manager.AirManager.ReduceAir(manager.AirManager.AirData.FloatingAirReductionSpeed);
+            manager.AirManager.ReduceAir(manager.Data.AirData.FloatingAirReductionSpeed);
 
             manager.MovementManager.CheckIfGrounded(manager, true);
 
@@ -32,7 +32,7 @@ namespace BlownAway.Character.States
 
         public override void FixedUpdateState(CharacterManager manager)
         {
-            manager.MovementManager.MoveAtSpeed(manager, manager.MovementManager.LateralMovementData.FloatDirectionTurnSpeed);
+            manager.MovementManager.MoveAtSpeed(manager, manager.Data.LateralMovementData.FloatDirectionTurnSpeed);
 
             manager.MovementManager.UpdatePropulsionMovement(manager, false);
 

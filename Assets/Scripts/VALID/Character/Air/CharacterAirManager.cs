@@ -1,6 +1,5 @@
 using System.Collections;
 using UnityEngine;
-using BlownAway.Character.Air.Data;
 
 namespace BlownAway.Character.Air
 {
@@ -12,8 +11,6 @@ namespace BlownAway.Character.Air
         public bool AirIsFull { get => _currentAir >= 1;}
         public bool AirIsEmpty { get => _currentAir <= 0.00001f;}
 
-
-        [field:SerializeField] public CharacterAirData AirData { get; private set; }
 
         private float _currentAir;
 

@@ -7,21 +7,21 @@ namespace BlownAway.Character.States
         public override void EnterState(CharacterManager manager)
         {
             Debug.Log("PROPULSION");
-            manager.MovementManager.LerpGravityTo(manager, manager.MovementManager.FallData.PropulsionGravity, manager.MovementManager.FallData.PropulsionMinGravity, manager.MovementManager.FallData.PropulsionMaxGravity, manager.MovementManager.FallData.PropulsionGravityIncreaseByFrame, manager.MovementManager.FallData.PropulsionGravityIncreaseDecelerationByFrame, manager.MovementManager.FallData.PropulsionGravityTime, manager.MovementManager.FallData.PropulsionGravityAccel);
+            manager.MovementManager.LerpGravityTo(manager, manager.Data.FallData.PropulsionGravity, manager.Data.FallData.PropulsionMinGravity, manager.Data.FallData.PropulsionMaxGravity, manager.Data.FallData.PropulsionGravityIncreaseByFrame, manager.Data.FallData.PropulsionGravityIncreaseDecelerationByFrame, manager.Data.FallData.PropulsionGravityTime, manager.Data.FallData.PropulsionGravityAccel);
 
-            manager.MovementManager.LerpDeplacementSpeed(manager, manager.MovementManager.LateralMovementData.BasePropulsionLateralDeplacementSpeed, manager.MovementManager.LateralMovementData.BasePropulsionDeplacementTime, manager.MovementManager.LateralMovementData.BasePropulsionDeplacementCurve);
+            manager.MovementManager.LerpDeplacementSpeed(manager, manager.Data.LateralMovementData.BasePropulsionLateralDeplacementSpeed, manager.Data.LateralMovementData.BasePropulsionDeplacementTime, manager.Data.LateralMovementData.BasePropulsionDeplacementCurve);
 
-            manager.MovementManager.LerpPropulsionSpeed(manager, 1, manager.MovementManager.PropulsionData.BasePropulsionAccelTime, manager.MovementManager.PropulsionData.BasePropulsionAccelCurve);
+            manager.MovementManager.LerpPropulsionSpeed(manager, 1, manager.Data.PropulsionData.BasePropulsionAccelTime, manager.Data.PropulsionData.BasePropulsionAccelCurve);
         }
 
         public override void ExitState(CharacterManager manager)
         {
-            manager.MovementManager.LerpPropulsionSpeed(manager, 0, manager.MovementManager.PropulsionData.BasePropulsionDecelTime, manager.MovementManager.PropulsionData.BasePropulsionDecelCurve);
+            manager.MovementManager.LerpPropulsionSpeed(manager, 0, manager.Data.PropulsionData.BasePropulsionDecelTime, manager.Data.PropulsionData.BasePropulsionDecelCurve);
         }
 
         public override void UpdateState(CharacterManager manager)
         {
-            manager.AirManager.ReduceAir(manager.AirManager.AirData.PropulsionAirReductionSpeed);
+            manager.AirManager.ReduceAir(manager.Data.AirData.PropulsionAirReductionSpeed);
 
             manager.MovementManager.CheckForPropulsionEnd(manager);
 
@@ -35,7 +35,7 @@ namespace BlownAway.Character.States
 
         public override void FixedUpdateState(CharacterManager manager)
         {
-            manager.MovementManager.MoveAtSpeed(manager, manager.MovementManager.LateralMovementData.PropulsionDirectionTurnSpeed);
+            manager.MovementManager.MoveAtSpeed(manager, manager.Data.LateralMovementData.PropulsionDirectionTurnSpeed);
 
             manager.MovementManager.UpdatePropulsionMovement(manager);
 

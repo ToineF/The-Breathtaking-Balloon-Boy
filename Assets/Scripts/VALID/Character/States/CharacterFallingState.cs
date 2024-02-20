@@ -9,11 +9,11 @@ namespace BlownAway.Character.States
         {
             Debug.Log("FALLING");
             // Movements
-            manager.MovementManager.LerpGravityTo(manager, manager.MovementManager.FallData.BaseGravity, manager.MovementManager.FallData.BaseMinGravity, manager.MovementManager.FallData.BaseMaxGravity, manager.MovementManager.FallData.BaseGravityIncreaseByFrame, manager.MovementManager.FallData.BaseGravityIncreaseDecelerationByFrame, manager.MovementManager.FallData.BaseGravityTime, manager.MovementManager.FallData.BaseGravityAccel);
-            manager.MovementManager.LerpDeplacementSpeed(manager, manager.MovementManager.LateralMovementData.BaseFallLateralSpeed, manager.MovementManager.LateralMovementData.BaseFallTime, manager.MovementManager.LateralMovementData.BaseFallCurve);
+            manager.MovementManager.LerpGravityTo(manager, manager.Data.FallData.BaseGravity, manager.Data.FallData.BaseMinGravity, manager.Data.FallData.BaseMaxGravity, manager.Data.FallData.BaseGravityIncreaseByFrame, manager.Data.FallData.BaseGravityIncreaseDecelerationByFrame, manager.Data.FallData.BaseGravityTime, manager.Data.FallData.BaseGravityAccel);
+            manager.MovementManager.LerpDeplacementSpeed(manager, manager.Data.LateralMovementData.BaseFallLateralSpeed, manager.Data.LateralMovementData.BaseFallTime, manager.Data.LateralMovementData.BaseFallCurve);
 
             // Air
-            manager.AirManager.AddAirUntilFullIfEmpty(manager, manager.AirManager.AirData.FallingAirRefillSpeed, manager.AirManager.AirData.FallingAirRefillDelay);
+            manager.AirManager.AddAirUntilFullIfEmpty(manager, manager.Data.AirData.FallingAirRefillSpeed, manager.Data.AirData.FallingAirRefillDelay);
         }
 
         public override void ExitState(CharacterManager manager)
@@ -31,7 +31,7 @@ namespace BlownAway.Character.States
 
         public override void FixedUpdateState(CharacterManager manager)
         {
-            manager.MovementManager.MoveAtSpeed(manager, manager.MovementManager.LateralMovementData.FallDirectionTurnSpeed);
+            manager.MovementManager.MoveAtSpeed(manager, manager.Data.LateralMovementData.FallDirectionTurnSpeed);
 
             manager.MovementManager.UpdatePropulsionMovement(manager, false);
 
