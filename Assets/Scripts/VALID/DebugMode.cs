@@ -24,21 +24,21 @@ namespace BlownAway.DebugMode
 
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.F1))
+            if (Input.GetKeyDown(KeyCode.F1)) // Previous Scene
             {
                 if (SceneManager.GetActiveScene().buildIndex > 0)
                     SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
             }
-            if (Input.GetKeyDown(KeyCode.F2))
+            if (Input.GetKeyDown(KeyCode.F2)) // Restart Scene
             {
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             }
-            if (Input.GetKeyDown(KeyCode.F3))
+            if (Input.GetKeyDown(KeyCode.F3)) // Next Scene
             {
                 if (SceneManager.GetActiveScene().buildIndex < SceneManager.sceneCountInBuildSettings - 1)
                     SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
             }
-            if (Input.GetKeyDown (KeyCode.F4))
+            if (Input.GetKeyDown (KeyCode.F4)) // Remove all UI
             {
                 UpdateCanvasList();
                 _canvasHidden = !_canvasHidden;

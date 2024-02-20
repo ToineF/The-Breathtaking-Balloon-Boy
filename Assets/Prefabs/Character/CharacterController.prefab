@@ -105,8 +105,9 @@ Transform:
   - {fileID: 3524539589287448671}
   - {fileID: 2067144079398581976}
   - {fileID: 1245727516111365879}
+  - {fileID: 7607169901228693325}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6348225905439228519
 MonoBehaviour:
@@ -123,6 +124,8 @@ MonoBehaviour:
   <CharacterRigidbody>k__BackingField: {fileID: 137970268629329876}
   <CharacterCollider>k__BackingField: {fileID: 4886940072450693899}
   <CharacterVisual>k__BackingField: {fileID: 2160287867640871309}
+  <Data>k__BackingField: {fileID: 11400000, guid: c71ab4cd1029b9549968c4dbce7ac1d7,
+    type: 2}
   <Inputs>k__BackingField: {fileID: 7507358721281837289}
   <CameraManager>k__BackingField: {fileID: 8720038069001201682}
   <MovementManager>k__BackingField: {fileID: 7865403362446753878}
@@ -166,16 +169,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d58fd51571b3e74ea1c67f1f8dbc22c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <LateralMovementData>k__BackingField: {fileID: 11400000, guid: 7f443f46d0ce00744a88875dcc46ee92,
-    type: 2}
-  <FallData>k__BackingField: {fileID: 11400000, guid: 84046029aee887b4987fd35fe3f75e37,
-    type: 2}
-  <PropulsionData>k__BackingField: {fileID: 11400000, guid: ececa92c454fd3f4b9a45daedfd93ab0,
-    type: 2}
-  <GroundDetectionData>k__BackingField: {fileID: 11400000, guid: e4fa3bf9bd46b1545bf277813388a847,
-    type: 2}
-  <SlopeData>k__BackingField: {fileID: 11400000, guid: 68fb3b1f3a9396145bc754ed34fb6a68,
-    type: 2}
 --- !u!114 &4325485606811522093
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -188,8 +181,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c19eea4798d3e3940a9829298b3b9745, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <AirData>k__BackingField: {fileID: 11400000, guid: 08a246c4d6886f247a03b9a183a4ad4c,
-    type: 2}
 --- !u!114 &2324459326877564572
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -216,7 +207,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81079fe74570dc24dbeba7aa051dcef0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _cameraData: {fileID: 11400000, guid: c4dd2d1fdd0792d40bb28287be4b0d85, type: 2}
   FocusPoint: {fileID: 9111970441125982811}
   CameraCenter: {fileID: 9049657606848679487}
   Camera: {fileID: 1012714471462903522}
@@ -233,6 +223,50 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _startCheckpoint: {fileID: 0}
+--- !u!1 &2174038822854039470
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7607169901228693325}
+  - component: {fileID: 6195353828592389329}
+  m_Layer: 0
+  m_Name: DebugMode
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7607169901228693325
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2174038822854039470}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 77.24809, y: -100.82303, z: -634.02374}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 496894185485964188}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6195353828592389329
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2174038822854039470}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8dd5c680c2feb4d4f8c74e2a6e700b03, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5937500286042893197
 GameObject:
   m_ObjectHideFlags: 0
