@@ -83,6 +83,7 @@ GameObject:
   - component: {fileID: 2324459326877564572}
   - component: {fileID: 8720038069001201682}
   - component: {fileID: 2711653856997542685}
+  - component: {fileID: 6958117120660801122}
   m_Layer: 0
   m_Name: CharacterController
   m_TagString: Untagged
@@ -107,7 +108,7 @@ Transform:
   - {fileID: 1245727516111365879}
   - {fileID: 7607169901228693325}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6348225905439228519
 MonoBehaviour:
@@ -124,8 +125,6 @@ MonoBehaviour:
   <CharacterRigidbody>k__BackingField: {fileID: 137970268629329876}
   <CharacterCollider>k__BackingField: {fileID: 4886940072450693899}
   <CharacterVisual>k__BackingField: {fileID: 2160287867640871309}
-  <Data>k__BackingField: {fileID: 11400000, guid: c71ab4cd1029b9549968c4dbce7ac1d7,
-    type: 2}
   <Inputs>k__BackingField: {fileID: 7507358721281837289}
   <CameraManager>k__BackingField: {fileID: 8720038069001201682}
   <MovementManager>k__BackingField: {fileID: 7865403362446753878}
@@ -133,6 +132,7 @@ MonoBehaviour:
   <AirManager>k__BackingField: {fileID: 4325485606811522093}
   <AnimationManager>k__BackingField: {fileID: 2324459326877564572}
   <CheckpointManager>k__BackingField: {fileID: 2711653856997542685}
+  <ChildrenManager>k__BackingField: {fileID: 6958117120660801122}
 --- !u!114 &1215609012679441032
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -223,6 +223,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _startCheckpoint: {fileID: 0}
+--- !u!114 &6958117120660801122
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2112151245869228761}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b5ba15a7c1f2194bb509e3ac00671d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <ChildrenCount>k__BackingField: 0
+  <CharacterUpgradesData>k__BackingField: {fileID: 11400000, guid: 06516eecec928054c94daa4052bd1607,
+    type: 2}
 --- !u!1 &2174038822854039470
 GameObject:
   m_ObjectHideFlags: 0

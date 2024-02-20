@@ -7,6 +7,7 @@ using BlownAway.Character.Air;
 using BlownAway.Character.Animations;
 using BlownAway.Hitbox.Checkpoints;
 using BlownAway.Character.Data;
+using BlownAway.Player;
 
 namespace BlownAway.Character
 {
@@ -18,7 +19,7 @@ namespace BlownAway.Character
         [field: SerializeField] public Transform CharacterVisual { get; set; }
 
         // Data
-        [field: SerializeField, Tooltip("The current data of the character")] public CharacterControllerData Data { get; private set; }
+        [Tooltip("The current data of the character")] public CharacterControllerData Data { get; set; }
 
 
         [field:Header("References to scripts")]
@@ -43,6 +44,9 @@ namespace BlownAway.Character
         // Checkpoints
         [field: SerializeField, Tooltip("The reference to the class that contains the logic of the checkpoint system")] public CheckpointManager CheckpointManager { get; private set; }
 
+        // Children
+        [field: SerializeField, Tooltip("The reference to the class that contains the logic of the checkpoint system")] public CharacterChildrenManager ChildrenManager { get; private set; }
+
 
 
         private void Awake()
@@ -52,6 +56,7 @@ namespace BlownAway.Character
             States.Manager = this;
             AirManager.Manager = this;
             AnimationManager.Manager = this;
+            ChildrenManager.Manager = this;
         }
 
 
