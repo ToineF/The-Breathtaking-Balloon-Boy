@@ -153,8 +153,8 @@ namespace BlownAway.Character.Movements
             var lastGrounded = IsGrounded;
             CanJumpBuffer = Physics.SphereCastNonAlloc(manager.CharacterCollider.Rigidbody.position, manager.Data.GroundDetectionData.GroundDetectionSphereRadius, Vector3.down, JumpBufferHitResults, manager.Data.GroundDetectionData.JumpBufferCheckDistance, manager.Data.GroundDetectionData.GroundLayer) > 0;
             IsGrounded = Physics.SphereCastNonAlloc(manager.CharacterCollider.Rigidbody.position, manager.Data.GroundDetectionData.GroundDetectionSphereRadius, Vector3.down, GroundHitResults, manager.Data.GroundDetectionData.GroundCheckDistance, manager.Data.GroundDetectionData.GroundLayer) > 0;
-            //bool a = Physics.SphereCastNonAlloc(manager.CharacterRigidbody.position, manager.Data.GroundDetectionData.GroundDetectionSphereRadius, Vector3.down, GroundHitResults, manager.Data.GroundDetectionData.GroundCheckDistance, manager.Data.GroundDetectionData.GroundLayer) > 0;
-            //Collider[] hitColliders = Physics.OverlapSphere(manager.CharacterRigidbody.position - Vector3.down * manager.Data.GroundDetectionData.GroundCheckDistance, manager.Data.GroundDetectionData.GroundDetectionSphereRadius, manager.Data.GroundDetectionData.GroundLayer);
+            //bool a = Physics.SphereCastNonAlloc(manager.CharacterCollider.Rigidbody.position, manager.Data.GroundDetectionData.GroundDetectionSphereRadius, Vector3.down, GroundHitResults, manager.Data.GroundDetectionData.GroundCheckDistance, manager.Data.GroundDetectionData.GroundLayer) > 0;
+            //Collider[] hitColliders = Physics.OverlapSphere(manager.CharacterCollider.Rigidbody.position + Vector3.down * manager.Data.GroundDetectionData.GroundCheckDistance, manager.Data.GroundDetectionData.GroundDetectionSphereRadius, manager.Data.GroundDetectionData.GroundLayer);
             //IsGrounded = hitColliders.Length > 0;
 
             //if (IsGrounded)
@@ -183,11 +183,9 @@ namespace BlownAway.Character.Movements
 
         public void UpdateGravity(CharacterManager manager)
         {
-            //if (!manager.MovementManager.IsGrounded)
-            //{
-                manager.MovementManager.CurrentGravityIncreaseByFrame = Mathf.Max(manager.MovementManager.CurrentGravityIncreaseByFrame - manager.MovementManager.CurrentGravityIncreaseDeceleration, 0);
-                manager.MovementManager.CurrentGravity = Mathf.Clamp(manager.MovementManager.CurrentGravity + manager.MovementManager.CurrentGravityIncreaseByFrame, manager.MovementManager.MinGravity, manager.MovementManager.MaxGravity);
-            //}
+            manager.MovementManager.CurrentGravityIncreaseByFrame = Mathf.Max(manager.MovementManager.CurrentGravityIncreaseByFrame - manager.MovementManager.CurrentGravityIncreaseDeceleration, 0);
+            manager.MovementManager.CurrentGravity = Mathf.Clamp(manager.MovementManager.CurrentGravity + manager.MovementManager.CurrentGravityIncreaseByFrame, manager.MovementManager.MinGravity, manager.MovementManager.MaxGravity);
+            
 
             /*Vector3 additionalForces = Vector3.zero;
             foreach (var force in _additionnalForces)
