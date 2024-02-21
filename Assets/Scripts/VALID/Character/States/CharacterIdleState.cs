@@ -13,12 +13,16 @@ namespace BlownAway.Character.States
             manager.Inputs.ResetLastPropulsionInputDirection();
             manager.MovementManager.LerpDeplacementSpeed(manager, 0, manager.Data.LateralMovementData.BaseIdleTime, manager.Data.LateralMovementData.BaseIdleCurve);
 
+            // Gravity
+            //manager.MovementManager.LerpGravityTo(manager, manager.Data.GroundDetectionData.GroundedGravity, 0, manager.Data.GroundDetectionData.GroundedGravity, 0, 0, 0.001f, AnimationCurve.Linear(0, 0, 1, 1));
+
             // Air
             manager.AirManager.RefreshAir();
         }
 
         public override void ExitState(CharacterManager manager)
         {
+            //manager.MovementManager.ResetGravity(manager);
         }
 
         public override void UpdateState(CharacterManager manager)

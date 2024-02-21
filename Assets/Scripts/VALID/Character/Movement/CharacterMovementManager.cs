@@ -34,6 +34,7 @@ namespace BlownAway.Character.Movements
         private Coroutine _currentFallCoroutine;
 
         // Propulsion Inputs (Propulsion) - Have this as a generic version for other movements
+        public float PropulsionTimer { get; private set; } // Minimum time after which the propulsion is allowed to end
         private float _currentPropulsionSpeed;
         private Vector3 _currentPropulsionDirection;
         private Coroutine _currentPropulsionCoroutine;
@@ -167,7 +168,6 @@ namespace BlownAway.Character.Movements
                 if (IsGrounded) // On Ground Enter
                 {
                     OnGroundEnter?.Invoke();
-                    CurrentGravity = manager.Data.GroundDetectionData.GroundedGravity;
                     manager.States.SwitchState(manager.States.IdleState);
                     manager.CharacterCollider.Rigidbody.transform.SetParent(LastGround.collider.transform);
                 }
@@ -183,12 +183,16 @@ namespace BlownAway.Character.Movements
             }
         }
 
-        public void UpdateGravity(CharacterManager manager, bool increaseGravity = true)
+        public void UpdateGravity(CharacterManager manager, bool isnotGrounded = true)
         {
-            if (increaseGravity)
+            if (isnotGrounded)
+            {
                 manager.MovementManager.CurrentGravityIncreaseByFrame = Mathf.Max(manager.MovementManager.CurrentGravityIncreaseByFrame - manager.MovementManager.CurrentGravityIncreaseDeceleration, 0);
+            }
             else
+            {
                 manager.MovementManager.CurrentGravityIncreaseByFrame = 0;
+            }
             manager.MovementManager.CurrentGravity = Mathf.Clamp(manager.MovementManager.CurrentGravity + manager.MovementManager.CurrentGravityIncreaseByFrame, manager.MovementManager.MinGravity, manager.MovementManager.MaxGravity);
             
 
@@ -199,12 +203,19 @@ namespace BlownAway.Character.Movements
                 force.Value.CurrentForce = Vector3.Lerp(force.Value.CurrentForce, force.Value.TargetForce, force.Value.ForceLerp);
             }*/
             Vector3 gravity = -manager.MovementManager.CurrentGravity * Vector3.up;
+            //if (!isnotGrounded) gravity = Vector3.ProjectOnPlane(gravity, LastGround.normal);
             //Vector3 allForces = CharacterManager.Instance + additionalForces + gravity;
 
             //_characterController.Move(allForces * Time.deltaTime);
 
             manager.MovementManager.CurrentVelocity += gravity;
             //CharacterManager.Instance.Force = Vector3.Lerp(CharacterManager.Instance.Force, CharacterManager.Instance.CurrentGravity, _lerpValue);
+        }
+
+        public void ResetGravity(CharacterManager manager)
+        {
+            manager.MovementManager.CurrentGravity = 0;
+            manager.MovementManager.CurrentGravityIncreaseByFrame = 0;
         }
 
         public void SetGravityTo(CharacterManager manager, float targetGravity, float minGravity, float maxGravity, float gravityIncreaseByFrame, float gravityIncreaseDeceleration)
@@ -350,6 +361,16 @@ namespace BlownAway.Character.Movements
             manager.Inputs.ResetLastPropulsionInputDirection();
 
             manager.States.SwitchState(manager.States.FallingState);
+        }
+
+        public void StartPropulsionTimer(CharacterManager manager)
+        {
+            PropulsionTimer = manager.Data.PropulsionData.MinimumPropulsionTime;
+        }
+
+        public void UpdatePropulsionTimer(CharacterManager manager)
+        {
+            PropulsionTimer -= Time.deltaTime;
         }
         #endregion
 

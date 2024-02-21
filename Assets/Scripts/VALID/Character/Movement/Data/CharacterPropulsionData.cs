@@ -17,6 +17,7 @@ namespace BlownAway.Character.Movements.Data
         [field: SerializeField, Range(0, 1), Tooltip("The time it takes to the character to transition from its current direction to the target direction while propulsing")] public float PropulsionDirectionTurnSpeed {get; private set;}
         [field: SerializeField, Tooltip("The increase of propulsion speed added at each frame when propulsing")] public float PropulsionIncreaseByFrame { get; private set;}
         [field: SerializeField, Tooltip("The deceleration of the increase of propulsion speed added at each frame when propulsing")] public float PropulsionIncreaseDeceleration { get; private set;}
+        [field: SerializeField, Tooltip("The minimum time the character stays in the propulsion state")] public float MinimumPropulsionTime { get; private set;}
     
         [field:Header("Take off")]
         [field: SerializeField, Tooltip("The maximum propulsion speed the character's initial take-off aims to moves at")] public float PropulsionTakeOffSpeed {get; private set;}

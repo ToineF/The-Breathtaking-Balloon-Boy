@@ -8,10 +8,14 @@ namespace BlownAway.Character.States
         {
             Debug.Log("WALK");
             manager.MovementManager.LerpDeplacementSpeed(manager, manager.Data.LateralMovementData.BaseWalkSpeed, manager.Data.LateralMovementData.BaseWalkTime, manager.Data.LateralMovementData.BaseWalkCurve);
+
+            // Gravity
+            //manager.MovementManager.LerpGravityTo(manager, manager.Data.GroundDetectionData.GroundedGravity, 0, manager.Data.GroundDetectionData.GroundedGravity, 0, 0, 0.001f, AnimationCurve.Linear(0, 0, 1, 1));
         }
 
         public override void ExitState(CharacterManager manager)
         {
+            //manager.MovementManager.ResetGravity(manager);
         }
         public override void UpdateState(CharacterManager manager)
         {
