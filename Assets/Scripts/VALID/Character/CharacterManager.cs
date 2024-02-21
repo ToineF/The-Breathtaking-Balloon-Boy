@@ -14,8 +14,6 @@ namespace BlownAway.Character
     public class CharacterManager : MonoBehaviour
     {
         [field: Header("References to data")]
-        [field: SerializeField] public Rigidbody CharacterRigidbody { get; set; }
-        [field: SerializeField] public Collider CharacterCollider { get; set; }
         [field: SerializeField] public Transform CharacterVisual { get; set; }
 
         // Data
@@ -32,8 +30,11 @@ namespace BlownAway.Character
         // Movement
         [field: SerializeField, Tooltip("The reference to the class that contains the movement of the character")] public CharacterMovementManager MovementManager { get; private set; }
 
-        //States
+        // States
         [field: SerializeField, Tooltip("The reference to the class that contains the states of the character")] public CharacterStatesManager States { get; private set; }
+        
+        // Collider
+        [field: SerializeField, Tooltip("The reference to the class that contains the collider the character")] public CharacterCollider CharacterCollider { get; private set; }
 
         // Air
         [field: SerializeField, Tooltip("The reference to the class that containsthe logic of the air")] public CharacterAirManager AirManager { get; private set; }
@@ -54,6 +55,7 @@ namespace BlownAway.Character
             CameraManager.Manager = this;
             MovementManager.Manager = this;
             States.Manager = this;
+            CharacterCollider.Manager = this;
             AirManager.Manager = this;
             AnimationManager.Manager = this;
             ChildrenManager.Manager = this;

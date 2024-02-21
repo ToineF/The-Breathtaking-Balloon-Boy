@@ -11,7 +11,7 @@ public class BouncyBalloon : SphereTrigger
 
     void MakePlayerBounce()
     {
-        if (!_lastOtherCollider.transform.parent.parent.TryGetComponent(out CharacterManager character)) return;
+        if (!_lastOtherCollider.TryGetComponent(out CharacterCollider collider)) return;
 
         // do something
         Debug.Log("*BOING*");

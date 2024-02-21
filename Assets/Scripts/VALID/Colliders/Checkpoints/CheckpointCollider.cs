@@ -16,7 +16,9 @@ namespace BlownAway.Hitbox.Checkpoints
 
         void SetCurrentCheckpoint()
         {
-            if (!_lastOtherCollider.transform.parent.parent.TryGetComponent(out CharacterManager character)) return;
+            if (!_lastOtherCollider.TryGetComponent(out CharacterCollider collider)) return;
+
+            CharacterManager character = collider.Manager;
 
             character.CheckpointManager.ChangeCurrentCheckPoint(_checkpoint);
         }

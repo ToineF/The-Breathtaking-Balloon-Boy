@@ -13,7 +13,9 @@ namespace BlownAway.Hitbox.Death
 
         void SetCurrentCheckpoint()
         {
-            if (!_lastOtherCollider.transform.parent.parent.TryGetComponent(out CharacterManager character)) return;
+            if (!_lastOtherCollider.TryGetComponent(out CharacterCollider collider)) return;
+
+            CharacterManager character = collider.Manager;
 
             character.States.SwitchState(character.States.DeathState);
         }

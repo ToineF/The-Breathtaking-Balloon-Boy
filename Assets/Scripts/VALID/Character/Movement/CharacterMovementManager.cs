@@ -62,7 +62,7 @@ namespace BlownAway.Character.Movements
 
         private void Start()
         {
-            parent = Manager.CharacterRigidbody.transform.parent;
+            parent = Manager.CharacterCollider.Rigidbody.transform.parent;
             GroundHitResults = new RaycastHit[2];
             JumpBufferHitResults = new RaycastHit[2];
             SetGravityTo(Manager, Manager.Data.FallData.BaseGravity, Manager.Data.FallData.BaseMinGravity, Manager.Data.FallData.BaseMaxGravity, Manager.Data.FallData.BaseGravityIncreaseByFrame, Manager.Data.FallData.BaseGravityIncreaseDecelerationByFrame);
@@ -100,7 +100,7 @@ namespace BlownAway.Character.Movements
 
         public void ApplyVelocity(CharacterManager manager)
         {
-            manager.CharacterRigidbody.velocity = CurrentVelocity;
+            manager.CharacterCollider.Rigidbody.velocity = CurrentVelocity;
         }
 
         public void ResetVelocity()
@@ -151,8 +151,8 @@ namespace BlownAway.Character.Movements
         public void CheckIfGrounded(CharacterManager manager, bool isPropulsing = false)
         {
             var lastGrounded = IsGrounded;
-            CanJumpBuffer = Physics.SphereCastNonAlloc(manager.CharacterRigidbody.position, manager.Data.GroundDetectionData.GroundDetectionSphereRadius, Vector3.down, JumpBufferHitResults, manager.Data.GroundDetectionData.JumpBufferCheckDistance, manager.Data.GroundDetectionData.GroundLayer) > 0;
-            IsGrounded = Physics.SphereCastNonAlloc(manager.CharacterRigidbody.position, manager.Data.GroundDetectionData.GroundDetectionSphereRadius, Vector3.down, GroundHitResults, manager.Data.GroundDetectionData.GroundCheckDistance, manager.Data.GroundDetectionData.GroundLayer) > 0;
+            CanJumpBuffer = Physics.SphereCastNonAlloc(manager.CharacterCollider.Rigidbody.position, manager.Data.GroundDetectionData.GroundDetectionSphereRadius, Vector3.down, JumpBufferHitResults, manager.Data.GroundDetectionData.JumpBufferCheckDistance, manager.Data.GroundDetectionData.GroundLayer) > 0;
+            IsGrounded = Physics.SphereCastNonAlloc(manager.CharacterCollider.Rigidbody.position, manager.Data.GroundDetectionData.GroundDetectionSphereRadius, Vector3.down, GroundHitResults, manager.Data.GroundDetectionData.GroundCheckDistance, manager.Data.GroundDetectionData.GroundLayer) > 0;
             //bool a = Physics.SphereCastNonAlloc(manager.CharacterRigidbody.position, manager.Data.GroundDetectionData.GroundDetectionSphereRadius, Vector3.down, GroundHitResults, manager.Data.GroundDetectionData.GroundCheckDistance, manager.Data.GroundDetectionData.GroundLayer) > 0;
             //Collider[] hitColliders = Physics.OverlapSphere(manager.CharacterRigidbody.position - Vector3.down * manager.Data.GroundDetectionData.GroundCheckDistance, manager.Data.GroundDetectionData.GroundDetectionSphereRadius, manager.Data.GroundDetectionData.GroundLayer);
             //IsGrounded = hitColliders.Length > 0;
@@ -167,7 +167,7 @@ namespace BlownAway.Character.Movements
                     OnGroundEnter?.Invoke();
                     CurrentGravity = manager.Data.FallData.BaseGravity;
                     manager.States.SwitchState(manager.States.IdleState);
-                    manager.CharacterRigidbody.transform.SetParent(LastGround.collider.transform);
+                    manager.CharacterCollider.Rigidbody.transform.SetParent(LastGround.collider.transform);
                 }
                 else // On Ground Leave
                 {
@@ -176,7 +176,7 @@ namespace BlownAway.Character.Movements
                     {
                         manager.States.SwitchState(manager.States.FallingState); // IDLE, WALK & FALL
                     }
-                    manager.CharacterRigidbody.transform.SetParent(parent);
+                    manager.CharacterCollider.Rigidbody.transform.SetParent(parent);
                 }
             }
         }
@@ -366,10 +366,10 @@ namespace BlownAway.Character.Movements
         {
             if (!IsGrounded) return;
 
-            var height = manager.CharacterCollider.bounds.center.y;
-            var radius = manager.CharacterCollider.bounds.extents.magnitude;
+            var height = manager.CharacterCollider.Collider.bounds.center.y;
+            var radius = manager.CharacterCollider.Collider.bounds.extents.magnitude;
             //var SphereCastVerticalOffset = height / 2 - radius;
-            var castOrigin = manager.CharacterRigidbody.position;
+            var castOrigin = manager.CharacterCollider.Rigidbody.position;
 
             //IsGrounded = Physics.SphereCastNonAlloc(manager.CharacterRigidbody.position, GroundDetectionData.GroundDetectionSphereRadius, Vector3.down, GroundHitResults, GroundDetectionData.GroundCheckDistance, GroundDetectionData.GroundLayer) > 0;
 
@@ -386,7 +386,7 @@ namespace BlownAway.Character.Movements
             //Debug.DrawLine(LastGround.point, LastGround.point + LastGround.normal, Color.black, 3f);
             //Debug.DrawLine(castOrigin, castOrigin + LastGround.normal, Color.black, 3f);
 
-            Debug.DrawLine(manager.CharacterRigidbody.position, manager.CharacterRigidbody.position + GetSlopeMoveDirection(_currentDeplacementDirection), Color.black, 3f);
+            Debug.DrawLine(manager.CharacterCollider.Rigidbody.position, manager.CharacterCollider.Rigidbody.position + GetSlopeMoveDirection(_currentDeplacementDirection), Color.black, 3f);
 
 
 
@@ -422,7 +422,7 @@ namespace BlownAway.Character.Movements
             }
 
             Vector3 direction = GetSlopeMoveDirection(_currentDeplacementDirection);
-            Vector3 position = Manager.CharacterRigidbody.position;
+            Vector3 position = Manager.CharacterCollider.Rigidbody.position;
             Gizmos.DrawLine(position, position + direction);
 
             //if (Physics.SphereCast(transform.position, 0.5f, -transform.up, out hit, 0.25f))

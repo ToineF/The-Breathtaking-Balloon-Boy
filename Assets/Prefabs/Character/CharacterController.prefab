@@ -122,13 +122,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8591fcf340878104e96a45912f6900f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <CharacterRigidbody>k__BackingField: {fileID: 137970268629329876}
-  <CharacterCollider>k__BackingField: {fileID: 4886940072450693899}
   <CharacterVisual>k__BackingField: {fileID: 2160287867640871309}
   <Inputs>k__BackingField: {fileID: 7507358721281837289}
   <CameraManager>k__BackingField: {fileID: 8720038069001201682}
   <MovementManager>k__BackingField: {fileID: 7865403362446753878}
   <States>k__BackingField: {fileID: 1215609012679441032}
+  <CharacterCollider>k__BackingField: {fileID: 8579306032225152818}
   <AirManager>k__BackingField: {fileID: 4325485606811522093}
   <AnimationManager>k__BackingField: {fileID: 2324459326877564572}
   <CheckpointManager>k__BackingField: {fileID: 2711653856997542685}
@@ -235,7 +234,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b5ba15a7c1f2194bb509e3ac00671d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <ChildrenCount>k__BackingField: 0
+  <ChildrenCount>k__BackingField: 1
   <CharacterUpgradesData>k__BackingField: {fileID: 11400000, guid: 06516eecec928054c94daa4052bd1607,
     type: 2}
 --- !u!1 &2174038822854039470
@@ -726,7 +725,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9111970441125982811}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.277, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -781,7 +780,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 569028ba63e0167449d4409f8bee0986,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.066
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 569028ba63e0167449d4409f8bee0986,
         type: 3}
@@ -1757,6 +1756,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 6614935496079010121}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 1e56880d68b6aed4f8c4ebb749299993,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8579306032225152818}
   m_SourcePrefab: {fileID: 100100000, guid: 1e56880d68b6aed4f8c4ebb749299993, type: 3}
 --- !u!4 &6926262528288321786 stripped
 Transform:
@@ -1843,3 +1846,17 @@ CapsuleCollider:
   m_Height: 1
   m_Direction: 1
   m_Center: {x: 0.105, y: 0.56, z: 0.015}
+--- !u!114 &8579306032225152818
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7734043671297337920}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4849f2f4699a9d04bb375cd7e3682311, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <Rigidbody>k__BackingField: {fileID: 137970268629329876}
+  <Collider>k__BackingField: {fileID: 4886940072450693899}

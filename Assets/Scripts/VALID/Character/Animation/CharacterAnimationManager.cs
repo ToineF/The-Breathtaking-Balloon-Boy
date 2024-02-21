@@ -17,7 +17,7 @@ namespace BlownAway.Character.Animations
 
         private void Update()
         {
-            Manager.CharacterVisual.transform.position = Manager.CharacterRigidbody.transform.position + _offsetFromRigidbody;
+            Manager.CharacterVisual.transform.position = Manager.CharacterCollider.Rigidbody.transform.position + _offsetFromRigidbody;
         }
 
         private void LateUpdate()
