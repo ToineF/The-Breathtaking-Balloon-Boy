@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using System.Collections;
 using BlownAway.Character.Inputs;
+using AntoineFoucault.Utilities;
 
 namespace BlownAway.Character.Movements
 {
@@ -151,10 +152,11 @@ namespace BlownAway.Character.Movements
         public void CheckIfGrounded(CharacterManager manager, bool isPropulsing = false)
         {
             var lastGrounded = IsGrounded;
-            CanJumpBuffer = Physics.SphereCastNonAlloc(manager.CharacterCollider.Rigidbody.position, manager.Data.GroundDetectionData.GroundDetectionSphereRadius, Vector3.down, JumpBufferHitResults, manager.Data.GroundDetectionData.JumpBufferCheckDistance, manager.Data.GroundDetectionData.GroundLayer) > 0;
-            IsGrounded = Physics.SphereCastNonAlloc(manager.CharacterCollider.Rigidbody.position, manager.Data.GroundDetectionData.GroundDetectionSphereRadius, Vector3.down, GroundHitResults, manager.Data.GroundDetectionData.GroundCheckDistance, manager.Data.GroundDetectionData.GroundLayer) > 0;
-            //bool a = Physics.SphereCastNonAlloc(manager.CharacterCollider.Rigidbody.position, manager.Data.GroundDetectionData.GroundDetectionSphereRadius, Vector3.down, GroundHitResults, manager.Data.GroundDetectionData.GroundCheckDistance, manager.Data.GroundDetectionData.GroundLayer) > 0;
-            //Collider[] hitColliders = Physics.OverlapSphere(manager.CharacterCollider.Rigidbody.position + Vector3.down * manager.Data.GroundDetectionData.GroundCheckDistance, manager.Data.GroundDetectionData.GroundDetectionSphereRadius, manager.Data.GroundDetectionData.GroundLayer);
+            Vector3 colliderPosition = new Vector3(manager.CharacterCollider.Collider.bounds.center.x, manager.CharacterCollider.Collider.bounds.min.y, manager.CharacterCollider.Collider.bounds.center.z);
+            CanJumpBuffer = Physics.SphereCastNonAlloc(colliderPosition, manager.Data.GroundDetectionData.GroundDetectionSphereRadius, Vector3.down, JumpBufferHitResults, manager.Data.GroundDetectionData.JumpBufferCheckDistance, manager.Data.GroundDetectionData.GroundLayer) > 0;
+            IsGrounded = Physics.SphereCastNonAlloc(colliderPosition, manager.Data.GroundDetectionData.GroundDetectionSphereRadius, Vector3.down, GroundHitResults, manager.Data.GroundDetectionData.GroundCheckDistance, manager.Data.GroundDetectionData.GroundLayer) > 0;
+            //bool a = Physics.SphereCastNonAlloc(colliderPositionn, manager.Data.GroundDetectionData.GroundDetectionSphereRadius, Vector3.down, GroundHitResults, manager.Data.GroundDetectionData.GroundCheckDistance, manager.Data.GroundDetectionData.GroundLayer) > 0;
+            //Collider[] hitColliders = Physics.OverlapSphere(colliderPosition + Vector3.down * manager.Data.GroundDetectionData.GroundCheckDistance, manager.Data.GroundDetectionData.GroundDetectionSphereRadius, manager.Data.GroundDetectionData.GroundLayer);
             //IsGrounded = hitColliders.Length > 0;
 
             //if (IsGrounded)
@@ -181,9 +183,12 @@ namespace BlownAway.Character.Movements
             }
         }
 
-        public void UpdateGravity(CharacterManager manager)
+        public void UpdateGravity(CharacterManager manager, bool increaseGravity = true)
         {
-            manager.MovementManager.CurrentGravityIncreaseByFrame = Mathf.Max(manager.MovementManager.CurrentGravityIncreaseByFrame - manager.MovementManager.CurrentGravityIncreaseDeceleration, 0);
+            if (increaseGravity)
+                manager.MovementManager.CurrentGravityIncreaseByFrame = Mathf.Max(manager.MovementManager.CurrentGravityIncreaseByFrame - manager.MovementManager.CurrentGravityIncreaseDeceleration, 0);
+            else
+                manager.MovementManager.CurrentGravityIncreaseByFrame = 0;
             manager.MovementManager.CurrentGravity = Mathf.Clamp(manager.MovementManager.CurrentGravity + manager.MovementManager.CurrentGravityIncreaseByFrame, manager.MovementManager.MinGravity, manager.MovementManager.MaxGravity);
             
 
@@ -427,7 +432,10 @@ namespace BlownAway.Character.Movements
             //Gizmos.DrawWireSphere(transform.position - transform.up * 0.25f, 0.5f);
             //
             //Physics.SphereCastNonAlloc(manager.CharacterVisual.position, GroundDetectionData.GroundDetectionSphereRadius, Vector3.down, GroundHitResults, GroundDetectionData.GroundCheckDistance, GroundDetectionData.GroundLayer) > 0;
-            Gizmos.DrawWireSphere(Manager.CharacterVisual.position + Vector3.down * Manager.Data.GroundDetectionData.GroundCheckDistance, Manager.Data.GroundDetectionData.GroundDetectionSphereRadius);
+
+            Vector3 colliderPosition = new Vector3(Manager.CharacterCollider.Collider.bounds.center.x, Manager.CharacterCollider.Collider.bounds.min.y, Manager.CharacterCollider.Collider.bounds.center.z);
+
+            GizmoExtensions.DrawSphereCast(colliderPosition, Manager.Data.GroundDetectionData.GroundDetectionSphereRadius, Vector3.down, Manager.Data.GroundDetectionData.GroundCheckDistance);
         }
         #endregion
 

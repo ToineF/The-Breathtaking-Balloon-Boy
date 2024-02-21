@@ -599,6 +599,18 @@ namespace AntoineFoucault.Utilities
         }
     }
 
+    public static class GizmoExtensions
+    {
+        public static void DrawSphereCast(Vector3 origin, float radius, Vector3 direction, float maxDistance, Color? color = null)
+        {
+            color = color ?? Color.white;
+            Gizmos.color = (Color)color;
+            Gizmos.DrawWireSphere(origin, radius);
+            Gizmos.DrawLine(origin, origin + direction * maxDistance);
+            Gizmos.DrawWireSphere(origin + direction * maxDistance, radius);
+        }
+    }
+
     public static class Tween
     {
         /// <summary>
