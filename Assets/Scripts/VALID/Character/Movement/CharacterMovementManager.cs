@@ -54,14 +54,15 @@ namespace BlownAway.Character.Movements
         [Tooltip("The raycast hits stocked while looking for jump buffer")] public RaycastHit[] JumpBufferHitResults { get; private set; }
 
 
+        private Transform parent;
         /*
         [Header("Forces")]
         [ReadOnly] public Vector3 Force;
         [ReadOnly] public Vector3 CurrentForce;*/
 
-
         private void Start()
         {
+            parent = Manager.CharacterRigidbody.transform.parent;
             GroundHitResults = new RaycastHit[2];
             JumpBufferHitResults = new RaycastHit[2];
             SetGravityTo(Manager, Manager.Data.FallData.BaseGravity, Manager.Data.FallData.BaseMinGravity, Manager.Data.FallData.BaseMaxGravity, Manager.Data.FallData.BaseGravityIncreaseByFrame, Manager.Data.FallData.BaseGravityIncreaseDecelerationByFrame);
@@ -152,6 +153,9 @@ namespace BlownAway.Character.Movements
             var lastGrounded = IsGrounded;
             CanJumpBuffer = Physics.SphereCastNonAlloc(manager.CharacterRigidbody.position, manager.Data.GroundDetectionData.GroundDetectionSphereRadius, Vector3.down, JumpBufferHitResults, manager.Data.GroundDetectionData.JumpBufferCheckDistance, manager.Data.GroundDetectionData.GroundLayer) > 0;
             IsGrounded = Physics.SphereCastNonAlloc(manager.CharacterRigidbody.position, manager.Data.GroundDetectionData.GroundDetectionSphereRadius, Vector3.down, GroundHitResults, manager.Data.GroundDetectionData.GroundCheckDistance, manager.Data.GroundDetectionData.GroundLayer) > 0;
+            //bool a = Physics.SphereCastNonAlloc(manager.CharacterRigidbody.position, manager.Data.GroundDetectionData.GroundDetectionSphereRadius, Vector3.down, GroundHitResults, manager.Data.GroundDetectionData.GroundCheckDistance, manager.Data.GroundDetectionData.GroundLayer) > 0;
+            //Collider[] hitColliders = Physics.OverlapSphere(manager.CharacterRigidbody.position - Vector3.down * manager.Data.GroundDetectionData.GroundCheckDistance, manager.Data.GroundDetectionData.GroundDetectionSphereRadius, manager.Data.GroundDetectionData.GroundLayer);
+            //IsGrounded = hitColliders.Length > 0;
 
             //if (IsGrounded)
             LastGround = GroundHitResults[0];
@@ -163,6 +167,7 @@ namespace BlownAway.Character.Movements
                     OnGroundEnter?.Invoke();
                     CurrentGravity = manager.Data.FallData.BaseGravity;
                     manager.States.SwitchState(manager.States.IdleState);
+                    manager.CharacterRigidbody.transform.SetParent(LastGround.collider.transform);
                 }
                 else // On Ground Leave
                 {
@@ -171,6 +176,7 @@ namespace BlownAway.Character.Movements
                     {
                         manager.States.SwitchState(manager.States.FallingState); // IDLE, WALK & FALL
                     }
+                    manager.CharacterRigidbody.transform.SetParent(parent);
                 }
             }
         }
