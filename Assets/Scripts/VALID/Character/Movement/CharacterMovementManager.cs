@@ -167,7 +167,7 @@ namespace BlownAway.Character.Movements
                 if (IsGrounded) // On Ground Enter
                 {
                     OnGroundEnter?.Invoke();
-                    CurrentGravity = manager.Data.FallData.BaseGravity;
+                    CurrentGravity = manager.Data.GroundDetectionData.GroundedGravity;
                     manager.States.SwitchState(manager.States.IdleState);
                     manager.CharacterCollider.Rigidbody.transform.SetParent(LastGround.collider.transform);
                 }

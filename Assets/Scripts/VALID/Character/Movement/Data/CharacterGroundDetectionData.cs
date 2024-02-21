@@ -7,6 +7,7 @@ namespace BlownAway.Character.Movements.Data
     public class CharacterGroundDetectionData : ScriptableObject
     {
         [Header("Ground Check")]
+        [Tooltip("The gravity to use while touching the ground to make sure the character rigidbody isn't offsetted from the ground")] public float GroundedGravity;
         [Tooltip("The distance offset of the ground detection check from the character")] public float GroundCheckDistance;
         [Tooltip("The radius of the ground detection sphere collider")] public float GroundDetectionSphereRadius;
         [Tooltip("The layer of the ground the character can walk on")] public LayerMask GroundLayer;
