@@ -2,8 +2,8 @@ using UnityEngine;
 using DG.Tweening;
 using BlownAway.Player;
 
-namespace BlownAway.GPE
-{
+//namespace BlownAway.GPE
+//{
     public class BouncyBalloon : MonoBehaviour
     {
         [Header("Force")]
@@ -65,4 +65,4 @@ namespace BlownAway.GPE
 
         }
     }
-}
+//}
