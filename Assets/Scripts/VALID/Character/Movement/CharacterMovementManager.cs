@@ -3,6 +3,7 @@ using UnityEngine;
 using System.Collections;
 using BlownAway.Character.Inputs;
 using AntoineFoucault.Utilities;
+using System.Collections.Generic;
 
 namespace BlownAway.Character.Movements
 {
@@ -57,10 +58,9 @@ namespace BlownAway.Character.Movements
 
 
         private Transform parent;
-        /*
-        [Header("Forces")]
-        [ReadOnly] public Vector3 Force;
-        [ReadOnly] public Vector3 CurrentForce;*/
+
+        // External Forces
+        public Dictionary<GameObject, Vector3> ExternalForces { get; private set; } = new Dictionary<GameObject, Vector3>();
 
         private void Start()
         {
@@ -133,8 +133,8 @@ namespace BlownAway.Character.Movements
 
             _currentDeplacementDirection = Vector3.Lerp(_currentDeplacementDirection, deplacementDirection, walkTurnSpeed);
 
-           //if (IsGrounded && OnSlope())
-           //     _currentDeplacementDirection = GetSlopeMoveDirection(); // HERE SEE SLOPES
+            //if (IsGrounded && OnSlope())
+            //     _currentDeplacementDirection = GetSlopeMoveDirection(); // HERE SEE SLOPES
 
             //Debug.LogWarning(_currentDeplacementDirection * _currentDeplacementSpeed);
 
@@ -159,6 +159,8 @@ namespace BlownAway.Character.Movements
             //bool a = Physics.SphereCastNonAlloc(colliderPositionn, manager.Data.GroundDetectionData.GroundDetectionSphereRadius, Vector3.down, GroundHitResults, manager.Data.GroundDetectionData.GroundCheckDistance, manager.Data.GroundDetectionData.GroundLayer) > 0;
             //Collider[] hitColliders = Physics.OverlapSphere(colliderPosition + Vector3.down * manager.Data.GroundDetectionData.GroundCheckDistance, manager.Data.GroundDetectionData.GroundDetectionSphereRadius, manager.Data.GroundDetectionData.GroundLayer);
             //IsGrounded = hitColliders.Length > 0;
+            //IsGrounded = Physics.CheckSphere(colliderPosition + Vector3.down * manager.Data.GroundDetectionData.JumpBufferCheckDistance, manager.Data.GroundDetectionData.GroundDetectionSphereRadius, manager.Data.GroundDetectionData.GroundLayer, QueryTriggerInteraction.Ignore);
+
 
             //if (IsGrounded)
             LastGround = GroundHitResults[0];
@@ -194,7 +196,7 @@ namespace BlownAway.Character.Movements
                 manager.MovementManager.CurrentGravityIncreaseByFrame = 0;
             }
             manager.MovementManager.CurrentGravity = Mathf.Clamp(manager.MovementManager.CurrentGravity + manager.MovementManager.CurrentGravityIncreaseByFrame, manager.MovementManager.MinGravity, manager.MovementManager.MaxGravity);
-            
+
 
             /*Vector3 additionalForces = Vector3.zero;
             foreach (var force in _additionnalForces)
@@ -207,8 +209,9 @@ namespace BlownAway.Character.Movements
             //Vector3 allForces = CharacterManager.Instance + additionalForces + gravity;
 
             //_characterController.Move(allForces * Time.deltaTime);
+            Vector3 externalForces = GetExternalForces();
 
-            manager.MovementManager.CurrentVelocity += gravity;
+            manager.MovementManager.CurrentVelocity += gravity + externalForces;
             //CharacterManager.Instance.Force = Vector3.Lerp(CharacterManager.Instance.Force, CharacterManager.Instance.CurrentGravity, _lerpValue);
         }
 
@@ -333,7 +336,7 @@ namespace BlownAway.Character.Movements
                 // Increase speed over time
                 CurrentPropulsionIncreaseByFrame = Math.Max(CurrentPropulsionIncreaseByFrame - manager.Data.PropulsionData.PropulsionIncreaseDeceleration, 0);
                 _currentPropulsionSpeed = Math.Min(_currentPropulsionSpeed + (CurrentPropulsionIncreaseByFrame / 100), manager.Data.PropulsionData.MaxPropulsionSpeed);
-                
+
             }
             else
             {
@@ -457,6 +460,40 @@ namespace BlownAway.Character.Movements
             Vector3 colliderPosition = new Vector3(Manager.CharacterCollider.Collider.bounds.center.x, Manager.CharacterCollider.Collider.bounds.min.y, Manager.CharacterCollider.Collider.bounds.center.z);
 
             GizmoExtensions.DrawSphereCast(colliderPosition, Manager.Data.GroundDetectionData.GroundDetectionSphereRadius, Vector3.down, Manager.Data.GroundDetectionData.GroundCheckDistance);
+        }
+        #endregion
+
+        #region External Force
+        public void AddExternalForce(GameObject go, Vector3 force)
+        {
+            if (ExternalForces.ContainsKey(go))
+            {
+                ExternalForces[go] = force;
+            }
+            else
+            {
+                ExternalForces.Add(go, force);
+            }
+        }
+
+        public void RemoveExternalForce(GameObject go)
+        {
+            if (ExternalForces.ContainsKey(go))
+            {
+                ExternalForces.Remove(go);
+            }
+        }
+
+        private Vector3 GetExternalForces()
+        {
+            if (ExternalForces.Count <= 0) return Vector3.zero;
+
+            Vector3 totalForce = Vector3.zero;
+            foreach (var force in ExternalForces)
+            {
+                totalForce += force.Value;
+            }
+            return totalForce;
         }
         #endregion
 
