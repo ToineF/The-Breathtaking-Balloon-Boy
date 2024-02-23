@@ -9,7 +9,7 @@ namespace BlownAway.Character.States
             Debug.Log("DEATH");
             manager.CheckpointManager.SetToCheckpointPosition(manager.CharacterCollider.Rigidbody.gameObject);
 
-            manager.States.SwitchState(manager.States.IdleState);
+            manager.States.SwitchState(manager.States.FallingState);
         }
 
         public override void ExitState(CharacterManager manager)
