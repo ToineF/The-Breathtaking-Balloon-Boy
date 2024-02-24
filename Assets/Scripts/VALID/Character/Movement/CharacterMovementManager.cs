@@ -139,7 +139,10 @@ namespace BlownAway.Character.Movements
 
             //Debug.LogWarning(_currentDeplacementDirection * _currentDeplacementSpeed);
 
-            CurrentVelocity += _currentDeplacementDirection * _currentDeplacementSpeed;
+            Vector3 externalForces = GetExternalForces();
+
+
+            CurrentVelocity += _currentDeplacementDirection * _currentDeplacementSpeed + externalForces;
         }
 
         // Generalize this to be more reusable (DO THIS ON STATE START)
@@ -210,9 +213,8 @@ namespace BlownAway.Character.Movements
             //Vector3 allForces = CharacterManager.Instance + additionalForces + gravity;
 
             //_characterController.Move(allForces * Time.deltaTime);
-            Vector3 externalForces = GetExternalForces();
 
-            manager.MovementManager.CurrentVelocity += gravity + externalForces;
+            manager.MovementManager.CurrentVelocity += gravity;
             //CharacterManager.Instance.Force = Vector3.Lerp(CharacterManager.Instance.Force, CharacterManager.Instance.CurrentGravity, _lerpValue);
         }
 
