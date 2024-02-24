@@ -48,7 +48,7 @@ namespace BlownAway.GPE
             else if (Mathf.Abs(normalizedDirection.x) > Mathf.Abs(normalizedDirection.z)) normalizedDirection = new Vector3(Mathf.Round(normalizedDirection.x), 0, 0); // LEFT - RIGHT
             else normalizedDirection = new Vector3(0, 0, Mathf.Round(normalizedDirection.z)); // FORWARD - BACKWARD
 
-            collider.Manager.MovementManager.AddExternalForce(gameObject, normalizedDirection * _force);
+            collider.Manager.MovementManager.AddExternalForce(gameObject, normalizedDirection * _force, _forceAccel);
 
         }
 
@@ -56,7 +56,7 @@ namespace BlownAway.GPE
         {
             if (!_lastOtherCollider.TryGetComponent(out CharacterCollider collider)) return;
 
-            collider.Manager.MovementManager.AddExternalForce(gameObject, Vector3.zero);
+            collider.Manager.MovementManager.AddExternalForce(gameObject, Vector3.zero, _forceDecel);
 
 
         }

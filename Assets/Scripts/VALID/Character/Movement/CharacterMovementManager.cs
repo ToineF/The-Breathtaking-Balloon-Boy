@@ -4,6 +4,7 @@ using System.Collections;
 using BlownAway.Character.Inputs;
 using AntoineFoucault.Utilities;
 using System.Collections.Generic;
+using BlownAway.GPE;
 
 namespace BlownAway.Character.Movements
 {
@@ -60,7 +61,7 @@ namespace BlownAway.Character.Movements
         private Transform parent;
 
         // External Forces
-        public Dictionary<GameObject, Vector3> ExternalForces { get; private set; } = new Dictionary<GameObject, Vector3>();
+        public Dictionary<GameObject, ForceData> ExternalForces { get; private set; } = new Dictionary<GameObject, ForceData>();
 
         private void Start()
         {
@@ -464,15 +465,16 @@ namespace BlownAway.Character.Movements
         #endregion
 
         #region External Force
-        public void AddExternalForce(GameObject go, Vector3 force)
+        public void AddExternalForce(GameObject go, Vector3 force, float lerp)
         {
             if (ExternalForces.ContainsKey(go))
             {
-                ExternalForces[go] = force;
+                ExternalForces[go].TargetForce = force;
+                ExternalForces[go].ForceLerp = lerp;
             }
             else
             {
-                ExternalForces.Add(go, force);
+                ExternalForces.Add(go, new ForceData(force, lerp));
             }
         }
 
@@ -491,7 +493,8 @@ namespace BlownAway.Character.Movements
             Vector3 totalForce = Vector3.zero;
             foreach (var force in ExternalForces)
             {
-                totalForce += force.Value;
+                totalForce += force.Value.CurrentForce;
+                force.Value.CurrentForce = Vector3.Lerp(force.Value.CurrentForce, force.Value.TargetForce, force.Value.ForceLerp);
             }
             return totalForce;
         }
