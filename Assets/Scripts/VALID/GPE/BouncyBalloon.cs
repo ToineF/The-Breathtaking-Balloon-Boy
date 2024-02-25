@@ -57,8 +57,6 @@ namespace BlownAway.GPE
             if (!_lastOtherCollider.TryGetComponent(out CharacterCollider collider)) return;
 
             collider.Manager.MovementManager.AddExternalForce(gameObject, Vector3.zero, _forceDecel);
-
-
         }
     }
 }
