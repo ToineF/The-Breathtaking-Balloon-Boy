@@ -94,7 +94,7 @@ public abstract class GenericTrigger : MonoBehaviour
     protected void OnDrawGizmos()
     {
         if (!_displayGizmos) return;
-        if (!_showOnlyWhileSelected) return;
+        if (_showOnlyWhileSelected) return;
 
         DrawGizmos(_gizmoColor, _gizmoWireColor);
     }
