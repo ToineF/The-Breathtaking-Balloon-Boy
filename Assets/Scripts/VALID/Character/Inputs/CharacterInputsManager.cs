@@ -30,6 +30,10 @@ namespace BlownAway.Character.Inputs
         // Falling
         public bool StartedFalling { get; private set; }
 
+        // Upgrades
+        public bool StartedBalloonBounce { get; private set; }
+        public bool StartedGroundPound { get; private set; }
+
 
         // Inputs
         private PlayerInputs _inputs;
@@ -63,6 +67,9 @@ namespace BlownAway.Character.Inputs
             _inputs.Player.LateralPropulsion.canceled += UnsetLateralPropulsion;
 
             _inputs.Player.CancelPropulsion.performed += StartFalling;
+
+            _inputs.Player.BalloonBounce.performed += StartBalloonBounce;
+            _inputs.Player.GroundPound.performed += StartGroundPound;
         }
 
         private void OnDisable()
@@ -85,6 +92,9 @@ namespace BlownAway.Character.Inputs
             _inputs.Player.LateralPropulsion.canceled -= UnsetLateralPropulsion;
 
             _inputs.Player.CancelPropulsion.performed -= StartFalling;
+
+            _inputs.Player.BalloonBounce.performed -= StartBalloonBounce;
+            _inputs.Player.GroundPound.performed -= StartGroundPound;
         }
 
         private void Start()
@@ -151,11 +161,23 @@ namespace BlownAway.Character.Inputs
         private void LateUpdate()
         {
             StartedFalling = false;
+            StartedBalloonBounce = false;
+            StartedGroundPound = false;
         }
 
         private void StartFalling(InputAction.CallbackContext context)
         {
             StartedFalling = true;
+        }
+
+        private void StartBalloonBounce(InputAction.CallbackContext context)
+        {
+            StartedBalloonBounce = true;
+        }
+
+        private void StartGroundPound(InputAction.CallbackContext context)
+        {
+            StartedGroundPound = true;
         }
     }
 }

@@ -89,6 +89,24 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""BalloonBounce"",
+                    ""type"": ""Button"",
+                    ""id"": ""6d25fcae-770f-4a1e-95ed-e98eb8969e6f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""GroundPound"",
+                    ""type"": ""Button"",
+                    ""id"": ""58737b0d-a6cd-43c6-b37f-33d1e25fad20"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -518,6 +536,105 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""CancelPropulsion"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""13b5be47-4e64-4a55-8e12-a6cb9a375ab9"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""BalloonBounce"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""67bc43fb-10ca-42ee-b3f7-fb714f3aa186"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""BalloonBounce"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""46778974-9d10-462a-9c68-f39c1687c585"",
+                    ""path"": ""<HID::BDA NSW wired controller>/button2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""BalloonBounce"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4a81f7ff-47e5-43aa-82ca-5e686ce8185e"",
+                    ""path"": ""<Keyboard>/ctrl"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""GroundPound"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""aec75147-952a-4f7b-bc98-4a1254e1caaa"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""GroundPound"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""569d2799-eda3-46c9-b7df-e7c89e75f6e3"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""GroundPound"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8077b06f-e4c9-4db3-aa7b-e0209223a435"",
+                    ""path"": ""<HID::BDA NSW wired controller>/button5"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""GroundPound"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c2c4ba27-2744-47c1-942f-c4d76daabb6e"",
+                    ""path"": ""<HID::BDA NSW wired controller>/button7"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""GroundPound"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""74e07742-5237-4145-8081-667d3470466f"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""GroundPound"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1641,6 +1758,8 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         m_Player_CancelPropulsion = m_Player.FindAction("CancelPropulsion", throwIfNotFound: true);
         m_Player_CameraMoveMouse = m_Player.FindAction("CameraMoveMouse", throwIfNotFound: true);
         m_Player_CameraMoveController = m_Player.FindAction("CameraMoveController", throwIfNotFound: true);
+        m_Player_BalloonBounce = m_Player.FindAction("BalloonBounce", throwIfNotFound: true);
+        m_Player_GroundPound = m_Player.FindAction("GroundPound", throwIfNotFound: true);
         // OLD_Player_Archive_2
         m_OLD_Player_Archive_2 = asset.FindActionMap("OLD_Player_Archive_2", throwIfNotFound: true);
         m_OLD_Player_Archive_2_Move = m_OLD_Player_Archive_2.FindAction("Move", throwIfNotFound: true);
@@ -1729,6 +1848,8 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_CancelPropulsion;
     private readonly InputAction m_Player_CameraMoveMouse;
     private readonly InputAction m_Player_CameraMoveController;
+    private readonly InputAction m_Player_BalloonBounce;
+    private readonly InputAction m_Player_GroundPound;
     public struct PlayerActions
     {
         private @PlayerInputs m_Wrapper;
@@ -1740,6 +1861,8 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         public InputAction @CancelPropulsion => m_Wrapper.m_Player_CancelPropulsion;
         public InputAction @CameraMoveMouse => m_Wrapper.m_Player_CameraMoveMouse;
         public InputAction @CameraMoveController => m_Wrapper.m_Player_CameraMoveController;
+        public InputAction @BalloonBounce => m_Wrapper.m_Player_BalloonBounce;
+        public InputAction @GroundPound => m_Wrapper.m_Player_GroundPound;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1770,6 +1893,12 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
             @CameraMoveController.started += instance.OnCameraMoveController;
             @CameraMoveController.performed += instance.OnCameraMoveController;
             @CameraMoveController.canceled += instance.OnCameraMoveController;
+            @BalloonBounce.started += instance.OnBalloonBounce;
+            @BalloonBounce.performed += instance.OnBalloonBounce;
+            @BalloonBounce.canceled += instance.OnBalloonBounce;
+            @GroundPound.started += instance.OnGroundPound;
+            @GroundPound.performed += instance.OnGroundPound;
+            @GroundPound.canceled += instance.OnGroundPound;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -1795,6 +1924,12 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
             @CameraMoveController.started -= instance.OnCameraMoveController;
             @CameraMoveController.performed -= instance.OnCameraMoveController;
             @CameraMoveController.canceled -= instance.OnCameraMoveController;
+            @BalloonBounce.started -= instance.OnBalloonBounce;
+            @BalloonBounce.performed -= instance.OnBalloonBounce;
+            @BalloonBounce.canceled -= instance.OnBalloonBounce;
+            @GroundPound.started -= instance.OnGroundPound;
+            @GroundPound.performed -= instance.OnGroundPound;
+            @GroundPound.canceled -= instance.OnGroundPound;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -2025,6 +2160,8 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         void OnCancelPropulsion(InputAction.CallbackContext context);
         void OnCameraMoveMouse(InputAction.CallbackContext context);
         void OnCameraMoveController(InputAction.CallbackContext context);
+        void OnBalloonBounce(InputAction.CallbackContext context);
+        void OnGroundPound(InputAction.CallbackContext context);
     }
     public interface IOLD_Player_Archive_2Actions
     {

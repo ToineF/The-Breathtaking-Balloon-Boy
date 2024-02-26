@@ -502,6 +502,23 @@ namespace BlownAway.Character.Movements
         }
         #endregion
 
+        #region Upgrades
+        public void CheckForBalloonBounce(CharacterManager manager)
+        {
+            if (!manager.Inputs.StartedBalloonBounce) return;
+
+            Debug.Log("Balloon Bounce");
+        }
+
+        public void CheckForGroundPound(CharacterManager manager)
+        {
+            if (!manager.Inputs.StartedGroundPound) return;
+
+            Debug.Log("Ground Pound");
+        }
+
+        #endregion
+
     }
 
 }

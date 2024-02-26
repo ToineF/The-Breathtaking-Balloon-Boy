@@ -23,11 +23,17 @@ namespace BlownAway.Character.States
 
             manager.MovementManager.CheckIfGrounded(manager, true);
 
+            manager.MovementManager.CheckForBalloonBounce(manager);
+
+            manager.MovementManager.CheckForGroundPound(manager);
+
             manager.MovementManager.CheckForPropulsionStartOnAir(manager);
 
             manager.MovementManager.CheckForFloatCancel(manager);
 
             manager.MovementManager.FallIfAirEmpty(manager);
+
+
         }
 
         public override void FixedUpdateState(CharacterManager manager)

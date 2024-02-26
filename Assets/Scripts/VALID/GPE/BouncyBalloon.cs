@@ -1,5 +1,4 @@
 using AntoineFoucault.Utilities;
-using BlownAway.Character;
 using UnityEngine;
 
 namespace BlownAway.GPE
@@ -8,25 +7,23 @@ namespace BlownAway.GPE
     {
         [Header("Force")]
         [SerializeField] private float _force;
-        [SerializeField] private Vector3 _direction;
         [SerializeField][Range(0, 1)] private float _forceAccel;
         [SerializeField][Range(0, 1)] private float _forceDecel;
-        [SerializeField] private Vector3 _vector3Up;
 
         [Header("Directions")]
         [SerializeField][Range(0, 1)] private float _upThreshold;
         [SerializeField][Range(-1, 0)] private float _downThreshold;
 
 
-        [Header("Timer")]
-        private bool _isPlayerIn;
+        //[Header("Timer")]
+        //private bool _isPlayerIn;
 
-        [Header("Visual")]
-        [SerializeField] private float _scaleMultiplier = 1;
-        [SerializeField] private float _scaleTime;
+        //[Header("Visual")]
+        //[SerializeField] private float _scaleMultiplier = 1;
+        //[SerializeField] private float _scaleTime;
 
-        [Header("Sounds")]
-        [SerializeField] private AudioClip _collisionSound;
+        //[Header("Sounds")]
+        //[SerializeField] private AudioClip _collisionSound;
 
 
         private new void Awake()
