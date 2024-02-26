@@ -625,6 +625,16 @@ namespace AntoineFoucault.Utilities
             Gizmos.color = color;
             DrawArrow(pos, direction, arrowHeadLength, arrowHeadAngle);
         }
+
+        public static void DrawCircle(Vector3 center, Vector3 rotation, float radius, float thickness, Color? color = null)
+        {
+            Gizmos.color = color ?? Color.white;
+
+            Matrix4x4 oldMatrix = Gizmos.matrix;
+            Gizmos.matrix = Matrix4x4.TRS(center, Quaternion.Euler(rotation), new Vector3(1, thickness, 1));
+            Gizmos.DrawSphere(Vector3.zero, radius);
+            Gizmos.matrix = oldMatrix;
+        }
     }
 
     public static class Tween

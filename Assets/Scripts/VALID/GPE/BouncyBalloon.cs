@@ -1,3 +1,4 @@
+using AntoineFoucault.Utilities;
 using BlownAway.Character;
 using UnityEngine;
 
@@ -57,6 +58,38 @@ namespace BlownAway.GPE
             if (!_lastOtherCollider.TryGetComponent(out CharacterCollider collider)) return;
 
             collider.Manager.MovementManager.AddExternalForce(gameObject, Vector3.zero, _forceDecel);
+        }
+
+        private new void OnDrawGizmos()
+        {
+            if (!_displayGizmos) return;
+            if (_showOnlyWhileSelected) return;
+
+            base.OnDrawGizmos();
+
+            DrawBalloonGizmos();
+        }
+
+        private new void OnDrawGizmosSelected()
+        {
+            if (!_displayGizmos) return;
+
+            base.OnDrawGizmosSelected();
+
+            DrawBalloonGizmos();
+        }
+
+        private void DrawBalloonGizmos()
+        {
+            _sphereCollider ??= GetComponent<SphereCollider>();
+
+            Vector3 position = transform.position;
+
+            Vector3 upOffset = Vector3.up * _sphereCollider.bounds.extents.y * _upThreshold;
+            Vector3 downOffset = Vector3.up * _sphereCollider.bounds.extents.y * _downThreshold;
+
+            GizmoExtensions.DrawCircle(position + upOffset, Vector3.up, _sphereCollider.radius, 0);
+            GizmoExtensions.DrawCircle(position + downOffset, Vector3.up, _sphereCollider.radius, 0);
         }
     }
 }

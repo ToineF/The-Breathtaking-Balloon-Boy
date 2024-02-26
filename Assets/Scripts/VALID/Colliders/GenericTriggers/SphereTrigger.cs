@@ -5,7 +5,7 @@ using UnityEngine.UIElements;
 [RequireComponent(typeof(SphereCollider))]
 public class SphereTrigger : GenericTrigger
 {
-    private SphereCollider _sphereCollider;
+    protected SphereCollider _sphereCollider;
 
     private new void Awake()
     {
