@@ -41,13 +41,18 @@ namespace BlownAway.GPE
             Vector3 direction = collider.transform.position - transform.position;
             Vector3 normalizedDirection = direction.normalized;
 
-            if (normalizedDirection.y > _upThreshold) normalizedDirection = Vector3.up; // UP
-            else if (normalizedDirection.y < _downThreshold) normalizedDirection = Vector3.down; // DOWN
+            // OLD VALUES
+            //if (normalizedDirection.y > _upThreshold) normalizedDirection = Vector3.up; // UP
+            //else if (normalizedDirection.y < _downThreshold) normalizedDirection = Vector3.down; // DOWN
+            //else if (Mathf.Abs(normalizedDirection.x) > Mathf.Abs(normalizedDirection.z)) normalizedDirection = new Vector3(Mathf.Round(normalizedDirection.x), 0, 0); // LEFT - RIGHT
+            //else normalizedDirection = new Vector3(0, 0, Mathf.Round(normalizedDirection.z)); // FORWARD - BACKWARD
+
+            if (normalizedDirection.y > _upThreshold) normalizedDirection = Vector3.up + collider.Manager.CharacterVisual.forward; // UP
+            else if (normalizedDirection.y < _downThreshold) normalizedDirection = Vector3.zero; // DOWN
             else if (Mathf.Abs(normalizedDirection.x) > Mathf.Abs(normalizedDirection.z)) normalizedDirection = new Vector3(Mathf.Round(normalizedDirection.x), 0, 0); // LEFT - RIGHT
             else normalizedDirection = new Vector3(0, 0, Mathf.Round(normalizedDirection.z)); // FORWARD - BACKWARD
 
             collider.Manager.MovementManager.AddExternalForce(gameObject, normalizedDirection * _force, _forceAccel);
-
         }
 
         private void StopPlayerBounce()
