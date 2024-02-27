@@ -10,10 +10,10 @@ namespace BlownAway.Camera
         public CharacterManager Manager { get; set; }
 
 
-        [Header("References")]
+        [field:Header("References")]
+        [field:SerializeField] public UnityEngine.Camera Camera { get; private set; }
         [SerializeField] GameObject FocusPoint;
         [SerializeField] GameObject CameraCenter;
-        [SerializeField] UnityEngine.Camera Camera;
 
         private Vector3 _cameraMoveVector;
 

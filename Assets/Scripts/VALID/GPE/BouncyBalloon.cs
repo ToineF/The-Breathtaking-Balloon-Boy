@@ -14,6 +14,8 @@ namespace BlownAway.GPE
         [SerializeField][Range(0, 1)] private float _upThreshold;
         [SerializeField][Range(-1, 0)] private float _downThreshold;
 
+        [SerializeField] private float _sideAngleThresold;
+
 
         //[Header("Timer")]
         //private bool _isPlayerIn;
@@ -47,10 +49,17 @@ namespace BlownAway.GPE
             //else if (Mathf.Abs(normalizedDirection.x) > Mathf.Abs(normalizedDirection.z)) normalizedDirection = new Vector3(Mathf.Round(normalizedDirection.x), 0, 0); // LEFT - RIGHT
             //else normalizedDirection = new Vector3(0, 0, Mathf.Round(normalizedDirection.z)); // FORWARD - BACKWARD
 
-            if (normalizedDirection.y > _upThreshold) normalizedDirection = Vector3.up + collider.Manager.CharacterVisual.forward; // UP
+            float angle = Vector3.Angle(collider.Manager.CharacterVisual.forward, _collider.bounds.center - collider.Manager.CharacterCollider.transform.position);
+            bool isSideRebounceDirection = angle < _sideAngleThresold;
+
+            Vector3 upDirection = Vector3.up + collider.Manager.CameraManager.Camera.transform.forward;
+            Vector3 leftRightDirection = isSideRebounceDirection ? new Vector3(Mathf.Round(normalizedDirection.x), 0, 0) : new Vector3(Mathf.Round(normalizedDirection.x), 0, 0) + collider.Manager.CameraManager.Camera.transform.forward;
+            Vector3 forwardBackwardDirection = isSideRebounceDirection ? new Vector3(0, 0, Mathf.Round(normalizedDirection.z)) : new Vector3(0, 0, Mathf.Round(normalizedDirection.z)) + collider.Manager.CameraManager.Camera.transform.forward;
+
+            if (normalizedDirection.y > _upThreshold) normalizedDirection = upDirection; // UP
             else if (normalizedDirection.y < _downThreshold) normalizedDirection = Vector3.zero; // DOWN
-            else if (Mathf.Abs(normalizedDirection.x) > Mathf.Abs(normalizedDirection.z)) normalizedDirection = new Vector3(Mathf.Round(normalizedDirection.x), 0, 0); // LEFT - RIGHT
-            else normalizedDirection = new Vector3(0, 0, Mathf.Round(normalizedDirection.z)); // FORWARD - BACKWARD
+            else if (Mathf.Abs(normalizedDirection.x) > Mathf.Abs(normalizedDirection.z)) normalizedDirection = leftRightDirection; // LEFT - RIGHT
+            else normalizedDirection = forwardBackwardDirection; // FORWARD - BACKWARD
 
             collider.Manager.MovementManager.AddExternalForce(gameObject, normalizedDirection * _force, _forceAccel);
         }
