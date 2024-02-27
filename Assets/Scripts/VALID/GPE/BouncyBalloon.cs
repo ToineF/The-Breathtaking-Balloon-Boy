@@ -53,8 +53,8 @@ namespace BlownAway.GPE
             bool isSideRebounceDirection = angle < _sideAngleThresold;
 
             Vector3 upDirection = Vector3.up + collider.Manager.CameraManager.Camera.transform.forward;
-            Vector3 leftRightDirection = isSideRebounceDirection ? new Vector3(Mathf.Round(normalizedDirection.x), 0, 0) : new Vector3(Mathf.Round(normalizedDirection.x), 0, 0) + collider.Manager.CameraManager.Camera.transform.forward;
-            Vector3 forwardBackwardDirection = isSideRebounceDirection ? new Vector3(0, 0, Mathf.Round(normalizedDirection.z)) : new Vector3(0, 0, Mathf.Round(normalizedDirection.z)) + collider.Manager.CameraManager.Camera.transform.forward;
+            Vector3 leftRightDirection = new Vector3(Mathf.Round(normalizedDirection.x), 0, 0); //isSideRebounceDirection ? new Vector3(Mathf.Round(normalizedDirection.x), 0, 0) : new Vector3(Mathf.Round(normalizedDirection.x), 0, 0) + collider.Manager.CameraManager.Camera.transform.forward;
+            Vector3 forwardBackwardDirection = new Vector3(0, 0, Mathf.Round(normalizedDirection.z)); //isSideRebounceDirection ? new Vector3(0, 0, Mathf.Round(normalizedDirection.z)) : new Vector3(0, 0, Mathf.Round(normalizedDirection.z)) + collider.Manager.CameraManager.Camera.transform.forward;
 
             if (normalizedDirection.y > _upThreshold) normalizedDirection = upDirection; // UP
             else if (normalizedDirection.y < _downThreshold) normalizedDirection = Vector3.zero; // DOWN
@@ -62,6 +62,9 @@ namespace BlownAway.GPE
             else normalizedDirection = forwardBackwardDirection; // FORWARD - BACKWARD
 
             collider.Manager.MovementManager.AddExternalForce(gameObject, normalizedDirection * _force, _forceAccel);
+
+            collider.Manager.States.SwitchState(collider.Manager.States.PropulsionState);
+            collider.Manager.AirManager.RefreshAir();
         }
 
         private void StopPlayerBounce()
