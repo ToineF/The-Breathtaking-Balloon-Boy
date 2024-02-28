@@ -1,9 +1,7 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 using DG.Tweening;
 
 public class Transition : MonoBehaviour
@@ -15,6 +13,7 @@ public class Transition : MonoBehaviour
     [Tooltip("The time the fade takes to complete in seconds")] [SerializeField] private float _fadeTime = 1f;
     [Header("Animations")]
     [Tooltip("The Animator used for the Animation transition")] [SerializeField] private Animator _animator;
+    [Tooltip("Uses the animation direction for the wait time")] [SerializeField] private bool _useAnimationDuration = false;
     
 
     enum AnimationMode
@@ -27,16 +26,21 @@ public class Transition : MonoBehaviour
     {
         if (_fadeIn)
         {
-            switch (_transitionMode)
-            {
-                case AnimationMode.Fade:
-                    _fadeImage.DOFade(1, 0);
-                    _fadeImage.DOFade(0, _fadeTime);
-                    break;
-                case AnimationMode.Animation:
-                    AnimationTransition("TransitionIn");
-                    break;
-            }
+            PlayFadeIn();
+        }
+    }
+
+    public void PlayFadeIn()
+    {
+        switch (_transitionMode)
+        {
+            case AnimationMode.Fade:
+                _fadeImage.DOFade(1, 0);
+                _fadeImage.DOFade(0, _fadeTime);
+                break;
+            case AnimationMode.Animation:
+                AnimationTransition("TransitionIn");
+                break;
         }
     }
 
@@ -56,7 +60,7 @@ public class Transition : MonoBehaviour
                 break;
             case AnimationMode.Animation:
                 float _animationDuration = AnimationTransition("TransitionOut");
-                yield return new WaitForSeconds(_animationDuration);
+                yield return new WaitForSeconds(_useAnimationDuration ? _animationDuration : _fadeTime);
                 break;
             default:
                 yield return new WaitForSeconds(0f);

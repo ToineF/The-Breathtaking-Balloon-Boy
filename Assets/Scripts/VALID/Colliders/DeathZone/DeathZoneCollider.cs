@@ -8,16 +8,17 @@ namespace BlownAway.Hitbox.Death
         private new void Awake()
         {
             base.Awake();
-            OnEnterTrigger += SetCurrentCheckpoint;
+            OnEnterTrigger += KillPlayer;
         }
 
-        void SetCurrentCheckpoint()
+        void KillPlayer()
         {
             if (!_lastOtherCollider.TryGetComponent(out CharacterCollider collider)) return;
 
             CharacterManager character = collider.Manager;
 
             character.States.SwitchState(character.States.DeathState);
+            //character.Transition.SetTransition(() => character.States.SwitchState(character.States.DeathState));
         }
     }
 }
