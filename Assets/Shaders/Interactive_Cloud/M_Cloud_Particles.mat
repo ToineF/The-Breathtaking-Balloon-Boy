@@ -31,7 +31,8 @@ Material:
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
-  stringTagMap: {}
+  stringTagMap:
+    RenderType: Opaque
   disabledShaderPasses: []
   m_LockedProperties: 
   m_SavedProperties:
@@ -51,15 +52,27 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _ColorDivideBlur: 1.42
-    - _ColorDivideHeight: -1.03
+    - _AlphaClip: 0
+    - _AlphaToMask: 0
+    - _Blend: 0
+    - _CastShadows: 1
+    - _ColorDivideBlur: 7.1
+    - _ColorDivideHeight: 14.01
+    - _Cull: 2
     - _DisplacementIntensity: 1.46
     - _DisplacementScale: 0.8
     - _DisplacementSpeed: 0.25
+    - _DstBlend: 0
+    - _FadeDepth: 0.45
     - _QueueControl: 0
     - _QueueOffset: 0
+    - _SrcBlend: 1
+    - _Surface: 0
+    - _ZTest: 4
+    - _ZWrite: 1
+    - _ZWriteControl: 0
     m_Colors:
     - _ColorDivideHeight: {r: 0, g: 0, b: 0, a: 0}
-    - _Color_1: {r: 1, g: 1, b: 1, a: 0}
-    - _Color_2: {r: 0.5379584, g: 0.665355, b: 0.7264151, a: 0}
+    - _Color_1: {r: 1, g: 0.9103774, b: 0.9103774, a: 1}
+    - _Color_2: {r: 0.31719473, g: 0.5453362, b: 0.6792453, a: 1}
   m_BuildTextureStacks: []
