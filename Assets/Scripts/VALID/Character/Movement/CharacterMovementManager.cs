@@ -111,6 +111,12 @@ namespace BlownAway.Character.Movements
             CurrentVelocity = Vector3.zero;
         }
 
+        public void UpdateExternalForces()
+        {
+            Vector3 externalForces = GetExternalForces();
+            CurrentVelocity += externalForces;
+        }
+
         #region Deplacement
         public void MoveAtSpeed(CharacterManager manager, float walkTurnSpeed, bool includesInputs = true)
         {
@@ -139,10 +145,9 @@ namespace BlownAway.Character.Movements
 
             //Debug.LogWarning(_currentDeplacementDirection * _currentDeplacementSpeed);
 
-            Vector3 externalForces = GetExternalForces();
 
 
-            CurrentVelocity += _currentDeplacementDirection * _currentDeplacementSpeed + externalForces;
+            CurrentVelocity += _currentDeplacementDirection * _currentDeplacementSpeed;
         }
 
         // Generalize this to be more reusable (DO THIS ON STATE START)

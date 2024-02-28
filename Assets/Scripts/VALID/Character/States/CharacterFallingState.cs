@@ -40,6 +40,8 @@ namespace BlownAway.Character.States
             manager.MovementManager.UpdatePropulsionMovement(manager, false);
 
             manager.MovementManager.UpdateGravity(manager);
+
+            manager.MovementManager.UpdateExternalForces();
         }
 
         public override void LateUpdateState(CharacterManager manager)

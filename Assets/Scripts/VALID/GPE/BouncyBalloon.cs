@@ -63,6 +63,7 @@ namespace BlownAway.GPE
 
             collider.Manager.MovementManager.AddExternalForce(gameObject, normalizedDirection * _force, _forceAccel);
 
+            //collider.Manager.Inputs.ResetLastPropulsionInputDirection();
             collider.Manager.States.SwitchState(collider.Manager.States.PropulsionState);
             collider.Manager.AirManager.RefreshAir();
         }

@@ -10,11 +10,6 @@ namespace BlownAway.Character.Animations
         [SerializeField] private Vector3 _offsetFromRigidbody;
         private Vector3 _lastDirection;
 
-        public void RotateTowards(Vector3 target)
-        {
-            Manager.CharacterVisual.LookAt(target);
-        }
-
         private void Update()
         {
             Manager.CharacterVisual.transform.position = Manager.CharacterCollider.Rigidbody.transform.position + _offsetFromRigidbody;
@@ -29,7 +24,7 @@ namespace BlownAway.Character.Animations
         {
             Vector3 moveDirection = Manager.MovementManager.CurrentVelocity;
             moveDirection = Vector3.Scale(moveDirection, new Vector3(1, 0, 1));
-            if (moveDirection != Vector3.zero) _lastDirection = moveDirection;
+            if (moveDirection.sqrMagnitude >= 0.001f) _lastDirection = moveDirection;
             int orientation = _isOrientationInverted ? -1 : 1;
 
             Manager.CharacterVisual.LookAt(Manager.CharacterVisual.position - _lastDirection * orientation);
