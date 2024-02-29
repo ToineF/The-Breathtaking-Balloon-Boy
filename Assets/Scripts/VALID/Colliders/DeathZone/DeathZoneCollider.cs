@@ -17,6 +17,7 @@ namespace BlownAway.Hitbox.Death
 
             CharacterManager character = collider.Manager;
 
+            UnityEngine.Debug.Log("Kill player");
             character.States.SwitchState(character.States.DeathState);
             //character.Transition.SetTransition(() => character.States.SwitchState(character.States.DeathState));
         }

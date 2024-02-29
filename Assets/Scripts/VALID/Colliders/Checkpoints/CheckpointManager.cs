@@ -21,7 +21,7 @@ namespace BlownAway.Hitbox.Checkpoints
         public void SetToCheckpointPosition(GameObject objectToMove)
         {
             if (_currentCheckPoint == null) return;
-
+            Debug.Log("checkpoint");
             objectToMove.transform.position = _currentCheckPoint.transform.position;
         }
     }
