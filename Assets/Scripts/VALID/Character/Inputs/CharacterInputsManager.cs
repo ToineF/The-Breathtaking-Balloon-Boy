@@ -140,12 +140,12 @@ namespace BlownAway.Character.Inputs
 
         private void SetDownPropulsion(InputAction.CallbackContext context)
         {
-            PropulsionType |= PropulsionDirection.Down;
+            //PropulsionType |= PropulsionDirection.Down;
         }
 
         private void UnsetDownPropulsion(InputAction.CallbackContext context)
         {
-            PropulsionType &= ~PropulsionDirection.Down;
+            //PropulsionType &= ~PropulsionDirection.Down;
         }
 
         private void SetLateralPropulsion(InputAction.CallbackContext context)
