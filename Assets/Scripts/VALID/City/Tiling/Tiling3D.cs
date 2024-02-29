@@ -49,6 +49,8 @@ public class Tiling3D : MonoBehaviour
                 }
             }
         }
+
+
     }
 
     public void ClearBuildingChildren()

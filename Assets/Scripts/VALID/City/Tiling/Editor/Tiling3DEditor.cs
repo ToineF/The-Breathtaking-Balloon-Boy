@@ -1,6 +1,7 @@
 using UnityEditor;
 using UnityEngine;
 
+[CanEditMultipleObjects]
 [CustomEditor(typeof(Tiling3D))]
 public class Tiling3DEditor : Editor
 {
