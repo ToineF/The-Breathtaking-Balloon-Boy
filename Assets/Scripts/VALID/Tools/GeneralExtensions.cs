@@ -647,6 +647,21 @@ namespace AntoineFoucault.Utilities
         }
     }
 
+    public static class StringExtensions
+    {
+        public static string OrdinalSuffixOf(int index)
+        {
+            int dizains = index % 100;
+            int units = index % 10;
+            if (units == 1 && dizains != 11) return "st";
+            else if (units == 2 && dizains != 12) return "nd";
+            else if (units == 3 && dizains != 13) return "rd";
+            else return "th";
+        }
+
+
+    }
+
     public static class Tween
     {
         /// <summary>
