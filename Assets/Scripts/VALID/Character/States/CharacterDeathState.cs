@@ -4,18 +4,21 @@ namespace BlownAway.Character.States
 {
     public class CharacterDeathState : CharacterBaseState
     {
-        private float _timer;
-
         public override void EnterState(CharacterManager manager)
         {
             Debug.Log("DEATH");
-            _timer = manager.Transition.FadeTime;
             manager.Transition.SetTransition(() =>
             {
                 manager.Transition.PlayFadeIn();
+                //manager.States.SwitchState(manager.States.FallingState);
+                Debug.Log(manager.CharacterCollider.Rigidbody.gameObject.name + ": " + manager.CharacterCollider.Rigidbody.gameObject.transform.position);
 
-
+                manager.CheckpointManager.SetToCheckpointPosition(manager.CharacterCollider.Rigidbody.gameObject);
+                Debug.Log("AAA " + manager.CharacterCollider.Rigidbody.gameObject.name + ": " + manager.CharacterCollider.Rigidbody.gameObject.transform.position);
+                Debug.Log("AAA " + manager.CharacterCollider.Rigidbody.gameObject.name + ": " + manager.CharacterCollider.Rigidbody.gameObject.transform.position);
             });
+
+            Debug.Log(manager.CharacterCollider.Rigidbody.gameObject.name + ": " + manager.CharacterCollider.Rigidbody.gameObject.transform.position);
 
         }
 
@@ -27,12 +30,8 @@ namespace BlownAway.Character.States
 
         public override void UpdateState(CharacterManager manager)
         {
-            _timer -= Time.deltaTime;
-            if (_timer <= 0)
-            {
-                manager.CheckpointManager.SetToCheckpointPosition(manager.CharacterCollider.Rigidbody.gameObject);
-                manager.States.SwitchState(manager.States.FallingState);
-            }
+            Debug.Log(manager.CharacterCollider.Rigidbody.gameObject.name + ": " + manager.CharacterCollider.Rigidbody.gameObject.transform.position);
+
         }
 
         public override void FixedUpdateState(CharacterManager manager)
