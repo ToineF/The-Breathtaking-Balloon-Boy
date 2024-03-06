@@ -16,11 +16,15 @@ namespace BlownAway.GPE
         [SerializeField][Tooltip("The deceleration of the force from the magnitude given to the player")][Range(0, 1)] private float _stopLerpValue;
         //[SerializeField][Tooltip("The original scale used for reference to scale the VFX")] private Vector3 _targetScale;
 
-        //[Header("FX")]
+        [Header("FX")]
         //[SerializeField][Tooltip("A reference to the Particule Effect of the Wind")] private GameObject _FXWind;
         //[SerializeField][Tooltip("A reference to all of the Particules of the Effect")] private ParticleSystem[] _FXWinds;
         //[SerializeField][Tooltip("The Color of the Hot Air")] private Color _HotColor;
         //[SerializeField][Tooltip("The Color of the Cold Air")] private Color _ColdColor;
+        [SerializeField][Tooltip("A reference to all of the Particules of the Effect")] private ParticleSystem _FXWind;
+        [SerializeField][Tooltip("The rotation offset to the FX Particules")] private float _FXWindRotationOffset = -90;
+        [SerializeField][Tooltip("The emission of particules over time for a (1,1,1) cube")] private float _FXWindParticulesCount = 100;
+
 
         //[Header("Sound")]
         //[SerializeField] private AudioSource _windBlowingSound;
@@ -34,6 +38,28 @@ namespace BlownAway.GPE
             base.Awake();
             OnEnterTrigger += MakePlayerBounce;
             OnExitTrigger += StopPlayerBounce;
+        }
+
+        private void Start()
+        {
+            ParticleSystem.ShapeModule editableShape = _FXWind.shape;
+            ParticleSystem.MainModule main = _FXWind.main;
+            ParticleSystem.EmissionModule emission = _FXWind.emission;
+            ParticleSystem.VelocityOverLifetimeModule velocityOverLifetime = _FXWind.velocityOverLifetime;
+
+            Vector3 scale = transform.localScale;
+
+            _FXWind.transform.position = transform.position;
+            _FXWind.transform.localScale = transform.localScale;
+            main.startSizeX = new ParticleSystem.MinMaxCurve(main.startSizeX.constant * scale.x);
+            main.startSizeY = new ParticleSystem.MinMaxCurve(main.startSizeY.constant * scale.y);
+            main.startSizeZ = new ParticleSystem.MinMaxCurve(main.startSizeZ.constant * scale.z);
+            //velocityOverLifetime.y = new ParticleSystem.MinMaxCurve(main.startSize.constantMin * scale, main.startSize.constantMax * scale);
+            main.startRotation = ((_pushVector.y * -90) + (_pushVector.x < 0 ? _pushVector.x * 180 : 0)) * Mathf.Deg2Rad;
+            velocityOverLifetime.x = velocityOverLifetime.x.constant * _pushVector.x;
+            velocityOverLifetime.y = velocityOverLifetime.y.constant * _pushVector.y;
+            velocityOverLifetime.z = velocityOverLifetime.z.constant * _pushVector.z;
+            emission.rateOverTime = _FXWindParticulesCount * scale.magnitude;
         }
 
         private void MakePlayerBounce()
