@@ -42,7 +42,16 @@ namespace BlownAway.Character.Movements.Data
         [field: SerializeField, Tooltip("The time needed to reach the target gravity (DeriveGravity)")] public float DeriveGravityTime { get; private set; }
         [field: SerializeField, Tooltip("The lerp used by the character to reach the target gravity (DeriveGravity)")] public AnimationCurve DeriveGravityAccel { get; private set; }
         [field: SerializeField, Tooltip("The increase of gravity added at each frame when deriving")] public float DeriveGravityIncreaseByFrame { get; private set; }
-        [field: SerializeField, Tooltip("The deceleration of the increase of gravity added at each frame when floating")] public float DeriveGravityIncreaseDecelerationByFrame { get; private set; }
+        [field: SerializeField, Tooltip("The deceleration of the increase of gravity added at each frame when deriving")] public float DeriveGravityIncreaseDecelerationByFrame { get; private set; }
+
+        [field: Header("Ground Pound")]
+        [field: SerializeField, Tooltip("The gravity the character falls at while ground pounding")] public float GroundPoundGravity { get; private set; }
+        [field: SerializeField, Tooltip("The minimum gravity the character can fall at while ground pounding")] public float GroundPoundMinGravity { get; private set; }
+        [field: SerializeField, Tooltip("The maximum gravity the character can fall at while ground pounding")] public float GroundPoundMaxGravity { get; private set; }
+        [field: SerializeField, Tooltip("The time needed to reach the target gravity (GroundPoundGravity)")] public float GroundPoundGravityTime { get; private set; }
+        [field: SerializeField, Tooltip("The lerp used by the character to reach the target gravity (GroundPoundGravity)")] public AnimationCurve GroundPoundGravityAccel { get; private set; }
+        [field: SerializeField, Tooltip("The increase of gravity added at each frame when ground pounding")] public float GroundPoundGravityIncreaseByFrame { get; private set; }
+        [field: SerializeField, Tooltip("The deceleration of the increase of gravity added at each frame when ground pounding")] public float GroundPoundGravityIncreaseDecelerationByFrame { get; private set; }
 
 
     }

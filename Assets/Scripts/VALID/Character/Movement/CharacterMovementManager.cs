@@ -548,7 +548,7 @@ namespace BlownAway.Character.Movements
         {
             if (!manager.Inputs.StartedGroundPound) return;
 
-            Debug.Log("Ground Pound");
+            manager.States.SwitchState(manager.States.GroundPoundState);
         }
 
         #endregion
