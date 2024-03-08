@@ -35,5 +35,15 @@ namespace BlownAway.Character.Movements.Data
         [field: SerializeField, Tooltip("The deceleration of the increase of gravity added at each frame when propulsing")] public float PropulsionGravityIncreaseDecelerationByFrame { get; private set; }
 
 
+        [field: Header("Derive")]
+        [field: SerializeField, Tooltip("The gravity the character falls at while deriving")] public float DeriveGravity { get; private set; }
+        [field: SerializeField, Tooltip("The minimum gravity the character can fall at while deriving")] public float DeriveMinGravity { get; private set; }
+        [field: SerializeField, Tooltip("The maximum gravity the character can fall at while deriving")] public float DeriveMaxGravity { get; private set; }
+        [field: SerializeField, Tooltip("The time needed to reach the target gravity (DeriveGravity)")] public float DeriveGravityTime { get; private set; }
+        [field: SerializeField, Tooltip("The lerp used by the character to reach the target gravity (DeriveGravity)")] public AnimationCurve DeriveGravityAccel { get; private set; }
+        [field: SerializeField, Tooltip("The increase of gravity added at each frame when deriving")] public float DeriveGravityIncreaseByFrame { get; private set; }
+        [field: SerializeField, Tooltip("The deceleration of the increase of gravity added at each frame when floating")] public float DeriveGravityIncreaseDecelerationByFrame { get; private set; }
+
+
     }
 }

@@ -26,5 +26,8 @@ namespace BlownAway.Character.Movements.Data
         [field: SerializeField, Tooltip("The time it takes to the propulsion take-off to stop moving after reaching its maximum value")] public float PropulsionTakeOffDecelTime {get; private set;}
         [field: SerializeField, Tooltip("The lerp used by the propulsion take-off to stop moving after reaching its maximum value")] public AnimationCurve PropulsionTakeOffDecelCurve {get; private set;}
 
+        [field:Header("Derive")]
+        [field: SerializeField, Tooltip("The maximum time the derive lasts")] public float DeriveTime { get; private set; }
+
     }
 }
