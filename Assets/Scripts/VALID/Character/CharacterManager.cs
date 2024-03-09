@@ -7,10 +7,10 @@ using BlownAway.Character.Air;
 using BlownAway.Character.Animations;
 using BlownAway.Hitbox.Checkpoints;
 using BlownAway.Character.Data;
-using BlownAway.Player;
 
 namespace BlownAway.Character
 {
+    [DefaultExecutionOrder(-1)]
     public class CharacterManager : MonoBehaviour
     {
         [field: Header("References to data")]
@@ -55,13 +55,13 @@ namespace BlownAway.Character
 
         private void Awake()
         {
-            CameraManager.Manager = this;
-            MovementManager.Manager = this;
-            States.Manager = this;
-            CharacterCollider.Manager = this;
-            AirManager.Manager = this;
-            AnimationManager.Manager = this;
-            ChildrenManager.Manager = this;
+            ChildrenManager.InitScript(this);
+            CameraManager.InitScript(this);
+            MovementManager.InitScript(this);
+            States.InitScript(this);
+            CharacterCollider.InitScript(this);
+            AirManager.InitScript(this);
+            AnimationManager.InitScript(this);
         }
 
 

@@ -1,14 +1,11 @@
 using UnityEngine;
 using AntoineFoucault.Utilities;
 using BlownAway.Character;
-using BlownAway.Camera.Data;
 
 namespace BlownAway.Camera
 {
-    public class CharacterCameraManager : MonoBehaviour
+    public class CharacterCameraManager : CharacterSubComponent
     {
-        public CharacterManager Manager { get; set; }
-
 
         [field:Header("References")]
         [field:SerializeField] public UnityEngine.Camera Camera { get; private set; }
@@ -24,14 +21,14 @@ namespace BlownAway.Camera
         private RaycastHit _camHit;
         private RaycastHit _camHit2;
 
-        private void Start()
+        protected override void StartScript(CharacterManager manager)
         {
             _camDist = Camera.transform.localPosition;
-            _zoomDistance = Manager.Data.CameraData.ZoomDefault;
+            _zoomDistance = manager.Data.CameraData.ZoomDefault;
             _camDist.z = -_zoomDistance;
 
-            Cursor.lockState = Manager.Data.CameraData.SetCursorVisible ? CursorLockMode.None : CursorLockMode.Locked;
-            Cursor.visible = Manager.Data.CameraData.SetCursorVisible;
+            Cursor.lockState = manager.Data.CameraData.SetCursorVisible ? CursorLockMode.None : CursorLockMode.Locked;
+            Cursor.visible = manager.Data.CameraData.SetCursorVisible;
         }
 
         private void LateUpdate()

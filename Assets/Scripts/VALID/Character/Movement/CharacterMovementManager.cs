@@ -8,14 +8,10 @@ using BlownAway.GPE;
 
 namespace BlownAway.Character.Movements
 {
-
-    public class CharacterMovementManager : MonoBehaviour // RANGER CE SCRIPT !!!
+    public class CharacterMovementManager : CharacterSubComponent // RANGER CE SCRIPT !!!
     {
         public Action OnGroundEnter;
         public Action OnGroundExit;
-
-
-        public CharacterManager Manager { get; set; }
 
         [Tooltip("The current global velocity of the character (movements, gravity, forces...)")] public Vector3 CurrentVelocity { get; private set; }
 
@@ -65,12 +61,12 @@ namespace BlownAway.Character.Movements
         // External Forces
         public Dictionary<GameObject, ForceData> ExternalForces { get; private set; } = new Dictionary<GameObject, ForceData>();
 
-        private void Start()
+        protected override void StartScript(CharacterManager manager)
         {
-            parent = Manager.CharacterCollider.Rigidbody.transform.parent;
+            parent = manager.CharacterCollider.Rigidbody.transform.parent;
             GroundHitResults = new RaycastHit[2];
             JumpBufferHitResults = new RaycastHit[2];
-            SetGravityTo(Manager, Manager.Data.FallData.BaseGravity, Manager.Data.FallData.BaseMinGravity, Manager.Data.FallData.BaseMaxGravity, Manager.Data.FallData.BaseGravityIncreaseByFrame, Manager.Data.FallData.BaseGravityIncreaseDecelerationByFrame);
+            SetGravityTo(manager, manager.Data.FallData.BaseGravity, manager.Data.FallData.BaseMinGravity, manager.Data.FallData.BaseMaxGravity, manager.Data.FallData.BaseGravityIncreaseByFrame, manager.Data.FallData.BaseGravityIncreaseDecelerationByFrame);
         }
 
 

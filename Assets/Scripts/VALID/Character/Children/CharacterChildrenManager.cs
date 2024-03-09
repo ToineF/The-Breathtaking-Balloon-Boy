@@ -2,15 +2,12 @@ using BlownAway.Character;
 using BlownAway.Character.Data;
 using UnityEngine;
 
-public class CharacterChildrenManager : MonoBehaviour
+public class CharacterChildrenManager : CharacterSubComponent
 {
-    public CharacterManager Manager { get; set; }
-
-
     [field:SerializeField] public int ChildrenCount {  get; private set; }
     [field:SerializeField] public CharacterChildrenUpgradesData CharacterUpgradesData {get; private set; }
 
-    private void Start()
+    protected override void StartScript(CharacterManager manager)
     {
         UpdateData();
     }

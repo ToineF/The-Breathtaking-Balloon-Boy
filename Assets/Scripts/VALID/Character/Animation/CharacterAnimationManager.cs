@@ -2,9 +2,8 @@ using UnityEngine;
 
 namespace BlownAway.Character.Animations
 {
-    public class CharacterAnimationManager : MonoBehaviour
+    public class CharacterAnimationManager : CharacterSubComponent
     {
-        public CharacterManager Manager { get; set; }
 
         [SerializeField] private bool _isOrientationInverted;
         [SerializeField] private Vector3 _offsetFromRigidbody;

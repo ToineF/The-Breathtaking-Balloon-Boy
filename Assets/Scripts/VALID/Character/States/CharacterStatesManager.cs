@@ -3,10 +3,8 @@ using UnityEngine;
 namespace BlownAway.Character.States
 {
 
-    public class CharacterStatesManager : MonoBehaviour
+    public class CharacterStatesManager : CharacterSubComponent
     {
-        public CharacterManager Manager { get; set; }
-
         // States Bank
         public CharacterIdleState IdleState = new CharacterIdleState();
         public CharacterWalkingState WalkingState = new CharacterWalkingState();
@@ -22,7 +20,7 @@ namespace BlownAway.Character.States
         private CharacterBaseState _currentState;
 
 
-        private void Start()
+        protected override void StartScript(CharacterManager manager)
         {
             _currentState = FallingState;
             _currentState.EnterState(Manager);
