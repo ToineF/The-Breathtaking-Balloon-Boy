@@ -125,7 +125,7 @@ namespace BlownAway.Character.Inputs
         private void SetCameraTypeController(InputAction.CallbackContext context)
         {
             IsMouse = false;
-            CameraMoveVector = context.ReadValue<Vector2>();
+            CameraMoveVector = context.ReadValue<Vector2>() * Time.deltaTime;
         }
 
         private void SetUpPropulsion(InputAction.CallbackContext context)
