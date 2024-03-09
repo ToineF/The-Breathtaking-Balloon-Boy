@@ -29,5 +29,8 @@ namespace BlownAway.Character.Data
         // Camera Data
         [field:SerializeField] public CharacterCameraData CameraData { get; private set; }
 
+        // Power Up Data
+        [field:SerializeField] public CharacterPowerUpData PowerUpData { get; private set; }
+
     }
 }

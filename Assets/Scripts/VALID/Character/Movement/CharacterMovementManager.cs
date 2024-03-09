@@ -535,6 +535,7 @@ namespace BlownAway.Character.Movements
         #region Upgrades
         public void CheckForBalloonBounce(CharacterManager manager)
         {
+            if (!manager.Data.PowerUpData.IsBalloonBounceAvailable) return;
             if (!manager.Inputs.StartedBalloonBounce) return;
 
             Debug.Log("Balloon Bounce");
@@ -542,6 +543,7 @@ namespace BlownAway.Character.Movements
 
         public void CheckForGroundPound(CharacterManager manager)
         {
+            if (!manager.Data.PowerUpData.IsGroundPoundAvailable) return;
             if (!manager.Inputs.StartedGroundPound) return;
 
             manager.States.SwitchState(manager.States.GroundPoundState);
