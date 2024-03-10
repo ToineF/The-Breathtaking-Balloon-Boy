@@ -10,8 +10,8 @@ namespace BlownAway.Character.Movements
 {
     public class CharacterMovementManager : CharacterSubComponent // RANGER CE SCRIPT !!!
     {
-        public Action OnGroundEnter;
-        public Action OnGroundExit;
+        public Action<CharacterManager> OnGroundEnter { get; set; }
+        public Action<CharacterManager> OnGroundExit { get; set; }
 
         [Tooltip("The current global velocity of the character (movements, gravity, forces...)")] public Vector3 CurrentVelocity { get; private set; }
 
@@ -176,17 +176,17 @@ namespace BlownAway.Character.Movements
             {
                 if (IsGrounded) // On Ground Enter
                 {
-                    OnGroundEnter?.Invoke();
+                    OnGroundEnter?.Invoke(manager);
                     manager.States.SwitchState(manager.States.IdleState);
                     manager.CharacterCollider.Rigidbody.transform.SetParent(LastGround.collider.transform);
                 }
                 else // On Ground Leave
                 {
-                    OnGroundExit?.Invoke();
                     if (!isPropulsing)
                     {
-                        manager.States.SwitchState(manager.States.FallingState); // IDLE, WALK & FALL
+                        manager.States.SwitchState(manager.States.PropulsionState); // IDLE, WALK & FALL
                     }
+                    OnGroundExit?.Invoke(manager);
                     manager.CharacterCollider.Rigidbody.transform.SetParent(parent);
                 }
             }
@@ -547,6 +547,18 @@ namespace BlownAway.Character.Movements
             if (!manager.Inputs.StartedGroundPound) return;
 
             manager.States.SwitchState(manager.States.GroundPoundState);
+        }
+
+        public void CheckForGroundPoundStart(CharacterManager manager)
+        {
+            OnGroundEnter -= CheckForGroundPoundStart;
+            AddExternalForce(gameObject, Vector3.up * manager.Data.PowerUpData.GroundPoundForce, manager.Data.PowerUpData.GroundPoundStartLerp);
+        }
+        public void CheckForGroundPoundEnd(CharacterManager manager)
+        {
+            OnGroundExit -= CheckForGroundPoundEnd;
+            AddExternalForce(gameObject, Vector3.zero, manager.Data.PowerUpData.GroundPoundEndLerp);
+            //manager.States.SwitchState(manager.States.PropulsionState);
         }
 
         #endregion
