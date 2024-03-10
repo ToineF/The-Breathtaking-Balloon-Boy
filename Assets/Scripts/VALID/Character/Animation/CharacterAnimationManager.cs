@@ -1,10 +1,16 @@
+using System;
 using UnityEngine;
 
 namespace BlownAway.Character.Animations
 {
     public class CharacterAnimationManager : CharacterSubComponent
     {
+        [Header("References")]
+        [SerializeField] private Animator _characterAnimator;
+        [SerializeField] private string _idleAnimName;
+        [SerializeField] private string _walkAnimName;
 
+        [Header("Parameters")]
         [SerializeField] private bool _isOrientationInverted;
         [SerializeField] private Vector3 _offsetFromRigidbody;
         private Vector3 _lastDirection;
@@ -12,6 +18,7 @@ namespace BlownAway.Character.Animations
         private void Update()
         {
             Manager.CharacterVisual.transform.position = Manager.CharacterCollider.Rigidbody.transform.position + _offsetFromRigidbody;
+            ChangeCharacterAnimation();
         }
 
         private void LateUpdate()
@@ -33,5 +40,13 @@ namespace BlownAway.Character.Animations
             //Manager.CharacterTransform.RotateAround(collider, Vector3.up, Vector3.Angle(Vector3.zero, Vector3.Scale(collider, new Vector3(0,1,0)) - _lastDirection));
 
         }
+
+        private void ChangeCharacterAnimation()
+        {
+            Vector3 moveDirection = Manager.MovementManager.CurrentVelocity;
+            moveDirection.y = 0;
+            _characterAnimator.Play((moveDirection.sqrMagnitude >= 0.1f) ? _walkAnimName : _idleAnimName);
+        }
+
     }
 }
