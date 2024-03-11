@@ -30,6 +30,8 @@ namespace BlownAway.Character.States
 
             manager.MovementManager.CheckForFloatCancel(manager);
 
+            manager.MovementManager.CheckForPropulsionStartOnAir(manager);
+
         }
 
         public override void FixedUpdateState(CharacterManager manager)
