@@ -36,33 +36,35 @@ namespace BlownAway.GPE
         private new void Awake()
         {
             base.Awake();
-            OnEnterTrigger += MakePlayerBounce;
-            OnExitTrigger += StopPlayerBounce;
+            OnEnterTrigger += StartPlayerPush;
+            OnExitTrigger += StopPlayerPush;
         }
 
         private void Start()
         {
-            ParticleSystem.ShapeModule editableShape = _FXWind.shape;
-            ParticleSystem.MainModule main = _FXWind.main;
-            ParticleSystem.EmissionModule emission = _FXWind.emission;
-            ParticleSystem.VelocityOverLifetimeModule velocityOverLifetime = _FXWind.velocityOverLifetime;
+            _FXWind.transform.localScale = Vector3.Scale(transform.localScale, _FXWind.transform.localScale);
 
-            Vector3 scale = transform.localScale;
+        //    ParticleSystem.ShapeModule editableShape = _FXWind.shape;
+        //    ParticleSystem.MainModule main = _FXWind.main;
+        //    ParticleSystem.EmissionModule emission = _FXWind.emission;
+        //    ParticleSystem.VelocityOverLifetimeModule velocityOverLifetime = _FXWind.velocityOverLifetime;
 
-            _FXWind.transform.position = transform.position;
-            _FXWind.transform.localScale = transform.localScale;
-            main.startSizeX = new ParticleSystem.MinMaxCurve(main.startSizeX.constant * scale.x);
-            main.startSizeY = new ParticleSystem.MinMaxCurve(main.startSizeY.constant * scale.y);
-            main.startSizeZ = new ParticleSystem.MinMaxCurve(main.startSizeZ.constant * scale.z);
-            //velocityOverLifetime.y = new ParticleSystem.MinMaxCurve(main.startSize.constantMin * scale, main.startSize.constantMax * scale);
-            main.startRotation = ((_pushVector.y * -90) + (_pushVector.x < 0 ? _pushVector.x * 180 : 0)) * Mathf.Deg2Rad;
-            velocityOverLifetime.x = velocityOverLifetime.x.constant * _pushVector.x;
-            velocityOverLifetime.y = velocityOverLifetime.y.constant * _pushVector.y;
-            velocityOverLifetime.z = velocityOverLifetime.z.constant * _pushVector.z;
-            emission.rateOverTime = _FXWindParticulesCount * scale.magnitude;
+            //    Vector3 scale = transform.localScale;
+
+            //    _FXWind.transform.position = transform.position;
+            //    _FXWind.transform.localScale = transform.localScale;
+            //    main.startSizeX = new ParticleSystem.MinMaxCurve(main.startSizeX.constant * scale.x);
+            //    main.startSizeY = new ParticleSystem.MinMaxCurve(main.startSizeY.constant * scale.y);
+            //    main.startSizeZ = new ParticleSystem.MinMaxCurve(main.startSizeZ.constant * scale.z);
+            //    //velocityOverLifetime.y = new ParticleSystem.MinMaxCurve(main.startSize.constantMin * scale, main.startSize.constantMax * scale);
+            //    main.startRotation = ((_pushVector.y * -90) + (_pushVector.x < 0 ? _pushVector.x * 180 : 0)) * Mathf.Deg2Rad;
+            //    velocityOverLifetime.x = velocityOverLifetime.x.constant * _pushVector.x;
+            //    velocityOverLifetime.y = velocityOverLifetime.y.constant * _pushVector.y;
+            //    velocityOverLifetime.z = velocityOverLifetime.z.constant * _pushVector.z;
+            //    emission.rateOverTime = _FXWindParticulesCount * scale.magnitude;
         }
 
-        private void MakePlayerBounce()
+        private void StartPlayerPush()
         {
             if (!_lastOtherCollider.TryGetComponent(out CharacterCollider collider)) return;
 
@@ -72,7 +74,7 @@ namespace BlownAway.GPE
 
         }
 
-        private void StopPlayerBounce()
+        private void StopPlayerPush()
         {
             if (!_lastOtherCollider.TryGetComponent(out CharacterCollider collider)) return;
 

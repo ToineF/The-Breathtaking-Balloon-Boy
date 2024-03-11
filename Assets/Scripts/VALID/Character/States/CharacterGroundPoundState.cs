@@ -19,6 +19,8 @@ namespace BlownAway.Character.States
 
         public override void ExitState(CharacterManager manager)
         {
+            manager.MovementManager.OnGroundEnter -= manager.MovementManager.CheckForGroundPoundStart;
+            manager.MovementManager.OnGroundExit -= manager.MovementManager.CheckForGroundPoundEnd;
         }
 
         public override void UpdateState(CharacterManager manager)
