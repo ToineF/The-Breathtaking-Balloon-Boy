@@ -43,11 +43,12 @@ namespace BlownAway.GPE
         private void Start()
         {
             _FXWind.transform.localScale = Vector3.Scale(transform.localScale, _FXWind.transform.localScale);
+            //_FXWind.transform.rotation = Quaternion.FromToRotation(Vector3.up, _pushVector);
 
-        //    ParticleSystem.ShapeModule editableShape = _FXWind.shape;
-        //    ParticleSystem.MainModule main = _FXWind.main;
-        //    ParticleSystem.EmissionModule emission = _FXWind.emission;
-        //    ParticleSystem.VelocityOverLifetimeModule velocityOverLifetime = _FXWind.velocityOverLifetime;
+            //    ParticleSystem.ShapeModule editableShape = _FXWind.shape;
+            //ParticleSystem.MainModule main = _FXWind.main;
+            //    ParticleSystem.EmissionModule emission = _FXWind.emission;
+            //    ParticleSystem.VelocityOverLifetimeModule velocityOverLifetime = _FXWind.velocityOverLifetime;
 
             //    Vector3 scale = transform.localScale;
 
@@ -57,7 +58,11 @@ namespace BlownAway.GPE
             //    main.startSizeY = new ParticleSystem.MinMaxCurve(main.startSizeY.constant * scale.y);
             //    main.startSizeZ = new ParticleSystem.MinMaxCurve(main.startSizeZ.constant * scale.z);
             //    //velocityOverLifetime.y = new ParticleSystem.MinMaxCurve(main.startSize.constantMin * scale, main.startSize.constantMax * scale);
-            //    main.startRotation = ((_pushVector.y * -90) + (_pushVector.x < 0 ? _pushVector.x * 180 : 0)) * Mathf.Deg2Rad;
+
+            //main.startRotationX = ((_pushVector.y * -90) + (_pushVector.z < 0 ? _pushVector.z * 180 : 0)) * Mathf.Deg2Rad;
+            //main.startRotationY = (_pushVector.x * 90) * Mathf.Deg2Rad;
+            _FXWind.Play();
+
             //    velocityOverLifetime.x = velocityOverLifetime.x.constant * _pushVector.x;
             //    velocityOverLifetime.y = velocityOverLifetime.y.constant * _pushVector.y;
             //    velocityOverLifetime.z = velocityOverLifetime.z.constant * _pushVector.z;
