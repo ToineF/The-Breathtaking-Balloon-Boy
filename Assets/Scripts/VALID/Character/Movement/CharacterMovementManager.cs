@@ -551,12 +551,10 @@ namespace BlownAway.Character.Movements
 
         public void CheckForGroundPoundStart(CharacterManager manager)
         {
-            OnGroundEnter -= CheckForGroundPoundStart;
             AddExternalForce(gameObject, Vector3.up * manager.Data.PowerUpData.GroundPoundForce, manager.Data.PowerUpData.GroundPoundStartLerp);
         }
         public void CheckForGroundPoundEnd(CharacterManager manager)
         {
-            OnGroundExit -= CheckForGroundPoundEnd;
             AddExternalForce(gameObject, Vector3.zero, manager.Data.PowerUpData.GroundPoundEndLerp);
             //manager.States.SwitchState(manager.States.PropulsionState);
         }
