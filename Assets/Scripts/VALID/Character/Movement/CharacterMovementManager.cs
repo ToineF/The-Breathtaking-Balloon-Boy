@@ -184,7 +184,7 @@ namespace BlownAway.Character.Movements
                 {
                     if (!isPropulsing)
                     {
-                        manager.States.SwitchState(manager.States.PropulsionState); // IDLE, WALK & FALL
+                        manager.States.SwitchState(manager.States.FallingState); // IDLE, WALK & FALL
                     }
                     OnGroundExit?.Invoke(manager);
                     manager.CharacterCollider.Rigidbody.transform.SetParent(parent);
@@ -393,7 +393,7 @@ namespace BlownAway.Character.Movements
         }
         public void CheckForDeriveEnd(CharacterManager manager)
         {
-            if (manager.Inputs.PropulsionType == 0 || DeriveTimer < 0)
+            if (DeriveTimer < 0)
             {
                 manager.States.SwitchState(manager.States.FallingState);
             }
