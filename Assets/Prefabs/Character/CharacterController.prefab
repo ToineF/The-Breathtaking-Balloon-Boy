@@ -193,6 +193,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2702a2a0c1c391743a140cbd4eedf14c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _characterAnimator: {fileID: 5872588943404050925}
+  _idleAnimName: Idle
+  _walkAnimName: Run
   _isOrientationInverted: 1
   _offsetFromRigidbody: {x: 0.09, y: -0.01, z: 0.01}
 --- !u!114 &8720038069001201682
@@ -235,7 +238,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b5ba15a7c1f2194bb509e3ac00671d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <ChildrenCount>k__BackingField: 1
+  <ChildrenCount>k__BackingField: 2
   <CharacterUpgradesData>k__BackingField: {fileID: 11400000, guid: 06516eecec928054c94daa4052bd1607,
     type: 2}
 --- !u!1 &2174038822854039470
@@ -384,7 +387,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5934499241986033235}
   m_LocalRotation: {x: 0.70702714, y: -0, z: -0, w: 0.7071864}
-  m_LocalPosition: {x: 0, y: 0.388, z: 0}
+  m_LocalPosition: {x: 0, y: 0.076, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -1513,6 +1516,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1d81c56e706b28040b8a372a588b5896, type: 3}
+--- !u!95 &5872588943404050925 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 2066926937171561734, guid: 1d81c56e706b28040b8a372a588b5896,
+    type: 3}
+  m_PrefabInstance: {fileID: 5607143845871494379}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8827161317595273927 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3985953871735684652, guid: 1d81c56e706b28040b8a372a588b5896,
