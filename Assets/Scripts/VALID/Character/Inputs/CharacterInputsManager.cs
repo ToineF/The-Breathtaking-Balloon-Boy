@@ -27,6 +27,7 @@ namespace BlownAway.Character.Inputs
 
         // Propulsion
         public PropulsionDirection PropulsionType { get; private set; }
+        public bool IsJacketInflated { get => PropulsionType != 0; }
 
         // Falling
         public bool StartedFalling { get; private set; }

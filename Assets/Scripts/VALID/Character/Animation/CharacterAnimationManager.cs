@@ -7,18 +7,23 @@ namespace BlownAway.Character.Animations
     {
         [Header("References")]
         [SerializeField] private Animator _characterAnimator;
+        [SerializeField] private SkinnedMeshRenderer _skinnedMeshRenderer;
         [SerializeField] private string _idleAnimName;
         [SerializeField] private string _walkAnimName;
 
         [Header("Parameters")]
         [SerializeField] private bool _isOrientationInverted;
         [SerializeField] private Vector3 _offsetFromRigidbody;
+        [SerializeField, Range(0,1)] private float _jacketMorpherLerp;
+
         private Vector3 _lastDirection;
+        private float _jacketMorpherWeight;
 
         private void Update()
         {
             Manager.CharacterVisual.transform.position = Manager.CharacterCollider.Rigidbody.transform.position + _offsetFromRigidbody;
             ChangeCharacterAnimation();
+            UpdateCharacterMorpher();
         }
 
         private void LateUpdate()
@@ -46,6 +51,14 @@ namespace BlownAway.Character.Animations
             Vector3 moveDirection = Manager.MovementManager.CurrentVelocity;
             moveDirection.y = 0;
             _characterAnimator.Play((moveDirection.sqrMagnitude >= 0.1f) ? _walkAnimName : _idleAnimName);
+        }
+
+        private void UpdateCharacterMorpher()
+        {
+            if (_skinnedMeshRenderer.sharedMesh.blendShapeCount < 1) return;
+            float weight = Manager.Inputs.IsJacketInflated ? 100 : 0;
+            _jacketMorpherWeight = Mathf.Lerp(_jacketMorpherWeight, weight, _jacketMorpherLerp);
+            _skinnedMeshRenderer.SetBlendShapeWeight(0, _jacketMorpherWeight);
         }
 
     }
