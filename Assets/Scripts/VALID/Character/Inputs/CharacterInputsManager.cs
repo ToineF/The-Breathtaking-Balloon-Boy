@@ -23,6 +23,7 @@ namespace BlownAway.Character.Inputs
         // Camera
         public bool IsMouse { get; private set; }
         public Vector2 CameraMoveVector { get; private set; }
+        public bool CameraCenter { get; private set; }
 
         // Propulsion
         public PropulsionDirection PropulsionType { get; private set; }
@@ -59,6 +60,8 @@ namespace BlownAway.Character.Inputs
             _inputs.Player.CameraMoveController.performed += SetCameraTypeController;
             _inputs.Player.CameraMoveController.canceled += SetCameraTypeController;
 
+            _inputs.Player.CameraCenter.performed += ResetCameraCenter;
+
             _inputs.Player.UpPropulsion.performed += SetUpPropulsion;
             _inputs.Player.DownPropulsion.performed += SetDownPropulsion;
             _inputs.Player.LateralPropulsion.performed += SetLateralPropulsion;
@@ -83,6 +86,8 @@ namespace BlownAway.Character.Inputs
             _inputs.Player.CameraMoveMouse.canceled -= SetCameraTypeMouse;
             _inputs.Player.CameraMoveController.performed -= SetCameraTypeController;
             _inputs.Player.CameraMoveController.canceled -= SetCameraTypeController;
+
+            _inputs.Player.CameraCenter.performed -= ResetCameraCenter;
 
             _inputs.Player.UpPropulsion.performed -= SetUpPropulsion;
             _inputs.Player.DownPropulsion.performed -= SetDownPropulsion;
@@ -128,6 +133,11 @@ namespace BlownAway.Character.Inputs
             CameraMoveVector = context.ReadValue<Vector2>() * Time.deltaTime;
         }
 
+        private void ResetCameraCenter(InputAction.CallbackContext context)
+        {
+            CameraCenter = true;
+        }
+
         private void SetUpPropulsion(InputAction.CallbackContext context)
         {
             PropulsionType |= PropulsionDirection.Up;
@@ -150,12 +160,12 @@ namespace BlownAway.Character.Inputs
 
         private void SetLateralPropulsion(InputAction.CallbackContext context)
         {
-            PropulsionType |= PropulsionDirection.Lateral;
+            //PropulsionType |= PropulsionDirection.Lateral;
         }
 
         private void UnsetLateralPropulsion(InputAction.CallbackContext context)
         {
-            PropulsionType &= ~PropulsionDirection.Lateral;
+            //PropulsionType &= ~PropulsionDirection.Lateral;
         }
 
         private void LateUpdate()
@@ -163,6 +173,7 @@ namespace BlownAway.Character.Inputs
             StartedFalling = false;
             StartedBalloonBounce = false;
             StartedGroundPound = false;
+            CameraCenter = false;
         }
 
         private void StartFalling(InputAction.CallbackContext context)

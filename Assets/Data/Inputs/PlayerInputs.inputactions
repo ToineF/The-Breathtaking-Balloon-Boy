@@ -69,6 +69,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "CameraCenter",
+                    "type": "Button",
+                    "id": "24bac7a0-8f2e-43ba-9cf0-12593f2e09dc",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "BalloonBounce",
                     "type": "Button",
                     "id": "6d25fcae-770f-4a1e-95ed-e98eb8969e6f",
@@ -613,6 +622,28 @@
                     "processors": "",
                     "groups": "Controller",
                     "action": "GroundPound",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "acd9ad24-71d1-44d2-8f39-2753ab8a19bf",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Controller",
+                    "action": "CameraCenter",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f9f67223-933c-4f98-82e6-1d9ce8b8c3dd",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "CameraCenter",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

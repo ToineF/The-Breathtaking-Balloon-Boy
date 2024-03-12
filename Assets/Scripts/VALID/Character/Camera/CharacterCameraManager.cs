@@ -1,6 +1,8 @@
 using UnityEngine;
 using AntoineFoucault.Utilities;
 using BlownAway.Character;
+using System.Collections;
+using DG.Tweening;
 
 namespace BlownAway.Camera
 {
@@ -11,6 +13,7 @@ namespace BlownAway.Camera
         [field:SerializeField] public UnityEngine.Camera Camera { get; private set; }
         [SerializeField] GameObject FocusPoint;
         [SerializeField] GameObject CameraCenter;
+        [SerializeField] float _CameraCenterLerpTime;
 
         private Vector3 _cameraMoveVector;
 
@@ -44,6 +47,8 @@ namespace BlownAway.Camera
             ScrollCamera();
 
             SetCameraPosition();
+
+            CheckForCameraCenter(Manager);
         }
 
         private void SetCameraPosition()
@@ -126,6 +131,15 @@ namespace BlownAway.Camera
             float ySign = (manager.Inputs.IsMouse ? Manager.Data.CameraData.IsMouseYInverted : Manager.Data.CameraData.IsControllerYInverted) ? -1 : 1;
             _cameraMoveVector = manager.Inputs.CameraMoveVector;
             _cameraMoveVector = new Vector3(_cameraMoveVector.x * xSign, _cameraMoveVector.y * ySign);
+            if (_cameraMoveVector != Vector3.zero) CameraCenter.transform.DOKill();
+        }
+
+        private void CheckForCameraCenter(CharacterManager manager)
+        {
+            if (manager.Inputs.CameraCenter)
+            {
+                CameraCenter.transform.DORotate(new Vector3(0,CameraCenter.transform.eulerAngles.y,0), _CameraCenterLerpTime);
+            }
         }
     }
 }

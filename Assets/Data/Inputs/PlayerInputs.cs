@@ -91,6 +91,15 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""CameraCenter"",
+                    ""type"": ""Button"",
+                    ""id"": ""24bac7a0-8f2e-43ba-9cf0-12593f2e09dc"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""BalloonBounce"",
                     ""type"": ""Button"",
                     ""id"": ""6d25fcae-770f-4a1e-95ed-e98eb8969e6f"",
@@ -635,6 +644,28 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Controller"",
                     ""action"": ""GroundPound"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""acd9ad24-71d1-44d2-8f39-2753ab8a19bf"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""CameraCenter"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f9f67223-933c-4f98-82e6-1d9ce8b8c3dd"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""CameraCenter"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1786,6 +1817,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         m_Player_CancelPropulsion = m_Player.FindAction("CancelPropulsion", throwIfNotFound: true);
         m_Player_CameraMoveMouse = m_Player.FindAction("CameraMoveMouse", throwIfNotFound: true);
         m_Player_CameraMoveController = m_Player.FindAction("CameraMoveController", throwIfNotFound: true);
+        m_Player_CameraCenter = m_Player.FindAction("CameraCenter", throwIfNotFound: true);
         m_Player_BalloonBounce = m_Player.FindAction("BalloonBounce", throwIfNotFound: true);
         m_Player_GroundPound = m_Player.FindAction("GroundPound", throwIfNotFound: true);
         // OLD_Player_Archive_2
@@ -1876,6 +1908,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_CancelPropulsion;
     private readonly InputAction m_Player_CameraMoveMouse;
     private readonly InputAction m_Player_CameraMoveController;
+    private readonly InputAction m_Player_CameraCenter;
     private readonly InputAction m_Player_BalloonBounce;
     private readonly InputAction m_Player_GroundPound;
     public struct PlayerActions
@@ -1889,6 +1922,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         public InputAction @CancelPropulsion => m_Wrapper.m_Player_CancelPropulsion;
         public InputAction @CameraMoveMouse => m_Wrapper.m_Player_CameraMoveMouse;
         public InputAction @CameraMoveController => m_Wrapper.m_Player_CameraMoveController;
+        public InputAction @CameraCenter => m_Wrapper.m_Player_CameraCenter;
         public InputAction @BalloonBounce => m_Wrapper.m_Player_BalloonBounce;
         public InputAction @GroundPound => m_Wrapper.m_Player_GroundPound;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
@@ -1921,6 +1955,9 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
             @CameraMoveController.started += instance.OnCameraMoveController;
             @CameraMoveController.performed += instance.OnCameraMoveController;
             @CameraMoveController.canceled += instance.OnCameraMoveController;
+            @CameraCenter.started += instance.OnCameraCenter;
+            @CameraCenter.performed += instance.OnCameraCenter;
+            @CameraCenter.canceled += instance.OnCameraCenter;
             @BalloonBounce.started += instance.OnBalloonBounce;
             @BalloonBounce.performed += instance.OnBalloonBounce;
             @BalloonBounce.canceled += instance.OnBalloonBounce;
@@ -1952,6 +1989,9 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
             @CameraMoveController.started -= instance.OnCameraMoveController;
             @CameraMoveController.performed -= instance.OnCameraMoveController;
             @CameraMoveController.canceled -= instance.OnCameraMoveController;
+            @CameraCenter.started -= instance.OnCameraCenter;
+            @CameraCenter.performed -= instance.OnCameraCenter;
+            @CameraCenter.canceled -= instance.OnCameraCenter;
             @BalloonBounce.started -= instance.OnBalloonBounce;
             @BalloonBounce.performed -= instance.OnBalloonBounce;
             @BalloonBounce.canceled -= instance.OnBalloonBounce;
@@ -2206,6 +2246,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         void OnCancelPropulsion(InputAction.CallbackContext context);
         void OnCameraMoveMouse(InputAction.CallbackContext context);
         void OnCameraMoveController(InputAction.CallbackContext context);
+        void OnCameraCenter(InputAction.CallbackContext context);
         void OnBalloonBounce(InputAction.CallbackContext context);
         void OnGroundPound(InputAction.CallbackContext context);
     }
