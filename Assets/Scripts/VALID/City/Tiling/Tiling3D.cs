@@ -17,7 +17,7 @@ public class Tiling3D : MonoBehaviour
 
     public void CreateBuilding()
     {
-        ClearBuilding();
+        ClearBuildingChildren();
         BuildBuilding();
     }
 
@@ -49,8 +49,6 @@ public class Tiling3D : MonoBehaviour
                 }
             }
         }
-
-
     }
 
     public void ClearBuildingChildren()
@@ -127,6 +125,4 @@ public class Tiling3D : MonoBehaviour
 
         return new Vector3(targetX, targetY, targetZ);
     }
-
-
 }
