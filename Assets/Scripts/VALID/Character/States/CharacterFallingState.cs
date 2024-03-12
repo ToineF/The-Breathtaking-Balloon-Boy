@@ -30,6 +30,8 @@ namespace BlownAway.Character.States
             manager.MovementManager.CheckForGroundPound(manager);
 
             manager.MovementManager.CheckForPropulsionStartOnAir(manager);
+
+            manager.MovementManager.CheckForJacketInflated(manager);
         }
 
 

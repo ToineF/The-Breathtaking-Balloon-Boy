@@ -27,7 +27,7 @@ namespace BlownAway.Character.Inputs
 
         // Propulsion
         public PropulsionDirection PropulsionType { get; private set; }
-        public bool IsJacketInflated { get => PropulsionType != 0; }
+        public bool IsJacketInflated { get; private set; }
 
         // Falling
         public bool StartedFalling { get; private set; }
@@ -70,6 +70,9 @@ namespace BlownAway.Character.Inputs
             _inputs.Player.DownPropulsion.canceled += UnsetDownPropulsion;
             _inputs.Player.LateralPropulsion.canceled += UnsetLateralPropulsion;
 
+            _inputs.Player.InflateJacket.performed += InflateJacket;
+            _inputs.Player.InflateJacket.canceled += DeflateJacket;
+
             _inputs.Player.CancelPropulsion.performed += StartFalling;
 
             _inputs.Player.BalloonBounce.performed += StartBalloonBounce;
@@ -96,6 +99,9 @@ namespace BlownAway.Character.Inputs
             _inputs.Player.UpPropulsion.canceled -= UnsetUpPropulsion;
             _inputs.Player.DownPropulsion.canceled -= UnsetDownPropulsion;
             _inputs.Player.LateralPropulsion.canceled -= UnsetLateralPropulsion;
+
+            _inputs.Player.InflateJacket.performed -= InflateJacket;
+            _inputs.Player.InflateJacket.canceled -= DeflateJacket;
 
             _inputs.Player.CancelPropulsion.performed -= StartFalling;
 
@@ -167,6 +173,16 @@ namespace BlownAway.Character.Inputs
         private void UnsetLateralPropulsion(InputAction.CallbackContext context)
         {
             //PropulsionType &= ~PropulsionDirection.Lateral;
+        }
+
+        private void InflateJacket(InputAction.CallbackContext context)
+        {
+            IsJacketInflated = true;
+        }
+
+        private void DeflateJacket(InputAction.CallbackContext context)
+        {
+            IsJacketInflated = false;
         }
 
         private void LateUpdate()

@@ -116,6 +116,15 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""InflateJacket"",
+                    ""type"": ""Button"",
+                    ""id"": ""1da7834a-9b42-42c9-a0c7-a844a9d88e5a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -666,6 +675,28 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
                     ""action"": ""CameraCenter"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""18ac0bb3-0321-42f5-a279-36d50b795068"",
+                    ""path"": ""<Keyboard>/shift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""InflateJacket"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3ab09a36-c59d-43ba-9616-fca0c2c764ff"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""InflateJacket"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1820,6 +1851,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         m_Player_CameraCenter = m_Player.FindAction("CameraCenter", throwIfNotFound: true);
         m_Player_BalloonBounce = m_Player.FindAction("BalloonBounce", throwIfNotFound: true);
         m_Player_GroundPound = m_Player.FindAction("GroundPound", throwIfNotFound: true);
+        m_Player_InflateJacket = m_Player.FindAction("InflateJacket", throwIfNotFound: true);
         // OLD_Player_Archive_2
         m_OLD_Player_Archive_2 = asset.FindActionMap("OLD_Player_Archive_2", throwIfNotFound: true);
         m_OLD_Player_Archive_2_Move = m_OLD_Player_Archive_2.FindAction("Move", throwIfNotFound: true);
@@ -1911,6 +1943,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_CameraCenter;
     private readonly InputAction m_Player_BalloonBounce;
     private readonly InputAction m_Player_GroundPound;
+    private readonly InputAction m_Player_InflateJacket;
     public struct PlayerActions
     {
         private @PlayerInputs m_Wrapper;
@@ -1925,6 +1958,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         public InputAction @CameraCenter => m_Wrapper.m_Player_CameraCenter;
         public InputAction @BalloonBounce => m_Wrapper.m_Player_BalloonBounce;
         public InputAction @GroundPound => m_Wrapper.m_Player_GroundPound;
+        public InputAction @InflateJacket => m_Wrapper.m_Player_InflateJacket;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1964,6 +1998,9 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
             @GroundPound.started += instance.OnGroundPound;
             @GroundPound.performed += instance.OnGroundPound;
             @GroundPound.canceled += instance.OnGroundPound;
+            @InflateJacket.started += instance.OnInflateJacket;
+            @InflateJacket.performed += instance.OnInflateJacket;
+            @InflateJacket.canceled += instance.OnInflateJacket;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -1998,6 +2035,9 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
             @GroundPound.started -= instance.OnGroundPound;
             @GroundPound.performed -= instance.OnGroundPound;
             @GroundPound.canceled -= instance.OnGroundPound;
+            @InflateJacket.started -= instance.OnInflateJacket;
+            @InflateJacket.performed -= instance.OnInflateJacket;
+            @InflateJacket.canceled -= instance.OnInflateJacket;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -2249,6 +2289,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         void OnCameraCenter(InputAction.CallbackContext context);
         void OnBalloonBounce(InputAction.CallbackContext context);
         void OnGroundPound(InputAction.CallbackContext context);
+        void OnInflateJacket(InputAction.CallbackContext context);
     }
     public interface IOLD_Player_Archive_2Actions
     {

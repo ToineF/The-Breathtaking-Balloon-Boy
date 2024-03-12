@@ -408,6 +408,22 @@ namespace BlownAway.Character.Movements
                 manager.States.SwitchState(manager.States.DeriveState);
             }
         }
+
+        public void CheckForJacketInflated(CharacterManager manager)
+        {
+            if (manager.Inputs.IsJacketInflated)
+            {
+                manager.States.SwitchState(manager.States.FloatingState);
+            }
+        }
+
+        public void CheckForJacketDeflated(CharacterManager manager)
+        {
+            if (!manager.Inputs.IsJacketInflated)
+            {
+                manager.States.SwitchState(manager.States.FallingState);
+            }
+        }
         #endregion
 
         #region Air
