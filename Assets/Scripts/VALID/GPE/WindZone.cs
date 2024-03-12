@@ -10,8 +10,8 @@ namespace BlownAway.GPE
         [SerializeField][Tooltip("The Magnitude at which the Wind pushes the Player")] private float _pushMagnitude;
         [SerializeField][Tooltip("The normalized direction of the Wind")] private Vector3 _pushVector;
         //[SerializeField][Tooltip("Is the Wind hot or cold?")] private bool _isHot;
-        //[SerializeField][Tooltip("The percentage of air the player gains or loses with every contact (postive only)")] private float _airPercentageAddedOnContact;
-        //[SerializeField][Tooltip("The interval of time in seconds at which the wind collides with the player")] private float _timeBetweenAdditions;
+        [SerializeField][Tooltip("The percentage of air the player gains or loses with every contact (postive only)")] private float _airPercentageAddedOnContact;
+        [SerializeField][Tooltip("The interval of time in seconds at which the wind collides with the player")] private float _timeBetweenAdditions;
         [SerializeField][Tooltip("The acceleration of the force towards the magnitude given to the player")][Range(0, 1)] private float _startLerpValue;
         [SerializeField][Tooltip("The deceleration of the force from the magnitude given to the player")][Range(0, 1)] private float _stopLerpValue;
         //[SerializeField][Tooltip("The original scale used for reference to scale the VFX")] private Vector3 _targetScale;
@@ -32,6 +32,7 @@ namespace BlownAway.GPE
         //[SerializeField] private float _audioEndFadeTime;
 
         private float _timer;
+        private CharacterCollider _playerCollider;
 
         private new void Awake()
         {
@@ -76,7 +77,7 @@ namespace BlownAway.GPE
             Vector3 force = _pushVector.normalized * _pushMagnitude;
 
             collider.Manager.MovementManager.AddExternalForce(gameObject, force, _startLerpValue);
-
+            _playerCollider = collider;
         }
 
         private void StopPlayerPush()
@@ -84,7 +85,18 @@ namespace BlownAway.GPE
             if (!_lastOtherCollider.TryGetComponent(out CharacterCollider collider)) return;
 
             collider.Manager.MovementManager.AddExternalForce(gameObject, Vector3.zero, _stopLerpValue);
+            _playerCollider = null;
+        }
 
+        private void Update()
+        {
+            if (_playerCollider == null) return;
+            _timer -= Time.deltaTime;
+            if (_timer < 0)
+            {
+                _timer = _timeBetweenAdditions;
+                _playerCollider.Manager.AirManager.AddAir(_airPercentageAddedOnContact);
+            }
         }
 
         private new void OnDrawGizmos()

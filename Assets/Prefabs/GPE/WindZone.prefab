@@ -81,6 +81,8 @@ MonoBehaviour:
   _gizmoSelectedWireColor: {r: 1, g: 1, b: 1, a: 1}
   _pushMagnitude: 1
   _pushVector: {x: 0, y: 1, z: 0}
+  _airPercentageAddedOnContact: 0.2
+  _timeBetweenAdditions: 0.01
   _startLerpValue: 0.09
   _stopLerpValue: 0.852
   _FXWind: {fileID: 2369878177537827489}
@@ -116,7 +118,7 @@ Transform:
   m_Children:
   - {fileID: 2847074495389571642}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &6604681689728394174
 PrefabInstance:
