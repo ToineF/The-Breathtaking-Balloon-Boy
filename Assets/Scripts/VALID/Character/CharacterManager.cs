@@ -59,6 +59,7 @@ namespace BlownAway.Character
         private void Awake()
         {
             DebugMode.InitScript(this);
+            Inputs.InitScript(this);
             ChildrenManager.InitScript(this);
             CameraManager.InitScript(this);
             MovementManager.InitScript(this);

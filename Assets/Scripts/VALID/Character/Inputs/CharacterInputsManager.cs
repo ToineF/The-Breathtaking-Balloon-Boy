@@ -14,7 +14,7 @@ namespace BlownAway.Character.Inputs
         Lateral = 4,
     }
 
-    public class CharacterInputsManager : MonoBehaviour
+    public class CharacterInputsManager : CharacterSubComponent
     {
         // Movements
         [Tooltip("The input direction for the movement")] public Vector3 MoveInputDirection { get; private set; }
@@ -71,7 +71,7 @@ namespace BlownAway.Character.Inputs
             _inputs.Player.DownPropulsion.canceled += UnsetDownPropulsion;
             _inputs.Player.LateralPropulsion.canceled += UnsetLateralPropulsion;
 
-            _inputs.Player.InflateJacket.performed += InflateJacket;
+            _inputs.Player.InflateJacket.performed += ToggleJacketInflation;
 
             _inputs.Player.CancelPropulsion.performed += StartFalling;
 
@@ -101,7 +101,7 @@ namespace BlownAway.Character.Inputs
             _inputs.Player.DownPropulsion.canceled -= UnsetDownPropulsion;
             _inputs.Player.LateralPropulsion.canceled -= UnsetLateralPropulsion;
 
-            _inputs.Player.InflateJacket.performed -= InflateJacket;
+            _inputs.Player.InflateJacket.performed -= ToggleJacketInflation;
 
             _inputs.Player.CancelPropulsion.performed -= StartFalling;
 
@@ -177,8 +177,10 @@ namespace BlownAway.Character.Inputs
             //PropulsionType &= ~PropulsionDirection.Lateral;
         }
 
-        private void InflateJacket(InputAction.CallbackContext context)
+        private void ToggleJacketInflation(InputAction.CallbackContext context)
         {
+            if (PropulsionType != 0 && !Manager.AirManager.AirIsEmpty) return;
+
             IsJacketInflated = !IsJacketInflated;
         }
 
