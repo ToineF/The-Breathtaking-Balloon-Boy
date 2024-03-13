@@ -10,7 +10,7 @@ namespace BlownAway.Character.States
             Debug.Log("Ground Pound");
             // Movements
             manager.MovementManager.LerpGravityTo(manager, manager.Data.FallData.GroundPoundGravity, manager.Data.FallData.GroundPoundMinGravity, manager.Data.FallData.GroundPoundMaxGravity, manager.Data.FallData.GroundPoundGravityIncreaseByFrame, manager.Data.FallData.GroundPoundGravityIncreaseDecelerationByFrame, manager.Data.FallData.GroundPoundGravityTime, manager.Data.FallData.GroundPoundGravityAccel);
-            manager.MovementManager.LerpDeplacementSpeed(manager, manager.Data.LateralMovementData.BaseGroundPoundFallLateralSpeed, manager.Data.LateralMovementData.GroundPoundFallTime, manager.Data.LateralMovementData.GroundPoundFallCurve);
+            manager.MovementManager.LerpDeplacementSpeed(manager, manager.Data.LateralMovementData.BaseGroundPoundDeplacementLateralSpeed, manager.Data.LateralMovementData.GroundPoundDeplacementTime, manager.Data.LateralMovementData.GroundPoundDeplacementCurve);
 
             // Ground Pound
             manager.MovementManager.OnGroundEnter += manager.MovementManager.CheckForGroundPoundStart;

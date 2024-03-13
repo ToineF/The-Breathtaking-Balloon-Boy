@@ -36,9 +36,9 @@ namespace BlownAway.Character.Movements.Data
         [field: SerializeField, Range(0, 1), Tooltip("The time it takes to the character to transition from its current direction to the target direction while propulsing")] public float PropulsionDirectionTurnSpeed { get; private set; }
 
         [field: Header("Ground Pound")]
-        [field: SerializeField, Tooltip("The maximum deplacement speed the character aims to moves at while ground pounding")] public float BaseGroundPoundFallLateralSpeed { get; private set; }
-        [field: SerializeField, Tooltip("The time it takes to the character to reach the maximum speed (BaseDeriveLateralSpeed) after pressing the inputs")] public float GroundPoundFallTime { get; private set; }
-        [field: SerializeField, Tooltip("The lerp used by character to reach the maximum speed (BaseDeriveLateralSpeed) after pressing the inputs")] public AnimationCurve GroundPoundFallCurve { get; private set; }
+        [field: SerializeField, Tooltip("The maximum deplacement speed the character aims to moves at while ground pounding")] public float BaseGroundPoundDeplacementLateralSpeed { get; private set; }
+        [field: SerializeField, Tooltip("The time it takes to the character to reach the maximum speed (BaseGroundPoundFallLateralSpeed) after pressing the inputs")] public float GroundPoundDeplacementTime { get; private set; }
+        [field: SerializeField, Tooltip("The lerp used by character to reach the maximum speed (BaseGroundPoundFallLateralSpeed) after pressing the inputs")] public AnimationCurve GroundPoundDeplacementCurve { get; private set; }
         [field: SerializeField, Range(0, 1), Tooltip("The time it takes to the character to transition from its current direction to the target direction while ground pounding")] public float GroundPoundDirectionTurnSpeed { get; private set; }
 
     }

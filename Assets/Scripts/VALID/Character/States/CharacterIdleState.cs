@@ -37,6 +37,8 @@ namespace BlownAway.Character.States
 
             manager.MovementManager.CheckIfGrounded(manager);
 
+            manager.MovementManager.CheckForDashStart(manager);
+
         }
 
         public override void FixedUpdateState(CharacterManager manager)

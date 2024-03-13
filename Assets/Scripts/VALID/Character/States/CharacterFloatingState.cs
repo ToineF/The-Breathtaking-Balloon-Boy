@@ -32,6 +32,7 @@ namespace BlownAway.Character.States
 
             manager.MovementManager.CheckForJacketDeflated(manager);
 
+            manager.MovementManager.CheckForDashStart(manager);
         }
 
         public override void FixedUpdateState(CharacterManager manager)

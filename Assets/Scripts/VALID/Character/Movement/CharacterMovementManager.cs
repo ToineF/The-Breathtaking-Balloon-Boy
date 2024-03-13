@@ -42,6 +42,13 @@ namespace BlownAway.Character.Movements
         private Coroutine _currentPropulsionTakeOffSubCoroutine2;
         public float CurrentPropulsionIncreaseByFrame { get; private set; }
 
+        // Dash
+        private float _dashTimer;
+        private float _currentDashSpeed = 1;
+        private Vector3 _currentDashDirection;
+        private float _currentPropulsionIncreaseByFrame;
+
+
 
         // Ground Detection
         [Tooltip("The raycast hits stocked while looking for ground")] public RaycastHit[] GroundHitResults { get; private set; }
@@ -218,7 +225,7 @@ namespace BlownAway.Character.Movements
             //_characterController.Move(allForces * Time.deltaTime);
 
             //if (!(OnSlope() && IsGrounded))
-                manager.MovementManager.CurrentVelocity += gravity;
+            manager.MovementManager.CurrentVelocity += gravity;
             //CharacterManager.Instance.Force = Vector3.Lerp(CharacterManager.Instance.Force, CharacterManager.Instance.CurrentGravity, _lerpValue);
         }
 
@@ -398,6 +405,44 @@ namespace BlownAway.Character.Movements
                 manager.States.SwitchState(manager.States.FallingState);
             }
         }
+
+        public void CheckForDashStart(CharacterManager manager)
+        {
+            if (!manager.Inputs.StartedDash) return;
+
+            manager.States.SwitchState(manager.States.DashState);
+        }
+
+        public void StartDash(CharacterManager manager)
+        {
+            _dashTimer = manager.Data.PowerUpData.DashDuration;
+            Vector3 lateralMoveInput = manager.Inputs.LastMoveInputDirection != Vector3.zero ? manager.Inputs.LastMoveInputDirection : Vector3.forward;
+            Vector3 lateralMoveDirection = (Vector3.Scale(UnityEngine.Camera.main.transform.forward, new Vector3(1, 0, 1)).normalized * lateralMoveInput.z + Vector3.Scale(UnityEngine.Camera.main.transform.right, new Vector3(1, 0, 1)) * lateralMoveInput.x).normalized;
+            _currentDashDirection = lateralMoveDirection;
+            _currentPropulsionIncreaseByFrame = manager.Data.PowerUpData.DashIncreaseByFrame;
+        }
+
+        public void UpdateDashTimer(CharacterManager manager)
+        {
+            _dashTimer -= Time.deltaTime;
+            if (_dashTimer <= 0)
+            {
+                manager.States.SwitchState(manager.States.PropulsionState);
+            }
+        }
+
+        public void UpdateDashMovement(CharacterManager manager)
+        {
+            // Increase speed over time
+            _currentPropulsionIncreaseByFrame = Math.Max(_currentPropulsionIncreaseByFrame - manager.Data.PowerUpData.DashIncreaseDeceleration, 0);
+            _currentDashSpeed = Math.Min(_currentDashSpeed + (_currentPropulsionIncreaseByFrame / 100), manager.Data.PowerUpData.MaxDashSpeed);
+
+            float horizontalSpeed = _currentDashSpeed * manager.Data.PowerUpData.DashSpeed;
+
+            Vector3 dashMovement = new Vector3(_currentDashDirection.x * horizontalSpeed, 0, _currentDashDirection.z * horizontalSpeed);
+            CurrentVelocity += dashMovement;
+        }
+
         #endregion
 
         #region Air
