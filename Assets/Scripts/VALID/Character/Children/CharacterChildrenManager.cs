@@ -21,6 +21,7 @@ public class CharacterChildrenManager : CharacterSubComponent
     public void SetChildren(int number)
     {
         ChildrenCount = number;
+        UpdateData();
     }
 
     private void UpdateData()
