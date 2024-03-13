@@ -129,15 +129,17 @@ namespace BlownAway.Character.Movements
                 //if (Vector3.Angle(_currentDeplacementDirection, deplacementDirection) > 170f) 
                 //    deplacementDirection = Quaternion.AngleAxis(-70, Vector3.up) * deplacementDirection;
 
-                Debug.LogWarning(deplacementDirection);
+                //Debug.LogWarning(deplacementDirection);
             }
 
             deplacementDirection = GetSlopeMoveDirection(deplacementDirection);
+            Debug.LogWarning(deplacementDirection);
+
 
             _currentDeplacementDirection = Vector3.Lerp(_currentDeplacementDirection, deplacementDirection, walkTurnSpeed);
 
             //if (IsGrounded && OnSlope())
-            //     _currentDeplacementDirection = GetSlopeMoveDirection(); // HERE SEE SLOPES
+            //     _currentDeplacementDirection = deplacementDirection; // HERE SEE SLOPES
 
             //Debug.LogWarning(_currentDeplacementDirection * _currentDeplacementSpeed);
 
@@ -215,7 +217,8 @@ namespace BlownAway.Character.Movements
 
             //_characterController.Move(allForces * Time.deltaTime);
 
-            manager.MovementManager.CurrentVelocity += gravity;
+            //if (!(OnSlope() && IsGrounded))
+                manager.MovementManager.CurrentVelocity += gravity;
             //CharacterManager.Instance.Force = Vector3.Lerp(CharacterManager.Instance.Force, CharacterManager.Instance.CurrentGravity, _lerpValue);
         }
 
