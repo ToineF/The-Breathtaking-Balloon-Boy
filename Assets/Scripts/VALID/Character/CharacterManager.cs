@@ -51,10 +51,14 @@ namespace BlownAway.Character
         // UI Transition
         [field: SerializeField, Tooltip("The reference to the class that contains the logic of the transitions")] public Transition Transition { get; private set; }
 
+        // Debug Mode
+        [field: SerializeField, Tooltip("The reference to the class that contains the logic of the transitions")] public DebugMode.DebugMode DebugMode { get; private set; }
+
 
 
         private void Awake()
         {
+            DebugMode.InitScript(this);
             ChildrenManager.InitScript(this);
             CameraManager.InitScript(this);
             MovementManager.InitScript(this);

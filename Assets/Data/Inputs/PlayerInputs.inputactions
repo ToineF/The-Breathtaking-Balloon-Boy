@@ -15,36 +15,9 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "LateralPropulsion",
-                    "type": "Button",
-                    "id": "48ecd013-eb6c-4759-95bd-516dc1063446",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "UpPropulsion",
                     "type": "Button",
                     "id": "0063e1a8-fb5d-4e95-9c7b-bb441f9e01d8",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "DownPropulsion",
-                    "type": "Button",
-                    "id": "486bd42b-2f6d-44f9-bfc3-216b0f1bf235",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "CancelPropulsion",
-                    "type": "Button",
-                    "id": "24ce3d26-3738-4dff-9e1d-3a0885b8bf93",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -78,6 +51,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "Dash",
+                    "type": "Button",
+                    "id": "8377f6ce-44f1-44a5-8a52-604c66a674dc",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "BalloonBounce",
                     "type": "Button",
                     "id": "6d25fcae-770f-4a1e-95ed-e98eb8969e6f",
@@ -99,6 +81,33 @@
                     "name": "InflateJacket",
                     "type": "Button",
                     "id": "1da7834a-9b42-42c9-a0c7-a844a9d88e5a",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "LateralPropulsion",
+                    "type": "Button",
+                    "id": "48ecd013-eb6c-4759-95bd-516dc1063446",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "DownPropulsion",
+                    "type": "Button",
+                    "id": "486bd42b-2f6d-44f9-bfc3-216b0f1bf235",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "CancelPropulsion",
+                    "type": "Button",
+                    "id": "24ce3d26-3738-4dff-9e1d-3a0885b8bf93",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -372,127 +381,6 @@
                 },
                 {
                     "name": "",
-                    "id": "42a7380b-db7d-4891-8def-f36c3af3af20",
-                    "path": "<Keyboard>/shift",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard",
-                    "action": "LateralPropulsion",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "4a98bb6e-9825-48f4-a3b4-ab39b35374d2",
-                    "path": "<Gamepad>/buttonEast",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Controller",
-                    "action": "LateralPropulsion",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "6a8fb0fb-93fb-42c7-a19a-f48ea3a9c39a",
-                    "path": "<Keyboard>/ctrl",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard",
-                    "action": "DownPropulsion",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "f4fcee45-0284-4c54-9fc7-4046a976f6f5",
-                    "path": "<Gamepad>/leftTrigger",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Controller",
-                    "action": "DownPropulsion",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "a8ec252c-d71f-4cdf-a597-e3c20f4e6ed3",
-                    "path": "<Gamepad>/leftShoulder",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Controller",
-                    "action": "DownPropulsion",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "92390191-8cf0-48e5-a392-15959903ed26",
-                    "path": "<HID::BDA NSW wired controller>/button5",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Controller",
-                    "action": "DownPropulsion",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "9d669a69-bec5-43ed-90a3-ffd57bc7a673",
-                    "path": "<HID::BDA NSW wired controller>/button7",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Controller",
-                    "action": "DownPropulsion",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "85f95b03-4a7e-4085-83c8-2c2dde40ff32",
-                    "path": "<Gamepad>/buttonNorth",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Controller",
-                    "action": "DownPropulsion",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "27ef7b94-f7cd-449b-acbc-69633672f5eb",
-                    "path": "<Keyboard>/q",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard",
-                    "action": "CancelPropulsion",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "9804a7c8-c5e2-4b71-a984-a7e35b3da52c",
-                    "path": "<Gamepad>/buttonEast",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Controller",
-                    "action": "CancelPropulsion",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "1b50a8e9-3fa6-4933-822b-1caba6c30bd2",
-                    "path": "<HID::BDA NSW wired controller>/button3",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Controller",
-                    "action": "CancelPropulsion",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "13b5be47-4e64-4a55-8e12-a6cb9a375ab9",
                     "path": "<Keyboard>/space",
                     "interactions": "",
@@ -631,6 +519,149 @@
                     "processors": "",
                     "groups": "",
                     "action": "InflateJacket",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "27ef7b94-f7cd-449b-acbc-69633672f5eb",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "CancelPropulsion",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9804a7c8-c5e2-4b71-a984-a7e35b3da52c",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Controller",
+                    "action": "CancelPropulsion",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1b50a8e9-3fa6-4933-822b-1caba6c30bd2",
+                    "path": "<HID::BDA NSW wired controller>/button3",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Controller",
+                    "action": "CancelPropulsion",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6a8fb0fb-93fb-42c7-a19a-f48ea3a9c39a",
+                    "path": "<Keyboard>/ctrl",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "DownPropulsion",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f4fcee45-0284-4c54-9fc7-4046a976f6f5",
+                    "path": "<Gamepad>/leftTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Controller",
+                    "action": "DownPropulsion",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a8ec252c-d71f-4cdf-a597-e3c20f4e6ed3",
+                    "path": "<Gamepad>/leftShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Controller",
+                    "action": "DownPropulsion",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "92390191-8cf0-48e5-a392-15959903ed26",
+                    "path": "<HID::BDA NSW wired controller>/button5",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Controller",
+                    "action": "DownPropulsion",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9d669a69-bec5-43ed-90a3-ffd57bc7a673",
+                    "path": "<HID::BDA NSW wired controller>/button7",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Controller",
+                    "action": "DownPropulsion",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "85f95b03-4a7e-4085-83c8-2c2dde40ff32",
+                    "path": "<Gamepad>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Controller",
+                    "action": "DownPropulsion",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "42a7380b-db7d-4891-8def-f36c3af3af20",
+                    "path": "<Keyboard>/shift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "LateralPropulsion",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4a98bb6e-9825-48f4-a3b4-ab39b35374d2",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Controller",
+                    "action": "LateralPropulsion",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "255d9f0d-7799-4f80-9559-ac93da2a4d28",
+                    "path": "<Keyboard>/shift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "Dash",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "cbad0eba-536b-4d47-916c-8ef4881b0449",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Controller",
+                    "action": "Dash",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

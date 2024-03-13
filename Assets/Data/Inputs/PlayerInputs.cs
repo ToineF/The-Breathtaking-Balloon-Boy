@@ -37,36 +37,9 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""LateralPropulsion"",
-                    ""type"": ""Button"",
-                    ""id"": ""48ecd013-eb6c-4759-95bd-516dc1063446"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""UpPropulsion"",
                     ""type"": ""Button"",
                     ""id"": ""0063e1a8-fb5d-4e95-9c7b-bb441f9e01d8"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""DownPropulsion"",
-                    ""type"": ""Button"",
-                    ""id"": ""486bd42b-2f6d-44f9-bfc3-216b0f1bf235"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""CancelPropulsion"",
-                    ""type"": ""Button"",
-                    ""id"": ""24ce3d26-3738-4dff-9e1d-3a0885b8bf93"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -100,6 +73,15 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""Dash"",
+                    ""type"": ""Button"",
+                    ""id"": ""8377f6ce-44f1-44a5-8a52-604c66a674dc"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""BalloonBounce"",
                     ""type"": ""Button"",
                     ""id"": ""6d25fcae-770f-4a1e-95ed-e98eb8969e6f"",
@@ -121,6 +103,33 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""name"": ""InflateJacket"",
                     ""type"": ""Button"",
                     ""id"": ""1da7834a-9b42-42c9-a0c7-a844a9d88e5a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""LateralPropulsion"",
+                    ""type"": ""Button"",
+                    ""id"": ""48ecd013-eb6c-4759-95bd-516dc1063446"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""DownPropulsion"",
+                    ""type"": ""Button"",
+                    ""id"": ""486bd42b-2f6d-44f9-bfc3-216b0f1bf235"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""CancelPropulsion"",
+                    ""type"": ""Button"",
+                    ""id"": ""24ce3d26-3738-4dff-9e1d-3a0885b8bf93"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -394,127 +403,6 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""42a7380b-db7d-4891-8def-f36c3af3af20"",
-                    ""path"": ""<Keyboard>/shift"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard"",
-                    ""action"": ""LateralPropulsion"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""4a98bb6e-9825-48f4-a3b4-ab39b35374d2"",
-                    ""path"": ""<Gamepad>/buttonEast"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Controller"",
-                    ""action"": ""LateralPropulsion"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""6a8fb0fb-93fb-42c7-a19a-f48ea3a9c39a"",
-                    ""path"": ""<Keyboard>/ctrl"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard"",
-                    ""action"": ""DownPropulsion"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""f4fcee45-0284-4c54-9fc7-4046a976f6f5"",
-                    ""path"": ""<Gamepad>/leftTrigger"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Controller"",
-                    ""action"": ""DownPropulsion"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""a8ec252c-d71f-4cdf-a597-e3c20f4e6ed3"",
-                    ""path"": ""<Gamepad>/leftShoulder"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Controller"",
-                    ""action"": ""DownPropulsion"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""92390191-8cf0-48e5-a392-15959903ed26"",
-                    ""path"": ""<HID::BDA NSW wired controller>/button5"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Controller"",
-                    ""action"": ""DownPropulsion"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""9d669a69-bec5-43ed-90a3-ffd57bc7a673"",
-                    ""path"": ""<HID::BDA NSW wired controller>/button7"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Controller"",
-                    ""action"": ""DownPropulsion"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""85f95b03-4a7e-4085-83c8-2c2dde40ff32"",
-                    ""path"": ""<Gamepad>/buttonNorth"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Controller"",
-                    ""action"": ""DownPropulsion"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""27ef7b94-f7cd-449b-acbc-69633672f5eb"",
-                    ""path"": ""<Keyboard>/q"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard"",
-                    ""action"": ""CancelPropulsion"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""9804a7c8-c5e2-4b71-a984-a7e35b3da52c"",
-                    ""path"": ""<Gamepad>/buttonEast"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Controller"",
-                    ""action"": ""CancelPropulsion"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""1b50a8e9-3fa6-4933-822b-1caba6c30bd2"",
-                    ""path"": ""<HID::BDA NSW wired controller>/button3"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Controller"",
-                    ""action"": ""CancelPropulsion"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""13b5be47-4e64-4a55-8e12-a6cb9a375ab9"",
                     ""path"": ""<Keyboard>/space"",
                     ""interactions"": """",
@@ -653,6 +541,149 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""InflateJacket"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""27ef7b94-f7cd-449b-acbc-69633672f5eb"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""CancelPropulsion"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9804a7c8-c5e2-4b71-a984-a7e35b3da52c"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""CancelPropulsion"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1b50a8e9-3fa6-4933-822b-1caba6c30bd2"",
+                    ""path"": ""<HID::BDA NSW wired controller>/button3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""CancelPropulsion"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6a8fb0fb-93fb-42c7-a19a-f48ea3a9c39a"",
+                    ""path"": ""<Keyboard>/ctrl"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""DownPropulsion"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f4fcee45-0284-4c54-9fc7-4046a976f6f5"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""DownPropulsion"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a8ec252c-d71f-4cdf-a597-e3c20f4e6ed3"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""DownPropulsion"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""92390191-8cf0-48e5-a392-15959903ed26"",
+                    ""path"": ""<HID::BDA NSW wired controller>/button5"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""DownPropulsion"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9d669a69-bec5-43ed-90a3-ffd57bc7a673"",
+                    ""path"": ""<HID::BDA NSW wired controller>/button7"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""DownPropulsion"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""85f95b03-4a7e-4085-83c8-2c2dde40ff32"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""DownPropulsion"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""42a7380b-db7d-4891-8def-f36c3af3af20"",
+                    ""path"": ""<Keyboard>/shift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""LateralPropulsion"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4a98bb6e-9825-48f4-a3b4-ab39b35374d2"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""LateralPropulsion"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""255d9f0d-7799-4f80-9559-ac93da2a4d28"",
+                    ""path"": ""<Keyboard>/shift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Dash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cbad0eba-536b-4d47-916c-8ef4881b0449"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""Dash"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1798,16 +1829,17 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         // Player
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
-        m_Player_LateralPropulsion = m_Player.FindAction("LateralPropulsion", throwIfNotFound: true);
         m_Player_UpPropulsion = m_Player.FindAction("UpPropulsion", throwIfNotFound: true);
-        m_Player_DownPropulsion = m_Player.FindAction("DownPropulsion", throwIfNotFound: true);
-        m_Player_CancelPropulsion = m_Player.FindAction("CancelPropulsion", throwIfNotFound: true);
         m_Player_CameraMoveMouse = m_Player.FindAction("CameraMoveMouse", throwIfNotFound: true);
         m_Player_CameraMoveController = m_Player.FindAction("CameraMoveController", throwIfNotFound: true);
         m_Player_CameraCenter = m_Player.FindAction("CameraCenter", throwIfNotFound: true);
+        m_Player_Dash = m_Player.FindAction("Dash", throwIfNotFound: true);
         m_Player_BalloonBounce = m_Player.FindAction("BalloonBounce", throwIfNotFound: true);
         m_Player_GroundPound = m_Player.FindAction("GroundPound", throwIfNotFound: true);
         m_Player_InflateJacket = m_Player.FindAction("InflateJacket", throwIfNotFound: true);
+        m_Player_LateralPropulsion = m_Player.FindAction("LateralPropulsion", throwIfNotFound: true);
+        m_Player_DownPropulsion = m_Player.FindAction("DownPropulsion", throwIfNotFound: true);
+        m_Player_CancelPropulsion = m_Player.FindAction("CancelPropulsion", throwIfNotFound: true);
         // OLD_Player_Archive_2
         m_OLD_Player_Archive_2 = asset.FindActionMap("OLD_Player_Archive_2", throwIfNotFound: true);
         m_OLD_Player_Archive_2_Move = m_OLD_Player_Archive_2.FindAction("Move", throwIfNotFound: true);
@@ -1890,31 +1922,33 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Player;
     private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
     private readonly InputAction m_Player_Move;
-    private readonly InputAction m_Player_LateralPropulsion;
     private readonly InputAction m_Player_UpPropulsion;
-    private readonly InputAction m_Player_DownPropulsion;
-    private readonly InputAction m_Player_CancelPropulsion;
     private readonly InputAction m_Player_CameraMoveMouse;
     private readonly InputAction m_Player_CameraMoveController;
     private readonly InputAction m_Player_CameraCenter;
+    private readonly InputAction m_Player_Dash;
     private readonly InputAction m_Player_BalloonBounce;
     private readonly InputAction m_Player_GroundPound;
     private readonly InputAction m_Player_InflateJacket;
+    private readonly InputAction m_Player_LateralPropulsion;
+    private readonly InputAction m_Player_DownPropulsion;
+    private readonly InputAction m_Player_CancelPropulsion;
     public struct PlayerActions
     {
         private @PlayerInputs m_Wrapper;
         public PlayerActions(@PlayerInputs wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Player_Move;
-        public InputAction @LateralPropulsion => m_Wrapper.m_Player_LateralPropulsion;
         public InputAction @UpPropulsion => m_Wrapper.m_Player_UpPropulsion;
-        public InputAction @DownPropulsion => m_Wrapper.m_Player_DownPropulsion;
-        public InputAction @CancelPropulsion => m_Wrapper.m_Player_CancelPropulsion;
         public InputAction @CameraMoveMouse => m_Wrapper.m_Player_CameraMoveMouse;
         public InputAction @CameraMoveController => m_Wrapper.m_Player_CameraMoveController;
         public InputAction @CameraCenter => m_Wrapper.m_Player_CameraCenter;
+        public InputAction @Dash => m_Wrapper.m_Player_Dash;
         public InputAction @BalloonBounce => m_Wrapper.m_Player_BalloonBounce;
         public InputAction @GroundPound => m_Wrapper.m_Player_GroundPound;
         public InputAction @InflateJacket => m_Wrapper.m_Player_InflateJacket;
+        public InputAction @LateralPropulsion => m_Wrapper.m_Player_LateralPropulsion;
+        public InputAction @DownPropulsion => m_Wrapper.m_Player_DownPropulsion;
+        public InputAction @CancelPropulsion => m_Wrapper.m_Player_CancelPropulsion;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1927,18 +1961,9 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
             @Move.started += instance.OnMove;
             @Move.performed += instance.OnMove;
             @Move.canceled += instance.OnMove;
-            @LateralPropulsion.started += instance.OnLateralPropulsion;
-            @LateralPropulsion.performed += instance.OnLateralPropulsion;
-            @LateralPropulsion.canceled += instance.OnLateralPropulsion;
             @UpPropulsion.started += instance.OnUpPropulsion;
             @UpPropulsion.performed += instance.OnUpPropulsion;
             @UpPropulsion.canceled += instance.OnUpPropulsion;
-            @DownPropulsion.started += instance.OnDownPropulsion;
-            @DownPropulsion.performed += instance.OnDownPropulsion;
-            @DownPropulsion.canceled += instance.OnDownPropulsion;
-            @CancelPropulsion.started += instance.OnCancelPropulsion;
-            @CancelPropulsion.performed += instance.OnCancelPropulsion;
-            @CancelPropulsion.canceled += instance.OnCancelPropulsion;
             @CameraMoveMouse.started += instance.OnCameraMoveMouse;
             @CameraMoveMouse.performed += instance.OnCameraMoveMouse;
             @CameraMoveMouse.canceled += instance.OnCameraMoveMouse;
@@ -1948,6 +1973,9 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
             @CameraCenter.started += instance.OnCameraCenter;
             @CameraCenter.performed += instance.OnCameraCenter;
             @CameraCenter.canceled += instance.OnCameraCenter;
+            @Dash.started += instance.OnDash;
+            @Dash.performed += instance.OnDash;
+            @Dash.canceled += instance.OnDash;
             @BalloonBounce.started += instance.OnBalloonBounce;
             @BalloonBounce.performed += instance.OnBalloonBounce;
             @BalloonBounce.canceled += instance.OnBalloonBounce;
@@ -1957,6 +1985,15 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
             @InflateJacket.started += instance.OnInflateJacket;
             @InflateJacket.performed += instance.OnInflateJacket;
             @InflateJacket.canceled += instance.OnInflateJacket;
+            @LateralPropulsion.started += instance.OnLateralPropulsion;
+            @LateralPropulsion.performed += instance.OnLateralPropulsion;
+            @LateralPropulsion.canceled += instance.OnLateralPropulsion;
+            @DownPropulsion.started += instance.OnDownPropulsion;
+            @DownPropulsion.performed += instance.OnDownPropulsion;
+            @DownPropulsion.canceled += instance.OnDownPropulsion;
+            @CancelPropulsion.started += instance.OnCancelPropulsion;
+            @CancelPropulsion.performed += instance.OnCancelPropulsion;
+            @CancelPropulsion.canceled += instance.OnCancelPropulsion;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -1964,18 +2001,9 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
             @Move.started -= instance.OnMove;
             @Move.performed -= instance.OnMove;
             @Move.canceled -= instance.OnMove;
-            @LateralPropulsion.started -= instance.OnLateralPropulsion;
-            @LateralPropulsion.performed -= instance.OnLateralPropulsion;
-            @LateralPropulsion.canceled -= instance.OnLateralPropulsion;
             @UpPropulsion.started -= instance.OnUpPropulsion;
             @UpPropulsion.performed -= instance.OnUpPropulsion;
             @UpPropulsion.canceled -= instance.OnUpPropulsion;
-            @DownPropulsion.started -= instance.OnDownPropulsion;
-            @DownPropulsion.performed -= instance.OnDownPropulsion;
-            @DownPropulsion.canceled -= instance.OnDownPropulsion;
-            @CancelPropulsion.started -= instance.OnCancelPropulsion;
-            @CancelPropulsion.performed -= instance.OnCancelPropulsion;
-            @CancelPropulsion.canceled -= instance.OnCancelPropulsion;
             @CameraMoveMouse.started -= instance.OnCameraMoveMouse;
             @CameraMoveMouse.performed -= instance.OnCameraMoveMouse;
             @CameraMoveMouse.canceled -= instance.OnCameraMoveMouse;
@@ -1985,6 +2013,9 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
             @CameraCenter.started -= instance.OnCameraCenter;
             @CameraCenter.performed -= instance.OnCameraCenter;
             @CameraCenter.canceled -= instance.OnCameraCenter;
+            @Dash.started -= instance.OnDash;
+            @Dash.performed -= instance.OnDash;
+            @Dash.canceled -= instance.OnDash;
             @BalloonBounce.started -= instance.OnBalloonBounce;
             @BalloonBounce.performed -= instance.OnBalloonBounce;
             @BalloonBounce.canceled -= instance.OnBalloonBounce;
@@ -1994,6 +2025,15 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
             @InflateJacket.started -= instance.OnInflateJacket;
             @InflateJacket.performed -= instance.OnInflateJacket;
             @InflateJacket.canceled -= instance.OnInflateJacket;
+            @LateralPropulsion.started -= instance.OnLateralPropulsion;
+            @LateralPropulsion.performed -= instance.OnLateralPropulsion;
+            @LateralPropulsion.canceled -= instance.OnLateralPropulsion;
+            @DownPropulsion.started -= instance.OnDownPropulsion;
+            @DownPropulsion.performed -= instance.OnDownPropulsion;
+            @DownPropulsion.canceled -= instance.OnDownPropulsion;
+            @CancelPropulsion.started -= instance.OnCancelPropulsion;
+            @CancelPropulsion.performed -= instance.OnCancelPropulsion;
+            @CancelPropulsion.canceled -= instance.OnCancelPropulsion;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -2236,16 +2276,17 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
     public interface IPlayerActions
     {
         void OnMove(InputAction.CallbackContext context);
-        void OnLateralPropulsion(InputAction.CallbackContext context);
         void OnUpPropulsion(InputAction.CallbackContext context);
-        void OnDownPropulsion(InputAction.CallbackContext context);
-        void OnCancelPropulsion(InputAction.CallbackContext context);
         void OnCameraMoveMouse(InputAction.CallbackContext context);
         void OnCameraMoveController(InputAction.CallbackContext context);
         void OnCameraCenter(InputAction.CallbackContext context);
+        void OnDash(InputAction.CallbackContext context);
         void OnBalloonBounce(InputAction.CallbackContext context);
         void OnGroundPound(InputAction.CallbackContext context);
         void OnInflateJacket(InputAction.CallbackContext context);
+        void OnLateralPropulsion(InputAction.CallbackContext context);
+        void OnDownPropulsion(InputAction.CallbackContext context);
+        void OnCancelPropulsion(InputAction.CallbackContext context);
     }
     public interface IOLD_Player_Archive_2Actions
     {

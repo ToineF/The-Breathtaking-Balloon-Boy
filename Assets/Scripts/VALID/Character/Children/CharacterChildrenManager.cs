@@ -18,6 +18,11 @@ public class CharacterChildrenManager : CharacterSubComponent
         UpdateData();
     }
 
+    public void SetChildren(int number)
+    {
+        ChildrenCount = number;
+    }
+
     private void UpdateData()
     {
         if (CharacterUpgradesData.CharacterDatas.Length <= 0) return;

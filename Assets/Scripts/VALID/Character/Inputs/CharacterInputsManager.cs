@@ -33,6 +33,7 @@ namespace BlownAway.Character.Inputs
         public bool StartedFalling { get; private set; }
 
         // Upgrades
+        public bool StartedDash { get; private set; }
         public bool StartedBalloonBounce { get; private set; }
         public bool StartedGroundPound { get; private set; }
 
@@ -74,6 +75,7 @@ namespace BlownAway.Character.Inputs
 
             _inputs.Player.CancelPropulsion.performed += StartFalling;
 
+            _inputs.Player.Dash.performed += StartDash;
             _inputs.Player.BalloonBounce.performed += StartBalloonBounce;
             _inputs.Player.GroundPound.performed += StartGroundPound;
         }
@@ -103,6 +105,7 @@ namespace BlownAway.Character.Inputs
 
             _inputs.Player.CancelPropulsion.performed -= StartFalling;
 
+            _inputs.Player.Dash.performed -= StartDash;
             _inputs.Player.BalloonBounce.performed -= StartBalloonBounce;
             _inputs.Player.GroundPound.performed -= StartGroundPound;
         }
@@ -182,6 +185,7 @@ namespace BlownAway.Character.Inputs
         private void LateUpdate()
         {
             StartedFalling = false;
+            StartedDash = false;
             StartedBalloonBounce = false;
             StartedGroundPound = false;
             CameraCenter = false;
@@ -200,6 +204,11 @@ namespace BlownAway.Character.Inputs
         private void StartGroundPound(InputAction.CallbackContext context)
         {
             StartedGroundPound = true;
+        }
+
+        private void StartDash(InputAction.CallbackContext context)
+        {
+            StartedDash = true;
         }
     }
 }

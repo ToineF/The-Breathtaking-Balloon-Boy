@@ -1,3 +1,4 @@
+using BlownAway.Character;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -5,7 +6,7 @@ using UnityEngine.SceneManagement;
 namespace BlownAway.DebugMode
 {
 
-    public class DebugMode : MonoBehaviour
+    public class DebugMode : CharacterSubComponent
     {
         private bool _canvasHidden = false;
         private List<Canvas> _canvasList = new List<Canvas>();
@@ -46,6 +47,18 @@ namespace BlownAway.DebugMode
                 {
                     c.gameObject.SetActive(_canvasHidden);
                 }
+            }
+            if (Input.GetKeyDown(KeyCode.F5)) // Child Level 0
+            {
+                Manager.ChildrenManager.SetChildren(0);
+            }
+            if (Input.GetKeyDown(KeyCode.F6)) // Child Level 1
+            {
+                Manager.ChildrenManager.SetChildren(1);
+            }
+            if (Input.GetKeyDown(KeyCode.F7)) // Child Level 2
+            {
+                Manager.ChildrenManager.SetChildren(2);
             }
         }
 
