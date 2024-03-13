@@ -194,10 +194,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _characterAnimator: {fileID: 5872588943404050925}
+  _skinnedMeshRenderer: {fileID: 1773426019814778948}
   _idleAnimName: Idle
   _walkAnimName: Run
   _isOrientationInverted: 1
   _offsetFromRigidbody: {x: 0.09, y: -0.01, z: 0.01}
+  _jacketMorpherLerp: 0.068
 --- !u!114 &8720038069001201682
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -213,6 +215,7 @@ MonoBehaviour:
   <Camera>k__BackingField: {fileID: 1012714471462903522}
   FocusPoint: {fileID: 9111970441125982811}
   CameraCenter: {fileID: 9049657606848679487}
+  _CameraCenterLerpTime: 0.3
 --- !u!114 &2711653856997542685
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1516,6 +1519,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1d81c56e706b28040b8a372a588b5896, type: 3}
+--- !u!137 &1773426019814778948 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 6146544942065814703, guid: 1d81c56e706b28040b8a372a588b5896,
+    type: 3}
+  m_PrefabInstance: {fileID: 5607143845871494379}
+  m_PrefabAsset: {fileID: 0}
 --- !u!95 &5872588943404050925 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 2066926937171561734, guid: 1d81c56e706b28040b8a372a588b5896,
