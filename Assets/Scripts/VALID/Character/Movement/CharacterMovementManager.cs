@@ -444,7 +444,8 @@ namespace BlownAway.Character.Movements
         {
             float timerPercentage = 1 - (_dashTimer / manager.Data.PowerUpData.DashDuration);
 
-            float horizontalSpeed = Mathf.Lerp(manager.Data.PowerUpData.DashSpeed, manager.Data.PowerUpData.DashEndSpeed, timerPercentage);
+            float interpolation = manager.Data.PowerUpData.DashInterpolationCurve.Evaluate(timerPercentage);
+            float horizontalSpeed = Mathf.Lerp(manager.Data.PowerUpData.DashStartSpeed, manager.Data.PowerUpData.DashEndSpeed, interpolation);
 
             Vector3 dashMovement = new Vector3(_currentDashDirection.x * horizontalSpeed, 0, _currentDashDirection.z * horizontalSpeed);
             CurrentVelocity += dashMovement;
