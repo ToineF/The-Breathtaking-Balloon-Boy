@@ -52,7 +52,9 @@ namespace BlownAway.GPE
             float angle = Vector3.Angle(collider.Manager.CharacterVisual.forward, _collider.bounds.center - collider.Manager.CharacterCollider.transform.position);
             bool isSideRebounceDirection = angle < _sideAngleThresold;
 
-            Vector3 upDirection = Vector3.up + collider.Manager.CameraManager.Camera.transform.forward;
+            Vector3 cameraForward = collider.Manager.CameraManager.Camera.transform.forward;
+            cameraForward.y = 0;
+            Vector3 upDirection = Vector3.up + cameraForward.normalized;
             Vector3 leftRightDirection = new Vector3(Mathf.Round(normalizedDirection.x), 0, 0); //isSideRebounceDirection ? new Vector3(Mathf.Round(normalizedDirection.x), 0, 0) : new Vector3(Mathf.Round(normalizedDirection.x), 0, 0) + collider.Manager.CameraManager.Camera.transform.forward;
             Vector3 forwardBackwardDirection = new Vector3(0, 0, Mathf.Round(normalizedDirection.z)); //isSideRebounceDirection ? new Vector3(0, 0, Mathf.Round(normalizedDirection.z)) : new Vector3(0, 0, Mathf.Round(normalizedDirection.z)) + collider.Manager.CameraManager.Camera.transform.forward;
 
