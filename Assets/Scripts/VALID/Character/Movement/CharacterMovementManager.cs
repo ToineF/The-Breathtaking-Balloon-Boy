@@ -42,8 +42,6 @@ namespace BlownAway.Character.Movements
         private Coroutine _currentPropulsionTakeOffSubCoroutine2;
         public float CurrentPropulsionIncreaseByFrame { get; private set; }
 
-        // Derive
-        public float DeriveTimer { get; private set; }
 
         // Ground Detection
         [Tooltip("The raycast hits stocked while looking for ground")] public RaycastHit[] GroundHitResults { get; private set; }
@@ -382,33 +380,6 @@ namespace BlownAway.Character.Movements
             PropulsionTimer -= Time.deltaTime;
         }
 
-        public void StartDeriveTimer(CharacterManager manager)
-        {
-            DeriveTimer = manager.Data.PropulsionData.DeriveTime;
-        }
-
-        public void UpdateDeriveTimer(CharacterManager manager)
-        {
-            DeriveTimer -= Time.deltaTime;
-        }
-        public void CheckForDeriveEnd(CharacterManager manager)
-        {
-            if (DeriveTimer < 0)
-            {
-                manager.States.SwitchState(manager.States.FallingState);
-            }
-        }
-
-        public void CheckForDeriveStart(CharacterManager manager)
-        {
-            if (!manager.AirManager.AirIsEmpty) return;
-
-            if (manager.Inputs.PropulsionType != 0 && DeriveTimer >= 0)
-            {
-                manager.States.SwitchState(manager.States.DeriveState);
-            }
-        }
-
         public void CheckForJacketInflated(CharacterManager manager)
         {
             if (manager.Inputs.IsJacketInflated)
@@ -431,7 +402,7 @@ namespace BlownAway.Character.Movements
         {
             if (!manager.AirManager.AirIsEmpty) return;
 
-            manager.States.SwitchState(manager.States.DeriveState);
+            manager.States.SwitchState(manager.States.FloatingState);
         }
         #endregion
 

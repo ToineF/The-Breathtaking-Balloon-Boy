@@ -138,7 +138,7 @@ namespace BlownAway.Camera
         {
             if (manager.Inputs.CameraCenter)
             {
-                CameraCenter.transform.DORotate(new Vector3(0,CameraCenter.transform.eulerAngles.y,0), _CameraCenterLerpTime);
+                CameraCenter.transform.DORotate(new Vector3(0,manager.CharacterVisual.transform.eulerAngles.y, 0), _CameraCenterLerpTime);
             }
         }
     }

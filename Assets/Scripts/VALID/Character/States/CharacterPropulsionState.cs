@@ -19,8 +19,6 @@ namespace BlownAway.Character.States
         public override void ExitState(CharacterManager manager)
         {
             manager.MovementManager.LerpPropulsionSpeed(manager, 0, manager.Data.PropulsionData.BasePropulsionDecelTime, manager.Data.PropulsionData.BasePropulsionDecelCurve);
-
-            manager.MovementManager.StartDeriveTimer(manager);
         }
 
         public override void UpdateState(CharacterManager manager)
@@ -40,9 +38,6 @@ namespace BlownAway.Character.States
             manager.MovementManager.CheckForBalloonBounce(manager);
 
             manager.MovementManager.CheckForGroundPound(manager);
-
-            manager.MovementManager.CheckForFloatCancel(manager);
-
 
         }
 

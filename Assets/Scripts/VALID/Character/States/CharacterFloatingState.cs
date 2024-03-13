@@ -32,11 +32,6 @@ namespace BlownAway.Character.States
 
             manager.MovementManager.CheckForJacketDeflated(manager);
 
-            manager.MovementManager.CheckForFloatCancel(manager);
-
-            manager.MovementManager.FallIfAirEmpty(manager);
-
-
         }
 
         public override void FixedUpdateState(CharacterManager manager)
