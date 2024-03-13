@@ -42,28 +42,28 @@ MonoBehaviour:
     m_RotationOrder: 4
   <BaseGravityIncreaseByFrame>k__BackingField: 0.5
   <BaseGravityIncreaseDecelerationByFrame>k__BackingField: 0.00005
-  <FloatingGravity>k__BackingField: 9
+  <FloatingGravity>k__BackingField: 8
   <FloatingMinGravity>k__BackingField: 0
   <FloatingMaxGravity>k__BackingField: 5000
-  <FloatingGravityTime>k__BackingField: 0.01
+  <FloatingGravityTime>k__BackingField: 50
   <FloatingGravityAccel>k__BackingField:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 34
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
       weightedMode: 0
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
       time: 1
       value: 1
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 34
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
       weightedMode: 0
       inWeight: 0
       outWeight: 0
@@ -102,6 +102,18 @@ MonoBehaviour:
     m_RotationOrder: 4
   <PropulsionGravityIncreaseByFrame>k__BackingField: 0
   <PropulsionGravityIncreaseDecelerationByFrame>k__BackingField: 0
+  <DashGravity>k__BackingField: 0
+  <DashMinGravity>k__BackingField: 0
+  <DashMaxGravity>k__BackingField: 0
+  <DashGravityTime>k__BackingField: 0
+  <DashGravityAccel>k__BackingField:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  <DashGravityIncreaseByFrame>k__BackingField: 0
+  <DashGravityIncreaseDecelerationByFrame>k__BackingField: 0
   <GroundPoundGravity>k__BackingField: 50
   <GroundPoundMinGravity>k__BackingField: 0
   <GroundPoundMaxGravity>k__BackingField: 5000
