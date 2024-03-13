@@ -44,9 +44,8 @@ namespace BlownAway.Character.Movements
 
         // Dash
         private float _dashTimer;
-        private float _currentDashSpeed = 1;
         private Vector3 _currentDashDirection;
-        private float _currentPropulsionIncreaseByFrame;
+        private float _currentDashes;
 
 
 
@@ -72,6 +71,9 @@ namespace BlownAway.Character.Movements
             GroundHitResults = new RaycastHit[2];
             JumpBufferHitResults = new RaycastHit[2];
             SetGravityTo(manager, manager.Data.FallData.BaseGravity, manager.Data.FallData.BaseMinGravity, manager.Data.FallData.BaseMaxGravity, manager.Data.FallData.BaseGravityIncreaseByFrame, manager.Data.FallData.BaseGravityIncreaseDecelerationByFrame);
+
+            // On Ground Enter Subscriptions
+            OnGroundEnter += RefreshDashes;
         }
 
 
@@ -406,20 +408,26 @@ namespace BlownAway.Character.Movements
             }
         }
 
-        public void CheckForDashStart(CharacterManager manager)
+        public void CheckForDashStart(CharacterManager manager, bool refreshDashes = false)
         {
             if (!manager.Inputs.StartedDash) return;
+            if (refreshDashes) RefreshDashes(manager);
+            if (_currentDashes < 1) return;
 
             manager.States.SwitchState(manager.States.DashState);
         }
 
         public void StartDash(CharacterManager manager)
         {
+            _currentDashes--;
+
             _dashTimer = manager.Data.PowerUpData.DashDuration;
+
             Vector3 lateralMoveInput = manager.Inputs.LastMoveInputDirection != Vector3.zero ? manager.Inputs.LastMoveInputDirection : Vector3.forward;
             Vector3 lateralMoveDirection = (Vector3.Scale(UnityEngine.Camera.main.transform.forward, new Vector3(1, 0, 1)).normalized * lateralMoveInput.z + Vector3.Scale(UnityEngine.Camera.main.transform.right, new Vector3(1, 0, 1)) * lateralMoveInput.x).normalized;
             _currentDashDirection = lateralMoveDirection;
-            _currentPropulsionIncreaseByFrame = manager.Data.PowerUpData.DashIncreaseByFrame;
+
+            if (manager.Data.PowerUpData.DashEmptiesAir) manager.AirManager.EmptyAir();
         }
 
         public void UpdateDashTimer(CharacterManager manager)
@@ -427,20 +435,24 @@ namespace BlownAway.Character.Movements
             _dashTimer -= Time.deltaTime;
             if (_dashTimer <= 0)
             {
-                manager.States.SwitchState(manager.States.PropulsionState);
+                if (IsGrounded) manager.States.SwitchState(manager.States.IdleState);
+                else manager.States.SwitchState(manager.States.FloatingState);
             }
         }
 
         public void UpdateDashMovement(CharacterManager manager)
         {
-            // Increase speed over time
-            _currentPropulsionIncreaseByFrame = Math.Max(_currentPropulsionIncreaseByFrame - manager.Data.PowerUpData.DashIncreaseDeceleration, 0);
-            _currentDashSpeed = Math.Min(_currentDashSpeed + (_currentPropulsionIncreaseByFrame / 100), manager.Data.PowerUpData.MaxDashSpeed);
+            float timerPercentage = 1 - (_dashTimer / manager.Data.PowerUpData.DashDuration);
 
-            float horizontalSpeed = _currentDashSpeed * manager.Data.PowerUpData.DashSpeed;
+            float horizontalSpeed = Mathf.Lerp(manager.Data.PowerUpData.DashSpeed, manager.Data.PowerUpData.DashEndSpeed, timerPercentage);
 
             Vector3 dashMovement = new Vector3(_currentDashDirection.x * horizontalSpeed, 0, _currentDashDirection.z * horizontalSpeed);
             CurrentVelocity += dashMovement;
+        }
+
+        public void RefreshDashes(CharacterManager manager)
+        {
+            _currentDashes = manager.Data.PowerUpData.MaxDashes;
         }
 
         #endregion

@@ -30,7 +30,7 @@ namespace BlownAway.Character.States
 
             manager.MovementManager.CheckForPropulsionStartOnGround(manager);
 
-            manager.MovementManager.CheckForDashStart(manager);
+            manager.MovementManager.CheckForDashStart(manager, true);
         }
 
         public override void FixedUpdateState(CharacterManager manager)

@@ -27,11 +27,6 @@ namespace BlownAway.Character.States
             manager.MovementManager.CheckForBalloonBounce(manager);
 
             manager.MovementManager.CheckForGroundPound(manager);
-
-            manager.MovementManager.CheckForPropulsionStartOnAir(manager);
-
-            manager.MovementManager.CheckForJacketDeflated(manager);
-
         }
 
         public override void FixedUpdateState(CharacterManager manager)

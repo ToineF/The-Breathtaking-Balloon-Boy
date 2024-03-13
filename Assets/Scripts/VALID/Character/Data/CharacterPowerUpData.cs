@@ -11,9 +11,10 @@ namespace BlownAway.Character.Data
         [field: Header("Dash")]
         [field: SerializeField, Tooltip("The time it takes for the dash to end")] public float DashDuration { get; private set; }
         [field: SerializeField, Tooltip("The speed of the dash")] public float DashSpeed { get; private set; }
+        [field: SerializeField, Tooltip("The speed of the dash when the dash ends")] public float DashEndSpeed { get; private set; }
         [field: SerializeField, Tooltip("The maximum speed of the dash")] public float MaxDashSpeed { get; private set; }
-        [field: SerializeField, Tooltip("The increase of propulsion speed added at each frame when propulsing")] public float DashIncreaseByFrame { get; private set; }
-        [field: SerializeField, Tooltip("The deceleration of the increase of propulsion speed added at each frame when dashing")] public float DashIncreaseDeceleration { get; private set; }
+        [field: SerializeField, Tooltip("Does dashing empty the player's air")] public bool DashEmptiesAir { get; private set; }
+        [field: SerializeField, Tooltip("Numbers of dashes the player can do")] public float MaxDashes { get; private set; }
 
         [field:Header("Ground Pound")]
         [field:SerializeField] public float GroundPoundForce { get; private set; }

@@ -68,7 +68,11 @@ namespace BlownAway.GPE
             //collider.Manager.Inputs.ResetLastPropulsionInputDirection();
             if (!collider.Manager.MovementManager.IsGrounded)
                 collider.Manager.States.SwitchState(collider.Manager.States.PropulsionState);
+            else
+                collider.Manager.States.SwitchState(collider.Manager.States.IdleState);
+
             collider.Manager.AirManager.RefreshAir();
+            collider.Manager.MovementManager.RefreshDashes(collider.Manager);
         }
 
         private void StopPlayerBounce()
