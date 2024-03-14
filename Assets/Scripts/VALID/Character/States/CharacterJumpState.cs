@@ -9,7 +9,7 @@ public class CharacterJumpState : CharacterBaseState
 {
     public override void EnterState(CharacterManager manager)
     {
-        Debug.Log("PROPULSION");
+        Debug.Log("JUMP");
         manager.MovementManager.LerpGravityTo(manager, manager.Data.FallData.JumpGravity, manager.Data.FallData.JumpMinGravity, manager.Data.FallData.JumpMaxGravity, manager.Data.FallData.JumpGravityIncreaseByFrame, manager.Data.FallData.JumpGravityIncreaseDecelerationByFrame, manager.Data.FallData.JumpGravityTime, manager.Data.FallData.JumpGravityAccel);
 
         manager.MovementManager.LerpDeplacementSpeed(manager, manager.Data.LateralMovementData.JumpLateralDeplacementSpeed, manager.Data.LateralMovementData.JumpDeplacementTime, manager.Data.LateralMovementData.JumpDeplacementCurve);
@@ -25,11 +25,11 @@ public class CharacterJumpState : CharacterBaseState
     {
         manager.MovementManager.UpdateJumpTimer(manager);
 
-        if (manager.MovementManager.PropulsionTimer > 0) return;
+        manager.MovementManager.CheckIfGrounded(manager, true);
+
+        if (manager.MovementManager.JumpTimer > 0) return;
 
         manager.MovementManager.CheckForPropulsionStartOnAir(manager);
-
-        manager.MovementManager.CheckIfGrounded(manager, true);
 
         manager.MovementManager.CheckForBalloonBounce(manager);
 

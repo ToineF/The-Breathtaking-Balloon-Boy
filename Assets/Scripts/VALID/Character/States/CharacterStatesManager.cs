@@ -11,6 +11,7 @@ namespace BlownAway.Character.States
         public CharacterFallingState FallingState = new CharacterFallingState();
         public CharacterFloatingState FloatingState = new CharacterFloatingState();
         public CharacterPropulsionState PropulsionState = new CharacterPropulsionState();
+        public CharacterJumpState JumpState = new CharacterJumpState();
         public CharacterDashState DashState = new CharacterDashState();
         public CharacterGroundPoundState GroundPoundState = new CharacterGroundPoundState();
         public CharacterDeathState DeathState = new CharacterDeathState();

@@ -305,7 +305,7 @@ namespace BlownAway.Character.Movements
         {
             if (CanJumpBuffer && !manager.AirManager.AirIsFull)
             {
-                CheckForPropulsionStartOnGround(manager);
+                CheckForJumpStart(manager);
                 return;
             }
 
@@ -413,11 +413,21 @@ namespace BlownAway.Character.Movements
             }
         }
 
+        public void CheckForJumpStart(CharacterManager manager)
+        {
+            if (manager.Inputs.PropulsionType.HasFlag(PropulsionDirection.Up) || manager.Inputs.PropulsionType.HasFlag(PropulsionDirection.Lateral))
+            {
+                manager.AirManager.RefreshAir();
+                manager.States.SwitchState(manager.States.JumpState);
+            }
+        }
+
         public void StartJump(CharacterManager manager)
         {
             JumpTimer = manager.Data.PropulsionData.MinimumJumpTime;
             _currentJumpSpeed = manager.Data.PropulsionData.JumpForce;
             _currentJumpIncreaseByFrame = manager.Data.PropulsionData.JumpDecreaseByFrame;
+
         }
         public void UpdateJumpTimer(CharacterManager manager)
         {
