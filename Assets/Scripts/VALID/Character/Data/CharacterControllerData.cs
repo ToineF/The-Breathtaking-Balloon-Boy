@@ -32,5 +32,8 @@ namespace BlownAway.Character.Data
         // Power Up Data
         [field:SerializeField] public CharacterPowerUpData PowerUpData { get; private set; }
 
+        // Feedbacks Data
+        [field:SerializeField] public CharacterFeedbacksData FeedbacksData { get; private set; }
+
     }
 }
