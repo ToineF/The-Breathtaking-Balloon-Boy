@@ -54,5 +54,10 @@ namespace BlownAway.Character.States
 
             _currentState.EnterState(Manager);
         }
+
+        public bool IsInState(CharacterBaseState state)
+        {
+            return _currentState == state;
+        }
     }
 }

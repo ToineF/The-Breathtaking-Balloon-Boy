@@ -29,6 +29,7 @@ namespace BlownAway.Character.States
 
             manager.MovementManager.CheckForPropulsionStartOnAir(manager);
 
+            manager.MovementManager.CheckForJacketToggle(manager);
             manager.MovementManager.CheckForJacketDeflated(manager);
 
             manager.MovementManager.CheckForDashStart(manager);

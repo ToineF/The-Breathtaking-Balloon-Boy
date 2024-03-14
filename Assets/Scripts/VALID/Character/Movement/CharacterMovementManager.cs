@@ -32,6 +32,8 @@ namespace BlownAway.Character.Movements
         private Coroutine _currentFallCoroutine;
 
         // Propulsion Inputs (Propulsion) - Have this as a generic version for other movements
+        public bool IsJacketInflated { get; private set; }
+
         public float PropulsionTimer { get; private set; } // Minimum time after which the propulsion is allowed to end
         private float _currentPropulsionSpeed;
         private Vector3 _currentPropulsionDirection;
@@ -397,20 +399,26 @@ namespace BlownAway.Character.Movements
             PropulsionTimer -= Time.deltaTime;
         }
 
-        public void CheckForJacketInflated(CharacterManager manager)
+        public void CheckForJacketToggle(CharacterManager manager)
         {
-            if (manager.Inputs.IsJacketInflated)
+            if (manager.Inputs.JacketInflateToggle)
             {
-                manager.States.SwitchState(manager.States.FloatingState);
+                IsJacketInflated = !IsJacketInflated;
             }
         }
 
+        public void CheckForJacketInflated(CharacterManager manager)
+        {
+            if (IsJacketInflated) manager.States.SwitchState(manager.States.FloatingState);
+        }
         public void CheckForJacketDeflated(CharacterManager manager)
         {
-            if (!manager.Inputs.IsJacketInflated)
-            {
-                manager.States.SwitchState(manager.States.FallingState);
-            }
+            if (!IsJacketInflated) manager.States.SwitchState(manager.States.FallingState);
+        }
+
+        public void StartJacketInflate(CharacterManager manager)
+        {
+            IsJacketInflated = true;
         }
 
         public void CheckForJumpStart(CharacterManager manager)

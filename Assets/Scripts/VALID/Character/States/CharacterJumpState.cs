@@ -27,7 +27,7 @@ public class CharacterJumpState : CharacterBaseState
 
         if (manager.MovementManager.JumpTimer > 0) return;
 
-        manager.MovementManager.CheckIfGrounded(manager, true);
+        manager.MovementManager.CheckIfGrounded(manager);
 
         manager.MovementManager.CheckForPropulsionStartOnAir(manager);
 

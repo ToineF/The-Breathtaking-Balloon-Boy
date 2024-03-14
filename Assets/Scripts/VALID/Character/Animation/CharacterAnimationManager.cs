@@ -56,7 +56,7 @@ namespace BlownAway.Character.Animations
         private void UpdateCharacterMorpher()
         {
             if (_skinnedMeshRenderer.sharedMesh.blendShapeCount < 1) return;
-            float weight = Manager.Inputs.IsJacketInflated ? 100 : 0;
+            float weight = Manager.MovementManager.IsJacketInflated ? 100 : 0;
             _jacketMorpherWeight = Mathf.Lerp(_jacketMorpherWeight, weight, _jacketMorpherLerp);
             _skinnedMeshRenderer.SetBlendShapeWeight(0, _jacketMorpherWeight);
         }

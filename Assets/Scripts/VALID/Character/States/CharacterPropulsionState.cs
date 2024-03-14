@@ -14,6 +14,7 @@ namespace BlownAway.Character.States
             manager.MovementManager.LerpPropulsionSpeed(manager, 1, manager.Data.PropulsionData.BasePropulsionAccelTime, manager.Data.PropulsionData.BasePropulsionAccelCurve);
 
             manager.MovementManager.StartPropulsionTimer(manager);
+            manager.MovementManager.StartJacketInflate(manager);
         }
 
         public override void ExitState(CharacterManager manager)
