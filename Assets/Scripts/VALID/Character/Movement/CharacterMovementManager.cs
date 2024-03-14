@@ -42,6 +42,11 @@ namespace BlownAway.Character.Movements
         private Coroutine _currentPropulsionTakeOffSubCoroutine2;
         public float CurrentPropulsionIncreaseByFrame { get; private set; }
 
+        // Jump
+        public float JumpTimer { get; private set; }
+        private float _currentJumpSpeed;
+        private float _currentJumpIncreaseByFrame;
+
         // Dash
         private float _dashTimer;
         private Vector3 _currentDashDirection;
@@ -406,6 +411,26 @@ namespace BlownAway.Character.Movements
             {
                 manager.States.SwitchState(manager.States.FallingState);
             }
+        }
+
+        public void StartJump(CharacterManager manager)
+        {
+            JumpTimer = manager.Data.PropulsionData.MinimumJumpTime;
+            _currentJumpSpeed = manager.Data.PropulsionData.JumpForce;
+            _currentJumpIncreaseByFrame = manager.Data.PropulsionData.JumpDecreaseByFrame;
+        }
+        public void UpdateJumpTimer(CharacterManager manager)
+        {
+            JumpTimer -= Time.deltaTime;
+        }
+        public void UpdateJumpMovement(CharacterManager manager)
+        {
+            _currentJumpIncreaseByFrame = Math.Max(_currentJumpIncreaseByFrame - manager.Data.PropulsionData.JumpDecreaseDeceleration, 0);
+            _currentJumpSpeed = Math.Min(_currentJumpSpeed + (_currentJumpIncreaseByFrame / 100), manager.Data.PropulsionData.MaxPropulsionSpeed);
+
+            Vector3 verticalMovement = Vector3.up * _currentJumpSpeed;
+
+            CurrentVelocity += verticalMovement;
         }
 
         public void CheckForDashStart(CharacterManager manager, bool refreshDashes = false)

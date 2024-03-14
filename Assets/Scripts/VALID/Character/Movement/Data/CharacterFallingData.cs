@@ -33,6 +33,15 @@ namespace BlownAway.Character.Movements.Data
         [field: SerializeField, Tooltip("The lerp used by the character to reach the target gravity (PropulsionGravity)")] public AnimationCurve PropulsionGravityAccel { get; private set; }
         [field: SerializeField, Tooltip("The increase of gravity added at each frame when propulsing")] public float PropulsionGravityIncreaseByFrame { get; private set; }
         [field: SerializeField, Tooltip("The deceleration of the increase of gravity added at each frame when propulsing")] public float PropulsionGravityIncreaseDecelerationByFrame { get; private set; }
+        
+        [field: Header("Jump")]
+        [field: SerializeField, Tooltip("The gravity the character falls at while jumping")] public float JumpGravity { get; private set; }
+        [field: SerializeField, Tooltip("The minimum gravity the character can fall at while jumping")] public float JumpMinGravity { get; private set; }
+        [field: SerializeField, Tooltip("The maximum gravity the character can fall at while jumping")] public float JumpMaxGravity { get; private set; }
+        [field: SerializeField, Tooltip("The time needed to reach the target gravity (JumpGravity)")] public float JumpGravityTime { get; private set; }
+        [field: SerializeField, Tooltip("The lerp used by the character to reach the target gravity (JumpGravity)")] public AnimationCurve JumpGravityAccel { get; private set; }
+        [field: SerializeField, Tooltip("The increase of gravity added at each frame when jumping")] public float JumpGravityIncreaseByFrame { get; private set; }
+        [field: SerializeField, Tooltip("The deceleration of the increase of gravity added at each frame when jumping")] public float JumpGravityIncreaseDecelerationByFrame { get; private set; }
 
         [field: Header("Dash")]
         [field: SerializeField, Tooltip("The gravity the character falls at while dashing")] public float DashGravity { get; private set; }

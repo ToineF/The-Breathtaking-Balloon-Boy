@@ -26,5 +26,13 @@ namespace BlownAway.Character.Movements.Data
         [field: SerializeField, Tooltip("The time it takes to the propulsion take-off to stop moving after reaching its maximum value")] public float PropulsionTakeOffDecelTime {get; private set;}
         [field: SerializeField, Tooltip("The lerp used by the propulsion take-off to stop moving after reaching its maximum value")] public AnimationCurve PropulsionTakeOffDecelCurve {get; private set;}
 
+        [field:Header("Jump")]
+        [field: SerializeField, Tooltip("The maximum jump speed the character aims to moves at")] public float JumpForce { get; private set; }
+        [field: SerializeField, Tooltip("The time it takes to the jump to reach its maximum value")] public float JumpAccelTime { get; private set; }
+        [field: SerializeField, Tooltip("The lerp used by the jump to reach its maximum value")] public AnimationCurve JumpAccelCurve { get; private set; }
+        [field: SerializeField, Tooltip("The decrease of jump speed removed at each frame when propulsing")] public float JumpDecreaseByFrame { get; private set; }
+        [field: SerializeField, Tooltip("The deceleration of the decrease of jump speed added at each frame when propulsing")] public float JumpDecreaseDeceleration { get; private set; }
+        [field: SerializeField, Tooltip("The minimum time the character stays in the jump state")] public float MinimumJumpTime { get; private set; }
+
     }
 }

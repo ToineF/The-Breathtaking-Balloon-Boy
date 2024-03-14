@@ -14,7 +14,7 @@ namespace BlownAway.GPE
         [SerializeField][Range(0, 1)] private float _upThreshold;
         [SerializeField][Range(-1, 0)] private float _downThreshold;
 
-        [SerializeField] private float _sideAngleThresold;
+        [SerializeField] private float _UpVectorMultiplier;
 
 
         //[Header("Timer")]
@@ -43,18 +43,9 @@ namespace BlownAway.GPE
             Vector3 direction = collider.transform.position - transform.position;
             Vector3 normalizedDirection = direction.normalized;
 
-            // OLD VALUES
-            //if (normalizedDirection.y > _upThreshold) normalizedDirection = Vector3.up; // UP
-            //else if (normalizedDirection.y < _downThreshold) normalizedDirection = Vector3.down; // DOWN
-            //else if (Mathf.Abs(normalizedDirection.x) > Mathf.Abs(normalizedDirection.z)) normalizedDirection = new Vector3(Mathf.Round(normalizedDirection.x), 0, 0); // LEFT - RIGHT
-            //else normalizedDirection = new Vector3(0, 0, Mathf.Round(normalizedDirection.z)); // FORWARD - BACKWARD
-
-            float angle = Vector3.Angle(collider.Manager.CharacterVisual.forward, _collider.bounds.center - collider.Manager.CharacterCollider.transform.position);
-            bool isSideRebounceDirection = angle < _sideAngleThresold;
-
             Vector3 cameraForward = collider.Manager.CameraManager.Camera.transform.forward;
             cameraForward.y = 0;
-            Vector3 upDirection = Vector3.up + cameraForward.normalized;
+            Vector3 upDirection = Vector3.up * _UpVectorMultiplier + cameraForward.normalized;
             Vector3 leftRightDirection = new Vector3(Mathf.Round(normalizedDirection.x), 0, 0); //isSideRebounceDirection ? new Vector3(Mathf.Round(normalizedDirection.x), 0, 0) : new Vector3(Mathf.Round(normalizedDirection.x), 0, 0) + collider.Manager.CameraManager.Camera.transform.forward;
             Vector3 forwardBackwardDirection = new Vector3(0, 0, Mathf.Round(normalizedDirection.z)); //isSideRebounceDirection ? new Vector3(0, 0, Mathf.Round(normalizedDirection.z)) : new Vector3(0, 0, Mathf.Round(normalizedDirection.z)) + collider.Manager.CameraManager.Camera.transform.forward;
 
