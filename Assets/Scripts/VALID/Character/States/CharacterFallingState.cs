@@ -23,8 +23,6 @@ namespace BlownAway.Character.States
 
         public override void UpdateState(CharacterManager manager)
         {
-            manager.MovementManager.CheckIfGrounded(manager);
-
             manager.MovementManager.CheckForBalloonBounce(manager);
 
             manager.MovementManager.CheckForGroundPound(manager);
@@ -33,6 +31,8 @@ namespace BlownAway.Character.States
 
             manager.MovementManager.CheckForJacketToggle(manager);
             manager.MovementManager.CheckForJacketInflated(manager);
+
+            manager.MovementManager.CheckIfGrounded(manager);
         }
 
 

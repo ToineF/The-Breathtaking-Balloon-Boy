@@ -130,27 +130,25 @@ namespace BlownAway.Character.Movements
         }
 
         #region Deplacement
-        public void MoveAtSpeed(CharacterManager manager, float walkTurnSpeed, bool includesInputs = true)
+        public void MoveAtSpeed(CharacterManager manager, float walkTurnSpeed)
         {
             Vector3 deplacementDirection = _currentDeplacementDirection;
             Vector3 groundDirection = new Vector3(1, 0, 1);
-            if (includesInputs) // Updates the Current Deplacement Value
-            {
-                deplacementDirection = (Vector3.Scale(UnityEngine.Camera.main.transform.forward, new Vector3(1, 0, 1)) * manager.Inputs.MoveInputDirection.z + Vector3.Scale(UnityEngine.Camera.main.transform.right, new Vector3(1, 0, 1)) * manager.Inputs.MoveInputDirection.x).normalized;
 
-                deplacementDirection = Vector3.Scale(deplacementDirection, new Vector3(1, 0, 1));
+            deplacementDirection = (Vector3.Scale(UnityEngine.Camera.main.transform.forward, new Vector3(1, 0, 1)) * manager.Inputs.MoveInputDirection.z + Vector3.Scale(UnityEngine.Camera.main.transform.right, new Vector3(1, 0, 1)) * manager.Inputs.MoveInputDirection.x).normalized;
 
-                //if (Vector3.Angle(_currentDeplacementDirection, deplacementDirection) > 170f) Debug.LogWarning("turn");
-                //Debug.LogWarning(Vector3.Angle(_currentDeplacementDirection, deplacementDirection));
-                //if (Vector3.Angle(_currentDeplacementDirection, deplacementDirection) > 170f) 
-                //    deplacementDirection = Quaternion.AngleAxis(-70, Vector3.up) * deplacementDirection;
+            deplacementDirection = Vector3.Scale(deplacementDirection, new Vector3(1, 0, 1));
 
-                //Debug.LogWarning(deplacementDirection);
-            }
+            //if (Vector3.Angle(_currentDeplacementDirection, deplacementDirection) > 170f) Debug.LogWarning("turn");
+            //Debug.LogWarning(Vector3.Angle(_currentDeplacementDirection, deplacementDirection));
+            //if (Vector3.Angle(_currentDeplacementDirection, deplacementDirection) > 170f) 
+            //    deplacementDirection = Quaternion.AngleAxis(-70, Vector3.up) * deplacementDirection;
+
+            //Debug.LogWarning(deplacementDirection);
+
 
             deplacementDirection = GetSlopeMoveDirection(deplacementDirection);
             Debug.LogWarning(deplacementDirection);
-
 
             _currentDeplacementDirection = Vector3.Lerp(_currentDeplacementDirection, deplacementDirection, walkTurnSpeed);
 
@@ -159,9 +157,19 @@ namespace BlownAway.Character.Movements
 
             //Debug.LogWarning(_currentDeplacementDirection * _currentDeplacementSpeed);
 
-
-
             CurrentVelocity += _currentDeplacementDirection * _currentDeplacementSpeed;
+        }
+
+        public void StopMoving(CharacterManager manager, float walkTurnSpeed)
+        {
+            _currentDeplacementDirection = Vector3.Lerp(_currentDeplacementDirection, Vector3.zero, walkTurnSpeed);
+            CurrentVelocity += _currentDeplacementDirection * _currentDeplacementSpeed;
+
+        }
+
+        public void ResetDeplacementDirection()
+        {
+            _currentDeplacementDirection = Vector3.zero;
         }
 
         // Generalize this to be more reusable (DO THIS ON STATE START)

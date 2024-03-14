@@ -45,7 +45,7 @@ namespace BlownAway.Character.States
 
         public override void FixedUpdateState(CharacterManager manager)
         {
-            manager.MovementManager.MoveAtSpeed(manager, manager.Data.LateralMovementData.IdleDirectionTurnSpeed, false);
+            manager.MovementManager.StopMoving(manager, manager.Data.LateralMovementData.IdleDirectionTurnSpeed);
 
             manager.MovementManager.UpdatePropulsionMovement(manager, false);
 
