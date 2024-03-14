@@ -48,7 +48,7 @@ public class CharacterJumpState : CharacterBaseState
 
     public override void FixedUpdateState(CharacterManager manager)
     {
-        if (!manager.Inputs.PropulsionType.HasFlag(Inputs.PropulsionDirection.Lateral))
+        //if (!manager.Inputs.PropulsionType.HasFlag(Inputs.PropulsionDirection.Lateral))
             manager.MovementManager.MoveAtSpeed(manager, manager.Data.LateralMovementData.PropulsionDirectionTurnSpeed);
 
         manager.MovementManager.UpdatePropulsionMovement(manager);
