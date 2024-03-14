@@ -25,9 +25,9 @@ public class CharacterJumpState : CharacterBaseState
     {
         manager.MovementManager.UpdateJumpTimer(manager);
 
-        manager.MovementManager.CheckIfGrounded(manager, true);
-
         if (manager.MovementManager.JumpTimer > 0) return;
+
+        manager.MovementManager.CheckIfGrounded(manager, true);
 
         manager.MovementManager.CheckForPropulsionStartOnAir(manager);
 
@@ -41,7 +41,7 @@ public class CharacterJumpState : CharacterBaseState
 
     public override void FixedUpdateState(CharacterManager manager)
     {
-            manager.MovementManager.MoveAtSpeed(manager, manager.Data.LateralMovementData.JumpDirectionTurnSpeed);
+        manager.MovementManager.MoveAtSpeed(manager, manager.Data.LateralMovementData.JumpDirectionTurnSpeed);
 
         manager.MovementManager.UpdateJumpMovement(manager);
 

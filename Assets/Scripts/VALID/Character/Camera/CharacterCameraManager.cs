@@ -32,6 +32,8 @@ namespace BlownAway.Camera
 
             Cursor.lockState = manager.Data.CameraData.SetCursorVisible ? CursorLockMode.None : CursorLockMode.Locked;
             Cursor.visible = manager.Data.CameraData.SetCursorVisible;
+
+            CenterCamera(manager, 0);
         }
 
         private void LateUpdate()
@@ -138,8 +140,13 @@ namespace BlownAway.Camera
         {
             if (manager.Inputs.CameraCenter)
             {
-                CameraCenter.transform.DORotate(new Vector3(0,manager.CharacterVisual.transform.eulerAngles.y, 0), _CameraCenterLerpTime);
+                CenterCamera(manager, _CameraCenterLerpTime);
             }
+        }
+
+        private void CenterCamera(CharacterManager manager, float rotateTime)
+        {
+            CameraCenter.transform.DORotate(new Vector3(0, manager.CharacterVisual.transform.eulerAngles.y, 0), rotateTime);
         }
     }
 }
