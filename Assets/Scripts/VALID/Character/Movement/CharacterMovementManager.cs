@@ -54,6 +54,8 @@ namespace BlownAway.Character.Movements
         private Vector3 _currentDashDirection;
         private float _currentDashes;
 
+        // Derive
+        public float DeriveTimer { get; private set; }
 
 
         // Ground Detection
@@ -415,6 +417,27 @@ namespace BlownAway.Character.Movements
             }
         }
 
+        public void StartDeriveTimer(CharacterManager manager)
+        {
+            DeriveTimer = manager.Data.PropulsionData.DeriveTime;
+        }
+
+        private void UpdateDeriveTimer(CharacterManager manager)
+        {
+            DeriveTimer -= Time.deltaTime;
+        }
+        public void CheckForDeriveEnd(CharacterManager manager)
+        {
+            UpdateDeriveTimer(manager);
+
+            if (!manager.AirManager.AirIsEmpty) return;
+
+            if (DeriveTimer < 0)
+            {
+                ToggleJacketInflate(manager, false);
+                manager.States.SwitchState(manager.States.FallingState);
+            }
+        }
         public void CheckForJacketInflated(CharacterManager manager)
         {
             if (IsJacketInflated) manager.States.SwitchState(manager.States.FloatingState);
@@ -424,9 +447,9 @@ namespace BlownAway.Character.Movements
             if (!IsJacketInflated) manager.States.SwitchState(manager.States.FallingState);
         }
 
-        public void StartJacketInflate(CharacterManager manager)
+        public void ToggleJacketInflate(CharacterManager manager, bool value)
         {
-            IsJacketInflated = true;
+            IsJacketInflated = value;
         }
 
         public void CheckForJumpStart(CharacterManager manager)

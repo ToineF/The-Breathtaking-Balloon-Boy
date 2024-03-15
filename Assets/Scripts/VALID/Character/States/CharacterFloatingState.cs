@@ -11,6 +11,8 @@ namespace BlownAway.Character.States
             
             manager.MovementManager.LerpDeplacementSpeed(manager, manager.Data.LateralMovementData.BaseFloatLateralSpeed, manager.Data.LateralMovementData.BaseFloatTime, manager.Data.LateralMovementData.BaseFloatCurve);
 
+            // Derive
+            manager.MovementManager.StartDeriveTimer(manager);
         }
 
         public override void ExitState(CharacterManager manager)
@@ -33,6 +35,8 @@ namespace BlownAway.Character.States
             manager.MovementManager.CheckForJacketDeflated(manager);
 
             manager.MovementManager.CheckForDashStart(manager);
+
+            manager.MovementManager.CheckForDeriveEnd(manager);
         }
 
         public override void FixedUpdateState(CharacterManager manager)
