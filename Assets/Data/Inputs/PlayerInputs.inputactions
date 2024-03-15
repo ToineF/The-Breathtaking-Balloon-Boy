@@ -51,6 +51,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "CameraTopDown",
+                    "type": "Button",
+                    "id": "e93bb946-10ce-4235-bf67-e4c77f3abf2b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Dash",
                     "type": "Button",
                     "id": "8377f6ce-44f1-44a5-8a52-604c66a674dc",
@@ -662,6 +671,28 @@
                     "processors": "",
                     "groups": "Controller",
                     "action": "Dash",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4038f170-e7f3-4d1d-9f41-b915bbe9695e",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Controller",
+                    "action": "CameraTopDown",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c88fb6e1-6183-4df8-8e5a-194863ca93eb",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "CameraTopDown",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

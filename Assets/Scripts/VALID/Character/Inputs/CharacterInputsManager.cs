@@ -24,6 +24,7 @@ namespace BlownAway.Character.Inputs
         public bool IsMouse { get; private set; }
         public Vector2 CameraMoveVector { get; private set; }
         public bool CameraCenter { get; private set; }
+        public bool CameraTopDown { get; private set; }
 
         // Propulsion
         public bool JacketInflateToggle {get; private set;}
@@ -63,6 +64,8 @@ namespace BlownAway.Character.Inputs
             _inputs.Player.CameraMoveController.canceled += SetCameraTypeController;
 
             _inputs.Player.CameraCenter.performed += ResetCameraCenter;
+            _inputs.Player.CameraTopDown.performed += StartCameraTopDown;
+            _inputs.Player.CameraTopDown.canceled += StopCameraTopDown;
 
             _inputs.Player.UpPropulsion.performed += SetUpPropulsion;
             _inputs.Player.DownPropulsion.performed += SetDownPropulsion;
@@ -93,6 +96,8 @@ namespace BlownAway.Character.Inputs
             _inputs.Player.CameraMoveController.canceled -= SetCameraTypeController;
 
             _inputs.Player.CameraCenter.performed -= ResetCameraCenter;
+            _inputs.Player.CameraTopDown.performed -= StartCameraTopDown;
+            _inputs.Player.CameraTopDown.canceled -= StopCameraTopDown;
 
             _inputs.Player.UpPropulsion.performed -= SetUpPropulsion;
             _inputs.Player.DownPropulsion.performed -= SetDownPropulsion;
@@ -144,6 +149,15 @@ namespace BlownAway.Character.Inputs
         private void ResetCameraCenter(InputAction.CallbackContext context)
         {
             CameraCenter = true;
+        }
+
+        private void StartCameraTopDown(InputAction.CallbackContext context)
+        {
+            CameraTopDown = true;
+        }
+        private void StopCameraTopDown(InputAction.CallbackContext context)
+        {
+            CameraTopDown = false;
         }
 
         private void SetUpPropulsion(InputAction.CallbackContext context)

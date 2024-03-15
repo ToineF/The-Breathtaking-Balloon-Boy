@@ -73,6 +73,15 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""CameraTopDown"",
+                    ""type"": ""Button"",
+                    ""id"": ""e93bb946-10ce-4235-bf67-e4c77f3abf2b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""Dash"",
                     ""type"": ""Button"",
                     ""id"": ""8377f6ce-44f1-44a5-8a52-604c66a674dc"",
@@ -684,6 +693,28 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Controller"",
                     ""action"": ""Dash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4038f170-e7f3-4d1d-9f41-b915bbe9695e"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""CameraTopDown"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c88fb6e1-6183-4df8-8e5a-194863ca93eb"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""CameraTopDown"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1833,6 +1864,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         m_Player_CameraMoveMouse = m_Player.FindAction("CameraMoveMouse", throwIfNotFound: true);
         m_Player_CameraMoveController = m_Player.FindAction("CameraMoveController", throwIfNotFound: true);
         m_Player_CameraCenter = m_Player.FindAction("CameraCenter", throwIfNotFound: true);
+        m_Player_CameraTopDown = m_Player.FindAction("CameraTopDown", throwIfNotFound: true);
         m_Player_Dash = m_Player.FindAction("Dash", throwIfNotFound: true);
         m_Player_BalloonBounce = m_Player.FindAction("BalloonBounce", throwIfNotFound: true);
         m_Player_GroundPound = m_Player.FindAction("GroundPound", throwIfNotFound: true);
@@ -1926,6 +1958,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_CameraMoveMouse;
     private readonly InputAction m_Player_CameraMoveController;
     private readonly InputAction m_Player_CameraCenter;
+    private readonly InputAction m_Player_CameraTopDown;
     private readonly InputAction m_Player_Dash;
     private readonly InputAction m_Player_BalloonBounce;
     private readonly InputAction m_Player_GroundPound;
@@ -1942,6 +1975,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         public InputAction @CameraMoveMouse => m_Wrapper.m_Player_CameraMoveMouse;
         public InputAction @CameraMoveController => m_Wrapper.m_Player_CameraMoveController;
         public InputAction @CameraCenter => m_Wrapper.m_Player_CameraCenter;
+        public InputAction @CameraTopDown => m_Wrapper.m_Player_CameraTopDown;
         public InputAction @Dash => m_Wrapper.m_Player_Dash;
         public InputAction @BalloonBounce => m_Wrapper.m_Player_BalloonBounce;
         public InputAction @GroundPound => m_Wrapper.m_Player_GroundPound;
@@ -1973,6 +2007,9 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
             @CameraCenter.started += instance.OnCameraCenter;
             @CameraCenter.performed += instance.OnCameraCenter;
             @CameraCenter.canceled += instance.OnCameraCenter;
+            @CameraTopDown.started += instance.OnCameraTopDown;
+            @CameraTopDown.performed += instance.OnCameraTopDown;
+            @CameraTopDown.canceled += instance.OnCameraTopDown;
             @Dash.started += instance.OnDash;
             @Dash.performed += instance.OnDash;
             @Dash.canceled += instance.OnDash;
@@ -2013,6 +2050,9 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
             @CameraCenter.started -= instance.OnCameraCenter;
             @CameraCenter.performed -= instance.OnCameraCenter;
             @CameraCenter.canceled -= instance.OnCameraCenter;
+            @CameraTopDown.started -= instance.OnCameraTopDown;
+            @CameraTopDown.performed -= instance.OnCameraTopDown;
+            @CameraTopDown.canceled -= instance.OnCameraTopDown;
             @Dash.started -= instance.OnDash;
             @Dash.performed -= instance.OnDash;
             @Dash.canceled -= instance.OnDash;
@@ -2280,6 +2320,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         void OnCameraMoveMouse(InputAction.CallbackContext context);
         void OnCameraMoveController(InputAction.CallbackContext context);
         void OnCameraCenter(InputAction.CallbackContext context);
+        void OnCameraTopDown(InputAction.CallbackContext context);
         void OnDash(InputAction.CallbackContext context);
         void OnBalloonBounce(InputAction.CallbackContext context);
         void OnGroundPound(InputAction.CallbackContext context);
