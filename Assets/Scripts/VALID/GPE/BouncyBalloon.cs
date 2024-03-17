@@ -11,14 +11,18 @@ namespace BlownAway.GPE
         [SerializeField][Range(0, 1)] private float _forceDecel;
 
         [Header("Directions")]
-        [SerializeField][Range(0, 1)] private float _upThreshold;
-        [SerializeField][Range(-1, 0)] private float _downThreshold;
+        [SerializeField][Range(-1, 1)] private float _upThreshold;
+        [Range(-1, 0)] private float _downThreshold;
 
         [SerializeField] private float _UpVectorMultiplier;
+        [SerializeField] private bool _refreshPlayerAir;
+        [SerializeField] private bool _needPlayerInput;
+
+
 
 
         //[Header("Timer")]
-        //private bool _isPlayerIn;
+        private bool _isPlayerIn;
 
         //[Header("Visual")]
         //[SerializeField] private float _scaleMultiplier = 1;
@@ -31,13 +35,29 @@ namespace BlownAway.GPE
         private new void Awake()
         {
             base.Awake();
-            OnEnterTrigger += MakePlayerBounce;
+            OnEnterTrigger += StartPlayerBounce;
             OnExitTrigger += StopPlayerBounce;
+        }
+
+        private void Start()
+        {
+            _downThreshold = -1;
+        }
+
+        private void StartPlayerBounce()
+        {
+            _isPlayerIn = true;
+
+            if (_needPlayerInput) return;
+
+            MakePlayerBounce();
         }
 
         private void MakePlayerBounce()
         {
             if (!_lastOtherCollider.TryGetComponent(out CharacterCollider collider)) return;
+            //if (_isPlayerIn) return;
+
 
             Debug.Log("*BOING*");
             Vector3 direction = collider.transform.position - transform.position;
@@ -46,8 +66,8 @@ namespace BlownAway.GPE
             Vector3 cameraForward = collider.Manager.CameraManager.Camera.transform.forward;
             cameraForward.y = 0;
             Vector3 upDirection = Vector3.up * _UpVectorMultiplier + cameraForward.normalized;
-            Vector3 leftRightDirection = new Vector3(Mathf.Round(normalizedDirection.x), 0, 0); //isSideRebounceDirection ? new Vector3(Mathf.Round(normalizedDirection.x), 0, 0) : new Vector3(Mathf.Round(normalizedDirection.x), 0, 0) + collider.Manager.CameraManager.Camera.transform.forward;
-            Vector3 forwardBackwardDirection = new Vector3(0, 0, Mathf.Round(normalizedDirection.z)); //isSideRebounceDirection ? new Vector3(0, 0, Mathf.Round(normalizedDirection.z)) : new Vector3(0, 0, Mathf.Round(normalizedDirection.z)) + collider.Manager.CameraManager.Camera.transform.forward;
+            Vector3 leftRightDirection = new Vector3(Mathf.Ceil(Mathf.Abs(normalizedDirection.x)) * Mathf.Sign(normalizedDirection.x), 0, 0); //isSideRebounceDirection ? new Vector3(Mathf.Round(normalizedDirection.x), 0, 0) : new Vector3(Mathf.Round(normalizedDirection.x), 0, 0) + collider.Manager.CameraManager.Camera.transform.forward;
+            Vector3 forwardBackwardDirection = new Vector3(0, 0, Mathf.Ceil(Mathf.Abs(normalizedDirection.z)) * Mathf.Sign(normalizedDirection.z)); //isSideRebounceDirection ? new Vector3(0, 0, Mathf.Round(normalizedDirection.z)) : new Vector3(0, 0, Mathf.Round(normalizedDirection.z)) + collider.Manager.CameraManager.Camera.transform.forward;
 
             if (normalizedDirection.y > _upThreshold) normalizedDirection = upDirection; // UP
             else if (normalizedDirection.y < _downThreshold) normalizedDirection = Vector3.zero; // DOWN
@@ -57,20 +77,43 @@ namespace BlownAway.GPE
             collider.Manager.MovementManager.AddExternalForce(gameObject, normalizedDirection * _force, _forceAccel);
 
             //collider.Manager.Inputs.ResetLastPropulsionInputDirection();
-            //if (!collider.Manager.MovementManager.IsGrounded)
-            //    collider.Manager.States.SwitchState(collider.Manager.States.PropulsionState);
-            //else
+            if (!collider.Manager.MovementManager.IsGrounded)
+                collider.Manager.States.SwitchState(collider.Manager.States.PropulsionState);
+            else
                 collider.Manager.States.SwitchState(collider.Manager.States.IdleState);
 
-            collider.Manager.AirManager.RefreshAir();
-            collider.Manager.MovementManager.RefreshDashes(collider.Manager);
+            if (_refreshPlayerAir)
+            {
+                collider.Manager.AirManager.RefreshAir();
+                collider.Manager.MovementManager.RefreshDashes(collider.Manager);
+            }
+
+        }
+
+        private void CheckForPlayerInput()
+        {
+            if (!_needPlayerInput) return;
+            if (!_isPlayerIn) return;
+            if (!_lastOtherCollider.TryGetComponent(out CharacterCollider collider)) return;
+            if (!collider.Manager.MovementManager.CanBalloonBounce) return;
+
+            MakePlayerBounce();
+
+            _isPlayerIn = false;
         }
 
         private void StopPlayerBounce()
         {
             if (!_lastOtherCollider.TryGetComponent(out CharacterCollider collider)) return;
 
+            _isPlayerIn = false;
+
             collider.Manager.MovementManager.AddExternalForce(gameObject, Vector3.zero, _forceDecel);
+        }
+
+        private void Update()
+        {
+            CheckForPlayerInput();
         }
 
         private new void OnDrawGizmos()
@@ -102,7 +145,7 @@ namespace BlownAway.GPE
             Vector3 downOffset = Vector3.up * _sphereCollider.bounds.extents.y * _downThreshold;
 
             GizmoExtensions.DrawCircle(position + upOffset, Vector3.up, _sphereCollider.radius, 0);
-            GizmoExtensions.DrawCircle(position + downOffset, Vector3.up, _sphereCollider.radius, 0);
+            //GizmoExtensions.DrawCircle(position + downOffset, Vector3.up, _sphereCollider.radius, 0);
         }
     }
 }

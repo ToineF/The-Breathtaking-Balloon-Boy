@@ -69,6 +69,9 @@ namespace BlownAway.Character.Movements
         [Tooltip("The raycast hits stocked while looking for jump buffer")] public RaycastHit[] JumpBufferHitResults { get; private set; }
 
 
+        // Balloon Bounce
+        public bool CanBalloonBounce { get; private set; }
+
         private Transform parent;
 
         // External Forces
@@ -659,10 +662,7 @@ namespace BlownAway.Character.Movements
         #region Upgrades
         public void CheckForBalloonBounce(CharacterManager manager)
         {
-            if (!manager.Data.PowerUpData.IsBalloonBounceAvailable) return;
-            if (!manager.Inputs.StartedBalloonBounce) return;
-
-            Debug.Log("Balloon Bounce");
+            CanBalloonBounce = manager.Data.PowerUpData.IsBalloonBounceAvailable && manager.Inputs.StartedBalloonBounce;
         }
 
         public void CheckForGroundPound(CharacterManager manager)
@@ -682,7 +682,6 @@ namespace BlownAway.Character.Movements
             AddExternalForce(gameObject, Vector3.zero, manager.Data.PowerUpData.GroundPoundEndLerp);
             //manager.States.SwitchState(manager.States.PropulsionState);
         }
-
         #endregion
 
     }
