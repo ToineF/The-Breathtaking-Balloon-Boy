@@ -1,9 +1,6 @@
 using BlownAway.Character;
 using BlownAway.Character.States;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Windows;
 
 public class CharacterJumpState : CharacterBaseState
 {
@@ -41,7 +38,7 @@ public class CharacterJumpState : CharacterBaseState
 
     public override void FixedUpdateState(CharacterManager manager)
     {
-        manager.MovementManager.MoveAtSpeed(manager, manager.Data.LateralMovementData.JumpDirectionTurnSpeed);
+        manager.MovementManager.StopMoving(manager, manager.Data.LateralMovementData.JumpDirectionTurnSpeed);
 
         manager.MovementManager.UpdateJumpMovement(manager);
 
