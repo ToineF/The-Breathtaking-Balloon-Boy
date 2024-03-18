@@ -10,7 +10,7 @@ namespace BlownAway.Camera
     {
 
         [field:Header("References")]
-        [field:SerializeField] public UnityEngine.Camera Camera { get; private set; }
+        [field:SerializeField] public GameObject Camera { get; private set; }
         [SerializeField] GameObject FocusPoint;
         [SerializeField] GameObject CameraCenter;
         [SerializeField] float _CameraCenterLerpTime;

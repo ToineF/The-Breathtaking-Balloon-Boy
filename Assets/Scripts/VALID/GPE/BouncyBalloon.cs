@@ -78,7 +78,7 @@ namespace BlownAway.GPE
 
             //collider.Manager.Inputs.ResetLastPropulsionInputDirection();
             if (!collider.Manager.MovementManager.IsGrounded)
-                collider.Manager.States.SwitchState(collider.Manager.States.PropulsionState);
+                collider.Manager.States.SwitchState(collider.Manager.States.FloatingState);
             else
                 collider.Manager.States.SwitchState(collider.Manager.States.IdleState);
 

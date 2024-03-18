@@ -12,15 +12,12 @@ namespace BlownAway.Character.States
             manager.MovementManager.LerpGravityTo(manager, manager.Data.FallData.GroundPoundGravity, manager.Data.FallData.GroundPoundMinGravity, manager.Data.FallData.GroundPoundMaxGravity, manager.Data.FallData.GroundPoundGravityIncreaseByFrame, manager.Data.FallData.GroundPoundGravityIncreaseDecelerationByFrame, manager.Data.FallData.GroundPoundGravityTime, manager.Data.FallData.GroundPoundGravityAccel);
             manager.MovementManager.LerpDeplacementSpeed(manager, manager.Data.LateralMovementData.BaseGroundPoundDeplacementLateralSpeed, manager.Data.LateralMovementData.GroundPoundDeplacementTime, manager.Data.LateralMovementData.GroundPoundDeplacementCurve);
 
-            // Ground Pound
-            manager.MovementManager.OnGroundEnter += manager.MovementManager.CheckForGroundPoundStart;
-            manager.MovementManager.OnGroundExit += manager.MovementManager.CheckForGroundPoundEnd;
         }
 
         public override void ExitState(CharacterManager manager)
         {
-            manager.MovementManager.OnGroundEnter -= manager.MovementManager.CheckForGroundPoundStart;
-            manager.MovementManager.OnGroundExit -= manager.MovementManager.CheckForGroundPoundEnd;
+            manager.MovementManager.CheckForGroundPoundStart(manager);
+            //manager.MovementManager.CheckForGroundPoundEnd(manager); // Here start timer to invoke this method
         }
 
         public override void UpdateState(CharacterManager manager)
