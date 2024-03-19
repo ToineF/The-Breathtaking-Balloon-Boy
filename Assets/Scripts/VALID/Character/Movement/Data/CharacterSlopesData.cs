@@ -6,5 +6,6 @@ namespace BlownAway.Character.Movements.Data {
     public class CharacterSlopesData : ScriptableObject
     {
         [field: SerializeField] public float MaxSlopeAngle {get; private set;} 
+        [field: SerializeField] public float SlopesGroundCheckDistance { get; private set;} 
     }
 }

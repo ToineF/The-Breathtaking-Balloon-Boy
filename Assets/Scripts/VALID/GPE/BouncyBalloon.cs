@@ -85,6 +85,7 @@ namespace BlownAway.GPE
             if (_refreshPlayerAir)
             {
                 collider.Manager.AirManager.RefreshAir();
+                collider.Manager.MovementManager.StartDeriveTimer(collider.Manager);
                 collider.Manager.MovementManager.RefreshDashes(collider.Manager);
             }
 

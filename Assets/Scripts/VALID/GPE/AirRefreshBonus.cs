@@ -30,7 +30,9 @@ namespace BlownAway.GPE
             if (!_lastOtherCollider.TryGetComponent(out CharacterCollider collider)) return;
 
             collider.Manager.AirManager.RefreshAir();
+            collider.Manager.MovementManager.StartDeriveTimer(collider.Manager);
             collider.Manager.MovementManager.RefreshDashes(collider.Manager);
+
 
             // Sound
             if (AudioManager.Instance != null)

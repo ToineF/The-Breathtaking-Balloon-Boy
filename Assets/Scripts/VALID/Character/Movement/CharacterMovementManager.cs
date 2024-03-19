@@ -63,6 +63,10 @@ namespace BlownAway.Character.Movements
         public bool IsGrounded { get; private set; }
         public RaycastHit LastGround { get; private set; }
 
+        // Slopes
+        [Tooltip("The raycast hits stocked while looking for slopes")] public RaycastHit[] SlopesHitResults { get; private set; }
+
+
 
         // Jump buffer
         public bool CanJumpBuffer { get; private set; }
@@ -81,6 +85,7 @@ namespace BlownAway.Character.Movements
         {
             parent = manager.CharacterCollider.Rigidbody.transform.parent;
             GroundHitResults = new RaycastHit[2];
+            SlopesHitResults = new RaycastHit[2];
             JumpBufferHitResults = new RaycastHit[2];
             SetGravityTo(manager, manager.Data.FallData.BaseGravity, manager.Data.FallData.BaseMinGravity, manager.Data.FallData.BaseMaxGravity, manager.Data.FallData.BaseGravityIncreaseByFrame, manager.Data.FallData.BaseGravityIncreaseDecelerationByFrame);
 
@@ -153,7 +158,7 @@ namespace BlownAway.Character.Movements
 
 
             deplacementDirection = GetSlopeMoveDirection(deplacementDirection);
-            Debug.LogWarning(deplacementDirection);
+            //Debug.LogWarning(deplacementDirection);
 
             _currentDeplacementDirection = Vector3.Lerp(_currentDeplacementDirection, deplacementDirection, walkTurnSpeed);
 
@@ -192,6 +197,7 @@ namespace BlownAway.Character.Movements
             Vector3 colliderPosition = new Vector3(manager.CharacterCollider.Collider.bounds.center.x, manager.CharacterCollider.Collider.bounds.min.y, manager.CharacterCollider.Collider.bounds.center.z);
             CanJumpBuffer = Physics.SphereCastNonAlloc(colliderPosition, manager.Data.GroundDetectionData.GroundDetectionSphereRadius, Vector3.down, JumpBufferHitResults, manager.Data.GroundDetectionData.JumpBufferCheckDistance, manager.Data.GroundDetectionData.GroundLayer) > 0;
             IsGrounded = Physics.SphereCastNonAlloc(colliderPosition, manager.Data.GroundDetectionData.GroundDetectionSphereRadius, Vector3.down, GroundHitResults, manager.Data.GroundDetectionData.GroundCheckDistance, manager.Data.GroundDetectionData.GroundLayer) > 0;
+            Physics.SphereCastNonAlloc(colliderPosition, manager.Data.GroundDetectionData.GroundDetectionSphereRadius, Vector3.down, SlopesHitResults, manager.Data.SlopeData.SlopesGroundCheckDistance, manager.Data.GroundDetectionData.GroundLayer);
             //bool a = Physics.SphereCastNonAlloc(colliderPositionn, manager.Data.GroundDetectionData.GroundDetectionSphereRadius, Vector3.down, GroundHitResults, manager.Data.GroundDetectionData.GroundCheckDistance, manager.Data.GroundDetectionData.GroundLayer) > 0;
             //Collider[] hitColliders = Physics.OverlapSphere(colliderPosition + Vector3.down * manager.Data.GroundDetectionData.GroundCheckDistance, manager.Data.GroundDetectionData.GroundDetectionSphereRadius, manager.Data.GroundDetectionData.GroundLayer);
             //IsGrounded = hitColliders.Length > 0;
@@ -579,9 +585,9 @@ namespace BlownAway.Character.Movements
 
         private bool OnSlope()
         {
-            if (LastGround.collider == null) return false;
+            if (SlopesHitResults[0].collider == null) return false;
 
-            float angle = Vector3.Angle(Vector3.up, LastGround.normal);
+            float angle = Vector3.Angle(Vector3.up, SlopesHitResults[0].normal);
             //Debug.LogWarning(angle);
             return angle < Manager.Data.SlopeData.MaxSlopeAngle && angle != 0;
 
@@ -589,7 +595,7 @@ namespace BlownAway.Character.Movements
 
         private Vector3 GetSlopeMoveDirection(Vector3 deplacementDirection)
         {
-            return Vector3.ProjectOnPlane(deplacementDirection, LastGround.normal).normalized;
+            return Vector3.ProjectOnPlane(deplacementDirection, SlopesHitResults[0].normal).normalized;
         }
 
 
