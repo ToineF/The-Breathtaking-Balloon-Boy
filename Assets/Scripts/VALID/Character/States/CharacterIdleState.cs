@@ -18,6 +18,9 @@ namespace BlownAway.Character.States
 
             // Air
             manager.AirManager.RefreshAir();
+
+            // Float
+            manager.MovementManager.StartDeriveTimer(manager);
         }
 
         public override void ExitState(CharacterManager manager)

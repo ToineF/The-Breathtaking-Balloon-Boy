@@ -433,8 +433,6 @@ namespace BlownAway.Character.Movements
         {
             UpdateDeriveTimer(manager);
 
-            if (!manager.AirManager.AirIsEmpty) return;
-
             if (DeriveTimer < 0)
             {
                 ToggleJacketInflate(manager, false);

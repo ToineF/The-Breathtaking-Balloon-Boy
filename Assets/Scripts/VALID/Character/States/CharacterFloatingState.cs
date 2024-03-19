@@ -10,9 +10,6 @@ namespace BlownAway.Character.States
             manager.MovementManager.LerpGravityTo(manager, manager.Data.FallData.FloatingGravity, manager.Data.FallData.FloatingMinGravity, manager.Data.FallData.FloatingMaxGravity, manager.Data.FallData.FloatingGravityIncreaseByFrame, manager.Data.FallData.FloatingGravityIncreaseDecelerationByFrame, manager.Data.FallData.FloatingGravityTime, manager.Data.FallData.FloatingGravityAccel);
             
             manager.MovementManager.LerpDeplacementSpeed(manager, manager.Data.LateralMovementData.BaseFloatLateralSpeed, manager.Data.LateralMovementData.BaseFloatTime, manager.Data.LateralMovementData.BaseFloatCurve);
-
-            // Derive
-            manager.MovementManager.StartDeriveTimer(manager);
         }
 
         public override void ExitState(CharacterManager manager)
@@ -29,6 +26,7 @@ namespace BlownAway.Character.States
 
             manager.MovementManager.CheckForGroundPound(manager);
 
+            manager.MovementManager.CheckForDeriveEnd(manager);
             manager.MovementManager.CheckForPropulsionStartOnAir(manager);
 
             manager.MovementManager.CheckForJacketToggle(manager);
@@ -36,7 +34,6 @@ namespace BlownAway.Character.States
 
             manager.MovementManager.CheckForDashStart(manager);
 
-            manager.MovementManager.CheckForDeriveEnd(manager);
         }
 
         public override void FixedUpdateState(CharacterManager manager)
