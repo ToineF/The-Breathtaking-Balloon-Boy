@@ -57,15 +57,15 @@ public class Tiling3D : MonoBehaviour
         transform.ClearImmediate();
     }
 
-    private int GetBlockScore(int x, int y, int z)
+    private int GetBlockScore(int x, int y, int z, int interiorOffset = 0)
     {
         int score = 0;
-        if (z == 0) score++;
-        if (z == Length - 1) score++;
-        if (x == 0) score++;
-        if (x == Width - 1) score++;
-        if (y == 0) score++;
-        if (y == Height - 1) score++;
+        if (z == interiorOffset) score++;
+        if (z == Length - 1 - interiorOffset) score++;
+        if (x == interiorOffset) score++;
+        if (x == Width - 1 - interiorOffset) score++;
+        if (y == interiorOffset) score++;
+        if (y == Height - 1 - interiorOffset) score++;
 
         return score;
     }
@@ -80,7 +80,13 @@ public class Tiling3D : MonoBehaviour
             if (y == 0)
                 block = TilesetData.DownCenterTile;
             else if (y == Height - 1)
-                block = TilesetData.UpCenterTile;
+            {
+                int topScore = GetBlockScore(x, y, z, 1);
+
+                if (topScore >= 2) block = TilesetData.TopCornerTile;
+                else if (topScore >= 1) block = TilesetData.TopEdgeTile;
+                else block = TilesetData.TopCenterTile;
+            }
             else
                 block = TilesetData.MiddleCenterTile;
         }
@@ -101,27 +107,38 @@ public class Tiling3D : MonoBehaviour
                 block = TilesetData.UpCornerTile;
         }
 
-
         return block;
     }
 
     private Vector3 GetRotation(int x, int y, int z)
     {
         int score = GetBlockScore(x, y, z);
+        int interiorOffset = 0;
+        if ((y == Height - 1 && score <= 1)) interiorOffset++;
+        int relativeScore = GetBlockScore(x, y, z, interiorOffset);
 
         int targetX = 0;
         int targetY = 0;
         int targetZ = 0;
 
-        if (x == Width - 1) targetY = 180;
-        if (z == Length - 1) targetY = 90;
-        if (z == 0) targetY = 270;
+
+        if (x == Width - 1 - interiorOffset) targetY = 180;
+        if (z == Length - 1 - interiorOffset) targetY = 90;
+        if (z == interiorOffset) targetY = 270;
 
         // Corners
-        if (x == 0 && z == Length - 1) targetY -= 45;
-        if (x == Width - 1 && z == 0) targetY -= 45;
-        if (x == 0 && z == 0) targetY += 45;
-        if (x == Width - 1 && z == Length - 1) targetY += 45;
+        if (x == interiorOffset && z == Length - 1 - interiorOffset) targetY -= 45;
+        if (x == Width - 1 - interiorOffset && z == interiorOffset) targetY -= 45;
+        if (x == interiorOffset && z == interiorOffset) targetY += 45;
+        if (x == Width - 1 - interiorOffset && z == Length - 1 - interiorOffset) targetY += 45;
+
+        // Top
+        if (interiorOffset == 1)
+        {
+            if (Length <= 3 || Width <= 3) return Vector3.zero;
+            targetZ += 45;
+            if (relativeScore != 2) targetZ += 45;
+        }
 
         return new Vector3(targetX, targetY, targetZ);
     }

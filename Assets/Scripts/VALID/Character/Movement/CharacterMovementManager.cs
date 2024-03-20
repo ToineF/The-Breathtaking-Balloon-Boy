@@ -578,9 +578,6 @@ namespace BlownAway.Character.Movements
             //Debug.DrawLine(castOrigin, castOrigin + LastGround.normal, Color.black, 3f);
 
             Debug.DrawLine(manager.CharacterCollider.Rigidbody.position, manager.CharacterCollider.Rigidbody.position + GetSlopeMoveDirection(_currentDeplacementDirection), Color.black, 3f);
-
-
-
         }
 
         private bool OnSlope()

@@ -13,7 +13,9 @@ public class TilesetData : ScriptableObject
     public GameObject DownCornerTile;
     public GameObject MiddleCenterTile;
     public GameObject MiddleEdgeTile;
-    public GameObject UpCenterTile;
     public GameObject UpEdgeTile;
     public GameObject UpCornerTile;
+    public GameObject TopCenterTile;
+    public GameObject TopEdgeTile;
+    public GameObject TopCornerTile;
 }
