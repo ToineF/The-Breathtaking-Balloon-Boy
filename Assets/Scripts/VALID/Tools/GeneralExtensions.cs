@@ -501,6 +501,14 @@ namespace AntoineFoucault.Utilities
 
         #endregion
 
+        public static Vector3 ProjectAndScale(Vector3 vector, Vector3 normal)
+        {
+            float magnitude = vector.magnitude;
+            vector = Vector3.ProjectOnPlane(vector, normal).normalized;
+            vector *= magnitude;
+            return vector;
+        }
+
     }
 
     public static class CollectionsExtensions

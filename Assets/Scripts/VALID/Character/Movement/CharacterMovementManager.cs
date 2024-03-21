@@ -125,6 +125,7 @@ namespace BlownAway.Character.Movements
 
         public void ApplyVelocity(CharacterManager manager)
         {
+            CurrentVelocity = ColliderAndSlide(manager, CurrentVelocity, Vector3.zero, 0, false, CurrentVelocity);
             manager.CharacterCollider.Rigidbody.velocity = CurrentVelocity;
         }
 
@@ -593,6 +594,59 @@ namespace BlownAway.Character.Movements
         private Vector3 GetSlopeMoveDirection(Vector3 deplacementDirection)
         {
             return Vector3.ProjectOnPlane(deplacementDirection, SlopesHitResults[0].normal).normalized;
+        }
+
+        private Vector3 ColliderAndSlide(CharacterManager manager, Vector3 vel, Vector3 pos, int depth, bool gravityPass, Vector3 velInit)
+        {
+            if (depth >= manager.Data.SlopeData.MaxBounces)
+            {
+                return Vector3.zero;
+            }
+
+            float dist = vel.magnitude + manager.Data.SlopeData.CharacterColliderCheckOffset;
+
+            RaycastHit hit;
+            if (Physics.SphereCast(pos, manager.CharacterCollider.Collider.bounds.extents.x, vel.normalized, out hit, dist, manager.Data.GroundDetectionData.GroundLayer))
+            {
+                Vector3 snapToSurface = vel.normalized * (hit.distance - manager.Data.SlopeData.CharacterColliderCheckOffset);
+                Vector3 leftOver = vel - snapToSurface;
+                float angle = Vector3.Angle(Vector3.up, hit.normal);
+
+                if (snapToSurface.magnitude <= manager.Data.SlopeData.CharacterColliderCheckOffset)
+                {
+                    snapToSurface = Vector3.zero;
+                }
+
+                // Walkable Ground / Slopes
+                if (angle <= manager.Data.SlopeData.MaxSlopeAngle)
+                {
+                    if (gravityPass)
+                    {
+                        return snapToSurface;
+                    }
+                    leftOver = VectorExtensions.ProjectAndScale(leftOver, hit.normal);
+                }
+                else // Unwalkable Slopes / Wall
+                {
+                    float scale = 1 -
+                        Vector3.Dot(new Vector3(hit.normal.x, 0, hit.normal.z).normalized,
+                        -new Vector3(velInit.x, 0, velInit.z).normalized);
+                    if (IsGrounded && !gravityPass)
+                    {
+                        leftOver = VectorExtensions.ProjectAndScale(
+                            new Vector3(leftOver.x, 0, leftOver.z),
+                            new Vector3(hit.normal.x, 0, hit.normal.z));
+                        leftOver *= scale;
+                    } else
+                    {
+                        leftOver = VectorExtensions.ProjectAndScale(leftOver, hit.normal) * scale;
+                    }
+                }
+
+                return snapToSurface + ColliderAndSlide(manager, leftOver, pos + snapToSurface, ++depth, gravityPass, velInit);
+            }
+
+            return vel;
         }
 
 

@@ -7,5 +7,7 @@ namespace BlownAway.Character.Movements.Data {
     {
         [field: SerializeField] public float MaxSlopeAngle {get; private set;} 
         [field: SerializeField] public float SlopesGroundCheckDistance { get; private set;} 
+        [field: SerializeField] public float CharacterColliderCheckOffset { get; private set;} 
+        [field: SerializeField] public float MaxBounces { get; private set;} 
     }
 }
