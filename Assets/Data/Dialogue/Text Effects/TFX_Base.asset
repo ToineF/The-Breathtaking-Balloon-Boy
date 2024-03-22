@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d214431ebcb101e45b45b8f5f9fb64d5, type: 3}
+  m_Name: TFX_Base
+  m_EditorClassIdentifier: 
+  Role: 1
+  Key: 
+  TextEffect:
+    MinRange: 0
+    MaxRange: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    TypeWriterRange: 2
+  MathDisplacement:
+    x:
+      Function: 1
+      TimeAmount: 0
+      AddedOriginAmount: {x: 0, y: 0, z: 0}
+      GlobalMultiplier: 0
+    y:
+      Function: 1
+      TimeAmount: 10
+      AddedOriginAmount: {x: 0.01, y: 0.01, z: 0}
+      GlobalMultiplier: 20
+    z:
+      Function: 3
+      TimeAmount: 0
+      AddedOriginAmount: {x: 0, y: 0, z: 0}
+      GlobalMultiplier: 0

@@ -38,12 +38,16 @@ namespace BlownAway.Cutscenes
         [SerializeField] private Image _dialogueTextbox;
         [SerializeField] private float _characterApparitionSpeed;
 
+        [Header("Text Effects")]
+        [SerializeField] private TextEffectData _hiddenEffectData;
+        [SerializeField] private TextEffectData _baseEffectData;
+
         private Dialogue _currentDialogue;
         private int _currentTextIndex;
         private int _currentCharIndex;
         private bool _hasCurrentTextEnded;
         private Coroutine _writingCharactersCoroutine;
-        private List<TextEffect> _textEffects = new List<TextEffect>();
+        private List<TextEffectData> _textEffects = new List<TextEffectData>();
 
         private void Awake()
         {
@@ -123,32 +127,15 @@ namespace BlownAway.Cutscenes
 
 
         // Text Animation
-        private void Update()
-        {
-            //dd(0, _currentCharIndex);
-            PlayTextAnimation();
-        }
-
         private void Start()
         {
-            _textEffects.Add(new TextEffect(GetNormalText, Color.white, Vector3.one, 0, -1, TextEffect.LimitRangeByTypeWriter.MIN));
-            _textEffects.Add(new TextEffect(GetWobblyText, Color.blue, Vector3.one, 0, 0, TextEffect.LimitRangeByTypeWriter.MAX));
+            _textEffects.Add(_hiddenEffectData);
+            _textEffects.Add(_baseEffectData);
         }
 
-        private Vector3 GetWobblyText(Vector3 origin)
+        private void Update()
         {
-            return new Vector3(0, Mathf.Sin(Time.time * 2f + origin.x * 0.01f) * 10f, 0);
-        }
-
-        private Vector3 GetNormalText(Vector3 origin)
-        {
-            return -origin;
-        }
-
-        private void HideAllCharacters()
-        {
-            //PlayTextAnimation(GetNormalText, Color.white, Vector3.zero);
-            //dd();
+            PlayTextAnimation();
         }
 
         private void PlayTextAnimation()
@@ -158,8 +145,10 @@ namespace BlownAway.Cutscenes
 
             if (_textEffects == null) return;
 
-            foreach (TextEffect effect in _textEffects)
+            foreach (TextEffectData data in _textEffects)
             {
+                TextEffect effect = data.TextEffect;
+
                 int minRange = effect.MinRange;
                 int maxRange = effect.MaxRange;
                 if (effect.TypeWriterRange == TextEffect.LimitRangeByTypeWriter.MIN) minRange = _currentCharIndex;
@@ -178,9 +167,8 @@ namespace BlownAway.Cutscenes
                     {
                         int index = charInfo.vertexIndex + j;
                         Vector3 origin = meshInfo.vertices[index];
-                        meshInfo.vertices[index] = origin + effect.GetText(origin);
+                        meshInfo.vertices[index] = origin + data.MathDisplacement.GetTotalFunction(origin);
                         meshInfo.colors32[index] = effect.Color;
-                        meshInfo.vertices[index].Scale(effect.Scale);
                     }
                 }
             }
@@ -193,45 +181,5 @@ namespace BlownAway.Cutscenes
             }
         }
 
-        private void dd(int rangeStart = 0, int rangeLength = -1)
-        {
-            _dialogueTextboxText.ForceMeshUpdate();
-            TMP_TextInfo textInfo = _dialogueTextboxText.textInfo;
-
-            rangeLength = rangeLength == -1 ? textInfo.characterCount : rangeLength;
-            for (int i = rangeStart; i < textInfo.characterCount; i++)
-            {
-                TMP_CharacterInfo charInfo = textInfo.characterInfo[i];
-
-                if (!charInfo.isVisible) continue;
-
-                TMP_MeshInfo meshInfo = textInfo.meshInfo[charInfo.materialReferenceIndex];
-
-                for (int j = 0; j < 4; j++)
-                {
-                    int index = charInfo.vertexIndex + j;
-                    Vector3 origin = meshInfo.vertices[index];
-                    if (i < rangeLength)
-                    {
-                        meshInfo.vertices[index] = origin + GetWobblyText(origin);
-                        meshInfo.colors32[index] = Color.blue;
-                        meshInfo.vertices[index].Scale(Vector3.one);
-                    }
-                    else
-                    {
-                        meshInfo.vertices[index] = origin + GetNormalText(origin);
-                        meshInfo.colors32[index] = Color.white;
-                        meshInfo.vertices[index].Scale(Vector3.zero);
-                    }
-                }
-            }
-
-            for (int i = 0; i < textInfo.meshInfo.Length; i++)
-            {
-                TMP_MeshInfo meshInfo = textInfo.meshInfo[i];
-                meshInfo.mesh.vertices = meshInfo.vertices;
-                _dialogueTextboxText.UpdateGeometry(meshInfo.mesh, i);
-            }
-        }
     }
 }
