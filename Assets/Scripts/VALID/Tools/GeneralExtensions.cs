@@ -597,6 +597,11 @@ namespace AntoineFoucault.Utilities
 
             return transform;
         }
+
+        public static void ToggleActivation(GameObject gameObject)
+        {
+            gameObject.SetActive(!gameObject.activeInHierarchy);
+        }
     }
 
     public static class LayerExtensions
