@@ -7,8 +7,8 @@ public class AudioManager : MonoBehaviour
     public AudioSource MainMusicSource { get => _mainMusicSource; private set => _mainMusicSource = value; }
     public AudioSource SfxSource { get => _sfxSource; private set => _sfxSource = value; }
 
-    [SerializeField] private AudioSource _mainMusicSource;
-    [SerializeField] private AudioSource _sfxSource;
+    [SerializeField] protected AudioSource _mainMusicSource;
+    [SerializeField] protected AudioSource _sfxSource;
 
     private void Awake()
     {
@@ -23,7 +23,7 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    public void PlayClip(AudioClip clip)
+    public virtual void PlayClip(AudioClip clip)
     {
         SfxSource.PlayOneShot(clip);
     }
