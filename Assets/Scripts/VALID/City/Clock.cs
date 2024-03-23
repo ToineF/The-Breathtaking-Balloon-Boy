@@ -5,8 +5,6 @@ public class Clock : MonoBehaviour
 {
     [SerializeField] private GameObject _minutesNeedle;
     [SerializeField] private GameObject _hoursNeedle;
-    [SerializeField] private float _minutesRotationOffset = 180;
-    [SerializeField] private float _hoursRotationOffset = 180;
 
     private void Start()
     {

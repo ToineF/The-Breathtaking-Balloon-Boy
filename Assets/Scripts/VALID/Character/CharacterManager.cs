@@ -67,6 +67,7 @@ namespace BlownAway.Character
             CharacterCollider.InitScript(this);
             AirManager.InitScript(this);
             AnimationManager.InitScript(this);
+            CharacterCollider.InitScript(this);
         }
 
 

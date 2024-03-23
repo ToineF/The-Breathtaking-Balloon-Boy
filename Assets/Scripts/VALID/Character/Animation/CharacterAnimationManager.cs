@@ -13,7 +13,6 @@ namespace BlownAway.Character.Animations
 
         [Header("Parameters")]
         [SerializeField] private bool _isOrientationInverted;
-        [SerializeField] private Vector3 _offsetFromRigidbody;
         [SerializeField, Range(0,1)] private float _jacketMorpherLerp;
 
         private Vector3 _lastDirection;
@@ -21,7 +20,7 @@ namespace BlownAway.Character.Animations
 
         private void Update()
         {
-            Manager.CharacterVisual.transform.position = Manager.CharacterCollider.Rigidbody.transform.position + _offsetFromRigidbody;
+            Manager.CharacterVisual.transform.position = Manager.CharacterCollider.Rigidbody.transform.position;
             ChangeCharacterAnimation();
             UpdateCharacterMorpher();
         }
