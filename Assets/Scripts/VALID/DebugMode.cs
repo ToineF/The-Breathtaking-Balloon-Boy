@@ -1,4 +1,5 @@
 using BlownAway.Character;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -60,6 +61,10 @@ namespace BlownAway.DebugMode
             {
                 Manager.ChildrenManager.SetChildren(2);
             }
+            if (Input.GetKeyDown(KeyCode.F8)) // Screenshot
+            {
+                TakeScreenshot();
+            }
         }
 
 
@@ -72,6 +77,13 @@ namespace BlownAway.DebugMode
                 _canvasList.Add(C);
             }
         }
+
+        private void TakeScreenshot()
+        {
+            ScreenCapture.CaptureScreenshot(Application.dataPath + "/Screenshots/" + DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss") + ".png");
+            UnityEditor.AssetDatabase.Refresh();
+        }
+
 #endif
 
     }

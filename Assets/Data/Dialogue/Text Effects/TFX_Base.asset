@@ -34,12 +34,12 @@ MonoBehaviour:
       GlobalMultiplier: 0
     y:
       Function: 1
-      TimeAmount: 1
-      AddedOriginAmount: {x: 0.01, y: 0, z: 0}
+      TimeAmount: 0
+      AddedOriginAmount: {x: 0, y: 0, z: 0}
       AddedRandomAmount:
         Min: {x: 0, y: 0, z: 0}
         Max: {x: 0, y: 0, z: 0}
-      GlobalMultiplier: 10
+      GlobalMultiplier: 0
     z:
       Function: 0
       TimeAmount: 0
@@ -50,21 +50,21 @@ MonoBehaviour:
       GlobalMultiplier: 0
   CharMathDisplacement:
     x:
-      Function: 0
-      TimeAmount: 0
-      AddedOriginAmount: {x: 0, y: 0, z: 0}
+      Function: 1
+      TimeAmount: 50
+      AddedOriginAmount: {x: 0, y: 50, z: 0}
       AddedRandomAmount:
         Min: {x: 0, y: 0, z: 0}
         Max: {x: 0, y: 0, z: 0}
-      GlobalMultiplier: 0
+      GlobalMultiplier: 3
     y:
       Function: 1
-      TimeAmount: 5
-      AddedOriginAmount: {x: 100, y: 0, z: 0}
+      TimeAmount: 50
+      AddedOriginAmount: {x: 50, y: 0, z: 0}
       AddedRandomAmount:
         Min: {x: 0, y: 0, z: 0}
         Max: {x: 0, y: 0, z: 0}
-      GlobalMultiplier: 15
+      GlobalMultiplier: 3
     z:
       Function: 0
       TimeAmount: 0
