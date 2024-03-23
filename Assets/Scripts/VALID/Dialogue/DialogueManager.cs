@@ -169,7 +169,7 @@ namespace BlownAway.Cutscenes
                         int index = charInfo.vertexIndex + j;
                         Vector3 origin = meshInfo.vertices[index];
                         meshInfo.vertices[index] = origin + data.VertexMathDisplacement.GetTotalFunction(origin) + data.CharMathDisplacement.GetTotalFunction(centerPoint);
-                        meshInfo.colors32[index] = effect.Color;
+                        meshInfo.colors32[index] = effect.Colors[j];
                     }
                 }
             }
@@ -178,6 +178,7 @@ namespace BlownAway.Cutscenes
             {
                 TMP_MeshInfo meshInfo = textInfo.meshInfo[i];
                 meshInfo.mesh.vertices = meshInfo.vertices;
+                meshInfo.mesh.colors32 = meshInfo.colors32;
                 _dialogueTextboxText.UpdateGeometry(meshInfo.mesh, i);
             }
         }

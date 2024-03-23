@@ -15,15 +15,15 @@ namespace BlownAway.Cutscenes
 
         public int MinRange;
         public int MaxRange;
-        public Color Color;
+        public ColorSquare Colors;
         public Func<Vector3, Vector3> GetText;
         public LimitRangeByTypeWriter TypeWriterRange;
 
-        public TextEffect(Func<Vector3, Vector3> getText, Color color, int minRange = 0, int maxRange = -1, LimitRangeByTypeWriter typewriterRange = LimitRangeByTypeWriter.FALSE)
+        public TextEffect(Func<Vector3, Vector3> getText, ColorSquare colors, int minRange = 0, int maxRange = -1, LimitRangeByTypeWriter typewriterRange = LimitRangeByTypeWriter.FALSE)
         {
             MinRange = minRange;
             MaxRange = maxRange;
-            Color = color;
+            Colors = colors;
             GetText = getText;
             TypeWriterRange = typewriterRange;
         }
@@ -104,6 +104,25 @@ namespace BlownAway.Cutscenes
         public Vector3 GetRandomRange()
         {
             return new Vector3(UnityEngine.Random.Range(Min.x, Max.x), UnityEngine.Random.Range(Min.y, Max.y), UnityEngine.Random.Range(Min.z, Max.z));
+        }
+    }
+
+    [Serializable]
+    public struct ColorSquare
+    {
+        public Color TopLeft;
+        public Color TopRight;
+        public Color BottomLeft;
+        public Color BottomRight;
+
+        public Color this[int i]
+        {
+            get {
+                if (i == 1) return TopLeft;
+                else if (i == 2) return TopRight;
+                else if (i == 3) return BottomRight;
+                else return BottomLeft;
+            }
         }
     }
 }
