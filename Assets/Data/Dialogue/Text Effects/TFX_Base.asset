@@ -17,21 +17,55 @@ MonoBehaviour:
   TextEffect:
     MinRange: 0
     MaxRange: 0
-    Color: {r: 1, g: 1, b: 1, a: 1}
+    Color: {r: 0.8018868, g: 0.26779988, b: 0.26779988, a: 1}
     TypeWriterRange: 2
-  MathDisplacement:
+  VertexMathDisplacement:
     x:
-      Function: 1
+      Function: 0
       TimeAmount: 0
       AddedOriginAmount: {x: 0, y: 0, z: 0}
+      AddedRandomAmount:
+        Min: {x: 0, y: 0, z: 0}
+        Max: {x: 0, y: 0, z: 0}
       GlobalMultiplier: 0
     y:
       Function: 1
-      TimeAmount: 10
-      AddedOriginAmount: {x: 0.01, y: 0.01, z: 0}
-      GlobalMultiplier: 20
+      TimeAmount: 1
+      AddedOriginAmount: {x: 0.01, y: 0, z: 0}
+      AddedRandomAmount:
+        Min: {x: 0, y: 0, z: 0}
+        Max: {x: 0, y: 0, z: 0}
+      GlobalMultiplier: 10
     z:
-      Function: 3
+      Function: 0
       TimeAmount: 0
       AddedOriginAmount: {x: 0, y: 0, z: 0}
+      AddedRandomAmount:
+        Min: {x: 0, y: 0, z: 0}
+        Max: {x: 0, y: 0, z: 0}
+      GlobalMultiplier: 0
+  CharMathDisplacement:
+    x:
+      Function: 0
+      TimeAmount: 0
+      AddedOriginAmount: {x: 0, y: 0, z: 0}
+      AddedRandomAmount:
+        Min: {x: 0, y: 0, z: 0}
+        Max: {x: 0, y: 0, z: 0}
+      GlobalMultiplier: 0
+    y:
+      Function: 1
+      TimeAmount: 5
+      AddedOriginAmount: {x: 100, y: 0, z: 0}
+      AddedRandomAmount:
+        Min: {x: 0, y: 0, z: 0}
+        Max: {x: 0, y: 0, z: 0}
+      GlobalMultiplier: 15
+    z:
+      Function: 0
+      TimeAmount: 0
+      AddedOriginAmount: {x: 0, y: 0, z: 0}
+      AddedRandomAmount:
+        Min: {x: 0, y: 0, z: 0}
+        Max: {x: 0, y: 0, z: 0}
       GlobalMultiplier: 0

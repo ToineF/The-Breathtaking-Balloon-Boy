@@ -19,22 +19,53 @@ MonoBehaviour:
     MaxRange: -1
     Color: {r: 0, g: 0, b: 0, a: 0}
     TypeWriterRange: 1
-  MathDisplacement:
+  VertexMathDisplacement:
     x:
       Function: 3
       TimeAmount: 0
-      MultipliedOriginAmount: {x: 0, y: 0, z: 0}
       AddedOriginAmount: {x: -1, y: 0, z: 0}
+      AddedRandomAmount:
+        Min: {x: 0, y: 0, z: 0}
+        Max: {x: 0, y: 0, z: 0}
       GlobalMultiplier: 1
     y:
       Function: 3
       TimeAmount: 0
-      MultipliedOriginAmount: {x: 0, y: 0, z: 0}
       AddedOriginAmount: {x: 0, y: -1, z: 0}
+      AddedRandomAmount:
+        Min: {x: 0, y: 0, z: 0}
+        Max: {x: 0, y: 0, z: 0}
       GlobalMultiplier: 1
     z:
       Function: 3
       TimeAmount: 0
-      MultipliedOriginAmount: {x: 0, y: 0, z: 0}
       AddedOriginAmount: {x: 0, y: 0, z: -1}
+      AddedRandomAmount:
+        Min: {x: 0, y: 0, z: 0}
+        Max: {x: 0, y: 0, z: 0}
       GlobalMultiplier: 1
+  CharMathDisplacement:
+    x:
+      Function: 0
+      TimeAmount: 0
+      AddedOriginAmount: {x: 0, y: 0, z: 0}
+      AddedRandomAmount:
+        Min: {x: 0, y: 0, z: 0}
+        Max: {x: 0, y: 0, z: 0}
+      GlobalMultiplier: 0
+    y:
+      Function: 0
+      TimeAmount: 0
+      AddedOriginAmount: {x: 0, y: 0, z: 0}
+      AddedRandomAmount:
+        Min: {x: 0, y: 0, z: 0}
+        Max: {x: 0, y: 0, z: 0}
+      GlobalMultiplier: 0
+    z:
+      Function: 0
+      TimeAmount: 0
+      AddedOriginAmount: {x: 0, y: 0, z: 0}
+      AddedRandomAmount:
+        Min: {x: 0, y: 0, z: 0}
+        Max: {x: 0, y: 0, z: 0}
+      GlobalMultiplier: 0

@@ -44,23 +44,28 @@ namespace BlownAway.Cutscenes
         public FunctionUsed Function;
         public float TimeAmount;
         public Vector3 AddedOriginAmount;
+        public Vector3MinMaxRange AddedRandomAmount;
         public float GlobalMultiplier;
 
-        public DisplacementParams(FunctionUsed function, float time, Vector3 originAdd, float globalMultiply)
+        public DisplacementParams(FunctionUsed function, float time, Vector3 originAdd, float globalMultiply, Vector3MinMaxRange randomAdd)
         {
             Function = function;
             TimeAmount = time;
             AddedOriginAmount = originAdd;
+            AddedRandomAmount = randomAdd;
             GlobalMultiplier = globalMultiply;
         }
 
         public float GetTotalValue(Vector3 origin)
         {
             float addedOrigin = origin.x * AddedOriginAmount.x + origin.y * AddedOriginAmount.y + origin.z * AddedOriginAmount.z;
+            Vector3 randomRange = AddedRandomAmount.GetRandomRange();
+            float addedRandom = randomRange.x + randomRange.y + randomRange.z;
 
             float value = Time.time * TimeAmount;
             value += addedOrigin;
-
+            value += addedRandom;
+            
             if (Function == FunctionUsed.COS) value = Mathf.Cos(value);
             else if (Function == FunctionUsed.SIN) value = Mathf.Sin(value);
             else if (Function == FunctionUsed.TAN) value = Mathf.Tan(value);
@@ -87,6 +92,18 @@ namespace BlownAway.Cutscenes
         public Vector3 GetTotalFunction(Vector3 origin)
         {
             return new Vector3(x.GetTotalValue(origin), y.GetTotalValue(origin), z.GetTotalValue(origin));
+        }
+    }
+
+    [Serializable]
+    public struct Vector3MinMaxRange
+    {
+        public Vector3 Min;
+        public Vector3 Max;
+
+        public Vector3 GetRandomRange()
+        {
+            return new Vector3(UnityEngine.Random.Range(Min.x, Max.x), UnityEngine.Random.Range(Min.y, Max.y), UnityEngine.Random.Range(Min.z, Max.z));
         }
     }
 }

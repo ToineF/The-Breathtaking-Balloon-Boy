@@ -162,12 +162,13 @@ namespace BlownAway.Cutscenes
                     if (!charInfo.isVisible) continue;
 
                     TMP_MeshInfo meshInfo = textInfo.meshInfo[charInfo.materialReferenceIndex];
+                    Vector3 centerPoint = new Vector2((meshInfo.vertices[charInfo.vertexIndex].x + meshInfo.vertices[charInfo.vertexIndex + 2].x)/2, meshInfo.vertices[charInfo.vertexIndex].y);
 
                     for (int j = 0; j < 4; j++)
                     {
                         int index = charInfo.vertexIndex + j;
                         Vector3 origin = meshInfo.vertices[index];
-                        meshInfo.vertices[index] = origin + data.MathDisplacement.GetTotalFunction(origin);
+                        meshInfo.vertices[index] = origin + data.VertexMathDisplacement.GetTotalFunction(origin) + data.CharMathDisplacement.GetTotalFunction(centerPoint);
                         meshInfo.colors32[index] = effect.Color;
                     }
                 }

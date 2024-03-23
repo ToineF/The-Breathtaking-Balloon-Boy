@@ -8,7 +8,8 @@ namespace BlownAway.Cutscenes
         [SerializeField] public TextEffectRole Role;
         [SerializeField] public string Key;
         [SerializeField] public TextEffect TextEffect;
-        [SerializeField] public Vector3Displacement MathDisplacement;
+        [SerializeField] public Vector3Displacement VertexMathDisplacement;
+        [SerializeField] public Vector3Displacement CharMathDisplacement;
     }
 
     public enum TextEffectRole
