@@ -9,7 +9,7 @@ namespace BlownAway.Character.States
             Debug.Log("PROPULSION");
             manager.MovementManager.LerpGravityTo(manager, manager.Data.FallData.PropulsionData);
 
-            manager.MovementManager.LerpDeplacementSpeed(manager, manager.Data.LateralMovementData.BasePropulsionLateralDeplacementSpeed, manager.Data.LateralMovementData.BasePropulsionDeplacementTime, manager.Data.LateralMovementData.BasePropulsionDeplacementCurve);
+            manager.MovementManager.LerpDeplacementSpeed(manager, manager.Data.LateralMovementData.PropulsionData);
 
             manager.MovementManager.LerpPropulsionSpeed(manager, 1, manager.Data.PropulsionData.BasePropulsionAccelTime, manager.Data.PropulsionData.BasePropulsionAccelCurve);
 
@@ -47,7 +47,7 @@ namespace BlownAway.Character.States
         public override void FixedUpdateState(CharacterManager manager)
         {
             if (!manager.Inputs.PropulsionType.HasFlag(Inputs.PropulsionDirection.Lateral))
-                manager.MovementManager.MoveAtSpeed(manager, manager.Data.LateralMovementData.PropulsionDirectionTurnSpeed);
+                manager.MovementManager.MoveAtSpeed(manager);
 
             manager.MovementManager.UpdatePropulsionMovement(manager);
 

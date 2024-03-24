@@ -17,7 +17,7 @@ public class CharacterJumpState : CharacterBaseState
         Debug.Log("JUMP");
         manager.MovementManager.LerpGravityTo(manager, manager.Data.FallData.BaseData);
 
-        manager.MovementManager.LerpDeplacementSpeed(manager, manager.Data.LateralMovementData.JumpLateralDeplacementSpeed, manager.Data.LateralMovementData.JumpDeplacementTime, manager.Data.LateralMovementData.JumpDeplacementCurve);
+        manager.MovementManager.LerpDeplacementSpeed(manager, manager.Data.LateralMovementData.JumpData);
 
         manager.MovementManager.StartJump(manager);
     }
@@ -38,7 +38,7 @@ public class CharacterJumpState : CharacterBaseState
 
         manager.MovementManager.CheckIfJumpButtonReleased(manager);
 
-        //manager.MovementManager.CheckForPropulsionStartOnAir(manager);
+        manager.MovementManager.CheckForPropulsionStartOnAir(manager);
 
         manager.MovementManager.CheckForBalloonBounce(manager);
 
@@ -51,7 +51,7 @@ public class CharacterJumpState : CharacterBaseState
     public override void FixedUpdateState(CharacterManager manager)
     {
         //manager.MovementManager.StopMoving(manager, manager.Data.LateralMovementData.JumpDirectionTurnSpeed);
-        manager.MovementManager.MoveAtSpeed(manager, manager.Data.LateralMovementData.JumpDirectionTurnSpeed);
+        manager.MovementManager.MoveAtSpeed(manager);
 
         manager.MovementManager.UpdateJumpMovement(manager);
 

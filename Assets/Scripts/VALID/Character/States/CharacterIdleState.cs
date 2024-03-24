@@ -11,7 +11,7 @@ namespace BlownAway.Character.States
 
             // Movements
             manager.Inputs.ResetLastPropulsionInputDirection();
-            manager.MovementManager.LerpDeplacementSpeed(manager, 0, manager.Data.LateralMovementData.BaseIdleTime, manager.Data.LateralMovementData.BaseIdleCurve);
+            manager.MovementManager.LerpDeplacementSpeed(manager, manager.Data.LateralMovementData.IdleData);
 
             // Gravity
             //manager.MovementManager.LerpGravityTo(manager, manager.Data.GroundDetectionData.GroundedGravity, 0, manager.Data.GroundDetectionData.GroundedGravity, 0, 0, 0.001f, AnimationCurve.Linear(0, 0, 1, 1));
@@ -48,7 +48,7 @@ namespace BlownAway.Character.States
 
         public override void FixedUpdateState(CharacterManager manager)
         {
-            manager.MovementManager.StopMoving(manager, manager.Data.LateralMovementData.IdleDirectionTurnSpeed);
+            manager.MovementManager.StopMoving(manager);
 
             manager.MovementManager.UpdatePropulsionMovement(manager, false);
 

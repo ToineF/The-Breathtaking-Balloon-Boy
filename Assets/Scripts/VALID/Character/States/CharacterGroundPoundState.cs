@@ -10,7 +10,7 @@ namespace BlownAway.Character.States
             Debug.Log("Ground Pound");
             // Movements
             manager.MovementManager.LerpGravityTo(manager, manager.Data.FallData.GroundPoundData);
-            manager.MovementManager.LerpDeplacementSpeed(manager, manager.Data.LateralMovementData.BaseGroundPoundDeplacementLateralSpeed, manager.Data.LateralMovementData.GroundPoundDeplacementTime, manager.Data.LateralMovementData.GroundPoundDeplacementCurve);
+            manager.MovementManager.LerpDeplacementSpeed(manager, manager.Data.LateralMovementData.GroundPoundData);
 
         }
 
@@ -28,7 +28,7 @@ namespace BlownAway.Character.States
 
         public override void FixedUpdateState(CharacterManager manager)
         {
-            manager.MovementManager.MoveAtSpeed(manager, manager.Data.LateralMovementData.GroundPoundDirectionTurnSpeed);
+            manager.MovementManager.MoveAtSpeed(manager);
 
             manager.MovementManager.UpdateGravity(manager);
 

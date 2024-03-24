@@ -20,6 +20,7 @@ namespace BlownAway.Character.Movements
         // Lateral Inputs (Idle, Walk, WASD) - Have this as a generic version for other movements
         private float _currentDeplacementSpeed;
         private Vector3 _currentDeplacementDirection;
+        private float _currentDeplacemenTurnSpeed;
         private Coroutine _currentDeplacementCoroutine;
 
         // Fall
@@ -142,7 +143,7 @@ namespace BlownAway.Character.Movements
         }
 
         #region Deplacement
-        public void MoveAtSpeed(CharacterManager manager, float walkTurnSpeed)
+        public void MoveAtSpeed(CharacterManager manager)
         {
             Vector3 deplacementDirection = _currentDeplacementDirection;
             Vector3 groundDirection = new Vector3(1, 0, 1);
@@ -162,7 +163,7 @@ namespace BlownAway.Character.Movements
             deplacementDirection = GetSlopeMoveDirection(deplacementDirection);
             //Debug.LogWarning(deplacementDirection);
 
-            _currentDeplacementDirection = Vector3.Lerp(_currentDeplacementDirection, deplacementDirection, walkTurnSpeed);
+            _currentDeplacementDirection = Vector3.Lerp(_currentDeplacementDirection, deplacementDirection, _currentDeplacemenTurnSpeed);
 
             //if (IsGrounded && OnSlope())
             //     _currentDeplacementDirection = deplacementDirection; // HERE SEE SLOPES
@@ -173,9 +174,9 @@ namespace BlownAway.Character.Movements
             CurrentVelocity += _currentDeplacementDirection * _currentDeplacementSpeed;
         }
 
-        public void StopMoving(CharacterManager manager, float walkTurnSpeed)
+        public void StopMoving(CharacterManager manager)
         {
-            _currentDeplacementDirection = Vector3.Lerp(_currentDeplacementDirection, Vector3.zero, walkTurnSpeed);
+            _currentDeplacementDirection = Vector3.Lerp(_currentDeplacementDirection, Vector3.zero, _currentDeplacemenTurnSpeed);
             CurrentVelocity += _currentDeplacementDirection * _currentDeplacementSpeed;
 
         }
@@ -186,10 +187,11 @@ namespace BlownAway.Character.Movements
         }
 
         // Generalize this to be more reusable (DO THIS ON STATE START)
-        public void LerpDeplacementSpeed(CharacterManager manager, float targetValue, float lerpSpeed, AnimationCurve curve)
+        public void LerpDeplacementSpeed(CharacterManager manager, Data.LateralData data)
         {
             if (_currentDeplacementCoroutine != null) StopCoroutine(_currentDeplacementCoroutine);
-            _currentDeplacementCoroutine = StartCoroutine(LerpWithEase(_currentDeplacementSpeed, targetValue, lerpSpeed, curve, (result) => _currentDeplacementSpeed = result));
+            _currentDeplacementCoroutine = StartCoroutine(LerpWithEase(_currentDeplacementSpeed, data.DeplacementLateralSpeed, data.DeplacementTime, data.DeplacementCurve, (result) => _currentDeplacementSpeed = result));
+            _currentDeplacemenTurnSpeed = data.DirectionTurnSpeed;
         }
         #endregion
 
