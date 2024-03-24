@@ -23,7 +23,8 @@ namespace BlownAway.Character.Movements.Data
         [field: SerializeField] public LateralData PropulsionData { get; private set; }
 
         [field: Header("Jump")]
-        [field: SerializeField] public LateralData JumpData { get; private set; }
+        [field: SerializeField] public LateralData JumpAscentData { get; private set; }
+        [field: SerializeField] public LateralData JumpDescentData { get; private set; }
 
         [field: Header("Ground Pound")]
         [field: SerializeField] public LateralData GroundPoundData { get; private set; }

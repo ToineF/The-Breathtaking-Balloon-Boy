@@ -17,8 +17,8 @@ namespace BlownAway.Character.Movements.Data
         [field: SerializeField] public FallData PropulsionData { get; private set; }
 
         [field: Header("Jump")]
-        [field: SerializeField] public FallData JumpData { get; private set; }
-        [field: SerializeField, Tooltip("The gravity the character falls at when releasing the jump button early")] public float ShortJumpStartGravity { get; private set; }
+        [field: SerializeField] public FallData JumpAscentData { get; private set; }
+        [field: SerializeField] public FallData JumpDescentData { get; private set; }
 
         [field: Header("Dash")]
         [field: SerializeField] public FallData DashData { get; private set; }

@@ -42,7 +42,7 @@ MonoBehaviour:
     <DirectionTurnSpeed>k__BackingField: 0.709
   <WalkData>k__BackingField:
     <DeplacementLateralSpeed>k__BackingField: 10
-    <DeplacementTime>k__BackingField: 5
+    <DeplacementTime>k__BackingField: 0.5
     <DeplacementCurve>k__BackingField:
       serializedVersion: 2
       m_Curve:
@@ -152,7 +152,7 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     <DirectionTurnSpeed>k__BackingField: 0.09
-  <JumpData>k__BackingField:
+  <JumpAscentData>k__BackingField:
     <DeplacementLateralSpeed>k__BackingField: 10
     <DeplacementTime>k__BackingField: 2
     <DeplacementCurve>k__BackingField:
@@ -179,7 +179,35 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    <DirectionTurnSpeed>k__BackingField: 0.102
+    <DirectionTurnSpeed>k__BackingField: 0.112
+  <JumpDescentData>k__BackingField:
+    <DeplacementLateralSpeed>k__BackingField: 10
+    <DeplacementTime>k__BackingField: 2
+    <DeplacementCurve>k__BackingField:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 1
+        outSlope: 1
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 1
+        outSlope: 1
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    <DirectionTurnSpeed>k__BackingField: 0.112
   <GroundPoundData>k__BackingField:
     <DeplacementLateralSpeed>k__BackingField: 0
     <DeplacementTime>k__BackingField: 0

@@ -15,9 +15,9 @@ public class CharacterJumpState : CharacterBaseState
     public override void EnterState(CharacterManager manager)
     {
         Debug.Log("JUMP");
-        manager.MovementManager.LerpGravityTo(manager, manager.Data.FallData.BaseData);
+        manager.MovementManager.LerpGravityTo(manager, manager.Data.FallData.JumpAscentData);
 
-        manager.MovementManager.LerpDeplacementSpeed(manager, manager.Data.LateralMovementData.JumpData);
+        manager.MovementManager.LerpDeplacementSpeed(manager, manager.Data.LateralMovementData.JumpAscentData);
 
         manager.MovementManager.StartJump(manager);
     }
@@ -38,7 +38,7 @@ public class CharacterJumpState : CharacterBaseState
 
         manager.MovementManager.CheckIfJumpButtonReleased(manager);
 
-        manager.MovementManager.CheckForPropulsionStartOnAir(manager);
+        //manager.MovementManager.CheckForPropulsionStartOnAir(manager);
 
         manager.MovementManager.CheckForBalloonBounce(manager);
 

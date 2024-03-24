@@ -501,9 +501,7 @@ namespace BlownAway.Character.Movements
             float jumpVelocity = _currentJumpSpeed - CurrentGravity;
             if (jumpVelocity <= 0)
             {
-                _currentJumpState = CharacterJumpState.JumpState.DESCENT;
-                //_currentJumpSpeed
-                //    _currentJumpIncreaseByFrame
+                StartJumpDescent(manager);
             }
         }
 
@@ -512,7 +510,14 @@ namespace BlownAway.Character.Movements
             if (_currentJumpState == CharacterJumpState.JumpState.DESCENT) return;
             if (manager.Inputs.PropulsionType.HasFlag(PropulsionDirection.Up) || manager.Inputs.PropulsionType.HasFlag(PropulsionDirection.Lateral)) return;
 
+            StartJumpDescent(manager);
+        }
+
+        private void StartJumpDescent(CharacterManager manager)
+        {
             _currentJumpState = CharacterJumpState.JumpState.DESCENT;
+            manager.MovementManager.LerpGravityTo(manager, manager.Data.FallData.JumpDescentData);
+            manager.MovementManager.LerpDeplacementSpeed(manager, manager.Data.LateralMovementData.JumpDescentData);
         }
 
         public void CheckForDashStart(CharacterManager manager, bool refreshDashes = false)
