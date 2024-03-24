@@ -9,7 +9,7 @@ namespace BlownAway.Character.States
         {
             Debug.Log("Dash");
             // Movements
-            manager.MovementManager.LerpGravityTo(manager, manager.Data.FallData.DashGravity, manager.Data.FallData.DashMinGravity, manager.Data.FallData.DashMaxGravity, manager.Data.FallData.DashGravityIncreaseByFrame, manager.Data.FallData.DashGravityIncreaseDecelerationByFrame, manager.Data.FallData.DashGravityTime, manager.Data.FallData.DashGravityAccel);
+            manager.MovementManager.LerpGravityTo(manager, manager.Data.FallData.DashData);
             // Dash
             manager.MovementManager.StartDash(manager);
         }

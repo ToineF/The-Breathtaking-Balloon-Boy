@@ -48,6 +48,7 @@ namespace BlownAway.Character.Movements
         public float JumpTimer { get; private set; }
         private float _currentJumpSpeed;
         private float _currentJumpIncreaseByFrame;
+        public CharacterJumpState.JumpState _currentJumpState;
 
         // Dash
         private float _dashTimer;
@@ -87,7 +88,7 @@ namespace BlownAway.Character.Movements
             GroundHitResults = new RaycastHit[2];
             SlopesHitResults = new RaycastHit[2];
             JumpBufferHitResults = new RaycastHit[2];
-            SetGravityTo(manager, manager.Data.FallData.BaseGravity, manager.Data.FallData.BaseMinGravity, manager.Data.FallData.BaseMaxGravity, manager.Data.FallData.BaseGravityIncreaseByFrame, manager.Data.FallData.BaseGravityIncreaseDecelerationByFrame);
+            SetGravityTo(manager, manager.Data.FallData.BaseData.BaseGravity, manager.Data.FallData.BaseData.MinGravity, manager.Data.FallData.BaseData.MaxGravity, manager.Data.FallData.BaseData.GravityIncreaseByFrame, manager.Data.FallData.BaseData.GravityIncreaseDecelerationByFrame);
 
             // On Ground Enter Subscriptions
             OnGroundEnter += RefreshDashes;
@@ -285,12 +286,12 @@ namespace BlownAway.Character.Movements
 
         }
 
-        public void LerpGravityTo(CharacterManager manager, float targetGravity, float minGravity, float maxGravity, float gravityIncreaseByFrame, float gravityIncreaseDeceleration, float time, AnimationCurve curve)
+        public void LerpGravityTo(CharacterManager manager, Data.FallData data)
         {
             if (_currentFallCoroutine != null) StopCoroutine(_currentFallCoroutine);
-            SetGravityMinMax(manager, targetGravity, minGravity, maxGravity);
-            SetGravityIncrease(manager, gravityIncreaseByFrame, gravityIncreaseDeceleration);
-            _currentFallCoroutine = StartCoroutine(LerpWithEase(CurrentGravity, targetGravity, time, curve, (result) => CurrentGravity = result));
+            SetGravityMinMax(manager, data.BaseGravity, data.MinGravity, data.MaxGravity);
+            SetGravityIncrease(manager, data.GravityIncreaseByFrame, data.GravityIncreaseDecelerationByFrame);
+            _currentFallCoroutine = StartCoroutine(LerpWithEase(CurrentGravity, data.BaseGravity, data.GravityTime, data.GravityAccel, (result) => CurrentGravity = result));
         }
         #endregion
 
@@ -465,6 +466,7 @@ namespace BlownAway.Character.Movements
         {
             if (manager.Inputs.PropulsionType.HasFlag(PropulsionDirection.Up) || manager.Inputs.PropulsionType.HasFlag(PropulsionDirection.Lateral))
             {
+                _currentJumpState = CharacterJumpState.JumpState.ASCENT;
                 manager.AirManager.RefreshAir();
                 manager.States.SwitchState(manager.States.JumpState);
             }
@@ -475,7 +477,6 @@ namespace BlownAway.Character.Movements
             JumpTimer = manager.Data.PropulsionData.MinimumJumpTime;
             _currentJumpSpeed = manager.Data.PropulsionData.JumpForce;
             _currentJumpIncreaseByFrame = manager.Data.PropulsionData.JumpDecreaseByFrame;
-
         }
         public void UpdateJumpTimer(CharacterManager manager)
         {
@@ -489,6 +490,27 @@ namespace BlownAway.Character.Movements
             Vector3 verticalMovement = Vector3.up * _currentJumpSpeed;
 
             CurrentVelocity += verticalMovement;
+        }
+
+        public void UpdateJumpState(CharacterManager manager)
+        {
+            if (_currentJumpState == CharacterJumpState.JumpState.DESCENT) return;
+
+            float jumpVelocity = _currentJumpSpeed - CurrentGravity;
+            if (jumpVelocity <= 0)
+            {
+                _currentJumpState = CharacterJumpState.JumpState.DESCENT;
+                //_currentJumpSpeed
+                //    _currentJumpIncreaseByFrame
+            }
+        }
+
+        public void CheckIfJumpButtonReleased(CharacterManager manager)
+        {
+            if (_currentJumpState == CharacterJumpState.JumpState.DESCENT) return;
+            if (manager.Inputs.PropulsionType.HasFlag(PropulsionDirection.Up) || manager.Inputs.PropulsionType.HasFlag(PropulsionDirection.Lateral)) return;
+
+            _currentJumpState = CharacterJumpState.JumpState.DESCENT;
         }
 
         public void CheckForDashStart(CharacterManager manager, bool refreshDashes = false)

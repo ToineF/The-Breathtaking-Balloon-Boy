@@ -9,7 +9,7 @@ namespace BlownAway.Character.States
         {
             Debug.Log("FALLING");
             // Movements
-            manager.MovementManager.LerpGravityTo(manager, manager.Data.FallData.BaseGravity, manager.Data.FallData.BaseMinGravity, manager.Data.FallData.BaseMaxGravity, manager.Data.FallData.BaseGravityIncreaseByFrame, manager.Data.FallData.BaseGravityIncreaseDecelerationByFrame, manager.Data.FallData.BaseGravityTime, manager.Data.FallData.BaseGravityAccel);
+            manager.MovementManager.LerpGravityTo(manager, manager.Data.FallData.BaseData);
             manager.MovementManager.LerpDeplacementSpeed(manager, manager.Data.LateralMovementData.BaseFallLateralSpeed, manager.Data.LateralMovementData.BaseFallTime, manager.Data.LateralMovementData.BaseFallCurve);
 
             // Air
