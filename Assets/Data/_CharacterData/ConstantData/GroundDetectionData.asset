@@ -12,10 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8568ec477af3da4e83e1accaa5c86d0, type: 3}
   m_Name: GroundDetectionData
   m_EditorClassIdentifier: 
-  GroundedGravity: 0
-  GroundCheckDistance: 0.01
-  GroundDetectionSphereRadius: 0.01
-  GroundLayer:
+  <GroundedGravity>k__BackingField: 0
+  <GroundCheckDistance>k__BackingField: 0.01
+  <GroundDetectionSphereRadius>k__BackingField: 0.01
+  <GroundLayer>k__BackingField:
     serializedVersion: 2
     m_Bits: 128
-  JumpBufferCheckDistance: 0.6
+  <JumpBufferCheckDistance>k__BackingField: 0.3
+  <MaxSlopeAngle>k__BackingField: 55
+  <SlopesGroundCheckDistance>k__BackingField: 1
+  <CharacterColliderCheckOffset>k__BackingField: 0.015
+  <MaxBounces>k__BackingField: 5
+  <StepHeight>k__BackingField: 0.2
+  <StepSmooth>k__BackingField: 800
+  <LowerRaycastLength>k__BackingField: 0.3
+  <UpperRaycastLength>k__BackingField: 0.4

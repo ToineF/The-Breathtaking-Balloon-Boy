@@ -10,6 +10,6 @@ public class CharacterCollider : CharacterSubComponent
 
     protected override void StartScript(CharacterManager manager)
     {
-        UpperStepRaycast.transform.localPosition += Vector3.up * manager.Data.SlopeData.StepHeight;
+        UpperStepRaycast.transform.localPosition += Vector3.up * manager.Data.GroundDetectionData.StepHeight;
     }
 }

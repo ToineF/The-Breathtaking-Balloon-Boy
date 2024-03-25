@@ -21,6 +21,10 @@ namespace BlownAway.Camera.Data
         [field:SerializeField, Tooltip("The offset in the Y direction from the focus point")] public float YOffset { get; private set; } = 1f;
         [field:SerializeField, Tooltip("The maximum angle the camera at which can turn")] public float YUpLimit { get; private set; } = 89.9f;
         [field:SerializeField, Tooltip("The minimum angle the camera at which can turn")] public float YDownLimit { get; private set; } = -89.9f;
+        [field:SerializeField, Tooltip("The time the camera needs to follow the target"), Range(0,1)] public float CameraFollowLerpTime { get; private set; }
+        [field:SerializeField, Tooltip("The time the camera needs to center itself")] public float CameraCenterLerpTime { get; private set; }
+        [field:SerializeField, Tooltip("The time the camera needs to center itself in top down")] public float CameraTopDownStartLerpTime { get; private set; }
+        [field:SerializeField, Tooltip("The time the camera needs to center itself")] public float CameraTopDownEndLerpTime { get; private set; }
         
         [field:Header("Scroll")]
         [field:SerializeField, Tooltip("Is the player able to scroll (useful for debug)")] public bool CanScroll { get; private set; } = false;

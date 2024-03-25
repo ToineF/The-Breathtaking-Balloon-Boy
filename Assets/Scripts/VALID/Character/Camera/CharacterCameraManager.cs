@@ -3,19 +3,21 @@ using AntoineFoucault.Utilities;
 using BlownAway.Character;
 using System.Collections;
 using DG.Tweening;
+using FMOD.Studio;
 
 namespace BlownAway.Camera
 {
     public class CharacterCameraManager : CharacterSubComponent
     {
 
-        [field:Header("References")]
-        [field:SerializeField] public GameObject Camera { get; private set; }
+        [field: Header("References")]
+        [field: SerializeField] public GameObject Camera { get; private set; }
         [SerializeField] GameObject FocusPoint;
         [SerializeField] GameObject CameraCenter;
-        [SerializeField] float _CameraCenterLerpTime;
+        [SerializeField] Transform TopDownPoint;
 
         private Vector3 _cameraMoveVector;
+        private Vector3 _lastRotation;
 
         private Vector3 _camDist;
         private float _zoomDistance;
@@ -23,6 +25,10 @@ namespace BlownAway.Camera
 
         private RaycastHit _camHit;
         private RaycastHit _camHit2;
+
+        private bool _canMoveCamera = true;
+        private bool _cameraIsTopDown = false;
+        private float _cameraCanMoveTimer;
 
         protected override void StartScript(CharacterManager manager)
         {
@@ -33,7 +39,9 @@ namespace BlownAway.Camera
             Cursor.lockState = manager.Data.CameraData.SetCursorVisible ? CursorLockMode.None : CursorLockMode.Locked;
             Cursor.visible = manager.Data.CameraData.SetCursorVisible;
 
-            CenterCamera(manager, 0);
+            CenterCamera(manager, new Vector3(0, manager.CharacterVisual.transform.eulerAngles.y, 0), 0);
+
+            CameraCenter.transform.position = new Vector3(FocusPoint.transform.position.x, FocusPoint.transform.position.y + Manager.Data.CameraData.YOffset, FocusPoint.transform.position.z);
         }
 
         private void LateUpdate()
@@ -44,13 +52,19 @@ namespace BlownAway.Camera
 
         private void UpdateCameraPosition()
         {
-            SetCameraAngle();
+            CheckForCameraCanMove();
+
+            SetCameraAngle(Manager);
+
+            CheckForCameraTopDown(Manager);
+
+            if (!_canMoveCamera) return;
+
+            CheckForCameraCenter(Manager);
 
             ScrollCamera();
 
             SetCameraPosition();
-
-            CheckForCameraCenter(Manager);
         }
 
         private void SetCameraPosition()
@@ -97,10 +111,12 @@ namespace BlownAway.Camera
             }
         }
 
-        private void SetCameraAngle()
+        private void SetCameraAngle(CharacterManager manager)
         {
-            CameraCenter.transform.position = new Vector3(FocusPoint.transform.position.x,
-                                        FocusPoint.transform.position.y + Manager.Data.CameraData.YOffset, FocusPoint.transform.position.z);
+            Vector3 focusPosition = new Vector3(FocusPoint.transform.position.x, FocusPoint.transform.position.y + Manager.Data.CameraData.YOffset, FocusPoint.transform.position.z);
+            CameraCenter.transform.position = Vector3.Lerp(CameraCenter.transform.position, focusPosition, manager.Data.CameraData.CameraFollowLerpTime);
+
+            if (!_canMoveCamera || _cameraIsTopDown) return;
 
             float xAngle = CameraCenter.transform.rotation.eulerAngles.x - _cameraMoveVector.y * _sensitivity / 2;
             float yAngle = CameraCenter.transform.rotation.eulerAngles.y + _cameraMoveVector.x * _sensitivity;
@@ -133,20 +149,49 @@ namespace BlownAway.Camera
             float ySign = (manager.Inputs.IsMouse ? Manager.Data.CameraData.IsMouseYInverted : Manager.Data.CameraData.IsControllerYInverted) ? -1 : 1;
             _cameraMoveVector = manager.Inputs.CameraMoveVector;
             _cameraMoveVector = new Vector3(_cameraMoveVector.x * xSign, _cameraMoveVector.y * ySign);
-            if (_cameraMoveVector != Vector3.zero) CameraCenter.transform.DOKill();
+            //if (_cameraMoveVector != Vector3.zero) CameraCenter.transform.DOKill();
         }
 
         private void CheckForCameraCenter(CharacterManager manager)
         {
             if (manager.Inputs.CameraCenter)
             {
-                CenterCamera(manager, _CameraCenterLerpTime);
+                CenterCamera(manager, new Vector3(0, manager.CharacterVisual.transform.eulerAngles.y, 0), manager.Data.CameraData.CameraCenterLerpTime);
             }
         }
 
-        private void CenterCamera(CharacterManager manager, float rotateTime)
+        private void CenterCamera(CharacterManager manager, Vector3 eulerAngles, float rotateTime)
         {
-            CameraCenter.transform.DORotate(new Vector3(0, manager.CharacterVisual.transform.eulerAngles.y, 0), rotateTime);
+            _canMoveCamera = false;
+            _cameraCanMoveTimer = rotateTime;
+            CameraCenter.transform.DORotate(eulerAngles, rotateTime);
+        }
+
+        private void CheckForCameraTopDown(CharacterManager manager)
+        {
+            if (manager.Inputs.CameraTopDownPressed)
+            {
+                _cameraIsTopDown = true;
+                if (_canMoveCamera) _lastRotation = Camera.transform.eulerAngles;
+                CenterCamera(manager, new Vector3(TopDownPoint.eulerAngles.x, Camera.transform.eulerAngles.y, 0), manager.Data.CameraData.CameraTopDownStartLerpTime);
+            }
+            else if (manager.Inputs.CameraTopDownReleased)
+            {
+                _cameraIsTopDown = false;
+                CenterCamera(manager, _lastRotation, manager.Data.CameraData.CameraTopDownEndLerpTime);
+            }
+        }
+
+        private void CheckForCameraCanMove()
+        {
+            if (_canMoveCamera) return;
+
+            _cameraCanMoveTimer -= Time.deltaTime;
+
+            if (_cameraCanMoveTimer < 0)
+            {
+                _canMoveCamera = true;
+            }
         }
     }
 }

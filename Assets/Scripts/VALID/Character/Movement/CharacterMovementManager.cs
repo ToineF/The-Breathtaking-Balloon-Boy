@@ -204,7 +204,7 @@ namespace BlownAway.Character.Movements
             Vector3 colliderPosition = new Vector3(manager.CharacterCollider.Collider.bounds.center.x, manager.CharacterCollider.Collider.bounds.min.y, manager.CharacterCollider.Collider.bounds.center.z);
             CanJumpBuffer = Physics.SphereCastNonAlloc(colliderPosition, manager.Data.GroundDetectionData.GroundDetectionSphereRadius, Vector3.down, JumpBufferHitResults, manager.Data.GroundDetectionData.JumpBufferCheckDistance, manager.Data.GroundDetectionData.GroundLayer) > 0;
             IsGrounded = Physics.SphereCastNonAlloc(colliderPosition, manager.Data.GroundDetectionData.GroundDetectionSphereRadius, Vector3.down, GroundHitResults, manager.Data.GroundDetectionData.GroundCheckDistance, manager.Data.GroundDetectionData.GroundLayer) > 0;
-            Physics.SphereCastNonAlloc(colliderPosition, manager.Data.GroundDetectionData.GroundDetectionSphereRadius, Vector3.down, SlopesHitResults, manager.Data.SlopeData.SlopesGroundCheckDistance, manager.Data.GroundDetectionData.GroundLayer);
+            Physics.SphereCastNonAlloc(colliderPosition, manager.Data.GroundDetectionData.GroundDetectionSphereRadius, Vector3.down, SlopesHitResults, manager.Data.GroundDetectionData.SlopesGroundCheckDistance, manager.Data.GroundDetectionData.GroundLayer);
             //bool a = Physics.SphereCastNonAlloc(colliderPositionn, manager.Data.GroundDetectionData.GroundDetectionSphereRadius, Vector3.down, GroundHitResults, manager.Data.GroundDetectionData.GroundCheckDistance, manager.Data.GroundDetectionData.GroundLayer) > 0;
             //Collider[] hitColliders = Physics.OverlapSphere(colliderPosition + Vector3.down * manager.Data.GroundDetectionData.GroundCheckDistance, manager.Data.GroundDetectionData.GroundDetectionSphereRadius, manager.Data.GroundDetectionData.GroundLayer);
             //IsGrounded = hitColliders.Length > 0;
@@ -218,7 +218,7 @@ namespace BlownAway.Character.Movements
             {
                 if (IsGrounded) // On Ground Enter
                 {
-                    EnterGround(manager);
+                    EnterGround(manager, colliderPosition);
                 }
                 else // On Ground Leave
                 {
@@ -234,15 +234,25 @@ namespace BlownAway.Character.Movements
             // Others checks to be sure
             if (IsGrounded && manager.States.IsInState(manager.States.FallingState))
             {
-                EnterGround(manager);
+                EnterGround(manager, colliderPosition);
             }
         }
 
-        private void EnterGround(CharacterManager manager)
+        private void EnterGround(CharacterManager manager, Vector3 colliderPosition)
         {
             OnGroundEnter?.Invoke(manager);
             manager.States.SwitchState(manager.States.IdleState);
             manager.CharacterCollider.Rigidbody.transform.SetParent(LastGround.collider.transform);
+
+            // VFX
+            Instantiate(manager.Data.FeedbacksData.LandVFX, manager.CharacterCollider.Rigidbody.transform.position, manager.Data.FeedbacksData.LandVFX.transform.rotation);
+
+            //if (LastGround.collider != null)
+            //{
+            //    Vector3 downVector = Vector3.down * (LastGround.point.y - colliderPosition.y);
+            //    Debug.LogError(downVector);
+            //    CurrentVelocity += downVector;
+            //}
         }
 
         public void UpdateGravity(CharacterManager manager, bool isnotGrounded = true)
@@ -635,7 +645,7 @@ namespace BlownAway.Character.Movements
 
             float angle = Vector3.Angle(Vector3.up, SlopesHitResults[0].normal);
             //Debug.LogWarning(angle);
-            return angle < Manager.Data.SlopeData.MaxSlopeAngle && angle != 0;
+            return angle < Manager.Data.GroundDetectionData.MaxSlopeAngle && angle != 0;
 
         }
 
@@ -646,27 +656,27 @@ namespace BlownAway.Character.Movements
 
         private Vector3 ColliderAndSlide(CharacterManager manager, Vector3 vel, Vector3 pos, int depth, bool gravityPass, Vector3 velInit)
         {
-            if (depth >= manager.Data.SlopeData.MaxBounces)
+            if (depth >= manager.Data.GroundDetectionData.MaxBounces)
             {
                 return Vector3.zero;
             }
 
-            float dist = vel.magnitude + manager.Data.SlopeData.CharacterColliderCheckOffset;
+            float dist = vel.magnitude + manager.Data.GroundDetectionData.CharacterColliderCheckOffset;
 
             RaycastHit hit;
             if (Physics.SphereCast(pos, manager.CharacterCollider.Collider.bounds.extents.x, vel.normalized, out hit, dist, manager.Data.GroundDetectionData.GroundLayer))
             {
-                Vector3 snapToSurface = vel.normalized * (hit.distance - manager.Data.SlopeData.CharacterColliderCheckOffset);
+                Vector3 snapToSurface = vel.normalized * (hit.distance - manager.Data.GroundDetectionData.CharacterColliderCheckOffset);
                 Vector3 leftOver = vel - snapToSurface;
                 float angle = Vector3.Angle(Vector3.up, hit.normal);
 
-                if (snapToSurface.magnitude <= manager.Data.SlopeData.CharacterColliderCheckOffset)
+                if (snapToSurface.magnitude <= manager.Data.GroundDetectionData.CharacterColliderCheckOffset)
                 {
                     snapToSurface = Vector3.zero;
                 }
 
                 // Walkable Ground / Slopes
-                if (angle <= manager.Data.SlopeData.MaxSlopeAngle)
+                if (angle <= manager.Data.GroundDetectionData.MaxSlopeAngle)
                 {
                     if (gravityPass)
                     {
@@ -728,23 +738,23 @@ namespace BlownAway.Character.Movements
             Gizmos.color = Color.blue;
 
             // Stairs
-            Debug.DrawRay(Manager.CharacterCollider.LowerStepRaycast.transform.position, Quaternion.AngleAxis(0, Vector3.up) * Manager.CharacterVisual.transform.forward * Manager.Data.SlopeData.LowerRaycastLength, Color.blue, 0.3f);
-            Debug.DrawRay(Manager.CharacterCollider.LowerStepRaycast.transform.position, Quaternion.AngleAxis(45, Vector3.up) * Manager.CharacterVisual.transform.forward * Manager.Data.SlopeData.LowerRaycastLength, Color.blue, 0.3f);
-            Debug.DrawRay(Manager.CharacterCollider.LowerStepRaycast.transform.position, Quaternion.AngleAxis(-45, Vector3.up) * Manager.CharacterVisual.transform.forward * Manager.Data.SlopeData.LowerRaycastLength, Color.blue, 0.3f);
-            Debug.DrawRay(Manager.CharacterCollider.UpperStepRaycast.transform.position, Quaternion.AngleAxis(0, Vector3.up) * Manager.CharacterVisual.transform.forward * Manager.Data.SlopeData.UpperRaycastLength, Color.blue, 0.3f);
-            Debug.DrawRay(Manager.CharacterCollider.UpperStepRaycast.transform.position, Quaternion.AngleAxis(45, Vector3.up) * Manager.CharacterVisual.transform.forward * Manager.Data.SlopeData.UpperRaycastLength, Color.blue, 0.3f);
-            Debug.DrawRay(Manager.CharacterCollider.UpperStepRaycast.transform.position, Quaternion.AngleAxis(-45, Vector3.up) * Manager.CharacterVisual.transform.forward * Manager.Data.SlopeData.UpperRaycastLength, Color.blue, 0.3f);
+            Debug.DrawRay(Manager.CharacterCollider.LowerStepRaycast.transform.position, Quaternion.AngleAxis(0, Vector3.up) * Manager.CharacterVisual.transform.forward * Manager.Data.GroundDetectionData.LowerRaycastLength, Color.blue, 0.3f);
+            Debug.DrawRay(Manager.CharacterCollider.LowerStepRaycast.transform.position, Quaternion.AngleAxis(45, Vector3.up) * Manager.CharacterVisual.transform.forward * Manager.Data.GroundDetectionData.LowerRaycastLength, Color.blue, 0.3f);
+            Debug.DrawRay(Manager.CharacterCollider.LowerStepRaycast.transform.position, Quaternion.AngleAxis(-45, Vector3.up) * Manager.CharacterVisual.transform.forward * Manager.Data.GroundDetectionData.LowerRaycastLength, Color.blue, 0.3f);
+            Debug.DrawRay(Manager.CharacterCollider.UpperStepRaycast.transform.position, Quaternion.AngleAxis(0, Vector3.up) * Manager.CharacterVisual.transform.forward * Manager.Data.GroundDetectionData.UpperRaycastLength, Color.blue, 0.3f);
+            Debug.DrawRay(Manager.CharacterCollider.UpperStepRaycast.transform.position, Quaternion.AngleAxis(45, Vector3.up) * Manager.CharacterVisual.transform.forward * Manager.Data.GroundDetectionData.UpperRaycastLength, Color.blue, 0.3f);
+            Debug.DrawRay(Manager.CharacterCollider.UpperStepRaycast.transform.position, Quaternion.AngleAxis(-45, Vector3.up) * Manager.CharacterVisual.transform.forward * Manager.Data.GroundDetectionData.UpperRaycastLength, Color.blue, 0.3f);
         }
 
         public void CheckForStepClimb(CharacterManager manager)
         {
             for (int i = -45; i <= 45; i += 45)
             {
-                if (Physics.Raycast(manager.CharacterCollider.LowerStepRaycast.transform.position, Quaternion.AngleAxis(i, Vector3.up) * Manager.CharacterVisual.transform.forward, manager.Data.SlopeData.LowerRaycastLength, manager.Data.GroundDetectionData.GroundLayer))
+                if (Physics.Raycast(manager.CharacterCollider.LowerStepRaycast.transform.position, Quaternion.AngleAxis(0, Vector3.up) * Manager.CharacterVisual.transform.forward, out RaycastHit lowerHit, manager.Data.GroundDetectionData.LowerRaycastLength, manager.Data.GroundDetectionData.GroundLayer))
                 {
-                    if (!Physics.Raycast(manager.CharacterCollider.UpperStepRaycast.transform.position, Quaternion.AngleAxis(i, Vector3.up) * Manager.CharacterVisual.transform.forward, manager.Data.SlopeData.UpperRaycastLength, manager.Data.GroundDetectionData.GroundLayer))
+                    if (!Physics.Raycast(manager.CharacterCollider.UpperStepRaycast.transform.position, Quaternion.AngleAxis(0, Vector3.up) * Manager.CharacterVisual.transform.forward, manager.Data.GroundDetectionData.UpperRaycastLength, manager.Data.GroundDetectionData.GroundLayer))
                     {
-                        CurrentVelocity += Vector3.up * manager.Data.SlopeData.StepSmooth * Time.deltaTime;
+                        CurrentVelocity += Vector3.up * manager.Data.GroundDetectionData.StepSmooth * Time.deltaTime;
                         break;
                     }
                 }
