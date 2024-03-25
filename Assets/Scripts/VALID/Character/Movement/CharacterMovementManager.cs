@@ -218,9 +218,7 @@ namespace BlownAway.Character.Movements
             {
                 if (IsGrounded) // On Ground Enter
                 {
-                    OnGroundEnter?.Invoke(manager);
-                    manager.States.SwitchState(manager.States.IdleState);
-                    manager.CharacterCollider.Rigidbody.transform.SetParent(LastGround.collider.transform);
+                    EnterGround(manager);
                 }
                 else // On Ground Leave
                 {
@@ -232,6 +230,19 @@ namespace BlownAway.Character.Movements
                     manager.CharacterCollider.Rigidbody.transform.SetParent(parent);
                 }
             }
+
+            // Others checks to be sure
+            if (IsGrounded && manager.States.IsInState(manager.States.FallingState))
+            {
+                EnterGround(manager);
+            }
+        }
+
+        private void EnterGround(CharacterManager manager)
+        {
+            OnGroundEnter?.Invoke(manager);
+            manager.States.SwitchState(manager.States.IdleState);
+            manager.CharacterCollider.Rigidbody.transform.SetParent(LastGround.collider.transform);
         }
 
         public void UpdateGravity(CharacterManager manager, bool isnotGrounded = true)
@@ -674,7 +685,8 @@ namespace BlownAway.Character.Movements
                             new Vector3(leftOver.x, 0, leftOver.z),
                             new Vector3(hit.normal.x, 0, hit.normal.z));
                         leftOver *= scale;
-                    } else
+                    }
+                    else
                     {
                         leftOver = VectorExtensions.ProjectAndScale(leftOver, hit.normal) * scale;
                     }
@@ -716,17 +728,17 @@ namespace BlownAway.Character.Movements
             Gizmos.color = Color.blue;
 
             // Stairs
-            Debug.DrawRay(Manager.CharacterCollider.LowerStepRaycast.transform.position, Quaternion.AngleAxis(0, Vector3.up) * Manager.CharacterVisual.transform.forward, Color.blue, Manager.Data.SlopeData.LowerRaycastLength);
-            Debug.DrawRay(Manager.CharacterCollider.LowerStepRaycast.transform.position, Quaternion.AngleAxis(45, Vector3.up) * Manager.CharacterVisual.transform.forward, Color.blue, Manager.Data.SlopeData.LowerRaycastLength);
-            Debug.DrawRay(Manager.CharacterCollider.LowerStepRaycast.transform.position, Quaternion.AngleAxis(-45, Vector3.up) * Manager.CharacterVisual.transform.forward, Color.blue, Manager.Data.SlopeData.LowerRaycastLength);
-            Debug.DrawRay(Manager.CharacterCollider.UpperStepRaycast.transform.position, Quaternion.AngleAxis(0, Vector3.up) * Manager.CharacterVisual.transform.forward, Color.blue, Manager.Data.SlopeData.UpperRaycastLength);
-            Debug.DrawRay(Manager.CharacterCollider.UpperStepRaycast.transform.position, Quaternion.AngleAxis(45, Vector3.up) * Manager.CharacterVisual.transform.forward, Color.blue, Manager.Data.SlopeData.UpperRaycastLength);
-            Debug.DrawRay(Manager.CharacterCollider.UpperStepRaycast.transform.position, Quaternion.AngleAxis(-45, Vector3.up) * Manager.CharacterVisual.transform.forward, Color.blue, Manager.Data.SlopeData.UpperRaycastLength);
+            Debug.DrawRay(Manager.CharacterCollider.LowerStepRaycast.transform.position, Quaternion.AngleAxis(0, Vector3.up) * Manager.CharacterVisual.transform.forward * Manager.Data.SlopeData.LowerRaycastLength, Color.blue, 0.3f);
+            Debug.DrawRay(Manager.CharacterCollider.LowerStepRaycast.transform.position, Quaternion.AngleAxis(45, Vector3.up) * Manager.CharacterVisual.transform.forward * Manager.Data.SlopeData.LowerRaycastLength, Color.blue, 0.3f);
+            Debug.DrawRay(Manager.CharacterCollider.LowerStepRaycast.transform.position, Quaternion.AngleAxis(-45, Vector3.up) * Manager.CharacterVisual.transform.forward * Manager.Data.SlopeData.LowerRaycastLength, Color.blue, 0.3f);
+            Debug.DrawRay(Manager.CharacterCollider.UpperStepRaycast.transform.position, Quaternion.AngleAxis(0, Vector3.up) * Manager.CharacterVisual.transform.forward * Manager.Data.SlopeData.UpperRaycastLength, Color.blue, 0.3f);
+            Debug.DrawRay(Manager.CharacterCollider.UpperStepRaycast.transform.position, Quaternion.AngleAxis(45, Vector3.up) * Manager.CharacterVisual.transform.forward * Manager.Data.SlopeData.UpperRaycastLength, Color.blue, 0.3f);
+            Debug.DrawRay(Manager.CharacterCollider.UpperStepRaycast.transform.position, Quaternion.AngleAxis(-45, Vector3.up) * Manager.CharacterVisual.transform.forward * Manager.Data.SlopeData.UpperRaycastLength, Color.blue, 0.3f);
         }
 
         public void CheckForStepClimb(CharacterManager manager)
         {
-            for (int i = -45; i <= 45; i+=45)
+            for (int i = -45; i <= 45; i += 45)
             {
                 if (Physics.Raycast(manager.CharacterCollider.LowerStepRaycast.transform.position, Quaternion.AngleAxis(i, Vector3.up) * Manager.CharacterVisual.transform.forward, manager.Data.SlopeData.LowerRaycastLength, manager.Data.GroundDetectionData.GroundLayer))
                 {
