@@ -5,7 +5,7 @@ namespace BlownAway.Character.States
 {
     public class CharacterGroundPoundState : CharacterBaseState
     {
-        public override void EnterState(CharacterManager manager)
+        public override void EnterState(CharacterManager manager, CharacterBaseState previousState)
         {
             Debug.Log("Ground Pound");
             // Movements

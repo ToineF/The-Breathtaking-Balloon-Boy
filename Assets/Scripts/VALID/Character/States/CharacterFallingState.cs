@@ -5,7 +5,7 @@ namespace BlownAway.Character.States
 {
     public class CharacterFallingState : CharacterBaseState
     {
-        public override void EnterState(CharacterManager manager)
+        public override void EnterState(CharacterManager manager, CharacterBaseState previousState)
         {
             Debug.Log("FALLING");
             // Movements

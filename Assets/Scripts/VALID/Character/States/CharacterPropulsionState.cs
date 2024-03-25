@@ -4,7 +4,7 @@ namespace BlownAway.Character.States
 {
     public class CharacterPropulsionState : CharacterBaseState
     {
-        public override void EnterState(CharacterManager manager)
+        public override void EnterState(CharacterManager manager, CharacterBaseState previousState)
         {
             Debug.Log("PROPULSION");
             manager.MovementManager.LerpGravityTo(manager, manager.Data.FallData.PropulsionData);

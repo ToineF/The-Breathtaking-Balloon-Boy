@@ -5,7 +5,7 @@ namespace BlownAway.Character.States
 {
     public class CharacterIdleState : CharacterBaseState
     {
-        public override void EnterState(CharacterManager manager)
+        public override void EnterState(CharacterManager manager, CharacterBaseState previousState)
         {
             Debug.Log("IDLE");
 

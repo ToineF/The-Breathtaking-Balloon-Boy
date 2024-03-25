@@ -12,7 +12,7 @@ public class CharacterJumpState : CharacterBaseState
         APEX = 2,
     }
 
-    public override void EnterState(CharacterManager manager)
+    public override void EnterState(CharacterManager manager, CharacterBaseState previousState)
     {
         Debug.Log("JUMP");
         manager.MovementManager.LerpGravityTo(manager, manager.Data.FallData.JumpAscentData);

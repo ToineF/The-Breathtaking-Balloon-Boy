@@ -4,7 +4,7 @@ namespace BlownAway.Character.States
 {
     public class CharacterWalkingState : CharacterBaseState
     {
-        public override void EnterState(CharacterManager manager)
+        public override void EnterState(CharacterManager manager, CharacterBaseState previousState)
         {
             Debug.Log("WALK");
             manager.MovementManager.LerpDeplacementSpeed(manager, manager.Data.LateralMovementData.WalkData);
@@ -14,7 +14,7 @@ namespace BlownAway.Character.States
 
             // VFX
             manager.Feedbacks.WalkVFX.Play();
-            GameObject.Instantiate(manager.Data.FeedbacksData.WalkStartVFX, manager.Feedbacks.WalkVFX.transform);
+            if (manager.Inputs.StartMoving) GameObject.Instantiate(manager.Data.FeedbacksData.WalkStartVFX, manager.Feedbacks.WalkVFX.transform);
         }
 
         public override void ExitState(CharacterManager manager)

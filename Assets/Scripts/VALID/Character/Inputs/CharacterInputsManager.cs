@@ -19,6 +19,7 @@ namespace BlownAway.Character.Inputs
         // Movements
         [Tooltip("The input direction for the movement")] public Vector3 MoveInputDirection { get; private set; }
         [Tooltip("The last non-null input direction for the movement")] public Vector3 LastMoveInputDirection { get; private set; }
+        public bool StartMoving { get; private set; }
 
         // Camera
         public bool IsMouse { get; private set; }
@@ -124,8 +125,10 @@ namespace BlownAway.Character.Inputs
         {
             float xPosition = context.ReadValue<Vector2>().x;
             float zPosition = context.ReadValue<Vector2>().y;
+            Vector3 previousPosition = MoveInputDirection;
             MoveInputDirection = new Vector3(xPosition, 0, zPosition);
             if (MoveInputDirection != Vector3.zero) LastMoveInputDirection = MoveInputDirection;
+            if (previousPosition == Vector3.zero && MoveInputDirection != Vector3.zero) StartMoving = true;
             //else LastMoveInputDirection = _propulsionDefaultDirection; // Uncomment if you want transform.forward to be the default position
         }
 
@@ -203,6 +206,7 @@ namespace BlownAway.Character.Inputs
             StartedBalloonBounce = false;
             StartedGroundPound = false;
             CameraCenter = false;
+            StartMoving = false;
         }
 
         private void StartFalling(InputAction.CallbackContext context)

@@ -24,7 +24,7 @@ namespace BlownAway.Character.States
         protected override void StartScript(CharacterManager manager)
         {
             _currentState = FallingState;
-            _currentState.EnterState(Manager);
+            _currentState.EnterState(Manager, null);
         }
 
         private void Update()
@@ -50,9 +50,11 @@ namespace BlownAway.Character.States
         {
             _currentState.ExitState(Manager);
 
+            CharacterBaseState previousState = _currentState;
+
             _currentState = state;
 
-            _currentState.EnterState(Manager);
+            _currentState.EnterState(Manager, previousState);
         }
 
         public bool IsInState(CharacterBaseState state)
