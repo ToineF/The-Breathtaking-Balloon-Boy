@@ -11,11 +11,18 @@ namespace BlownAway.Character.States
 
             // Gravity
             //manager.MovementManager.LerpGravityTo(manager, manager.Data.GroundDetectionData.GroundedGravity, 0, manager.Data.GroundDetectionData.GroundedGravity, 0, 0, 0.001f, AnimationCurve.Linear(0, 0, 1, 1));
+
+            // VFX
+            manager.Feedbacks.WalkVFX.Play();
+            GameObject.Instantiate(manager.Data.FeedbacksData.WalkStartVFX, manager.Feedbacks.WalkVFX.transform);
         }
 
         public override void ExitState(CharacterManager manager)
         {
             //manager.MovementManager.ResetGravity(manager);
+
+            // VFX
+            manager.Feedbacks.WalkVFX.Stop();
         }
         public override void UpdateState(CharacterManager manager)
         {

@@ -48,6 +48,9 @@ namespace BlownAway.Character
         // Children
         [field: SerializeField, Tooltip("The reference to the class that contains the logic of the checkpoint system")] public CharacterChildrenManager ChildrenManager { get; private set; }
 
+        // Feedbacks
+        [field: SerializeField, Tooltip("The reference to the class that contains the references to the feedbacks")] public CharacterFeedbacksManager Feedbacks { get; private set; }
+
         // UI Transition
         [field: SerializeField, Tooltip("The reference to the class that contains the logic of the transitions")] public Transition Transition { get; private set; }
 
