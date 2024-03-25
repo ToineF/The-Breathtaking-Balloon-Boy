@@ -9,5 +9,6 @@ namespace BlownAway.Character.Air.Data
         [field: SerializeField, Tooltip("The speed at which the air reduces while propulsing")] public float PropulsionAirReductionSpeed { get; private set; }
         [field: SerializeField, Tooltip("The speed at which the air refills while falling")] public float FallingAirRefillSpeed { get; private set; }
         [field: SerializeField, Tooltip("The delay at which the air refills while falling")] public float FallingAirRefillDelay { get; private set; }
+        [field: SerializeField, Tooltip("Does the derive starts only when the air is empty")] public bool DeriveStartsWhenAirIsEmpty { get; private set; }
     }
 }

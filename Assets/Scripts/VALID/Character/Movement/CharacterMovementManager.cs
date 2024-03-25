@@ -444,6 +444,8 @@ namespace BlownAway.Character.Movements
         }
         public void CheckForDeriveEnd(CharacterManager manager)
         {
+            if (!manager.Data.AirData.DeriveStartsWhenAirIsEmpty || !manager.AirManager.AirIsEmpty) return;
+
             UpdateDeriveTimer(manager);
 
             if (DeriveTimer < 0)
