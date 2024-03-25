@@ -32,19 +32,21 @@ public class CharacterJumpState : CharacterBaseState
 
         if (manager.MovementManager.JumpTimer > 0) return;
 
-        manager.MovementManager.CheckIfGrounded(manager, true);
-
         manager.MovementManager.UpdateJumpState(manager);
 
         manager.MovementManager.CheckIfJumpButtonReleased(manager);
 
-        //manager.MovementManager.CheckForPropulsionStartOnAir(manager);
+        manager.MovementManager.CheckIfGrounded(manager, true);
 
         manager.MovementManager.CheckForBalloonBounce(manager);
 
         manager.MovementManager.CheckForGroundPound(manager);
 
         manager.MovementManager.CheckForDashStart(manager);
+
+        if (manager.MovementManager.JumppPropulsionTimer > 0) return;
+
+        manager.MovementManager.CheckForPropulsionStartOnAir(manager);
 
     }
 

@@ -5,6 +5,7 @@ using BlownAway.Character.Inputs;
 using AntoineFoucault.Utilities;
 using System.Collections.Generic;
 using BlownAway.GPE;
+using BlownAway.Character.Movements.Data;
 
 namespace BlownAway.Character.Movements
 {
@@ -47,6 +48,7 @@ namespace BlownAway.Character.Movements
 
         // Jump
         public float JumpTimer { get; private set; }
+        public float JumppPropulsionTimer { get; private set; }
         private float _currentJumpSpeed;
         private float _currentJumpIncreaseByFrame;
         public CharacterJumpState.JumpState _currentJumpState;
@@ -477,12 +479,14 @@ namespace BlownAway.Character.Movements
         public void StartJump(CharacterManager manager)
         {
             JumpTimer = manager.Data.PropulsionData.MinimumJumpTime;
+            JumppPropulsionTimer = manager.Data.PropulsionData.JumpBeforePropulsionTime;
             _currentJumpSpeed = manager.Data.PropulsionData.JumpForce;
             _currentJumpIncreaseByFrame = manager.Data.PropulsionData.JumpDecreaseByFrame;
         }
         public void UpdateJumpTimer(CharacterManager manager)
         {
             JumpTimer -= Time.deltaTime;
+            JumppPropulsionTimer -= Time.deltaTime;
         }
         public void UpdateJumpMovement(CharacterManager manager)
         {
@@ -516,7 +520,8 @@ namespace BlownAway.Character.Movements
         private void StartJumpDescent(CharacterManager manager)
         {
             _currentJumpState = CharacterJumpState.JumpState.DESCENT;
-            manager.MovementManager.LerpGravityTo(manager, manager.Data.FallData.JumpDescentData);
+            CurrentGravityIncreaseByFrame += manager.Data.FallData.JumpDescentData.GravityIncreaseByFrame;
+            CurrentGravity += manager.Data.FallData.JumpDescentData.BaseGravity;
             manager.MovementManager.LerpDeplacementSpeed(manager, manager.Data.LateralMovementData.JumpDescentData);
         }
 
