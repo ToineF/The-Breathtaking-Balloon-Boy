@@ -805,7 +805,7 @@ namespace BlownAway.Character.Movements
         #region Upgrades
         public void CheckForBalloonBounce(CharacterManager manager)
         {
-            CanBalloonBounce = manager.Data.PowerUpData.IsBalloonBounceAvailable && manager.Inputs.StartedBalloonBounce;
+            CanBalloonBounce = manager.Data.PowerUpData.IsBalloonBounceAvailable;
         }
 
         public void CheckForGroundPound(CharacterManager manager)
