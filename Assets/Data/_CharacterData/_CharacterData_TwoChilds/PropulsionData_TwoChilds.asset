@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65f1056132fa75d40bf6dcd598859a0b, type: 3}
   m_Name: PropulsionData_TwoChilds
   m_EditorClassIdentifier: 
-  <VerticalPropulsionMultiplier>k__BackingField: 9
-  <HorizontalPropulsionMultiplier>k__BackingField: 20
-  <MaxPropulsionSpeed>k__BackingField: 700
+  <VerticalPropulsionMultiplier>k__BackingField: 12.5
+  <HorizontalPropulsionMultiplier>k__BackingField: 24
+  <MaxPropulsionSpeed>k__BackingField: 800
   <BasePropulsionAccelTime>k__BackingField: 0.2
   <BasePropulsionAccelCurve>k__BackingField:
     serializedVersion: 2
@@ -75,7 +75,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   <PropulsionDirectionTurnSpeed>k__BackingField: 0.05
-  <PropulsionIncreaseByFrame>k__BackingField: 0.5
+  <PropulsionIncreaseByFrame>k__BackingField: 0.7
   <PropulsionIncreaseDeceleration>k__BackingField: 0.01
   <MinimumPropulsionTime>k__BackingField: 0.2
   <PropulsionTakeOffSpeed>k__BackingField: 7.6
@@ -129,4 +129,9 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  <DeriveTime>k__BackingField: 1e+25
+  <JumpForce>k__BackingField: 15
+  <JumpDecreaseByFrame>k__BackingField: 1
+  <JumpDecreaseDeceleration>k__BackingField: 0.01
+  <MinimumJumpTime>k__BackingField: 0.15
+  <JumpBeforePropulsionTime>k__BackingField: 0
+  <DeriveTime>k__BackingField: 8
