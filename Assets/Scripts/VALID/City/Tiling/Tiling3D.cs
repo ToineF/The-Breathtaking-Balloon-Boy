@@ -4,16 +4,17 @@ using AntoineFoucault.Utilities;
 
 public class Tiling3D : MonoBehaviour
 {
-    [field:Header("References")]
-    [field:SerializeField] public TilesetData TilesetData { get; private set; }
+    [field: Header("References")]
+    [field: SerializeField] public TilesetData TilesetData { get; private set; }
     [field: Space(10)]
 
     [field: Header("Properties")]
-    [field:SerializeField, Range(3, 25)] public int Length { get; private set; }
+    [field: SerializeField, Range(3, 25)] public int Length { get; private set; }
     [field: SerializeField, Range(3, 25)] public int Width { get; private set; }
     [field: SerializeField, Range(3, 25)] public int Height { get; private set; }
 
     private List<GameObject> _buildingBlocks = new List<GameObject>();
+    private InnerFloor[] _middleFloors;
 
     public void CreateBuilding()
     {
@@ -33,15 +34,22 @@ public class Tiling3D : MonoBehaviour
 
     private void BuildBuilding()
     {
+        _middleFloors = new InnerFloor[Height-2];
+        for (int i = 1; i < Height - 1; i++)
+        {
+            _middleFloors[i-1] = GetRandomTile(TilesetData.MiddleFloor);
+        }
+
+
         for (int z = 0; z < Length; z++)
         {
             for (int x = 0; x < Width; x++)
             {
                 for (int y = 0; y < Height; y++)
                 {
-                    if (GetBlockScore(x,y,z) == 0) continue;
+                    if (GetBlockScore(x, y, z) == 0) continue;
 
-                    GameObject block = GetBlockType(x,y,z);
+                    GameObject block = GetBlockType(x, y, z);
                     Vector3 position = new Vector3(x, y, z) * TilesetData.BlockSize;
                     Vector3 rotation = GetRotation(x, y, z);
                     GameObject newBlock = Instantiate(block, transform.position + position, Quaternion.Euler(TilesetData.BlockRotation + rotation), transform);
@@ -78,33 +86,33 @@ public class Tiling3D : MonoBehaviour
         if (score <= 1) // Center
         {
             if (y == 0)
-                block = TilesetData.DownCenterTile;
+                block = TilesetData.DownFloor[0].CenterTile;
             else if (y == Height - 1)
             {
                 int topScore = GetBlockScore(x, y, z, 1);
 
-                if (topScore >= 2) block = TilesetData.TopCornerTile;
-                else if (topScore >= 1) block = TilesetData.TopEdgeTile;
-                else block = TilesetData.TopCenterTile;
+                if (topScore >= 2) block = TilesetData.TopFloor[0].CornerTile;
+                else if (topScore >= 1) block = TilesetData.TopFloor[0].EdgeTile;
+                else block = TilesetData.TopFloor[0].CenterTile;
             }
             else
-                block = TilesetData.MiddleCenterTile;
+                block = _middleFloors[y-1].CornerTile;
         }
         else if (score == 2) // Edges
         {
             if (y == 0)
-                block = TilesetData.DownEdgeTile;
+                block = TilesetData.DownFloor[0].EdgeTile;
             else if (y == Height - 1)
-                block = TilesetData.UpEdgeTile;
+                block = TilesetData.UpFloor[0].EdgeTile;
             else
-                block = TilesetData.MiddleEdgeTile;
+                block = _middleFloors[y-1].EdgeTile;
         }
         else // Corners
         {
-            if (y == 0) 
-                block = TilesetData.DownCornerTile;
+            if (y == 0)
+                block = TilesetData.DownFloor[0].CornerTile;
             else
-                block = TilesetData.UpCornerTile;
+                block = TilesetData.UpFloor[0].CornerTile;
         }
 
         return block;
@@ -141,5 +149,18 @@ public class Tiling3D : MonoBehaviour
         }
 
         return new Vector3(targetX, targetY, targetZ);
+    }
+
+    private OuterFloor GetRandomTile(OuterFloor[] floor)
+    {
+        int randomAmount = (int)Mathf.Clamp(TilesetData.RandomnessAmount, 0, floor.Length - 1);
+        return floor[Random.Range(0, randomAmount)];
+    }
+
+    private InnerFloor GetRandomTile(InnerFloor[] floor)
+    {
+        int randomAmount = (int)Mathf.Clamp(TilesetData.RandomnessAmount, 0, floor.Length - 1);
+        Debug.Log(randomAmount);
+        return floor[Random.Range(0, randomAmount+1)];
     }
 }

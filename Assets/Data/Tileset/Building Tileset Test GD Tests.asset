@@ -14,6 +14,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BlockSize: 3
   BlockRotation: {x: 0, y: 0, z: 0}
+  RandomnessAmount: 0
+  DownFloor:
+  - CenterTile: {fileID: 2330471232002438071, guid: 5f6ebe05fc7492e4a945fabfc1dbe206,
+      type: 3}
+    EdgeTile: {fileID: 1165168166204148091, guid: adb7807ebf822c54794cca041391203a,
+      type: 3}
+    CornerTile: {fileID: 7038046019301849614, guid: 7a51714ef83e4a94b95d7ad22134b235,
+      type: 3}
+  MiddleFloor:
+  - EdgeTile: {fileID: 1165168166204148091, guid: adb7807ebf822c54794cca041391203a,
+      type: 3}
+    CornerTile: {fileID: 3360970820784716868, guid: c409be154ecb0474196b72f47e678dde,
+      type: 3}
+  UpFloor:
+  - EdgeTile: {fileID: 7705996422977216067, guid: 754b5f51c9fd39242ba7fd4515f58ec3,
+      type: 3}
+    CornerTile: {fileID: 4618861646649164356, guid: 5537e916723325143b3ed19bb650eccf,
+      type: 3}
+  TopFloor:
+  - CenterTile: {fileID: 0}
+    EdgeTile: {fileID: 0}
+    CornerTile: {fileID: 0}
   DownCenterTile: {fileID: 2330471232002438071, guid: 5f6ebe05fc7492e4a945fabfc1dbe206,
     type: 3}
   DownEdgeTile: {fileID: 1165168166204148091, guid: adb7807ebf822c54794cca041391203a,
@@ -24,9 +46,10 @@ MonoBehaviour:
     type: 3}
   MiddleEdgeTile: {fileID: 3825359484917369530, guid: 78ebedcc647cf3142971899fe404a2cd,
     type: 3}
-  UpCenterTile: {fileID: 4618861646649164356, guid: 5537e916723325143b3ed19bb650eccf,
-    type: 3}
   UpEdgeTile: {fileID: 7705996422977216067, guid: 754b5f51c9fd39242ba7fd4515f58ec3,
     type: 3}
   UpCornerTile: {fileID: 7372136784919494173, guid: 32401eef85586a747b287cae0bb2b614,
     type: 3}
+  TopCenterTile: {fileID: 0}
+  TopEdgeTile: {fileID: 0}
+  TopCornerTile: {fileID: 0}
