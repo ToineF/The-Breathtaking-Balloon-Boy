@@ -687,17 +687,6 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""6e34996f-03fb-44a1-95ea-6d332d5c4015"",
-                    ""path"": ""<Gamepad>/buttonEast"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Dash"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""4038f170-e7f3-4d1d-9f41-b915bbe9695e"",
                     ""path"": ""<Gamepad>/buttonWest"",
                     ""interactions"": """",
