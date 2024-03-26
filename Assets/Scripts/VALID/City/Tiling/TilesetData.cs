@@ -19,14 +19,14 @@ public class TilesetData : ScriptableObject
 [Serializable]
 public struct InnerFloor
 {
-    public GameObject EdgeTile;
-    public GameObject CornerTile;
+    public GameObject[] EdgeTile;
+    public GameObject[] CornerTile;
 }
 
 [Serializable]
 public struct OuterFloor
 {
-    public GameObject CenterTile;
-    public GameObject EdgeTile;
-    public GameObject CornerTile;
+    public GameObject[] CenterTile;
+    public GameObject[] EdgeTile;
+    public GameObject[] CornerTile;
 }

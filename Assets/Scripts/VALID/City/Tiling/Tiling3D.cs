@@ -86,33 +86,33 @@ public class Tiling3D : MonoBehaviour
         if (score <= 1) // Center
         {
             if (y == 0)
-                block = TilesetData.DownFloor[0].CenterTile;
+                block = TilesetData.DownFloor[0].CenterTile[0];
             else if (y == Height - 1)
             {
                 int topScore = GetBlockScore(x, y, z, 1);
 
-                if (topScore >= 2) block = TilesetData.TopFloor[0].CornerTile;
-                else if (topScore >= 1) block = TilesetData.TopFloor[0].EdgeTile;
-                else block = TilesetData.TopFloor[0].CenterTile;
+                if (topScore >= 2) block = TilesetData.TopFloor[0].CornerTile[0];
+                else if (topScore >= 1) block = TilesetData.TopFloor[0].EdgeTile[0];
+                else block = TilesetData.TopFloor[0].CenterTile[0];
             }
             else
-                block = _middleFloors[y-1].CornerTile;
+                block = _middleFloors[y-1].CornerTile.GetRandomItem();
         }
         else if (score == 2) // Edges
         {
             if (y == 0)
-                block = TilesetData.DownFloor[0].EdgeTile;
+                block = TilesetData.DownFloor[0].EdgeTile[0];
             else if (y == Height - 1)
-                block = TilesetData.UpFloor[0].EdgeTile;
+                block = TilesetData.UpFloor[0].EdgeTile[0];
             else
-                block = _middleFloors[y-1].EdgeTile;
+                block = _middleFloors[y-1].EdgeTile.GetRandomItem();
         }
         else // Corners
         {
             if (y == 0)
-                block = TilesetData.DownFloor[0].CornerTile;
+                block = TilesetData.DownFloor[0].CornerTile[0];
             else
-                block = TilesetData.UpFloor[0].CornerTile;
+                block = TilesetData.UpFloor[0].CornerTile[0];
         }
 
         return block;
