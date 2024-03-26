@@ -39,7 +39,7 @@ namespace BlownAway.Character.States
 
             manager.MovementManager.CheckForDashStart(manager, true);
 
-            manager.MovementManager.CheckForJacketToggle(manager);
+            //manager.MovementManager.CheckForJacketToggle(manager);
 
         }
 
