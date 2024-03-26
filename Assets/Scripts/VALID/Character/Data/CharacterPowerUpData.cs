@@ -17,8 +17,9 @@ namespace BlownAway.Character.Data
         [field: SerializeField, Tooltip("Numbers of dashes the player can do")] public float MaxDashes { get; private set; }
 
         [field:Header("Ground Pound")]
-        [field:SerializeField] public float GroundPoundForce { get; private set; }
-        [field:SerializeField, Range(0,1)] public float GroundPoundStartLerp { get; private set; }
-        [field:SerializeField, Range(0, 1)] public float GroundPoundEndLerp { get; private set; }
+        [field:SerializeField, Tooltip("The upper force of the ground pound")] public float GroundPoundForce { get; private set; }
+        [field:SerializeField, Range(0,1), Tooltip("The lerp of the ground pound start")] public float GroundPoundStartLerp { get; private set; }
+        [field:SerializeField, Range(0, 1), Tooltip("The lerp of the ground pound end")] public float GroundPoundEndLerp { get; private set; }
+        [field:SerializeField, Tooltip("The time before the ground pound ends")] public float GroundPoundEndTime { get; private set; }
     }
 }

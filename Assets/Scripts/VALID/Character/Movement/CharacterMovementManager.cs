@@ -812,14 +812,28 @@ namespace BlownAway.Character.Movements
             manager.States.SwitchState(manager.States.GroundPoundState);
         }
 
-        public void CheckForGroundPoundStart(CharacterManager manager)
+        public void StartGroundPound(CharacterManager manager)
         {
             AddExternalForce(gameObject, Vector3.up * manager.Data.PowerUpData.GroundPoundForce, manager.Data.PowerUpData.GroundPoundStartLerp);
         }
-        public void CheckForGroundPoundEnd(CharacterManager manager)
+
+        public void EndGroundPound(CharacterManager manager)
         {
             AddExternalForce(gameObject, Vector3.zero, manager.Data.PowerUpData.GroundPoundEndLerp);
-            //manager.States.SwitchState(manager.States.PropulsionState);
+        }
+
+        public void StartGroundPoundCoroutine(CharacterManager manager)
+        {
+            StartCoroutine(WaitBeforeGroundPoundEnd(manager));
+        }
+
+        public IEnumerator WaitBeforeGroundPoundEnd(CharacterManager manager)
+        {
+            StartGroundPound(manager);
+
+            yield return new WaitForSeconds(manager.Data.PowerUpData.GroundPoundEndTime);
+
+            EndGroundPound(manager);
         }
         #endregion
 

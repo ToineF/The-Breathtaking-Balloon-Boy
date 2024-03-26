@@ -8,16 +8,17 @@ namespace BlownAway.Character.States
         public override void EnterState(CharacterManager manager, CharacterBaseState previousState)
         {
             Debug.Log("Ground Pound");
+
             // Movements
             manager.MovementManager.LerpGravityTo(manager, manager.Data.FallData.GroundPoundData);
+
             manager.MovementManager.LerpDeplacementSpeed(manager, manager.Data.LateralMovementData.GroundPoundData);
 
         }
 
         public override void ExitState(CharacterManager manager)
         {
-            manager.MovementManager.CheckForGroundPoundStart(manager);
-            //manager.MovementManager.CheckForGroundPoundEnd(manager); // Here start timer to invoke this method
+            manager.MovementManager.StartGroundPoundCoroutine(manager);
         }
 
         public override void UpdateState(CharacterManager manager)
