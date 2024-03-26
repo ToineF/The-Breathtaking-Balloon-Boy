@@ -80,6 +80,10 @@ namespace BlownAway.Character.Movements
         // Balloon Bounce
         public bool CanBalloonBounce { get; private set; }
 
+
+        // Ground Pound
+        public float GroundPoundTotalHeight { get; set; }
+
         private Transform parent;
 
         // External Forces
@@ -814,7 +818,10 @@ namespace BlownAway.Character.Movements
 
         public void StartGroundPound(CharacterManager manager)
         {
-            AddExternalForce(gameObject, Vector3.up * manager.Data.PowerUpData.GroundPoundForce, manager.Data.PowerUpData.GroundPoundStartLerp);
+            bool isSmallJump = GroundPoundTotalHeight < manager.Data.PowerUpData.GroundPoundNormalGroundHeightThresold;
+            float groundPoundForce = isSmallJump ? manager.Data.PowerUpData.GroundPoundSmallForce : manager.Data.PowerUpData.GroundPoundNormalForce;
+            if (SlopesHitResults[0].collider?.GetComponent<BouncyBalloon>()) groundPoundForce = manager.Data.PowerUpData.GroundPoundBalloonForce;
+            AddExternalForce(gameObject, Vector3.up * groundPoundForce, manager.Data.PowerUpData.GroundPoundStartLerp);
         }
 
         public void EndGroundPound(CharacterManager manager)
@@ -829,6 +836,7 @@ namespace BlownAway.Character.Movements
 
         public IEnumerator WaitBeforeGroundPoundEnd(CharacterManager manager)
         {
+            GroundPoundTotalHeight -= manager.CharacterCollider.Collider.transform.position.y;
             StartGroundPound(manager);
 
             yield return new WaitForSeconds(manager.Data.PowerUpData.GroundPoundEndTime);

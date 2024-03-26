@@ -14,6 +14,8 @@ namespace BlownAway.Character.States
 
             manager.MovementManager.LerpDeplacementSpeed(manager, manager.Data.LateralMovementData.GroundPoundData);
 
+            manager.MovementManager.GroundPoundTotalHeight = manager.CharacterCollider.Collider.transform.position.y;
+
         }
 
         public override void ExitState(CharacterManager manager)
