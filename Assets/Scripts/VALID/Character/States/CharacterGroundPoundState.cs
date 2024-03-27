@@ -15,6 +15,7 @@ namespace BlownAway.Character.States
             manager.MovementManager.LerpDeplacementSpeed(manager, manager.Data.LateralMovementData.GroundPoundData);
 
             manager.MovementManager.GroundPoundTotalHeight = manager.CharacterCollider.Collider.transform.position.y;
+            manager.MovementManager.GroundPoundCancelTime = manager.Data.PowerUpData.MinGroundPoundCancelTime;
 
         }
 
@@ -26,6 +27,13 @@ namespace BlownAway.Character.States
         public override void UpdateState(CharacterManager manager)
         {
             manager.MovementManager.CheckIfGrounded(manager);
+
+            manager.MovementManager.UpdateGroundPoundTimer(manager);
+
+            //if (manager.MovementManager.GroundPoundCancelTime < 0)
+            //    manager.MovementManager.CheckForPropulsionStartOnAir(manager);
+
+            //manager.MovementManager.CheckForGroundPoundBalloon(manager);
         }
 
 

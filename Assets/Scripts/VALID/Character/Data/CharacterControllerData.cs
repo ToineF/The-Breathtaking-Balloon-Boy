@@ -20,9 +20,6 @@ namespace BlownAway.Character.Data
         // Ground Detection Data
         [field: SerializeField] public CharacterGroundDetectionData GroundDetectionData { get; private set; }
 
-        // Slopes Data
-        [field: SerializeField] public CharacterSlopesData SlopeData { get; private set; }
-
         // Air Data
         [field: SerializeField] public CharacterAirData AirData { get; private set; }
 

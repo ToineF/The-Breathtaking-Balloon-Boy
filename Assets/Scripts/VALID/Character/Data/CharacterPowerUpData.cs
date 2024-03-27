@@ -24,5 +24,6 @@ namespace BlownAway.Character.Data
         [field:SerializeField, Range(0, 1), Tooltip("The lerp of the ground pound end")] public float GroundPoundEndLerp { get; private set; }
         [field:SerializeField, Tooltip("The time before the ground pound ends")] public float GroundPoundEndTime { get; private set; }
         [field:SerializeField, Tooltip("The minimum distance for a ground to be considered (GroundPoundNormalForce)")] public float GroundPoundNormalGroundHeightThresold { get; private set; }
+        [field:SerializeField, Tooltip("The minimum time the player is locked in the ground pound state before allowing to cancel it")] public float MinGroundPoundCancelTime { get; private set; }
     }
 }

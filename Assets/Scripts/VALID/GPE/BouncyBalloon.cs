@@ -70,7 +70,7 @@ namespace BlownAway.GPE
             Vector3 leftRightDirection = new Vector3(Mathf.Ceil(Mathf.Abs(normalizedDirection.x)) * Mathf.Sign(normalizedDirection.x), 0, 0); //isSideRebounceDirection ? new Vector3(Mathf.Round(normalizedDirection.x), 0, 0) : new Vector3(Mathf.Round(normalizedDirection.x), 0, 0) + collider.Manager.CameraManager.Camera.transform.forward;
             Vector3 forwardBackwardDirection = new Vector3(0, 0, Mathf.Ceil(Mathf.Abs(normalizedDirection.z)) * Mathf.Sign(normalizedDirection.z)); //isSideRebounceDirection ? new Vector3(0, 0, Mathf.Round(normalizedDirection.z)) : new Vector3(0, 0, Mathf.Round(normalizedDirection.z)) + collider.Manager.CameraManager.Camera.transform.forward;
 
-            if (normalizedDirection.y > _upThreshold && collider.Manager.MovementManager.CanBalloonBounce)
+            if (normalizedDirection.y > _upThreshold && collider.Manager.Data.PowerUpData.IsBalloonBounceAvailable)
             {
                 normalizedDirection = upDirection; // UP
                 if (_refreshPlayerAir)

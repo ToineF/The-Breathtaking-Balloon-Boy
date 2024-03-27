@@ -15,6 +15,8 @@ namespace BlownAway.Character.States
 
             manager.MovementManager.StartPropulsionTimer(manager);
             manager.MovementManager.ToggleJacketInflate(manager, true);
+
+            manager.MovementManager.EndGroundPound(manager);
         }
 
         public override void ExitState(CharacterManager manager)
@@ -35,8 +37,6 @@ namespace BlownAway.Character.States
             manager.MovementManager.CheckForPropulsionEnd(manager);
 
             manager.MovementManager.CheckIfGrounded(manager, true);
-
-            manager.MovementManager.CheckForBalloonBounce(manager);
 
             manager.MovementManager.CheckForGroundPound(manager);
 

@@ -22,8 +22,6 @@ namespace BlownAway.Character.States
 
             manager.MovementManager.CheckIfGrounded(manager, true);
 
-            manager.MovementManager.CheckForBalloonBounce(manager);
-
             manager.MovementManager.CheckForGroundPound(manager);
 
             manager.MovementManager.CheckForDeriveEnd(manager);

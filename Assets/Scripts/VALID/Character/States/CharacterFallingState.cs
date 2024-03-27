@@ -23,8 +23,6 @@ namespace BlownAway.Character.States
 
         public override void UpdateState(CharacterManager manager)
         {
-            manager.MovementManager.CheckForBalloonBounce(manager);
-
             manager.MovementManager.CheckForGroundPound(manager);
 
             manager.MovementManager.CheckForPropulsionStartOnAir(manager);
