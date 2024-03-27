@@ -41,18 +41,25 @@ namespace BlownAway.Cutscenes
             NONE = 3,
         }
 
+        [Header("Base Params")]
         public FunctionUsed Function;
         public float TimeAmount;
         public Vector3 AddedOriginAmount;
         public Vector3MinMaxRange AddedRandomAmount;
         public float GlobalMultiplier;
 
-        public DisplacementParams(FunctionUsed function, float time, Vector3 originAdd, float globalMultiply, Vector3MinMaxRange randomAdd)
+        [Header("Typewriter Params")]
+        public float ScaleTime;
+        public Vector3AnimationCurve ScaleAnimations;
+
+        public DisplacementParams(FunctionUsed function, float time, Vector3 originAdd, float globalMultiply, Vector3MinMaxRange randomAdd, float scaleTime, Vector3AnimationCurve scaleAnimations)
         {
             Function = function;
             TimeAmount = time;
             AddedOriginAmount = originAdd;
             AddedRandomAmount = randomAdd;
+            ScaleTime = scaleTime;
+            ScaleAnimations = scaleAnimations;
             GlobalMultiplier = globalMultiply;
         }
 
@@ -124,5 +131,13 @@ namespace BlownAway.Cutscenes
                 else return BottomLeft;
             }
         }
+    }
+
+    [Serializable]
+    public struct Vector3AnimationCurve
+    {
+        public AnimationCurve x;
+        public AnimationCurve y;
+        public AnimationCurve z;
     }
 }
