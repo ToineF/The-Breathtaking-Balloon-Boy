@@ -16,16 +16,16 @@ namespace BlownAway.Cutscenes
         public int MinRange;
         public int MaxRange;
         public ColorSquare Colors;
-        public Func<Vector3, Vector3> GetText;
         public LimitRangeByTypeWriter TypeWriterRange;
+        public float CharacterApparitionTime;
 
-        public TextEffect(Func<Vector3, Vector3> getText, ColorSquare colors, int minRange = 0, int maxRange = -1, LimitRangeByTypeWriter typewriterRange = LimitRangeByTypeWriter.FALSE)
+        public TextEffect(ColorSquare colors, int minRange = 0, int maxRange = -1, LimitRangeByTypeWriter typewriterRange = LimitRangeByTypeWriter.FALSE)
         {
             MinRange = minRange;
             MaxRange = maxRange;
             Colors = colors;
-            GetText = getText;
             TypeWriterRange = typewriterRange;
+            CharacterApparitionTime = 0;
         }
 
     }

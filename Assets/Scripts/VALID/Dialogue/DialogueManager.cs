@@ -5,6 +5,7 @@ using System;
 using AntoineFoucault.Utilities;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using System.Text;
 
 namespace BlownAway.Cutscenes
 {
@@ -36,11 +37,12 @@ namespace BlownAway.Cutscenes
 
         [SerializeField] private TMP_Text _dialogueTextboxText;
         [SerializeField] private Image _dialogueTextbox;
-        [SerializeField] private float _characterApparitionSpeed;
 
         [Header("Text Effects")]
         [SerializeField] private TextEffectData _hiddenEffectData;
         [SerializeField] private TextEffectData _baseEffectData;
+        [SerializeField] private TextEffectData[] _textEffectsToCheck;
+        [SerializeField] private TextEffectData[] _textEffectsByCharacters;
 
         private Dialogue _currentDialogue;
         private int _currentTextIndex;
@@ -82,15 +84,17 @@ namespace BlownAway.Cutscenes
             }
             else
             {
-                _writingCharactersCoroutine = StartCoroutine(WriteEachCharacter(_dialogueTextboxText, currentText, _characterApparitionSpeed, _currentDialogue.CharacterData));
+                string finalText = GetTextEffectsInString(currentText);
+                _writingCharactersCoroutine = StartCoroutine(WriteEachCharacter(_dialogueTextboxText, finalText, _currentDialogue.CharacterData));
             }
         }
 
-        public IEnumerator WriteEachCharacter(TMP_Text dialogueTextbox, string finalText, float timeBetweenCharacters, DialogueCharacterData characterData)
+        public IEnumerator WriteEachCharacter(TMP_Text dialogueTextbox, string finalText, DialogueCharacterData characterData)
         {
             _hasCurrentTextEnded = false;
             dialogueTextbox.text = finalText;
             _currentCharIndex = 0;
+            _textEffectsByCharacters = new TextEffectData[finalText.Length];
             for (int i = 0; i < finalText.Length; i++)
             {
                 _currentCharIndex = i;
@@ -105,8 +109,8 @@ namespace BlownAway.Cutscenes
                     }
                 }
 
-
-                yield return new WaitForSeconds(timeBetweenCharacters);
+                yield return new WaitForEndOfFrame();
+                yield return new WaitForSeconds(_textEffectsByCharacters[_currentCharIndex].TextEffect.CharacterApparitionTime);
             }
             _hasCurrentTextEnded = true;
             _currentCharIndex = -1;
@@ -128,6 +132,11 @@ namespace BlownAway.Cutscenes
 
         // Text Animation
         private void Start()
+        {
+            AddBaseEffects();
+        }
+
+        private void AddBaseEffects()
         {
             _textEffects.Add(_hiddenEffectData);
             _textEffects.Add(_baseEffectData);
@@ -155,14 +164,17 @@ namespace BlownAway.Cutscenes
                 if (effect.TypeWriterRange == TextEffect.LimitRangeByTypeWriter.MAX) maxRange = _currentCharIndex;
                 if (minRange == -1) minRange = textInfo.characterCount;
                 if (maxRange == -1) maxRange = textInfo.characterCount;
+
                 for (int i = minRange; i < maxRange; i++)
                 {
+                    if (!_hasCurrentTextEnded) _textEffectsByCharacters[i] = _baseEffectData;
+                    if (!_hasCurrentTextEnded && data.Role != TextEffectRole.HIDDEN) _textEffectsByCharacters[i] = data;
                     TMP_CharacterInfo charInfo = textInfo.characterInfo[i];
 
                     if (!charInfo.isVisible) continue;
 
                     TMP_MeshInfo meshInfo = textInfo.meshInfo[charInfo.materialReferenceIndex];
-                    Vector3 centerPoint = new Vector2((meshInfo.vertices[charInfo.vertexIndex].x + meshInfo.vertices[charInfo.vertexIndex + 2].x)/2, meshInfo.vertices[charInfo.vertexIndex].y);
+                    Vector3 centerPoint = new Vector2((meshInfo.vertices[charInfo.vertexIndex].x + meshInfo.vertices[charInfo.vertexIndex + 2].x) / 2, meshInfo.vertices[charInfo.vertexIndex].y);
                     Vector3 charData = data.CharMathDisplacement.GetTotalFunction(centerPoint);
 
                     for (int j = 0; j < 4; j++)
@@ -182,6 +194,41 @@ namespace BlownAway.Cutscenes
                 meshInfo.mesh.colors32 = meshInfo.colors32;
                 _dialogueTextboxText.UpdateGeometry(meshInfo.mesh, i);
             }
+        }
+
+        private string GetTextEffectsInString(string text)
+        {
+            _textEffects.Clear();
+            AddBaseEffects();
+
+            string newText = text;
+            foreach (TextEffectData data in _textEffectsToCheck)
+            {
+                string splitCharacter = $"<TFX={data.Key}>";
+                string[] textParts = newText.Split(splitCharacter);
+                if (textParts.Length <= 1) continue;
+
+                // Update Text to return
+                newText = String.Empty;
+                foreach (string t in textParts)
+                {
+                    newText += t;
+                }
+
+                // Apply Effects
+                int count = 0;
+                foreach (string t in textParts)
+                {
+                    int startID = count;
+                    int endID = t.Length - 1 + count;
+                    count += t.Length;
+                    TextEffect effect = data.TextEffect;
+                    effect = new TextEffect(effect.Colors, startID, endID, effect.TypeWriterRange);
+                    data.TextEffect = effect;
+                    _textEffects.Add(data);
+                }
+            }
+            return newText;
         }
 
     }
