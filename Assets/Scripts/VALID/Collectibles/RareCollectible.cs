@@ -6,9 +6,6 @@ namespace BlownAway.Collectibles
 {
     public class RareCollectible : Collectible
     {
-        protected override void OnPickUp()
-        {
 
-        }
     }
 }
