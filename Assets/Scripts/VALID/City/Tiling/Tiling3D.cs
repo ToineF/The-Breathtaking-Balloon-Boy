@@ -160,7 +160,6 @@ public class Tiling3D : MonoBehaviour
     private InnerFloor GetRandomTile(InnerFloor[] floor)
     {
         int randomAmount = (int)Mathf.Clamp(TilesetData.RandomnessAmount, 0, floor.Length - 1);
-        Debug.Log(randomAmount);
         return floor[Random.Range(0, randomAmount+1)];
     }
 }
