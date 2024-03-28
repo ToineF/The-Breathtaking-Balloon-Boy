@@ -33,7 +33,7 @@ namespace BlownAway.Collectibles
             float percentile = _magnetTimer / _magnetSpeed;
             float positionWeight = _magnetCurve.Evaluate(percentile);
             float scaleWeight = _scaleOverTime.Evaluate(percentile);
-            transform.position = Vector3.Lerp(transform.position, _owner.transform.position, positionWeight);
+            transform.position = Vector3.Lerp(transform.position, _owner.Collider.bounds.center, positionWeight);
             transform.localScale = Vector3.Lerp(transform.localScale, Vector3.zero, scaleWeight);
 
             if (percentile > 1) Destroy(gameObject);

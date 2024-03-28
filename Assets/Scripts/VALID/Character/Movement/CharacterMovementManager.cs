@@ -165,7 +165,7 @@ namespace BlownAway.Character.Movements
             //Debug.LogWarning(deplacementDirection);
 
 
-            deplacementDirection = GetSlopeMoveDirection(deplacementDirection);
+            if (IsGrounded) deplacementDirection = GetSlopeMoveDirection(deplacementDirection);
             //Debug.LogWarning(deplacementDirection);
 
             _currentDeplacementDirection = Vector3.Lerp(_currentDeplacementDirection, deplacementDirection, _currentDeplacemenTurnSpeed);
