@@ -215,7 +215,7 @@ namespace BlownAway.Character.Movements
 
 
             //if (IsGrounded)
-            LastGround = GroundHitResults[0];
+            LastGround = SlopesHitResults[0];
 
             if (lastGrounded != IsGrounded)
             {

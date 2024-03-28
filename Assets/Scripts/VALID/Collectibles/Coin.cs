@@ -10,6 +10,7 @@ namespace BlownAway.Collectibles
         [SerializeField] private float _turnSpeed;
         [SerializeField] private float _magnetSpeed;
         [SerializeField] private AnimationCurve _magnetCurve;
+        [SerializeField] private AnimationCurve _scaleOverTime;
 
         private float _magnetTimer = 0;
 
@@ -30,8 +31,10 @@ namespace BlownAway.Collectibles
 
             _magnetTimer += Time.deltaTime;
             float percentile = _magnetTimer / _magnetSpeed;
-            float weight = _magnetCurve.Evaluate(percentile);
-            transform.position = Vector3.Lerp(transform.position, _owner.transform.position, weight);
+            float positionWeight = _magnetCurve.Evaluate(percentile);
+            float scaleWeight = _scaleOverTime.Evaluate(percentile);
+            transform.position = Vector3.Lerp(transform.position, _owner.transform.position, positionWeight);
+            transform.localScale = Vector3.Lerp(transform.localScale, Vector3.zero, scaleWeight);
 
             if (percentile > 1) Destroy(gameObject);
         }
