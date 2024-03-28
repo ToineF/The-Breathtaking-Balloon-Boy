@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.UI.GridLayoutGroup;
 
 namespace BlownAway.Collectibles
 {
     public abstract class Collectible : SphereTrigger
     {
+        protected CharacterCollider _owner;
+
         private new void Awake()
         {
             base.Awake();
@@ -16,11 +19,14 @@ namespace BlownAway.Collectibles
         {
             if (!_lastOtherCollider.TryGetComponent(out CharacterCollider collider)) return;
 
-            OnPickUp();
+            _owner = collider;
 
-            Destroy(gameObject);
+            OnPickUp();
         }
 
-        protected abstract void OnPickUp();
+        protected virtual void OnPickUp()
+        {
+            Destroy(gameObject);
+        }
     }
 }
