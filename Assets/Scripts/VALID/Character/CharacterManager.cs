@@ -64,13 +64,13 @@ namespace BlownAway.Character
             DebugMode.InitScript(this);
             Inputs.InitScript(this);
             ChildrenManager.InitScript(this);
-            CameraManager.InitScript(this);
             MovementManager.InitScript(this);
             States.InitScript(this);
             CharacterCollider.InitScript(this);
             AirManager.InitScript(this);
             AnimationManager.InitScript(this);
             CharacterCollider.InitScript(this);
+            CameraManager.InitScript(this);
         }
 
 

@@ -1,9 +1,7 @@
 using UnityEngine;
 using AntoineFoucault.Utilities;
 using BlownAway.Character;
-using System.Collections;
 using DG.Tweening;
-using FMOD.Studio;
 
 namespace BlownAway.Camera
 {
@@ -47,20 +45,20 @@ namespace BlownAway.Camera
         private void LateUpdate()
         {
             UpdateCameraAngle(Manager);
-            UpdateCameraPosition();
+            UpdateCameraPosition(Manager);
         }
 
-        private void UpdateCameraPosition()
+        private void UpdateCameraPosition(CharacterManager manager)
         {
             CheckForCameraCanMove();
 
-            SetCameraAngle(Manager);
+            SetCameraAngle(manager);
 
-            CheckForCameraTopDown(Manager);
+            CheckForCameraTopDown(manager);
 
             if (!_canMoveCamera) return;
 
-            CheckForCameraCenter(Manager);
+            CheckForCameraCenter(manager);
 
             ScrollCamera();
 
@@ -156,6 +154,7 @@ namespace BlownAway.Camera
         {
             if (manager.Inputs.CameraCenter)
             {
+                // NOTHING ENTERS HERE IN BUILD
                 CenterCamera(manager, new Vector3(0, manager.CharacterVisual.transform.eulerAngles.y, 0), manager.Data.CameraData.CameraCenterLerpTime);
             }
         }
