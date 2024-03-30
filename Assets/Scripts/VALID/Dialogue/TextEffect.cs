@@ -44,6 +44,18 @@ namespace BlownAway.Cutscenes
             return targetScale;
         }
 
+        public Vector3 ReturnScaledPosition(Vector3 position, Vector3 scale, Vector3 center)
+        {
+            Vector3 direction = (position - center);
+            return Vector3.Scale(direction, scale);
+        }
+
+        public Vector3 ReturnAddedScaledPosition(Vector3 position, Vector3 scale, Vector3 center)
+        {
+            Vector3 direction = (position - center);
+            return Vector3.Scale(direction, scale - Vector3.one);
+        }
+
     }
 
     [Serializable]

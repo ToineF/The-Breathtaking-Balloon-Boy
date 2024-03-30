@@ -184,8 +184,11 @@ namespace BlownAway.Cutscenes
                     visitedCharacters[i] = true;
 
                     TMP_MeshInfo meshInfo = textInfo.meshInfo[charInfo.materialReferenceIndex];
-                    Vector3 centerPoint = new Vector2((meshInfo.vertices[charInfo.vertexIndex].x + meshInfo.vertices[charInfo.vertexIndex + 2].x) / 2, meshInfo.vertices[charInfo.vertexIndex].y);
-                    Vector3 charData = data.CharMathDisplacement.GetTotalFunction(centerPoint);
+                    Vector3 upCenterPoint = new Vector2((meshInfo.vertices[charInfo.vertexIndex].x + meshInfo.vertices[charInfo.vertexIndex + 2].x) / 2, meshInfo.vertices[charInfo.vertexIndex].y);
+                    Vector3 middleCenterPoint = new Vector2((meshInfo.vertices[charInfo.vertexIndex].x + meshInfo.vertices[charInfo.vertexIndex + 2].x) / 2, (meshInfo.vertices[charInfo.vertexIndex].y + meshInfo.vertices[charInfo.vertexIndex].y+1)/2);
+                    Vector3 charData = data.CharMathDisplacement.GetTotalFunction(middleCenterPoint);
+                    Vector3 characterScale = Vector3.zero;
+                    if (data.Role != TextEffectRole.HIDDEN) characterScale = data.TextEffect.GetCurrentScale(_characterApparitionTimers[i]);
 
                     for (int j = 0; j < 4; j++)
                     {
@@ -193,7 +196,7 @@ namespace BlownAway.Cutscenes
                         Vector3 origin = meshInfo.vertices[index];
                         meshInfo.vertices[index] = origin + data.VertexMathDisplacement.GetTotalFunction(origin) + charData;
                         meshInfo.colors32[index] = effect.Colors[j];
-                        if (data.Role != TextEffectRole.HIDDEN) meshInfo.vertices[index].Scale(data.TextEffect.GetCurrentScale(_characterApparitionTimers[i]));
+                        if (data.Role != TextEffectRole.HIDDEN) meshInfo.vertices[index] += data.TextEffect.ReturnAddedScaledPosition(meshInfo.vertices[index], characterScale, middleCenterPoint);
                     }
                 }
             }
