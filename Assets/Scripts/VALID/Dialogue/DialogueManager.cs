@@ -43,6 +43,7 @@ namespace BlownAway.Cutscenes
         [SerializeField] private TextEffectData _baseEffectData;
         [SerializeField] private TextEffectData[] _textEffectsToCheck;
         [SerializeField] private TextEffectData[] _textEffectsByCharacters;
+        [SerializeField] private float[] _characterApparitionTimers;
 
         private Dialogue _currentDialogue;
         private int _currentTextIndex;
@@ -95,6 +96,7 @@ namespace BlownAway.Cutscenes
             dialogueTextbox.text = finalText;
             _currentCharIndex = 0;
             _textEffectsByCharacters = new TextEffectData[finalText.Length];
+            _characterApparitionTimers = new float[finalText.Length];
             for (int i = 0; i < finalText.Length; i++)
             {
                 _currentCharIndex = i;
@@ -151,11 +153,15 @@ namespace BlownAway.Cutscenes
         {
             _dialogueTextboxText.ForceMeshUpdate();
             TMP_TextInfo textInfo = _dialogueTextboxText.textInfo;
+            bool[] visitedCharacters = new bool[textInfo.characterCount];
 
             if (_textEffects == null) return;
 
-            foreach (TextEffectData data in _textEffects)
+
+            for (int k = _textEffects.Count - 1; k >= 0; k--)
             {
+
+                TextEffectData data = _textEffects[k];
                 TextEffect effect = data.TextEffect;
 
                 int minRange = effect.MinRange;
@@ -169,9 +175,13 @@ namespace BlownAway.Cutscenes
                 {
                     if (!_hasCurrentTextEnded) _textEffectsByCharacters[i] = _baseEffectData;
                     if (!_hasCurrentTextEnded && data.Role != TextEffectRole.HIDDEN) _textEffectsByCharacters[i] = data;
+                    if (data.Role != TextEffectRole.HIDDEN) _characterApparitionTimers[i] += Time.deltaTime;
                     TMP_CharacterInfo charInfo = textInfo.characterInfo[i];
 
+
                     if (!charInfo.isVisible) continue;
+                    if (visitedCharacters[i]) continue;
+                    visitedCharacters[i] = true;
 
                     TMP_MeshInfo meshInfo = textInfo.meshInfo[charInfo.materialReferenceIndex];
                     Vector3 centerPoint = new Vector2((meshInfo.vertices[charInfo.vertexIndex].x + meshInfo.vertices[charInfo.vertexIndex + 2].x) / 2, meshInfo.vertices[charInfo.vertexIndex].y);
@@ -183,6 +193,7 @@ namespace BlownAway.Cutscenes
                         Vector3 origin = meshInfo.vertices[index];
                         meshInfo.vertices[index] = origin + data.VertexMathDisplacement.GetTotalFunction(origin) + charData;
                         meshInfo.colors32[index] = effect.Colors[j];
+                        if (data.Role != TextEffectRole.HIDDEN) meshInfo.vertices[index].Scale(data.TextEffect.GetCurrentScale(_characterApparitionTimers[i]));
                     }
                 }
             }
@@ -223,7 +234,7 @@ namespace BlownAway.Cutscenes
                     int endID = t.Length - 1 + count;
                     count += t.Length;
                     TextEffect effect = data.TextEffect;
-                    effect = new TextEffect(effect.Colors, startID, endID, effect.TypeWriterRange);
+                    effect = new TextEffect(effect.Colors, effect.CharacterApparitionTime, effect.ScaleTime, effect.ScaleAnimations, startID, endID, effect.TypeWriterRange);
                     data.TextEffect = effect;
                     _textEffects.Add(data);
                 }

@@ -19,13 +19,29 @@ namespace BlownAway.Cutscenes
         public LimitRangeByTypeWriter TypeWriterRange;
         public float CharacterApparitionTime;
 
-        public TextEffect(ColorSquare colors, int minRange = 0, int maxRange = -1, LimitRangeByTypeWriter typewriterRange = LimitRangeByTypeWriter.FALSE)
+        [Header("Typewriter Params")]
+        public float ScaleTime;
+        public Vector3AnimationCurve ScaleAnimations;
+
+        public TextEffect(ColorSquare colors, float apparitionTime, float scaleTime, Vector3AnimationCurve scaleAnimations, int minRange = 0, int maxRange = -1, LimitRangeByTypeWriter typewriterRange = LimitRangeByTypeWriter.FALSE)
         {
             MinRange = minRange;
             MaxRange = maxRange;
             Colors = colors;
             TypeWriterRange = typewriterRange;
-            CharacterApparitionTime = 0;
+            CharacterApparitionTime = apparitionTime;
+            ScaleTime = scaleTime;
+            ScaleAnimations = scaleAnimations;
+        }
+
+        public Vector3 GetCurrentScale(float timer)
+        {
+            float percentile = timer / ScaleTime;
+            float x = ScaleAnimations.x.Evaluate(percentile);
+            float y = ScaleAnimations.y.Evaluate(percentile);
+            float z = ScaleAnimations.z.Evaluate(percentile);
+            Vector3 targetScale = new Vector3(x, y, z);
+            return targetScale;
         }
 
     }
@@ -33,7 +49,7 @@ namespace BlownAway.Cutscenes
     [Serializable]
     public struct DisplacementParams
     {
-        public enum FunctionUsed
+        public enum MathFunction
         {
             COS = 0,
             SIN = 1,
@@ -42,24 +58,18 @@ namespace BlownAway.Cutscenes
         }
 
         [Header("Base Params")]
-        public FunctionUsed Function;
+        public MathFunction Function;
         public float TimeAmount;
         public Vector3 AddedOriginAmount;
         public Vector3MinMaxRange AddedRandomAmount;
         public float GlobalMultiplier;
 
-        [Header("Typewriter Params")]
-        public float ScaleTime;
-        public Vector3AnimationCurve ScaleAnimations;
-
-        public DisplacementParams(FunctionUsed function, float time, Vector3 originAdd, float globalMultiply, Vector3MinMaxRange randomAdd, float scaleTime, Vector3AnimationCurve scaleAnimations)
+        public DisplacementParams(MathFunction function, float time, Vector3 originAdd, float globalMultiply, Vector3MinMaxRange randomAdd)
         {
             Function = function;
             TimeAmount = time;
             AddedOriginAmount = originAdd;
             AddedRandomAmount = randomAdd;
-            ScaleTime = scaleTime;
-            ScaleAnimations = scaleAnimations;
             GlobalMultiplier = globalMultiply;
         }
 
@@ -73,9 +83,9 @@ namespace BlownAway.Cutscenes
             value += addedOrigin;
             value += addedRandom;
             
-            if (Function == FunctionUsed.COS) value = Mathf.Cos(value);
-            else if (Function == FunctionUsed.SIN) value = Mathf.Sin(value);
-            else if (Function == FunctionUsed.TAN) value = Mathf.Tan(value);
+            if (Function == MathFunction.COS) value = Mathf.Cos(value);
+            else if (Function == MathFunction.SIN) value = Mathf.Sin(value);
+            else if (Function == MathFunction.TAN) value = Mathf.Tan(value);
 
             value *= GlobalMultiplier;
 

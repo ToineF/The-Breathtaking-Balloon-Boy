@@ -23,7 +23,81 @@ MonoBehaviour:
       BottomLeft: {r: 1, g: 1, b: 1, a: 1}
       BottomRight: {r: 1, g: 1, b: 1, a: 1}
     TypeWriterRange: 2
-    CharacterApparitionTime: 0
+    CharacterApparitionTime: 1
+    ScaleTime: 0.4
+    ScaleAnimations:
+      x:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 0
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        - serializedVersion: 3
+          time: 1
+          value: 1
+          inSlope: 2
+          outSlope: 2
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      y:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        - serializedVersion: 3
+          time: 1
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      z:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        - serializedVersion: 3
+          time: 1
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
   VertexMathDisplacement:
     x:
       Function: 0
@@ -33,26 +107,6 @@ MonoBehaviour:
         Min: {x: 0, y: 0, z: 0}
         Max: {x: 0, y: 0, z: 0}
       GlobalMultiplier: 0
-      ScaleTime: 0
-      ScaleAnimations:
-        x:
-          serializedVersion: 2
-          m_Curve: []
-          m_PreInfinity: 2
-          m_PostInfinity: 2
-          m_RotationOrder: 4
-        y:
-          serializedVersion: 2
-          m_Curve: []
-          m_PreInfinity: 2
-          m_PostInfinity: 2
-          m_RotationOrder: 4
-        z:
-          serializedVersion: 2
-          m_Curve: []
-          m_PreInfinity: 2
-          m_PostInfinity: 2
-          m_RotationOrder: 4
     y:
       Function: 1
       TimeAmount: 0
@@ -61,26 +115,6 @@ MonoBehaviour:
         Min: {x: 0, y: 0, z: 0}
         Max: {x: 0, y: 0, z: 0}
       GlobalMultiplier: 0
-      ScaleTime: 0
-      ScaleAnimations:
-        x:
-          serializedVersion: 2
-          m_Curve: []
-          m_PreInfinity: 2
-          m_PostInfinity: 2
-          m_RotationOrder: 4
-        y:
-          serializedVersion: 2
-          m_Curve: []
-          m_PreInfinity: 2
-          m_PostInfinity: 2
-          m_RotationOrder: 4
-        z:
-          serializedVersion: 2
-          m_Curve: []
-          m_PreInfinity: 2
-          m_PostInfinity: 2
-          m_RotationOrder: 4
     z:
       Function: 0
       TimeAmount: 0
@@ -89,26 +123,6 @@ MonoBehaviour:
         Min: {x: 0, y: 0, z: 0}
         Max: {x: 0, y: 0, z: 0}
       GlobalMultiplier: 0
-      ScaleTime: 0
-      ScaleAnimations:
-        x:
-          serializedVersion: 2
-          m_Curve: []
-          m_PreInfinity: 2
-          m_PostInfinity: 2
-          m_RotationOrder: 4
-        y:
-          serializedVersion: 2
-          m_Curve: []
-          m_PreInfinity: 2
-          m_PostInfinity: 2
-          m_RotationOrder: 4
-        z:
-          serializedVersion: 2
-          m_Curve: []
-          m_PreInfinity: 2
-          m_PostInfinity: 2
-          m_RotationOrder: 4
   CharMathDisplacement:
     x:
       Function: 0
@@ -118,26 +132,6 @@ MonoBehaviour:
         Min: {x: 5, y: 0, z: 0}
         Max: {x: 0, y: 0, z: 0}
       GlobalMultiplier: 1
-      ScaleTime: 0
-      ScaleAnimations:
-        x:
-          serializedVersion: 2
-          m_Curve: []
-          m_PreInfinity: 2
-          m_PostInfinity: 2
-          m_RotationOrder: 4
-        y:
-          serializedVersion: 2
-          m_Curve: []
-          m_PreInfinity: 2
-          m_PostInfinity: 2
-          m_RotationOrder: 4
-        z:
-          serializedVersion: 2
-          m_Curve: []
-          m_PreInfinity: 2
-          m_PostInfinity: 2
-          m_RotationOrder: 4
     y:
       Function: 1
       TimeAmount: 30
@@ -146,26 +140,6 @@ MonoBehaviour:
         Min: {x: 0, y: 5, z: 0}
         Max: {x: 0, y: 0, z: 0}
       GlobalMultiplier: 1
-      ScaleTime: 0
-      ScaleAnimations:
-        x:
-          serializedVersion: 2
-          m_Curve: []
-          m_PreInfinity: 2
-          m_PostInfinity: 2
-          m_RotationOrder: 4
-        y:
-          serializedVersion: 2
-          m_Curve: []
-          m_PreInfinity: 2
-          m_PostInfinity: 2
-          m_RotationOrder: 4
-        z:
-          serializedVersion: 2
-          m_Curve: []
-          m_PreInfinity: 2
-          m_PostInfinity: 2
-          m_RotationOrder: 4
     z:
       Function: 0
       TimeAmount: 0
@@ -174,23 +148,3 @@ MonoBehaviour:
         Min: {x: 0, y: 0, z: 0}
         Max: {x: 0, y: 0, z: 0}
       GlobalMultiplier: 0
-      ScaleTime: 0
-      ScaleAnimations:
-        x:
-          serializedVersion: 2
-          m_Curve: []
-          m_PreInfinity: 2
-          m_PostInfinity: 2
-          m_RotationOrder: 4
-        y:
-          serializedVersion: 2
-          m_Curve: []
-          m_PreInfinity: 2
-          m_PostInfinity: 2
-          m_RotationOrder: 4
-        z:
-          serializedVersion: 2
-          m_Curve: []
-          m_PreInfinity: 2
-          m_PostInfinity: 2
-          m_RotationOrder: 4
