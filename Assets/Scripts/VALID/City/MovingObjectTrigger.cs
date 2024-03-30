@@ -10,18 +10,19 @@ namespace BlownAway.City
         [Header("Moving Object Params")]
         [SerializeField] private MovingObject _object;
 
+
         private new void Awake()
         {
             base.Awake();
-            OnEnterTrigger += MakePlayerBounce;
+            OnEnterTrigger += CheckForPlayerCollisions;
         }
 
-        private void MakePlayerBounce()
+
+        private void CheckForPlayerCollisions()
         {
             if (!_lastOtherCollider.TryGetComponent(out CharacterCollider collider)) return;
 
             _object.StartMoving();
-
         }
 
         private new void OnDrawGizmos()
