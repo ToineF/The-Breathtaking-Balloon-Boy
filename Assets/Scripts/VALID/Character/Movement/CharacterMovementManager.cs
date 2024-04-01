@@ -51,7 +51,7 @@ namespace BlownAway.Character.Movements
         public float JumppPropulsionTimer { get; private set; }
         private float _currentJumpSpeed;
         private float _currentJumpIncreaseByFrame;
-        public CharacterJumpState.JumpState _currentJumpState;
+        public CharacterJumpState.JumpState _currentJumpState { get; private set; }
 
         // Dash
         private float _dashTimer;
