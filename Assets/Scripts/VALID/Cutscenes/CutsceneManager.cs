@@ -6,140 +6,107 @@ namespace BlownAway.Cutscenes
 {
     public class CutsceneManager : MonoBehaviour
     {
-        //public int CurrentSequenceIndex
-        //{
-        //    get => _currentSequenceIndex; private set
-        //    {
-        //        if (_currentInteractionSequence == null) return;
+        [SerializeField] private DialogueManager _dialogueManager;
+        [SerializeField] private CutsceneCameraManager _cameraManager;
 
-        //        _currentSequenceIndex = Mathf.Clamp(value, 0, _currentInteractionSequence.SequenceElements.Length - 1);
+        public int CurrentSequenceIndex
+        {
+            get => _currentSequenceIndex; private set
+            {
+                if (_currentInteractionSequence == null) return;
 
-        //        if (value < 0 || value > _currentInteractionSequence.SequenceElements.Length - 1) EndSequence();
-        //        else ReadSequenceElement();
-        //    }
-        //}
+                _currentSequenceIndex = Mathf.Clamp(value, 0, _currentInteractionSequence.SequenceElements.List.Count - 1);
 
-        //private InteractionSequence _currentInteractionSequence;
-        //private int _currentSequenceIndex;
+                if (value < 0 || value > _currentInteractionSequence.SequenceElements.List.Count - 1) EndSequence();
+                else ReadSequenceElement();
+            }
+        }
 
-        //public void StartNewSequence(InteractionSequence sequence)
-        //{
-        //    if (MainGame.Instance.Player)
-        //        MainGame.Instance.Player.CanMove = false;
+        private Cutscene _currentInteractionSequence;
+        private int _currentSequenceIndex;
 
-        //    _currentInteractionSequence = sequence;
-        //    CurrentSequenceIndex = 0;
-        //}
+        public void StartNewSequence(Cutscene cutscene)
+        {
+            //if (MainGame.Instance.Player)
+            //    MainGame.Instance.Player.CanMove = false;
 
-        //private void GoToSequenceAt(int index)
-        //{
-        //    CurrentSequenceIndex = index;
-        //}
+            _currentInteractionSequence = cutscene;
+            CurrentSequenceIndex = 0;
+        }
 
-        //public void GoToNextSequenceElement()
-        //{
-        //    GoToSequenceAt(CurrentSequenceIndex + 1);
-        //}
+        private void GoToSequenceAt(int index)
+        {
+            CurrentSequenceIndex = index;
+        }
 
-        //private void EndSequence()
-        //{
-        //    if (MainGame.Instance.Player)
-        //        MainGame.Instance.Player.CanMove = true;
-        //}
+        public void GoToNextSequenceElement()
+        {
+            GoToSequenceAt(CurrentSequenceIndex + 1);
+        }
 
-        //private void ReadSequenceElement()
-        //{
-        //    InteractionElement interactionElement = _currentInteractionSequence.SequenceElements[CurrentSequenceIndex];
+        private void EndSequence()
+        {
+            //if (MainGame.Instance.Player)
+            //    MainGame.Instance.Player.CanMove = true;
+        }
 
-        //    Dialogue dialogue = interactionElement as Dialogue;
-        //    if (dialogue != null)
-        //    {
-        //        ReadDialogue(dialogue);
-        //    }
+        private void ReadSequenceElement()
+        {
+            CutsceneElement interactionElement = _currentInteractionSequence.SequenceElements.List[CurrentSequenceIndex];
 
-        //    InventoryItemData itemData = interactionElement as InventoryItemData;
-        //    if (itemData != null)
-        //    {
-        //        SpawnInventoryItem(itemData);
-        //    }
+            CutsceneDialogue dialogue = interactionElement as CutsceneDialogue;
+            if (dialogue != null)
+            {
+                ReadDialogue(dialogue);
+            }
 
-        //    InteractionImageAppear imageAppear = interactionElement as InteractionImageAppear;
-        //    if (imageAppear != null)
-        //    {
-        //        ShowImage(imageAppear);
-        //    }
-        //}
+            CutsceneCamera camera = interactionElement as CutsceneCamera;
+            if (camera != null)
+            {
+                StartCameraTravelling(camera);
+            }
 
-        //private void ReadDialogue(Dialogue dialogue)
-        //{
-        //    MainGame.Instance.DialogueUI.SetActive(true);
-        //    MainGame.Instance.DialogueManager.SetNewDialogue(dialogue);
-        //    MainGame.Instance.DialogueManager.OnDialogueEnd += EndDialogue;
-        //}
+            CutsceneWaitForTime waitForTime = interactionElement as CutsceneWaitForTime;
+            if (waitForTime != null)
+            {
+                WaitForTime(waitForTime);
+            }
+        }
 
-        //private void EndDialogue()
-        //{
-        //    MainGame.Instance.DialogueUI.SetActive(false);
-        //    MainGame.Instance.DialogueManager.OnDialogueEnd -= EndDialogue;
-        //    GoToNextSequenceElement();
-        //}
+        private void ReadDialogue(CutsceneDialogue dialogue)
+        {
+            _dialogueManager.DialogueUI.alpha = 1;
+            _dialogueManager.SetNewDialogue(dialogue.Dialogue);
+            _dialogueManager.OnDialogueEnd += EndDialogue;
+        }
 
-        //private void SpawnInventoryItem(InventoryItemData itemData)
-        //{
-        //    MainGame.Instance.Inventory.AddItem(itemData);
-        //    MainGame.Instance.Inventory.OnItemAddition += EndItemSpawn;
-        //}
+        private void EndDialogue()
+        {
+            _dialogueManager.DialogueUI.alpha = 0;
+            _dialogueManager.OnDialogueEnd -= EndDialogue;
+            GoToNextSequenceElement();
+        }
 
-        //private void EndItemSpawn()
-        //{
-        //    MainGame.Instance.Inventory.OnItemAddition -= EndItemSpawn;
-        //    GoToNextSequenceElement();
-        //}
+        private void StartCameraTravelling(CutsceneCamera camera)
+        {
+            //_dialogueManager.OnDialogueEnd += EndCameraTravelling;
 
-        //private void ShowImage(InteractionImageAppear imageAppear)
-        //{
-        //    MainGame.Instance.InteractionImageManager.gameObject.SetActive(true);
-        //    MainGame.Instance.InteractionImageManager.SetImage(imageAppear.Sprite);
-        //    MainGame.Instance.InteractionImageManager.OnCLick += HideImage;
-        //}
+        }
 
-        //private void HideImage()
-        //{
-        //    MainGame.Instance.InteractionImageManager.gameObject.SetActive(false);
-        //    GoToNextSequenceElement();
-        //}
-    }
+        private void EndCameraTravelling()
+        {
+            GoToNextSequenceElement();
+        }
 
-    [Serializable]
-    public class CutsceneElement
-    {
-    }
+        private void WaitForTime(CutsceneWaitForTime waitForTime)
+        {
+            //_dialogueManager.OnDialogueEnd += EndWaitForTime;
 
-    public class CutsceneDialogue : CutsceneElement
-    {
-        [SerializeField] public Dialogue _dialogue;
-    }
+        }
 
-    public class CutsceneCamera : CutsceneElement
-    {
-        [SerializeField] public Transform _targetTransform;
-        [SerializeField] public float _travellingTime;
-        [SerializeField] public DG.Tweening.Ease _travellingEase;
-
-    }
-    public class CutsceneWaitForTime : CutsceneElement
-    {
-        [SerializeField] public float _waitTIme;
-    }
-
-    public class Cutscene
-    {
-        [BF_SubclassList.SubclassList(typeof(CutsceneElement)), SerializeField] private CutsceneElementWrapper _cutscene;
-    }
-
-    [Serializable]
-    public class CutsceneElementWrapper
-    {
-        [SerializeReference] public List<CutsceneElement> List;
+        private void EndWaitForTime()
+        {
+            GoToNextSequenceElement();
+        }
     }
 }

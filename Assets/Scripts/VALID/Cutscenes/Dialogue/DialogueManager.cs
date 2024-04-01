@@ -34,6 +34,7 @@ namespace BlownAway.Cutscenes
 
             }
         }
+        [field:SerializeField] public CanvasGroup DialogueUI { get; private set; }
 
         [SerializeField] private TMP_Text _dialogueTextboxText;
         [SerializeField] private Image _dialogueTextbox;
