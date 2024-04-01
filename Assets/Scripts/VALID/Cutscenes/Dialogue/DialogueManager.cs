@@ -49,17 +49,14 @@ namespace BlownAway.Cutscenes
         private Dialogue _currentDialogue;
         private int _currentTextIndex;
         private int _currentCharIndex;
-        private bool _hasCurrentTextEnded;
+        private float _currentCharWaitTime;
+        private bool _hasCurrentTextEnded = true;
         private Coroutine _writingCharactersCoroutine;
         private List<TextEffectData> _textEffects = new List<TextEffectData>();
 
-        private void Awake()
-        {
-            _hasCurrentTextEnded = true;
-        }
-
         public void SetNewDialogue(Dialogue newDialogue)
         {
+            _hasCurrentTextEnded = true;
             _currentDialogue = newDialogue;
             CurrentTextIndex = 0;
             _dialogueTextbox.color = newDialogue.CharacterData.DialogueBoxColor;
@@ -102,6 +99,7 @@ namespace BlownAway.Cutscenes
             {
                 _currentCharIndex = i;
                 char c = finalText[i];
+                _currentCharWaitTime = _baseEffectData.TextEffect.CharacterApparitionTime;
 
                 if (characterData.SoundsTalk.Length > 0)
                 {
@@ -112,8 +110,9 @@ namespace BlownAway.Cutscenes
                     }
                 }
 
-                yield return new WaitForEndOfFrame();
-                yield return new WaitForSeconds(_textEffectsByCharacters[_currentCharIndex].TextEffect.CharacterApparitionTime);
+                //yield return new WaitForEndOfFrame();
+                //_textEffectsByCharacters[_currentCharIndex]?.TextEffect.CharacterApparitionTime ??
+                yield return new WaitForSeconds(_currentCharWaitTime);
             }
             _hasCurrentTextEnded = true;
             _currentCharIndex = -1;

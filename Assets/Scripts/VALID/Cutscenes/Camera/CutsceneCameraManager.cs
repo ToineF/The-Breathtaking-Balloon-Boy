@@ -1,8 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
-public class CutsceneCameraManager : MonoBehaviour
+namespace BlownAway.Cutscenes
 {
-    
+    public class CutsceneCameraManager : MonoBehaviour
+    {
+        public void SetNewCamera(CutsceneCamera camera)
+        {
+            camera.TargetTransform.gameObject.SetActive(false);
+            camera.TargetTransform.gameObject.SetActive(true);
+        }
+    }
 }

@@ -1,5 +1,4 @@
-using System;
-using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 
 namespace BlownAway.Cutscenes
@@ -8,6 +7,7 @@ namespace BlownAway.Cutscenes
     {
         [SerializeField] private DialogueManager _dialogueManager;
         [SerializeField] private CutsceneCameraManager _cameraManager;
+        [SerializeField] private CutsceneWaitForTimeManager _waitForTimeManager;
 
         public int CurrentSequenceIndex
         {
@@ -69,7 +69,7 @@ namespace BlownAway.Cutscenes
             CutsceneWaitForTime waitForTime = interactionElement as CutsceneWaitForTime;
             if (waitForTime != null)
             {
-                WaitForTime(waitForTime);
+                StartWaitForTime(waitForTime);
             }
         }
 
@@ -78,34 +78,37 @@ namespace BlownAway.Cutscenes
             _dialogueManager.DialogueUI.alpha = 1;
             _dialogueManager.SetNewDialogue(dialogue.Dialogue);
             _dialogueManager.OnDialogueEnd += EndDialogue;
+            if (dialogue.CloseWindowOnDialogueEnd) _dialogueManager.OnDialogueEnd += HideDialogueWindow;
+        }
+
+        private void HideDialogueWindow()
+        {
+            _dialogueManager.DialogueUI.alpha = 0;
         }
 
         private void EndDialogue()
         {
-            _dialogueManager.DialogueUI.alpha = 0;
             _dialogueManager.OnDialogueEnd -= EndDialogue;
             GoToNextSequenceElement();
         }
 
         private void StartCameraTravelling(CutsceneCamera camera)
         {
-            //_dialogueManager.OnDialogueEnd += EndCameraTravelling;
+            _cameraManager.SetNewCamera(camera);
 
-        }
-
-        private void EndCameraTravelling()
-        {
             GoToNextSequenceElement();
         }
 
-        private void WaitForTime(CutsceneWaitForTime waitForTime)
+        private void StartWaitForTime(CutsceneWaitForTime waitForTime)
         {
-            //_dialogueManager.OnDialogueEnd += EndWaitForTime;
+            _waitForTimeManager.StartTimer(waitForTime.WaitTime);
+            _waitForTimeManager.OnTimerEnd += EndWaitForTime;
 
         }
 
         private void EndWaitForTime()
         {
+            _waitForTimeManager.OnTimerEnd -= EndWaitForTime;
             GoToNextSequenceElement();
         }
     }
