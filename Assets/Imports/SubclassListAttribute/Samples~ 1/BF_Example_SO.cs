@@ -1,11 +1,6 @@
+#if UNITY_EDITOR
 using BF_SubclassList;
-using System.Collections;
-using System.Collections.Generic;
-using System;
 using UnityEngine;
-using System.Linq;
-using UnityEditor;
-using UnityEditorInternal;
 
 namespace BF_SubclassList_Example
 {
@@ -15,3 +10,4 @@ namespace BF_SubclassList_Example
     }
 
 }
+#endif
