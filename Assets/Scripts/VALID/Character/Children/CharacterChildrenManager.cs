@@ -1,11 +1,14 @@
 using BlownAway.Character;
 using BlownAway.Character.Data;
+using System;
 using UnityEngine;
 
 public class CharacterChildrenManager : CharacterSubComponent
 {
+    public Action OnChildGain;
     [field:SerializeField] public int ChildrenCount {  get; private set; }
     [field:SerializeField] public CharacterChildrenUpgradesData CharacterUpgradesData {get; private set; }
+    public int MaxChildrenCount {  get => CharacterUpgradesData.CharacterDatas.Length; }
 
     protected override void StartScript(CharacterManager manager)
     {
@@ -16,6 +19,7 @@ public class CharacterChildrenManager : CharacterSubComponent
     {
         ChildrenCount++;
         UpdateData();
+        OnChildGain?.Invoke();
     }
 
     public void SetChildren(int number)

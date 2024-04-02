@@ -7,6 +7,7 @@ using BlownAway.Character.Air;
 using BlownAway.Character.Animations;
 using BlownAway.Hitbox.Checkpoints;
 using BlownAway.Character.Data;
+using BlownAway.Collectibles;
 
 namespace BlownAway.Character
 {
@@ -51,6 +52,9 @@ namespace BlownAway.Character
         // Feedbacks
         [field: SerializeField, Tooltip("The reference to the class that contains the references to the feedbacks")] public CharacterFeedbacksManager Feedbacks { get; private set; }
 
+        // Collectibles
+        [field: SerializeField, Tooltip("The reference to the class that contains the logic of the collectibles")] public CharacterCollectiblesManager Collectibles { get; private set; }
+
         // UI Transition
         [field: SerializeField, Tooltip("The reference to the class that contains the logic of the transitions")] public Transition Transition { get; private set; }
 
@@ -71,6 +75,7 @@ namespace BlownAway.Character
             AnimationManager.InitScript(this);
             CharacterCollider.InitScript(this);
             CameraManager.InitScript(this);
+            Collectibles.InitScript(this);
         }
 
 

@@ -1,6 +1,4 @@
 using UnityEngine;
-using DG.Tweening;
-using static UnityEngine.Rendering.DebugUI;
 
 namespace BlownAway.Collectibles
 {
@@ -36,12 +34,13 @@ namespace BlownAway.Collectibles
             transform.position = Vector3.Lerp(transform.position, _owner.Collider.bounds.center, positionWeight);
             transform.localScale = Vector3.Lerp(transform.localScale, Vector3.zero, scaleWeight);
 
-            if (percentile > 1) Destroy(gameObject);
+            if (percentile > 1) OnDeath();
         }
 
-        private void DestroySelf()
+        protected override void OnDeath()
         {
-            Destroy(gameObject);
+            _lastOtherCollider.GetComponent<CharacterCollider>()?.Manager.Collectibles.AddCoin();
+            base.OnDeath();
         }
     }
 }

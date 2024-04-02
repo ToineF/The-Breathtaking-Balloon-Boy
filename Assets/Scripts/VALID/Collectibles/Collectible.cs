@@ -25,6 +25,11 @@ namespace BlownAway.Collectibles
 
         protected virtual void OnPickUp()
         {
+            OnDeath();
+        }
+
+        protected virtual void OnDeath()
+        {
             Destroy(gameObject);
         }
     }
