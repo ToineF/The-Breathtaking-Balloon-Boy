@@ -14,7 +14,7 @@ namespace BlownAway.Collectibles
 
         protected override void OnPickUp()
         {
-            
+            _lastOtherCollider.GetComponent<CharacterCollider>()?.Manager.Collectibles.AddCoin();
         }
 
         private void Update()
@@ -39,7 +39,6 @@ namespace BlownAway.Collectibles
 
         protected override void OnDeath()
         {
-            _lastOtherCollider.GetComponent<CharacterCollider>()?.Manager.Collectibles.AddCoin();
             base.OnDeath();
         }
     }

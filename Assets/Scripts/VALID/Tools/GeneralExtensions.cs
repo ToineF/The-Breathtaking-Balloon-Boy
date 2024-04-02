@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using DG.Tweening;
+using System;
 
 namespace AntoineFoucault.Utilities
 {
@@ -699,6 +700,15 @@ namespace AntoineFoucault.Utilities
         public static void DOInt(this int value, int target, float time, Ease ease = Ease.Unset)
         {
             DOTween.To(() => value, x => value = x, target, time).SetEase(ease);
+        }
+
+        [Serializable]
+        public struct DoTweenPunchFeedback
+        {
+            [SerializeField] public float PunchTime;
+            [SerializeField] public Vector3 PunchDirection;
+            [SerializeField] public int PunchVibrato;
+            [SerializeField] public float PunchElasticity;
         }
 
     }

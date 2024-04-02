@@ -3,6 +3,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using AntoineFoucault.Utilities;
+using DG.Tweening;
+using static AntoineFoucault.Utilities.Tween;
 
 namespace BlownAway.Collectibles
 {
@@ -27,6 +29,10 @@ namespace BlownAway.Collectibles
         [SerializeField] private CanvasGroup _rareCollectibleUI;
         [SerializeField] private TMP_Text _rareCollectibleCountText;
 
+        [Header("Feedbacks")]
+        [SerializeField] private DoTweenPunchFeedback _coinFeedbacks;
+        [SerializeField] private DoTweenPunchFeedback _rareCollectibleFeedbacks;
+
         private Image[] _collectiblesImage;
 
         private void Start()
@@ -43,10 +49,14 @@ namespace BlownAway.Collectibles
 
         private void UpdateCoinUI()
         {
+            _coinsCountText.transform.DOComplete();
+            _coinsCountText.transform.DOPunchPosition(_coinFeedbacks.PunchDirection, _coinFeedbacks.PunchTime, _coinFeedbacks.PunchVibrato, _coinFeedbacks.PunchElasticity);
             _coinsCountText.text = _collectiblesManager.Coins.ToString();
         }
         private void UpdateRareCollectibleUI()
         {
+            _rareCollectibleCountText.transform.DOComplete();
+            _rareCollectibleCountText.transform.DOPunchPosition(_rareCollectibleFeedbacks.PunchDirection, _rareCollectibleFeedbacks.PunchTime, _rareCollectibleFeedbacks.PunchVibrato, _rareCollectibleFeedbacks.PunchElasticity);
             _rareCollectibleCountText.text = _collectiblesManager.RareCollectibles.ToString();
         }
         private void UpdateChildrenUI()
@@ -73,3 +83,4 @@ namespace BlownAway.Collectibles
         }
     }
 }
+
