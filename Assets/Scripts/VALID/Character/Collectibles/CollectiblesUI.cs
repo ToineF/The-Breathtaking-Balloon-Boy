@@ -1,10 +1,9 @@
-using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using AntoineFoucault.Utilities;
 using DG.Tweening;
 using static AntoineFoucault.Utilities.Tween;
+using System.Collections;
 
 namespace BlownAway.Collectibles
 {
@@ -15,6 +14,12 @@ namespace BlownAway.Collectibles
         [SerializeField] private CharacterChildrenManager _childrenManager;
 
         [SerializeField] private CanvasGroup _collectiblesUI;
+
+        [Header("Visibility")]
+        [SerializeField] private float _hideTime;
+        [SerializeField] private float _appearFadeTime;
+        [SerializeField] private float _disappearFadeTime;
+        [SerializeField] private float _stayFadeTime;
 
         [Header("Children")]
         [SerializeField] private Transform _childrenUIParent;
@@ -34,10 +39,13 @@ namespace BlownAway.Collectibles
         [SerializeField] private DoTweenPunchFeedback _rareCollectibleFeedbacks;
 
         private Image[] _collectiblesImage;
+        private Coroutine _currentVisibilityCoroutine;
+        private bool _isVisible;
 
         private void Start()
         {
             _collectiblesManager.OnCoinGain += UpdateCoinUI;
+            _collectiblesManager.OnCoinGainPreview += ShowUICollectible;
             _collectiblesManager.OnRareCollectibleGain += UpdateRareCollectibleUI;
             _childrenManager.OnChildGain += UpdateChildrenUI;
 
@@ -58,6 +66,7 @@ namespace BlownAway.Collectibles
             _rareCollectibleCountText.transform.DOComplete();
             _rareCollectibleCountText.transform.DOPunchPosition(_rareCollectibleFeedbacks.PunchDirection, _rareCollectibleFeedbacks.PunchTime, _rareCollectibleFeedbacks.PunchVibrato, _rareCollectibleFeedbacks.PunchElasticity);
             _rareCollectibleCountText.text = _collectiblesManager.RareCollectibles.ToString();
+            ShowUICollectible();
         }
         private void UpdateChildrenUI()
         {
@@ -71,6 +80,7 @@ namespace BlownAway.Collectibles
                 Destroy(_collectiblesImage[i].gameObject);
                 _collectiblesImage[i] = Instantiate(_childHiddenImagePrefab, _childrenUIParent);
             }
+            ShowUICollectible();
         }
         private void CreateChildrenUI()
         {
@@ -80,6 +90,53 @@ namespace BlownAway.Collectibles
             {
                 _collectiblesImage[i] = Instantiate(_childHiddenImagePrefab, _childrenUIParent);
             }
+        }
+
+        private void Update()
+        {
+            CheckForUIHide();
+        }
+
+        private void CheckForUIHide()
+        {
+            if (_childrenManager.Manager.Inputs.MoveInputDirection == Vector3.zero) // Stop moving
+            {
+                ShowHideUIAfterTime(_hideTime, true);
+            }
+            else if (_childrenManager.Manager.Inputs.StartMoving) // Starts moving
+            {
+                if (_currentVisibilityCoroutine != null) ShowHideUIAfterTime(0, false);
+            }
+        }
+
+        private void ShowUICollectible()
+        {
+            ShowHideUIImmediate(true, true);
+            ShowHideUIAfterTime(_stayFadeTime, false);
+        }
+
+        private void ShowHideUIAfterTime(float time, bool isVisible, bool highPriority = false)
+        {
+            if (isVisible == _isVisible && !highPriority) return;
+            _isVisible = isVisible;
+
+            if (_currentVisibilityCoroutine != null) StopCoroutine(_currentVisibilityCoroutine);
+            _currentVisibilityCoroutine = StartCoroutine(ShowHideUIAfterTimeRoutine(time, isVisible));
+        }
+
+        private void ShowHideUIImmediate(bool isVisible, bool highPriority = false)
+        {
+            if (isVisible == _isVisible && !highPriority) return;
+            _isVisible = isVisible;
+
+            _collectiblesUI.DOFade(isVisible ? 1 : 0, isVisible ? _appearFadeTime : _disappearFadeTime);
+        }
+
+        private IEnumerator ShowHideUIAfterTimeRoutine(float time, bool isVisible)
+        {
+            yield return new WaitForSeconds(time);
+
+            _collectiblesUI.DOFade(isVisible ? 1 : 0, isVisible ? _appearFadeTime : _disappearFadeTime);
         }
     }
 }

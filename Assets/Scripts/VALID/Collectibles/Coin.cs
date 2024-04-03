@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 namespace BlownAway.Collectibles
@@ -9,12 +10,14 @@ namespace BlownAway.Collectibles
         [SerializeField] private float _magnetSpeed;
         [SerializeField] private AnimationCurve _magnetCurve;
         [SerializeField] private AnimationCurve _scaleOverTime;
+        [SerializeField] private float _uiWinDelay;
 
         private float _magnetTimer = 0;
 
         protected override void OnPickUp()
         {
-            _lastOtherCollider.GetComponent<CharacterCollider>()?.Manager.Collectibles.AddCoin();
+            _lastOtherCollider.GetComponent<CharacterCollider>()?.Manager.Collectibles.AddCoinPreview();
+            StartCoroutine(AddCoinToCount());
         }
 
         private void Update()
@@ -37,9 +40,10 @@ namespace BlownAway.Collectibles
             if (percentile > 1) OnDeath();
         }
 
-        protected override void OnDeath()
+        private IEnumerator AddCoinToCount()
         {
-            base.OnDeath();
+            yield return new WaitForSeconds(_uiWinDelay);
+            _lastOtherCollider.GetComponent<CharacterCollider>()?.Manager.Collectibles.AddCoin();
         }
     }
 }
