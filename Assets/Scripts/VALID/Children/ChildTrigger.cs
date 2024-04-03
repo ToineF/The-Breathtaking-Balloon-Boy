@@ -1,7 +1,5 @@
 using UnityEngine;
-using System;
-using AntoineFoucault.Utilities;
-
+using BlownAway.Cutscenes;
 
 namespace BlownAway.Children
 {
@@ -9,6 +7,7 @@ namespace BlownAway.Children
     {
         [Header("Child")]
         [SerializeField] private ChildAnimator _animator;
+        [SerializeField] private Cutscene _cutscene;
 
         private new void Awake()
         {
@@ -21,6 +20,7 @@ namespace BlownAway.Children
             if (!_lastOtherCollider.TryGetComponent(out CharacterCollider collider)) return;
 
             collider.Manager.ChildrenManager.AddChild();
+            if (_cutscene != null) collider.Manager.CutsceneManager.StartNewSequence(_cutscene);
             _animator.Found();
         }
     }

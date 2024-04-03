@@ -1,9 +1,9 @@
-using System.Collections;
+using BlownAway.Character;
 using UnityEngine;
 
 namespace BlownAway.Cutscenes
 {
-    public class CutsceneManager : MonoBehaviour
+    public class CutsceneManager : CharacterSubComponent
     {
         [SerializeField] private DialogueManager _dialogueManager;
         [SerializeField] private CutsceneCameraManager _cameraManager;

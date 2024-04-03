@@ -8,6 +8,7 @@ using BlownAway.Character.Animations;
 using BlownAway.Hitbox.Checkpoints;
 using BlownAway.Character.Data;
 using BlownAway.Collectibles;
+using BlownAway.Cutscenes;
 
 namespace BlownAway.Character
 {
@@ -48,6 +49,10 @@ namespace BlownAway.Character
 
         // Children
         [field: SerializeField, Tooltip("The reference to the class that contains the logic of the checkpoint system")] public CharacterChildrenManager ChildrenManager { get; private set; }
+
+        // Cutscenes
+        [field: SerializeField, Tooltip("The reference to the class that contains the logic of the cutscene system")] public CutsceneManager CutsceneManager { get; private set; }
+
 
         // Feedbacks
         [field: SerializeField, Tooltip("The reference to the class that contains the references to the feedbacks")] public CharacterFeedbacksManager Feedbacks { get; private set; }
