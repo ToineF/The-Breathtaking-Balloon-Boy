@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <IsBalloonBounceAvailable>k__BackingField: 0
   <IsGroundPoundAvailable>k__BackingField: 0
-  <DashDuration>k__BackingField: 0.4
+  <DashDuration>k__BackingField: 0.45
   <DashStartSpeed>k__BackingField: 40
-  <DashEndSpeed>k__BackingField: 75
+  <DashEndSpeed>k__BackingField: 17
   <DashInterpolationCurve>k__BackingField:
     serializedVersion: 2
     m_Curve:
@@ -43,6 +43,11 @@ MonoBehaviour:
     m_RotationOrder: 4
   <DashEmptiesAir>k__BackingField: 0
   <MaxDashes>k__BackingField: 1
-  <GroundPoundForce>k__BackingField: 0
+  <GroundPoundNormalForce>k__BackingField: 0
+  <GroundPoundSmallForce>k__BackingField: 0
+  <GroundPoundBalloonForce>k__BackingField: 0
   <GroundPoundStartLerp>k__BackingField: 0
   <GroundPoundEndLerp>k__BackingField: 0
+  <GroundPoundEndTime>k__BackingField: 0
+  <GroundPoundNormalGroundHeightThresold>k__BackingField: 0
+  <MinGroundPoundCancelTime>k__BackingField: 0
