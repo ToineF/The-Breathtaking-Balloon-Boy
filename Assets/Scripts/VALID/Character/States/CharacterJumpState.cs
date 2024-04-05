@@ -42,9 +42,9 @@ public class CharacterJumpState : CharacterBaseState
 
         manager.MovementManager.CheckForDashStart(manager);
 
-        if (manager.MovementManager.JumppPropulsionTimer > 0) return;
+        if (manager.MovementManager.JumpPropulsionTimer > 0) return;
 
-        manager.MovementManager.CheckForPropulsionStartOnAir(manager);
+        manager.MovementManager.CheckForPropulsionStartOnAir(manager); // HERE CHECK IF BUTTON PRESSED
 
     }
 

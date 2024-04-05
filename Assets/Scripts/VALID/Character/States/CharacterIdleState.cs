@@ -18,6 +18,7 @@ namespace BlownAway.Character.States
 
             // Air
             manager.AirManager.RefreshAir();
+            manager.MovementManager.RefreshDashes(manager);
 
             // Float
             manager.MovementManager.StartDeriveTimer(manager);

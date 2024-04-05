@@ -48,7 +48,7 @@ namespace BlownAway.Character.Movements
 
         // Jump
         public float JumpTimer { get; private set; }
-        public float JumppPropulsionTimer { get; private set; }
+        public float JumpPropulsionTimer { get; private set; }
         private float _currentJumpSpeed;
         private float _currentJumpIncreaseByFrame;
         public CharacterJumpState.JumpState _currentJumpState { get; private set; }
@@ -95,9 +95,6 @@ namespace BlownAway.Character.Movements
             JumpBufferHitResults = new RaycastHit[2];
             GroundPoundHitResults = new RaycastHit[2];
             SetGravityTo(manager, manager.Data.FallData.BaseData.BaseGravity, manager.Data.FallData.BaseData.MinGravity, manager.Data.FallData.BaseData.MaxGravity, manager.Data.FallData.BaseData.GravityIncreaseByFrame, manager.Data.FallData.BaseData.GravityIncreaseDecelerationByFrame);
-
-            // On Ground Enter Subscriptions
-            OnGroundEnter += RefreshDashes;
         }
 
 
@@ -498,6 +495,8 @@ namespace BlownAway.Character.Movements
             {
                 _currentJumpState = CharacterJumpState.JumpState.ASCENT;
                 manager.AirManager.RefreshAir();
+                RefreshDashes(manager);
+                StartDeriveTimer(manager);
                 manager.States.SwitchState(manager.States.JumpState);
             }
         }
@@ -505,14 +504,14 @@ namespace BlownAway.Character.Movements
         public void StartJump(CharacterManager manager)
         {
             JumpTimer = manager.Data.PropulsionData.MinimumJumpTime;
-            JumppPropulsionTimer = manager.Data.PropulsionData.JumpBeforePropulsionTime;
+            JumpPropulsionTimer = manager.Data.PropulsionData.JumpBeforePropulsionTime;
             _currentJumpSpeed = manager.Data.PropulsionData.JumpForce;
             _currentJumpIncreaseByFrame = manager.Data.PropulsionData.JumpDecreaseByFrame;
         }
         public void UpdateJumpTimer(CharacterManager manager)
         {
             JumpTimer -= Time.deltaTime;
-            JumppPropulsionTimer -= Time.deltaTime;
+            JumpPropulsionTimer -= Time.deltaTime;
         }
         public void UpdateJumpMovement(CharacterManager manager)
         {
