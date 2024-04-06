@@ -687,6 +687,17 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""5a5da10c-71a1-42fa-a809-54d64b1c34db"",
+                    ""path"": ""<HID::BDA NSW wired controller>/button7"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Dash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""4038f170-e7f3-4d1d-9f41-b915bbe9695e"",
                     ""path"": ""<Gamepad>/buttonEast"",
                     ""interactions"": """",

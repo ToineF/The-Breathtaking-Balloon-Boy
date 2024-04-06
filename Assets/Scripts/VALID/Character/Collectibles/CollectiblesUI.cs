@@ -41,6 +41,7 @@ namespace BlownAway.Collectibles
         private Image[] _collectiblesImage;
         private Coroutine _currentVisibilityCoroutine;
         private bool _isVisible;
+        private bool _wasInIdleState;
 
         private void Start()
         {
@@ -99,11 +100,11 @@ namespace BlownAway.Collectibles
 
         private void CheckForUIHide()
         {
-            if (_childrenManager.Manager.Inputs.MoveInputDirection == Vector3.zero) // Stop moving
+            if (_childrenManager.Manager.States.IsInState(_childrenManager.Manager.States.IdleState)) // Stop moving
             {
                 ShowHideUIAfterTime(_hideTime, true);
             }
-            else if (_childrenManager.Manager.Inputs.StartMoving) // Starts moving
+            else if (!_childrenManager.Manager.States.IsInState(_childrenManager.Manager.States.IdleState)) // Starts moving
             {
                 if (_currentVisibilityCoroutine != null) ShowHideUIAfterTime(0, false);
             }

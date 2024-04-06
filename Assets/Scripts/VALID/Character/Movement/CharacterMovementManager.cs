@@ -570,6 +570,8 @@ namespace BlownAway.Character.Movements
             _currentDashDirection = lateralMoveDirection;
 
             GameObject.Instantiate(manager.Data.FeedbacksData.DashVFX, manager.CharacterCollider.Rigidbody.transform.position, Quaternion.LookRotation(lateralMoveDirection), null);
+            manager.Feedbacks.HapticManager.VibrateForTime(0.123f, 0.234f, 0.05f);
+           
 
             if (manager.Data.PowerUpData.DashEmptiesAir) manager.AirManager.EmptyAir();
         }

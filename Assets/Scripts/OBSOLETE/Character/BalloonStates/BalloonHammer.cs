@@ -83,7 +83,7 @@ namespace BlownAway.Player.States {
 
             Collider collider = _balloonStageManager.CharaController.GetComponent<Collider>();
             GameObject.Instantiate(_balloonStageManager.HammerFXGroundPrefab, collider.bounds.center - collider.bounds.extents.y * Vector3.up, _balloonStageManager.HammerFXGroundPrefab.transform.rotation);
-            HapticManager.Instance.VibrateForTime(0.123f, 0.234f, 0.05f);
+            //HapticManager.Instance.VibrateForTime(0.123f, 0.234f, 0.05f);
         }
 
         public override void OnSecondaryActionPressed(InputAction.CallbackContext context)

@@ -9,6 +9,7 @@ using BlownAway.Hitbox.Checkpoints;
 using BlownAway.Character.Data;
 using BlownAway.Collectibles;
 using BlownAway.Cutscenes;
+using BlownAway.Character.Feedbacks;
 
 namespace BlownAway.Character
 {
