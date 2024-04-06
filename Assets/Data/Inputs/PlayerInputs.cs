@@ -46,6 +46,15 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""Jump"",
+                    ""type"": ""Button"",
+                    ""id"": ""8bf8f7ab-1e9c-416a-9ae0-d3da63b2c112"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""CameraMoveMouse"",
                     ""type"": ""PassThrough"",
                     ""id"": ""ca75b410-b717-4001-b182-926a73e9559d"",
@@ -390,8 +399,8 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""60167232-df15-48fe-8d31-e9a2c76c7950"",
-                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""id"": ""66193cae-76ed-43fd-a31e-ce0f60de14bf"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Controller"",
@@ -401,8 +410,8 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""66193cae-76ed-43fd-a31e-ce0f60de14bf"",
-                    ""path"": ""<HID::BDA NSW wired controller>/button2"",
+                    ""id"": ""60167232-df15-48fe-8d31-e9a2c76c7950"",
+                    ""path"": ""<HID::BDA NSW wired controller>/button8"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Controller"",
@@ -715,6 +724,39 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
                     ""action"": ""CameraTopDown"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6d9f4921-4465-4987-83af-5d30c301fbba"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7e47d9ef-3755-453a-aa9a-97d3461fcf91"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3f4bdc1e-21e2-4577-8304-15d3fdf20a48"",
+                    ""path"": ""<HID::BDA NSW wired controller>/button2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1861,6 +1903,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
         m_Player_UpPropulsion = m_Player.FindAction("UpPropulsion", throwIfNotFound: true);
+        m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_CameraMoveMouse = m_Player.FindAction("CameraMoveMouse", throwIfNotFound: true);
         m_Player_CameraMoveController = m_Player.FindAction("CameraMoveController", throwIfNotFound: true);
         m_Player_CameraCenter = m_Player.FindAction("CameraCenter", throwIfNotFound: true);
@@ -1955,6 +1998,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
     private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
     private readonly InputAction m_Player_Move;
     private readonly InputAction m_Player_UpPropulsion;
+    private readonly InputAction m_Player_Jump;
     private readonly InputAction m_Player_CameraMoveMouse;
     private readonly InputAction m_Player_CameraMoveController;
     private readonly InputAction m_Player_CameraCenter;
@@ -1972,6 +2016,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         public PlayerActions(@PlayerInputs wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Player_Move;
         public InputAction @UpPropulsion => m_Wrapper.m_Player_UpPropulsion;
+        public InputAction @Jump => m_Wrapper.m_Player_Jump;
         public InputAction @CameraMoveMouse => m_Wrapper.m_Player_CameraMoveMouse;
         public InputAction @CameraMoveController => m_Wrapper.m_Player_CameraMoveController;
         public InputAction @CameraCenter => m_Wrapper.m_Player_CameraCenter;
@@ -1998,6 +2043,9 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
             @UpPropulsion.started += instance.OnUpPropulsion;
             @UpPropulsion.performed += instance.OnUpPropulsion;
             @UpPropulsion.canceled += instance.OnUpPropulsion;
+            @Jump.started += instance.OnJump;
+            @Jump.performed += instance.OnJump;
+            @Jump.canceled += instance.OnJump;
             @CameraMoveMouse.started += instance.OnCameraMoveMouse;
             @CameraMoveMouse.performed += instance.OnCameraMoveMouse;
             @CameraMoveMouse.canceled += instance.OnCameraMoveMouse;
@@ -2041,6 +2089,9 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
             @UpPropulsion.started -= instance.OnUpPropulsion;
             @UpPropulsion.performed -= instance.OnUpPropulsion;
             @UpPropulsion.canceled -= instance.OnUpPropulsion;
+            @Jump.started -= instance.OnJump;
+            @Jump.performed -= instance.OnJump;
+            @Jump.canceled -= instance.OnJump;
             @CameraMoveMouse.started -= instance.OnCameraMoveMouse;
             @CameraMoveMouse.performed -= instance.OnCameraMoveMouse;
             @CameraMoveMouse.canceled -= instance.OnCameraMoveMouse;
@@ -2317,6 +2368,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
     {
         void OnMove(InputAction.CallbackContext context);
         void OnUpPropulsion(InputAction.CallbackContext context);
+        void OnJump(InputAction.CallbackContext context);
         void OnCameraMoveMouse(InputAction.CallbackContext context);
         void OnCameraMoveController(InputAction.CallbackContext context);
         void OnCameraCenter(InputAction.CallbackContext context);

@@ -491,7 +491,7 @@ namespace BlownAway.Character.Movements
 
         public void CheckForJumpStart(CharacterManager manager)
         {
-            if (manager.Inputs.PropulsionType.HasFlag(PropulsionDirection.Up) || manager.Inputs.PropulsionType.HasFlag(PropulsionDirection.Lateral))
+            if (manager.Inputs.IsJumping)
             {
                 _currentJumpState = CharacterJumpState.JumpState.ASCENT;
                 manager.AirManager.RefreshAir();
@@ -537,7 +537,7 @@ namespace BlownAway.Character.Movements
         public void CheckIfJumpButtonReleased(CharacterManager manager)
         {
             if (_currentJumpState == CharacterJumpState.JumpState.DESCENT) return;
-            if (manager.Inputs.PropulsionType.HasFlag(PropulsionDirection.Up) || manager.Inputs.PropulsionType.HasFlag(PropulsionDirection.Lateral)) return;
+            if (manager.Inputs.IsJumping) return;
 
             StartJumpDescent(manager);
         }

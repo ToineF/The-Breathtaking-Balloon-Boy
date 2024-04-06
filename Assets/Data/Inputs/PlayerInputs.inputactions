@@ -24,6 +24,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "Jump",
+                    "type": "Button",
+                    "id": "8bf8f7ab-1e9c-416a-9ae0-d3da63b2c112",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "CameraMoveMouse",
                     "type": "PassThrough",
                     "id": "ca75b410-b717-4001-b182-926a73e9559d",
@@ -368,8 +377,8 @@
                 },
                 {
                     "name": "",
-                    "id": "60167232-df15-48fe-8d31-e9a2c76c7950",
-                    "path": "<Gamepad>/rightTrigger",
+                    "id": "66193cae-76ed-43fd-a31e-ce0f60de14bf",
+                    "path": "<Gamepad>/leftTrigger",
                     "interactions": "",
                     "processors": "",
                     "groups": "Controller",
@@ -379,8 +388,8 @@
                 },
                 {
                     "name": "",
-                    "id": "66193cae-76ed-43fd-a31e-ce0f60de14bf",
-                    "path": "<HID::BDA NSW wired controller>/button2",
+                    "id": "60167232-df15-48fe-8d31-e9a2c76c7950",
+                    "path": "<HID::BDA NSW wired controller>/button8",
                     "interactions": "",
                     "processors": "",
                     "groups": "Controller",
@@ -693,6 +702,39 @@
                     "processors": "",
                     "groups": "Keyboard",
                     "action": "CameraTopDown",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6d9f4921-4465-4987-83af-5d30c301fbba",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7e47d9ef-3755-453a-aa9a-97d3461fcf91",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Controller",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3f4bdc1e-21e2-4577-8304-15d3fdf20a48",
+                    "path": "<HID::BDA NSW wired controller>/button2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Controller",
+                    "action": "Jump",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
