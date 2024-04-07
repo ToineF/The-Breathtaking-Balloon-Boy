@@ -571,7 +571,7 @@ namespace BlownAway.Character.Movements
 
             GameObject.Instantiate(manager.Data.FeedbacksData.DashVFX, manager.CharacterCollider.Rigidbody.transform.position, Quaternion.LookRotation(lateralMoveDirection), null);
             manager.Feedbacks.HapticManager.VibrateForTime(0.123f, 0.234f, 0.05f);
-           
+
 
             if (manager.Data.PowerUpData.DashEmptiesAir) manager.AirManager.EmptyAir();
         }
@@ -800,6 +800,11 @@ namespace BlownAway.Character.Movements
             }
             return totalForce;
         }
+
+        public void ResetAllExternalForces()
+        {
+            ExternalForces.Clear();
+        }
         #endregion
 
         #region Upgrades
@@ -816,7 +821,12 @@ namespace BlownAway.Character.Movements
         {
             bool isSmallJump = GroundPoundTotalHeight < manager.Data.PowerUpData.GroundPoundNormalGroundHeightThresold;
             float groundPoundForce = isSmallJump ? manager.Data.PowerUpData.GroundPoundSmallForce : manager.Data.PowerUpData.GroundPoundNormalForce;
-            if (SlopesHitResults[0].collider?.GetComponent<BouncyBalloon>()) groundPoundForce = manager.Data.PowerUpData.GroundPoundBalloonForce;
+            Vector3 colliderPosition = new Vector3(manager.CharacterCollider.Collider.bounds.center.x, manager.CharacterCollider.Collider.bounds.max.y, manager.CharacterCollider.Collider.bounds.center.z);
+            Physics.SphereCastNonAlloc(colliderPosition, manager.Data.GroundDetectionData.GroundDetectionSphereRadius, Vector3.down, GroundPoundHitResults, int.MaxValue, ~manager.Data.CameraData.PlayerLayer);
+            if (GroundPoundHitResults[0].collider?.GetComponent<BouncyBalloon>())
+            {
+                groundPoundForce = manager.Data.PowerUpData.GroundPoundBalloonForce;
+            }
             AddExternalForce(gameObject, Vector3.up * groundPoundForce, manager.Data.PowerUpData.GroundPoundStartLerp);
         }
 
@@ -848,7 +858,7 @@ namespace BlownAway.Character.Movements
         //public void CheckForGroundPoundBalloon(CharacterManager manager)
         //{
         //    Vector3 colliderPosition = new Vector3(manager.CharacterCollider.Collider.bounds.center.x, manager.CharacterCollider.Collider.bounds.min.y, manager.CharacterCollider.Collider.bounds.center.z);
-        //    Physics.SphereCastNonAlloc(colliderPosition, manager.Data.GroundDetectionData.GroundDetectionSphereRadius, Vector3.down, GroundPoundHitResults, manager.Data.GroundDetectionData.SlopesGroundCheckDistance*4, ~manager.Data.CameraData.PlayerLayer);
+        //    Physics.SphereCastNonAlloc(colliderPosition, manager.Data.GroundDetectionData.GroundDetectionSphereRadius, Vector3.down, GroundPoundHitResults, manager.Data.GroundDetectionData.SlopesGroundCheckDistance * 4, ~manager.Data.CameraData.PlayerLayer);
         //    if (GroundPoundHitResults[0].collider?.GetComponent<BouncyBalloon>())
         //    {
         //        float groundPoundForce = manager.Data.PowerUpData.GroundPoundBalloonForce;

@@ -35,4 +35,9 @@ public class CharacterChildrenManager : CharacterSubComponent
         int targetData = Mathf.Clamp(ChildrenCount, 0, CharacterUpgradesData.CharacterDatas.Length - 1);
         Manager.Data = CharacterUpgradesData.CharacterDatas[targetData];
     }
+
+    public void PassInGodMode()
+    {
+        Manager.Data = CharacterUpgradesData.GodModeData;
+    }
 }

@@ -52,6 +52,10 @@ namespace BlownAway.DebugMode
             {
                 TakeScreenshot();
             }
+            if (Input.GetKeyDown(KeyCode.F9)) // God Mode
+            {
+                Manager.ChildrenManager.PassInGodMode();
+            }
         }
 
         private void TakeScreenshot()

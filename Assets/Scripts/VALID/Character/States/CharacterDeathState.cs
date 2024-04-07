@@ -8,6 +8,8 @@ namespace BlownAway.Character.States
         {
             Debug.Log("DEATH");
             manager.CheckpointManager.SetToCheckpointPosition(manager.CharacterCollider.Rigidbody.gameObject);
+            manager.MovementManager.ResetAllExternalForces();
+            manager.CameraManager.IsMovable = false;
             manager.States.SwitchState(manager.States.FallingState);
             //manager.Transition.SetTransition(() =>
             //{
@@ -20,8 +22,6 @@ namespace BlownAway.Character.States
             //});
 
             //Debug.Log(manager.CharacterCollider.Rigidbody.gameObject.name + ": " + manager.CharacterCollider.Rigidbody.gameObject.transform.position);
-
-            manager.CameraManager.IsMovable = false;
         }
 
         public override void ExitState(CharacterManager manager)

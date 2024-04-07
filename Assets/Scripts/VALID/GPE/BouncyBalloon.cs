@@ -84,9 +84,11 @@ namespace BlownAway.GPE
             else if (Mathf.Abs(normalizedDirection.x) > Mathf.Abs(normalizedDirection.z)) normalizedDirection = leftRightDirection; // LEFT - RIGHT
             else normalizedDirection = forwardBackwardDirection; // FORWARD - BACKWARD
 
+
             collider.Manager.MovementManager.AddExternalForce(gameObject, normalizedDirection * _force, _forceAccel);
 
             //collider.Manager.Inputs.ResetLastPropulsionInputDirection();
+
             if (!collider.Manager.MovementManager.IsGrounded)
                 collider.Manager.States.SwitchState(collider.Manager.States.FloatingState);
             else

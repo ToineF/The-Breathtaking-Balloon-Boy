@@ -6,6 +6,7 @@ namespace BlownAway.Character.Data
     public class CharacterChildrenUpgradesData : ScriptableObject
     {
         [field:SerializeField] public CharacterControllerData[] CharacterDatas {get; private set; }
+        [field:SerializeField] public CharacterControllerData GodModeData {get; private set; }
 
     }
 }
