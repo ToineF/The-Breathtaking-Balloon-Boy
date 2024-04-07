@@ -16,6 +16,7 @@ namespace BlownAway.Character.States
 
             manager.MovementManager.GroundPoundTotalHeight = manager.CharacterCollider.Collider.transform.position.y;
             manager.MovementManager.GroundPoundCancelTime = manager.Data.PowerUpData.MinGroundPoundCancelTime;
+            manager.MovementManager.HasBalloonGroundPound = false;
 
         }
 
