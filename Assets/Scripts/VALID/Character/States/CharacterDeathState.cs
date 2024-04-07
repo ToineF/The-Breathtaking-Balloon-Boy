@@ -21,12 +21,14 @@ namespace BlownAway.Character.States
 
             //Debug.Log(manager.CharacterCollider.Rigidbody.gameObject.name + ": " + manager.CharacterCollider.Rigidbody.gameObject.transform.position);
 
+            manager.CameraManager.IsMovable = false;
         }
 
         public override void ExitState(CharacterManager manager)
         {
             Debug.Log("death end");
             //manager.CheckpointManager.SetToCheckpointPosition(manager.CharacterCollider.Rigidbody.gameObject);
+            manager.CameraManager.IsMovable = true;
         }
 
         public override void UpdateState(CharacterManager manager)

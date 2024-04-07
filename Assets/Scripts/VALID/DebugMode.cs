@@ -9,20 +9,12 @@ namespace BlownAway.DebugMode
 
     public class DebugMode : CharacterSubComponent
     {
-        private bool _canvasHidden = false;
-        private List<Canvas> _canvasList = new List<Canvas>();
-
         private void Awake()
         {
             DontDestroyOnLoad(this);
         }
 
 #if UNITY_EDITOR
-
-        private void Start()
-        {
-            UpdateCanvasList();
-        }
 
         private void Update()
         {
@@ -42,12 +34,7 @@ namespace BlownAway.DebugMode
             }
             if (Input.GetKeyDown (KeyCode.F4)) // Remove all UI
             {
-                UpdateCanvasList();
-                _canvasHidden = !_canvasHidden;
-                foreach (Canvas c in _canvasList)
-                {
-                    c.gameObject.SetActive(_canvasHidden);
-                }
+                FindObjectOfType<CharacterUI>()?.ToggleUI();
             }
             if (Input.GetKeyDown(KeyCode.F5)) // Child Level 0
             {
@@ -64,17 +51,6 @@ namespace BlownAway.DebugMode
             if (Input.GetKeyDown(KeyCode.F8)) // Screenshot
             {
                 TakeScreenshot();
-            }
-        }
-
-
-        private void UpdateCanvasList()
-        {
-            Canvas[] canvasList = FindObjectsOfType<Canvas>();
-            foreach (Canvas C in canvasList)
-            {
-                if (_canvasList.Contains(C)) continue;
-                _canvasList.Add(C);
             }
         }
 

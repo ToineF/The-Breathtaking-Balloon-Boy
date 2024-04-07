@@ -18,7 +18,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &540240434640383406
 RectTransform:
   m_ObjectHideFlags: 0
@@ -890,9 +890,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dialogueContinueSound: {fileID: 0}
+  <DialogueUI>k__BackingField: {fileID: 0}
   _dialogueTextboxText: {fileID: 4712470715706371058}
   _dialogueTextbox: {fileID: 2887933281160080466}
-  _characterApparitionSpeed: 0.05
+  _hiddenEffectData: {fileID: 0}
+  _baseEffectData: {fileID: 0}
+  _textEffectsToCheck: []
+  _textEffectsByCharacters: []
+  _characterApparitionTimers: []
 --- !u!1 &8726283008493459489
 GameObject:
   m_ObjectHideFlags: 0
@@ -911,7 +916,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &9175874175019406084
 RectTransform:
   m_ObjectHideFlags: 0

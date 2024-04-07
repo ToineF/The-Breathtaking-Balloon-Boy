@@ -20,7 +20,13 @@ namespace BlownAway.Children
             if (!_lastOtherCollider.TryGetComponent(out CharacterCollider collider)) return;
 
             collider.Manager.ChildrenManager.AddChild();
-            if (_cutscene != null) collider.Manager.CutsceneManager.StartNewSequence(_cutscene);
+            if (_cutscene != null)
+            {
+                CharacterCollider character = _lastOtherCollider.GetComponent<CharacterCollider>();
+                if (character == null) return;
+
+                collider.Manager.CutsceneManager.StartNewSequence(_cutscene, character.Manager);
+            }
             _animator.Found();
         }
     }

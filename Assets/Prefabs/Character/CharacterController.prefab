@@ -248,6 +248,7 @@ GameObject:
   - component: {fileID: 7507358721281837289}
   - component: {fileID: 7865403362446753878}
   - component: {fileID: 4325485606811522093}
+  - component: {fileID: 1532270469282470665}
   - component: {fileID: 2324459326877564572}
   - component: {fileID: 8720038069001201682}
   - component: {fileID: 2711653856997542685}
@@ -300,6 +301,7 @@ MonoBehaviour:
   <States>k__BackingField: {fileID: 1215609012679441032}
   <CharacterCollider>k__BackingField: {fileID: 8579306032225152818}
   <AirManager>k__BackingField: {fileID: 4325485606811522093}
+  <UIManager>k__BackingField: {fileID: 1532270469282470665}
   <AnimationManager>k__BackingField: {fileID: 2324459326877564572}
   <CheckpointManager>k__BackingField: {fileID: 2711653856997542685}
   <ChildrenManager>k__BackingField: {fileID: 6958117120660801122}
@@ -356,6 +358,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c19eea4798d3e3940a9829298b3b9745, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1532270469282470665
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2112151245869228761}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58ca3eaec477c934ab7c4c70d6812508, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UI: {fileID: 7020479435512486204}
 --- !u!114 &2324459326877564572
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1301,6 +1316,7 @@ GameObject:
   - component: {fileID: 3939878820524698510}
   - component: {fileID: 5799965886623014559}
   - component: {fileID: 5902811518895720357}
+  - component: {fileID: 7020479435512486204}
   m_Layer: 5
   m_Name: PlayerUI
   m_TagString: Untagged
@@ -1394,6 +1410,18 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!225 &7020479435512486204
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7091933966987010704}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &7772109719085674860
 GameObject:
   m_ObjectHideFlags: 0

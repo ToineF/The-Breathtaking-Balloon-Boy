@@ -649,18 +649,13 @@ MonoBehaviour:
     List:
     - rid: 7683776523686903809
     - rid: 7683776523686903811
-    - rid: 7683776523686903808
+    - rid: 7683776652863602689
     - rid: 7683776523686903810
+    - rid: 7683776652863602690
   <StopPlayerMovements>k__BackingField: 0
   references:
     version: 2
     RefIds:
-    - rid: 7683776523686903808
-      type: {class: CutsceneDialogue, ns: BlownAway.Cutscenes, asm: Assembly-CSharp}
-      data:
-        <Dialogue>k__BackingField: {fileID: 11400000, guid: ea9b3ddd89156a34ab626d7725b3b388,
-          type: 2}
-        <CloseWindowOnDialogueEnd>k__BackingField: 0
     - rid: 7683776523686903809
       type: {class: CutsceneCamera, ns: BlownAway.Cutscenes, asm: Assembly-CSharp}
       data:
@@ -670,6 +665,16 @@ MonoBehaviour:
       data:
         <TargetTransform>k__BackingField: {fileID: 6451385582996643312}
     - rid: 7683776523686903811
+      type: {class: CutsceneWaitForTime, ns: BlownAway.Cutscenes, asm: Assembly-CSharp}
+      data:
+        <WaitTime>k__BackingField: 2
+    - rid: 7683776652863602689
+      type: {class: CutsceneDialogue, ns: BlownAway.Cutscenes, asm: Assembly-CSharp}
+      data:
+        <Dialogue>k__BackingField: {fileID: 11400000, guid: ea9b3ddd89156a34ab626d7725b3b388,
+          type: 2}
+        <CloseWindowOnDialogueEnd>k__BackingField: 1
+    - rid: 7683776652863602690
       type: {class: CutsceneWaitForTime, ns: BlownAway.Cutscenes, asm: Assembly-CSharp}
       data:
         <WaitTime>k__BackingField: 2

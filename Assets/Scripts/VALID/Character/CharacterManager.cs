@@ -42,6 +42,9 @@ namespace BlownAway.Character
         // Air
         [field: SerializeField, Tooltip("The reference to the class that containsthe logic of the air")] public CharacterAirManager AirManager { get; private set; }
 
+        // UI
+        [field: SerializeField, Tooltip("The reference to the class that containsthe logic of the air")] public CharacterUI UIManager { get; private set; }
+
         // Animations
         [field: SerializeField, Tooltip("The reference to the class that contains the logic of the animations")] public CharacterAnimationManager AnimationManager { get; private set; }
 
@@ -53,7 +56,6 @@ namespace BlownAway.Character
 
         // Cutscenes
         [field: SerializeField, Tooltip("The reference to the class that contains the logic of the cutscene system")] public CutsceneManager CutsceneManager { get; private set; }
-
 
         // Feedbacks
         [field: SerializeField, Tooltip("The reference to the class that contains the references to the feedbacks")] public CharacterFeedbacksManager Feedbacks { get; private set; }
@@ -82,6 +84,7 @@ namespace BlownAway.Character
             CharacterCollider.InitScript(this);
             CameraManager.InitScript(this);
             Collectibles.InitScript(this);
+            UIManager.InitScript(this);
         }
 
 

@@ -5,9 +5,13 @@ namespace BlownAway.Cutscenes
 {
     public class CutsceneManager : CharacterSubComponent
     {
+        public DialogueManager DialogueManager { get => _dialogueManager; set => _dialogueManager = value; }
+
         [SerializeField] private DialogueManager _dialogueManager;
         [SerializeField] private CutsceneCameraManager _cameraManager;
         [SerializeField] private CutsceneWaitForTimeManager _waitForTimeManager;
+
+        private CharacterManager _character;
 
         public int CurrentSequenceIndex
         {
@@ -25,10 +29,10 @@ namespace BlownAway.Cutscenes
         private Cutscene _currentInteractionSequence;
         private int _currentSequenceIndex;
 
-        public void StartNewSequence(Cutscene cutscene)
+        public void StartNewSequence(Cutscene cutscene, CharacterManager character)
         {
-            //if (MainGame.Instance.Player)
-            //    MainGame.Instance.Player.CanMove = false;
+            character.States.SwitchState(character.States.CutsceneState);
+            _character = character;
 
             _currentInteractionSequence = cutscene;
             CurrentSequenceIndex = 0;
@@ -46,8 +50,7 @@ namespace BlownAway.Cutscenes
 
         private void EndSequence()
         {
-            //if (MainGame.Instance.Player)
-            //    MainGame.Instance.Player.CanMove = true;
+            _character.States.SwitchState(_character.States.IdleState);
         }
 
         private void ReadSequenceElement()

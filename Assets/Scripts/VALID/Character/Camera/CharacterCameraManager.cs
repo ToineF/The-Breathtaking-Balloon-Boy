@@ -7,6 +7,8 @@ namespace BlownAway.Camera
 {
     public class CharacterCameraManager : CharacterSubComponent
     {
+        public bool IsMovable { get; set; } = true;
+
 
         [field: Header("References")]
         [field: SerializeField] public GameObject Camera { get; private set; }
@@ -46,12 +48,16 @@ namespace BlownAway.Camera
 
         private void LateUpdate()
         {
+            if (!IsMovable) return;
+
             UpdateCameraAngle(Manager);
             UpdateCameraPosition(Manager);
         }
 
         private void Update()
         {
+            if (!IsMovable) return;
+
             CheckForCameraTopDown(Manager);
 
             if (!_canMoveCamera) return;
@@ -199,6 +205,12 @@ namespace BlownAway.Camera
             {
                 _canMoveCamera = true;
             }
+        }
+
+        public void ReactivateCamera()
+        {
+            Camera.SetActive(false);
+            Camera.SetActive(true);
         }
     }
 }

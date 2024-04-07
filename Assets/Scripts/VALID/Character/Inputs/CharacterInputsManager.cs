@@ -42,6 +42,8 @@ namespace BlownAway.Character.Inputs
         public bool StartedDash { get; private set; }
         public bool StartedGroundPound { get; private set; }
 
+        // Cutscenes
+        public bool NextDialoguePressed { get; private set; }
 
         // Inputs
         private PlayerInputs _inputs;
@@ -87,6 +89,8 @@ namespace BlownAway.Character.Inputs
 
             _inputs.Player.Dash.performed += StartDash;
             _inputs.Player.GroundPound.performed += StartGroundPound;
+
+            _inputs.Player.NextDialogue.performed += PlayNextDialogue;
         }
 
         private void OnDisable()
@@ -118,6 +122,8 @@ namespace BlownAway.Character.Inputs
 
             _inputs.Player.Dash.performed -= StartDash;
             _inputs.Player.GroundPound.performed -= StartGroundPound;
+
+            _inputs.Player.NextDialogue.performed -= PlayNextDialogue;
         }
 
         private void Start()
@@ -222,6 +228,7 @@ namespace BlownAway.Character.Inputs
             CameraCenter = false;
             CameraTopDownPressed = false;
             CameraTopDownReleased = false;
+            NextDialoguePressed = false;
         }
 
         private void StartFalling(InputAction.CallbackContext context)
@@ -237,6 +244,11 @@ namespace BlownAway.Character.Inputs
         private void StartDash(InputAction.CallbackContext context)
         {
             StartedDash = true;
+        }
+
+        private void PlayNextDialogue(InputAction.CallbackContext context)
+        {
+            NextDialoguePressed = true;
         }
     }
 }

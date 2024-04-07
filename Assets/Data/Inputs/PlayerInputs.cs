@@ -127,6 +127,15 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""NextDialogue"",
+                    ""type"": ""Button"",
+                    ""id"": ""c48bb965-f789-4f8c-86e6-bf0a5c1b3032"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""LateralPropulsion"",
                     ""type"": ""Button"",
                     ""id"": ""48ecd013-eb6c-4759-95bd-516dc1063446"",
@@ -757,6 +766,50 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Controller"",
                     ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3978564c-3661-4d93-bfd7-b691e1d9fd3f"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""NextDialogue"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c8cd2f7b-831c-4d6c-9eec-d95b1153e806"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""NextDialogue"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ceacd0c5-40a6-45d3-8f35-9d9321e46f3e"",
+                    ""path"": ""<HID::BDA NSW wired controller>/button2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""NextDialogue"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e360e4cd-4430-4d1a-acee-dc83baeca7e3"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""NextDialogue"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1912,6 +1965,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         m_Player_BalloonBounce = m_Player.FindAction("BalloonBounce", throwIfNotFound: true);
         m_Player_GroundPound = m_Player.FindAction("GroundPound", throwIfNotFound: true);
         m_Player_InflateJacket = m_Player.FindAction("InflateJacket", throwIfNotFound: true);
+        m_Player_NextDialogue = m_Player.FindAction("NextDialogue", throwIfNotFound: true);
         m_Player_LateralPropulsion = m_Player.FindAction("LateralPropulsion", throwIfNotFound: true);
         m_Player_DownPropulsion = m_Player.FindAction("DownPropulsion", throwIfNotFound: true);
         m_Player_CancelPropulsion = m_Player.FindAction("CancelPropulsion", throwIfNotFound: true);
@@ -2007,6 +2061,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_BalloonBounce;
     private readonly InputAction m_Player_GroundPound;
     private readonly InputAction m_Player_InflateJacket;
+    private readonly InputAction m_Player_NextDialogue;
     private readonly InputAction m_Player_LateralPropulsion;
     private readonly InputAction m_Player_DownPropulsion;
     private readonly InputAction m_Player_CancelPropulsion;
@@ -2025,6 +2080,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         public InputAction @BalloonBounce => m_Wrapper.m_Player_BalloonBounce;
         public InputAction @GroundPound => m_Wrapper.m_Player_GroundPound;
         public InputAction @InflateJacket => m_Wrapper.m_Player_InflateJacket;
+        public InputAction @NextDialogue => m_Wrapper.m_Player_NextDialogue;
         public InputAction @LateralPropulsion => m_Wrapper.m_Player_LateralPropulsion;
         public InputAction @DownPropulsion => m_Wrapper.m_Player_DownPropulsion;
         public InputAction @CancelPropulsion => m_Wrapper.m_Player_CancelPropulsion;
@@ -2070,6 +2126,9 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
             @InflateJacket.started += instance.OnInflateJacket;
             @InflateJacket.performed += instance.OnInflateJacket;
             @InflateJacket.canceled += instance.OnInflateJacket;
+            @NextDialogue.started += instance.OnNextDialogue;
+            @NextDialogue.performed += instance.OnNextDialogue;
+            @NextDialogue.canceled += instance.OnNextDialogue;
             @LateralPropulsion.started += instance.OnLateralPropulsion;
             @LateralPropulsion.performed += instance.OnLateralPropulsion;
             @LateralPropulsion.canceled += instance.OnLateralPropulsion;
@@ -2116,6 +2175,9 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
             @InflateJacket.started -= instance.OnInflateJacket;
             @InflateJacket.performed -= instance.OnInflateJacket;
             @InflateJacket.canceled -= instance.OnInflateJacket;
+            @NextDialogue.started -= instance.OnNextDialogue;
+            @NextDialogue.performed -= instance.OnNextDialogue;
+            @NextDialogue.canceled -= instance.OnNextDialogue;
             @LateralPropulsion.started -= instance.OnLateralPropulsion;
             @LateralPropulsion.performed -= instance.OnLateralPropulsion;
             @LateralPropulsion.canceled -= instance.OnLateralPropulsion;
@@ -2377,6 +2439,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         void OnBalloonBounce(InputAction.CallbackContext context);
         void OnGroundPound(InputAction.CallbackContext context);
         void OnInflateJacket(InputAction.CallbackContext context);
+        void OnNextDialogue(InputAction.CallbackContext context);
         void OnLateralPropulsion(InputAction.CallbackContext context);
         void OnDownPropulsion(InputAction.CallbackContext context);
         void OnCancelPropulsion(InputAction.CallbackContext context);
