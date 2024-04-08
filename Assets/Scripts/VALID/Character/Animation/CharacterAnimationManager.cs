@@ -13,6 +13,7 @@ namespace BlownAway.Character.Animations
 
         [Header("Parameters")]
         [SerializeField] private bool _isOrientationInverted;
+        [SerializeField] private float _lookAtLerp;
         [SerializeField, Range(0,1)] private float _jacketMorpherLerp;
 
         private Vector3 _lastDirection;
@@ -37,7 +38,11 @@ namespace BlownAway.Character.Animations
             if (moveDirection.sqrMagnitude >= 0.001f) _lastDirection = moveDirection;
             int orientation = _isOrientationInverted ? -1 : 1;
 
-            Manager.CharacterVisual.LookAt(Manager.CharacterVisual.position - _lastDirection * orientation);
+            Vector3 point = Manager.CharacterVisual.position - _lastDirection * orientation;
+            //Manager.CharacterVisual.LookAt(point);
+            Vector3 direction = point - Manager.CharacterVisual.transform.position;
+            Quaternion toRotation = Quaternion.LookRotation(direction, Manager.CharacterVisual.transform.up);
+            Manager.CharacterVisual.transform.rotation = Quaternion.Lerp(Manager.CharacterVisual.transform.rotation, toRotation, _lookAtLerp * Time.deltaTime);
 
             //transform.rotation = Quaternion.identity;
             // transform.RotateAround(collider, Vector3.forward, Vector3.Angle(position, position + _lastDirection));
