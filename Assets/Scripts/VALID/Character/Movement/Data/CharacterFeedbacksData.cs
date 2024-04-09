@@ -17,5 +17,6 @@ namespace BlownAway.Character.Movements.Data
         [field: Header("Dash")]
         [field: SerializeField] public GameObject DashVFX { get; private set; }
         [field: SerializeField] public HapticFeedback DashHaptic { get; private set; }
+        [field: SerializeField] public Feedback DashFeedback { get; private set; }
     }
 }
