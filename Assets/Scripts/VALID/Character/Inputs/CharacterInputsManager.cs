@@ -45,11 +45,14 @@ namespace BlownAway.Character.Inputs
         // Cutscenes
         public bool NextDialoguePressed { get; private set; }
 
+        // Pause
+        public bool TogglePause { get; private set; }
+
         // Inputs
         private PlayerInputs _inputs;
 
         // Propulsion
-        private static Vector3 _propulsionDefaultDirection = Vector3.forward;
+        private Vector3 _propulsionDefaultDirection = Vector3.forward;
 
 
         private void Awake()
@@ -91,6 +94,7 @@ namespace BlownAway.Character.Inputs
             _inputs.Player.GroundPound.performed += StartGroundPound;
 
             _inputs.Player.NextDialogue.performed += PlayNextDialogue;
+            _inputs.Player.Pause.performed += StartTogglePause;
         }
 
         private void OnDisable()
@@ -124,6 +128,7 @@ namespace BlownAway.Character.Inputs
             _inputs.Player.GroundPound.performed -= StartGroundPound;
 
             _inputs.Player.NextDialogue.performed -= PlayNextDialogue;
+            _inputs.Player.Pause.performed -= StartTogglePause;
         }
 
         private void Start()
@@ -229,6 +234,7 @@ namespace BlownAway.Character.Inputs
             CameraTopDownPressed = false;
             CameraTopDownReleased = false;
             NextDialoguePressed = false;
+            TogglePause = false;
         }
 
         private void StartFalling(InputAction.CallbackContext context)
@@ -249,6 +255,11 @@ namespace BlownAway.Character.Inputs
         private void PlayNextDialogue(InputAction.CallbackContext context)
         {
             NextDialoguePressed = true;
+        }
+
+        private void StartTogglePause(InputAction.CallbackContext context)
+        {
+            TogglePause = true;
         }
     }
 }

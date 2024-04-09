@@ -41,7 +41,7 @@ namespace BlownAway.Collectibles
         private Image[] _collectiblesImage;
         private Coroutine _currentVisibilityCoroutine;
         private bool _isVisible;
-        private bool _wasInIdleState;
+        private bool _highPriority;
 
         private void Start()
         {
@@ -112,13 +112,15 @@ namespace BlownAway.Collectibles
 
         private void ShowUICollectible()
         {
+            _highPriority = true;
             ShowHideUIImmediate(true, true);
-            ShowHideUIAfterTime(_stayFadeTime, false);
+            ShowHideUIAfterTime(_stayFadeTime, false, true);
         }
 
         private void ShowHideUIAfterTime(float time, bool isVisible, bool highPriority = false)
         {
             if (isVisible == _isVisible && !highPriority) return;
+            if (_highPriority && !highPriority) return;
             _isVisible = isVisible;
 
             if (_currentVisibilityCoroutine != null) StopCoroutine(_currentVisibilityCoroutine);
@@ -128,6 +130,7 @@ namespace BlownAway.Collectibles
         private void ShowHideUIImmediate(bool isVisible, bool highPriority = false)
         {
             if (isVisible == _isVisible && !highPriority) return;
+            if (_highPriority && !highPriority) return;
             _isVisible = isVisible;
 
             _collectiblesUI.DOFade(isVisible ? 1 : 0, isVisible ? _appearFadeTime : _disappearFadeTime);
@@ -138,6 +141,7 @@ namespace BlownAway.Collectibles
             yield return new WaitForSeconds(time);
 
             _collectiblesUI.DOFade(isVisible ? 1 : 0, isVisible ? _appearFadeTime : _disappearFadeTime);
+            _highPriority = false;
         }
     }
 }

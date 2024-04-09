@@ -66,6 +66,9 @@ namespace BlownAway.Character
         // UI Transition
         [field: SerializeField, Tooltip("The reference to the class that contains the logic of the transitions")] public Transition Transition { get; private set; }
 
+        // Pause Menu
+        [field: SerializeField, Tooltip("The reference to the class that contains the logic of the pause system")] public PauseMenu PauseMenu { get; private set; }
+
         // Debug Mode
         [field: SerializeField, Tooltip("The reference to the class that contains the logic of the transitions")] public DebugMode.DebugMode DebugMode { get; private set; }
 
@@ -85,6 +88,7 @@ namespace BlownAway.Character
             CameraManager.InitScript(this);
             Collectibles.InitScript(this);
             UIManager.InitScript(this);
+            PauseMenu.InitScript(this);
         }
 
 

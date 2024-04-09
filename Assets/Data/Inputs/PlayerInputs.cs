@@ -136,6 +136,15 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""3b4ac9ec-b08b-4771-8b9c-59760def878c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""LateralPropulsion"",
                     ""type"": ""Button"",
                     ""id"": ""48ecd013-eb6c-4759-95bd-516dc1063446"",
@@ -810,6 +819,28 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Controller"",
                     ""action"": ""NextDialogue"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fd70b564-f42c-4350-9d54-ba980d935a28"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1c09e33b-628a-4c90-bc67-5aebf27d1a6e"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""Pause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1966,6 +1997,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         m_Player_GroundPound = m_Player.FindAction("GroundPound", throwIfNotFound: true);
         m_Player_InflateJacket = m_Player.FindAction("InflateJacket", throwIfNotFound: true);
         m_Player_NextDialogue = m_Player.FindAction("NextDialogue", throwIfNotFound: true);
+        m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
         m_Player_LateralPropulsion = m_Player.FindAction("LateralPropulsion", throwIfNotFound: true);
         m_Player_DownPropulsion = m_Player.FindAction("DownPropulsion", throwIfNotFound: true);
         m_Player_CancelPropulsion = m_Player.FindAction("CancelPropulsion", throwIfNotFound: true);
@@ -2062,6 +2094,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_GroundPound;
     private readonly InputAction m_Player_InflateJacket;
     private readonly InputAction m_Player_NextDialogue;
+    private readonly InputAction m_Player_Pause;
     private readonly InputAction m_Player_LateralPropulsion;
     private readonly InputAction m_Player_DownPropulsion;
     private readonly InputAction m_Player_CancelPropulsion;
@@ -2081,6 +2114,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         public InputAction @GroundPound => m_Wrapper.m_Player_GroundPound;
         public InputAction @InflateJacket => m_Wrapper.m_Player_InflateJacket;
         public InputAction @NextDialogue => m_Wrapper.m_Player_NextDialogue;
+        public InputAction @Pause => m_Wrapper.m_Player_Pause;
         public InputAction @LateralPropulsion => m_Wrapper.m_Player_LateralPropulsion;
         public InputAction @DownPropulsion => m_Wrapper.m_Player_DownPropulsion;
         public InputAction @CancelPropulsion => m_Wrapper.m_Player_CancelPropulsion;
@@ -2129,6 +2163,9 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
             @NextDialogue.started += instance.OnNextDialogue;
             @NextDialogue.performed += instance.OnNextDialogue;
             @NextDialogue.canceled += instance.OnNextDialogue;
+            @Pause.started += instance.OnPause;
+            @Pause.performed += instance.OnPause;
+            @Pause.canceled += instance.OnPause;
             @LateralPropulsion.started += instance.OnLateralPropulsion;
             @LateralPropulsion.performed += instance.OnLateralPropulsion;
             @LateralPropulsion.canceled += instance.OnLateralPropulsion;
@@ -2178,6 +2215,9 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
             @NextDialogue.started -= instance.OnNextDialogue;
             @NextDialogue.performed -= instance.OnNextDialogue;
             @NextDialogue.canceled -= instance.OnNextDialogue;
+            @Pause.started -= instance.OnPause;
+            @Pause.performed -= instance.OnPause;
+            @Pause.canceled -= instance.OnPause;
             @LateralPropulsion.started -= instance.OnLateralPropulsion;
             @LateralPropulsion.performed -= instance.OnLateralPropulsion;
             @LateralPropulsion.canceled -= instance.OnLateralPropulsion;
@@ -2440,6 +2480,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         void OnGroundPound(InputAction.CallbackContext context);
         void OnInflateJacket(InputAction.CallbackContext context);
         void OnNextDialogue(InputAction.CallbackContext context);
+        void OnPause(InputAction.CallbackContext context);
         void OnLateralPropulsion(InputAction.CallbackContext context);
         void OnDownPropulsion(InputAction.CallbackContext context);
         void OnCancelPropulsion(InputAction.CallbackContext context);
