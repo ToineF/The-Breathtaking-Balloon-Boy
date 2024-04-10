@@ -1,5 +1,6 @@
 using UnityEngine;
 using System;
+using BlownAway.Camera;
 
 namespace BlownAway.Character.Feedbacks
 {
@@ -8,6 +9,7 @@ namespace BlownAway.Character.Feedbacks
         [field:Header("References")]
         [field:SerializeField] public HapticManager HapticManager { get; private set; }
         [field:SerializeField] public FMODAudioManager AudioManager { get; private set; }
+        [field:SerializeField] public ScreenShake ScreenShake { get; private set; }
 
         [field:Header("Walk")]
         [field:SerializeField] public ParticleSystem WalkVFX { get; private set; }
@@ -18,12 +20,13 @@ namespace BlownAway.Character.Feedbacks
             if (feedback.VFX != null) Instantiate(feedback.VFX);
 
             // SFX
-            AudioManager.PlayClip(feedback.SFX);
+            AudioManager?.PlayClip(feedback.SFX);
 
             // Haptic
-            HapticManager.VibrateForTime(feedback.HapticFeedback);
+            HapticManager?.VibrateForTime(feedback.HapticFeedback);
 
             // Screenshake
+            ScreenShake?.Shake(feedback.ShakeFeedback);
         }
     }
 
@@ -31,7 +34,7 @@ namespace BlownAway.Character.Feedbacks
     public struct Feedback
     {
         public HapticFeedback HapticFeedback;
-        //public ScreenShake HapticFeedback;
+        public ShakeData ShakeFeedback;
         public GameObject VFX;
         public FMODUnity.EventReference SFX;
     }
