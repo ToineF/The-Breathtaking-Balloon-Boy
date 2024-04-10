@@ -7,11 +7,17 @@ namespace BlownAway.Collectibles
         [SerializeField] private GameObject _coinPrefab;
         [SerializeField] private float _coinDistance;
         [SerializeField] private int _coinsNumber;
+        [SerializeField] private float _turnSpeed;
 
         protected override void OnPickUp()
         {
             SpawnCoins();
             OnDeath();
+        }
+
+        private void Update()
+        {
+            transform.eulerAngles += Vector3.up * _turnSpeed;
         }
 
         private void SpawnCoins()

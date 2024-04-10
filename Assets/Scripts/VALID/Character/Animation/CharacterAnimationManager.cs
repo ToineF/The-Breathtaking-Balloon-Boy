@@ -41,6 +41,7 @@ namespace BlownAway.Character.Animations
             Vector3 point = Manager.CharacterVisual.position - _lastDirection * orientation;
             //Manager.CharacterVisual.LookAt(point);
             Vector3 direction = point - Manager.CharacterVisual.transform.position;
+            if (direction.magnitude < 0.001f) return;
             Quaternion toRotation = Quaternion.LookRotation(direction, Manager.CharacterVisual.transform.up);
             Manager.CharacterVisual.transform.rotation = Quaternion.Lerp(Manager.CharacterVisual.transform.rotation, toRotation, _lookAtLerp * Time.deltaTime);
 
