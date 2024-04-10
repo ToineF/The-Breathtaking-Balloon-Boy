@@ -570,8 +570,7 @@ namespace BlownAway.Character.Movements
             Vector3 lateralMoveDirection = (Vector3.Scale(UnityEngine.Camera.main.transform.forward, new Vector3(1, 0, 1)).normalized * lateralMoveInput.z + Vector3.Scale(UnityEngine.Camera.main.transform.right, new Vector3(1, 0, 1)) * lateralMoveInput.x).normalized;
             _currentDashDirection = lateralMoveDirection;
 
-            GameObject.Instantiate(manager.Data.FeedbacksData.DashVFX, manager.CharacterCollider.Rigidbody.transform.position, Quaternion.LookRotation(lateralMoveDirection), null);
-            manager.Feedbacks.PlayFeedback(manager.Data.FeedbacksData.DashFeedback);
+            manager.Feedbacks.PlayFeedback(manager.Data.FeedbacksData.DashFeedback, manager.CharacterCollider.Rigidbody.transform.position, Quaternion.LookRotation(lateralMoveDirection), null);
 
 
             if (manager.Data.PowerUpData.DashEmptiesAir) manager.AirManager.EmptyAir();

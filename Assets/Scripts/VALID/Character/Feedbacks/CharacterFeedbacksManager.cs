@@ -28,6 +28,22 @@ namespace BlownAway.Character.Feedbacks
             // Screenshake
             ScreenShake?.Shake(feedback.ShakeFeedback);
         }
+
+        public void PlayFeedback(Feedback feedback, Vector3 position, Quaternion rotation, Transform transform)
+        {
+            // VFX
+            if (feedback.VFX != null) Instantiate(feedback.VFX, position, rotation, transform);
+
+
+            // SFX
+            AudioManager?.PlayClip(feedback.SFX);
+
+            // Haptic
+            HapticManager?.VibrateForTime(feedback.HapticFeedback);
+
+            // Screenshake
+            ScreenShake?.Shake(feedback.ShakeFeedback);
+        }
     }
 
     [Serializable]
