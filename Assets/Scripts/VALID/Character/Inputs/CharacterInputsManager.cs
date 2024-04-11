@@ -31,6 +31,7 @@ namespace BlownAway.Character.Inputs
         // Propulsion
         public bool JacketInflateToggle {get; private set;}
         public PropulsionDirection PropulsionType { get; private set; }
+        public bool StartPropulsion { get; private set; }
 
         // Jump
         public bool IsJumping { get; private set; }
@@ -181,6 +182,7 @@ namespace BlownAway.Character.Inputs
         private void SetUpPropulsion(InputAction.CallbackContext context)
         {
             PropulsionType |= PropulsionDirection.Up;
+            StartPropulsion = true;
         }
 
         private void UnsetUpPropulsion(InputAction.CallbackContext context)
@@ -235,6 +237,7 @@ namespace BlownAway.Character.Inputs
             CameraTopDownReleased = false;
             NextDialoguePressed = false;
             TogglePause = false;
+            StartPropulsion = false;
         }
 
         private void StartFalling(InputAction.CallbackContext context)

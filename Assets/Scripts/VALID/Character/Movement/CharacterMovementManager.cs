@@ -343,7 +343,8 @@ namespace BlownAway.Character.Movements
 
         public void CheckForPropulsionStartOnGround(CharacterManager manager)
         {
-            if (manager.Inputs.PropulsionType.HasFlag(PropulsionDirection.Up) || manager.Inputs.PropulsionType.HasFlag(PropulsionDirection.Lateral))
+            //if (manager.Inputs.PropulsionType.HasFlag(PropulsionDirection.Up) || manager.Inputs.PropulsionType.HasFlag(PropulsionDirection.Lateral))
+            if (manager.Inputs.StartPropulsion)
             {
                 manager.AirManager.RefreshAir();
                 PropulsionStart(manager);
@@ -361,7 +362,7 @@ namespace BlownAway.Character.Movements
 
             if (manager.AirManager.AirIsEmpty) return;
 
-            if (manager.Inputs.PropulsionType != 0)
+            if (manager.Inputs.StartPropulsion)
             {
                 PropulsionStart(manager);
             }
