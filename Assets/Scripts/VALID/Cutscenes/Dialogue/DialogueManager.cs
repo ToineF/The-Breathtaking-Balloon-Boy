@@ -24,7 +24,7 @@ namespace BlownAway.Cutscenes
                 if (_hasCurrentTextEnded)
                 {
                     _currentTextIndex = Mathf.Clamp(value, 0, _currentDialogue.Texts.Length - 1);
-                    AudioManager.Instance?.PlayClip(_dialogueContinueSound);
+                    //AudioManager.Instance?.PlayClip(_dialogueContinueSound);
                 }
 
                 if ((value < 0 || value > _currentDialogue.Texts.Length - 1) && _hasCurrentTextEnded)
@@ -110,7 +110,9 @@ namespace BlownAway.Cutscenes
                     }
                 }
 
-                //yield return new WaitForEndOfFrame();
+                Debug.LogError("NEW CHAR");
+
+                yield return new WaitForEndOfFrame();
                 //_textEffectsByCharacters[_currentCharIndex]?.TextEffect.CharacterApparitionTime ??
                 yield return new WaitForSeconds(_currentCharWaitTime);
             }
@@ -140,8 +142,11 @@ namespace BlownAway.Cutscenes
 
         private void AddBaseEffects()
         {
+            _textEffects.Clear();
             _textEffects.Add(_hiddenEffectData);
             _textEffects.Add(_baseEffectData);
+            Debug.LogError("ADD BASE");
+
         }
 
         private void Update()
@@ -151,6 +156,7 @@ namespace BlownAway.Cutscenes
 
         private void PlayTextAnimation()
         {
+            Debug.LogError("TFX COUNT : " + _textEffects.Count);
             _dialogueTextboxText.ForceMeshUpdate();
             TMP_TextInfo textInfo = _dialogueTextboxText.textInfo;
             bool[] visitedCharacters = new bool[textInfo.characterCount];
@@ -212,7 +218,6 @@ namespace BlownAway.Cutscenes
 
         private string GetTextEffectsInString(string text)
         {
-            _textEffects.Clear();
             AddBaseEffects();
 
             string newText = text;
