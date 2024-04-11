@@ -175,6 +175,8 @@ namespace BlownAway.Character.Movements
 
 
             CurrentVelocity += _currentDeplacementDirection * _currentDeplacementSpeed;
+
+            manager.MovementManager.CheckForStepClimb(manager);
         }
 
         public void StopMoving(CharacterManager manager)
@@ -247,6 +249,9 @@ namespace BlownAway.Character.Movements
 
             // VFX
             Instantiate(manager.Data.FeedbacksData.LandVFX, manager.CharacterCollider.Rigidbody.transform.position, manager.Data.FeedbacksData.LandVFX.transform.rotation);
+
+            // Animation
+            manager.AnimationManager.PlayAnimation(manager.AnimationManager.LandingAnim);
 
             //if (LastGround.collider != null)
             //{

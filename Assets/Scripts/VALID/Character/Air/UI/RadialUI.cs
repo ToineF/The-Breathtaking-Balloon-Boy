@@ -15,9 +15,9 @@ public class RadialUI : MonoBehaviour
         }
     }
 
-    [SerializeField] private Image[] _allUIImages;
+    [SerializeField] private CanvasGroup _UI;
     [SerializeField] private Image _filledImage;
-    
+
 
     [Header("Parameters")]
     [SerializeField] private bool _hideOnFull;
@@ -65,20 +65,17 @@ public class RadialUI : MonoBehaviour
     {
         StartCoroutine(ChangeColorOverTime(_filledImage, _fullColor, _naturalColor, _fullColorTime, _fullToNaturalColorSpeed, _fullColorDelay));
 
-        foreach (var ui in _allUIImages)
-        {
-            StartCoroutine(FadeWithDelay(ui, 0, _hideSpeed, _hideDelay));
-        }
+
+        StartCoroutine(FadeWithDelay(_UI, 0, _hideSpeed, _hideDelay));
         _hidden = true;
     }
 
     private void UnhideUI()
     {
         //StopAllCoroutines();
-        foreach (var ui in _allUIImages)
-        {
-            StartCoroutine(FadeWithDelay(ui, 1, _appearSpeed, _appearDelay));
-        }
+
+        StartCoroutine(FadeWithDelay(_UI, 1, _appearSpeed, _appearDelay));
+
         _hidden = false;
     }
 
@@ -90,10 +87,10 @@ public class RadialUI : MonoBehaviour
         image.DOColor(color2, colorTransitionSpeed);
     }
 
-    private IEnumerator FadeWithDelay(Image image, float fadeAlpha, float fadeSpeed, float delay = 0)
+    private IEnumerator FadeWithDelay(CanvasGroup group, float fadeAlpha, float fadeSpeed, float delay = 0)
     {
         yield return new WaitForSeconds(delay);
-        image.DOComplete();
-        image.DOFade(fadeAlpha, fadeSpeed);
+        group.DOComplete();
+        group.DOFade(fadeAlpha, fadeSpeed);
     }
 }

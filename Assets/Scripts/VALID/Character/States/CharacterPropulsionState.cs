@@ -17,6 +17,9 @@ namespace BlownAway.Character.States
             manager.MovementManager.ToggleJacketInflate(manager, true);
 
             manager.MovementManager.EndGroundPound(manager);
+
+            // Animation
+            manager.AnimationManager.PlayAnimation(manager.AnimationManager.JumpAnim);
         }
 
         public override void ExitState(CharacterManager manager)

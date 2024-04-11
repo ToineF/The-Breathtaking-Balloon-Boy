@@ -20,6 +20,9 @@ public class CharacterJumpState : CharacterBaseState
         manager.MovementManager.LerpDeplacementSpeed(manager, manager.Data.LateralMovementData.JumpAscentData);
 
         manager.MovementManager.StartJump(manager);
+
+        // Animation
+        manager.AnimationManager.PlayAnimation(manager.AnimationManager.JumpAnim);
     }
 
     public override void ExitState(CharacterManager manager)
