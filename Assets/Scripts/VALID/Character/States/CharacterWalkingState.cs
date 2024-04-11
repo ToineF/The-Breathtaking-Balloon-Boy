@@ -47,7 +47,7 @@ namespace BlownAway.Character.States
         {
             manager.MovementManager.MoveAtSpeed(manager);
 
-            manager.MovementManager.CheckForStepClimb(manager);
+            //manager.MovementManager.CheckForStepClimb(manager);
 
             manager.MovementManager.UpdatePropulsionMovement(manager, false);
 

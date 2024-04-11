@@ -155,9 +155,9 @@ namespace BlownAway.Camera
 
         public void UpdateCameraAngle(CharacterManager manager) // Late Update
         {
-            _sensitivity = manager.Inputs.IsMouse ? Manager.Data.CameraData.MouseSensitivity : Manager.Data.CameraData.ControllerSensitivity;
-            float xSign = (manager.Inputs.IsMouse ? Manager.Data.CameraData.IsMouseXInverted : Manager.Data.CameraData.IsControllerXInverted) ? -1 : 1;
-            float ySign = (manager.Inputs.IsMouse ? Manager.Data.CameraData.IsMouseYInverted : Manager.Data.CameraData.IsControllerYInverted) ? -1 : 1;
+            _sensitivity = manager.Inputs.IsMouse ? manager.Data.CameraData.MouseSensitivity : manager.Data.CameraData.ControllerSensitivity;
+            float xSign = (manager.Inputs.IsMouse ? manager.Data.CameraData.IsMouseXInverted : manager.Data.CameraData.IsControllerXInverted) ? -1 : 1;
+            float ySign = (manager.Inputs.IsMouse ? manager.Data.CameraData.IsMouseYInverted : manager.Data.CameraData.IsControllerYInverted) ? -1 : 1;
             _cameraMoveVector = manager.Inputs.CameraMoveVector;
             _cameraMoveVector = new Vector3(_cameraMoveVector.x * xSign, _cameraMoveVector.y * ySign);
             //if (_cameraMoveVector != Vector3.zero) CameraCenter.transform.DOKill();
@@ -167,8 +167,6 @@ namespace BlownAway.Camera
         {
             if (manager.Inputs.CameraCenter)
             {
-
-                // NOTHING ENTERS HERE IN BUILD
                 CenterCamera(manager, new Vector3(0, manager.CharacterVisual.transform.eulerAngles.y, 0), manager.Data.CameraData.CameraCenterLerpTime);
             }
         }
