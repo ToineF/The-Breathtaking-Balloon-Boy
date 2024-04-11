@@ -7,7 +7,7 @@ namespace BlownAway.Character.Animations
     {
         [Header("References")]
         [SerializeField] private Animator _characterAnimator;
-        [SerializeField] private SkinnedMeshRenderer _skinnedMeshRenderer;
+        [SerializeField] private SkinnedMeshRenderer[] _skinnedMeshRenderers;
         [SerializeField] private string _idleAnimName;
         [SerializeField] private string _walkAnimName;
 
@@ -60,10 +60,14 @@ namespace BlownAway.Character.Animations
 
         private void UpdateCharacterMorpher()
         {
-            if (_skinnedMeshRenderer.sharedMesh.blendShapeCount < 1) return;
-            float weight = Manager.MovementManager.IsJacketInflated ? 100 : 0;
-            _jacketMorpherWeight = Mathf.Lerp(_jacketMorpherWeight, weight, _jacketMorpherLerp);
-            _skinnedMeshRenderer.SetBlendShapeWeight(0, _jacketMorpherWeight);
+            foreach (SkinnedMeshRenderer morpher in _skinnedMeshRenderers)
+            {
+                if (morpher.sharedMesh.blendShapeCount < 1) return;
+                float weight = Manager.MovementManager.IsJacketInflated ? 100 : 0;
+                _jacketMorpherWeight = Mathf.Lerp(_jacketMorpherWeight, weight, _jacketMorpherLerp);
+                morpher.SetBlendShapeWeight(0, _jacketMorpherWeight);
+            }
+            
         }
 
     }
