@@ -5,11 +5,20 @@ namespace BlownAway.Character.Animations
 {
     public class CharacterAnimationManager : CharacterSubComponent
     {
+        public string IdleAnim => _idleAnimName;
+        public string WalkAnim => _walkAnimName;
+        public string JumpAnim => _jumpAnimName;
+        public string FallAnim => _fallAnimName;
+        public string LandingAnim => _landingAnimName;
+
         [Header("References")]
         [SerializeField] private Animator _characterAnimator;
         [SerializeField] private SkinnedMeshRenderer[] _skinnedMeshRenderers;
         [SerializeField] private string _idleAnimName;
         [SerializeField] private string _walkAnimName;
+        [SerializeField] private string _jumpAnimName;
+        [SerializeField] private string _fallAnimName;
+        [SerializeField] private string _landingAnimName;
 
         [Header("Parameters")]
         [SerializeField] private bool _isOrientationInverted;
@@ -19,10 +28,11 @@ namespace BlownAway.Character.Animations
         private Vector3 _lastDirection;
         private float _jacketMorpherWeight;
 
+
         private void Update()
         {
             Manager.CharacterVisual.transform.position = Manager.CharacterCollider.Rigidbody.transform.position;
-            ChangeCharacterAnimation();
+            //ChangeCharacterAnimation();
             UpdateCharacterMorpher();
         }
 
@@ -51,11 +61,16 @@ namespace BlownAway.Character.Animations
 
         }
 
+        public void PlayAnimation(string animation)
+        {
+            _characterAnimator.Play(animation);
+        }
+
         private void ChangeCharacterAnimation()
         {
             Vector3 moveDirection = Manager.MovementManager.CurrentVelocity;
             moveDirection.y = 0;
-            _characterAnimator.Play((moveDirection.sqrMagnitude >= 0.1f) ? _walkAnimName : _idleAnimName);
+            _characterAnimator.Play((moveDirection.sqrMagnitude >= 0.1f) ? WalkAnim : IdleAnim);
         }
 
         private void UpdateCharacterMorpher()

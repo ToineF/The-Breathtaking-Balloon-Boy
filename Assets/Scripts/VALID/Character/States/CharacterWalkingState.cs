@@ -15,6 +15,9 @@ namespace BlownAway.Character.States
             // VFX
             manager.Feedbacks.WalkVFX.Play();
             if (manager.Inputs.StartMoving) GameObject.Instantiate(manager.Data.FeedbacksData.WalkStartVFX, manager.Feedbacks.WalkVFX.transform);
+
+            // Animation
+            manager.AnimationManager.PlayAnimation(manager.AnimationManager.WalkAnim);
         }
 
         public override void ExitState(CharacterManager manager)
