@@ -32,6 +32,7 @@ namespace BlownAway.Character.Movements.Data
         [field: SerializeField, Tooltip("The deceleration of the decrease of jump speed added at each frame when propulsing")] public float JumpDecreaseDeceleration { get; private set; }
         [field: SerializeField, Tooltip("The minimum time the character stays in the jump state")] public float MinimumJumpTime { get; private set; }
         [field: SerializeField, Tooltip("The minimum time the character stays in the jump state before propulsing")] public float JumpBeforePropulsionTime { get; private set; }
+        [field: SerializeField, Tooltip("Is the jump height affected by the input duration")] public bool VariableJumpHeightBaseOnInput { get; private set; }
 
         [field: Header("Derive")]
         [field: SerializeField, Tooltip("The maximum time the derive lasts")] public float DeriveTime { get; private set; }

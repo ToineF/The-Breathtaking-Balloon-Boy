@@ -34,6 +34,7 @@ namespace BlownAway.Character.Inputs
         public bool StartPropulsion { get; private set; }
 
         // Jump
+        public bool StartedJumping { get; private set; }
         public bool IsJumping { get; private set; }
 
         // Falling
@@ -213,6 +214,7 @@ namespace BlownAway.Character.Inputs
         private void StartJumping(InputAction.CallbackContext context)
         {
             IsJumping = true;
+            StartedJumping = true;
         }
 
         private void StopJumping(InputAction.CallbackContext context)
@@ -238,6 +240,7 @@ namespace BlownAway.Character.Inputs
             NextDialoguePressed = false;
             TogglePause = false;
             StartPropulsion = false;
+            StartedJumping = false;
         }
 
         private void StartFalling(InputAction.CallbackContext context)

@@ -493,7 +493,7 @@ namespace BlownAway.Character.Movements
 
         public void CheckForJumpStart(CharacterManager manager)
         {
-            if (manager.Inputs.IsJumping)
+            if (manager.Inputs.StartedJumping)
             {
                 _currentJumpState = CharacterJumpState.JumpState.ASCENT;
                 manager.AirManager.RefreshAir();
@@ -538,6 +538,7 @@ namespace BlownAway.Character.Movements
 
         public void CheckIfJumpButtonReleased(CharacterManager manager)
         {
+            if (!manager.Data.PropulsionData.VariableJumpHeightBaseOnInput) return;
             if (_currentJumpState == CharacterJumpState.JumpState.DESCENT) return;
             if (manager.Inputs.IsJumping) return;
 
@@ -770,10 +771,10 @@ namespace BlownAway.Character.Movements
         #region External Force
         public void AddExternalForce(GameObject go, Vector3 force, float lerp)
         {
-            if (go == gameObject)
-            {
-                Debug.Log(force + " " + lerp);
-            }
+            //if (go == gameObject)
+            //{
+            //    Debug.Log(force + " " + lerp);
+            //}
             if (ExternalForces.ContainsKey(go))
             {
                 ExternalForces[go].TargetForce = force;
