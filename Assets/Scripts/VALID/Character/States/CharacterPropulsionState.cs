@@ -19,7 +19,7 @@ namespace BlownAway.Character.States
             manager.MovementManager.EndGroundPound(manager);
 
             // Animation
-            manager.AnimationManager.PlayAnimation(manager.AnimationManager.JumpAnim);
+            manager.AnimationManager.PlayAnimation(manager.AnimationManager.PropulsionAnim);
         }
 
         public override void ExitState(CharacterManager manager)
