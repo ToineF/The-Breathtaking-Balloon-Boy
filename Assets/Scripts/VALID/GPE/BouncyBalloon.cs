@@ -1,5 +1,6 @@
 using AntoineFoucault.Utilities;
 using UnityEngine;
+using DG.Tweening;
 
 namespace BlownAway.GPE
 {
@@ -18,15 +19,16 @@ namespace BlownAway.GPE
         [SerializeField] private bool _refreshPlayerAir;
         [SerializeField] private bool _needPlayerInput;
 
+        [Header("Visual")]
+        [SerializeField] private GameObject _visual;
+        [SerializeField] private float _scaleMultiplier = 1;
+        [SerializeField] private float _scaleTime;
 
 
 
         //[Header("Timer")]
         private bool _isPlayerIn;
 
-        //[Header("Visual")]
-        //[SerializeField] private float _scaleMultiplier = 1;
-        //[SerializeField] private float _scaleTime;
 
         //[Header("Sounds")]
         //[SerializeField] private AudioClip _collisionSound;
@@ -103,6 +105,9 @@ namespace BlownAway.GPE
                 collider.Manager.States.SwitchState(collider.Manager.States.IdleState);
 
 
+            // Bounce
+            _visual.transform.DOComplete();
+            _visual.transform.DOPunchScale(Vector3.up * _scaleMultiplier, _scaleTime);
 
         }
 
