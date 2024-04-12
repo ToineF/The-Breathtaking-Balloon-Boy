@@ -12,7 +12,7 @@ namespace BlownAway.Character.States
             manager.MovementManager.LerpDeplacementSpeed(manager, manager.Data.LateralMovementData.FloatingData);
 
             // Animation
-            manager.AnimationManager.PlayAnimation(manager.AnimationManager.FallAnim);
+            manager.AnimationManager.PlayAnimation(manager.AnimationManager.FloatAnim);
         }
 
         public override void ExitState(CharacterManager manager)

@@ -7,34 +7,37 @@ namespace BlownAway.Character.States
         public override void EnterState(CharacterManager manager, CharacterBaseState previousState)
         {
             Debug.Log("DEATH");
-            manager.CheckpointManager.SetToCheckpointPosition(manager.CharacterCollider.Rigidbody.gameObject);
             manager.MovementManager.ResetAllExternalForces();
             manager.CameraManager.IsMovable = false;
-            manager.States.SwitchState(manager.States.FallingState);
-            //manager.Transition.SetTransition(() =>
-            //{
-            //    manager.Transition.PlayFadeIn();
-            //    Debug.Log(manager.CharacterCollider.Rigidbody.gameObject.name + ": " + manager.CharacterCollider.Rigidbody.gameObject.transform.position);
-            //    manager.States.SwitchState(manager.States.FallingState);
+            //manager.States.SwitchState(manager.States.FallingState);
+            manager.Transition.SetTransition(() =>
+            {
+                //manager.Transition.PlayFadeIn();
+                //Debug.Log(manager.CharacterCollider.Rigidbody.gameObject.name + ": " + manager.CharacterCollider.Rigidbody.gameObject.transform.position);
+                manager.CameraManager.IsMovable = true;
 
-            //    Debug.Log("AAA " + manager.CharacterCollider.Rigidbody.gameObject.name + ": " + manager.CharacterCollider.Rigidbody.gameObject.transform.position);
-            //    Debug.Log("AAA " + manager.CharacterCollider.Rigidbody.gameObject.name + ": " + manager.CharacterCollider.Rigidbody.gameObject.transform.position);
-            //});
+                manager.CheckpointManager.SetToCheckpointPosition(manager.CharacterCollider.Rigidbody.gameObject);
+                manager.States.SwitchState(manager.States.FallingState);
+
+
+                //Debug.Log("AAA " + manager.CharacterCollider.Rigidbody.gameObject.name + ": " + manager.CharacterCollider.Rigidbody.gameObject.transform.position);
+                //Debug.Log("AAA " + manager.CharacterCollider.Rigidbody.gameObject.name + ": " + manager.CharacterCollider.Rigidbody.gameObject.transform.position);
+            });
 
             //Debug.Log(manager.CharacterCollider.Rigidbody.gameObject.name + ": " + manager.CharacterCollider.Rigidbody.gameObject.transform.position);
         }
 
         public override void ExitState(CharacterManager manager)
         {
-            Debug.Log("death end");
+            //Debug.Log("death end");
+
+            manager.Transition.PlayFadeIn();
             //manager.CheckpointManager.SetToCheckpointPosition(manager.CharacterCollider.Rigidbody.gameObject);
-            manager.CameraManager.IsMovable = true;
         }
 
         public override void UpdateState(CharacterManager manager)
         {
-            Debug.Log(manager.CharacterCollider.Rigidbody.gameObject.name + ": " + manager.CharacterCollider.Rigidbody.gameObject.transform.position);
-
+            //Debug.Log(manager.CharacterCollider.Rigidbody.gameObject.name + ": " + manager.CharacterCollider.Rigidbody.gameObject.transform.position);
         }
 
         public override void FixedUpdateState(CharacterManager manager)

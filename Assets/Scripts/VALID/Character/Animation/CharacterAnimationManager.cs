@@ -10,6 +10,9 @@ namespace BlownAway.Character.Animations
         public string JumpAnim => _jumpAnimName;
         public string FallAnim => _fallAnimName;
         public string LandingAnim => _landingAnimName;
+        public string PropulsionAnim => _propulsionAnimName;
+        public string FloatAnim => _floatAnimName;
+        public string DashAnim => _dashAnimName;
 
         [Header("References")]
         [SerializeField] private Animator _characterAnimator;
@@ -19,6 +22,9 @@ namespace BlownAway.Character.Animations
         [SerializeField] private string _jumpAnimName;
         [SerializeField] private string _fallAnimName;
         [SerializeField] private string _landingAnimName;
+        [SerializeField] private string _propulsionAnimName;
+        [SerializeField] private string _floatAnimName;
+        [SerializeField] private string _dashAnimName;
 
         [Header("Parameters")]
         [SerializeField] private bool _isOrientationInverted;
@@ -63,15 +69,15 @@ namespace BlownAway.Character.Animations
 
         public void PlayAnimation(string animation)
         {
-            _characterAnimator.Play(animation);
+            _characterAnimator.SetTrigger(animation);
         }
 
-        private void ChangeCharacterAnimation()
-        {
-            Vector3 moveDirection = Manager.MovementManager.CurrentVelocity;
-            moveDirection.y = 0;
-            _characterAnimator.Play((moveDirection.sqrMagnitude >= 0.1f) ? WalkAnim : IdleAnim);
-        }
+        //private void ChangeCharacterAnimation()
+        //{
+        //    Vector3 moveDirection = Manager.MovementManager.CurrentVelocity;
+        //    moveDirection.y = 0;
+        //    _characterAnimator.Play((moveDirection.sqrMagnitude >= 0.1f) ? WalkAnim : IdleAnim);
+        //}
 
         private void UpdateCharacterMorpher()
         {
