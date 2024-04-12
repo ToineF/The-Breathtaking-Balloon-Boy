@@ -359,7 +359,7 @@ namespace BlownAway.Character.Movements
 
         public void CheckForPropulsionStartOnAir(CharacterManager manager)
         {
-            if (CanJumpBuffer && !manager.AirManager.AirIsFull)
+            if (CanJumpBuffer) //  && !manager.AirManager.AirIsFull
             {
                 CheckForJumpStart(manager);
                 return;

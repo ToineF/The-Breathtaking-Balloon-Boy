@@ -16,5 +16,8 @@ namespace BlownAway.Character.Movements.Data
 
         [field: Header("Dash")]
         [field: SerializeField] public Feedback DashFeedback { get; private set; }
+
+        [field: Header("Balloon Bounce")]
+        [field: SerializeField] public Feedback BalloonBounceFeedback { get; private set; }
     }
 }

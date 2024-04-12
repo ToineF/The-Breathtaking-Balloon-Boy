@@ -1,6 +1,7 @@
 using AntoineFoucault.Utilities;
 using UnityEngine;
 using DG.Tweening;
+using BlownAway.Character;
 
 namespace BlownAway.GPE
 {
@@ -60,13 +61,14 @@ namespace BlownAway.GPE
             if (!_lastOtherCollider.TryGetComponent(out CharacterCollider collider)) return;
             //if (collider.Manager.States.IsInState(collider.Manager.States.GroundPoundState)) return;
             //if (_isPlayerIn) return;
+            CharacterManager manager = collider.Manager;
 
 
             Debug.Log("*BOING*");
             Vector3 direction = collider.transform.position - transform.position;
             Vector3 normalizedDirection = direction.normalized;
 
-            Vector3 cameraForward = collider.Manager.CameraManager.Camera.transform.forward;
+            Vector3 cameraForward = manager.CameraManager.Camera.transform.forward;
             cameraForward.y = 0;
             Vector3 upDirection = Vector3.up * _UpVectorMultiplier + cameraForward.normalized;
             Vector3 leftRightDirection = new Vector3(Mathf.Ceil(Mathf.Abs(normalizedDirection.x)) * Mathf.Sign(normalizedDirection.x), 0, 0); //isSideRebounceDirection ? new Vector3(Mathf.Round(normalizedDirection.x), 0, 0) : new Vector3(Mathf.Round(normalizedDirection.x), 0, 0) + collider.Manager.CameraManager.Camera.transform.forward;
@@ -77,9 +79,9 @@ namespace BlownAway.GPE
                 normalizedDirection = upDirection; // UP
                 if (_refreshPlayerAir)
                 {
-                    collider.Manager.AirManager.RefreshAir();
-                    collider.Manager.MovementManager.StartDeriveTimer(collider.Manager);
-                    collider.Manager.MovementManager.RefreshDashes(collider.Manager);
+                    manager.AirManager.RefreshAir();
+                    manager.MovementManager.StartDeriveTimer(manager);
+                    manager.MovementManager.RefreshDashes(manager);
                 }
             }
             else if (normalizedDirection.y < _downThreshold) normalizedDirection = Vector3.zero; // DOWN
@@ -87,27 +89,30 @@ namespace BlownAway.GPE
             else normalizedDirection = forwardBackwardDirection; // FORWARD - BACKWARD
 
 
-            if (collider.Manager.States.IsInState(collider.Manager.States.GroundPoundState)) // Ground Pound
+            if (manager.States.IsInState(manager.States.GroundPoundState)) // Ground Pound
             {
-                collider.Manager.MovementManager.GroundPoundOnBalloon(collider.Manager);
+                manager.MovementManager.GroundPoundOnBalloon(manager);
             }
             else // Base Balloon Bounce
             {
-                collider.Manager.MovementManager.AddExternalForce(gameObject, normalizedDirection * _force, _forceAccel);
+                manager.MovementManager.AddExternalForce(gameObject, normalizedDirection * _force, _forceAccel);
             }
 
 
-            //collider.Manager.Inputs.ResetLastPropulsionInputDirection();
+            //manager.Inputs.ResetLastPropulsionInputDirection();
 
-            if (!collider.Manager.MovementManager.IsGrounded)
-                collider.Manager.States.SwitchState(collider.Manager.States.FloatingState);
+            if (!manager.MovementManager.IsGrounded)
+                manager.States.SwitchState(manager.States.FloatingState);
             else
-                collider.Manager.States.SwitchState(collider.Manager.States.IdleState);
+                manager.States.SwitchState(manager.States.IdleState);
 
 
-            // Bounce
+            // Visual
             _visual.transform.DOComplete();
             _visual.transform.DOPunchScale(Vector3.up * _scaleMultiplier, _scaleTime);
+
+            // Feedbacks
+            manager.Feedbacks.PlayFeedback(manager.Data.FeedbacksData.BalloonBounceFeedback);
 
         }
 
