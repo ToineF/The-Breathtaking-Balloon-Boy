@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8714279947316191169}
-  - component: {fileID: 3237609745779814660}
+  - component: {fileID: 604584145228388693}
   m_Layer: 5
   m_Name: RadialUI
   m_TagString: Untagged
@@ -39,7 +39,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &3237609745779814660
+--- !u!114 &604584145228388693
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -48,23 +48,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 3177921140503270161}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bcf0cebf88c93c14ea12971fb20c1b03, type: 3}
+  m_Script: {fileID: 11500000, guid: 555b57d74dc363f4c9509423bc3394e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _allUIImages:
-  - {fileID: 1286784373258236967}
-  - {fileID: 4433971733491920336}
+  _UI: {fileID: 0}
   _filledImage: {fileID: 4433971733491920336}
-  _hideOnFull: 1
+  _hideOnFull: 0
   _appearSpeed: 0.05
-  _appearDelay: 0.3
+  _appearDelay: 0.05
   _hideSpeed: 0.3
   _hideDelay: 0.2
-  _naturalColor: {r: 0.745283, g: 0.3058473, b: 0.3058473, a: 1}
+  _naturalColor: {r: 0.74509805, g: 0.30588236, b: 0.30588236, a: 1}
   _fullColor: {r: 1, g: 1, b: 1, a: 1}
   _fullColorTime: 0.05
   _fullColorDelay: 0.05
   _fullToNaturalColorSpeed: 0.5
+  AirManager: {fileID: 0}
 --- !u!1 &6400637855873506705
 GameObject:
   m_ObjectHideFlags: 0

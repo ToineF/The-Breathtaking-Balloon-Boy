@@ -10,29 +10,31 @@ namespace BlownAway.Character.States
             manager.MovementManager.ResetAllExternalForces();
             manager.CameraManager.IsMovable = false;
             //manager.States.SwitchState(manager.States.FallingState);
-            manager.Transition.SetTransition(() =>
-            {
-                //manager.Transition.PlayFadeIn();
-                //Debug.Log(manager.CharacterCollider.Rigidbody.gameObject.name + ": " + manager.CharacterCollider.Rigidbody.gameObject.transform.position);
-                manager.CameraManager.IsMovable = true;
+            //manager.Transition.SetTransition(() =>
+            //{
+            //    //manager.Transition.PlayFadeIn();
+            //    //Debug.Log(manager.CharacterCollider.Rigidbody.gameObject.name + ": " + manager.CharacterCollider.Rigidbody.gameObject.transform.position);
+            //    manager.CameraManager.IsMovable = true;
 
-                manager.CheckpointManager.SetToCheckpointPosition(manager.CharacterCollider.Rigidbody.gameObject);
-                manager.States.SwitchState(manager.States.FallingState);
+            //    manager.CheckpointManager.SetToCheckpointPosition(manager.CharacterCollider.Rigidbody.gameObject);
+            //    //manager.States.SwitchState(manager.States.FallingState);
+            //    manager.Transition.PlayFadeIn();
 
 
-                //Debug.Log("AAA " + manager.CharacterCollider.Rigidbody.gameObject.name + ": " + manager.CharacterCollider.Rigidbody.gameObject.transform.position);
-                //Debug.Log("AAA " + manager.CharacterCollider.Rigidbody.gameObject.name + ": " + manager.CharacterCollider.Rigidbody.gameObject.transform.position);
-            });
+            //    //Debug.Log("AAA " + manager.CharacterCollider.Rigidbody.gameObject.name + ": " + manager.CharacterCollider.Rigidbody.gameObject.transform.position);
+            //    //Debug.Log("AAA " + manager.CharacterCollider.Rigidbody.gameObject.name + ": " + manager.CharacterCollider.Rigidbody.gameObject.transform.position);
+            //});
 
             //Debug.Log(manager.CharacterCollider.Rigidbody.gameObject.name + ": " + manager.CharacterCollider.Rigidbody.gameObject.transform.position);
+            manager.States.SwitchState(manager.States.FallingState);
+
         }
 
         public override void ExitState(CharacterManager manager)
         {
             //Debug.Log("death end");
-
-            manager.Transition.PlayFadeIn();
-            //manager.CheckpointManager.SetToCheckpointPosition(manager.CharacterCollider.Rigidbody.gameObject);
+            manager.CameraManager.IsMovable = true;
+            manager.CheckpointManager.SetToCheckpointPosition(manager.CharacterCollider.Rigidbody.gameObject);
         }
 
         public override void UpdateState(CharacterManager manager)
