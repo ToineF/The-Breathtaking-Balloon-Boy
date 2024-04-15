@@ -18,6 +18,7 @@ namespace BlownAway.City
         [SerializeField] [Tooltip("Does the position list plays only one at a time")] private bool _playOnePosition;
         [SerializeField] [Tooltip("Does it move again if collider is re-entered")] private bool _canBeReactivated;
         [SerializeField] [Tooltip("The time between collisions in seconds if it take be reactivated")] private float _timeBetweenPlayerCollisions;
+        [SerializeField] [Tooltip("The wait time between positions")] private float _waitTimeBetweenPositions;
 
         private int _index = 0;
         private float _timerMovements = 0;
@@ -25,6 +26,7 @@ namespace BlownAway.City
         private float _currentSpeed = 1;
         private bool _isMoving = false;
         private bool _canMove = true;
+        private bool _isWaiting = false;
 
         private void Start()
         {
@@ -36,6 +38,7 @@ namespace BlownAway.City
         {
             if (_isMoving || !_canMove) return;
 
+            _index = 0;
             _isMoving = true;
             _movingObject.transform.position = _positions[_index].position;
             MoveToNextPoint();
@@ -43,7 +46,7 @@ namespace BlownAway.City
 
         private void MoveToNextPoint()
         {
-            if (!_loopPositions && _index == _positions.Length - 1 && !_canBeReactivated)
+            if (!_loopPositions && _index == _positions.Length - 1) //  && !_canBeReactivated
             {
                 StopMoving();
                 return;
@@ -81,6 +84,7 @@ namespace BlownAway.City
         private void FixedUpdate()
         {
             if (!_isMoving) return;
+            if (_isWaiting) return;
 
             float elapsedPercentage = _timerMovements / _currentSpeed;
             elapsedPercentage = Mathf.SmoothStep(0, 1, elapsedPercentage);
@@ -91,8 +95,16 @@ namespace BlownAway.City
                 if (_playOnePosition)
                     StopMoving();
                 else
-                    MoveToNextPoint();
+                    StartCoroutine(WaitForMoveToNextPoint());
             }
+        }
+
+        private IEnumerator WaitForMoveToNextPoint()
+        {
+            _isWaiting = true;
+            yield return new WaitForSeconds(_waitTimeBetweenPositions);
+            _isWaiting = false;
+            MoveToNextPoint();
         }
     }
 }
