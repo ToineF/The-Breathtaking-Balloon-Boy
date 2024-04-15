@@ -54,12 +54,13 @@ namespace BlownAway.Character.Movements
         public CharacterJumpState.JumpState _currentJumpState { get; private set; }
 
         // Dash
+        public float CurrentDashes { get; private set; }
         private float _dashTimer;
         private Vector3 _currentDashDirection;
-        private float _currentDashes;
 
         // Derive
         public float DeriveTimer { get; private set; }
+        public float NormalizedDeriveAirAmount { get => DeriveTimer / Mathf.Max(Manager.Data.PropulsionData.DeriveTime,0.0001f); }
 
 
         // Ground Detection
@@ -562,14 +563,14 @@ namespace BlownAway.Character.Movements
         {
             if (!manager.Inputs.StartedDash) return;
             if (refreshDashes) RefreshDashes(manager);
-            if (_currentDashes < 1) return;
+            if (CurrentDashes < 1) return;
 
             manager.States.SwitchState(manager.States.DashState);
         }
 
         public void StartDash(CharacterManager manager)
         {
-            _currentDashes--;
+            CurrentDashes--;
 
             _dashTimer = manager.Data.PowerUpData.DashDuration;
 
@@ -606,7 +607,7 @@ namespace BlownAway.Character.Movements
 
         public void RefreshDashes(CharacterManager manager)
         {
-            _currentDashes = manager.Data.PowerUpData.MaxDashes;
+            CurrentDashes = manager.Data.PowerUpData.MaxDashes;
         }
 
         #endregion

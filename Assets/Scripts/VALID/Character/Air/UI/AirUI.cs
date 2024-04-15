@@ -10,7 +10,7 @@ namespace BlownAway.Character.Air
 
         void Update()
         {
-            FillAmount = AirManager.Manager.AirManager.CurrentAir;
+            FillAmount = AirManager.CurrentAir;
         }
     }
 }
