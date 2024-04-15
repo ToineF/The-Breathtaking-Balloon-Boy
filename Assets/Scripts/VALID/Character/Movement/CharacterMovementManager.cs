@@ -13,6 +13,7 @@ namespace BlownAway.Character.Movements
     {
         public Action<CharacterManager> OnGroundEnter { get; set; }
         public Action<CharacterManager> OnGroundExit { get; set; }
+        public Action<CharacterManager> OnDeath { get; set; }
 
         [Tooltip("The current global velocity of the character (movements, gravity, forces...)")] public Vector3 CurrentVelocity { get; private set; }
 

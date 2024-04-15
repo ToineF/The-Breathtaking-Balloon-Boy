@@ -71,7 +71,8 @@ namespace BlownAway.City
             {
                 if (_canMove)
                     _timerMovements += Time.deltaTime;
-            } else
+            }
+            else
             {
                 _timerCollisions -= Time.deltaTime;
                 if (_timerCollisions < 0 && _canBeReactivated)
@@ -88,8 +89,8 @@ namespace BlownAway.City
 
             float elapsedPercentage = _timerMovements / _currentSpeed;
             elapsedPercentage = Mathf.SmoothStep(0, 1, elapsedPercentage);
-            _movingObject.transform.position = Vector3.Lerp(_positions[(_index-1).Modulo(_positions.Length)].position, _positions[_index].position, elapsedPercentage);
-            
+            _movingObject.transform.position = Vector3.Lerp(_positions[(_index - 1).Modulo(_positions.Length)].position, _positions[_index].position, elapsedPercentage);
+
             if (elapsedPercentage >= 1)
             {
                 if (_playOnePosition)
@@ -105,6 +106,18 @@ namespace BlownAway.City
             yield return new WaitForSeconds(_waitTimeBetweenPositions);
             _isWaiting = false;
             MoveToNextPoint();
+        }
+
+        public void ResetPosition()
+        {
+            _index = 0;
+            _timerMovements = 0;
+            _timerCollisions = 0;
+            _currentSpeed = 1;
+            _isMoving = false;
+            _canMove = true;
+            _isWaiting = false;
+            _movingObject.transform.position = _positions[_index].position;
         }
     }
 }

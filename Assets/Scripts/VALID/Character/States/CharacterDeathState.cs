@@ -9,6 +9,7 @@ namespace BlownAway.Character.States
             Debug.Log("DEATH");
             manager.MovementManager.ResetAllExternalForces();
             manager.CameraManager.IsMovable = false;
+            manager.MovementManager.OnDeath?.Invoke(manager);
             //manager.States.SwitchState(manager.States.FallingState);
             //manager.Transition.SetTransition(() =>
             //{

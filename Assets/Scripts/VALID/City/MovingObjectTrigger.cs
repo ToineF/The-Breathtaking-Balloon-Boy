@@ -1,7 +1,7 @@
 using UnityEngine;
 using System;
 using AntoineFoucault.Utilities;
-
+using BlownAway.Character;
 
 namespace BlownAway.City
 {
@@ -9,6 +9,8 @@ namespace BlownAway.City
     {
         [Header("Moving Object Params")]
         [SerializeField] private MovingObject _object;
+
+        private CharacterManager _characterManager;
 
 
         private new void Awake()
@@ -23,6 +25,8 @@ namespace BlownAway.City
             if (!_lastOtherCollider.TryGetComponent(out CharacterCollider collider)) return;
 
             _object.StartMoving();
+            _characterManager = collider.Manager;
+            _characterManager.MovementManager.OnDeath += OnDeath;
         }
 
         private new void OnDrawGizmos()
@@ -38,6 +42,12 @@ namespace BlownAway.City
             if (!_displayGizmos) return;
 
             base.OnDrawGizmosSelected();
+        }
+
+        private void OnDeath(CharacterManager manager)
+        {
+            _object.ResetPosition();
+            if (_characterManager != null) _characterManager.MovementManager.OnDeath -= OnDeath;
         }
     }
 }
