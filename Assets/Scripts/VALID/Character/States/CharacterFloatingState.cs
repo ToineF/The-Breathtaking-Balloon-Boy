@@ -23,8 +23,6 @@ namespace BlownAway.Character.States
         {
             manager.AirManager.ReduceAir(manager.Data.AirData.FloatingAirReductionSpeed);
 
-            manager.MovementManager.CheckIfGrounded(manager, true);
-
             manager.MovementManager.CheckForGroundPound(manager);
 
             manager.MovementManager.CheckForDeriveEnd(manager);
@@ -34,6 +32,8 @@ namespace BlownAway.Character.States
             manager.MovementManager.CheckForJacketDeflated(manager);
 
             manager.MovementManager.CheckForDashStart(manager);
+
+            manager.MovementManager.CheckIfGrounded(manager, true);
 
         }
 
