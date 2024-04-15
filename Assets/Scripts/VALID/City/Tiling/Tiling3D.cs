@@ -57,6 +57,11 @@ public class Tiling3D : MonoBehaviour
                 }
             }
         }
+
+        if (GetComponent<BoxCollider>()) DestroyImmediate(GetComponent<BoxCollider>());
+        //BoxCollider boxCollider = gameObject.AddComponent<BoxCollider>();
+        //boxCollider.size = new Vector3(Width-1, Height-1, Length-1) * TilesetData.BlockSize;
+        //boxCollider.center = boxCollider.size / 2;
     }
 
     public void ClearBuildingChildren()
