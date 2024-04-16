@@ -16,6 +16,9 @@ namespace BlownAway.Collectibles
             {
                 manager.Collectibles.AddRareCollectible();
                 if (_cutscene != null) manager.CutsceneManager.StartNewSequence(_cutscene, manager);
+                
+                // Feedback
+                manager.Feedbacks.PlayFeedback(manager.Data.FeedbacksData.RareCollectibleFeedback);
             }
             base.OnDeath();
         }

@@ -1,3 +1,4 @@
+using BlownAway.Character;
 using System.Collections;
 using UnityEngine;
 
@@ -27,7 +28,12 @@ namespace BlownAway.Collectibles
 
         protected override void OnPickUp()
         {
-            _lastOtherCollider.GetComponent<CharacterCollider>()?.Manager.Collectibles.AddCoinPreview();
+            CharacterManager manager = _lastOtherCollider.GetComponent<CharacterManager>();
+            if (manager != null)
+            {
+                manager.Collectibles.AddCoinPreview();
+                manager.Feedbacks.PlayFeedback(manager.Data.FeedbacksData.CoinFeedback);
+            }
             StartCoroutine(AddCoinToCount());
         }
 

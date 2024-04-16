@@ -1,3 +1,4 @@
+using BlownAway.Character;
 using UnityEngine;
 
 namespace BlownAway.Collectibles
@@ -31,6 +32,9 @@ namespace BlownAway.Collectibles
                 Vector3 targetPosition = transform.position + new Vector3(targetOffset.x, 0, targetOffset.y);
                 Instantiate(_coinPrefab, targetPosition, _coinPrefab.transform.rotation);
             }
+
+            CharacterManager manager = _lastOtherCollider.GetComponent<CharacterManager>();
+            if (manager != null) manager.Feedbacks.PlayFeedback(manager.Data.FeedbacksData.BigCoinFeedback);
         }
     }
 }
