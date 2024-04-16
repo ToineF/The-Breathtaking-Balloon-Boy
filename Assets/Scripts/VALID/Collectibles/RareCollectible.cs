@@ -1,14 +1,22 @@
-using System.Collections;
-using System.Collections.Generic;
+using BlownAway.Character;
+using BlownAway.Cutscenes;
 using UnityEngine;
 
 namespace BlownAway.Collectibles
 {
     public class RareCollectible : Collectible
     {
+        [Header("Rare Collectibles")]
+        [SerializeField] private Cutscene _cutscene;
+
         protected override void OnDeath()
         {
-            _lastOtherCollider.GetComponent<CharacterCollider>()?.Manager.Collectibles.AddRareCollectible();
+            CharacterManager manager = _lastOtherCollider.GetComponent<CharacterCollider>()?.Manager;
+            if (manager != null)
+            {
+                manager.Collectibles.AddRareCollectible();
+                if (_cutscene != null) manager.CutsceneManager.StartNewSequence(_cutscene, manager);
+            }
             base.OnDeath();
         }
     }

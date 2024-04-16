@@ -6,6 +6,7 @@ using AntoineFoucault.Utilities;
 using System.Collections.Generic;
 using BlownAway.GPE;
 using BlownAway.Character.Movements.Data;
+using UnityEngine.InputSystem.XR;
 
 namespace BlownAway.Character.Movements
 {
@@ -325,6 +326,13 @@ namespace BlownAway.Character.Movements
             SetGravityMinMax(manager, data.BaseGravity, data.MinGravity, data.MaxGravity);
             SetGravityIncrease(manager, data.GravityIncreaseByFrame, data.GravityIncreaseDecelerationByFrame);
             _currentFallCoroutine = StartCoroutine(LerpWithEase(CurrentGravity, data.BaseGravity, data.GravityTime, data.GravityAccel, (result) => CurrentGravity = result));
+        }
+
+        public void SnapToGround(CharacterManager manager)
+        {
+            Vector3 colliderPosition = new Vector3(manager.CharacterCollider.Collider.bounds.center.x, manager.CharacterCollider.Collider.bounds.min.y, manager.CharacterCollider.Collider.bounds.center.z);
+            if (!Physics.Raycast(colliderPosition, Vector3.down,out RaycastHit hit, manager.Data.GroundDetectionData.GroundLayer)) return;
+            manager.CharacterCollider.transform.position = new Vector3(hit.point.x, hit.point.y + manager.CharacterCollider.Collider.bounds.extents.y / 2, hit.point.z);
         }
         #endregion
 

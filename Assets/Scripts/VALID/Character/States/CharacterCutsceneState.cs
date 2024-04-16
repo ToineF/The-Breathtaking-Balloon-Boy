@@ -9,6 +9,8 @@ namespace BlownAway.Character.States
             Debug.Log("CUTSCENE");
             manager.CameraManager.IsMovable = false;
             manager.UIManager.ShowUI(false);
+
+            manager.MovementManager.SnapToGround(manager);
         }
 
         public override void ExitState(CharacterManager manager)
