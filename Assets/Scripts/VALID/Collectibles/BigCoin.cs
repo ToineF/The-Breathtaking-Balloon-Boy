@@ -5,6 +5,8 @@ namespace BlownAway.Collectibles
 {
     public class BigCoin : Collectible
     {
+        public int CoinsNumber => _coinsNumber;
+
         [SerializeField] private GameObject _coinPrefab;
         [SerializeField] private float _coinDistance;
         [SerializeField] private int _coinsNumber;

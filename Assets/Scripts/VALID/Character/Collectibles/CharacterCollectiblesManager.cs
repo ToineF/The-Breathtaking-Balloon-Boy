@@ -12,6 +12,15 @@ namespace BlownAway.Collectibles
         public float Coins { get; private set; }
         public float RareCollectibles { get; private set; }
 
+        public float MaxCoins { get; private set; }
+        public float MaxRareCollectibles { get; private set; }
+
+        protected override void StartScript(CharacterManager manager)
+        {
+            base.StartScript(manager);
+            GetMaxCollectibles();
+        }
+
         public void AddCoin()
         {
             Coins++;
@@ -27,6 +36,19 @@ namespace BlownAway.Collectibles
         public void AddCoinPreview()
         {
             OnCoinGainPreview?.Invoke();
+        }
+
+        private void GetMaxCollectibles()
+        {
+            int coinsCount = FindObjectsOfType<Coin>().Length;
+            int rareCollectibleCount = FindObjectsOfType<RareCollectible>().Length;
+
+            var bigCoins = FindObjectsOfType<BigCoin>();
+            int bigCoinsCount = bigCoins.Length;
+            var bigCoinsValue = bigCoinsCount > 0 ? bigCoins[0].CoinsNumber : 1;
+
+            MaxCoins = coinsCount + bigCoinsCount * bigCoinsValue;
+            MaxRareCollectibles = rareCollectibleCount;
         }
     }
 }

@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using DG.Tweening;
 using static AntoineFoucault.Utilities.Tween;
 using System.Collections;
+using System;
 
 namespace BlownAway.Collectibles
 {
@@ -29,10 +30,12 @@ namespace BlownAway.Collectibles
         [Header("Coin")]
         [SerializeField] private CanvasGroup _coinsUI;
         [SerializeField] private TMP_Text _coinsCountText;
+        [SerializeField] private TMP_Text _maxCoinsCountText;
 
         [Header("Rare Collectible")]
         [SerializeField] private CanvasGroup _rareCollectibleUI;
         [SerializeField] private TMP_Text _rareCollectibleCountText;
+        [SerializeField] private TMP_Text _maxRareCollectibleCountText;
 
         [Header("Feedbacks")]
         [SerializeField] private DoTweenPunchFeedback _coinFeedbacks;
@@ -53,8 +56,14 @@ namespace BlownAway.Collectibles
             UpdateCoinUI();
             UpdateRareCollectibleUI();
             CreateChildrenUI();
+            UpdateMaxCollectiblesUI();
         }
 
+        private void UpdateMaxCollectiblesUI()
+        {
+            _maxCoinsCountText.text = _collectiblesManager.MaxCoins.ToString();
+            _maxRareCollectibleCountText.text = _collectiblesManager.MaxRareCollectibles.ToString();
+        }
 
         private void UpdateCoinUI()
         {
