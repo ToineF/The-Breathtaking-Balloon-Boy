@@ -20,7 +20,7 @@ namespace BlownAway.Collectibles
 
         private void Update()
         {
-            transform.eulerAngles += Vector3.up * _turnSpeed;
+            transform.eulerAngles += Vector3.up * _turnSpeed * Time.deltaTime;
         }
 
         private void SpawnCoins()
