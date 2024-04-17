@@ -72,6 +72,7 @@ namespace BlownAway.Character.Movements
 
         // Slopes
         [Tooltip("The raycast hits stocked while looking for slopes")] public RaycastHit[] SlopesHitResults { get; private set; }
+        public bool IsSupposedToBeGrounded { get; private set; }
 
 
 
@@ -210,7 +211,7 @@ namespace BlownAway.Character.Movements
             Vector3 colliderPosition = new Vector3(manager.CharacterCollider.Collider.bounds.center.x, manager.CharacterCollider.Collider.bounds.min.y, manager.CharacterCollider.Collider.bounds.center.z);
             CanJumpBuffer = Physics.SphereCastNonAlloc(colliderPosition, manager.Data.GroundDetectionData.GroundDetectionSphereRadius, Vector3.down, JumpBufferHitResults, manager.Data.GroundDetectionData.JumpBufferCheckDistance, manager.Data.GroundDetectionData.GroundLayer) > 0;
             IsGrounded = Physics.SphereCastNonAlloc(colliderPosition, manager.Data.GroundDetectionData.GroundDetectionSphereRadius, Vector3.down, GroundHitResults, manager.Data.GroundDetectionData.GroundCheckDistance, manager.Data.GroundDetectionData.GroundLayer) > 0;
-            Physics.SphereCastNonAlloc(colliderPosition, manager.Data.GroundDetectionData.GroundDetectionSphereRadius, Vector3.down, SlopesHitResults, manager.Data.GroundDetectionData.SlopesGroundCheckDistance, manager.Data.GroundDetectionData.GroundLayer);
+            IsSupposedToBeGrounded = Physics.SphereCastNonAlloc(colliderPosition, manager.Data.GroundDetectionData.GroundDetectionSphereRadius, Vector3.down, SlopesHitResults, manager.Data.GroundDetectionData.SlopesGroundCheckDistance, manager.Data.GroundDetectionData.GroundLayer) > 0;
             //bool a = Physics.SphereCastNonAlloc(colliderPositionn, manager.Data.GroundDetectionData.GroundDetectionSphereRadius, Vector3.down, GroundHitResults, manager.Data.GroundDetectionData.GroundCheckDistance, manager.Data.GroundDetectionData.GroundLayer) > 0;
             //Collider[] hitColliders = Physics.OverlapSphere(colliderPosition + Vector3.down * manager.Data.GroundDetectionData.GroundCheckDistance, manager.Data.GroundDetectionData.GroundDetectionSphereRadius, manager.Data.GroundDetectionData.GroundLayer);
             //IsGrounded = hitColliders.Length > 0;
@@ -332,7 +333,7 @@ namespace BlownAway.Character.Movements
         {
             Vector3 colliderPosition = new Vector3(manager.CharacterCollider.Collider.bounds.center.x, manager.CharacterCollider.Collider.bounds.min.y, manager.CharacterCollider.Collider.bounds.center.z);
             if (!Physics.Raycast(colliderPosition, Vector3.down,out RaycastHit hit, manager.Data.GroundDetectionData.GroundLayer)) return;
-            manager.CharacterCollider.transform.position = new Vector3(hit.point.x, hit.point.y + manager.CharacterCollider.Collider.bounds.extents.y / 2, hit.point.z);
+            CurrentVelocity += manager.CharacterCollider.Collider.bounds.size - new Vector3(hit.point.x, hit.point.y + manager.CharacterCollider.Collider.bounds.extents.y / 2, hit.point.z);
         }
         #endregion
 
@@ -465,7 +466,7 @@ namespace BlownAway.Character.Movements
 
         public void CheckForJacketToggle(CharacterManager manager)
         {
-            if (manager.Inputs.JacketInflateToggle)
+            if (manager.Inputs.JacketInflateToggle && DeriveTimer > 0.001f)
             {
                 IsJacketInflated = !IsJacketInflated;
             }

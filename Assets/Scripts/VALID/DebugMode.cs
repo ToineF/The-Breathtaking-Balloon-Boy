@@ -11,7 +11,7 @@ namespace BlownAway.DebugMode
     {
         private void Awake()
         {
-            DontDestroyOnLoad(this);
+            if (transform.parent == null) DontDestroyOnLoad(this);
         }
 
 #if UNITY_EDITOR

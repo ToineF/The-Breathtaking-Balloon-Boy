@@ -8,6 +8,15 @@ namespace BlownAway.Character.States
         public override void EnterState(CharacterManager manager, CharacterBaseState previousState)
         {
             Debug.Log("FALLING");
+            // Check
+            //if (manager.MovementManager.IsSupposedToBeGrounded)
+            //{
+            //    manager.States.SwitchState(previousState);
+            //    manager.MovementManager.SnapToGround(manager);
+            //    return;
+            //}
+
+
             // Movements
             manager.MovementManager.LerpGravityTo(manager, manager.Data.FallData.BaseData);
             manager.MovementManager.LerpDeplacementSpeed(manager, manager.Data.LateralMovementData.FallingData);
