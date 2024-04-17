@@ -31,6 +31,8 @@ namespace BlownAway.Cutscenes
 
         public void StartNewSequence(Cutscene cutscene, CharacterManager character)
         {
+            _currentInteractionSequence = cutscene;
+
             if (_currentInteractionSequence.StopPlayerMovements)
             {
                 character.States.SwitchState(character.States.CutsceneState);
@@ -38,7 +40,6 @@ namespace BlownAway.Cutscenes
             }
             _character = character;
 
-            _currentInteractionSequence = cutscene;
             CurrentSequenceIndex = 0;
         }
 
