@@ -114,6 +114,11 @@ namespace BlownAway.Character.Animations
                 if (morpher.sharedMesh.blendShapeCount < 1) return;
                 float weight = Manager.MovementManager.IsJacketInflated ? 100 : 0;
                 _jacketMorpherWeight = Mathf.Lerp(_jacketMorpherWeight, weight, _jacketMorpherLerp);
+                if (Manager.States.IsInState(Manager.States.FloatingState) && Manager.MovementManager.NormalizedDeriveAirAmount < 1)
+                {
+                    _jacketMorpherWeight = Manager.MovementManager.NormalizedDeriveAirAmount * 100f;
+                    Debug.LogWarning(_jacketMorpherWeight);
+                }
                 morpher.SetBlendShapeWeight(0, _jacketMorpherWeight);
             }
             
