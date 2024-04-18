@@ -14,6 +14,10 @@ public class TilesetData : ScriptableObject
     public InnerFloor[] MiddleFloor;
     public InnerFloor[] UpFloor;
     public OuterFloor[] TopFloor;
+
+    [Header("Doors")]
+    public bool UseDoors;
+    public InnerFloor[] DoorsFloor;
 }
 
 [Serializable]

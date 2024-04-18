@@ -88,6 +88,12 @@ public class Tiling3D : MonoBehaviour
         GameObject block;
         int score = GetBlockScore(x, y, z);
 
+
+        //if (y == 1 && TilesetData.UseDoors) // Door
+        //{
+
+        //}
+        //else 
         if (score <= 1) // Center
         {
             if (y == 0)

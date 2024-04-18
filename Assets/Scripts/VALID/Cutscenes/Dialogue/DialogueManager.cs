@@ -111,8 +111,6 @@ namespace BlownAway.Cutscenes
                     }
                 }
 
-                Debug.LogError("NEW CHAR");
-
                 //_textEffectsByCharacters[_currentCharIndex]?.TextEffect.CharacterApparitionTime ??
                 yield return new WaitForSeconds(_currentCharWaitTime);
             }
@@ -145,7 +143,6 @@ namespace BlownAway.Cutscenes
             _textEffects.Clear();
             _textEffects.Add(_hiddenEffectData);
             _textEffects.Add(_baseEffectData);
-            Debug.LogError("ADD BASE");
 
         }
 
@@ -156,7 +153,6 @@ namespace BlownAway.Cutscenes
 
         private void PlayTextAnimation()
         {
-            Debug.LogError("TFX COUNT : " + _textEffects.Count);
             _dialogueTextboxText.ForceMeshUpdate();
             TMP_TextInfo textInfo = _dialogueTextboxText.textInfo;
             bool[] visitedCharacters = new bool[textInfo.characterCount];
