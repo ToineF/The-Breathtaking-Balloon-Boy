@@ -95,6 +95,7 @@ namespace BlownAway.Cutscenes
             _currentCharIndex = 0;
             _textEffectsByCharacters = new TextEffectData[finalText.Length];
             _characterApparitionTimers = new float[finalText.Length];
+
             for (int i = 0; i < finalText.Length; i++)
             {
                 _currentCharIndex = i;
@@ -112,7 +113,6 @@ namespace BlownAway.Cutscenes
 
                 Debug.LogError("NEW CHAR");
 
-                yield return new WaitForEndOfFrame();
                 //_textEffectsByCharacters[_currentCharIndex]?.TextEffect.CharacterApparitionTime ??
                 yield return new WaitForSeconds(_currentCharWaitTime);
             }
@@ -149,7 +149,7 @@ namespace BlownAway.Cutscenes
 
         }
 
-        private void Update()
+        private void LateUpdate()
         {
             PlayTextAnimation();
         }

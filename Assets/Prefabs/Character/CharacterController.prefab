@@ -165,7 +165,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 475135957353019833}
   m_Enabled: 1
-  m_Alpha: 0
+  m_Alpha: 1
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
@@ -420,8 +420,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1816818144299226447}
-  m_LocalRotation: {x: -0, y: 0.7071316, z: -0, w: 0.70708185}
-  m_LocalPosition: {x: -336.67, y: 94.53, z: -399.4}
+  m_LocalRotation: {x: -0, y: 0.85220766, z: -0, w: -0.5232038}
+  m_LocalPosition: {x: 136.84671, y: 49.416016, z: -397.13803}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -430,7 +430,7 @@ Transform:
   - {fileID: 7775348857471118020}
   m_Father: {fileID: 496894185485964188}
   m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 90.004, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 243.095, z: 0}
 --- !u!1 &1839701439536448765
 GameObject:
   m_ObjectHideFlags: 0
@@ -630,6 +630,16 @@ MonoBehaviour:
   _propulsionAnimName: PROPULSION
   _floatAnimName: FLOAT
   _dashAnimName: DASH
+  <X>k__BackingField: X
+  <Y>k__BackingField: Y
+  <Z>k__BackingField: Z
+  <PropulsionAmount>k__BackingField: PropulsionAmount
+  <DeriveAmount>k__BackingField: DeriveAmount
+  <IsDashing>k__BackingField: IsDashing
+  <IsGroundPounding>k__BackingField: IsGroundPounding
+  <IsJacketInflated>k__BackingField: IsJacketInflated
+  <IsGrounded>k__BackingField: IsGrounded
+  <IsPropulsing>k__BackingField: IsPropulsing
   _isOrientationInverted: 1
   _lookAtLerp: 10
   _jacketMorpherLerp: 0.013
@@ -1908,7 +1918,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6268552565867689310}
   m_Enabled: 1
-  m_Alpha: 0
+  m_Alpha: 1
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
@@ -2462,7 +2472,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7997222213339330684}
   m_Enabled: 1
-  m_Alpha: 1
+  m_Alpha: 0
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
@@ -4101,6 +4111,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: DeriveGauge
+      objectReference: {fileID: 0}
+    - target: {fileID: 3177921140503270161, guid: a8f3537f9fd352944bc0255417cb2cb9,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4433971733491920336, guid: a8f3537f9fd352944bc0255417cb2cb9,
         type: 3}
