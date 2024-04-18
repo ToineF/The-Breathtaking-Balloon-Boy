@@ -26,6 +26,18 @@ namespace BlownAway.Character.Animations
         [SerializeField] private string _floatAnimName;
         [SerializeField] private string _dashAnimName;
 
+        [field:Header("Animator Params")]
+        [field:SerializeField] public string X { get; private set; }
+        [field:SerializeField] public string Y { get; private set; }
+        [field:SerializeField] public string Z { get; private set; }
+        [field:SerializeField] public string PropulsionAmount { get; private set; }
+        [field:SerializeField] public string DeriveAmount { get; private set; }
+        [field:SerializeField] public string IsDashing { get; private set; }
+        [field:SerializeField] public string IsGroundPounding { get; private set; }
+        [field:SerializeField] public string IsJacketInflated { get; private set; }
+        [field:SerializeField] public string IsGrounded { get; private set; }
+        [field:SerializeField] public string IsPropulsing { get; private set; }
+
         [Header("Parameters")]
         [SerializeField] private bool _isOrientationInverted;
         [SerializeField] private float _lookAtLerp;
@@ -40,7 +52,9 @@ namespace BlownAway.Character.Animations
             Manager.CharacterVisual.transform.position = Manager.CharacterCollider.Rigidbody.transform.position;
             //ChangeCharacterAnimation();
             UpdateCharacterMorpher();
+            UpdateAnimationParams(Manager);
         }
+
 
         private void LateUpdate()
         {
@@ -65,6 +79,20 @@ namespace BlownAway.Character.Animations
             // transform.RotateAround(collider, Vector3.forward, Vector3.Angle(position, position + _lastDirection));
             //Manager.CharacterTransform.RotateAround(collider, Vector3.up, Vector3.Angle(Vector3.zero, Vector3.Scale(collider, new Vector3(0,1,0)) - _lastDirection));
 
+        }
+
+        private void UpdateAnimationParams(CharacterManager manager)
+        {
+            _characterAnimator.SetFloat(X, manager.MovementManager.CurrentVelocity.x);
+            _characterAnimator.SetFloat(Y, manager.MovementManager.CurrentVelocity.y);
+            _characterAnimator.SetFloat(Z, manager.MovementManager.CurrentVelocity.z);
+            _characterAnimator.SetFloat(PropulsionAmount, manager.AirManager.CurrentAir);
+            _characterAnimator.SetFloat(DeriveAmount, manager.MovementManager.NormalizedDeriveAirAmount);
+            _characterAnimator.SetBool(IsDashing, manager.States.IsInState(manager.States.DashState));
+            _characterAnimator.SetBool(IsGroundPounding, manager.States.IsInState(manager.States.GroundPoundState));
+            _characterAnimator.SetBool(IsGrounded, manager.MovementManager.IsGrounded);
+            _characterAnimator.SetBool(IsJacketInflated, manager.MovementManager.IsJacketInflated);
+            _characterAnimator.SetBool(IsPropulsing, manager.States.IsInState(manager.States.PropulsionState));
         }
 
         public void PlayAnimation(string animation)

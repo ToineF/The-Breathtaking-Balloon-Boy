@@ -221,9 +221,9 @@ namespace BlownAway.Character.Movements
             //if (IsGrounded)
             LastGround = SlopesHitResults[0];
 
-            if (lastGrounded != IsGrounded)
+            if (lastGrounded != IsSupposedToBeGrounded)
             {
-                if (IsGrounded) // On Ground Enter
+                if (IsSupposedToBeGrounded) // On Ground Enter
                 {
                     EnterGround(manager, colliderPosition);
                 }
@@ -239,7 +239,7 @@ namespace BlownAway.Character.Movements
             }
 
             // Others checks to be sure
-            if (IsGrounded && manager.States.IsInState(manager.States.FallingState))
+            if (IsSupposedToBeGrounded && manager.States.IsInState(manager.States.FallingState))
             {
                 EnterGround(manager, colliderPosition);
             }
