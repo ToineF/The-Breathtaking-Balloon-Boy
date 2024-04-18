@@ -802,7 +802,9 @@ PlayerSettings:
   webGLMemoryGeometricGrowthCap: 96
   webGLPowerPreference: 2
   scriptingDefineSymbols:
-    Standalone: UNITY_PIPELINE_URP
+    Android: OBI_ONI_SUPPORTED
+    Standalone: UNITY_PIPELINE_URP;OBI_ONI_SUPPORTED
+    iPhone: OBI_ONI_SUPPORTED
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend: {}
