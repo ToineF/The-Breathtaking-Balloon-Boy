@@ -599,8 +599,15 @@ namespace BlownAway.Character.Movements
             _dashTimer -= Time.deltaTime;
             if (_dashTimer <= 0)
             {
-                if (IsGrounded) manager.States.SwitchState(manager.States.IdleState);
-                else manager.States.SwitchState(manager.States.FloatingState);
+                if (IsGrounded)
+                {
+                    manager.States.SwitchState(manager.States.IdleState);
+                }
+                else
+                {
+                    ToggleJacketInflate(manager, true);
+                    manager.States.SwitchState(manager.States.FloatingState);
+                }
             }
         }
 

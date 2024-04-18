@@ -46,7 +46,7 @@ namespace BlownAway.Character.States
 
             manager.MovementManager.CheckIfGrounded(manager);
 
-            manager.MovementManager.CheckForDashStart(manager, true);
+            //manager.MovementManager.CheckForDashStart(manager, true);
 
             //manager.MovementManager.CheckForJacketToggle(manager);
 
