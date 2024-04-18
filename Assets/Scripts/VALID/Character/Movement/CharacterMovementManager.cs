@@ -239,7 +239,7 @@ namespace BlownAway.Character.Movements
             }
 
             // Others checks to be sure
-            if (manager.States.IsInState(manager.States.FallingState))
+            if (IsGrounded && manager.States.IsInState(manager.States.FallingState))
             {
                 EnterGround(manager, colliderPosition);
             }
