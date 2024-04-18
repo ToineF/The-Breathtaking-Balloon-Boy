@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.EventSystems;
 
 namespace BlownAway.Character
 {
@@ -9,6 +10,7 @@ namespace BlownAway.Character
 
 
         [SerializeField] private CanvasGroup PauseUIMenu;
+        [SerializeField] private GameObject FirstSelectedButton;
 
         // Inputs
         private PlayerInputs _inputs;
@@ -46,6 +48,7 @@ namespace BlownAway.Character
             Manager.Inputs.EnableInputs(true);
             GameIsPaused = false;
             PauseUIMenu.alpha = 0f;
+            EventSystem.current.SetSelectedGameObject(FirstSelectedButton);
         }
 
         public void Pause()

@@ -908,8 +908,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8377431617436845997}
-  m_LocalRotation: {x: -0.13254708, y: -0.28168547, z: 0.03932262, w: -0.94949377}
-  m_LocalPosition: {x: -79.51531, y: -787.0071, z: 37.818146}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -158.76624, y: -859.7283, z: 107.744995}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -949,7 +949,7 @@ Camera:
     height: 1
   near clip plane: 0.1
   far clip plane: 5000
-  field of view: 60
+  field of view: 40
   orthographic: 0
   orthographic size: 10
   m_Depth: -1
@@ -1359,7 +1359,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 5504109939117958966, guid: feaf980e285b77842981336e32b184dc, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 6414775461236088920, guid: feaf980e285b77842981336e32b184dc,
         type: 3}
