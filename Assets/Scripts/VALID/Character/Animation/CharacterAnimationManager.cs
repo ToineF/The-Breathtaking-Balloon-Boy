@@ -97,7 +97,7 @@ namespace BlownAway.Character.Animations
 
         public void PlayAnimation(string animation)
         {
-            _characterAnimator.SetTrigger(animation);
+            //_characterAnimator.SetTrigger(animation);
         }
 
         //private void ChangeCharacterAnimation()
