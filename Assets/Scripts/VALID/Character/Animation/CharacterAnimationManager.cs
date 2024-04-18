@@ -117,7 +117,6 @@ namespace BlownAway.Character.Animations
                 if (Manager.States.IsInState(Manager.States.FloatingState) && Manager.MovementManager.NormalizedDeriveAirAmount < 1)
                 {
                     _jacketMorpherWeight = Manager.MovementManager.NormalizedDeriveAirAmount * 100f;
-                    Debug.LogWarning(_jacketMorpherWeight);
                 }
                 morpher.SetBlendShapeWeight(0, _jacketMorpherWeight);
             }

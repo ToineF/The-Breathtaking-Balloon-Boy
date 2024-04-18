@@ -19,6 +19,7 @@ namespace BlownAway.GPE
         [SerializeField] private float _UpVectorMultiplier;
         [SerializeField] private bool _refreshPlayerAir;
         [SerializeField] private bool _needPlayerInput;
+        [SerializeField, Tooltip("The ejection force when the player doesn't have the balloon bounce")] private float _repelForce = 1;
 
         [Header("Visual")]
         [SerializeField] private GameObject _visual;
@@ -88,6 +89,8 @@ namespace BlownAway.GPE
             else if (Mathf.Abs(normalizedDirection.x) > Mathf.Abs(normalizedDirection.z)) normalizedDirection = leftRightDirection; // LEFT - RIGHT
             else normalizedDirection = forwardBackwardDirection; // FORWARD - BACKWARD
 
+            float repelForce = collider.Manager.Data.PowerUpData.IsBalloonBounceAvailable ? 1 : _repelForce;
+
 
             if (manager.States.IsInState(manager.States.GroundPoundState)) // Ground Pound
             {
@@ -95,7 +98,7 @@ namespace BlownAway.GPE
             }
             else // Base Balloon Bounce
             {
-                manager.MovementManager.AddExternalForce(gameObject, normalizedDirection * _force, _forceAccel);
+                manager.MovementManager.AddExternalForce(gameObject, normalizedDirection * _force * repelForce, _forceAccel);
             }
 
 
