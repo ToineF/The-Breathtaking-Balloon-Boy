@@ -50,6 +50,7 @@ public class Tiling3D : MonoBehaviour
                     if (GetBlockScore(x, y, z) == 0) continue;
 
                     GameObject block = GetBlockType(x, y, z);
+                    if (block == null) continue;
                     Vector3 position = new Vector3(x, y, z) * TilesetData.BlockSize;
                     Vector3 rotation = GetRotation(x, y, z);
                     GameObject newBlock = Instantiate(block, transform.position + position, Quaternion.Euler(TilesetData.BlockRotation + rotation), transform);
@@ -89,11 +90,21 @@ public class Tiling3D : MonoBehaviour
         int score = GetBlockScore(x, y, z);
 
 
-        //if (y == 1 && TilesetData.UseDoors) // Door
-        //{
-
-        //}
-        //else 
+        if ((y == 1 || y == 2) && TilesetData.UseDoors) // Door
+        {
+            int even = (x == Width - 1 || z == 0) ? 1 : 0;
+            if ((((x == 0 || x==Width-1) && z%2== even) || ((z == 0 || z == Length - 1) && x % 2 == even) || score > 1) && y == 1 )
+            {
+                if (score <= 1)
+                    block = TilesetData.DoorsFloor[0].EdgeTile[0];
+                else
+                    block = TilesetData.DoorsFloor[0].CornerTile[0];
+            } else
+            {
+                block = null;
+            }
+        }
+        else 
         if (score <= 1) // Center
         {
             if (y == 0)
