@@ -20,11 +20,17 @@ namespace BlownAway.Character.States
 
             // Animation
             manager.AnimationManager.PlayAnimation(manager.AnimationManager.PropulsionAnim);
+
+            // VFX
+            manager.Feedbacks.PropulsionVFX.Play();
         }
 
         public override void ExitState(CharacterManager manager)
         {
             manager.MovementManager.LerpPropulsionSpeed(manager, 0, manager.Data.PropulsionData.BasePropulsionDecelTime, manager.Data.PropulsionData.BasePropulsionDecelCurve);
+
+            // VFX
+            manager.Feedbacks.PropulsionVFX.Stop();
         }
 
         public override void UpdateState(CharacterManager manager)

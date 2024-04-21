@@ -11,8 +11,9 @@ namespace BlownAway.Character.Feedbacks
         [field:SerializeField] public FMODAudioManager AudioManager { get; private set; }
         [field:SerializeField] public ScreenShake ScreenShake { get; private set; }
 
-        [field:Header("Walk")]
+        [field:Header("VFX References")]
         [field:SerializeField] public ParticleSystem WalkVFX { get; private set; }
+        [field:SerializeField] public ParticleSystem PropulsionVFX { get; private set; }
 
         public void PlayFeedback(Feedback feedback)
         {
