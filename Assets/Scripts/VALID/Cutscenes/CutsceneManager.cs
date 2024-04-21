@@ -85,6 +85,12 @@ namespace BlownAway.Cutscenes
             {
                 StartMoveObject(moveObject);
             }
+
+            CutsceneInvokeFunction function = interactionElement as CutsceneInvokeFunction;
+            if (function != null)
+            {
+                StartInvokeMethod(function);
+            }
         }
 
         private void ReadDialogue(CutsceneDialogue dialogue)
@@ -129,6 +135,12 @@ namespace BlownAway.Cutscenes
         private void StartMoveObject(CutsceneMoveObject moveObject)
         {
             moveObject.ObjectToMove.transform.position = moveObject.TargetPosition.position;
+            GoToNextSequenceElement();
+        }
+
+        private void StartInvokeMethod(CutsceneInvokeFunction function)
+        {
+            function.Event?.Invoke();
             GoToNextSequenceElement();
         }
     }

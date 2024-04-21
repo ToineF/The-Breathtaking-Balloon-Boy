@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace BlownAway.Cutscenes
 {
@@ -26,6 +27,10 @@ namespace BlownAway.Cutscenes
     {
         [field: SerializeField] public GameObject ObjectToMove { get; private set; }
         [field: SerializeField] public Transform TargetPosition { get; private set; }
+    }
+    public class CutsceneInvokeFunction : CutsceneElement
+    {
+        [field: SerializeField] public UnityEvent Event { get; private set; }
     }
 
     [Serializable]
