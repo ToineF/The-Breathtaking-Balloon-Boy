@@ -2,67 +2,70 @@ using BlownAway.Character;
 using BlownAway.Character.States;
 using UnityEngine;
 
-public class CharacterJumpState : CharacterBaseState
+namespace BlownAway.Character.States
 {
-
-    public enum JumpState
+    public class CharacterJumpState : CharacterBaseState
     {
-        ASCENT = 0,
-        DESCENT = 1,
-        APEX = 2,
-    }
 
-    public override void EnterState(CharacterManager manager, CharacterBaseState previousState)
-    {
-        Debug.Log("JUMP");
-        manager.MovementManager.LerpGravityTo(manager, manager.Data.FallData.JumpAscentData);
+        public enum JumpState
+        {
+            ASCENT = 0,
+            DESCENT = 1,
+            APEX = 2,
+        }
 
-        manager.MovementManager.LerpDeplacementSpeed(manager, manager.Data.LateralMovementData.JumpAscentData);
+        public override void EnterState(CharacterManager manager, CharacterBaseState previousState)
+        {
+            Debug.Log("JUMP");
+            manager.MovementManager.LerpGravityTo(manager, manager.Data.FallData.JumpAscentData);
 
-        manager.MovementManager.StartJump(manager);
+            manager.MovementManager.LerpDeplacementSpeed(manager, manager.Data.LateralMovementData.JumpAscentData);
 
-        // Animation
-        manager.AnimationManager.PlayAnimation(manager.AnimationManager.JumpAnim);
-    }
+            manager.MovementManager.StartJump(manager);
 
-    public override void ExitState(CharacterManager manager)
-    {
-    }
+            // Animation
+            manager.AnimationManager.PlayAnimation(manager.AnimationManager.JumpAnim);
+        }
 
-    public override void UpdateState(CharacterManager manager)
-    {
-        manager.MovementManager.UpdateJumpTimer(manager);
+        public override void ExitState(CharacterManager manager)
+        {
+        }
 
-        if (manager.MovementManager.JumpTimer > 0) return;
+        public override void UpdateState(CharacterManager manager)
+        {
+            manager.MovementManager.UpdateJumpTimer(manager);
 
-        manager.MovementManager.UpdateJumpState(manager);
+            if (manager.MovementManager.JumpTimer > 0) return;
 
-        manager.MovementManager.CheckIfJumpButtonReleased(manager);
+            manager.MovementManager.UpdateJumpState(manager);
 
-        manager.MovementManager.CheckIfGrounded(manager, true);
+            manager.MovementManager.CheckIfJumpButtonReleased(manager);
 
-        manager.MovementManager.CheckForGroundPound(manager);
+            manager.MovementManager.CheckIfGrounded(manager, true);
 
-        manager.MovementManager.CheckForDashStart(manager);
+            manager.MovementManager.CheckForGroundPound(manager);
 
-        if (manager.MovementManager.JumpPropulsionTimer > 0) return;
+            manager.MovementManager.CheckForDashStart(manager);
 
-        manager.MovementManager.CheckForPropulsionStartOnAir(manager); // HERE CHECK IF BUTTON PRESSED
+            if (manager.MovementManager.JumpPropulsionTimer > 0) return;
 
-    }
+            manager.MovementManager.CheckForPropulsionStartOnAir(manager); // HERE CHECK IF BUTTON PRESSED
 
-    public override void FixedUpdateState(CharacterManager manager)
-    {
-        //manager.MovementManager.StopMoving(manager, manager.Data.LateralMovementData.JumpDirectionTurnSpeed);
-        manager.MovementManager.MoveAtSpeed(manager);
+        }
 
-        manager.MovementManager.UpdateJumpMovement(manager);
+        public override void FixedUpdateState(CharacterManager manager)
+        {
+            //manager.MovementManager.StopMoving(manager, manager.Data.LateralMovementData.JumpDirectionTurnSpeed);
+            manager.MovementManager.MoveAtSpeed(manager);
 
-        manager.MovementManager.UpdateGravity(manager);
+            manager.MovementManager.UpdateJumpMovement(manager);
 
-        manager.MovementManager.UpdateExternalForces();
-    }
-    public override void LateUpdateState(CharacterManager manager)
-    {
+            manager.MovementManager.UpdateGravity(manager);
+
+            manager.MovementManager.UpdateExternalForces();
+        }
+        public override void LateUpdateState(CharacterManager manager)
+        {
+        }
     }
 }

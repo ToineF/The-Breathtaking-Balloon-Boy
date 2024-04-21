@@ -38,7 +38,7 @@ namespace BlownAway.City
         {
             if (_isMoving || !_canMove) return;
 
-            _index = 0;
+            if (!_playOnePosition) _index = 0;
             _isMoving = true;
             _movingObject.transform.position = _positions[_index].position;
             MoveToNextPoint();
@@ -46,7 +46,7 @@ namespace BlownAway.City
 
         private void MoveToNextPoint()
         {
-            if (!_loopPositions && _index == _positions.Length - 1) //  && !_canBeReactivated
+            if (!_loopPositions && _index == _positions.Length - 1 && !_canBeReactivated)
             {
                 StopMoving();
                 return;

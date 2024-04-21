@@ -4,12 +4,18 @@ namespace BlownAway.Character.States
 {
     public class CharacterCutsceneState : CharacterBaseState
     {
+        public enum CutsceneState
+        {
+            BEFORE = 0,
+            DURING = 1,
+        }
+
         public override void EnterState(CharacterManager manager, CharacterBaseState previousState)
         {
             Debug.Log("CUTSCENE");
             manager.UIManager.ShowUI(false);
 
-            manager.MovementManager.SnapToGround(manager);
+            manager.MovementManager.CurrentCutsceneState = CutsceneState.BEFORE;
         }
 
         public override void ExitState(CharacterManager manager)
@@ -23,10 +29,13 @@ namespace BlownAway.Character.States
         {
             if (manager.Inputs.NextDialoguePressed)
                 manager.CutsceneManager.DialogueManager.GoToNextText();
+
+            manager.MovementManager.CheckIfGrounded(manager, false, false);
         }
 
         public override void FixedUpdateState(CharacterManager manager)
         {
+            manager.MovementManager.UpdateGravity(manager);
         }
 
         public override void LateUpdateState(CharacterManager manager)

@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using BlownAway.GPE;
 using BlownAway.Character.Movements.Data;
 using UnityEngine.InputSystem.XR;
+using BlownAway.Character.States;
 
 namespace BlownAway.Character.Movements
 {
@@ -91,6 +92,10 @@ namespace BlownAway.Character.Movements
 
         // External Forces
         public Dictionary<GameObject, ForceData> ExternalForces { get; private set; } = new Dictionary<GameObject, ForceData>();
+
+        // Cutscene
+        public CharacterCutsceneState.CutsceneState CurrentCutsceneState { get; set; }
+
 
         protected override void StartScript(CharacterManager manager)
         {
@@ -205,7 +210,7 @@ namespace BlownAway.Character.Movements
         #endregion
 
         #region Gravity
-        public void CheckIfGrounded(CharacterManager manager, bool isPropulsing = false)
+        public void CheckIfGrounded(CharacterManager manager, bool isPropulsing = false, bool changeState = true)
         {
             var lastGrounded = IsGrounded;
             Vector3 colliderPosition = new Vector3(manager.CharacterCollider.Collider.bounds.center.x, manager.CharacterCollider.Collider.bounds.min.y, manager.CharacterCollider.Collider.bounds.center.z);
@@ -225,11 +230,11 @@ namespace BlownAway.Character.Movements
             {
                 if (IsGrounded) // On Ground Enter
                 {
-                    EnterGround(manager, colliderPosition);
+                    EnterGround(manager, colliderPosition, changeState);
                 }
                 else // On Ground Leave
                 {
-                    if (!isPropulsing)
+                    if (!isPropulsing && changeState)
                     {
                         manager.States.SwitchState(manager.States.FallingState); // IDLE, WALK & FALL
                     }
@@ -241,14 +246,14 @@ namespace BlownAway.Character.Movements
             // Others checks to be sure
             if (IsGrounded && manager.States.IsInState(manager.States.FallingState))
             {
-                EnterGround(manager, colliderPosition);
+                EnterGround(manager, colliderPosition, changeState);
             }
         }
 
-        private void EnterGround(CharacterManager manager, Vector3 colliderPosition)
+        private void EnterGround(CharacterManager manager, Vector3 colliderPosition, bool switchState = true)
         {
             OnGroundEnter?.Invoke(manager);
-            manager.States.SwitchState(manager.States.IdleState);
+            if (switchState) manager.States.SwitchState(manager.States.IdleState);
             manager.CharacterCollider.Rigidbody.transform.SetParent(LastGround.collider.transform);
 
             // VFX
