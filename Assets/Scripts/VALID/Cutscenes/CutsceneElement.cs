@@ -9,7 +9,7 @@ namespace BlownAway.Cutscenes
 
     public class CutsceneDialogue : CutsceneElement
     {
-        [field:SerializeField] public Dialogue Dialogue { get; private set; }
+        [field: SerializeField] public Dialogue Dialogue { get; private set; }
         [field: SerializeField] public bool CloseWindowOnDialogueEnd { get; private set; } = true;
     }
 
@@ -17,11 +17,16 @@ namespace BlownAway.Cutscenes
     {
         [field: SerializeField] public Cinemachine.CinemachineVirtualCamera TargetTransform { get; private set; }
 
-}
+    }
     public class CutsceneWaitForTime : CutsceneElement
     {
-        [field:SerializeField] public float WaitTime { get; private set; }
-}
+        [field: SerializeField] public float WaitTime { get; private set; }
+    }
+    public class CutsceneMoveObject : CutsceneElement
+    {
+        [field: SerializeField] public GameObject ObjectToMove { get; private set; }
+        [field: SerializeField] public Transform TargetPosition { get; private set; }
+    }
 
     [Serializable]
     public class CutsceneElementWrapper

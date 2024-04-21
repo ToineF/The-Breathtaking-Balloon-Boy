@@ -55,7 +55,7 @@ namespace BlownAway.Cutscenes
 
         private void EndSequence()
         {
-            _character.States.SwitchState(_character.States.IdleState);
+            _character.States.SwitchState(_character.States.FallingState);
         }
 
         private void ReadSequenceElement()
@@ -78,6 +78,12 @@ namespace BlownAway.Cutscenes
             if (waitForTime != null)
             {
                 StartWaitForTime(waitForTime);
+            }
+
+            CutsceneMoveObject moveObject = interactionElement as CutsceneMoveObject;
+            if (moveObject != null)
+            {
+                StartMoveObject(moveObject);
             }
         }
 
@@ -117,6 +123,12 @@ namespace BlownAway.Cutscenes
         private void EndWaitForTime()
         {
             _waitForTimeManager.OnTimerEnd -= EndWaitForTime;
+            GoToNextSequenceElement();
+        }
+
+        private void StartMoveObject(CutsceneMoveObject moveObject)
+        {
+            moveObject.ObjectToMove.transform.position = moveObject.TargetPosition.position;
             GoToNextSequenceElement();
         }
     }
