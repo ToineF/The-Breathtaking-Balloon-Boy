@@ -8,9 +8,16 @@ namespace BlownAway.Character
     {
         public bool GameIsPaused { get; private set; } = false;
 
+        [Header("References")]
+        [SerializeField] private CanvasGroup GlobalPauseUIMenu;
 
-        [SerializeField] private CanvasGroup PauseUIMenu;
+        [Header("Main Menu")]
+        [SerializeField] private CanvasGroup MainPauseUIMenu;
         [SerializeField] private GameObject FirstSelectedButton;
+
+        [Header("Options Menu")]
+        [SerializeField] private CanvasGroup OptionsPauseUIMenu;
+        [SerializeField] private GameObject FirstOptionsSelectedButton, MainMenuOptionsSelectedButton;
 
         // Inputs
         private PlayerInputs _inputs;
@@ -31,6 +38,12 @@ namespace BlownAway.Character
             _inputs.Player.Pause.performed -= StartTogglePause;
         }
 
+        protected override void StartScript(CharacterManager manager)
+        {
+            base.StartScript(manager);
+            GlobalPauseUIMenu.alpha = 0;
+        }
+
         private void StartTogglePause(InputAction.CallbackContext context)
         {
             if (GameIsPaused)
@@ -47,8 +60,7 @@ namespace BlownAway.Character
             Time.timeScale = 1f;
             Manager.Inputs.EnableInputs(true);
             GameIsPaused = false;
-            PauseUIMenu.alpha = 0f;
-            EventSystem.current.SetSelectedGameObject(FirstSelectedButton);
+            CloseMenu(GlobalPauseUIMenu);
         }
 
         public void Pause()
@@ -56,7 +68,34 @@ namespace BlownAway.Character
             Time.timeScale = 0f;
             Manager.Inputs.EnableInputs(false);
             GameIsPaused = true;
-            PauseUIMenu.alpha = 1f;
+            OpenMenu(GlobalPauseUIMenu);
+            OpenMenu(MainPauseUIMenu, FirstSelectedButton);
+        }
+
+        public void OpenOptions()
+        {
+            OpenMenu(OptionsPauseUIMenu, FirstOptionsSelectedButton);
+            CloseMenu(MainPauseUIMenu);
+        }
+
+        public void CloseOptions()
+        {
+            OpenMenu(MainPauseUIMenu, MainMenuOptionsSelectedButton);
+            CloseMenu(OptionsPauseUIMenu);
+        }
+
+        private void OpenMenu(CanvasGroup group, GameObject firstSelected = null)
+        {
+            group.interactable = true;
+            group.alpha = 1;
+            if (firstSelected != null) EventSystem.current.SetSelectedGameObject(firstSelected);
+        }
+
+        private void CloseMenu(CanvasGroup group, GameObject firstSelected = null)
+        {
+            group.interactable = false;
+            group.alpha = 0;
+            if (firstSelected != null) EventSystem.current.SetSelectedGameObject(firstSelected);
         }
     }
 

@@ -69,6 +69,9 @@ namespace BlownAway.Character
         // Pause Menu
         [field: SerializeField, Tooltip("The reference to the class that contains the logic of the pause system")] public PauseMenu PauseMenu { get; private set; }
 
+        // Accessibility
+        [field: SerializeField, Tooltip("The reference to the class that contains the logic of the acessibility options")] public AccessibilityOptions AccessibilityOptions { get; private set; }
+
         // Debug Mode
         [field: SerializeField, Tooltip("The reference to the class that contains the logic of the transitions")] public DebugMode.DebugMode DebugMode { get; private set; }
 
@@ -89,6 +92,7 @@ namespace BlownAway.Character
             Collectibles.InitScript(this);
             UIManager.InitScript(this);
             PauseMenu.InitScript(this);
+            AccessibilityOptions.InitScript(this);
         }
 
 
