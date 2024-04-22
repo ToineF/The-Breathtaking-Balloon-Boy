@@ -27,6 +27,7 @@ namespace BlownAway.Cutscenes
     {
         [field: SerializeField] public GameObject ObjectToMove { get; private set; }
         [field: SerializeField] public Transform TargetPosition { get; private set; }
+        [field: SerializeField] public bool SetParent { get; private set; } = false;
     }
     public class CutsceneInvokeFunction : CutsceneElement
     {

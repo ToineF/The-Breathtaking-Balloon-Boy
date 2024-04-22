@@ -135,6 +135,7 @@ namespace BlownAway.Cutscenes
         private void StartMoveObject(CutsceneMoveObject moveObject)
         {
             moveObject.ObjectToMove.transform.position = moveObject.TargetPosition.position;
+            if (moveObject.SetParent) moveObject.ObjectToMove.transform.SetParent(moveObject.TargetPosition.transform);
             GoToNextSequenceElement();
         }
 

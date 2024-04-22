@@ -33,9 +33,10 @@ namespace BlownAway.Collectibles
             {
                 CharacterManager manager = collider.Manager;
                 manager.Collectibles.AddCoinPreview();
-                manager.Feedbacks.PlayFeedback(manager.Data.FeedbacksData.CoinFeedback, transform.position, Quaternion.identity, null);
+                manager.Feedbacks.PlayFeedback(manager.Data.FeedbacksData.CoinPreviewFeedback, transform.position, Quaternion.identity, null);
+
+                StartCoroutine(AddCoinToCount(manager));
             }
-            StartCoroutine(AddCoinToCount());
         }
 
         private void Update()
@@ -53,15 +54,17 @@ namespace BlownAway.Collectibles
             float positionWeight = _magnetCurve.Evaluate(percentile);
             float scaleWeight = _scaleOverTime.Evaluate(percentile);
             transform.position = _startPosition + (_owner.Collider.bounds.center - _startPosition) * positionWeight;
-            transform.localScale = _startScale * (1f-scaleWeight);
+            transform.localScale = _startScale * (1f - scaleWeight);
 
             if (percentile > 1) OnDeath();
         }
 
-        private IEnumerator AddCoinToCount()
+        private IEnumerator AddCoinToCount(CharacterManager manager)
         {
             yield return new WaitForSeconds(_uiWinDelay);
             _lastOtherCollider.GetComponent<CharacterCollider>()?.Manager.Collectibles.AddCoin();
+            manager.Feedbacks.PlayFeedback(manager.Data.FeedbacksData.CoinFeedback, transform.position, Quaternion.identity, null);
+
         }
     }
 }

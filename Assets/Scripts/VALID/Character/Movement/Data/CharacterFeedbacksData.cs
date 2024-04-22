@@ -23,6 +23,7 @@ namespace BlownAway.Character.Movements.Data
         [field: SerializeField] public Feedback BalloonBounceFeedback { get; private set; }
 
         [field: Header("Collectibles")]
+        [field: SerializeField] public Feedback CoinPreviewFeedback { get; private set; }
         [field: SerializeField] public Feedback CoinFeedback { get; private set; }
         [field: SerializeField] public Feedback BigCoinFeedback { get; private set; }
         [field: SerializeField] public Feedback RareCollectibleFeedback { get; private set; }
