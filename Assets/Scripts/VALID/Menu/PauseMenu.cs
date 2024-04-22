@@ -88,6 +88,7 @@ namespace BlownAway.Character
         {
             group.interactable = true;
             group.alpha = 1;
+            group.blocksRaycasts = true;
             if (firstSelected != null) EventSystem.current.SetSelectedGameObject(firstSelected);
         }
 
@@ -95,6 +96,7 @@ namespace BlownAway.Character
         {
             group.interactable = false;
             group.alpha = 0;
+            group.blocksRaycasts = false;
             if (firstSelected != null) EventSystem.current.SetSelectedGameObject(firstSelected);
         }
     }
