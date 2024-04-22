@@ -25,6 +25,9 @@ namespace BlownAway.Character.States
 
             // Animation
             manager.AnimationManager.PlayAnimation(manager.AnimationManager.JumpAnim);
+
+            // VFX
+            manager.Feedbacks.PlayFeedback(manager.Data.FeedbacksData.JumpFeedback, manager.CharacterCollider.Rigidbody.transform.position, Quaternion.identity, null);
         }
 
         public override void ExitState(CharacterManager manager)

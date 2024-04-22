@@ -63,7 +63,7 @@ namespace BlownAway.Character.Movements
 
         // Derive
         public float DeriveTimer { get; private set; }
-        public float NormalizedDeriveAirAmount { get => DeriveTimer / Mathf.Max(Manager.Data.PropulsionData.DeriveTime,0.0001f); }
+        public float NormalizedDeriveAirAmount { get => DeriveTimer / Mathf.Max(Manager.Data.PropulsionData.DeriveTime, 0.0001f); }
 
 
         // Ground Detection
@@ -337,7 +337,7 @@ namespace BlownAway.Character.Movements
         public void SnapToGround(CharacterManager manager)
         {
             Vector3 colliderPosition = new Vector3(manager.CharacterCollider.Collider.bounds.center.x, manager.CharacterCollider.Collider.bounds.min.y, manager.CharacterCollider.Collider.bounds.center.z);
-            if (!Physics.Raycast(colliderPosition, Vector3.down,out RaycastHit hit, manager.Data.GroundDetectionData.GroundLayer)) return;
+            if (!Physics.Raycast(colliderPosition, Vector3.down, out RaycastHit hit, manager.Data.GroundDetectionData.GroundLayer)) return;
             CurrentVelocity += manager.CharacterCollider.Collider.bounds.size - new Vector3(hit.point.x, hit.point.y + manager.CharacterCollider.Collider.bounds.extents.y / 2, hit.point.z);
         }
         #endregion
@@ -489,6 +489,8 @@ namespace BlownAway.Character.Movements
         public void CheckForDeriveEnd(CharacterManager manager)
         {
             if (!manager.Data.AirData.DeriveStartsWhenAirIsEmpty || !manager.AirManager.AirIsEmpty) return;
+            if (!manager.Feedbacks.DeriveVFX.isPlaying) manager.Feedbacks.DeriveVFX.Play();
+
 
             UpdateDeriveTimer(manager);
 
@@ -856,7 +858,7 @@ namespace BlownAway.Character.Movements
             if (HasBalloonGroundPound) return;
             bool isSmallJump = GroundPoundTotalHeight < manager.Data.PowerUpData.GroundPoundNormalGroundHeightThresold;
             float groundPoundForce = isSmallJump ? manager.Data.PowerUpData.GroundPoundSmallForce : manager.Data.PowerUpData.GroundPoundNormalForce;
-            
+
             AddExternalForce(gameObject, Vector3.up * groundPoundForce, manager.Data.PowerUpData.GroundPoundStartLerp);
         }
 

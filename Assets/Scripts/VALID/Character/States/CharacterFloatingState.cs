@@ -17,6 +17,7 @@ namespace BlownAway.Character.States
 
         public override void ExitState(CharacterManager manager)
         {
+            manager.Feedbacks.DeriveVFX.Stop();
         }
 
         public override void UpdateState(CharacterManager manager)
