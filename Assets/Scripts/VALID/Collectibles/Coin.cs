@@ -28,9 +28,10 @@ namespace BlownAway.Collectibles
 
         protected override void OnPickUp()
         {
-            CharacterManager manager = _lastOtherCollider.GetComponent<CharacterManager>();
-            if (manager != null)
+            CharacterCollider collider = _lastOtherCollider.GetComponent<CharacterCollider>();
+            if (collider != null)
             {
+                CharacterManager manager = collider.Manager;
                 manager.Collectibles.AddCoinPreview();
                 manager.Feedbacks.PlayFeedback(manager.Data.FeedbacksData.CoinFeedback);
             }
