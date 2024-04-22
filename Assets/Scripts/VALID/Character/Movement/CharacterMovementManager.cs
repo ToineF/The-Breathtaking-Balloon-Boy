@@ -139,7 +139,7 @@ namespace BlownAway.Character.Movements
 
         public void ApplyVelocity(CharacterManager manager)
         {
-            CurrentVelocity = ColliderAndSlide(manager, CurrentVelocity, Vector3.zero, 0, false, CurrentVelocity);
+            //CurrentVelocity = ColliderAndSlide(manager, CurrentVelocity, Vector3.zero, 0, false, CurrentVelocity);
             manager.CharacterCollider.Rigidbody.velocity = CurrentVelocity;
         }
 
@@ -185,7 +185,7 @@ namespace BlownAway.Character.Movements
 
             CurrentVelocity += _currentDeplacementDirection * _currentDeplacementSpeed;
 
-            manager.MovementManager.CheckForStepClimb(manager);
+            //manager.MovementManager.CheckForStepClimb(manager);
         }
 
         public void StopMoving(CharacterManager manager)

@@ -24,10 +24,10 @@ namespace BlownAway.Character.States
         {
             manager.AirManager.ReduceAir(manager.Data.AirData.FloatingAirReductionSpeed);
 
-            manager.MovementManager.CheckForGroundPound(manager);
-
             manager.MovementManager.CheckForDeriveEnd(manager);
             manager.MovementManager.CheckForPropulsionStartOnAir(manager);
+
+            manager.MovementManager.CheckForGroundPound(manager);
 
             manager.MovementManager.CheckForJacketToggle(manager);
             manager.MovementManager.CheckForJacketDeflated(manager);
