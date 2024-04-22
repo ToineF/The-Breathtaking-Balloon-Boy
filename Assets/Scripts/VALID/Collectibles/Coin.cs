@@ -33,7 +33,7 @@ namespace BlownAway.Collectibles
             {
                 CharacterManager manager = collider.Manager;
                 manager.Collectibles.AddCoinPreview();
-                manager.Feedbacks.PlayFeedback(manager.Data.FeedbacksData.CoinFeedback);
+                manager.Feedbacks.PlayFeedback(manager.Data.FeedbacksData.CoinFeedback, transform.position, Quaternion.identity, null);
             }
             StartCoroutine(AddCoinToCount());
         }
