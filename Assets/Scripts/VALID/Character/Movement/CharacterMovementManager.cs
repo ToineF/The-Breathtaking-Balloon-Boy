@@ -54,7 +54,7 @@ namespace BlownAway.Character.Movements
         public float JumpPropulsionTimer { get; private set; }
         private float _currentJumpSpeed;
         private float _currentJumpIncreaseByFrame;
-        public CharacterJumpState.JumpState _currentJumpState { get; private set; }
+        public CharacterJumpState.JumpState CurrentJumpState { get; private set; }
 
         // Dash
         public float CurrentDashes { get; private set; }
@@ -283,9 +283,6 @@ namespace BlownAway.Character.Movements
 
             // VFX
             Instantiate(manager.Data.FeedbacksData.LandVFX, manager.CharacterCollider.Rigidbody.transform.position, manager.Data.FeedbacksData.LandVFX.transform.rotation);
-
-            // Animation
-            manager.AnimationManager.PlayAnimation(manager.AnimationManager.LandingAnim);
 
             //if (LastGround.collider != null)
             //{
@@ -543,7 +540,7 @@ namespace BlownAway.Character.Movements
         {
             if (manager.Inputs.StartedJumping)
             {
-                _currentJumpState = CharacterJumpState.JumpState.ASCENT;
+                CurrentJumpState = CharacterJumpState.JumpState.ASCENT;
                 manager.AirManager.RefreshAir();
                 RefreshDashes(manager);
                 StartDeriveTimer(manager);
@@ -575,7 +572,7 @@ namespace BlownAway.Character.Movements
 
         public void UpdateJumpState(CharacterManager manager)
         {
-            if (_currentJumpState == CharacterJumpState.JumpState.DESCENT) return;
+            if (CurrentJumpState == CharacterJumpState.JumpState.DESCENT) return;
 
             float jumpVelocity = _currentJumpSpeed - CurrentGravity;
             if (jumpVelocity <= 0)
@@ -587,7 +584,7 @@ namespace BlownAway.Character.Movements
         public void CheckIfJumpButtonReleased(CharacterManager manager)
         {
             if (!manager.Data.PropulsionData.VariableJumpHeightBaseOnInput) return;
-            if (_currentJumpState == CharacterJumpState.JumpState.DESCENT) return;
+            if (CurrentJumpState == CharacterJumpState.JumpState.DESCENT) return;
             if (manager.Inputs.IsJumping) return;
 
             StartJumpDescent(manager);
@@ -595,7 +592,7 @@ namespace BlownAway.Character.Movements
 
         private void StartJumpDescent(CharacterManager manager)
         {
-            _currentJumpState = CharacterJumpState.JumpState.DESCENT;
+            CurrentJumpState = CharacterJumpState.JumpState.DESCENT;
             CurrentGravityIncreaseByFrame += manager.Data.FallData.JumpDescentData.GravityIncreaseByFrame;
             CurrentGravity += manager.Data.FallData.JumpDescentData.BaseGravity;
             manager.MovementManager.LerpDeplacementSpeed(manager, manager.Data.LateralMovementData.JumpDescentData);

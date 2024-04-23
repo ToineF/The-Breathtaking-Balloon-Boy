@@ -24,9 +24,6 @@ namespace BlownAway.Character.States
             manager.MovementManager.StartDeriveTimer(manager);
 
             manager.MovementManager.ToggleJacketInflate(manager, false);
-
-            // Animation
-            manager.AnimationManager.PlayAnimation(manager.AnimationManager.IdleAnim);
         }
 
         public override void ExitState(CharacterManager manager)

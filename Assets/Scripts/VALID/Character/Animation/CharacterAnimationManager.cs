@@ -5,26 +5,10 @@ namespace BlownAway.Character.Animations
 {
     public class CharacterAnimationManager : CharacterSubComponent
     {
-        public string IdleAnim => _idleAnimName;
-        public string WalkAnim => _walkAnimName;
-        public string JumpAnim => _jumpAnimName;
-        public string FallAnim => _fallAnimName;
-        public string LandingAnim => _landingAnimName;
-        public string PropulsionAnim => _propulsionAnimName;
-        public string FloatAnim => _floatAnimName;
-        public string DashAnim => _dashAnimName;
 
         [Header("References")]
         [SerializeField] private Animator _characterAnimator;
         [SerializeField] private SkinnedMeshRenderer[] _skinnedMeshRenderers;
-        [SerializeField] private string _idleAnimName;
-        [SerializeField] private string _walkAnimName;
-        [SerializeField] private string _jumpAnimName;
-        [SerializeField] private string _fallAnimName;
-        [SerializeField] private string _landingAnimName;
-        [SerializeField] private string _propulsionAnimName;
-        [SerializeField] private string _floatAnimName;
-        [SerializeField] private string _dashAnimName;
 
         [field:Header("Animator Params")]
         [field:SerializeField] public string X { get; private set; }
@@ -37,6 +21,7 @@ namespace BlownAway.Character.Animations
         [field:SerializeField] public string IsJacketInflated { get; private set; }
         [field:SerializeField] public string IsGrounded { get; private set; }
         [field:SerializeField] public string IsPropulsing { get; private set; }
+        [field:SerializeField] public string IsJumpDescending { get; private set; }
 
         [Header("Parameters")]
         [SerializeField] private bool _isOrientationInverted;
@@ -93,11 +78,7 @@ namespace BlownAway.Character.Animations
             _characterAnimator.SetBool(IsGrounded, manager.MovementManager.IsGrounded);
             _characterAnimator.SetBool(IsJacketInflated, manager.MovementManager.IsJacketInflated);
             _characterAnimator.SetBool(IsPropulsing, manager.States.IsInState(manager.States.PropulsionState));
-        }
-
-        public void PlayAnimation(string animation)
-        {
-            //_characterAnimator.SetTrigger(animation);
+            _characterAnimator.SetBool(IsJumpDescending, manager.States.IsInState(manager.States.JumpState) && manager.MovementManager.CurrentJumpState == States.CharacterJumpState.JumpState.DESCENT);
         }
 
         //private void ChangeCharacterAnimation()

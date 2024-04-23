@@ -12,9 +12,6 @@ namespace BlownAway.Character.States
             manager.MovementManager.LerpGravityTo(manager, manager.Data.FallData.DashData);
             // Dash
             manager.MovementManager.StartDash(manager);
-
-            // Animation
-            manager.AnimationManager.PlayAnimation(manager.AnimationManager.DashAnim);
         }
 
         public override void ExitState(CharacterManager manager)

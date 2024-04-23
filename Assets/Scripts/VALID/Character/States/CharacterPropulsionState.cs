@@ -18,9 +18,6 @@ namespace BlownAway.Character.States
 
             manager.MovementManager.EndGroundPound(manager);
 
-            // Animation
-            manager.AnimationManager.PlayAnimation(manager.AnimationManager.PropulsionAnim);
-
             // VFX
             manager.Feedbacks.PropulsionVFX.Play();
         }

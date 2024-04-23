@@ -23,9 +23,6 @@ namespace BlownAway.Character.States
 
             manager.MovementManager.StartJump(manager);
 
-            // Animation
-            manager.AnimationManager.PlayAnimation(manager.AnimationManager.JumpAnim);
-
             // VFX
             manager.Feedbacks.PlayFeedback(manager.Data.FeedbacksData.JumpFeedback, manager.CharacterCollider.Rigidbody.transform.position, Quaternion.identity, null);
         }

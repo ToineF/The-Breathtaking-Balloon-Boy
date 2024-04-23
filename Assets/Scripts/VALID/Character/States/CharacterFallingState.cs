@@ -23,9 +23,6 @@ namespace BlownAway.Character.States
 
             // Air
             manager.AirManager.AddAirUntilFullIfEmpty(manager, manager.Data.AirData.FallingAirRefillSpeed, manager.Data.AirData.FallingAirRefillDelay);
-
-            // Animation
-            manager.AnimationManager.PlayAnimation(manager.AnimationManager.FallAnim);
         }
 
         public override void ExitState(CharacterManager manager)
