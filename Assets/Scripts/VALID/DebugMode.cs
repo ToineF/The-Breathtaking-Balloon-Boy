@@ -14,7 +14,7 @@ namespace BlownAway.DebugMode
             if (transform.parent == null) DontDestroyOnLoad(this);
         }
 
-//#if UNITY_EDITOR
+#if UNITY_EDITOR
 
         private void Update()
         {
@@ -48,23 +48,23 @@ namespace BlownAway.DebugMode
             {
                 Manager.ChildrenManager.SetChildren(2);
             }
-            //if (Input.GetKeyDown(KeyCode.F8)) // Screenshot
-            //{
-            //    TakeScreenshot();
-            //}
+            if (Input.GetKeyDown(KeyCode.F8)) // Screenshot
+            {
+                TakeScreenshot();
+            }
             if (Input.GetKeyDown(KeyCode.F9)) // God Mode
             {
                 Manager.ChildrenManager.PassInGodMode();
             }
         }
 
-        //private void TakeScreenshot()
-        //{
-        //    ScreenCapture.CaptureScreenshot(Application.dataPath + "/Screenshots/" + DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss") + ".png");
-        //    UnityEditor.AssetDatabase.Refresh();
-        //}
+        private void TakeScreenshot()
+        {
+            ScreenCapture.CaptureScreenshot(Application.dataPath + "/Screenshots/" + DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss") + ".png");
+            UnityEditor.AssetDatabase.Refresh();
+        }
 
-//#endif
+#endif
 
     }
 }
