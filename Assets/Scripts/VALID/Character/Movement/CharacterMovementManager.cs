@@ -210,6 +210,34 @@ namespace BlownAway.Character.Movements
         #endregion
 
         #region Gravity
+        private void CheckGroundAgain(CharacterManager manager)
+        {
+            Vector3 colliderPosition = new Vector3(manager.CharacterCollider.Collider.bounds.center.x, manager.CharacterCollider.Collider.bounds.min.y, manager.CharacterCollider.Collider.bounds.center.z);
+            IsSupposedToBeGrounded = Physics.SphereCastNonAlloc(colliderPosition, manager.Data.GroundDetectionData.GroundDetectionSphereRadius, Vector3.down, SlopesHitResults, manager.Data.GroundDetectionData.SlopesGroundCheckDistance, manager.Data.GroundDetectionData.GroundLayer) > 0;
+
+            if (!IsSupposedToBeGrounded) return;
+            RaycastHit hit = SlopesHitResults[0];
+
+            Vector3 velocity = manager.CharacterCollider.Rigidbody.velocity;
+            Vector3 raycastDirection = Vector3.down;
+            Vector3 otherVelocity = Vector3.zero;
+            Rigidbody hitBody = hit.rigidbody;
+            if (hitBody != null)
+            {
+                otherVelocity = hitBody.velocity;
+            }
+            float raycastDirectionVelocity = Vector3.Dot(raycastDirection, velocity);
+            float otherDirectionVelocity = Vector3.Dot(raycastDirection, otherVelocity);
+
+            float relativeVelocity = raycastDirectionVelocity - otherDirectionVelocity;
+            float x = hit.distance - manager.Data.GroundDetectionData.RideHeight;
+            float springForce = (x * manager.Data.GroundDetectionData.RideSpringStrength) - (relativeVelocity * manager.Data.GroundDetectionData.RideSpringDamper);
+
+            Debug.DrawLine(manager.CharacterVisual.transform.position, manager.CharacterVisual.transform.position + (raycastDirection * springForce), Color.yellow);
+
+            CurrentVelocity += raycastDirection * springForce;
+        }
+
         public void CheckIfGrounded(CharacterManager manager, bool isPropulsing = false, bool changeState = true)
         {
             var lastGrounded = IsGrounded;
@@ -217,10 +245,7 @@ namespace BlownAway.Character.Movements
             CanJumpBuffer = Physics.SphereCastNonAlloc(colliderPosition, manager.Data.GroundDetectionData.GroundDetectionSphereRadius, Vector3.down, JumpBufferHitResults, manager.Data.GroundDetectionData.JumpBufferCheckDistance, manager.Data.GroundDetectionData.GroundLayer) > 0;
             IsGrounded = Physics.SphereCastNonAlloc(colliderPosition, manager.Data.GroundDetectionData.GroundDetectionSphereRadius, Vector3.down, GroundHitResults, manager.Data.GroundDetectionData.GroundCheckDistance, manager.Data.GroundDetectionData.GroundLayer) > 0;
             IsSupposedToBeGrounded = Physics.SphereCastNonAlloc(colliderPosition, manager.Data.GroundDetectionData.GroundDetectionSphereRadius, Vector3.down, SlopesHitResults, manager.Data.GroundDetectionData.SlopesGroundCheckDistance, manager.Data.GroundDetectionData.GroundLayer) > 0;
-            //bool a = Physics.SphereCastNonAlloc(colliderPositionn, manager.Data.GroundDetectionData.GroundDetectionSphereRadius, Vector3.down, GroundHitResults, manager.Data.GroundDetectionData.GroundCheckDistance, manager.Data.GroundDetectionData.GroundLayer) > 0;
-            //Collider[] hitColliders = Physics.OverlapSphere(colliderPosition + Vector3.down * manager.Data.GroundDetectionData.GroundCheckDistance, manager.Data.GroundDetectionData.GroundDetectionSphereRadius, manager.Data.GroundDetectionData.GroundLayer);
-            //IsGrounded = hitColliders.Length > 0;
-            //IsGrounded = Physics.CheckSphere(colliderPosition + Vector3.down * manager.Data.GroundDetectionData.JumpBufferCheckDistance, manager.Data.GroundDetectionData.GroundDetectionSphereRadius, manager.Data.GroundDetectionData.GroundLayer, QueryTriggerInteraction.Ignore);
+
 
 
             //if (IsGrounded)
@@ -748,7 +773,10 @@ namespace BlownAway.Character.Movements
         // REMOVE THIS
         private void OnDrawGizmos()
         {
+            return;
             if (Manager == null) return;
+
+            Vector3 colliderPosition = new Vector3(Manager.CharacterCollider.Collider.bounds.center.x, Manager.CharacterCollider.Collider.bounds.min.y, Manager.CharacterCollider.Collider.bounds.center.z);
 
             Gizmos.color = Color.white;
 
@@ -767,7 +795,6 @@ namespace BlownAway.Character.Movements
             //
             //Physics.SphereCastNonAlloc(manager.CharacterVisual.position, GroundDetectionData.GroundDetectionSphereRadius, Vector3.down, GroundHitResults, GroundDetectionData.GroundCheckDistance, GroundDetectionData.GroundLayer) > 0;
 
-            Vector3 colliderPosition = new Vector3(Manager.CharacterCollider.Collider.bounds.center.x, Manager.CharacterCollider.Collider.bounds.min.y, Manager.CharacterCollider.Collider.bounds.center.z);
 
             GizmoExtensions.DrawSphereCast(colliderPosition, Manager.Data.GroundDetectionData.GroundDetectionSphereRadius, Vector3.down, Manager.Data.GroundDetectionData.GroundCheckDistance);
 

@@ -27,5 +27,12 @@ namespace BlownAway.Character.Movements.Data
         [field: SerializeField] public float LowerRaycastLength { get; private set; } = 0.1f;
         [field: SerializeField] public float UpperRaycastLength { get; private set; } = 0.2f;
 
+        [field: Header("Ground Again")]
+        [field: SerializeField] public float RideHeight { get; private set; }
+        [field: SerializeField] public float RideSpringStrength { get; private set; }
+        [field: SerializeField] public float RideSpringDamper { get; private set; }
+
+
+
     }
 }

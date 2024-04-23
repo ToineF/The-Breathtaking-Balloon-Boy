@@ -31,6 +31,8 @@ namespace BlownAway.Character.States
 
             // VFX
             manager.Feedbacks.PropulsionVFX.Stop();
+            Debug.Log("END PROPULSION");
+
         }
 
         public override void UpdateState(CharacterManager manager)
