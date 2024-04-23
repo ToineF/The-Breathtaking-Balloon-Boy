@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 2777989842482151487}
   - component: {fileID: 8467914560526566642}
   - component: {fileID: 830137769782442064}
-  - component: {fileID: 7751994323535074457}
+  - component: {fileID: 451245800920778851}
   m_Layer: 7
   m_Name: Plane(Clone)
   m_TagString: Untagged
@@ -116,8 +116,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &7751994323535074457
-MeshCollider:
+--- !u!65 &451245800920778851
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -134,7 +134,6 @@ MeshCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -462981019419857548, guid: 4b858effd364874479ce223e85db095a, type: 3}
+  serializedVersion: 3
+  m_Size: {x: 0.02, y: 0.02, z: 0.0032703686}
+  m_Center: {x: 0, y: 0, z: 0.0068103997}
