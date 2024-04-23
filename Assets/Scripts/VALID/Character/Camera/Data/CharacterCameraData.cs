@@ -27,6 +27,7 @@ namespace BlownAway.Camera.Data
         [field:SerializeField, Tooltip("The time the camera needs to center itself")] public float CameraCenterLerpTime { get; private set; }
         [field:SerializeField, Tooltip("The time the camera needs to center itself in top down")] public float CameraTopDownStartLerpTime { get; private set; }
         [field:SerializeField, Tooltip("The time the camera needs to center itself")] public float CameraTopDownEndLerpTime { get; private set; }
+        [field:SerializeField, Tooltip("Do you need to hold the top down button")] public bool IsCameraTopDownHold { get; private set; }
         
         [field:Header("Scroll")]
         [field:SerializeField, Tooltip("Is the player able to scroll (useful for debug)")] public bool CanScroll { get; private set; } = false;

@@ -180,6 +180,14 @@ namespace BlownAway.Camera
 
         private void CheckForCameraTopDown(CharacterManager manager)
         {
+            if (manager.Data.CameraData.IsCameraTopDownHold)
+                CameraTopDownHold(manager);
+            else
+                CameraTopDownToggle(manager);
+        }
+
+        private void CameraTopDownHold(CharacterManager manager)
+        {
             if (manager.Inputs.CameraTopDownPressed)
             {
                 _cameraIsTopDown = true;
@@ -189,6 +197,23 @@ namespace BlownAway.Camera
             else if (manager.Inputs.CameraTopDownReleased)
             {
                 _cameraIsTopDown = false;
+                CenterCamera(manager, _lastRotation, manager.Data.CameraData.CameraTopDownEndLerpTime);
+            }
+        }
+
+        private void CameraTopDownToggle(CharacterManager manager)
+        {
+            if (!manager.Inputs.CameraTopDownPressed) return;
+
+            _cameraIsTopDown = !_cameraIsTopDown;
+
+            if (_cameraIsTopDown)
+            {
+                if (_canMoveCamera) _lastRotation = Camera.transform.eulerAngles;
+                CenterCamera(manager, new Vector3(TopDownPoint.eulerAngles.x, Camera.transform.eulerAngles.y, 0), manager.Data.CameraData.CameraTopDownStartLerpTime);
+            }
+            else
+            {
                 CenterCamera(manager, _lastRotation, manager.Data.CameraData.CameraTopDownEndLerpTime);
             }
         }
