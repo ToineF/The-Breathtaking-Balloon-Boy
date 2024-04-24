@@ -39,9 +39,9 @@ namespace BlownAway.Character.States
                 return;
             }
 
-            manager.MovementManager.CheckForJumpStart(manager);
-
             manager.MovementManager.CheckIfGrounded(manager);
+
+            manager.MovementManager.CheckForJumpStart(manager);
 
             //manager.MovementManager.CheckForDashStart(manager, true);
 

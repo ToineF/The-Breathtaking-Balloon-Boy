@@ -269,8 +269,11 @@ namespace BlownAway.Character.Movements
                 }
                 else
                 {
-                    Debug.LogWarning(IsSupposedToBeGrounded);
-                    IsGrounded = IsSupposedToBeGrounded;
+                    //if (!manager.States.IsInState(manager.States.JumpState))
+                    //{
+                        Debug.LogWarning(IsSupposedToBeGrounded);
+                        IsGrounded = IsSupposedToBeGrounded;
+                    //}
                 }
             }
 
@@ -333,10 +336,12 @@ namespace BlownAway.Character.Movements
             if (LastGround.collider == null) return;
 
 
-            float dir = manager.Data.GroundDetectionData.SlopesGroundCheckDistance - LastGround.distance;
+            float dir = manager.Data.GroundDetectionData.RideSpringDamper - LastGround.distance;
+            if (dir < 0.01f) dir = 0;
             Vector3 springForce = Vector3.up * dir * manager.Data.GroundDetectionData.RideSpringStrength;
+            //Debug.LogWarning(dir);
 
-            CurrentVelocity = new Vector3(CurrentVelocity.x, dir, CurrentVelocity.z);
+            CurrentVelocity += springForce;
         }
 
         public void ResetGravity(CharacterManager manager)
