@@ -31,7 +31,7 @@ Transform:
   - {fileID: 6055474416519115213}
   - {fileID: 1963462557662602533}
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4008445897779270353
 GameObject:
@@ -45,6 +45,7 @@ GameObject:
   - component: {fileID: 7313107301775416357}
   - component: {fileID: 9013620116639167331}
   - component: {fileID: 4506479847211192816}
+  - component: {fileID: 8764906213340414497}
   m_Layer: 7
   m_Name: Collider
   m_TagString: Untagged
@@ -138,6 +139,18 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8764906213340414497
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4008445897779270353}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3b1065cdd081034eaf2152f3049b7d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4082006638481567680
 GameObject:
   m_ObjectHideFlags: 0
@@ -193,6 +206,10 @@ MonoBehaviour:
   _ease: 11
   _moveOnStart: 0
   _loopPositions: 0
+  _playOnePosition: 0
+  _canBeReactivated: 0
+  _timeBetweenPlayerCollisions: 0
+  _waitTimeBetweenPositions: 0
 --- !u!1 &6878195661094231501
 GameObject:
   m_ObjectHideFlags: 0

@@ -288,7 +288,7 @@ namespace BlownAway.Character.Movements
         {
             OnGroundEnter?.Invoke(manager);
             if (switchState) manager.States.SwitchState(manager.States.IdleState);
-            manager.CharacterCollider.Rigidbody.transform.SetParent(LastGround.collider.transform);
+            if (LastGround.collider.GetComponent<ParentableCollider>()) manager.CharacterCollider.Rigidbody.transform.SetParent(LastGround.collider.transform);
 
             // VFX
             Instantiate(manager.Data.FeedbacksData.LandVFX, manager.CharacterCollider.Rigidbody.transform.position, manager.Data.FeedbacksData.LandVFX.transform.rotation);
