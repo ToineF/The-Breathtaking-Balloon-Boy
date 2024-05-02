@@ -148,6 +148,14 @@ namespace BlownAway.Character.Movements
             CurrentVelocity = Vector3.zero;
         }
 
+        public void TeleportPlayer(CharacterManager manager, Vector3 targetPos)
+        {
+            //CurrentVelocity = new Vector3(CurrentVelocity.x, 0, CurrentVelocity.z);
+            manager.CharacterCollider.Rigidbody.position = targetPos;
+            CurrentVelocity = Vector3.zero;
+
+        }
+
         public void UpdateExternalForces()
         {
             Vector3 externalForces = GetExternalForces();
@@ -265,6 +273,8 @@ namespace BlownAway.Character.Movements
                         }
                         OnGroundExit?.Invoke(manager);
                         manager.CharacterCollider.Rigidbody.transform.SetParent(parent);
+                        Debug.LogWarning("Exit ground");
+
                     }
                 }
                 else
@@ -273,6 +283,7 @@ namespace BlownAway.Character.Movements
                     //{
                         Debug.LogWarning(IsSupposedToBeGrounded);
                         IsGrounded = IsSupposedToBeGrounded;
+                        LastGround = GroundHitResults[0];
                     //}
                 }
             }
@@ -286,6 +297,8 @@ namespace BlownAway.Character.Movements
 
         private void EnterGround(CharacterManager manager, Vector3 colliderPosition, bool switchState = true)
         {
+            Debug.LogWarning("Enter ground");
+
             OnGroundEnter?.Invoke(manager);
             if (switchState) manager.States.SwitchState(manager.States.IdleState);
             if (LastGround.collider.GetComponent<ParentableCollider>()) manager.CharacterCollider.Rigidbody.transform.SetParent(LastGround.collider.transform);
@@ -334,14 +347,21 @@ namespace BlownAway.Character.Movements
         public void UpdateStickToGround(CharacterManager manager)
         {
             if (LastGround.collider == null) return;
-
+            if (LastGround.distance < 0.001f) return;
 
             float dir = manager.Data.GroundDetectionData.RideSpringDamper - LastGround.distance;
             if (dir < 0.01f) dir = 0;
             Vector3 springForce = Vector3.up * dir * manager.Data.GroundDetectionData.RideSpringStrength;
+            float newDir = manager.Data.GroundDetectionData.RideSpringStrength;
             //Debug.LogWarning(dir);
 
-            CurrentVelocity += springForce;
+            //CurrentVelocity += springForce;
+            Vector3 rigidbodyPosition = manager.CharacterCollider.Rigidbody.transform.position;
+            Vector3 targetPos = new Vector3(rigidbodyPosition.x, LastGround.point.y + newDir, rigidbodyPosition.z);
+            Debug.LogWarning(LastGround.collider.name + ": " + targetPos);
+
+            manager.States.StickToGround = true;
+            manager.States.Position = targetPos;
         }
 
         public void ResetGravity(CharacterManager manager)

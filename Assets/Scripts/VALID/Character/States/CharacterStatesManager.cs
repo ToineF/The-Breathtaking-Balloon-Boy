@@ -5,6 +5,9 @@ namespace BlownAway.Character.States
 
     public class CharacterStatesManager : CharacterSubComponent
     {
+        public Vector3 Position { get; set; }
+        public bool StickToGround { get; set; }
+
         // States Bank
         public CharacterIdleState IdleState = new CharacterIdleState();
         public CharacterWalkingState WalkingState = new CharacterWalkingState();
@@ -39,6 +42,13 @@ namespace BlownAway.Character.States
             _currentState.FixedUpdateState(Manager);
 
             Manager.MovementManager.ApplyVelocity(Manager);
+            if (StickToGround)
+            {
+                Manager.MovementManager.TeleportPlayer(Manager, Position);
+                StickToGround = false;
+            }
+
+
         }
 
         private void LateUpdate()
