@@ -67,13 +67,13 @@ namespace BlownAway.Character.Movements
 
 
         // Ground Detection
-        [Tooltip("The raycast hits stocked while looking for ground")] public RaycastHit[] GroundHitResults { get; private set; }
-        public bool IsGrounded { get; private set; }
+        [Tooltip("The raycast hits stocked while looking for ground")] public RaycastHit[] MaxGroundHitResults { get; private set; }
+        public bool IsMinGrounded { get; private set; }
         public RaycastHit LastGround { get; private set; }
 
         // Slopes
-        [Tooltip("The raycast hits stocked while looking for slopes")] public RaycastHit[] SlopesHitResults { get; private set; }
-        public bool IsSupposedToBeGrounded { get; private set; }
+        [Tooltip("The raycast hits stocked while looking for slopes")] public RaycastHit[] MinGroundHitResults { get; private set; }
+        public bool IsMaxGrounded { get; private set; }
 
 
 
@@ -100,8 +100,8 @@ namespace BlownAway.Character.Movements
         protected override void StartScript(CharacterManager manager)
         {
             parent = manager.CharacterCollider.Rigidbody.transform.parent;
-            GroundHitResults = new RaycastHit[2];
-            SlopesHitResults = new RaycastHit[2];
+            MaxGroundHitResults = new RaycastHit[2];
+            MinGroundHitResults = new RaycastHit[2];
             JumpBufferHitResults = new RaycastHit[2];
             GroundPoundHitResults = new RaycastHit[2];
             SetGravityTo(manager, manager.Data.FallData.BaseData.BaseGravity, manager.Data.FallData.BaseData.MinGravity, manager.Data.FallData.BaseData.MaxGravity, manager.Data.FallData.BaseData.GravityIncreaseByFrame, manager.Data.FallData.BaseData.GravityIncreaseDecelerationByFrame);
@@ -148,6 +148,11 @@ namespace BlownAway.Character.Movements
             CurrentVelocity = Vector3.zero;
         }
 
+        public void TeleportPlayer(CharacterManager manager, Vector3 targetPos)
+        {
+            manager.CharacterCollider.Rigidbody.position = targetPos;
+        }
+
         public void UpdateExternalForces()
         {
             Vector3 externalForces = GetExternalForces();
@@ -172,7 +177,7 @@ namespace BlownAway.Character.Movements
             //Debug.LogWarning(deplacementDirection);
 
 
-            if (IsGrounded) deplacementDirection = GetSlopeMoveDirection(deplacementDirection);
+            if (IsMinGrounded) deplacementDirection = GetSlopeMoveDirection(deplacementDirection);
             //Debug.LogWarning(deplacementDirection);
 
             _currentDeplacementDirection = Vector3.Lerp(_currentDeplacementDirection, deplacementDirection, _currentDeplacemenTurnSpeed);
@@ -210,66 +215,53 @@ namespace BlownAway.Character.Movements
         #endregion
 
         #region Gravity
-        private void CheckGroundAgain(CharacterManager manager)
-        {
-            Vector3 colliderPosition = new Vector3(manager.CharacterCollider.Collider.bounds.center.x, manager.CharacterCollider.Collider.bounds.min.y, manager.CharacterCollider.Collider.bounds.center.z);
-            IsSupposedToBeGrounded = Physics.SphereCastNonAlloc(colliderPosition, manager.Data.GroundDetectionData.GroundDetectionSphereRadius, Vector3.down, SlopesHitResults, manager.Data.GroundDetectionData.SlopesGroundCheckDistance, manager.Data.GroundDetectionData.GroundLayer) > 0;
-
-            if (!IsSupposedToBeGrounded) return;
-            RaycastHit hit = SlopesHitResults[0];
-
-            Vector3 velocity = manager.CharacterCollider.Rigidbody.velocity;
-            Vector3 raycastDirection = Vector3.down;
-            Vector3 otherVelocity = Vector3.zero;
-            Rigidbody hitBody = hit.rigidbody;
-            if (hitBody != null)
-            {
-                otherVelocity = hitBody.velocity;
-            }
-            float raycastDirectionVelocity = Vector3.Dot(raycastDirection, velocity);
-            float otherDirectionVelocity = Vector3.Dot(raycastDirection, otherVelocity);
-
-            float relativeVelocity = raycastDirectionVelocity - otherDirectionVelocity;
-            float x = hit.distance - manager.Data.GroundDetectionData.RideHeight;
-            float springForce = (x * manager.Data.GroundDetectionData.RideSpringStrength) - (relativeVelocity * manager.Data.GroundDetectionData.RideSpringDamper);
-
-            Debug.DrawLine(manager.CharacterVisual.transform.position, manager.CharacterVisual.transform.position + (raycastDirection * springForce), Color.yellow);
-
-            CurrentVelocity += raycastDirection * springForce;
-        }
 
         public void CheckIfGrounded(CharacterManager manager, bool isPropulsing = false, bool changeState = true)
         {
-            var lastGrounded = IsGrounded;
+            var lastGrounded = IsMinGrounded;
             Vector3 colliderPosition = new Vector3(manager.CharacterCollider.Collider.bounds.center.x, manager.CharacterCollider.Collider.bounds.min.y, manager.CharacterCollider.Collider.bounds.center.z);
+            
             CanJumpBuffer = Physics.SphereCastNonAlloc(colliderPosition, manager.Data.GroundDetectionData.GroundDetectionSphereRadius, Vector3.down, JumpBufferHitResults, manager.Data.GroundDetectionData.JumpBufferCheckDistance, manager.Data.GroundDetectionData.GroundLayer) > 0;
-            IsGrounded = Physics.SphereCastNonAlloc(colliderPosition, manager.Data.GroundDetectionData.GroundDetectionSphereRadius, Vector3.down, GroundHitResults, manager.Data.GroundDetectionData.GroundCheckDistance, manager.Data.GroundDetectionData.GroundLayer) > 0;
-            IsSupposedToBeGrounded = Physics.SphereCastNonAlloc(colliderPosition, manager.Data.GroundDetectionData.GroundDetectionSphereRadius, Vector3.down, SlopesHitResults, manager.Data.GroundDetectionData.SlopesGroundCheckDistance, manager.Data.GroundDetectionData.GroundLayer) > 0;
-
-
+            
+            IsMinGrounded = Physics.SphereCastNonAlloc(colliderPosition, manager.Data.GroundDetectionData.GroundDetectionSphereRadius, Vector3.down, MinGroundHitResults, manager.Data.GroundDetectionData.MinGroundCheckDistance, manager.Data.GroundDetectionData.GroundLayer) > 0;
+            IsMaxGrounded = Physics.SphereCastNonAlloc(colliderPosition, manager.Data.GroundDetectionData.GroundDetectionSphereRadius, Vector3.down, MaxGroundHitResults, manager.Data.GroundDetectionData.MaxGroundCheckDistance, manager.Data.GroundDetectionData.GroundLayer) > 0;
 
             //if (IsGrounded)
-            LastGround = SlopesHitResults[0];
+            LastGround = MinGroundHitResults[0];
 
-            if (lastGrounded != IsGrounded)
+            if (lastGrounded != IsMinGrounded)
             {
-                if (IsGrounded) // On Ground Enter
+                if (IsMinGrounded == IsMaxGrounded)
                 {
-                    EnterGround(manager, colliderPosition, changeState);
-                }
-                else // On Ground Leave
-                {
-                    if (!isPropulsing && changeState)
+                    if (IsMinGrounded) // On Ground Enter
                     {
-                        manager.States.SwitchState(manager.States.FallingState); // IDLE, WALK & FALL
+                        EnterGround(manager, colliderPosition, changeState);
                     }
-                    OnGroundExit?.Invoke(manager);
-                    manager.CharacterCollider.Rigidbody.transform.SetParent(parent);
+                    else // On Ground Leave
+                    {
+                        if (!isPropulsing && changeState)
+                        {
+                            manager.States.SwitchState(manager.States.FallingState); // IDLE, WALK & FALL
+                        }
+                        OnGroundExit?.Invoke(manager);
+                        manager.CharacterCollider.Rigidbody.transform.SetParent(parent);
+                        Debug.LogWarning("Exit ground");
+
+                    }
+                }
+                else
+                {
+                    //if (!manager.States.IsInState(manager.States.JumpState))
+                    //{
+                        Debug.LogWarning(IsMaxGrounded);
+                        IsMinGrounded = IsMaxGrounded;
+                        LastGround = MaxGroundHitResults[0];
+                    //}
                 }
             }
 
             // Others checks to be sure
-            if (IsGrounded && manager.States.IsInState(manager.States.FallingState))
+            if (IsMinGrounded && manager.States.IsInState(manager.States.FallingState))
             {
                 EnterGround(manager, colliderPosition, changeState);
             }
@@ -277,9 +269,11 @@ namespace BlownAway.Character.Movements
 
         private void EnterGround(CharacterManager manager, Vector3 colliderPosition, bool switchState = true)
         {
+            Debug.LogWarning("Enter ground");
+
             OnGroundEnter?.Invoke(manager);
             if (switchState) manager.States.SwitchState(manager.States.IdleState);
-            manager.CharacterCollider.Rigidbody.transform.SetParent(LastGround.collider.transform);
+            if (LastGround.collider.GetComponent<ParentableCollider>()) manager.CharacterCollider.Rigidbody.transform.SetParent(LastGround.collider.transform);
 
             // VFX
             Instantiate(manager.Data.FeedbacksData.LandVFX, manager.CharacterCollider.Rigidbody.transform.position, manager.Data.FeedbacksData.LandVFX.transform.rotation);
@@ -320,6 +314,20 @@ namespace BlownAway.Character.Movements
             //if (!(OnSlope() && IsGrounded))
             manager.MovementManager.CurrentVelocity += gravity;
             //CharacterManager.Instance.Force = Vector3.Lerp(CharacterManager.Instance.Force, CharacterManager.Instance.CurrentGravity, _lerpValue);
+        }
+
+        public void UpdateStickToGround(CharacterManager manager)
+        {
+            if (LastGround.collider == null) return;
+            if (LastGround.distance < 0.001f) return;
+
+            //CurrentVelocity += springForce;
+            Vector3 rigidbodyPosition = manager.CharacterCollider.Rigidbody.transform.position;
+            Vector3 targetPos = new Vector3(rigidbodyPosition.x, LastGround.point.y + manager.Data.GroundDetectionData.TargetDistanceFromGround, rigidbodyPosition.z);
+            Debug.LogWarning(LastGround.collider.name + ": " + targetPos);
+
+            TeleportPlayer(manager, targetPos);
+
         }
 
         public void ResetGravity(CharacterManager manager)
@@ -628,7 +636,7 @@ namespace BlownAway.Character.Movements
             _dashTimer -= Time.deltaTime;
             if (_dashTimer <= 0)
             {
-                if (IsGrounded)
+                if (IsMinGrounded)
                 {
                     manager.States.SwitchState(manager.States.IdleState);
                 }
@@ -672,7 +680,7 @@ namespace BlownAway.Character.Movements
 
         private void UpdateSlopes(CharacterManager manager)
         {
-            if (!IsGrounded) return;
+            if (!IsMinGrounded) return;
 
             var height = manager.CharacterCollider.Collider.bounds.center.y;
             var radius = manager.CharacterCollider.Collider.bounds.extents.magnitude;
@@ -697,91 +705,93 @@ namespace BlownAway.Character.Movements
             Debug.DrawLine(manager.CharacterCollider.Rigidbody.position, manager.CharacterCollider.Rigidbody.position + GetSlopeMoveDirection(_currentDeplacementDirection), Color.black, 3f);
         }
 
-        private bool OnSlope()
-        {
-            if (SlopesHitResults[0].collider == null) return false;
+        //private bool OnSlope()
+        //{
+        //    if (MinGroundHitResults[0].collider == null) return false;
 
-            float angle = Vector3.Angle(Vector3.up, SlopesHitResults[0].normal);
-            //Debug.LogWarning(angle);
-            return angle < Manager.Data.GroundDetectionData.MaxSlopeAngle && angle != 0;
+        //    float angle = Vector3.Angle(Vector3.up, MinGroundHitResults[0].normal);
+        //    //Debug.LogWarning(angle);
+        //    return angle < Manager.Data.GroundDetectionData.MaxSlopeAngle && angle != 0;
 
-        }
+        //}
 
         private Vector3 GetSlopeMoveDirection(Vector3 deplacementDirection)
         {
-            return Vector3.ProjectOnPlane(deplacementDirection, SlopesHitResults[0].normal).normalized;
+            return Vector3.ProjectOnPlane(deplacementDirection, MinGroundHitResults[0].normal).normalized;
         }
 
-        private Vector3 ColliderAndSlide(CharacterManager manager, Vector3 vel, Vector3 pos, int depth, bool gravityPass, Vector3 velInit)
-        {
-            if (depth >= manager.Data.GroundDetectionData.MaxBounces)
-            {
-                return Vector3.zero;
-            }
+        //private Vector3 ColliderAndSlide(CharacterManager manager, Vector3 vel, Vector3 pos, int depth, bool gravityPass, Vector3 velInit)
+        //{
+        //    if (depth >= manager.Data.GroundDetectionData.MaxBounces)
+        //    {
+        //        return Vector3.zero;
+        //    }
 
-            float dist = vel.magnitude + manager.Data.GroundDetectionData.CharacterColliderCheckOffset;
+        //    float dist = vel.magnitude + manager.Data.GroundDetectionData.CharacterColliderCheckOffset;
 
-            RaycastHit hit;
-            if (Physics.SphereCast(pos, manager.CharacterCollider.Collider.bounds.extents.x, vel.normalized, out hit, dist, manager.Data.GroundDetectionData.GroundLayer))
-            {
-                Vector3 snapToSurface = vel.normalized * (hit.distance - manager.Data.GroundDetectionData.CharacterColliderCheckOffset);
-                Vector3 leftOver = vel - snapToSurface;
-                float angle = Vector3.Angle(Vector3.up, hit.normal);
+        //    RaycastHit hit;
+        //    if (Physics.SphereCast(pos, manager.CharacterCollider.Collider.bounds.extents.x, vel.normalized, out hit, dist, manager.Data.GroundDetectionData.GroundLayer))
+        //    {
+        //        Vector3 snapToSurface = vel.normalized * (hit.distance - manager.Data.GroundDetectionData.CharacterColliderCheckOffset);
+        //        Vector3 leftOver = vel - snapToSurface;
+        //        float angle = Vector3.Angle(Vector3.up, hit.normal);
 
-                if (snapToSurface.magnitude <= manager.Data.GroundDetectionData.CharacterColliderCheckOffset)
-                {
-                    snapToSurface = Vector3.zero;
-                }
+        //        if (snapToSurface.magnitude <= manager.Data.GroundDetectionData.CharacterColliderCheckOffset)
+        //        {
+        //            snapToSurface = Vector3.zero;
+        //        }
 
-                // Walkable Ground / Slopes
-                if (angle <= manager.Data.GroundDetectionData.MaxSlopeAngle)
-                {
-                    if (gravityPass)
-                    {
-                        return snapToSurface;
-                    }
-                    leftOver = VectorExtensions.ProjectAndScale(leftOver, hit.normal);
-                }
-                else // Unwalkable Slopes / Wall
-                {
-                    float scale = 1 -
-                        Vector3.Dot(new Vector3(hit.normal.x, 0, hit.normal.z).normalized,
-                        -new Vector3(velInit.x, 0, velInit.z).normalized);
-                    if (IsGrounded && !gravityPass)
-                    {
-                        leftOver = VectorExtensions.ProjectAndScale(
-                            new Vector3(leftOver.x, 0, leftOver.z),
-                            new Vector3(hit.normal.x, 0, hit.normal.z));
-                        leftOver *= scale;
-                    }
-                    else
-                    {
-                        leftOver = VectorExtensions.ProjectAndScale(leftOver, hit.normal) * scale;
-                    }
-                }
+        //        // Walkable Ground / Slopes
+        //        if (angle <= manager.Data.GroundDetectionData.MaxSlopeAngle)
+        //        {
+        //            if (gravityPass)
+        //            {
+        //                return snapToSurface;
+        //            }
+        //            leftOver = VectorExtensions.ProjectAndScale(leftOver, hit.normal);
+        //        }
+        //        else // Unwalkable Slopes / Wall
+        //        {
+        //            float scale = 1 -
+        //                Vector3.Dot(new Vector3(hit.normal.x, 0, hit.normal.z).normalized,
+        //                -new Vector3(velInit.x, 0, velInit.z).normalized);
+        //            if (IsGrounded && !gravityPass)
+        //            {
+        //                leftOver = VectorExtensions.ProjectAndScale(
+        //                    new Vector3(leftOver.x, 0, leftOver.z),
+        //                    new Vector3(hit.normal.x, 0, hit.normal.z));
+        //                leftOver *= scale;
+        //            }
+        //            else
+        //            {
+        //                leftOver = VectorExtensions.ProjectAndScale(leftOver, hit.normal) * scale;
+        //            }
+        //        }
 
-                return snapToSurface + ColliderAndSlide(manager, leftOver, pos + snapToSurface, ++depth, gravityPass, velInit);
-            }
+        //        return snapToSurface + ColliderAndSlide(manager, leftOver, pos + snapToSurface, ++depth, gravityPass, velInit);
+        //    }
 
-            return vel;
-        }
+        //    return vel;
+        //}
 
 
         // REMOVE THIS
         private void OnDrawGizmos()
         {
-            return;
+
             if (Manager == null) return;
 
             Vector3 colliderPosition = new Vector3(Manager.CharacterCollider.Collider.bounds.center.x, Manager.CharacterCollider.Collider.bounds.min.y, Manager.CharacterCollider.Collider.bounds.center.z);
+            GizmoExtensions.DrawSphereCast(colliderPosition, Manager.Data.GroundDetectionData.GroundDetectionSphereRadius, Vector3.down, Manager.Data.GroundDetectionData.MinGroundCheckDistance, IsMinGrounded ? Color.red : Color.white);
+            return;
 
             Gizmos.color = Color.white;
 
-            if (OnSlope())
-            {
-                Gizmos.color = Color.red;
-                //Debug.Log(LastGround.normal);
-            }
+            //if (OnSlope())
+            //{
+            //    Gizmos.color = Color.red;
+            //    //Debug.Log(LastGround.normal);
+            //}
 
             Vector3 direction = GetSlopeMoveDirection(_currentDeplacementDirection);
             Vector3 position = Manager.CharacterCollider.Rigidbody.position;
@@ -793,33 +803,33 @@ namespace BlownAway.Character.Movements
             //Physics.SphereCastNonAlloc(manager.CharacterVisual.position, GroundDetectionData.GroundDetectionSphereRadius, Vector3.down, GroundHitResults, GroundDetectionData.GroundCheckDistance, GroundDetectionData.GroundLayer) > 0;
 
 
-            GizmoExtensions.DrawSphereCast(colliderPosition, Manager.Data.GroundDetectionData.GroundDetectionSphereRadius, Vector3.down, Manager.Data.GroundDetectionData.GroundCheckDistance);
+            GizmoExtensions.DrawSphereCast(colliderPosition, Manager.Data.GroundDetectionData.GroundDetectionSphereRadius, Vector3.down, Manager.Data.GroundDetectionData.MinGroundCheckDistance);
 
             Gizmos.color = Color.blue;
 
             // Stairs
-            Debug.DrawRay(Manager.CharacterCollider.LowerStepRaycast.transform.position, Quaternion.AngleAxis(0, Vector3.up) * Manager.CharacterVisual.transform.forward * Manager.Data.GroundDetectionData.LowerRaycastLength, Color.blue, 0.3f);
-            Debug.DrawRay(Manager.CharacterCollider.LowerStepRaycast.transform.position, Quaternion.AngleAxis(45, Vector3.up) * Manager.CharacterVisual.transform.forward * Manager.Data.GroundDetectionData.LowerRaycastLength, Color.blue, 0.3f);
-            Debug.DrawRay(Manager.CharacterCollider.LowerStepRaycast.transform.position, Quaternion.AngleAxis(-45, Vector3.up) * Manager.CharacterVisual.transform.forward * Manager.Data.GroundDetectionData.LowerRaycastLength, Color.blue, 0.3f);
-            Debug.DrawRay(Manager.CharacterCollider.UpperStepRaycast.transform.position, Quaternion.AngleAxis(0, Vector3.up) * Manager.CharacterVisual.transform.forward * Manager.Data.GroundDetectionData.UpperRaycastLength, Color.blue, 0.3f);
-            Debug.DrawRay(Manager.CharacterCollider.UpperStepRaycast.transform.position, Quaternion.AngleAxis(45, Vector3.up) * Manager.CharacterVisual.transform.forward * Manager.Data.GroundDetectionData.UpperRaycastLength, Color.blue, 0.3f);
-            Debug.DrawRay(Manager.CharacterCollider.UpperStepRaycast.transform.position, Quaternion.AngleAxis(-45, Vector3.up) * Manager.CharacterVisual.transform.forward * Manager.Data.GroundDetectionData.UpperRaycastLength, Color.blue, 0.3f);
+            //Debug.DrawRay(Manager.CharacterCollider.LowerStepRaycast.transform.position, Quaternion.AngleAxis(0, Vector3.up) * Manager.CharacterVisual.transform.forward * Manager.Data.GroundDetectionData.LowerRaycastLength, Color.blue, 0.3f);
+            //Debug.DrawRay(Manager.CharacterCollider.LowerStepRaycast.transform.position, Quaternion.AngleAxis(45, Vector3.up) * Manager.CharacterVisual.transform.forward * Manager.Data.GroundDetectionData.LowerRaycastLength, Color.blue, 0.3f);
+            //Debug.DrawRay(Manager.CharacterCollider.LowerStepRaycast.transform.position, Quaternion.AngleAxis(-45, Vector3.up) * Manager.CharacterVisual.transform.forward * Manager.Data.GroundDetectionData.LowerRaycastLength, Color.blue, 0.3f);
+            //Debug.DrawRay(Manager.CharacterCollider.UpperStepRaycast.transform.position, Quaternion.AngleAxis(0, Vector3.up) * Manager.CharacterVisual.transform.forward * Manager.Data.GroundDetectionData.UpperRaycastLength, Color.blue, 0.3f);
+            //Debug.DrawRay(Manager.CharacterCollider.UpperStepRaycast.transform.position, Quaternion.AngleAxis(45, Vector3.up) * Manager.CharacterVisual.transform.forward * Manager.Data.GroundDetectionData.UpperRaycastLength, Color.blue, 0.3f);
+            //Debug.DrawRay(Manager.CharacterCollider.UpperStepRaycast.transform.position, Quaternion.AngleAxis(-45, Vector3.up) * Manager.CharacterVisual.transform.forward * Manager.Data.GroundDetectionData.UpperRaycastLength, Color.blue, 0.3f);
         }
 
-        public void CheckForStepClimb(CharacterManager manager)
-        {
-            for (int i = -45; i <= 45; i += 45)
-            {
-                if (Physics.Raycast(manager.CharacterCollider.LowerStepRaycast.transform.position, Quaternion.AngleAxis(0, Vector3.up) * Manager.CharacterVisual.transform.forward, out RaycastHit lowerHit, manager.Data.GroundDetectionData.LowerRaycastLength, manager.Data.GroundDetectionData.GroundLayer))
-                {
-                    if (!Physics.Raycast(manager.CharacterCollider.UpperStepRaycast.transform.position, Quaternion.AngleAxis(0, Vector3.up) * Manager.CharacterVisual.transform.forward, manager.Data.GroundDetectionData.UpperRaycastLength, manager.Data.GroundDetectionData.GroundLayer))
-                    {
-                        CurrentVelocity += Vector3.up * manager.Data.GroundDetectionData.StepSmooth * Time.deltaTime;
-                        break;
-                    }
-                }
-            }
-        }
+        //public void CheckForStepClimb(CharacterManager manager)
+        //{
+        //    for (int i = -45; i <= 45; i += 45)
+        //    {
+        //        if (Physics.Raycast(manager.CharacterCollider.LowerStepRaycast.transform.position, Quaternion.AngleAxis(0, Vector3.up) * Manager.CharacterVisual.transform.forward, out RaycastHit lowerHit, manager.Data.GroundDetectionData.LowerRaycastLength, manager.Data.GroundDetectionData.GroundLayer))
+        //        {
+        //            if (!Physics.Raycast(manager.CharacterCollider.UpperStepRaycast.transform.position, Quaternion.AngleAxis(0, Vector3.up) * Manager.CharacterVisual.transform.forward, manager.Data.GroundDetectionData.UpperRaycastLength, manager.Data.GroundDetectionData.GroundLayer))
+        //            {
+        //                CurrentVelocity += Vector3.up * manager.Data.GroundDetectionData.StepSmooth * Time.deltaTime;
+        //                break;
+        //            }
+        //        }
+        //    }
+        //}
         #endregion
 
         #region External Force

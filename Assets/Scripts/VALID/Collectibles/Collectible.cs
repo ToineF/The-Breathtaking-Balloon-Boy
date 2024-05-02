@@ -17,6 +17,7 @@ namespace BlownAway.Collectibles
         private void PickUp()
         {
             if (!_lastOtherCollider.TryGetComponent(out CharacterCollider collider)) return;
+            if (_owner != null) return; // Ensure the collectible is taken only once
 
             _owner = collider;
 

@@ -104,7 +104,7 @@ namespace BlownAway.GPE
 
             //manager.Inputs.ResetLastPropulsionInputDirection();
 
-            if (!manager.MovementManager.IsGrounded)
+            if (!manager.MovementManager.IsMinGrounded)
                 manager.States.SwitchState(manager.States.FloatingState);
             else
                 manager.States.SwitchState(manager.States.IdleState);

@@ -75,7 +75,7 @@ namespace BlownAway.Character.Animations
             _characterAnimator.SetFloat(DeriveAmount, manager.MovementManager.NormalizedDeriveAirAmount);
             _characterAnimator.SetBool(IsDashing, manager.States.IsInState(manager.States.DashState));
             _characterAnimator.SetBool(IsGroundPounding, manager.States.IsInState(manager.States.GroundPoundState));
-            _characterAnimator.SetBool(IsGrounded, manager.MovementManager.IsGrounded);
+            _characterAnimator.SetBool(IsGrounded, manager.MovementManager.IsMinGrounded);
             _characterAnimator.SetBool(IsJacketInflated, manager.MovementManager.IsJacketInflated);
             _characterAnimator.SetBool(IsPropulsing, manager.States.IsInState(manager.States.PropulsionState));
             _characterAnimator.SetBool(IsJumpDescending, manager.States.IsInState(manager.States.JumpState) && manager.MovementManager.CurrentJumpState == States.CharacterJumpState.JumpState.DESCENT);

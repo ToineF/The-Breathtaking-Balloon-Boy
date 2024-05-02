@@ -5,6 +5,7 @@ namespace BlownAway.Character.States
 
     public class CharacterStatesManager : CharacterSubComponent
     {
+
         // States Bank
         public CharacterIdleState IdleState = new CharacterIdleState();
         public CharacterWalkingState WalkingState = new CharacterWalkingState();
