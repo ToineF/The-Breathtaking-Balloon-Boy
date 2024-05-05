@@ -26,7 +26,13 @@ MonoBehaviour:
       Duration: 0
     VFX: {fileID: 7226888052703040409, guid: b158086c279270a4ba81a7fab1f8374b, type: 3}
     SFX:
-      Guid:
+    - Guid:
+        Data1: 0
+        Data2: 0
+        Data3: 0
+        Data4: 0
+      Path: 
+    - Guid:
         Data1: 0
         Data2: 0
         Data3: 0
@@ -42,12 +48,12 @@ MonoBehaviour:
       Duration: 0.15
     VFX: {fileID: 7226888052703040409, guid: 6194680d73ef64f49a8c0732aa2ae803, type: 3}
     SFX:
-      Guid:
+    - Guid:
         Data1: 1746900570
         Data2: 1339306380
         Data3: 1367926171
         Data4: 1730860149
-      Path: event:/Character/DashStart
+      Path: event:/SFX/Character/DashStart
   <BalloonBounceFeedback>k__BackingField:
     HapticFeedback:
       LowFrequency: 0.2
@@ -58,12 +64,12 @@ MonoBehaviour:
       Duration: 0.15
     VFX: {fileID: 0}
     SFX:
-      Guid:
-        Data1: 1746900570
-        Data2: 1339306380
-        Data3: 1367926171
-        Data4: 1730860149
-      Path: event:/Character/DashStart
+    - Guid:
+        Data1: 0
+        Data2: 0
+        Data3: 0
+        Data4: 0
+      Path: 
   <CoinPreviewFeedback>k__BackingField:
     HapticFeedback:
       LowFrequency: 0
@@ -74,12 +80,18 @@ MonoBehaviour:
       Duration: 0
     VFX: {fileID: 8771972552311404799, guid: f270dedae6090764281b13b9c7b0877f, type: 3}
     SFX:
-      Guid:
-        Data1: 0
-        Data2: 0
-        Data3: 0
-        Data4: 0
-      Path: 
+    - Guid:
+        Data1: -752114117
+        Data2: 1121309813
+        Data3: -1668912964
+        Data4: -332769166
+      Path: event:/SFX/Collectibles/Coin/CoinPickUp_A
+    - Guid:
+        Data1: 1480706613
+        Data2: 1201962236
+        Data3: -503862090
+        Data4: -1335499991
+      Path: event:/SFX/Collectibles/Coin/CoinPickUp_B
   <CoinFeedback>k__BackingField:
     HapticFeedback:
       LowFrequency: 0
@@ -89,13 +101,7 @@ MonoBehaviour:
       Strength: 0
       Duration: 0
     VFX: {fileID: 0}
-    SFX:
-      Guid:
-        Data1: 0
-        Data2: 0
-        Data3: 0
-        Data4: 0
-      Path: 
+    SFX: []
   <BigCoinFeedback>k__BackingField:
     HapticFeedback:
       LowFrequency: 0
@@ -106,7 +112,13 @@ MonoBehaviour:
       Duration: 0
     VFX: {fileID: 0}
     SFX:
-      Guid:
+    - Guid:
+        Data1: 0
+        Data2: 0
+        Data3: 0
+        Data4: 0
+      Path: 
+    - Guid:
         Data1: 0
         Data2: 0
         Data3: 0
@@ -122,9 +134,9 @@ MonoBehaviour:
       Duration: 0
     VFX: {fileID: 8771972552311404799, guid: a0ee23a056d510444a057c8de9eefeb9, type: 3}
     SFX:
-      Guid:
-        Data1: 0
-        Data2: 0
-        Data3: 0
-        Data4: 0
-      Path: 
+    - Guid:
+        Data1: -698860578
+        Data2: 1246795486
+        Data3: -334923623
+        Data4: 1962582432
+      Path: event:/SFX/Collectibles/Rare Collectible/RareCollectiblePickUp

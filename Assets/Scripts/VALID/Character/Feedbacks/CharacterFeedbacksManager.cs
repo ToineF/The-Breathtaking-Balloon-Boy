@@ -1,6 +1,7 @@
 using UnityEngine;
 using System;
 using BlownAway.Camera;
+using AntoineFoucault.Utilities;
 
 namespace BlownAway.Character.Feedbacks
 {
@@ -18,17 +19,7 @@ namespace BlownAway.Character.Feedbacks
 
         public void PlayFeedback(Feedback feedback)
         {
-            // VFX
-            if (feedback.VFX != null) Instantiate(feedback.VFX);
-
-            // SFX
-            AudioManager?.PlayClip(feedback.SFX);
-
-            // Haptic
-            HapticManager?.VibrateForTime(feedback.HapticFeedback);
-
-            // Screenshake
-            ScreenShake?.Shake(feedback.ShakeFeedback);
+            PlayFeedback(feedback, Vector3.zero, Quaternion.identity, transform);
         }
 
         public void PlayFeedback(Feedback feedback, Vector3 position, Quaternion rotation, Transform transform)
@@ -38,7 +29,7 @@ namespace BlownAway.Character.Feedbacks
 
 
             // SFX
-            AudioManager?.PlayClip(feedback.SFX);
+            AudioManager?.PlayClip(feedback.SFX.GetRandomItem());
 
             // Haptic
             HapticManager?.VibrateForTime(feedback.HapticFeedback);
@@ -54,6 +45,6 @@ namespace BlownAway.Character.Feedbacks
         public HapticFeedback HapticFeedback;
         public ShakeData ShakeFeedback;
         public GameObject VFX;
-        public FMODUnity.EventReference SFX;
+        public FMODUnity.EventReference[] SFX;
     }
 }
