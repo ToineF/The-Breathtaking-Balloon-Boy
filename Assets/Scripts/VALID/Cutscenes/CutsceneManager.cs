@@ -1,5 +1,7 @@
 using BlownAway.Character;
 using UnityEngine;
+using UnityEngine.Playables;
+using UnityEngine.Timeline;
 
 namespace BlownAway.Cutscenes
 {
@@ -91,6 +93,12 @@ namespace BlownAway.Cutscenes
             {
                 StartInvokeMethod(function);
             }
+
+            CutsceneTimeline timeline = interactionElement as CutsceneTimeline;
+            if (timeline != null)
+            {
+                StartTimeline(timeline);
+            }
         }
 
         private void ReadDialogue(CutsceneDialogue dialogue)
@@ -142,6 +150,20 @@ namespace BlownAway.Cutscenes
         private void StartInvokeMethod(CutsceneInvokeFunction function)
         {
             function.Event?.Invoke();
+            GoToNextSequenceElement();
+        }
+
+        private void StartTimeline(CutsceneTimeline timeline)
+        {
+            timeline.Director.Play();
+            timeline.Director.stopped += EndTimeline;
+            Debug.Log("start timeline");
+        }
+        private void EndTimeline(PlayableDirector director)
+        {
+            Debug.Log("end timeline");
+            director.stopped -= EndTimeline;
+            _dialogueManager.OnDialogueEnd -= EndDialogue;
             GoToNextSequenceElement();
         }
     }

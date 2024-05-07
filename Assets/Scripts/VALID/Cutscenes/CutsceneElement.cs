@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Playables;
 
 namespace BlownAway.Cutscenes
 {
@@ -32,6 +33,11 @@ namespace BlownAway.Cutscenes
     public class CutsceneInvokeFunction : CutsceneElement
     {
         [field: SerializeField] public UnityEvent Event { get; private set; }
+    }
+
+    public class CutsceneTimeline : CutsceneElement
+    {
+        [field: SerializeField] public PlayableDirector Director { get; private set; }
     }
 
     [Serializable]
