@@ -21,6 +21,7 @@ namespace BlownAway.Character.Animations
         [field:SerializeField] public string IsJacketInflated { get; private set; }
         [field:SerializeField] public string IsGrounded { get; private set; }
         [field:SerializeField] public string IsPropulsing { get; private set; }
+        [field:SerializeField] public string IsJumping { get; private set; }
         [field:SerializeField] public string IsJumpDescending { get; private set; }
 
         [Header("Parameters")]
@@ -78,6 +79,7 @@ namespace BlownAway.Character.Animations
             _characterAnimator.SetBool(IsGrounded, manager.MovementManager.IsMaxGrounded);
             _characterAnimator.SetBool(IsJacketInflated, manager.MovementManager.IsJacketInflated);
             _characterAnimator.SetBool(IsPropulsing, manager.States.IsInState(manager.States.PropulsionState));
+            _characterAnimator.SetBool(IsJumping, manager.States.IsInState(manager.States.JumpState));
             _characterAnimator.SetBool(IsJumpDescending, manager.States.IsInState(manager.States.JumpState) && manager.MovementManager.CurrentJumpState == States.CharacterJumpState.JumpState.DESCENT);
         }
 
