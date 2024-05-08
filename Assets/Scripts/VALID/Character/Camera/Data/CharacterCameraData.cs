@@ -25,6 +25,7 @@ namespace BlownAway.Camera.Data
         [field:SerializeField, Tooltip("The minimum angle the camera at which can turn")] public float YDownLimit { get; private set; } = -89.9f;
         [field:SerializeField, Tooltip("The time the camera needs to follow the target"), Range(0,1)] public float CameraFollowLerpTime { get; private set; }
         [field:SerializeField, Tooltip("The time the camera needs to center itself")] public float CameraCenterLerpTime { get; private set; }
+        [field:SerializeField, Tooltip("Can you use the camera top down")] public bool CanUseCameraTopDown { get; private set; }
         [field:SerializeField, Tooltip("The time the camera needs to center itself in top down")] public float CameraTopDownStartLerpTime { get; private set; }
         [field:SerializeField, Tooltip("The time the camera needs to center itself")] public float CameraTopDownEndLerpTime { get; private set; }
         [field:SerializeField, Tooltip("Do you need to hold the top down button")] public bool IsCameraTopDownHold { get; private set; }

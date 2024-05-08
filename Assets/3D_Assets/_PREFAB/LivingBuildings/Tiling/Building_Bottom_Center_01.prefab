@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 8467914560526566642}
   - component: {fileID: 830137769782442064}
   - component: {fileID: 6036216858332054679}
+  - component: {fileID: 856333504020034223}
   m_Layer: 7
   m_Name: Plane(Clone)
   m_TagString: Untagged
@@ -137,3 +138,24 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.02, y: 0.02, z: 0.0025011604}
   m_Center: {x: 0, y: 0, z: 0.00875059}
+--- !u!205 &856333504020034223
+LODGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9133418837269541440}
+  serializedVersion: 2
+  m_LocalReferencePoint: {x: 0.0026029758, y: -0.000034661032, z: -0.0026082322}
+  m_Size: 0.006666667
+  m_FadeMode: 0
+  m_AnimateCrossFading: 0
+  m_LastLODIsBillboard: 0
+  m_LODs:
+  - screenRelativeHeight: 0.03
+    fadeTransitionWidth: 0
+    renderers:
+    - renderer: {fileID: 0}
+    - renderer: {fileID: 0}
+    - renderer: {fileID: 0}
+  m_Enabled: 1

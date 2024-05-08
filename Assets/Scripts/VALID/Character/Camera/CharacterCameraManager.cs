@@ -180,6 +180,8 @@ namespace BlownAway.Camera
 
         private void CheckForCameraTopDown(CharacterManager manager)
         {
+            if (!manager.Data.CameraData.CanUseCameraTopDown) return;
+
             if (manager.Data.CameraData.IsCameraTopDownHold)
                 CameraTopDownHold(manager);
             else
