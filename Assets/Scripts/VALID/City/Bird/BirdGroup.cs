@@ -17,6 +17,7 @@ namespace BlownAway.City
         public void SpawnBirds()
         {
             Clear();
+            _birds = new List<Bird>();
 
             int birdsCount = Random.Range(_birdsCountMinMax.x, _birdsCountMinMax.y);
             for (int i = 0; i < birdsCount; i++)
