@@ -133,7 +133,7 @@ namespace CartoonFX
 			{
 				if (light != null)
 				{
-					if (animateIntensity)
+					if (animateIntensity)	
 					{
 						light.intensity = (fadeIn || fadeOut) ? 0 : intensityEnd;
 					}
