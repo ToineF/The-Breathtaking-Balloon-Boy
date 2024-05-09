@@ -16,7 +16,9 @@ public class Transition : MonoBehaviour
     [Header("Animations")]
     [Tooltip("The Animator used for the Animation transition")] [SerializeField] private Animator _animator;
     [Tooltip("Uses the animation direction for the wait time")] [SerializeField] private bool _useAnimationDuration = false;
-    
+
+    private float _timer;
+    private Action _endAction;
 
     enum AnimationMode
     {
@@ -48,28 +50,62 @@ public class Transition : MonoBehaviour
 
     public void SetTransition(Action endAction)
     {
-        StartCoroutine(StartTransition(endAction));
+        StartTransition(endAction);
     }
 
-    private IEnumerator StartTransition(Action endAction)
+    //private IEnumerator StartTransition(Action endAction)
+    //{
+    //    switch (_transitionMode)
+    //    {
+    //        case AnimationMode.Fade:
+    //            _fadeImage.DOFade(0, 0);
+    //            _fadeImage.DOFade(1, _fadeTime);
+    //            yield return new WaitForSeconds(_fadeTime);
+    //            break;
+    //        case AnimationMode.Animation:
+    //            float _animationDuration = AnimationTransition("TransitionOut");
+    //            yield return new WaitForSeconds(_useAnimationDuration ? _animationDuration : _fadeTime);
+    //            break;
+    //        default:
+    //            yield return new WaitForSeconds(0f);
+    //            break;
+    //    }
+        
+    //    endAction?.Invoke();
+    //}
+
+    private void StartTransition(Action endAction)
     {
         switch (_transitionMode)
         {
             case AnimationMode.Fade:
                 _fadeImage.DOFade(0, 0);
                 _fadeImage.DOFade(1, _fadeTime);
-                yield return new WaitForSeconds(_fadeTime);
+                _timer = _fadeTime;
                 break;
             case AnimationMode.Animation:
                 float _animationDuration = AnimationTransition("TransitionOut");
-                yield return new WaitForSeconds(_useAnimationDuration ? _animationDuration : _fadeTime);
+                _timer = _useAnimationDuration? _animationDuration : _fadeTime;
                 break;
             default:
-                yield return new WaitForSeconds(0f);
+                _timer = 0f;
                 break;
         }
-        
-        endAction?.Invoke();
+
+        _endAction = endAction;
+    }
+
+    private void Update()
+    {
+        if (_timer <= 0) // Timer End
+        {
+            _endAction?.Invoke();
+            _endAction = null;
+        } 
+        else // Timer Ticking
+        {
+            _timer -= Time.deltaTime;
+        }
     }
 
     private float AnimationTransition(string transitionName)
@@ -81,5 +117,10 @@ public class Transition : MonoBehaviour
         float _targetFPS = 60;
         float _animationDuration = (1-_animationLength / _framePerSecondsInAnimation * _targetFPS * Time.deltaTime) + 1;
         return _animationDuration;
+    }
+
+    public void PlayFakeTransition()
+    {
+        AnimationTransition("TransitionInOut");
     }
 }
