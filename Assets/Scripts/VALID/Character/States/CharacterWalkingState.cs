@@ -10,7 +10,7 @@ namespace BlownAway.Character.States
             manager.MovementManager.LerpDeplacementSpeed(manager, manager.Data.LateralMovementData.WalkData);
 
             // Gravity
-            //manager.MovementManager.LerpGravityTo(manager, manager.Data.GroundDetectionData.GroundedGravity, 0, manager.Data.GroundDetectionData.GroundedGravity, 0, 0, 0.001f, AnimationCurve.Linear(0, 0, 1, 1));
+            manager.MovementManager.LerpGravityTo(manager, manager.Data.FallData.GroundedData);
 
             // VFX
             manager.Feedbacks.WalkVFX.Play();

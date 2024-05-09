@@ -26,6 +26,9 @@ namespace BlownAway.Character.Movements.Data
         [field: Header("Ground Pound")]
         [field: SerializeField] public FallData GroundPoundData { get; private set; }
 
+        [field: Header("Grounded")]
+        [field: SerializeField] public FallData GroundedData { get;  private set; }
+
     }
 
     [Serializable]
