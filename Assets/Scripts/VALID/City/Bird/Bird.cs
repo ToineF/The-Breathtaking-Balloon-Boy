@@ -7,6 +7,8 @@ namespace BlownAway.City
     public class Bird : SphereTrigger
     {
         public State CurrentState { get; private set; }
+        public bool TriggerOtherBirds { get => _triggerOtherBirds; set => _triggerOtherBirds = value; }
+
         public enum State
         {
             IDLE = 0,
@@ -21,6 +23,7 @@ namespace BlownAway.City
         [SerializeField] private Vector3 _targetDirection;
         [SerializeField] private float _directionRandomness;
         [SerializeField] private float _flySpeed;
+        [SerializeField] private bool _triggerOtherBirds;
 
 
         private new void Awake()
@@ -37,6 +40,27 @@ namespace BlownAway.City
             Vector2 randomCircle = UnityEngine.Random.insideUnitCircle * _directionRandomness;
             Vector3 targetDirection = transform.position + new Vector3(randomCircle.x, 0, randomCircle.y) + _targetDirection;
             gameObject.transform.DOMove(targetDirection, _flySpeed).OnComplete(EndFly);
+
+            SetNeighboursBirdsFree();
+        }
+
+        private void SetNeighboursBirdsFree()
+        {
+            if (!_triggerOtherBirds) return;
+
+            Debug.Log(_sphereCollider);
+            if (_sphereCollider == null) _sphereCollider = GetComponent<SphereCollider>();
+            Collider[] colliders = Physics.OverlapSphere(transform.position, _sphereCollider.radius);
+            Debug.Log(colliders);
+
+            foreach (var item in colliders)
+            {
+                if (item.TryGetComponent(out Bird bird))
+                {
+                    if (bird.CurrentState != State.FLY) 
+                        bird.StartFlying();
+                }
+            }
         }
 
         private void EndFly()

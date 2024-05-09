@@ -28,7 +28,7 @@ namespace BlownAway.City
                 Bird newBird = Instantiate(_birdPrefab, spawnPoint, Quaternion.Euler(rotation), transform);
                 float randomScale = UnityEngine.Random.Range(_birdsScaleMinMax.x, _birdsScaleMinMax.y);
                 newBird.transform.localScale = Vector3.one * randomScale;
-
+                newBird.TriggerOtherBirds = _allBirdsFlyTogether;
 
                 _birds.Add(newBird);
             }
@@ -43,19 +43,6 @@ namespace BlownAway.City
             }
             _birds.Clear();
             transform.ClearImmediate();
-        }
-
-
-        private void SetAllBirdsFree()
-        {
-            if (!_allBirdsFlyTogether) return;
-
-            foreach (var bird in _birds)
-            {
-                if (bird.CurrentState == Bird.State.FLY) continue;
-
-                bird.StartFlying();
-            }
         }
     }
 }
