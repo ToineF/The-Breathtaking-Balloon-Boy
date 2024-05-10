@@ -34,12 +34,18 @@ namespace BlownAway.City
 
         public void StartFlying()
         {
+            if (CurrentState == State.FLY) return;
+
             CurrentState = State.FLY;
             _animator.SetTrigger(_startFlying);
 
             Vector2 randomCircle = UnityEngine.Random.insideUnitCircle * _directionRandomness;
             Vector3 targetDirection = transform.position + new Vector3(randomCircle.x, 0, randomCircle.y) + _targetDirection;
             gameObject.transform.DOMove(targetDirection, _flySpeed).OnComplete(EndFly);
+
+
+            transform.LookAt(new Vector3(targetDirection.x, 0, targetDirection.z));
+            transform.eulerAngles = new Vector3(0, transform.eulerAngles.y + 90, 0);
 
             SetNeighboursBirdsFree();
         }
@@ -57,7 +63,7 @@ namespace BlownAway.City
             {
                 if (item.TryGetComponent(out Bird bird))
                 {
-                    if (bird.CurrentState != State.FLY) 
+                    if (bird.CurrentState != State.FLY)
                         bird.StartFlying();
                 }
             }
