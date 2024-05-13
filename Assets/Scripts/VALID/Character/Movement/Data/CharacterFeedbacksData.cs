@@ -12,7 +12,7 @@ namespace BlownAway.Character.Movements.Data
         [field: SerializeField] public GameObject WalkStartVFX { get; private set; }
 
         [field: Header("Fall")]
-        [field: SerializeField] public GameObject LandVFX { get; private set; }
+        [field: SerializeField] public Feedback LandingFeedback { get; private set; }
         [field:Header("Jump")]
         [field: SerializeField] public Feedback JumpFeedback { get; private set; }
 

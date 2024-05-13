@@ -1,6 +1,5 @@
 using UnityEngine;
 using DG.Tweening;
-using System;
 
 namespace BlownAway.City
 {
@@ -18,8 +17,10 @@ namespace BlownAway.City
         [Header("Bird Animator")]
         [SerializeField] private Animator _animator;
         [SerializeField] private string _startFlying;
+        [SerializeField] private string _startPecking;
+        [SerializeField] private float _peckingRandomness;
 
-        [Header("Bird Settings")]
+        [Header("Fly Settings")]
         [SerializeField] private Vector3 _targetDirection;
         [SerializeField] private float _directionRandomness;
         [SerializeField] private float _flySpeed;

@@ -14,8 +14,46 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <WalkStartVFX>k__BackingField: {fileID: 7226888052703040409, guid: 95c833680e44dc64b8f35f5394da1d56,
     type: 3}
-  <LandVFX>k__BackingField: {fileID: 7226888052703040409, guid: 4b47a5781aeb4034b85acc7ba21f916c,
-    type: 3}
+  <LandingFeedback>k__BackingField:
+    HapticFeedback:
+      LowFrequency: 0
+      HighFrequency: 0
+      Time: 0
+    ShakeFeedback:
+      Strength: 0
+      Duration: 0
+    VFX: {fileID: 7226888052703040409, guid: 4b47a5781aeb4034b85acc7ba21f916c, type: 3}
+    SFX:
+    - Guid:
+        Data1: -338629907
+        Data2: 1330242285
+        Data3: -926097763
+        Data4: -550389912
+      Path: event:/SFX/Character/Landing/char_land_01
+    - Guid:
+        Data1: -888009574
+        Data2: 1139115130
+        Data3: 1620487335
+        Data4: 1360421104
+      Path: event:/SFX/Character/Landing/char_land_02
+    - Guid:
+        Data1: -925234829
+        Data2: 1330928620
+        Data3: -1277216367
+        Data4: 673280829
+      Path: event:/SFX/Character/Landing/char_land_03
+    - Guid:
+        Data1: -1668327529
+        Data2: 1187003049
+        Data3: -328472141
+        Data4: -158428000
+      Path: event:/SFX/Character/Landing/char_land_04
+    - Guid:
+        Data1: 1435115354
+        Data2: 1089990456
+        Data3: 1197738678
+        Data4: 15871245
+      Path: event:/SFX/Character/Landing/char_land_05
   <JumpFeedback>k__BackingField:
     HapticFeedback:
       LowFrequency: 0.03
@@ -27,17 +65,29 @@ MonoBehaviour:
     VFX: {fileID: 7226888052703040409, guid: b158086c279270a4ba81a7fab1f8374b, type: 3}
     SFX:
     - Guid:
-        Data1: 0
-        Data2: 0
-        Data3: 0
-        Data4: 0
-      Path: 
+        Data1: 180522788
+        Data2: 1217937617
+        Data3: 2067308435
+        Data4: -777605416
+      Path: event:/SFX/Character/Jump/char_jumping_01
     - Guid:
-        Data1: 0
-        Data2: 0
-        Data3: 0
-        Data4: 0
-      Path: 
+        Data1: -1246771722
+        Data2: 1187133561
+        Data3: -730445951
+        Data4: 134270011
+      Path: event:/SFX/Character/Jump/char_jumping_02
+    - Guid:
+        Data1: 683845932
+        Data2: 1110789728
+        Data3: -566759235
+        Data4: 1303605121
+      Path: event:/SFX/Character/Jump/char_jumping_03
+    - Guid:
+        Data1: 1965093041
+        Data2: 1139450405
+        Data3: 512858514
+        Data4: -1949126180
+      Path: event:/SFX/Character/Jump/char_jumping_04
   <DashFeedback>k__BackingField:
     HapticFeedback:
       LowFrequency: 0.2

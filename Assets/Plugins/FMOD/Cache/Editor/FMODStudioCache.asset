@@ -1,5 +1,140 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-9118495107832418338
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Character/Dash/char_dash_01
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Character/Dash/char_dash_01
+  Guid:
+    Data1: 1746900570
+    Data2: 1339306380
+    Data3: 1367926171
+    Data4: 1730860149
+  Banks:
+  - {fileID: 7924125151239261790}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 2424
+--- !u!114 &-6633315340407476401
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Character/Landing/char_land_01
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Character/Landing/char_land_01
+  Guid:
+    Data1: -338629907
+    Data2: 1330242285
+    Data3: -926097763
+    Data4: -550389912
+  Banks:
+  - {fileID: 7924125151239261790}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 875
+--- !u!114 &-6048012943976533331
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Character/Walk/char_walking_04
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Character/Walk/char_walking_04
+  Guid:
+    Data1: 1966592742
+    Data2: 1205099139
+    Data3: 255391112
+    Data4: 42060177
+  Banks:
+  - {fileID: 7924125151239261790}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 500
+--- !u!114 &-4619361408387458581
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Collectibles/Coin/collectibles_coin_02
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Collectibles/Coin/collectibles_coin_02
+  Guid:
+    Data1: 1480706613
+    Data2: 1201962236
+    Data3: -503862090
+    Data4: -1335499991
+  Banks:
+  - {fileID: 7924125151239261790}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 400
+--- !u!114 &-3604196653309808550
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Character/Walk/char_walking_06
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Character/Walk/char_walking_06
+  Guid:
+    Data1: -201548325
+    Data2: 1256363240
+    Data3: -1030187387
+    Data4: 1104554238
+  Banks:
+  - {fileID: 7924125151239261790}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 500
 --- !u!114 &-3458211381694956580
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20,14 +155,14 @@ MonoBehaviour:
     Data4: -597710356
   Banks:
   - {fileID: 7924125151239261790}
-  IsStream: 1
+  IsStream: 0
   Is3D: 0
   IsOneShot: 0
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
   Length: 30168
---- !u!114 &-1500673841832927571
+--- !u!114 &-3388425605650632908
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -37,14 +172,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/SFX/Collectibles/Coin/CoinPickUp_A
+  m_Name: event:/SFX/Character/Walk/char_walking_08
   m_EditorClassIdentifier: 
-  Path: event:/SFX/Collectibles/Coin/CoinPickUp_A
+  Path: event:/SFX/Character/Walk/char_walking_08
   Guid:
-    Data1: -752114117
-    Data2: 1121309813
-    Data3: -1668912964
-    Data4: -332769166
+    Data1: 1596480160
+    Data2: 1339169214
+    Data3: -1694221399
+    Data4: -692658561
   Banks:
   - {fileID: 7924125151239261790}
   IsStream: 0
@@ -53,7 +188,142 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 350
+  Length: 500
+--- !u!114 &-2367158688793609613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Character/Landing/char_land_05
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Character/Landing/char_land_05
+  Guid:
+    Data1: 1435115354
+    Data2: 1089990456
+    Data3: 1197738678
+    Data4: 15871245
+  Banks:
+  - {fileID: 7924125151239261790}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 875
+--- !u!114 &-2161859926457375257
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Character/Death/char_death_02
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Character/Death/char_death_02
+  Guid:
+    Data1: 1559178912
+    Data2: 1310358438
+    Data3: 879720868
+    Data4: -898566583
+  Banks:
+  - {fileID: 7924125151239261790}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 3000
+--- !u!114 &-1315688412445514631
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Character/Jump/char_jumping_02
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Character/Jump/char_jumping_02
+  Guid:
+    Data1: -1246771722
+    Data2: 1187133561
+    Data3: -730445951
+    Data4: 134270011
+  Banks:
+  - {fileID: 7924125151239261790}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 500
+--- !u!114 &-1020768241338436068
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Character/Landing/char_land_04
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Character/Landing/char_land_04
+  Guid:
+    Data1: -1668327529
+    Data2: 1187003049
+    Data3: -328472141
+    Data4: -158428000
+  Banks:
+  - {fileID: 7924125151239261790}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 875
+--- !u!114 &-940645844746367694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Character/Walk/char_walking_02
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Character/Walk/char_walking_02
+  Guid:
+    Data1: -37265877
+    Data2: 1194876955
+    Data3: -328289349
+    Data4: -1518310985
+  Banks:
+  - {fileID: 7924125151239261790}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 500
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -71,18 +341,119 @@ MonoBehaviour:
   - {fileID: 7924125151239261790}
   EditorEvents:
   - {fileID: 1394131165166313505}
-  - {fileID: 6434867072815936587}
-  - {fileID: -1500673841832927571}
   - {fileID: -3458211381694956580}
-  - {fileID: 2093378319594306788}
-  - {fileID: 3738654073033667876}
+  - {fileID: 3759176086532166177}
+  - {fileID: 773775762211377083}
+  - {fileID: -940645844746367694}
+  - {fileID: 4433896913574422466}
+  - {fileID: -4619361408387458581}
+  - {fileID: 4489513385489490099}
+  - {fileID: 4849946483866525563}
+  - {fileID: -2367158688793609613}
+  - {fileID: -9118495107832418338}
+  - {fileID: 6579813655661244050}
+  - {fileID: 3369818827615252679}
+  - {fileID: 88315621298956005}
+  - {fileID: -1020768241338436068}
+  - {fileID: 3437785985144613503}
+  - {fileID: -2161859926457375257}
+  - {fileID: -3388425605650632908}
+  - {fileID: 646338464090684629}
+  - {fileID: 5413904166759579547}
+  - {fileID: 6907185286104449182}
+  - {fileID: -3604196653309808550}
+  - {fileID: 6202223760404609088}
+  - {fileID: -6048012943976533331}
+  - {fileID: -6633315340407476401}
+  - {fileID: -1315688412445514631}
   EditorParameters: []
   MasterBanks:
   - {fileID: 7924125151239261790}
   StringsBanks:
   - {fileID: 3047809022776121466}
-  cacheTime: 638511885224557535
+  cacheTime: 638511966688468328
   cacheVersion: 131616
+--- !u!114 &88315621298956005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Character/Walk/char_walking_07
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Character/Walk/char_walking_07
+  Guid:
+    Data1: 347882647
+    Data2: 1074215042
+    Data3: -1367503473
+    Data4: 1127968690
+  Banks:
+  - {fileID: 7924125151239261790}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 500
+--- !u!114 &646338464090684629
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Character/Death/char_death_01
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Character/Death/char_death_01
+  Guid:
+    Data1: -547204944
+    Data2: 1164716928
+    Data3: 1104083330
+    Data4: 832360327
+  Banks:
+  - {fileID: 7924125151239261790}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 3000
+--- !u!114 &773775762211377083
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Character/Jump/char_jumping_01
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Character/Jump/char_jumping_01
+  Guid:
+    Data1: 180522788
+    Data2: 1217937617
+    Data3: 2067308435
+    Data4: -777605416
+  Banks:
+  - {fileID: 7924125151239261790}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 500
 --- !u!114 &1394131165166313505
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -103,40 +474,13 @@ MonoBehaviour:
     Data4: 75667095
   Banks:
   - {fileID: 7924125151239261790}
-  IsStream: 1
+  IsStream: 0
   Is3D: 0
   IsOneShot: 0
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
   Length: 72786
---- !u!114 &2093378319594306788
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/SFX/Character/DashStart
-  m_EditorClassIdentifier: 
-  Path: event:/SFX/Character/DashStart
-  Guid:
-    Data1: 1746900570
-    Data2: 1339306380
-    Data3: 1367926171
-    Data4: 1730860149
-  Banks:
-  - {fileID: 7924125151239261790}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 2424
 --- !u!114 &3047809022776121466
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -152,12 +496,12 @@ MonoBehaviour:
   Path: Assets/Audio/FMOD/BlownAway_FMOD_Project/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638511885224557535
+  lastModified: 638511966688468328
   FileSizes:
   - Name: Desktop
-    Value: 1228
+    Value: 2078
   Exists: 1
---- !u!114 &3738654073033667876
+--- !u!114 &3369818827615252679
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -167,9 +511,198 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/SFX/Collectibles/Rare Collectible/RareCollectiblePickUp
+  m_Name: event:/SFX/Character/Landing/char_land_03
   m_EditorClassIdentifier: 
-  Path: event:/SFX/Collectibles/Rare Collectible/RareCollectiblePickUp
+  Path: event:/SFX/Character/Landing/char_land_03
+  Guid:
+    Data1: -925234829
+    Data2: 1330928620
+    Data3: -1277216367
+    Data4: 673280829
+  Banks:
+  - {fileID: 7924125151239261790}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 875
+--- !u!114 &3437785985144613503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Character/Landing/char_land_02
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Character/Landing/char_land_02
+  Guid:
+    Data1: -888009574
+    Data2: 1139115130
+    Data3: 1620487335
+    Data4: 1360421104
+  Banks:
+  - {fileID: 7924125151239261790}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 875
+--- !u!114 &3759176086532166177
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Character/Walk/char_walking_09
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Character/Walk/char_walking_09
+  Guid:
+    Data1: 1397558801
+    Data2: 1202455031
+    Data3: 1044090520
+    Data4: -1500013059
+  Banks:
+  - {fileID: 7924125151239261790}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 500
+--- !u!114 &4433896913574422466
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Character/Jump/char_jumping_03
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Character/Jump/char_jumping_03
+  Guid:
+    Data1: 683845932
+    Data2: 1110789728
+    Data3: -566759235
+    Data4: 1303605121
+  Banks:
+  - {fileID: 7924125151239261790}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 500
+--- !u!114 &4489513385489490099
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Collectibles/Coin/collectibles_coin_01
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Collectibles/Coin/collectibles_coin_01
+  Guid:
+    Data1: -752114117
+    Data2: 1121309813
+    Data3: -1668912964
+    Data4: -332769166
+  Banks:
+  - {fileID: 7924125151239261790}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 350
+--- !u!114 &4849946483866525563
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Character/Walk/char_walking_01
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Character/Walk/char_walking_01
+  Guid:
+    Data1: -1792953255
+    Data2: 1208544946
+    Data3: 435002301
+    Data4: 1072177742
+  Banks:
+  - {fileID: 7924125151239261790}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 500
+--- !u!114 &5413904166759579547
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Character/Jump/char_jumping_04
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Character/Jump/char_jumping_04
+  Guid:
+    Data1: 1965093041
+    Data2: 1139450405
+    Data3: 512858514
+    Data4: -1949126180
+  Banks:
+  - {fileID: 7924125151239261790}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 500
+--- !u!114 &6202223760404609088
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Collectibles/Rare Collectible/collectibles_rare_01
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Collectibles/Rare Collectible/collectibles_rare_01
   Guid:
     Data1: -698860578
     Data2: 1246795486
@@ -184,7 +717,7 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 750
---- !u!114 &6434867072815936587
+--- !u!114 &6579813655661244050
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -194,14 +727,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/SFX/Collectibles/Coin/CoinPickUp_B
+  m_Name: event:/SFX/Character/Walk/char_walking_05
   m_EditorClassIdentifier: 
-  Path: event:/SFX/Collectibles/Coin/CoinPickUp_B
+  Path: event:/SFX/Character/Walk/char_walking_05
   Guid:
-    Data1: 1480706613
-    Data2: 1201962236
-    Data3: -503862090
-    Data4: -1335499991
+    Data1: -1520768665
+    Data2: 1140950706
+    Data3: -1999949890
+    Data4: -324791459
   Banks:
   - {fileID: 7924125151239261790}
   IsStream: 0
@@ -210,7 +743,34 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 400
+  Length: 500
+--- !u!114 &6907185286104449182
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Character/Walk/char_walking_03
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Character/Walk/char_walking_03
+  Guid:
+    Data1: -1425202213
+    Data2: 1197910028
+    Data3: -1816749655
+    Data4: -620245721
+  Banks:
+  - {fileID: 7924125151239261790}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 500
 --- !u!114 &7924125151239261790
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -226,8 +786,8 @@ MonoBehaviour:
   Path: Assets/Audio/FMOD/BlownAway_FMOD_Project/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638511885224547525
+  lastModified: 638511966688438322
   FileSizes:
   - Name: Desktop
-    Value: 1339488
+    Value: 1481056
   Exists: 1
