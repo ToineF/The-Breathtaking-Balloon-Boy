@@ -17,8 +17,6 @@ namespace BlownAway.City
         [Header("Bird Animator")]
         [SerializeField] private Animator _animator;
         [SerializeField] private string _startFlying;
-        [SerializeField] private string _startPecking;
-        [SerializeField] private float _peckingRandomness;
 
         [Header("Fly Settings")]
         [SerializeField] private Vector3 _targetDirection;
@@ -26,6 +24,8 @@ namespace BlownAway.City
         [SerializeField] private float _flySpeed;
         [SerializeField] private bool _triggerOtherBirds;
 
+        [Header("Feedbacks")]
+        [SerializeField] private GameObject _vfxFly;
 
         private new void Awake()
         {
@@ -47,6 +47,9 @@ namespace BlownAway.City
 
             transform.LookAt(new Vector3(targetDirection.x, 0, targetDirection.z));
             transform.eulerAngles = new Vector3(0, transform.eulerAngles.y + 90, 0);
+
+            // Feedbacks
+            if (_vfxFly != null) Instantiate(_vfxFly, transform.position, Quaternion.identity, null);
 
             SetNeighboursBirdsFree();
         }
