@@ -214,15 +214,15 @@ MonoBehaviour:
         - serializedVersion: 3
           time: 0
           value: 0
-          inSlope: 0.062031534
-          outSlope: 0.062031534
+          inSlope: 0.4301887
+          outSlope: 0.4301887
           tangentMode: 0
           weightedMode: 0
           inWeight: 0
-          outWeight: 0.60896754
+          outWeight: 0.5383578
         - serializedVersion: 3
-          time: 0.4994793
-          value: 0.3627068
+          time: 0.25781265
+          value: 0.53251815
           inSlope: 2.2233133
           outSlope: 2.2233133
           tangentMode: 0
@@ -230,13 +230,13 @@ MonoBehaviour:
           inWeight: 0.09789375
           outWeight: 0.33333334
         - serializedVersion: 3
-          time: 0.5944502
-          value: 0.7870115
-          inSlope: 1.1476791
-          outSlope: 1.1476791
+          time: 0.5194502
+          value: 0.8412568
+          inSlope: 0.5307335
+          outSlope: 0.5307335
           tangentMode: 0
           weightedMode: 0
-          inWeight: 0.33333334
+          inWeight: 0.50432444
           outWeight: 0.25829142
         - serializedVersion: 3
           time: 1
@@ -246,6 +246,91 @@ MonoBehaviour:
           tangentMode: 0
           weightedMode: 0
           inWeight: 0.5445283
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 0
+  - m_From: GameplayCamera
+    m_To: TrailerCam_GrandeRoue
+    m_Blend:
+      m_Style: 0
+      m_Time: 2
+      m_CustomCurve:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 0
+          inSlope: 0.4301887
+          outSlope: 0.4301887
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0.5383578
+        - serializedVersion: 3
+          time: 0.25781265
+          value: 0.53251815
+          inSlope: 2.2233133
+          outSlope: 2.2233133
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0.09789375
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 0.5194502
+          value: 0.8412568
+          inSlope: 0.5307335
+          outSlope: 0.5307335
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0.50432444
+          outWeight: 0.25829142
+        - serializedVersion: 3
+          time: 1
+          value: 1
+          inSlope: 0.117479526
+          outSlope: 0.117479526
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0.5445283
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 0
+  - m_From: TrailerCam_GrandeRoue
+    m_To: TrailerCam_GrandeRoue_2
+    m_Blend:
+      m_Style: 6
+      m_Time: 3.24
+      m_CustomCurve:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 0
+          inSlope: 0.030596634
+          outSlope: 0.030596634
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0.48090512
+        - serializedVersion: 3
+          time: 0.80365217
+          value: 0.19290243
+          inSlope: 0.78765094
+          outSlope: 0.78765094
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0.18476373
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 1
+          value: 1
+          inSlope: 2.773583
+          outSlope: 2.773583
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0.43085366
           outWeight: 0
         m_PreInfinity: 2
         m_PostInfinity: 2
