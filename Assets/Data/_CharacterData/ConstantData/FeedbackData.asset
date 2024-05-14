@@ -14,6 +14,78 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <WalkStartVFX>k__BackingField: {fileID: 7226888052703040409, guid: 95c833680e44dc64b8f35f5394da1d56,
     type: 3}
+  <WalkContinousFeedback>k__BackingField:
+    Feedback:
+      HapticFeedback:
+        LowFrequency: 0
+        HighFrequency: 0
+        Time: 0
+      ShakeFeedback:
+        Strength: 0
+        Duration: 0
+      VFX: {fileID: 0}
+      SFX:
+      - Guid:
+          Data1: -1792953255
+          Data2: 1208544946
+          Data3: 435002301
+          Data4: 1072177742
+        Path: event:/SFX/Character/Walk/char_walking_01
+      - Guid:
+          Data1: -37265877
+          Data2: 1194876955
+          Data3: -328289349
+          Data4: -1518310985
+        Path: event:/SFX/Character/Walk/char_walking_02
+      - Guid:
+          Data1: -1425202213
+          Data2: 1197910028
+          Data3: -1816749655
+          Data4: -620245721
+        Path: event:/SFX/Character/Walk/char_walking_03
+      - Guid:
+          Data1: 1966592742
+          Data2: 1205099139
+          Data3: 255391112
+          Data4: 42060177
+        Path: event:/SFX/Character/Walk/char_walking_04
+      - Guid:
+          Data1: 1966592742
+          Data2: 1205099139
+          Data3: 255391112
+          Data4: 42060177
+        Path: event:/SFX/Character/Walk/char_walking_04
+      - Guid:
+          Data1: -1520768665
+          Data2: 1140950706
+          Data3: -1999949890
+          Data4: -324791459
+        Path: event:/SFX/Character/Walk/char_walking_05
+      - Guid:
+          Data1: -201548325
+          Data2: 1256363240
+          Data3: -1030187387
+          Data4: 1104554238
+        Path: event:/SFX/Character/Walk/char_walking_06
+      - Guid:
+          Data1: 347882647
+          Data2: 1074215042
+          Data3: -1367503473
+          Data4: 1127968690
+        Path: event:/SFX/Character/Walk/char_walking_07
+      - Guid:
+          Data1: 1596480160
+          Data2: 1339169214
+          Data3: -1694221399
+          Data4: -692658561
+        Path: event:/SFX/Character/Walk/char_walking_08
+      - Guid:
+          Data1: 1397558801
+          Data2: 1202455031
+          Data3: 1044090520
+          Data4: -1500013059
+        Path: event:/SFX/Character/Walk/char_walking_09
+    Frequency: 0.7
   <LandingFeedback>k__BackingField:
     HapticFeedback:
       LowFrequency: 0
@@ -120,6 +192,22 @@ MonoBehaviour:
         Data3: 0
         Data4: 0
       Path: 
+  <DeathFeedback>k__BackingField:
+    HapticFeedback:
+      LowFrequency: 0
+      HighFrequency: 0
+      Time: 0
+    ShakeFeedback:
+      Strength: 0
+      Duration: 0
+    VFX: {fileID: 0}
+    SFX:
+    - Guid:
+        Data1: -547204944
+        Data2: 1164716928
+        Data3: 1104083330
+        Data4: 832360327
+      Path: event:/SFX/Character/Death/char_death_01
   <CoinPreviewFeedback>k__BackingField:
     HapticFeedback:
       LowFrequency: 0

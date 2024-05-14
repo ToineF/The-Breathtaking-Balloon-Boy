@@ -32,13 +32,16 @@ namespace BlownAway.Character.States
 
             //manager.States.SwitchState(manager.States.FallingState);
             //{
-                
+
             //});
 
             //Debug.Log(manager.CharacterCollider.Rigidbody.gameObject.name + ": " + manager.CharacterCollider.Rigidbody.gameObject.transform.position);
             //manager.CameraManager.IsMovable = true;
             //manager.CheckpointManager.SetToCheckpointPosition(manager.CharacterCollider.Rigidbody.transform);
             //manager.States.SwitchState(manager.States.FallingState);
+
+            // Feedbacks
+            manager.Feedbacks.PlayFeedback(manager.Data.FeedbacksData.DeathFeedback);
 
         }
 

@@ -47,4 +47,11 @@ namespace BlownAway.Character.Feedbacks
         public GameObject VFX;
         public FMODUnity.EventReference[] SFX;
     }
+
+    [Serializable]
+    public struct ContinousFeedback
+    {
+        public Feedback Feedback;
+        public float Frequency;
+    }
 }

@@ -37,6 +37,8 @@ namespace BlownAway.Character.States
 
             manager.MovementManager.CheckForJumpStart(manager);
 
+            manager.MovementManager.UpdateWalkFeedback(manager);
+
             //manager.MovementManager.CheckForDashStart(manager, true);
 
             //manager.MovementManager.CheckForJacketToggle(manager);

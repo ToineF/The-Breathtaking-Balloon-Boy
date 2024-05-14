@@ -96,6 +96,9 @@ namespace BlownAway.Character.Movements
         // Cutscene
         public CharacterCutsceneState.CutsceneState CurrentCutsceneState { get; set; }
 
+        // Feedback
+        private float _currentWalkFeedbackWaitTime;
+
 
         protected override void StartScript(CharacterManager manager)
         {
@@ -925,6 +928,18 @@ namespace BlownAway.Character.Movements
         {
             AddExternalForce(gameObject, Vector3.up * manager.Data.PowerUpData.GroundPoundBalloonForce, manager.Data.PowerUpData.GroundPoundStartLerp);
             HasBalloonGroundPound = true;
+        }
+        #endregion
+
+        #region Feedbacks
+        public void UpdateWalkFeedback(CharacterManager manager)
+        {
+            _currentWalkFeedbackWaitTime -= Time.deltaTime;
+            if (_currentWalkFeedbackWaitTime <= 0)
+            {
+                _currentWalkFeedbackWaitTime = manager.Data.FeedbacksData.WalkContinousFeedback.Frequency;
+                manager.Feedbacks.PlayFeedback(manager.Data.FeedbacksData.WalkContinousFeedback.Feedback);
+            }
         }
         #endregion
 
