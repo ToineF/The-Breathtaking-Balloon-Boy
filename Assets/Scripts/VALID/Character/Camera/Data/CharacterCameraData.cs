@@ -8,10 +8,10 @@ namespace BlownAway.Camera.Data
         [field:Header("Mouse")]
         [field:SerializeField, Tooltip("Is the mouse cursor visible when the game plays?")] public bool SetCursorVisible { get; private set; }
         [field:SerializeField, Tooltip("The influence of the mouse on the camera speed")] public float MouseSensitivity { get; private set; } = 1;
-        [field:SerializeField, Tooltip("Is the X-Axis Inverted")] public bool IsMouseXInverted { get; set; }
-        [field:SerializeField, Tooltip("Is the Y-Axis Inverted")] public bool IsMouseYInverted { get; set; }
-        [field:SerializeField, Tooltip("Is the Y-Axis Inverted (read-only)")] public bool IsXInvertedDefault { get; private set; }
-        [field:SerializeField, Tooltip("Is the Y-Axis Inverted (read-only)")] public bool IsYInvertedDefault { get; private set; }
+        public bool IsMouseXInverted { get; set; }
+        public bool IsMouseYInverted { get; set; }
+        [field:SerializeField, Tooltip("Is the Y-Axis Inverted")] public bool IsXInvertedDefault { get; private set; }
+        [field:SerializeField, Tooltip("Is the Y-Axis Inverted")] public bool IsYInvertedDefault { get; private set; }
 
         [field:Header("Controller")]
         [field:SerializeField, Tooltip("The influence of the controller on the camera speed")] public float ControllerSensitivity { get; private set; } = 1;
@@ -21,6 +21,7 @@ namespace BlownAway.Camera.Data
         [field:Header("Positions")]
         [field:SerializeField, Tooltip("The default zoom position at the start of the scene")] public float ZoomDefault { get; private set; } = 10f;
         [field:SerializeField, Tooltip("The offset in the Y direction from the focus point")] public float YOffset { get; private set; } = 1f;
+        [field:SerializeField, Tooltip("The offset in the Y direction from the focus point")] public float YOffsetUpLimit { get; private set; } = 1f;
         [field:SerializeField, Tooltip("The maximum angle the camera at which can turn")] public float YUpLimit { get; private set; } = 89.9f;
         [field:SerializeField, Tooltip("The minimum angle the camera at which can turn")] public float YDownLimit { get; private set; } = -89.9f;
         [field:SerializeField, Tooltip("The time the camera needs to follow the target"), Range(0,1)] public float CameraFollowLerpTime { get; private set; }
