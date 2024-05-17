@@ -16,6 +16,9 @@ namespace BlownAway.Character.States
             manager.UIManager.ShowUI(false);
 
             manager.MovementManager.CurrentCutsceneState = CutsceneState.BEFORE;
+
+            manager.MovementManager.LerpGravityTo(manager, manager.Data.FallData.BaseData);
+
         }
 
         public override void ExitState(CharacterManager manager)
