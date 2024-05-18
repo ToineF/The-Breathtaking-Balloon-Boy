@@ -63,7 +63,7 @@ namespace BlownAway.Character.Movements
 
         // Derive
         public float DeriveTimer { get; private set; }
-        public float NormalizedDeriveAirAmount { get => DeriveTimer / Mathf.Max(Manager.Data.PropulsionData.DeriveTime, 0.0001f); }
+        public float NormalizedDeriveAirAmount { get => Mathf.Clamp01(DeriveTimer / Mathf.Max(Manager.Data.PropulsionData.DeriveTime, 0.0001f)); }
 
 
         // Ground Detection
