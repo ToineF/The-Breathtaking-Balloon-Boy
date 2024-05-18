@@ -540,6 +540,36 @@ namespace AntoineFoucault.Utilities
         {
             return values.Select((b, i) => object.Equals(b, val) ? i : -1).Where(i => i != -1).ToArray();
         }
+
+        public static GameObject GetRandomPonderatedGameObject(this IList<PonderableGameObject> list)
+        {
+            int total = 0;
+            Dictionary<int, GameObject> gameObjectToSpawn = new Dictionary<int, GameObject>();
+            foreach (var go in list)
+            {
+                gameObjectToSpawn.Add(total, go.GameObject);
+                total += go.Probability;
+            }
+
+            int randomIndex = UnityEngine.Random.Range(0, total);
+            int max = 0;
+
+            foreach (var go in gameObjectToSpawn)
+            {
+                if (go.Key > randomIndex) continue;
+                if (max < go.Key) max = go.Key;
+            }
+
+            return gameObjectToSpawn[max];
+        }
+
+
+        [Serializable]
+        public struct PonderableGameObject
+        {
+            public int Probability;
+            public GameObject GameObject;
+        }
     }
 
     public static class TransformExtensions

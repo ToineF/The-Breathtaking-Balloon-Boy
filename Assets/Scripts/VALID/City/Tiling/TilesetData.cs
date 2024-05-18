@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using static AntoineFoucault.Utilities.CollectionsExtensions;
 
 [CreateAssetMenu(fileName = "TilesetData", menuName = "Tileset Data")]
 public class TilesetData : ScriptableObject
@@ -23,14 +24,14 @@ public class TilesetData : ScriptableObject
 [Serializable]
 public struct InnerFloor
 {
-    public GameObject[] EdgeTile;
-    public GameObject[] CornerTile;
+    public PonderableGameObject[] EdgeTile;
+    public PonderableGameObject[] CornerTile;
 }
 
 [Serializable]
 public struct OuterFloor
 {
-    public GameObject[] CenterTile;
-    public GameObject[] EdgeTile;
-    public GameObject[] CornerTile;
+    public PonderableGameObject[] CenterTile;
+    public PonderableGameObject[] EdgeTile;
+    public PonderableGameObject[] CornerTile;
 }

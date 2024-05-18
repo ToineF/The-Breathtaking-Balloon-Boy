@@ -323,6 +323,7 @@ namespace BlownAway.Character.Movements
         {
             if (LastGround.collider == null) return;
             if (LastGround.distance < 0.001f) return;
+            Debug.LogWarning(LastGround.collider.name);
 
             //CurrentVelocity += springForce;
             Vector3 rigidbodyPosition = manager.CharacterCollider.Rigidbody.transform.position;
