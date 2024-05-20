@@ -279,7 +279,7 @@ namespace BlownAway.Character.Movements
             if (LastGround.collider.GetComponent<ParentableCollider>()) manager.CharacterCollider.Rigidbody.transform.SetParent(LastGround.collider.transform);
 
             // VFX
-            manager.Feedbacks.PlayFeedback(manager.Data.FeedbacksData.LandingFeedback, manager.CharacterCollider.Rigidbody.transform.position, manager.Data.FeedbacksData.LandingFeedback.VFX.transform.rotation, null);
+            manager.Feedbacks.PlayFeedback(manager.Data.FeedbacksData.LandingFeedback, colliderPosition + Vector3.down * manager.Data.GroundDetectionData.TargetDistanceFromGround, manager.Data.FeedbacksData.LandingFeedback.VFX.transform.rotation, null);
 
             //if (LastGround.collider != null)
             //{
