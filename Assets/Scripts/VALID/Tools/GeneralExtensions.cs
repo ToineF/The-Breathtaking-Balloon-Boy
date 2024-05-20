@@ -594,6 +594,44 @@ namespace AntoineFoucault.Utilities
             transform.rotation = targetTransform.rotation;
             transform.localScale = targetTransform.localScale;
         }
+
+        public static GameObject GetClosestItem(this IList<GameObject> list, Vector3 position)
+        {
+            float maxDistance = float.MaxValue;
+            GameObject gameObjectToReturn = list[0];
+            for (int i = 1; i < list.Count; i++)
+            {
+                var item = list[i];
+                float distance = Mathf.Pow(item.transform.position.x - position.x, 2) + 
+                                 Mathf.Pow(item.transform.position.y - position.y, 2) +
+                                 Mathf.Pow(item.transform.position.z - position.z, 2);
+
+                if (distance < maxDistance)
+                {
+                    maxDistance = distance;
+                    gameObjectToReturn = item;
+                }
+            }
+            return gameObjectToReturn;
+        }
+
+        public static RaycastHit GetClosestItem(this IList<RaycastHit> list, Vector3 position)
+        {
+            float maxDistance = float.MaxValue;
+            RaycastHit raycastToReturn = list[0];
+            for (int i = 1; i < list.Count; i++)
+            {
+                var item = list[i];
+                if (item.collider == null) continue;
+
+                if (item.distance < maxDistance)
+                {
+                    maxDistance = item.distance;
+                    raycastToReturn = item;
+                }
+            }
+            return raycastToReturn;
+        }
     }
 
     public static class GameObjectExtensions

@@ -103,8 +103,8 @@ namespace BlownAway.Character.Movements
         protected override void StartScript(CharacterManager manager)
         {
             parent = manager.CharacterCollider.Rigidbody.transform.parent;
-            MaxGroundHitResults = new RaycastHit[2];
-            MinGroundHitResults = new RaycastHit[2];
+            MaxGroundHitResults = new RaycastHit[4];
+            MinGroundHitResults = new RaycastHit[4];
             JumpBufferHitResults = new RaycastHit[2];
             GroundPoundHitResults = new RaycastHit[2];
             SetGravityTo(manager, manager.Data.FallData.BaseData.BaseGravity, manager.Data.FallData.BaseData.MinGravity, manager.Data.FallData.BaseData.MaxGravity, manager.Data.FallData.BaseData.GravityIncreaseByFrame, manager.Data.FallData.BaseData.GravityIncreaseDecelerationByFrame);
@@ -230,7 +230,9 @@ namespace BlownAway.Character.Movements
             IsMaxGrounded = Physics.SphereCastNonAlloc(colliderPosition, manager.Data.GroundDetectionData.GroundDetectionSphereRadius, Vector3.down, MaxGroundHitResults, manager.Data.GroundDetectionData.MaxGroundCheckDistance, manager.Data.GroundDetectionData.GroundLayer) > 0;
 
             //if (IsGrounded)
+            Debug.LogWarning(MinGroundHitResults[0].collider + " // " + MinGroundHitResults[1].collider);
             LastGround = MinGroundHitResults[0];
+            //LastGround = MinGroundHitResults[1].collider == LastGround.collider ? MinGroundHitResults.GetClosestItem(colliderPosition) : MinGroundHitResults[0];
 
             if (lastGrounded != IsMinGrounded)
             {
