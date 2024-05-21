@@ -92,6 +92,7 @@ namespace BlownAway.Character.Animations
 
         private void UpdateCharacterMorpher()
         {
+            if (Time.timeScale <= 0) return;
             foreach (SkinnedMeshRenderer morpher in _skinnedMeshRenderers)
             {
                 if (morpher.sharedMesh.blendShapeCount < 1) return;
