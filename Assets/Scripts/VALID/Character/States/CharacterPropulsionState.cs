@@ -44,7 +44,6 @@ namespace BlownAway.Character.States
 
             manager.MovementManager.CheckForPropulsionEnd(manager);
 
-            manager.MovementManager.CheckIfGrounded(manager, true);
 
             manager.MovementManager.CheckForGroundPound(manager);
 
@@ -62,6 +61,8 @@ namespace BlownAway.Character.States
             manager.MovementManager.UpdateGravity(manager);
 
             manager.MovementManager.UpdateExternalForces();
+
+            manager.MovementManager.CheckIfGrounded(manager, true);
         }
         public override void LateUpdateState(CharacterManager manager)
         {
