@@ -18,13 +18,15 @@ namespace BlownAway.Character.States
         public CharacterDeathState DeathState = new CharacterDeathState();
         public CharacterCutsceneState CutsceneState = new CharacterCutsceneState();
 
+        [SerializeField] private bool _enableMovementsOnStart = true;
+
 
         private CharacterBaseState _currentState;
 
 
         protected override void StartScript(CharacterManager manager)
         {
-            _currentState = FallingState;
+            _currentState = _enableMovementsOnStart ? FallingState : CutsceneState;
             _currentState.EnterState(Manager, null);
         }
 

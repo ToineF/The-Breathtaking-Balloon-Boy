@@ -38,7 +38,10 @@ namespace BlownAway.Character.States
 
         public override void FixedUpdateState(CharacterManager manager)
         {
-            manager.MovementManager.UpdateGravity(manager);
+            if (manager.MovementManager.IsMinGrounded)
+                manager.MovementManager.UpdateStickToGround(manager);
+            else
+                manager.MovementManager.UpdateGravity(manager);
 
             manager.MovementManager.CheckIfGrounded(manager, false, false);
         }
