@@ -194,7 +194,26 @@ namespace BlownAway.Cutscenes
 
         private void SkipCutscene()
         {
-            Debug.LogError("SKIP");
+            _skipCutsceneTime = 0;
+            _isSkippingCutscene = false;
+            ForceEndCutscene();
+            foreach (var skipEvent in _currentInteractionSequence.OnSkipEvents)
+            {
+                skipEvent?.Invoke();
+            }
+        }
+
+        private void ForceEndCutscene()
+        {
+            // Wait for time
+            _waitForTimeManager.OnTimerEnd -= EndWaitForTime;
+
+            // Dialogue
+            _dialogueManager.OnDialogueEnd -= EndDialogue;
+            HideDialogueWindow();
+
+            // End Sequence
+            CurrentSequenceIndex = _currentInteractionSequence.SequenceElements.List.Count;
         }
         #endregion
     }

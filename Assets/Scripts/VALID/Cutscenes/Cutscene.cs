@@ -1,6 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace BlownAway.Cutscenes
 {
@@ -8,6 +8,7 @@ namespace BlownAway.Cutscenes
     {
         [field:BF_SubclassList.SubclassList(typeof(CutsceneElement)), SerializeField] public CutsceneElementWrapper SequenceElements { get; private set; }
         [field:SerializeField] public bool StopPlayerMovements { get; private set; }
+        [field:SerializeField] public List<UnityEvent> OnSkipEvents { get; private set; }
 
     }
 }
