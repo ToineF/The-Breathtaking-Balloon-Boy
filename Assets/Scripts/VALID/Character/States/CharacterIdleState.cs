@@ -39,7 +39,6 @@ namespace BlownAway.Character.States
                 return;
             }
 
-            manager.MovementManager.CheckIfGrounded(manager);
 
             manager.MovementManager.CheckForJumpStart(manager);
 
@@ -60,6 +59,8 @@ namespace BlownAway.Character.States
             manager.MovementManager.UpdateExternalForces();
 
             manager.MovementManager.UpdateStickToGround(manager);
+
+            manager.MovementManager.CheckIfGrounded(manager);
         }
         public override void LateUpdateState(CharacterManager manager)
         {

@@ -170,6 +170,15 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SkipCutscene"",
+                    ""type"": ""Button"",
+                    ""id"": ""fc385c55-a867-4a85-a2dc-4faf0fa0a5d0"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -885,6 +894,39 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Controller"",
                     ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a0a58e48-d018-466e-b7e9-58051f3023a1"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""SkipCutscene"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3e7c44a9-fa3d-4784-b341-24484064715c"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""SkipCutscene"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0681d5dc-0e61-4f30-b80f-a2ebf947c14c"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""SkipCutscene"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -2045,6 +2087,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         m_Player_LateralPropulsion = m_Player.FindAction("LateralPropulsion", throwIfNotFound: true);
         m_Player_DownPropulsion = m_Player.FindAction("DownPropulsion", throwIfNotFound: true);
         m_Player_CancelPropulsion = m_Player.FindAction("CancelPropulsion", throwIfNotFound: true);
+        m_Player_SkipCutscene = m_Player.FindAction("SkipCutscene", throwIfNotFound: true);
         // OLD_Player_Archive_2
         m_OLD_Player_Archive_2 = asset.FindActionMap("OLD_Player_Archive_2", throwIfNotFound: true);
         m_OLD_Player_Archive_2_Move = m_OLD_Player_Archive_2.FindAction("Move", throwIfNotFound: true);
@@ -2142,6 +2185,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_LateralPropulsion;
     private readonly InputAction m_Player_DownPropulsion;
     private readonly InputAction m_Player_CancelPropulsion;
+    private readonly InputAction m_Player_SkipCutscene;
     public struct PlayerActions
     {
         private @PlayerInputs m_Wrapper;
@@ -2162,6 +2206,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         public InputAction @LateralPropulsion => m_Wrapper.m_Player_LateralPropulsion;
         public InputAction @DownPropulsion => m_Wrapper.m_Player_DownPropulsion;
         public InputAction @CancelPropulsion => m_Wrapper.m_Player_CancelPropulsion;
+        public InputAction @SkipCutscene => m_Wrapper.m_Player_SkipCutscene;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -2219,6 +2264,9 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
             @CancelPropulsion.started += instance.OnCancelPropulsion;
             @CancelPropulsion.performed += instance.OnCancelPropulsion;
             @CancelPropulsion.canceled += instance.OnCancelPropulsion;
+            @SkipCutscene.started += instance.OnSkipCutscene;
+            @SkipCutscene.performed += instance.OnSkipCutscene;
+            @SkipCutscene.canceled += instance.OnSkipCutscene;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -2271,6 +2319,9 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
             @CancelPropulsion.started -= instance.OnCancelPropulsion;
             @CancelPropulsion.performed -= instance.OnCancelPropulsion;
             @CancelPropulsion.canceled -= instance.OnCancelPropulsion;
+            @SkipCutscene.started -= instance.OnSkipCutscene;
+            @SkipCutscene.performed -= instance.OnSkipCutscene;
+            @SkipCutscene.canceled -= instance.OnSkipCutscene;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -2528,6 +2579,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         void OnLateralPropulsion(InputAction.CallbackContext context);
         void OnDownPropulsion(InputAction.CallbackContext context);
         void OnCancelPropulsion(InputAction.CallbackContext context);
+        void OnSkipCutscene(InputAction.CallbackContext context);
     }
     public interface IOLD_Player_Archive_2Actions
     {

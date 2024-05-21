@@ -33,12 +33,14 @@ namespace BlownAway.Character.States
             if (manager.Inputs.NextDialoguePressed)
                 manager.CutsceneManager.DialogueManager.GoToNextText();
 
-            manager.MovementManager.CheckIfGrounded(manager, false, false);
+            manager.CutsceneManager.SetSkipCutscene(manager.Inputs.SkipCutscene);
         }
 
         public override void FixedUpdateState(CharacterManager manager)
         {
             manager.MovementManager.UpdateGravity(manager);
+
+            manager.MovementManager.CheckIfGrounded(manager, false, false);
         }
 
         public override void LateUpdateState(CharacterManager manager)

@@ -29,7 +29,7 @@ namespace BlownAway.Character.Feedbacks
 
 
             // SFX
-            AudioManager?.PlayClip(feedback.SFX.GetRandomItem());
+            if (feedback.SFX.Length > 0) AudioManager?.PlayClip(feedback.SFX.GetRandomItem());
 
             // Haptic
             HapticManager?.VibrateForTime(feedback.HapticFeedback);

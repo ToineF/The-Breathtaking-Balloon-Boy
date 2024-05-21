@@ -40,9 +40,6 @@ namespace BlownAway.Character.States
             manager.MovementManager.CheckForPropulsionStartOnAir(manager);
 
             manager.MovementManager.CheckForDashStart(manager);
-
-            manager.MovementManager.CheckIfGrounded(manager);
-
         }
 
 
@@ -55,6 +52,8 @@ namespace BlownAway.Character.States
             manager.MovementManager.UpdateGravity(manager);
 
             manager.MovementManager.UpdateExternalForces();
+            manager.MovementManager.CheckIfGrounded(manager);
+
         }
 
         public override void LateUpdateState(CharacterManager manager)

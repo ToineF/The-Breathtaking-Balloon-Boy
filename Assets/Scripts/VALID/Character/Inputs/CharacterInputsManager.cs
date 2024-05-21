@@ -46,7 +46,7 @@ namespace BlownAway.Character.Inputs
 
         // Cutscenes
         public bool NextDialoguePressed { get; private set; }
-    
+        public bool SkipCutscene { get; private set; }
 
         // Inputs
         private PlayerInputs _inputs;
@@ -94,6 +94,8 @@ namespace BlownAway.Character.Inputs
             _inputs.Player.GroundPound.performed += StartGroundPound;
 
             _inputs.Player.NextDialogue.performed += PlayNextDialogue;
+            _inputs.Player.SkipCutscene.performed += StartSkipCutscene;
+            _inputs.Player.SkipCutscene.canceled += StopSkipCutscene;
         }
 
         private void OnDisable()
@@ -262,6 +264,15 @@ namespace BlownAway.Character.Inputs
         private void PlayNextDialogue(InputAction.CallbackContext context)
         {
             NextDialoguePressed = true;
+        }
+
+        private void StartSkipCutscene(InputAction.CallbackContext context)
+        {
+            SkipCutscene = true;
+        }
+        private void StopSkipCutscene(InputAction.CallbackContext context)
+        {
+            SkipCutscene = false;
         }
     }
 }

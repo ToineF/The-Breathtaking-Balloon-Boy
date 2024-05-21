@@ -2,6 +2,7 @@ using UnityEngine;
 using BlownAway.Character.Air.Data;
 using BlownAway.Character.Movements.Data;
 using BlownAway.Camera.Data;
+using BlownAway.Cutscenes.Data;
 
 namespace BlownAway.Character.Data 
 {
@@ -28,6 +29,9 @@ namespace BlownAway.Character.Data
 
         // Power Up Data
         [field:SerializeField] public CharacterPowerUpData PowerUpData { get; private set; }
+        
+        // Cutscene Data
+        [field:SerializeField] public CharacterCutsceneData CutsceneData { get; private set; }
 
         // Feedbacks Data
         [field:SerializeField] public CharacterFeedbacksData FeedbacksData { get; private set; }

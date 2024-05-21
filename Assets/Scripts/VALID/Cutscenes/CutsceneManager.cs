@@ -1,19 +1,24 @@
 using BlownAway.Character;
 using UnityEngine;
 using UnityEngine.Playables;
-using UnityEngine.Timeline;
+using System;
 
 namespace BlownAway.Cutscenes
 {
     public class CutsceneManager : CharacterSubComponent
     {
         public DialogueManager DialogueManager { get => _dialogueManager; set => _dialogueManager = value; }
+        public float NormalizedSkipCutsceneTime { get => Mathf.Clamp01(_skipCutsceneTime / Mathf.Max(Manager.Data.CutsceneData.CutsceneSkipTime, 0.0001f)); }
 
         [SerializeField] private DialogueManager _dialogueManager;
         [SerializeField] private CutsceneCameraManager _cameraManager;
         [SerializeField] private CutsceneWaitForTimeManager _waitForTimeManager;
 
         private CharacterManager _character;
+
+        // Skip
+        private float _skipCutsceneTime;
+        private bool _isSkippingCutscene;
 
         public int CurrentSequenceIndex
         {
@@ -157,14 +162,40 @@ namespace BlownAway.Cutscenes
         {
             timeline.Director.Play();
             timeline.Director.stopped += EndTimeline;
-            Debug.Log("start timeline");
         }
         private void EndTimeline(PlayableDirector director)
         {
-            Debug.Log("end timeline");
             director.stopped -= EndTimeline;
             _dialogueManager.OnDialogueEnd -= EndDialogue;
             GoToNextSequenceElement();
         }
+
+        #region Skip
+        public void SetSkipCutscene(bool isSkipping)
+        {
+            _isSkippingCutscene = isSkipping;
+        }
+
+        private void Update()
+        {
+            if (!_isSkippingCutscene)
+            {
+                _skipCutsceneTime = 0;
+                return;
+            }
+
+            _skipCutsceneTime += Time.deltaTime;
+
+            if (_skipCutsceneTime > Manager.Data.CutsceneData.CutsceneSkipTime)
+            {
+                SkipCutscene();
+            }
+        }
+
+        private void SkipCutscene()
+        {
+            Debug.LogError("SKIP");
+        }
+        #endregion
     }
 }
