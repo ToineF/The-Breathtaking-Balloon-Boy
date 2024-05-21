@@ -513,6 +513,12 @@ namespace BlownAway.Character.Movements
             }
         }
 
+        public void CheckForJacketToggleNoDerive(CharacterManager manager)
+        {
+            if (manager.AirManager.AirIsEmpty) return;
+            CheckForJacketToggle(manager);
+        }
+
         public void StartDeriveTimer(CharacterManager manager)
         {
             DeriveTimer = manager.Data.PropulsionData.DeriveTime;
@@ -526,7 +532,6 @@ namespace BlownAway.Character.Movements
         {
             if (!manager.Data.AirData.DeriveStartsWhenAirIsEmpty || !manager.AirManager.AirIsEmpty) return;
             if (!manager.Feedbacks.DeriveVFX.isPlaying) manager.Feedbacks.DeriveVFX.Play();
-
 
             UpdateDeriveTimer(manager);
 
