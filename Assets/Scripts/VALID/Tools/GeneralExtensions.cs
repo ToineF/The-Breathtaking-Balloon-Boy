@@ -540,6 +540,36 @@ namespace AntoineFoucault.Utilities
         {
             return values.Select((b, i) => object.Equals(b, val) ? i : -1).Where(i => i != -1).ToArray();
         }
+
+        public static GameObject GetRandomPonderatedGameObject(this IList<PonderableGameObject> list)
+        {
+            int total = 0;
+            Dictionary<int, GameObject> gameObjectToSpawn = new Dictionary<int, GameObject>();
+            foreach (var go in list)
+            {
+                gameObjectToSpawn.Add(total, go.GameObject);
+                total += go.Probability;
+            }
+
+            int randomIndex = UnityEngine.Random.Range(0, total);
+            int max = 0;
+
+            foreach (var go in gameObjectToSpawn)
+            {
+                if (go.Key > randomIndex) continue;
+                if (max < go.Key) max = go.Key;
+            }
+
+            return gameObjectToSpawn[max];
+        }
+
+
+        [Serializable]
+        public struct PonderableGameObject
+        {
+            public int Probability;
+            public GameObject GameObject;
+        }
     }
 
     public static class TransformExtensions
@@ -563,6 +593,44 @@ namespace AntoineFoucault.Utilities
             transform.position = targetTransform.position;
             transform.rotation = targetTransform.rotation;
             transform.localScale = targetTransform.localScale;
+        }
+
+        public static GameObject GetClosestItem(this IList<GameObject> list, Vector3 position)
+        {
+            float maxDistance = float.MaxValue;
+            GameObject gameObjectToReturn = list[0];
+            for (int i = 1; i < list.Count; i++)
+            {
+                var item = list[i];
+                float distance = Mathf.Pow(item.transform.position.x - position.x, 2) + 
+                                 Mathf.Pow(item.transform.position.y - position.y, 2) +
+                                 Mathf.Pow(item.transform.position.z - position.z, 2);
+
+                if (distance < maxDistance)
+                {
+                    maxDistance = distance;
+                    gameObjectToReturn = item;
+                }
+            }
+            return gameObjectToReturn;
+        }
+
+        public static RaycastHit GetClosestItem(this IList<RaycastHit> list, Vector3 position)
+        {
+            float maxDistance = float.MaxValue;
+            RaycastHit raycastToReturn = list[0];
+            for (int i = 1; i < list.Count; i++)
+            {
+                var item = list[i];
+                if (item.collider == null) continue;
+
+                if (item.distance < maxDistance)
+                {
+                    maxDistance = item.distance;
+                    raycastToReturn = item;
+                }
+            }
+            return raycastToReturn;
         }
     }
 

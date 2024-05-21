@@ -63,7 +63,7 @@ namespace BlownAway.Character.Movements
 
         // Derive
         public float DeriveTimer { get; private set; }
-        public float NormalizedDeriveAirAmount { get => DeriveTimer / Mathf.Max(Manager.Data.PropulsionData.DeriveTime, 0.0001f); }
+        public float NormalizedDeriveAirAmount { get => Mathf.Clamp01(DeriveTimer / Mathf.Max(Manager.Data.PropulsionData.DeriveTime, 0.0001f)); }
 
 
         // Ground Detection
@@ -103,8 +103,8 @@ namespace BlownAway.Character.Movements
         protected override void StartScript(CharacterManager manager)
         {
             parent = manager.CharacterCollider.Rigidbody.transform.parent;
-            MaxGroundHitResults = new RaycastHit[2];
-            MinGroundHitResults = new RaycastHit[2];
+            MaxGroundHitResults = new RaycastHit[4];
+            MinGroundHitResults = new RaycastHit[4];
             JumpBufferHitResults = new RaycastHit[2];
             GroundPoundHitResults = new RaycastHit[2];
             SetGravityTo(manager, manager.Data.FallData.BaseData.BaseGravity, manager.Data.FallData.BaseData.MinGravity, manager.Data.FallData.BaseData.MaxGravity, manager.Data.FallData.BaseData.GravityIncreaseByFrame, manager.Data.FallData.BaseData.GravityIncreaseDecelerationByFrame);
@@ -230,7 +230,9 @@ namespace BlownAway.Character.Movements
             IsMaxGrounded = Physics.SphereCastNonAlloc(colliderPosition, manager.Data.GroundDetectionData.GroundDetectionSphereRadius, Vector3.down, MaxGroundHitResults, manager.Data.GroundDetectionData.MaxGroundCheckDistance, manager.Data.GroundDetectionData.GroundLayer) > 0;
 
             //if (IsGrounded)
+            Debug.LogWarning(MinGroundHitResults[0].collider + " // " + MinGroundHitResults[1].collider);
             LastGround = MinGroundHitResults[0];
+            //LastGround = MinGroundHitResults[1].collider == LastGround.collider ? MinGroundHitResults.GetClosestItem(colliderPosition) : MinGroundHitResults[0];
 
             if (lastGrounded != IsMinGrounded)
             {
@@ -279,7 +281,7 @@ namespace BlownAway.Character.Movements
             if (LastGround.collider.GetComponent<ParentableCollider>()) manager.CharacterCollider.Rigidbody.transform.SetParent(LastGround.collider.transform);
 
             // VFX
-            manager.Feedbacks.PlayFeedback(manager.Data.FeedbacksData.LandingFeedback, manager.CharacterCollider.Rigidbody.transform.position, manager.Data.FeedbacksData.LandingFeedback.VFX.transform.rotation, null);
+            manager.Feedbacks.PlayFeedback(manager.Data.FeedbacksData.LandingFeedback, colliderPosition + Vector3.down * manager.Data.GroundDetectionData.TargetDistanceFromGround, manager.Data.FeedbacksData.LandingFeedback.VFX.transform.rotation, null);
 
             //if (LastGround.collider != null)
             //{
@@ -323,6 +325,7 @@ namespace BlownAway.Character.Movements
         {
             if (LastGround.collider == null) return;
             if (LastGround.distance < 0.001f) return;
+            Debug.LogWarning(LastGround.collider.name);
 
             //CurrentVelocity += springForce;
             Vector3 rigidbodyPosition = manager.CharacterCollider.Rigidbody.transform.position;

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using AntoineFoucault.Utilities;
+using static AntoineFoucault.Utilities.CollectionsExtensions;
 
 public class Tiling3D : MonoBehaviour
 {
@@ -96,9 +97,9 @@ public class Tiling3D : MonoBehaviour
             if ((((x == 0 || x==Width-1) && z%2== even) || ((z == 0 || z == Length - 1) && x % 2 == even) || score > 1) && y == 1 )
             {
                 if (score <= 1)
-                    block = TilesetData.DoorsFloor[0].EdgeTile[0];
+                    block = TilesetData.DoorsFloor[0].EdgeTile[0].GameObject;
                 else
-                    block = TilesetData.DoorsFloor[0].CornerTile[0];
+                    block = TilesetData.DoorsFloor[0].CornerTile[0].GameObject;
             } else
             {
                 block = null;
@@ -108,33 +109,33 @@ public class Tiling3D : MonoBehaviour
         if (score <= 1) // Center
         {
             if (y == 0)
-                block = TilesetData.DownFloor[0].CenterTile[0];
+                block = TilesetData.DownFloor[0].CenterTile[0].GameObject;
             else if (y == Height - 1)
             {
                 int topScore = GetBlockScore(x, y, z, 1);
 
-                if (topScore >= 2) block = TilesetData.TopFloor[0].CornerTile[0];
-                else if (topScore >= 1) block = TilesetData.TopFloor[0].EdgeTile[0];
-                else block = TilesetData.TopFloor[0].CenterTile[0];
+                if (topScore >= 2) block = TilesetData.TopFloor[0].CornerTile[0].GameObject;
+                else if (topScore >= 1) block = TilesetData.TopFloor[0].EdgeTile[0].GameObject;
+                else block = TilesetData.TopFloor[0].CenterTile[0].GameObject;
             }
             else
-                block = _middleFloors[y-1].CornerTile.GetRandomItem();
+                block = _middleFloors[y-1].CornerTile.GetRandomPonderatedGameObject();
         }
         else if (score == 2) // Edges
         {
             if (y == 0)
-                block = TilesetData.DownFloor[0].EdgeTile[0];
+                block = TilesetData.DownFloor[0].EdgeTile[0].GameObject;
             else if (y == Height - 1)
-                block = TilesetData.UpFloor[0].EdgeTile[0];
+                block = TilesetData.UpFloor[0].EdgeTile[0].GameObject;
             else
-                block = _middleFloors[y-1].EdgeTile.GetRandomItem();
+                block = _middleFloors[y-1].EdgeTile.GetRandomPonderatedGameObject();
         }
         else // Corners
         {
             if (y == 0)
-                block = TilesetData.DownFloor[0].CornerTile[0];
+                block = TilesetData.DownFloor[0].CornerTile[0].GameObject;
             else
-                block = TilesetData.UpFloor[0].CornerTile[0];
+                block = TilesetData.UpFloor[0].CornerTile[0].GameObject;
         }
 
         return block;
