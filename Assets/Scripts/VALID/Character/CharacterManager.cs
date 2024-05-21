@@ -93,6 +93,7 @@ namespace BlownAway.Character
             UIManager.InitScript(this);
             PauseMenu.InitScript(this);
             AccessibilityOptions.InitScript(this);
+            CutsceneManager.InitScript(this);
         }
 
 

@@ -32,6 +32,8 @@ namespace BlownAway.Character.States
         {
             if (manager.Inputs.NextDialoguePressed)
                 manager.CutsceneManager.DialogueManager.GoToNextText();
+
+            manager.CutsceneManager.SetSkipCutscene(manager.Inputs.SkipCutscene);
         }
 
         public override void FixedUpdateState(CharacterManager manager)
