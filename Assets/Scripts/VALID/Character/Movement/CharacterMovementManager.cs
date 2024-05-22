@@ -35,6 +35,7 @@ namespace BlownAway.Character.Movements
         public float CurrentGravityIncreaseDeceleration { get; private set; }
 
         private Coroutine _currentFallCoroutine;
+        private Vector3 _lastPosition;
 
         // Propulsion Inputs (Propulsion) - Have this as a generic version for other movements
         public bool IsJacketInflated { get; private set; }
@@ -223,13 +224,15 @@ namespace BlownAway.Character.Movements
         {
             var lastGrounded = IsMinGrounded;
             Vector3 colliderPosition = new Vector3(manager.CharacterCollider.Collider.bounds.center.x, manager.CharacterCollider.Collider.bounds.min.y, manager.CharacterCollider.Collider.bounds.center.z);
+            float maxFallSpeed = Mathf.Max(_lastPosition.y - manager.CharacterCollider.Collider.transform.position.y, 0);
+
+            CanJumpBuffer = Physics.SphereCastNonAlloc(colliderPosition, manager.Data.GroundDetectionData.GroundDetectionSphereRadius, Vector3.down, JumpBufferHitResults, Mathf.Max(manager.Data.GroundDetectionData.JumpBufferCheckDistance, maxFallSpeed), manager.Data.GroundDetectionData.GroundLayer) > 0;
             
-            CanJumpBuffer = Physics.SphereCastNonAlloc(colliderPosition, manager.Data.GroundDetectionData.GroundDetectionSphereRadius, Vector3.down, JumpBufferHitResults, manager.Data.GroundDetectionData.JumpBufferCheckDistance, manager.Data.GroundDetectionData.GroundLayer) > 0;
-            
-            IsMinGrounded = Physics.SphereCastNonAlloc(colliderPosition, manager.Data.GroundDetectionData.GroundDetectionSphereRadius, Vector3.down, MinGroundHitResults, manager.Data.GroundDetectionData.MinGroundCheckDistance, manager.Data.GroundDetectionData.GroundLayer) > 0;
-            IsMaxGrounded = Physics.SphereCastNonAlloc(colliderPosition, manager.Data.GroundDetectionData.GroundDetectionSphereRadius, Vector3.down, MaxGroundHitResults, manager.Data.GroundDetectionData.MaxGroundCheckDistance, manager.Data.GroundDetectionData.GroundLayer) > 0;
+            IsMinGrounded = Physics.SphereCastNonAlloc(colliderPosition, manager.Data.GroundDetectionData.GroundDetectionSphereRadius, Vector3.down, MinGroundHitResults, Mathf.Max(manager.Data.GroundDetectionData.MinGroundCheckDistance, maxFallSpeed), manager.Data.GroundDetectionData.GroundLayer) > 0;
+            IsMaxGrounded = Physics.SphereCastNonAlloc(colliderPosition, manager.Data.GroundDetectionData.GroundDetectionSphereRadius, Vector3.down, MaxGroundHitResults, Mathf.Max(manager.Data.GroundDetectionData.MaxGroundCheckDistance, maxFallSpeed), manager.Data.GroundDetectionData.GroundLayer) > 0;
 
             //if (IsGrounded)
+            Debug.LogError("Fall Speed : " + maxFallSpeed + ", Position : " + manager.CharacterCollider.Collider.transform.position.y);
             Debug.LogWarning(MinGroundHitResults[0].collider + " // " + MinGroundHitResults[1].collider);
             LastGround = MinGroundHitResults[0];
             //LastGround = MinGroundHitResults[1].collider == LastGround.collider ? MinGroundHitResults.GetClosestItem(colliderPosition) : MinGroundHitResults[0];
@@ -375,6 +378,11 @@ namespace BlownAway.Character.Movements
             Vector3 colliderPosition = new Vector3(manager.CharacterCollider.Collider.bounds.center.x, manager.CharacterCollider.Collider.bounds.min.y, manager.CharacterCollider.Collider.bounds.center.z);
             if (!Physics.Raycast(colliderPosition, Vector3.down, out RaycastHit hit, manager.Data.GroundDetectionData.GroundLayer)) return;
             CurrentVelocity += manager.CharacterCollider.Collider.bounds.size - new Vector3(hit.point.x, hit.point.y + manager.CharacterCollider.Collider.bounds.extents.y / 2, hit.point.z);
+        }
+
+        private void LateUpdate()
+        {
+            _lastPosition = Manager.CharacterCollider.Collider.transform.position;
         }
         #endregion
 
