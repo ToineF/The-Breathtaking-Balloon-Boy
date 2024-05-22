@@ -1,3 +1,4 @@
+using FMODUnity;
 using UnityEngine;
 
 namespace BlownAway.Cutscenes
@@ -8,7 +9,7 @@ namespace BlownAway.Cutscenes
         public string Name;
         public Color DialogueBoxColor;
         public Color DialogueTextColor;
-        public AudioClip[] SoundsTalk;
+        public EventReference[] SoundsTalk;
         public int TalkFrequency;
     }
 }
