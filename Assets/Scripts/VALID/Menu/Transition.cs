@@ -104,18 +104,18 @@ public class Transition : MonoBehaviour
         } 
         else // Timer Ticking
         {
-            _timer -= Time.deltaTime;
+            _timer -= Time.unscaledDeltaTime;
         }
     }
 
     private float AnimationTransition(string transitionName)
     {
-        _animator.Play(transitionName);
+        _animator.PlayInFixedTime(transitionName);
         var _stateInfo = _animator.GetCurrentAnimatorStateInfo(0);
         float _animationLength = (1 / _stateInfo.length);
         float _framePerSecondsInAnimation = 24;
         float _targetFPS = 60;
-        float _animationDuration = (1-_animationLength / _framePerSecondsInAnimation * _targetFPS * Time.deltaTime) + 1;
+        float _animationDuration = (1-_animationLength / _framePerSecondsInAnimation * _targetFPS * Time.unscaledDeltaTime) + 1;
         return _animationDuration;
     }
 

@@ -63,6 +63,7 @@ namespace BlownAway.Character
             Manager.Inputs.EnableInputs(true);
             GameIsPaused = false;
             CloseMenu(GlobalPauseUIMenu);
+            CloseMenu(OptionsPauseUIMenu);
         }
 
         public void Pause()
@@ -102,5 +103,4 @@ namespace BlownAway.Character
             if (firstSelected != null) EventSystem.current.SetSelectedGameObject(firstSelected);
         }
     }
-
 }

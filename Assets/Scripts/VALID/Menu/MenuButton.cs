@@ -54,6 +54,7 @@ public class MenuButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     {
         if (_menuManager.CanClickButtons)
         {
+            Debug.Log("QUIT");
             _menuManager.SetButtonsUnclickable();
             _menuManager.Transition.SetTransition(() => Application.Quit());
 
