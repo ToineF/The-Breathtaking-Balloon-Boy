@@ -46,8 +46,8 @@ namespace BlownAway.Character
 
         private void StartTogglePause(InputAction.CallbackContext context)
         {
-            if (Manager.States.IsInState(Manager.States.CutsceneState)) return; //SPECIFIC SCENES WHERE WE DONT WANT THE PLAYER TO PAUSE
-                                                                                // + specific moments when you don't want the player to be able to pause (ex : Quit Game Transition)
+            if (Manager.States.IsInMovableState() == false) return; //SPECIFIC SCENES WHERE WE DONT WANT THE PLAYER TO PAUSE
+                                                                    // + specific moments when you don't want the player to be able to pause (ex : Quit Game Transition)
 
             if (GameIsPaused)
                 Resume();

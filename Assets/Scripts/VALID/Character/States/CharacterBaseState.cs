@@ -1,6 +1,3 @@
-using UnityEngine;
-
-
 namespace BlownAway.Character.States
 {
     public abstract class CharacterBaseState
@@ -10,5 +7,7 @@ namespace BlownAway.Character.States
         public abstract void FixedUpdateState(CharacterManager manager);
         public abstract void LateUpdateState(CharacterManager manager);
         public abstract void ExitState(CharacterManager manager);
+
+        public abstract bool IsMovable { get; }
     }
 }

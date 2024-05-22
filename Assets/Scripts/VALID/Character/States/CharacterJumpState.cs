@@ -6,6 +6,7 @@ namespace BlownAway.Character.States
 {
     public class CharacterJumpState : CharacterBaseState
     {
+        public override bool IsMovable { get => true; }
 
         public enum JumpState
         {

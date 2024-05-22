@@ -939,6 +939,18 @@ namespace BlownAway.Character.Movements
         }
         #endregion
 
+        #region Cutscene
+        public void SetPlayerFallingState(CharacterManager manager)
+        {
+            manager.States.SwitchState(manager.States.FallingState);
+        }
+
+        public void SetPlayerMenuState(CharacterManager manager)
+        {
+            manager.States.SwitchState(manager.States.MenuState);
+        }
+        #endregion
+
         #region Feedbacks
         public void UpdateWalkFeedback(CharacterManager manager)
         {
@@ -950,6 +962,7 @@ namespace BlownAway.Character.Movements
             }
         }
         #endregion
+
 
     }
 

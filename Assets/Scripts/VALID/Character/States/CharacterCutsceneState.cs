@@ -4,6 +4,8 @@ namespace BlownAway.Character.States
 {
     public class CharacterCutsceneState : CharacterBaseState
     {
+        public override bool IsMovable { get => false; }
+
         public enum CutsceneState
         {
             BEFORE = 0,

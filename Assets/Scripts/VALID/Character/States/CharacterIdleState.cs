@@ -5,6 +5,8 @@ namespace BlownAway.Character.States
 {
     public class CharacterIdleState : CharacterBaseState
     {
+        public override bool IsMovable { get => true; }
+
         public override void EnterState(CharacterManager manager, CharacterBaseState previousState)
         {
             Debug.Log("IDLE");

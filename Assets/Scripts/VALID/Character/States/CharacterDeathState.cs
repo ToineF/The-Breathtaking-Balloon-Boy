@@ -4,6 +4,8 @@ namespace BlownAway.Character.States
 {
     public class CharacterDeathState : CharacterBaseState
     {
+        public override bool IsMovable { get => false; }
+
         public override void EnterState(CharacterManager manager, CharacterBaseState previousState)
         {
             Debug.Log("DEATH");

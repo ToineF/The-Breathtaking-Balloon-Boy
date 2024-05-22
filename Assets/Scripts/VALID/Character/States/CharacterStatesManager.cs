@@ -17,6 +17,7 @@ namespace BlownAway.Character.States
         public CharacterGroundPoundState GroundPoundState = new CharacterGroundPoundState();
         public CharacterDeathState DeathState = new CharacterDeathState();
         public CharacterCutsceneState CutsceneState = new CharacterCutsceneState();
+        public CharacterMenuState MenuState = new CharacterMenuState();
 
         [SerializeField] private bool _enableMovementsOnStart = true;
 
@@ -26,7 +27,7 @@ namespace BlownAway.Character.States
 
         protected override void StartScript(CharacterManager manager)
         {
-            _currentState = _enableMovementsOnStart ? FallingState : CutsceneState;
+            _currentState = _enableMovementsOnStart ? FallingState : MenuState;
             _currentState.EnterState(Manager, null);
         }
 
@@ -63,6 +64,10 @@ namespace BlownAway.Character.States
         public bool IsInState(CharacterBaseState state)
         {
             return _currentState == state;
+        }
+        public bool IsInMovableState()
+        {
+            return _currentState.IsMovable;
         }
     }
 }
