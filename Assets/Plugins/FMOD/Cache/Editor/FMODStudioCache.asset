@@ -27,7 +27,7 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 2424
---- !u!114 &-8660765640316839032
+--- !u!114 &-8734183184881953445
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -37,14 +37,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/SFX/Character/Landing/char_landing_voice_02
+  m_Name: event:/SFX/Character/Dash/char_dash_voice_01
   m_EditorClassIdentifier: 
-  Path: event:/SFX/Character/Landing/char_landing_voice_02
+  Path: event:/SFX/Character/Dash/char_dash_voice_01
   Guid:
-    Data1: 2068730370
-    Data2: 1297167310
-    Data3: 728055955
-    Data4: -2010478179
+    Data1: 538324149
+    Data2: 1261741062
+    Data3: 661300156
+    Data4: 171028313
   Banks:
   - {fileID: 7924125151239261790}
   IsStream: 0
@@ -53,7 +53,7 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 171
+  Length: 220
 --- !u!114 &-8388239733851764515
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -702,33 +702,6 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 500
---- !u!114 &-578116660393711625
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/SFX/Character/Landing/char_landing_voice_01
-  m_EditorClassIdentifier: 
-  Path: event:/SFX/Character/Landing/char_landing_voice_01
-  Guid:
-    Data1: 538324149
-    Data2: 1261741062
-    Data3: 661300156
-    Data4: 171028313
-  Banks:
-  - {fileID: 7924125151239261790}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 220
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -783,19 +756,19 @@ MonoBehaviour:
   - {fileID: 1539127861836124781}
   - {fileID: -6229283881540544270}
   - {fileID: -3185348873525843710}
-  - {fileID: -8660765640316839032}
   - {fileID: 889628252258595450}
   - {fileID: -1035173066670896753}
   - {fileID: -1933217744538055423}
   - {fileID: -6658746665809616365}
   - {fileID: 5447069839426020685}
-  - {fileID: -578116660393711625}
+  - {fileID: 5617521357332381599}
+  - {fileID: -8734183184881953445}
   EditorParameters: []
   MasterBanks:
   - {fileID: 7924125151239261790}
   StringsBanks:
   - {fileID: 3047809022776121466}
-  cacheTime: 638519927359181615
+  cacheTime: 638520171996508387
   cacheVersion: 131616
 --- !u!114 &88315621298956005
 MonoBehaviour:
@@ -974,10 +947,10 @@ MonoBehaviour:
   Path: Assets/Audio/FMOD/BlownAway_FMOD_Project/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638519927359181615
+  lastModified: 638520171996508387
   FileSizes:
   - Name: Desktop
-    Value: 2856
+    Value: 2852
   Exists: 1
 --- !u!114 &3369818827615252679
 MonoBehaviour:
@@ -1222,6 +1195,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 242
+--- !u!114 &5617521357332381599
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Character/Dash/char_dash_voice_02
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Character/Dash/char_dash_voice_02
+  Guid:
+    Data1: 2068730370
+    Data2: 1297167310
+    Data3: 728055955
+    Data4: -2010478179
+  Banks:
+  - {fileID: 7924125151239261790}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 171
 --- !u!114 &6202223760404609088
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1318,7 +1318,7 @@ MonoBehaviour:
   Path: Assets/Audio/FMOD/BlownAway_FMOD_Project/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638519927359141600
+  lastModified: 638520171996468410
   FileSizes:
   - Name: Desktop
     Value: 1585248
