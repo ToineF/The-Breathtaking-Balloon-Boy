@@ -5,7 +5,7 @@ using System;
 using AntoineFoucault.Utilities;
 using UnityEngine.UI;
 using System.Collections.Generic;
-using System.Text;
+using BlownAway.Character.Feedbacks;
 
 namespace BlownAway.Cutscenes
 {
@@ -13,7 +13,6 @@ namespace BlownAway.Cutscenes
     {
         public Action OnDialogueEnd;
 
-        [SerializeField] AudioClip _dialogueContinueSound;
 
         public int CurrentTextIndex
         {
@@ -37,8 +36,10 @@ namespace BlownAway.Cutscenes
         [field:SerializeField] public CanvasGroup DialogueUI { get; private set; }
 
         [SerializeField] private TMP_Text _dialogueTextboxText;
+        [SerializeField] private CharacterFeedbacksManager _feedbackManager;
         [SerializeField] private Image _dialogueTextbox;
         [SerializeField] private TMP_Text _talkingCharacterNameText;
+        [SerializeField] private AudioClip _dialogueContinueSound;
 
         [Header("Text Effects")]
         [SerializeField] private TextEffectData _hiddenEffectData;
@@ -108,11 +109,10 @@ namespace BlownAway.Cutscenes
                 {
                     if (i % Math.Max(1, characterData.TalkFrequency) == 0 && char.IsLetterOrDigit(c))
                     {
-                        AudioClip sound = characterData.SoundsTalk.GetRandomItem();
-                        AudioManager.Instance?.PlayClip(sound);
+                        var sound = characterData.SoundsTalk.GetRandomItem();
+                        _feedbackManager?.AudioManager?.PlayClip(sound);
                     }
                 }
-
                 //_textEffectsByCharacters[_currentCharIndex]?.TextEffect.CharacterApparitionTime ??
                 yield return new WaitForSeconds(_currentCharWaitTime);
             }
