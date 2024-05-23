@@ -281,10 +281,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: event:/SFX/Character/Propulsion/char_propulsion_start_01
   Guid:
-    Data1: 1147073993
-    Data2: 1275629369
-    Data3: 1443161014
-    Data4: 129897147
+    Data1: 1921056468
+    Data2: 1216277461
+    Data3: -1635536461
+    Data4: -1722800700
   Banks:
   - {fileID: 7924125151239261790}
   IsStream: 0
@@ -293,7 +293,7 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 3250
+  Length: 1054
 --- !u!114 &-3604196653309808550
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -321,6 +321,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 500
+--- !u!114 &-3481746679908604135
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Character/Propulsion/char_propulsion_end_01
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Character/Propulsion/char_propulsion_end_01
+  Guid:
+    Data1: -1793597334
+    Data2: 1295033705
+    Data3: -1505149003
+    Data4: 643892178
+  Banks:
+  - {fileID: 7924125151239261790}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 489
 --- !u!114 &-3388425605650632908
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -764,12 +791,14 @@ MonoBehaviour:
   - {fileID: 1845421456856088929}
   - {fileID: -4078890130422339304}
   - {fileID: 6050077213407120550}
+  - {fileID: -3481746679908604135}
+  - {fileID: 1950718754047433014}
   EditorParameters: []
   MasterBanks:
   - {fileID: 7924125151239261790}
   StringsBanks:
   - {fileID: 3047809022776121466}
-  cacheTime: 638520769744230716
+  cacheTime: 638520784732192466
   cacheVersion: 131616
 --- !u!114 &88315621298956005
 MonoBehaviour:
@@ -987,6 +1016,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 189765
+--- !u!114 &1950718754047433014
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Character/Propulsion/char_propulsion_start_03
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Character/Propulsion/char_propulsion_start_03
+  Guid:
+    Data1: -2027754516
+    Data2: 1165073732
+    Data3: -950668909
+    Data4: 849637018
+  Banks:
+  - {fileID: 7924125151239261790}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 3312
 --- !u!114 &3047809022776121466
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1002,10 +1058,10 @@ MonoBehaviour:
   Path: Assets/Audio/FMOD/BlownAway_FMOD_Project/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638520769744230716
+  lastModified: 638520784732192466
   FileSizes:
   - Name: Desktop
-    Value: 3042
+    Value: 3110
   Exists: 1
 --- !u!114 &3369818827615252679
 MonoBehaviour:
@@ -1346,10 +1402,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: event:/SFX/Character/Propulsion/char_propulsion_start_02
   Guid:
-    Data1: -2027754516
-    Data2: 1165073732
-    Data3: -950668909
-    Data4: 849637018
+    Data1: 1147073993
+    Data2: 1275629369
+    Data3: 1443161014
+    Data4: 129897147
   Banks:
   - {fileID: 7924125151239261790}
   IsStream: 0
@@ -1358,7 +1414,7 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 3312
+  Length: 3250
 --- !u!114 &6202223760404609088
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1455,8 +1511,8 @@ MonoBehaviour:
   Path: Assets/Audio/FMOD/BlownAway_FMOD_Project/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638520769744170704
+  lastModified: 638520784732132452
   FileSizes:
   - Name: Desktop
-    Value: 8635616
+    Value: 8653760
   Exists: 1

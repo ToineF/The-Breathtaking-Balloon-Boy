@@ -14,6 +14,14 @@ namespace BlownAway.Character.Inputs
         Lateral = 4,
     }
 
+    public enum ControllerType
+    {
+        KEYBOARD = 0,
+        XBOX = 1,
+        PLAYSTATION = 2,
+        SWITCH = 3,
+    }
+
     public class CharacterInputsManager : CharacterSubComponent
     {
         // Movements
@@ -29,7 +37,7 @@ namespace BlownAway.Character.Inputs
         public bool CameraTopDownReleased { get; private set; }
 
         // Propulsion
-        public bool JacketInflateToggle {get; private set;}
+        public bool JacketInflateToggle { get; private set; }
         public PropulsionDirection PropulsionType { get; private set; }
         public bool StartPropulsion { get; private set; }
 
@@ -49,7 +57,19 @@ namespace BlownAway.Character.Inputs
         public bool SkipCutscene { get; private set; }
 
         // Inputs
+        public Action<ControllerType> OnControllerTypeChange;
+        public ControllerType ControllerType { get => _controllerType;
+            set
+            {
+                if (_controllerType != value) OnControllerTypeChange?.Invoke(value);
+                _controllerType = value;
+            }
+        }
         private PlayerInputs _inputs;
+        private Gamepad _gamepad;
+        private ControllerType _gamepadType;
+        private ControllerType _controllerType;
+        public bool IsGamepad { get; private set; }
 
         // Propulsion
         private Vector3 _propulsionDefaultDirection = Vector3.forward;
@@ -58,6 +78,10 @@ namespace BlownAway.Character.Inputs
         private void Awake()
         {
             _inputs = new PlayerInputs();
+
+            if (Gamepad.all.Count > 0)
+                _gamepad = Gamepad.all[0];
+            AssignControllerType();
         }
 
         private void OnEnable()
@@ -151,6 +175,7 @@ namespace BlownAway.Character.Inputs
             if (MoveInputDirection != Vector3.zero) LastMoveInputDirection = MoveInputDirection;
             if (previousPosition == Vector3.zero && MoveInputDirection != Vector3.zero) StartMoving = true;
             //else LastMoveInputDirection = _propulsionDefaultDirection; // Uncomment if you want transform.forward to be the default position
+            UpdateControllerType(context);
         }
 
         public void ResetLastPropulsionInputDirection()
@@ -162,32 +187,38 @@ namespace BlownAway.Character.Inputs
         {
             IsMouse = true;
             CameraMoveVector = context.ReadValue<Vector2>();
+            UpdateControllerType(context);
         }
 
         private void SetCameraTypeController(InputAction.CallbackContext context)
         {
             IsMouse = false;
             CameraMoveVector = context.ReadValue<Vector2>() * Time.deltaTime;
+            UpdateControllerType(context);
         }
 
         private void ResetCameraCenter(InputAction.CallbackContext context)
         {
             CameraCenter = true;
+            UpdateControllerType(context);
         }
 
         private void StartCameraTopDown(InputAction.CallbackContext context)
         {
             CameraTopDownPressed = true;
+            UpdateControllerType(context);
         }
         private void StopCameraTopDown(InputAction.CallbackContext context)
         {
             CameraTopDownReleased = true;
+            UpdateControllerType(context);
         }
 
         private void SetUpPropulsion(InputAction.CallbackContext context)
         {
             PropulsionType |= PropulsionDirection.Up;
             StartPropulsion = true;
+            UpdateControllerType(context);
         }
 
         private void UnsetUpPropulsion(InputAction.CallbackContext context)
@@ -219,16 +250,19 @@ namespace BlownAway.Character.Inputs
         {
             IsJumping = true;
             StartedJumping = true;
+            UpdateControllerType(context);
         }
 
         private void StopJumping(InputAction.CallbackContext context)
         {
             IsJumping = false;
+            UpdateControllerType(context);
         }
 
         private void ToggleJacketInflation(InputAction.CallbackContext context)
         {
             JacketInflateToggle = true;
+            UpdateControllerType(context);
         }
 
         private void LateUpdate()
@@ -244,35 +278,90 @@ namespace BlownAway.Character.Inputs
             NextDialoguePressed = false;
             StartPropulsion = false;
             StartedJumping = false;
+
+            UpdateControllerType();
         }
+
+        private void UpdateControllerType()
+        {
+            if (!IsGamepad)
+            {
+                ControllerType = ControllerType.KEYBOARD;
+            }
+            else
+            {
+                if (_gamepad == null)
+                {
+                    ControllerType = ControllerType.KEYBOARD;
+                    return;
+                }
+
+                AssignControllerType();
+            }
+        }
+
+        private void AssignControllerType()
+        {
+            if (Gamepad.all.Count <= 0) return;
+            var gamepad = Gamepad.all[0];
+
+            if (gamepad is UnityEngine.InputSystem.XInput.XInputController)
+            {
+                ControllerType = ControllerType.XBOX;
+            }
+            else if (gamepad is UnityEngine.InputSystem.DualShock.DualShockGamepad)
+            {
+                ControllerType = ControllerType.PLAYSTATION;
+            }
+            else if (gamepad is UnityEngine.InputSystem.Switch.SwitchProControllerHID)
+            {
+                ControllerType = ControllerType.SWITCH;
+            }
+            _gamepad = gamepad;
+            _gamepadType = ControllerType;
+        }
+
 
         private void StartFalling(InputAction.CallbackContext context)
         {
             StartedFalling = true;
+            UpdateControllerType(context);
         }
 
         private void StartGroundPound(InputAction.CallbackContext context)
         {
             StartedGroundPound = true;
+            UpdateControllerType(context);
         }
 
         private void StartDash(InputAction.CallbackContext context)
         {
             StartedDash = true;
+            UpdateControllerType(context);
         }
 
         private void PlayNextDialogue(InputAction.CallbackContext context)
         {
             NextDialoguePressed = true;
+            UpdateControllerType(context);
         }
 
         private void StartSkipCutscene(InputAction.CallbackContext context)
         {
             SkipCutscene = true;
+            UpdateControllerType(context);
         }
         private void StopSkipCutscene(InputAction.CallbackContext context)
         {
             SkipCutscene = false;
+            UpdateControllerType(context);
+        }
+
+        private void UpdateControllerType(InputAction.CallbackContext context)
+        {
+            string inputSource = context.control.path.Split('/')[1];
+            if (inputSource == "Keyboard" || inputSource == "Mouse") IsGamepad = false;
+            else IsGamepad = true;
         }
     }
 }

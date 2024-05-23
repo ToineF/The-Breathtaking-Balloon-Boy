@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1342868484027270831}
   - component: {fileID: 5909969402837755399}
   - component: {fileID: 984775439475812655}
+  - component: {fileID: 408879557644535682}
   m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
@@ -76,6 +77,24 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &408879557644535682
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1906794129563280583}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a044b2a6b6ce8ef43aeb482139c67205, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _manager: {fileID: 0}
+  _image: {fileID: 984775439475812655}
+  _keyboardSprite: {fileID: 21300000, guid: b5867da7e13e927488be4a21db138f59, type: 3}
+  _xboxSprite: {fileID: 0}
+  _playstationSprite: {fileID: 0}
+  _switchSprite: {fileID: 0}
 --- !u!1 &3545366996315826609
 GameObject:
   m_ObjectHideFlags: 0
@@ -330,6 +349,7 @@ GameObject:
   - component: {fileID: 6866780026026542041}
   - component: {fileID: 3980518841993232437}
   - component: {fileID: 912179296519929339}
+  - component: {fileID: 5233027656525714596}
   m_Layer: 5
   m_Name: Image (1)
   m_TagString: Untagged
@@ -395,6 +415,24 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &5233027656525714596
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6450431703125999465}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a044b2a6b6ce8ef43aeb482139c67205, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _manager: {fileID: 0}
+  _image: {fileID: 912179296519929339}
+  _keyboardSprite: {fileID: 21300000, guid: b5867da7e13e927488be4a21db138f59, type: 3}
+  _xboxSprite: {fileID: 0}
+  _playstationSprite: {fileID: 0}
+  _switchSprite: {fileID: 0}
 --- !u!1 &6870048376500466816
 GameObject:
   m_ObjectHideFlags: 0
