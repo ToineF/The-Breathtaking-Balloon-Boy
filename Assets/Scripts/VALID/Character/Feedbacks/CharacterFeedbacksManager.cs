@@ -2,6 +2,7 @@ using UnityEngine;
 using System;
 using BlownAway.Camera;
 using AntoineFoucault.Utilities;
+using FMODUnity;
 
 namespace BlownAway.Character.Feedbacks
 {
@@ -16,6 +17,10 @@ namespace BlownAway.Character.Feedbacks
         [field:SerializeField] public ParticleSystem WalkVFX { get; private set; }
         [field:SerializeField] public ParticleSystem PropulsionVFX { get; private set; }
         [field:SerializeField] public ParticleSystem DeriveVFX { get; private set; }
+
+        [field:Header("SFX References")]
+        [field:SerializeField] public GameObject PropulsionSFX { get; private set; }
+
 
         public void PlayFeedback(Feedback feedback)
         {

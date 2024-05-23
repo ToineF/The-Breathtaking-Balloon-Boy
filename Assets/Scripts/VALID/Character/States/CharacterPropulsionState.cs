@@ -20,8 +20,9 @@ namespace BlownAway.Character.States
 
             manager.MovementManager.EndGroundPound(manager);
 
-            // VFX
+            // Feedback
             manager.Feedbacks.PropulsionVFX.Play();
+            manager.Feedbacks.PropulsionSFX.SetActive(true);
             manager.Feedbacks.PlayFeedback(manager.Data.FeedbacksData.StartPropulsionFeedback);
         }
 
@@ -29,8 +30,9 @@ namespace BlownAway.Character.States
         {
             manager.MovementManager.LerpPropulsionSpeed(manager, 0, manager.Data.PropulsionData.BasePropulsionDecelTime, manager.Data.PropulsionData.BasePropulsionDecelCurve);
 
-            // VFX
+            // Feedback
             manager.Feedbacks.PropulsionVFX.Stop();
+            manager.Feedbacks.PropulsionSFX.SetActive(false);
             Debug.Log("END PROPULSION");
 
         }

@@ -27,6 +27,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 220
+--- !u!114 &-8491933794831350014
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Voices/Normal/char_talking_normal_14
+  m_EditorClassIdentifier: 
+  Path: event:/Voices/Normal/char_talking_normal_14
+  Guid:
+    Data1: 1923668302
+    Data2: 1253464273
+    Data3: -128260224
+    Data4: -1264670323
+  Banks:
+  - {fileID: 7924125151239261790}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 461
 --- !u!114 &-8388239733851764515
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -54,6 +81,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 336
+--- !u!114 &-7717992143815840873
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Voices/Normal/char_talking_normal_13
+  m_EditorClassIdentifier: 
+  Path: event:/Voices/Normal/char_talking_normal_13
+  Guid:
+    Data1: -47598302
+    Data2: 1230574316
+    Data3: -312183148
+    Data4: -1626386386
+  Banks:
+  - {fileID: 7924125151239261790}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 479
 --- !u!114 &-7560438208670374622
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -537,6 +591,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 469
+--- !u!114 &-1518486069071783081
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Voices/Normal/char_talking_normal_15
+  m_EditorClassIdentifier: 
+  Path: event:/Voices/Normal/char_talking_normal_15
+  Guid:
+    Data1: 22702595
+    Data2: 1175066001
+    Data3: -1504632177
+    Data4: 1525419347
+  Banks:
+  - {fileID: 7924125151239261790}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 470
 --- !u!114 &-1506501850912018506
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -823,12 +904,15 @@ MonoBehaviour:
   - {fileID: -1883539287967138269}
   - {fileID: 4177936872472779709}
   - {fileID: 8933599110795910658}
+  - {fileID: -1518486069071783081}
+  - {fileID: -7717992143815840873}
+  - {fileID: -8491933794831350014}
   EditorParameters: []
   MasterBanks:
   - {fileID: 7924125151239261790}
   StringsBanks:
   - {fileID: 3047809022776121466}
-  cacheTime: 638521024278505031
+  cacheTime: 638521075158560560
   cacheVersion: 131616
 --- !u!114 &88315621298956005
 MonoBehaviour:
@@ -1088,10 +1172,10 @@ MonoBehaviour:
   Path: Assets/Audio/FMOD/BlownAway_FMOD_Project/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638521024278505031
+  lastModified: 638521075158560560
   FileSizes:
   - Name: Desktop
-    Value: 3262
+    Value: 3358
   Exists: 1
 --- !u!114 &3369818827615252679
 MonoBehaviour:
@@ -1196,7 +1280,7 @@ MonoBehaviour:
   - {fileID: 7924125151239261790}
   IsStream: 0
   Is3D: 0
-  IsOneShot: 1
+  IsOneShot: 0
   Parameters:
   - {fileID: -5890136421217176565}
   MinDistance: 1
@@ -1568,10 +1652,10 @@ MonoBehaviour:
   Path: Assets/Audio/FMOD/BlownAway_FMOD_Project/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638521024278455058
+  lastModified: 638521075158519374
   FileSizes:
   - Name: Desktop
-    Value: 8677408
+    Value: 8690912
   Exists: 1
 --- !u!114 &8933599110795910658
 MonoBehaviour:
