@@ -1,6 +1,4 @@
 using UnityEngine;
-using System;
-using AntoineFoucault.Utilities;
 using BlownAway.Character;
 
 namespace BlownAway.City
