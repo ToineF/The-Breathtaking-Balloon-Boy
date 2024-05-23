@@ -232,7 +232,7 @@ namespace BlownAway.Character.Movements
             IsMaxGrounded = Physics.SphereCastNonAlloc(colliderPosition, manager.Data.GroundDetectionData.GroundDetectionSphereRadius, Vector3.down, MaxGroundHitResults, Mathf.Max(manager.Data.GroundDetectionData.MaxGroundCheckDistance, maxFallSpeed), manager.Data.GroundDetectionData.GroundLayer) > 0;
 
             //if (IsGrounded)
-            Debug.LogError("Fall Speed : " + maxFallSpeed + ", Position : " + manager.CharacterCollider.Collider.transform.position.y);
+            //Debug.LogError("Fall Speed : " + maxFallSpeed + ", Position : " + manager.CharacterCollider.Collider.transform.position.y);
             Debug.LogWarning(MinGroundHitResults[0].collider + " // " + MinGroundHitResults[1].collider);
             LastGround = MinGroundHitResults[0];
             //LastGround = MinGroundHitResults[1].collider == LastGround.collider ? MinGroundHitResults.GetClosestItem(colliderPosition) : MinGroundHitResults[0];
