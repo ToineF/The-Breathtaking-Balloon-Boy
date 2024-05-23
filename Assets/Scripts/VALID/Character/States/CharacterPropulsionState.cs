@@ -22,6 +22,7 @@ namespace BlownAway.Character.States
 
             // VFX
             manager.Feedbacks.PropulsionVFX.Play();
+            manager.Feedbacks.PlayFeedback(manager.Data.FeedbacksData.StartPropulsionFeedback);
         }
 
         public override void ExitState(CharacterManager manager)

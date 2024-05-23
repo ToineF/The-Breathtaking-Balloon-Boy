@@ -267,6 +267,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 400
+--- !u!114 &-4078890130422339304
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Character/Propulsion/char_propulsion_start_01
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Character/Propulsion/char_propulsion_start_01
+  Guid:
+    Data1: 1147073993
+    Data2: 1275629369
+    Data3: 1443161014
+    Data4: 129897147
+  Banks:
+  - {fileID: 7924125151239261790}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 3250
 --- !u!114 &-3604196653309808550
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -735,12 +762,14 @@ MonoBehaviour:
   - {fileID: 4755224979630864427}
   - {fileID: 1173786253069915078}
   - {fileID: 1845421456856088929}
+  - {fileID: -4078890130422339304}
+  - {fileID: 6050077213407120550}
   EditorParameters: []
   MasterBanks:
   - {fileID: 7924125151239261790}
   StringsBanks:
   - {fileID: 3047809022776121466}
-  cacheTime: 638520743476036396
+  cacheTime: 638520769744230716
   cacheVersion: 131616
 --- !u!114 &88315621298956005
 MonoBehaviour:
@@ -973,10 +1002,10 @@ MonoBehaviour:
   Path: Assets/Audio/FMOD/BlownAway_FMOD_Project/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638520743476036396
+  lastModified: 638520769744230716
   FileSizes:
   - Name: Desktop
-    Value: 2946
+    Value: 3042
   Exists: 1
 --- !u!114 &3369818827615252679
 MonoBehaviour:
@@ -1303,6 +1332,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 171
+--- !u!114 &6050077213407120550
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Character/Propulsion/char_propulsion_start_02
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Character/Propulsion/char_propulsion_start_02
+  Guid:
+    Data1: -2027754516
+    Data2: 1165073732
+    Data3: -950668909
+    Data4: 849637018
+  Banks:
+  - {fileID: 7924125151239261790}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 3312
 --- !u!114 &6202223760404609088
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1399,8 +1455,8 @@ MonoBehaviour:
   Path: Assets/Audio/FMOD/BlownAway_FMOD_Project/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638520743475996403
+  lastModified: 638520769744170704
   FileSizes:
   - Name: Desktop
-    Value: 8578752
+    Value: 8635616
   Exists: 1
