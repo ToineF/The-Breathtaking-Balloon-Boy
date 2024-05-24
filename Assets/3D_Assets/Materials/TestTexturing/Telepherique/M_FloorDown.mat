@@ -38,11 +38,15 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _AO:
-        m_Texture: {fileID: 2800000, guid: dce428d422d22614084be7a7c21ed085, type: 3}
+        m_Texture: {fileID: 2800000, guid: 62e6f0864b96f94488375e7b20e8e17e, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Alpha:
         m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _AmbientOcclusion:
+        m_Texture: {fileID: 2800000, guid: 62e6f0864b96f94488375e7b20e8e17e, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BASE_COLOR_MAP:
@@ -54,7 +58,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseColor:
-        m_Texture: {fileID: 2800000, guid: 0faf3a0471061284da4cb768f396552b, type: 3}
+        m_Texture: {fileID: 2800000, guid: cfbda0a36065b5d47a4ba2e43700aa72, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseMap:
@@ -93,16 +97,24 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _MainText:
+        m_Texture: {fileID: 2800000, guid: cfbda0a36065b5d47a4ba2e43700aa72, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _Map:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Metallic:
-        m_Texture: {fileID: 2800000, guid: 5f6d318f5bdf3b94d96efcc1a0de957f, type: 3}
+        m_Texture: {fileID: 2800000, guid: 4b8107739efda2f48be4cc535b1046f7, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
         m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MetallicText:
+        m_Texture: {fileID: 2800000, guid: 4b8107739efda2f48be4cc535b1046f7, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NormalDetail:
@@ -110,7 +122,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NormalMap:
-        m_Texture: {fileID: 2800000, guid: e1e62c68f238e9f479d9958a97a031ac, type: 3}
+        m_Texture: {fileID: 2800000, guid: ebc4e4ee757b9744d92992bf6f36fe42, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NormalText:
+        m_Texture: {fileID: 2800000, guid: ebc4e4ee757b9744d92992bf6f36fe42, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
@@ -134,7 +150,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Roughness:
-        m_Texture: {fileID: 2800000, guid: a4538de1ad2e6d24db1ea075f3f6d053, type: 3}
+        m_Texture: {fileID: 2800000, guid: bfaddbf0477700e4a9c2a223a88aea49, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _RougnhessText:
+        m_Texture: {fileID: 2800000, guid: bfaddbf0477700e4a9c2a223a88aea49, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SpecGlossMap:
@@ -183,8 +203,10 @@ Material:
     - _METALNESS: 0
     - _Metallic: 0
     - _MetallicSlider: 0
+    - _MetallicValue: 0
     - _NormalDetailIntensity: 0
     - _NormalIntensity: 0.75
+    - _NormalValue: 0
     - _OcclusionStrength: 1
     - _Opacity: 0
     - _Parallax: 0.005
@@ -196,6 +218,7 @@ Material:
     - _ReceiveShadows: 1
     - _RoughnessMax: 1
     - _RoughnessMin: 0.931
+    - _RoughnessValue: 0
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
@@ -203,7 +226,9 @@ Material:
     - _SrcBlendAlpha: 1
     - _Surface: 0
     - _TRANSPARENCY: 0
+    - _UseMetallic: 1
     - _UseMetallicMap: 1
+    - _UseRoughness: 1
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
@@ -212,6 +237,7 @@ Material:
     - _Color: {r: 0.94509804, g: 0.90588236, b: 0.89411765, a: 1}
     - _EMISSION_COLOR: {r: 0, g: 0, b: 0, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _MainColor: {r: 1, g: 1, b: 1, a: 0}
     - _MaskColor: {r: 1, g: 1, b: 1, a: 0}
     - _REFLECTIONS_COLOR: {r: 1, g: 1, b: 1, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
