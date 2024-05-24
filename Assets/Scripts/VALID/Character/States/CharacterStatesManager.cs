@@ -69,5 +69,11 @@ namespace BlownAway.Character.States
         {
             return _currentState.IsMovable;
         }
+
+        public void Die()
+        {
+            Debug.Log("die");
+            SwitchState(DeathState);
+        }
     }
 }

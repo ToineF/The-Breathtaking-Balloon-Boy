@@ -224,7 +224,10 @@ namespace BlownAway.Character.Movements
         {
             var lastGrounded = IsMinGrounded;
             Vector3 colliderPosition = new Vector3(manager.CharacterCollider.Collider.bounds.center.x, manager.CharacterCollider.Collider.bounds.min.y, manager.CharacterCollider.Collider.bounds.center.z);
+           
+            float fallSpeedAccel = Mathf.Max(manager.MovementManager.CurrentGravityIncreaseByFrame - manager.MovementManager.CurrentGravityIncreaseDeceleration, 0);
             float maxFallSpeed = Mathf.Max(_lastPosition.y - manager.CharacterCollider.Collider.transform.position.y, 0);
+            maxFallSpeed += fallSpeedAccel;
 
             CanJumpBuffer = Physics.SphereCastNonAlloc(colliderPosition, manager.Data.GroundDetectionData.GroundDetectionSphereRadius, Vector3.down, JumpBufferHitResults, Mathf.Max(manager.Data.GroundDetectionData.JumpBufferCheckDistance, maxFallSpeed), manager.Data.GroundDetectionData.GroundLayer) > 0;
 
