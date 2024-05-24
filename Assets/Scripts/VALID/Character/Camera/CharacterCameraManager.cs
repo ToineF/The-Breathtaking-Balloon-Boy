@@ -155,7 +155,7 @@ namespace BlownAway.Camera
 
         public void UpdateCameraAngle(CharacterManager manager) // Late Update
         {
-            _sensitivity = manager.Inputs.IsMouse ? manager.Data.CameraData.MouseSensitivity : manager.Data.CameraData.ControllerSensitivity;
+            _sensitivity = manager.Inputs.IsMouse ? manager.Data.CameraData.MouseSensitivityGameplay : manager.Data.CameraData.ControllerSensitivityGameplay;
             float xSign = (manager.Inputs.IsMouse ? manager.Data.CameraData.IsMouseXInverted : manager.Data.CameraData.IsControllerXInverted) ? -1 : 1;
             float ySign = (manager.Inputs.IsMouse ? manager.Data.CameraData.IsMouseYInverted : manager.Data.CameraData.IsControllerYInverted) ? -1 : 1;
             _cameraMoveVector = manager.Inputs.CameraMoveVector;

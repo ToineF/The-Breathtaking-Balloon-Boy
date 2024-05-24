@@ -8,15 +8,17 @@ namespace BlownAway.Camera.Data
         [field:Header("Mouse")]
         [field:SerializeField, Tooltip("Is the mouse cursor visible when the game plays?")] public bool SetCursorVisible { get; private set; }
         [field:SerializeField, Tooltip("The influence of the mouse on the camera speed")] public float MouseSensitivity { get; private set; } = 1;
+        public float MouseSensitivityGameplay { get; set; }
         public bool IsMouseXInverted { get; set; }
         public bool IsMouseYInverted { get; set; }
-        [field:SerializeField, Tooltip("Is the Y-Axis Inverted")] public bool IsXInvertedDefault { get; private set; }
-        [field:SerializeField, Tooltip("Is the Y-Axis Inverted")] public bool IsYInvertedDefault { get; private set; }
+        [field:SerializeField, Tooltip("Is the X-Axis Inverted")] public bool IsXInverted { get; private set; }
+        [field:SerializeField, Tooltip("Is the Y-Axis Inverted")] public bool IsYInverted { get; private set; }
 
         [field:Header("Controller")]
         [field:SerializeField, Tooltip("The influence of the controller on the camera speed")] public float ControllerSensitivity { get; private set; } = 1;
-        [field:SerializeField, Tooltip("Is the X-Axis Inverted")] public bool IsControllerXInverted { get; set; }
-        [field:SerializeField, Tooltip("Is the Y-Axis Inverted")] public bool IsControllerYInverted { get; set; }
+        public float ControllerSensitivityGameplay { get; set; }
+        public bool IsControllerXInverted { get; set; }
+        public bool IsControllerYInverted { get; set; }
 
         [field:Header("Positions")]
         [field:SerializeField, Tooltip("The default zoom position at the start of the scene")] public float ZoomDefault { get; private set; } = 10f;
