@@ -19,6 +19,11 @@ public class SliderText : MonoBehaviour
         _slider.onValueChanged.AddListener(UpdateText);
     }
 
+    private void Start()
+    {
+        UpdateText(_slider.value);
+    }
+
     private void UpdateText(float value)
     {
         if (_normalizeText)
