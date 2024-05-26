@@ -1,11 +1,13 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.EventSystems;
+using UnityEngine.Events;
 
 namespace BlownAway.Character
 {
     public class PauseMenu : SubMenu
     {
+        public UnityEvent OnPause;
+        public UnityEvent OnResume;
         public bool GameIsPaused { get; private set; } = false;
 
         [Header("References")]
@@ -62,6 +64,7 @@ namespace BlownAway.Character
             {
                 CloseMenu(submenu.CanvasGroup);
             }
+            OnResume?.Invoke();
         }
 
         public void Pause()
@@ -71,6 +74,7 @@ namespace BlownAway.Character
             GameIsPaused = true;
             OpenMenu(_globalPauseUIMenu);
             OpenMenu(CanvasGroup, FirstSelectedButton);
+            OnPause?.Invoke();
         }
     }
 }
