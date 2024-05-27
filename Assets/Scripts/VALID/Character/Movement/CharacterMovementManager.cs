@@ -87,6 +87,11 @@ namespace BlownAway.Character.Movements
         public RaycastHit[] GroundPoundHitResults { get; set; }
         public bool HasBalloonGroundPound { get; set; }
 
+
+        // Balloon Bounce
+        public bool IsAboveBalloon { get; private set; }
+        [Tooltip("The raycast hits stocked while looking for balloon bounce")] public RaycastHit[] AboveBalloonHitResults { get; private set; }
+
         private Transform _parent;
 
         // External Forces
@@ -106,6 +111,7 @@ namespace BlownAway.Character.Movements
             MinGroundHitResults = new RaycastHit[4];
             JumpBufferHitResults = new RaycastHit[2];
             GroundPoundHitResults = new RaycastHit[2];
+            AboveBalloonHitResults = new RaycastHit[1];
             SetGravityTo(manager, manager.Data.FallData.BaseData.BaseGravity, manager.Data.FallData.BaseData.MinGravity, manager.Data.FallData.BaseData.MaxGravity, manager.Data.FallData.BaseData.GravityIncreaseByFrame, manager.Data.FallData.BaseData.GravityIncreaseDecelerationByFrame);
         }
 
@@ -222,7 +228,7 @@ namespace BlownAway.Character.Movements
         {
             var lastGrounded = IsMinGrounded;
             Vector3 colliderPosition = new Vector3(manager.CharacterCollider.Collider.bounds.center.x, manager.CharacterCollider.Collider.bounds.min.y, manager.CharacterCollider.Collider.bounds.center.z);
-           
+
             float fallSpeedAccel = Mathf.Max(manager.MovementManager.CurrentGravityIncreaseByFrame - manager.MovementManager.CurrentGravityIncreaseDeceleration, 0);
             float maxFallSpeed = Mathf.Max(_lastPosition.y - manager.CharacterCollider.Collider.transform.position.y, 0);
             maxFallSpeed += fallSpeedAccel;
@@ -231,6 +237,7 @@ namespace BlownAway.Character.Movements
 
             IsMinGrounded = Physics.SphereCastNonAlloc(colliderPosition, manager.Data.GroundDetectionData.GroundDetectionSphereRadius, Vector3.down, MinGroundHitResults, Mathf.Max(manager.Data.GroundDetectionData.MinGroundCheckDistance, maxFallSpeed), manager.Data.GroundDetectionData.GroundLayer) > 0;
             IsMaxGrounded = Physics.SphereCastNonAlloc(colliderPosition, manager.Data.GroundDetectionData.GroundDetectionSphereRadius, Vector3.down, MaxGroundHitResults, Mathf.Max(manager.Data.GroundDetectionData.MaxGroundCheckDistance, maxFallSpeed), manager.Data.GroundDetectionData.GroundLayer) > 0;
+            CheckBalloonDown(manager, colliderPosition, maxFallSpeed);
 
             //if (IsGrounded)
             //Debug.LogError("Fall Speed : " + maxFallSpeed + ", Position : " + manager.CharacterCollider.Collider.transform.position.y);
@@ -278,10 +285,18 @@ namespace BlownAway.Character.Movements
             if (IsMinGrounded && LastGround.collider.GetComponent<ParentableCollider>())
             {
                 manager.CharacterCollider.Rigidbody.transform.SetParent(LastGround.collider.transform);
-            } else
+            }
+            else
             {
                 manager.CharacterCollider.Rigidbody.transform.SetParent(_parent);
             }
+        }
+
+        private void CheckBalloonDown(CharacterManager manager, Vector3 colliderPosition, float maxFallSpeed)
+        {
+            IsAboveBalloon = Physics.SphereCastNonAlloc(colliderPosition, manager.Data.GroundDetectionData.GroundDetectionSphereRadius, Vector3.down, AboveBalloonHitResults, Mathf.Max(manager.Data.GroundDetectionData.BalloonBounceCheckDistance, maxFallSpeed), ~manager.Data.CameraData.PlayerLayer) > 0;
+            if (!IsAboveBalloon) return;
+            IsAboveBalloon = AboveBalloonHitResults[0].collider.gameObject.GetComponent<BouncyBalloon>();
         }
 
         private void EnterGround(CharacterManager manager, Vector3 colliderPosition, bool switchState = true)

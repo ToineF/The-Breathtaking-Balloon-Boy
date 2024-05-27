@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8848897630321571111}
   - component: {fileID: 14783628832543862}
   - component: {fileID: 3139104931409986790}
+  - component: {fileID: 9080863121715343915}
   m_Layer: 5
   m_Name: Logo
   m_TagString: Untagged
@@ -76,6 +77,22 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!111 &9080863121715343915
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 90385497621819851}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: ccd0a0b950046ac44b34fd1a6421b325, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: ccd0a0b950046ac44b34fd1a6421b325, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &1105981113591733723
 GameObject:
   m_ObjectHideFlags: 0
@@ -367,36 +384,30 @@ MonoBehaviour:
     List:
     - rid: 7384065268242710528
     - rid: 1592602397989928961
-    - rid: 1592602397989928960
-    - rid: 7384065268242710529
+    - rid: 8590561939571867649
+    - rid: 8590561939571867650
     - rid: 8590561705866035201
-    - rid: 7384065285074714627
+    - rid: 8590561939571867651
     - rid: 8590561705866035202
-    - rid: 8590561705866035203
-    - rid: 8590561705866035204
   <StopPlayerMovements>k__BackingField: 1
-  <OnSkipEvents>k__BackingField: []
+  <OnSkipEvents>k__BackingField:
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: BlownAway.City.MovingObject, Assembly-CSharp
+        m_MethodName: StartMoving
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   references:
     version: 2
     RefIds:
-    - rid: 1592602397989928960
-      type: {class: CutsceneInvokeFunction, ns: BlownAway.Cutscenes, asm: Assembly-CSharp}
-      data:
-        <Event>k__BackingField:
-          m_PersistentCalls:
-            m_Calls:
-            - m_Target: {fileID: 0}
-              m_TargetAssemblyTypeName: BlownAway.City.MovingObject, Assembly-CSharp
-              m_MethodName: StartMoving
-              m_Mode: 1
-              m_Arguments:
-                m_ObjectArgument: {fileID: 0}
-                m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-                m_IntArgument: 0
-                m_FloatArgument: 0
-                m_StringArgument: 
-                m_BoolArgument: 0
-              m_CallState: 2
     - rid: 1592602397989928961
       type: {class: CutsceneInvokeFunction, ns: BlownAway.Cutscenes, asm: Assembly-CSharp}
       data:
@@ -419,14 +430,6 @@ MonoBehaviour:
       type: {class: CutsceneCamera, ns: BlownAway.Cutscenes, asm: Assembly-CSharp}
       data:
         <TargetTransform>k__BackingField: {fileID: 7738860148913705667}
-    - rid: 7384065268242710529
-      type: {class: CutsceneWaitForTime, ns: BlownAway.Cutscenes, asm: Assembly-CSharp}
-      data:
-        <WaitTime>k__BackingField: 8
-    - rid: 7384065285074714627
-      type: {class: CutsceneWaitForTime, ns: BlownAway.Cutscenes, asm: Assembly-CSharp}
-      data:
-        <WaitTime>k__BackingField: 2
     - rid: 8590561705866035201
       type: {class: CutsceneInvokeFunction, ns: BlownAway.Cutscenes, asm: Assembly-CSharp}
       data:
@@ -463,11 +466,29 @@ MonoBehaviour:
                 m_StringArgument: 
                 m_BoolArgument: 0
               m_CallState: 2
-    - rid: 8590561705866035203
-      type: {class: CutsceneCamera, ns: BlownAway.Cutscenes, asm: Assembly-CSharp}
+    - rid: 8590561939571867649
+      type: {class: CutsceneInvokeFunction, ns: BlownAway.Cutscenes, asm: Assembly-CSharp}
       data:
-        <TargetTransform>k__BackingField: {fileID: 0}
-    - rid: 8590561705866035204
+        <Event>k__BackingField:
+          m_PersistentCalls:
+            m_Calls:
+            - m_Target: {fileID: 0}
+              m_TargetAssemblyTypeName: BlownAway.City.MovingObject, Assembly-CSharp
+              m_MethodName: StartMoving
+              m_Mode: 1
+              m_Arguments:
+                m_ObjectArgument: {fileID: 0}
+                m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+                m_IntArgument: 0
+                m_FloatArgument: 0
+                m_StringArgument: 
+                m_BoolArgument: 0
+              m_CallState: 2
+    - rid: 8590561939571867650
       type: {class: CutsceneWaitForTime, ns: BlownAway.Cutscenes, asm: Assembly-CSharp}
       data:
-        <WaitTime>k__BackingField: 2
+        <WaitTime>k__BackingField: 4
+    - rid: 8590561939571867651
+      type: {class: CutsceneWaitForTime, ns: BlownAway.Cutscenes, asm: Assembly-CSharp}
+      data:
+        <WaitTime>k__BackingField: 8
