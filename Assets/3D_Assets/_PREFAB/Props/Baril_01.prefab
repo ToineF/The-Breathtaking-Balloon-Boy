@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 561763909153716103}
+  - component: {fileID: 1348626755657653382}
   m_Layer: 0
   m_Name: Baril_01
   m_TagString: Untagged
@@ -32,6 +33,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!205 &1348626755657653382
+LODGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6531429831747607566}
+  serializedVersion: 2
+  m_LocalReferencePoint: {x: 0.39711, y: 0, z: 0.05385971}
+  m_Size: 1.2972734
+  m_FadeMode: 0
+  m_AnimateCrossFading: 0
+  m_LastLODIsBillboard: 0
+  m_LODs:
+  - screenRelativeHeight: 0.03
+    fadeTransitionWidth: 0
+    renderers:
+    - renderer: {fileID: 3504104781056776987}
+    - renderer: {fileID: 5983277061107149913}
+  m_Enabled: 1
 --- !u!1001 &6675488672139692000
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -140,6 +161,18 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2abe467d5445a9b4794e7b71879fab33, type: 3}
+--- !u!23 &3504104781056776987 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -1439730007547781893, guid: 2abe467d5445a9b4794e7b71879fab33,
+    type: 3}
+  m_PrefabInstance: {fileID: 6675488672139692000}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &5983277061107149913 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 1129496810705857465, guid: 2abe467d5445a9b4794e7b71879fab33,
+    type: 3}
+  m_PrefabInstance: {fileID: 6675488672139692000}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6570365830104260619 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 2abe467d5445a9b4794e7b71879fab33,

@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1326076434733756102}
+  - component: {fileID: 1943510312757186008}
   m_Layer: 7
   m_Name: Prefab_Chair
   m_TagString: Untagged
@@ -34,6 +35,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+--- !u!205 &1943510312757186008
+LODGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6728759808282300455}
+  serializedVersion: 2
+  m_LocalReferencePoint: {x: -0.054937154, y: 0.007592857, z: 0.022256017}
+  m_Size: 1.2310176
+  m_FadeMode: 0
+  m_AnimateCrossFading: 0
+  m_LastLODIsBillboard: 0
+  m_LODs:
+  - screenRelativeHeight: 0.03
+    fadeTransitionWidth: 0
+    renderers:
+    - renderer: {fileID: 7845073325698969659}
+    - renderer: {fileID: 6767326865221884969}
+  m_Enabled: 1
 --- !u!1 &7753726374187715297
 GameObject:
   m_ObjectHideFlags: 0
@@ -212,6 +233,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1696628576181687664}
   m_PrefabAsset: {fileID: 0}
+--- !u!23 &6767326865221884969 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 5359843614796286297, guid: d60423f47a65790419bd628b4c1ca154,
+    type: 3}
+  m_PrefabInstance: {fileID: 1696628576181687664}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8871767177310465215
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -314,6 +341,12 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1502036429209370385}
   m_SourcePrefab: {fileID: 100100000, guid: ed8f41e20fd338440980b8367c216ac7, type: 3}
+--- !u!23 &7845073325698969659 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: ed8f41e20fd338440980b8367c216ac7,
+    type: 3}
+  m_PrefabInstance: {fileID: 8871767177310465215}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &8637817154512769518 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: ed8f41e20fd338440980b8367c216ac7,
