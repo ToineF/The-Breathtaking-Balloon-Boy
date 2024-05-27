@@ -1,6 +1,7 @@
 using BlownAway.Character;
 using BlownAway.Cutscenes;
 using UnityEngine;
+using DG.Tweening;
 
 namespace BlownAway.Collectibles
 {
@@ -8,6 +9,13 @@ namespace BlownAway.Collectibles
     {
         [Header("Rare Collectibles")]
         [SerializeField] private Cutscene _cutscene;
+        [SerializeField] private float _scaleTime;
+
+
+        protected override void OnPickUp()
+        {
+            transform.DOScale(Vector3.zero, _scaleTime).OnComplete(OnDeath);
+        }
 
         protected override void OnDeath()
         {
@@ -18,7 +26,7 @@ namespace BlownAway.Collectibles
                 if (_cutscene != null) manager.CutsceneManager.StartNewSequence(_cutscene, manager);
                 
                 // Feedback
-                manager.Feedbacks.PlayFeedback(manager.Data.FeedbacksData.RareCollectibleFeedback);
+                manager.Feedbacks.PlayFeedback(manager.Data.FeedbacksData.RareCollectibleFeedback, transform.position, Quaternion.identity, null);
             }
             base.OnDeath();
         }
