@@ -5,8 +5,6 @@ using BlownAway.Character.Inputs;
 using AntoineFoucault.Utilities;
 using System.Collections.Generic;
 using BlownAway.GPE;
-using BlownAway.Character.Movements.Data;
-using UnityEngine.InputSystem.XR;
 using BlownAway.Character.States;
 
 namespace BlownAway.Character.Movements
