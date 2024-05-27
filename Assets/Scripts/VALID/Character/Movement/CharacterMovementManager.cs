@@ -87,7 +87,7 @@ namespace BlownAway.Character.Movements
         public RaycastHit[] GroundPoundHitResults { get; set; }
         public bool HasBalloonGroundPound { get; set; }
 
-        private Transform parent;
+        private Transform _parent;
 
         // External Forces
         public Dictionary<GameObject, ForceData> ExternalForces { get; private set; } = new Dictionary<GameObject, ForceData>();
@@ -101,7 +101,7 @@ namespace BlownAway.Character.Movements
 
         protected override void StartScript(CharacterManager manager)
         {
-            parent = manager.CharacterCollider.Rigidbody.transform.parent;
+            _parent = manager.CharacterCollider.Rigidbody.transform.parent;
             MaxGroundHitResults = new RaycastHit[4];
             MinGroundHitResults = new RaycastHit[4];
             JumpBufferHitResults = new RaycastHit[2];
@@ -253,7 +253,6 @@ namespace BlownAway.Character.Movements
                             manager.States.SwitchState(manager.States.FallingState); // IDLE, WALK & FALL
                         }
                         OnGroundExit?.Invoke(manager);
-                        manager.CharacterCollider.Rigidbody.transform.SetParent(parent);
                         Debug.LogWarning("Exit ground");
 
                     }
@@ -274,6 +273,15 @@ namespace BlownAway.Character.Movements
             {
                 EnterGround(manager, colliderPosition, changeState);
             }
+
+            // Change Parenting
+            if (IsMinGrounded && LastGround.collider.GetComponent<ParentableCollider>())
+            {
+                manager.CharacterCollider.Rigidbody.transform.SetParent(LastGround.collider.transform);
+            } else
+            {
+                manager.CharacterCollider.Rigidbody.transform.SetParent(_parent);
+            }
         }
 
         private void EnterGround(CharacterManager manager, Vector3 colliderPosition, bool switchState = true)
@@ -282,7 +290,6 @@ namespace BlownAway.Character.Movements
 
             OnGroundEnter?.Invoke(manager);
             if (switchState) manager.States.SwitchState(manager.States.IdleState);
-            if (LastGround.collider.GetComponent<ParentableCollider>()) manager.CharacterCollider.Rigidbody.transform.SetParent(LastGround.collider.transform);
 
             // VFX
             manager.Feedbacks.PlayFeedback(manager.Data.FeedbacksData.LandingFeedback, colliderPosition + Vector3.down * manager.Data.GroundDetectionData.TargetDistanceFromGround, manager.Data.FeedbacksData.LandingFeedback.VFX.transform.rotation, null);
@@ -315,12 +322,15 @@ namespace BlownAway.Character.Movements
                 force.Value.CurrentForce = Vector3.Lerp(force.Value.CurrentForce, force.Value.TargetForce, force.Value.ForceLerp);
             }*/
             Vector3 gravity = -manager.MovementManager.CurrentGravity * Vector3.up;
+
+            // Parent
+
             //if (!isnotGrounded) gravity = Vector3.ProjectOnPlane(gravity, LastGround.normal);
             //Vector3 allForces = CharacterManager.Instance + additionalForces + gravity;
 
-            //_characterController.Move(allForces * Time.deltaTime);
+                //_characterController.Move(allForces * Time.deltaTime);
 
-            //if (!(OnSlope() && IsGrounded))
+                //if (!(OnSlope() && IsGrounded))
             manager.MovementManager.CurrentVelocity += gravity;
             //CharacterManager.Instance.Force = Vector3.Lerp(CharacterManager.Instance.Force, CharacterManager.Instance.CurrentGravity, _lerpValue);
         }
