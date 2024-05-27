@@ -27,6 +27,7 @@ namespace BlownAway.Tutorial
         {
             if (_manager != null)
                 _manager.Inputs.OnControllerTypeChange += OnControllerChange;
+            OnControllerChange(_manager.Inputs.ControllerType);
         }
 
         private void OnControllerChange(Character.Inputs.ControllerType type)
