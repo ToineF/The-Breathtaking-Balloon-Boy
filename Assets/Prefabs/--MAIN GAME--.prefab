@@ -3160,7 +3160,15 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1875212900062092885, guid: f9ae97330384b214bb0973edc56036ab,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5825923954353626975}
+    - targetCorrespondingSourceObject: {fileID: 1875212900062092885, guid: f9ae97330384b214bb0973edc56036ab,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1745028346480811043}
   m_SourcePrefab: {fileID: 100100000, guid: f9ae97330384b214bb0973edc56036ab, type: 3}
 --- !u!114 &1871078789489505753 stripped
 MonoBehaviour:
@@ -3198,6 +3206,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8591fcf340878104e96a45912f6900f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &7986842169562967002 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1875212900062092885, guid: f9ae97330384b214bb0973edc56036ab,
+    type: 3}
+  m_PrefabInstance: {fileID: 8417490012702471567}
+  m_PrefabAsset: {fileID: 0}
+--- !u!225 &5825923954353626975
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7986842169562967002}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
+--- !u!114 &1745028346480811043
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7986842169562967002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f49bfa1631be4343a509fc75e0efccc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MovementManager: {fileID: 1871078789489505753}
+  UI: {fileID: 5825923954353626975}
 --- !u!4 &8229690810906338835 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 496894185485964188, guid: f9ae97330384b214bb0973edc56036ab,
