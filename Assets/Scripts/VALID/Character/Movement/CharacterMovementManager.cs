@@ -90,7 +90,7 @@ namespace BlownAway.Character.Movements
 
         // Balloon Bounce
         public bool IsAboveBalloon { get; private set; }
-        [Tooltip("The raycast hits stocked while looking for balloon bounce")] public RaycastHit[] AboveBalloonHitResults { get; private set; }
+        private RaycastHit _aboveBalloonHitPoint;
 
         private Transform _parent;
 
@@ -111,7 +111,6 @@ namespace BlownAway.Character.Movements
             MinGroundHitResults = new RaycastHit[4];
             JumpBufferHitResults = new RaycastHit[2];
             GroundPoundHitResults = new RaycastHit[2];
-            AboveBalloonHitResults = new RaycastHit[1];
             SetGravityTo(manager, manager.Data.FallData.BaseData.BaseGravity, manager.Data.FallData.BaseData.MinGravity, manager.Data.FallData.BaseData.MaxGravity, manager.Data.FallData.BaseData.GravityIncreaseByFrame, manager.Data.FallData.BaseData.GravityIncreaseDecelerationByFrame);
         }
 
@@ -294,9 +293,13 @@ namespace BlownAway.Character.Movements
 
         private void CheckBalloonDown(CharacterManager manager, Vector3 colliderPosition, float maxFallSpeed)
         {
-            IsAboveBalloon = Physics.SphereCastNonAlloc(colliderPosition, manager.Data.GroundDetectionData.GroundDetectionSphereRadius, Vector3.down, AboveBalloonHitResults, Mathf.Max(manager.Data.GroundDetectionData.BalloonBounceCheckDistance, maxFallSpeed), ~manager.Data.CameraData.PlayerLayer) > 0;
-            if (!IsAboveBalloon) return;
-            IsAboveBalloon = AboveBalloonHitResults[0].collider.gameObject.GetComponent<BouncyBalloon>();
+            if (!manager.Data.PowerUpData.IsGroundPoundAvailable) return;
+            Ray ray = new Ray(colliderPosition, Vector3.down);
+            IsAboveBalloon = false;
+            if (Physics.Raycast(ray, out _aboveBalloonHitPoint, Mathf.Max(manager.Data.GroundDetectionData.BalloonBounceCheckDistance, maxFallSpeed), ~manager.Data.CameraData.PlayerLayer))
+            {
+                IsAboveBalloon = (_aboveBalloonHitPoint.collider.GetComponent<BouncyBalloon>());
+            }
         }
 
         private void EnterGround(CharacterManager manager, Vector3 colliderPosition, bool switchState = true)
