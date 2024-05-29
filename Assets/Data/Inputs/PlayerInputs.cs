@@ -361,7 +361,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                 {
                     ""name"": ""Gamepad"",
                     ""id"": ""74326ff4-c4c8-4637-b0ba-50da06fdc27d"",
-                    ""path"": ""2DVector"",
+                    ""path"": ""2DVector(mode=2)"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
