@@ -584,7 +584,11 @@ namespace BlownAway.Character.Movements
         }
         public void CheckForJacketDeflated(CharacterManager manager)
         {
-            if (!IsJacketInflated) manager.States.SwitchState(manager.States.FallingState);
+            if (!IsJacketInflated)
+            {
+                manager.States.SwitchState(manager.States.FallingState);
+                manager.Feedbacks.PlayFeedback(manager.Data.FeedbacksData.CancelFloatFeedback, manager.CharacterCollider.Rigidbody.transform.position, Quaternion.identity, manager.CharacterCollider.Rigidbody.transform);
+            }
         }
 
         public void ToggleJacketInflate(CharacterManager manager, bool value)

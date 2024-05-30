@@ -14,11 +14,13 @@ namespace BlownAway.Character.Movements.Data
 
         [field: Header("Fall")]
         [field: SerializeField] public Feedback LandingFeedback { get; private set; }
+
         [field:Header("Jump")]
         [field: SerializeField] public Feedback JumpFeedback { get; private set; }
 
         [field: Header("Propulsion")]
         [field: SerializeField] public Feedback StartPropulsionFeedback { get; private set; }
+        [field: SerializeField] public Feedback CancelFloatFeedback { get; private set; }
 
         [field: Header("Dash")]
         [field: SerializeField] public Feedback DashFeedback { get; private set; }
