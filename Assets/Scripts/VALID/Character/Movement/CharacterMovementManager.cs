@@ -76,9 +76,11 @@ namespace BlownAway.Character.Movements
 
 
 
-        // Jump buffer
+        // Jump buffer & Coyote time
         public bool CanJumpBuffer { get; private set; }
         [Tooltip("The raycast hits stocked while looking for jump buffer")] public RaycastHit[] JumpBufferHitResults { get; private set; }
+        public bool CanCoyoteTime => _coyoteTimer > 0;
+        private float _coyoteTimer;
 
 
         // Ground Pound
@@ -254,12 +256,7 @@ namespace BlownAway.Character.Movements
                     }
                     else // On Ground Leave
                     {
-                        if (!isPropulsing && changeState)
-                        {
-                            manager.States.SwitchState(manager.States.FallingState); // IDLE, WALK & FALL
-                        }
-                        OnGroundExit?.Invoke(manager);
-                        Debug.LogWarning("Exit ground");
+                        ExitGround(manager, isPropulsing, changeState);
 
                     }
                 }
@@ -291,15 +288,15 @@ namespace BlownAway.Character.Movements
             }
         }
 
-        private void CheckBalloonDown(CharacterManager manager, Vector3 colliderPosition, float maxFallSpeed)
+        private void ExitGround(CharacterManager manager, bool isPropulsing, bool changeState)
         {
-            if (!manager.Data.PowerUpData.IsGroundPoundAvailable) return;
-            Ray ray = new Ray(colliderPosition, Vector3.down);
-            IsAboveBalloon = false;
-            if (Physics.Raycast(ray, out _aboveBalloonHitPoint, Mathf.Max(manager.Data.PowerUpData.BalloonBounceCheckDistance, maxFallSpeed), ~manager.Data.CameraData.PlayerLayer))
+            Debug.LogWarning("Exit ground");
+            if (!isPropulsing && changeState)
             {
-                IsAboveBalloon = (_aboveBalloonHitPoint.collider.GetComponent<BouncyBalloon>());
+                manager.States.SwitchState(manager.States.FallingState); // IDLE, WALK & FALL
+                StartCoyoteTimer(manager);
             }
+            OnGroundExit?.Invoke(manager);
         }
 
         private void EnterGround(CharacterManager manager, Vector3 colliderPosition, bool switchState = true)
@@ -318,6 +315,17 @@ namespace BlownAway.Character.Movements
             //    Debug.LogError(downVector);
             //    CurrentVelocity += downVector;
             //}
+        }
+
+        private void CheckBalloonDown(CharacterManager manager, Vector3 colliderPosition, float maxFallSpeed)
+        {
+            if (!manager.Data.PowerUpData.IsGroundPoundAvailable) return;
+            Ray ray = new Ray(colliderPosition, Vector3.down);
+            IsAboveBalloon = false;
+            if (Physics.Raycast(ray, out _aboveBalloonHitPoint, Mathf.Max(manager.Data.PowerUpData.BalloonBounceCheckDistance, maxFallSpeed), ~manager.Data.CameraData.PlayerLayer))
+            {
+                IsAboveBalloon = (_aboveBalloonHitPoint.collider.GetComponent<BouncyBalloon>());
+            }
         }
 
         public void UpdateGravity(CharacterManager manager, bool isnotGrounded = true)
@@ -413,6 +421,21 @@ namespace BlownAway.Character.Movements
         {
             _lastPosition = Manager.CharacterCollider.Collider.transform.position;
         }
+
+        private void StartCoyoteTimer(CharacterManager manager)
+        {
+            _coyoteTimer = manager.Data.GroundDetectionData.CoyoteTime;
+        }
+
+        public void UpdateCoyoteTime()
+        {
+            _coyoteTimer -= Time.deltaTime;
+        }
+
+        public void StopCoyoteTime()
+        {
+            _coyoteTimer = -1;
+        }
         #endregion
 
         #region Propulsion
@@ -448,7 +471,7 @@ namespace BlownAway.Character.Movements
 
         public void CheckForPropulsionStartOnAir(CharacterManager manager)
         {
-            if (CanJumpBuffer) //  && !manager.AirManager.AirIsFull
+            if (CanJumpBuffer || CanCoyoteTime) //  && !manager.AirManager.AirIsFull
             {
                 CheckForJumpStart(manager);
                 return;

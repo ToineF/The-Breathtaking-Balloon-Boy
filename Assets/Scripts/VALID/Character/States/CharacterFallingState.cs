@@ -30,10 +30,13 @@ namespace BlownAway.Character.States
         public override void ExitState(CharacterManager manager)
         {
             manager.AirManager.StopAddingAir();
+            manager.MovementManager.StopCoyoteTime();
         }
 
         public override void UpdateState(CharacterManager manager)
         {
+            manager.MovementManager.UpdateCoyoteTime();
+
             manager.MovementManager.CheckForGroundPound(manager);
 
             manager.MovementManager.CheckForJacketToggleNoDerive(manager);
