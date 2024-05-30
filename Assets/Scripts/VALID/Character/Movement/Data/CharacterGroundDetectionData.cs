@@ -16,7 +16,5 @@ namespace BlownAway.Character.Movements.Data
         [field: Header("Jump Buffer")]
         [field:SerializeField, Tooltip("The distance offset of the jump buffer detection check from the character")] public float JumpBufferCheckDistance {  get; private set; }
 
-        [field: Header("Balloon Bounce Check")]
-        [field: SerializeField] public float BalloonBounceCheckDistance { get; private set; }
     }
 }

@@ -296,7 +296,7 @@ namespace BlownAway.Character.Movements
             if (!manager.Data.PowerUpData.IsGroundPoundAvailable) return;
             Ray ray = new Ray(colliderPosition, Vector3.down);
             IsAboveBalloon = false;
-            if (Physics.Raycast(ray, out _aboveBalloonHitPoint, Mathf.Max(manager.Data.GroundDetectionData.BalloonBounceCheckDistance, maxFallSpeed), ~manager.Data.CameraData.PlayerLayer))
+            if (Physics.Raycast(ray, out _aboveBalloonHitPoint, Mathf.Max(manager.Data.PowerUpData.BalloonBounceCheckDistance, maxFallSpeed), ~manager.Data.CameraData.PlayerLayer))
             {
                 IsAboveBalloon = (_aboveBalloonHitPoint.collider.GetComponent<BouncyBalloon>());
             }
