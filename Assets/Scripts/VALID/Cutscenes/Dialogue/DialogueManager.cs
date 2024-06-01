@@ -39,7 +39,7 @@ namespace BlownAway.Cutscenes
         [SerializeField] private CharacterFeedbacksManager _feedbackManager;
         [SerializeField] private Image _dialogueTextbox;
         [SerializeField] private TMP_Text _talkingCharacterNameText;
-        [SerializeField] private AudioClip _dialogueContinueSound;
+        [SerializeField] private Image _talkingCharacterSprite;
 
         [Header("Text Effects")]
         [SerializeField] private TextEffectData _hiddenEffectData;
@@ -64,6 +64,7 @@ namespace BlownAway.Cutscenes
             _dialogueTextbox.color = newDialogue.CharacterData.DialogueBoxColor;
             _dialogueTextboxText.color = newDialogue.CharacterData.DialogueTextColor;
             _talkingCharacterNameText.text = newDialogue.CharacterData.Name;
+            _talkingCharacterSprite.sprite = newDialogue.CharacterData.Sprite;
         }
 
         private void GoToTextAt(int index)

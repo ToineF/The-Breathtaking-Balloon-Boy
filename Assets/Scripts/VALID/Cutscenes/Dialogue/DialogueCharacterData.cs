@@ -7,6 +7,7 @@ namespace BlownAway.Cutscenes
     public class DialogueCharacterData : ScriptableObject
     {
         public string Name;
+        public Sprite Sprite;
         public Color DialogueBoxColor;
         public Color DialogueTextColor;
         public EventReference[] SoundsTalk;
