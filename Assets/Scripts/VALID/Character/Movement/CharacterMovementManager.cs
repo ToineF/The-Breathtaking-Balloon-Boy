@@ -66,12 +66,12 @@ namespace BlownAway.Character.Movements
 
 
         // Ground Detection
-        [Tooltip("The raycast hits stocked while looking for ground")] public RaycastHit[] MaxGroundHitResults { get; private set; }
+        //[Tooltip("The raycast hits stocked while looking for ground")] public RaycastHit[] MaxGroundHitResults { get; private set; }
         public bool IsMinGrounded { get; private set; }
         public RaycastHit LastGround { get; private set; }
 
         // Slopes
-        [Tooltip("The raycast hits stocked while looking for slopes")] public RaycastHit[] MinGroundHitResults { get; private set; }
+        //[Tooltip("The raycast hits stocked while looking for slopes")] public RaycastHit[] MinGroundHitResults { get; private set; }
         public bool IsMaxGrounded { get; private set; }
 
 
@@ -109,8 +109,8 @@ namespace BlownAway.Character.Movements
         protected override void StartScript(CharacterManager manager)
         {
             _parent = manager.CharacterCollider.Rigidbody.transform.parent;
-            MaxGroundHitResults = new RaycastHit[4];
-            MinGroundHitResults = new RaycastHit[4];
+            //MaxGroundHitResults = new RaycastHit[1];
+            //MinGroundHitResults = new RaycastHit[1];
             JumpBufferHitResults = new RaycastHit[2];
             GroundPoundHitResults = new RaycastHit[2];
             SetGravityTo(manager, manager.Data.FallData.BaseData.BaseGravity, manager.Data.FallData.BaseData.MinGravity, manager.Data.FallData.BaseData.MaxGravity, manager.Data.FallData.BaseData.GravityIncreaseByFrame, manager.Data.FallData.BaseData.GravityIncreaseDecelerationByFrame);
@@ -236,14 +236,16 @@ namespace BlownAway.Character.Movements
 
             CanJumpBuffer = Physics.SphereCastNonAlloc(colliderPosition, manager.Data.GroundDetectionData.GroundDetectionSphereRadius, Vector3.down, JumpBufferHitResults, Mathf.Max(manager.Data.GroundDetectionData.JumpBufferCheckDistance, maxFallSpeed), manager.Data.GroundDetectionData.GroundLayer) > 0;
 
-            IsMinGrounded = Physics.SphereCastNonAlloc(colliderPosition, manager.Data.GroundDetectionData.GroundDetectionSphereRadius, Vector3.down, MinGroundHitResults, Mathf.Max(manager.Data.GroundDetectionData.MinGroundCheckDistance, maxFallSpeed), manager.Data.GroundDetectionData.GroundLayer) > 0;
-            IsMaxGrounded = Physics.SphereCastNonAlloc(colliderPosition, manager.Data.GroundDetectionData.GroundDetectionSphereRadius, Vector3.down, MaxGroundHitResults, Mathf.Max(manager.Data.GroundDetectionData.MaxGroundCheckDistance, maxFallSpeed), manager.Data.GroundDetectionData.GroundLayer) > 0;
+            //IsMinGrounded = Physics.SphereCastNonAlloc(colliderPosition, manager.Data.GroundDetectionData.GroundDetectionSphereRadius, Vector3.down, MinGroundHitResults, Mathf.Max(manager.Data.GroundDetectionData.MinGroundCheckDistance, maxFallSpeed), manager.Data.GroundDetectionData.GroundLayer) > 0;
+            //IsMaxGrounded = Physics.SphereCastNonAlloc(colliderPosition, manager.Data.GroundDetectionData.GroundDetectionSphereRadius, Vector3.down, MaxGroundHitResults, Mathf.Max(manager.Data.GroundDetectionData.MaxGroundCheckDistance, maxFallSpeed), manager.Data.GroundDetectionData.GroundLayer) > 0;
+            IsMinGrounded = Physics.SphereCast(colliderPosition, manager.Data.GroundDetectionData.GroundDetectionSphereRadius, Vector3.down, out RaycastHit minHit, Mathf.Max(manager.Data.GroundDetectionData.MinGroundCheckDistance, maxFallSpeed), manager.Data.GroundDetectionData.GroundLayer);
+            IsMaxGrounded = Physics.SphereCast(colliderPosition, manager.Data.GroundDetectionData.GroundDetectionSphereRadius, Vector3.down, out RaycastHit maxHit, Mathf.Max(manager.Data.GroundDetectionData.MaxGroundCheckDistance, maxFallSpeed), manager.Data.GroundDetectionData.GroundLayer);
             CheckBalloonDown(manager, colliderPosition, maxFallSpeed);
 
             //if (IsGrounded)
             //Debug.LogError("Fall Speed : " + maxFallSpeed + ", Position : " + manager.CharacterCollider.Collider.transform.position.y);
-            Debug.LogWarning(MinGroundHitResults[0].collider + " // " + MinGroundHitResults[1].collider);
-            LastGround = MinGroundHitResults[0];
+            Debug.LogWarning(minHit.collider /*+ " // " + MinGroundHitResults[1].collider*/);
+            LastGround = minHit;
             //LastGround = MinGroundHitResults[1].collider == LastGround.collider ? MinGroundHitResults.GetClosestItem(colliderPosition) : MinGroundHitResults[0];
 
             if (lastGrounded != IsMinGrounded)
@@ -266,7 +268,7 @@ namespace BlownAway.Character.Movements
                     //{
                     Debug.LogWarning(IsMaxGrounded);
                     IsMinGrounded = IsMaxGrounded;
-                    LastGround = MaxGroundHitResults[0];
+                    LastGround = maxHit;
                     //}
                 }
             }
@@ -792,7 +794,7 @@ namespace BlownAway.Character.Movements
 
         private Vector3 GetSlopeMoveDirection(Vector3 deplacementDirection)
         {
-            return Vector3.ProjectOnPlane(deplacementDirection, MinGroundHitResults[0].normal).normalized;
+            return Vector3.ProjectOnPlane(deplacementDirection, LastGround.normal).normalized;
         }
 
         //private Vector3 ColliderAndSlide(CharacterManager manager, Vector3 vel, Vector3 pos, int depth, bool gravityPass, Vector3 velInit)
