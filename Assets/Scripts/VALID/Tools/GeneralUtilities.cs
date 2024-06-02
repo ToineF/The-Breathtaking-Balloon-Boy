@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class GeneralUtilities : MonoBehaviour
@@ -6,25 +7,32 @@ public class GeneralUtilities : MonoBehaviour
 
     public void MoveObjectToCopiedPosition(Transform transform)
     {
-        if (_copiedTransform == null) return;
-        transform.position = _copiedTransform.position;
+        GeneralPasteBlueprint(transform, () =>
+        {
+            transform.position = _copiedTransform.position;
+        }); 
     }
 
     public void ScaleObjectToCopiedScale(Transform transform)
     {
-        if (_copiedTransform == null) return;
-        transform.localScale = _copiedTransform.localScale;
+        GeneralPasteBlueprint(transform, () =>
+        {
+            transform.localScale = _copiedTransform.localScale;
+        });
     }
 
     public void RotateObjectToCopiedRotation(Transform transform)
     {
-        if (_copiedTransform == null) return;
-        transform.rotation = _copiedTransform.rotation;
+        GeneralPasteBlueprint(transform, () =>
+        {
+            transform.rotation = _copiedTransform.rotation;
+        });
     }
 
     public void PasteTransform(Transform transform)
     {
         if (_copiedTransform == null) return;
+
         MoveObjectToCopiedPosition(transform);
         RotateObjectToCopiedRotation(transform);
         ScaleObjectToCopiedScale(transform);
@@ -33,5 +41,16 @@ public class GeneralUtilities : MonoBehaviour
     public void CopyTransform(Transform transform)
     {
         _copiedTransform = transform;
+    }
+    private void GeneralPasteBlueprint(Transform transform, Action action)
+    {
+        if (_copiedTransform == null) return;
+        bool isActive = transform.gameObject.activeInHierarchy;
+        if (transform.gameObject.TryGetComponent(out Rigidbody rb)) transform.gameObject.SetActive(false);
+
+        action?.Invoke();
+
+
+        if (rb != null) transform.gameObject.SetActive(isActive);
     }
 }
