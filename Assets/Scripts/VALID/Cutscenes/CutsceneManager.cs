@@ -116,6 +116,7 @@ namespace BlownAway.Cutscenes
 
         private void HideDialogueWindow()
         {
+            _dialogueManager.OnDialogueEnd -= HideDialogueWindow;
             _dialogueManager.DialogueUI.alpha = 0;
         }
 
@@ -147,8 +148,13 @@ namespace BlownAway.Cutscenes
 
         private void StartMoveObject(CutsceneMoveObject moveObject)
         {
-            moveObject.ObjectToMove.transform.position = moveObject.TargetPosition.position;
+            bool isActive = moveObject.ObjectToMove.activeInHierarchy;
+            if (moveObject.ObjectToMove.TryGetComponent(out Rigidbody rb)) rb.gameObject.SetActive(false);
+            if (moveObject.SetPosition) moveObject.ObjectToMove.transform.position = moveObject.TargetPosition.position;
+            if (moveObject.SetRotation) moveObject.ObjectToMove.transform.rotation = moveObject.TargetPosition.rotation;
+            if (moveObject.SetScale) moveObject.ObjectToMove.transform.localScale = moveObject.TargetPosition.localScale;
             if (moveObject.SetParent) moveObject.ObjectToMove.transform.SetParent(moveObject.TargetPosition.transform);
+            if (rb != null) rb.gameObject.SetActive(isActive);
             GoToNextSequenceElement();
         }
 
