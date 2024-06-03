@@ -13,6 +13,44 @@ MonoBehaviour:
   m_Name: CustomBlend_TEST
   m_EditorClassIdentifier: 
   m_CustomBlends:
+  - m_From: '**ANY CAMERA**'
+    m_To: GameplayCamera
+    m_Blend:
+      m_Style: 0
+      m_Time: 2
+      m_CustomCurve:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 0
+          inSlope: 0.030596634
+          outSlope: 0.030596634
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0.48090512
+        - serializedVersion: 3
+          time: 0.80365217
+          value: 0.19290243
+          inSlope: 0.78765094
+          outSlope: 0.78765094
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0.18476373
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 1
+          value: 1
+          inSlope: 2.773583
+          outSlope: 2.773583
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0.43085366
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 0
   - m_From: GameplayCamera
     m_To: Pos1
     m_Blend:
