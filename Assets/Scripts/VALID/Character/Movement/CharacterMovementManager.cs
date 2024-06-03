@@ -68,6 +68,7 @@ namespace BlownAway.Character.Movements
         // Ground Detection
         //[Tooltip("The raycast hits stocked while looking for ground")] public RaycastHit[] MaxGroundHitResults { get; private set; }
         public bool IsMinGrounded { get; private set; }
+        public bool IsGrounded => LastGround.collider != null;
         public RaycastHit LastGround { get; private set; }
 
         // Slopes
@@ -244,7 +245,7 @@ namespace BlownAway.Character.Movements
 
             //if (IsGrounded)
             //Debug.LogError("Fall Speed : " + maxFallSpeed + ", Position : " + manager.CharacterCollider.Collider.transform.position.y);
-            Debug.LogWarning(minHit.collider /*+ " // " + MinGroundHitResults[1].collider*/);
+            //Debug.LogWarning(minHit.collider /*+ " // " + MinGroundHitResults[1].collider*/);
             LastGround = minHit;
             //LastGround = MinGroundHitResults[1].collider == LastGround.collider ? MinGroundHitResults.GetClosestItem(colliderPosition) : MinGroundHitResults[0];
 
@@ -971,6 +972,10 @@ namespace BlownAway.Character.Movements
             float groundPoundForce = isSmallJump ? manager.Data.PowerUpData.GroundPoundSmallForce : manager.Data.PowerUpData.GroundPoundNormalForce;
 
             AddExternalForce(gameObject, Vector3.up * groundPoundForce, manager.Data.PowerUpData.GroundPoundStartLerp);
+
+            // VFX
+            if (isSmallJump) manager.Feedbacks.PlayFeedback(manager.Data.FeedbacksData.GroundPoundLowLanding, LastGround.point, manager.Data.FeedbacksData.GroundPoundLowLanding.VFX.transform.rotation, null);
+            else manager.Feedbacks.PlayFeedback(manager.Data.FeedbacksData.GroundPoundHighLanding, LastGround.point, manager.Data.FeedbacksData.GroundPoundHighLanding.VFX.transform.rotation, null);
         }
 
         public void EndGroundPound(CharacterManager manager)

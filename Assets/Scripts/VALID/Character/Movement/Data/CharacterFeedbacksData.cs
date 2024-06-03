@@ -27,7 +27,10 @@ namespace BlownAway.Character.Movements.Data
 
         [field: Header("Balloon Bounce")]
         [field: SerializeField] public Feedback BalloonBounceFeedback { get; private set; }
-
+        
+        [field: Header("Ground Pound")]
+        [field: SerializeField] public Feedback GroundPoundLowLanding { get; private set; }
+        [field: SerializeField] public Feedback GroundPoundHighLanding { get; private set; }
         [field:Header("Death")]
         [field: SerializeField] public Feedback DeathFeedback { get; private set; }
 

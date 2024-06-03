@@ -1,22 +1,33 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 
 namespace BlownAway.Character
 {
-    [RequireComponent(typeof(DecalProjector))]
+    //[RequireComponent(typeof(DecalProjector))]
     public class CharacterShadow : MonoBehaviour
     {
-        [SerializeField] private float _maxDistance;
-        [SerializeField] private LayerMask _plateformLayer;
+        [SerializeField] private CharacterManager _manager;
+        [SerializeField] private bool _hideOnGrounded;
 
         private DecalProjector _projector;
 
         private void Awake()
         {
+            if (_hideOnGrounded) Destroy(this);
             _projector = GetComponent<DecalProjector>();
         }
+
+        private void Update()
+        {
+            _projector.enabled = !_manager.MovementManager.IsGrounded;
+        }
+
+
+
+        //[SerializeField] private float _maxDistance;
+        //[SerializeField] private LayerMask _plateformLayer;
+
+
 
         //private void Start()
         //{
