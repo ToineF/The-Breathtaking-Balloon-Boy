@@ -1,5 +1,6 @@
 using UnityEngine;
 using DG.Tweening;
+using System;
 
 namespace BlownAway.City
 {
@@ -17,6 +18,9 @@ namespace BlownAway.City
         [Header("Bird Animator")]
         [SerializeField] private Animator _animator;
         [SerializeField] private string _startFlying;
+        [SerializeField] private string _startPecking;
+        [SerializeField] private float _peckingWaitTimeMin;
+        [SerializeField] private float _peckingWaitTimeMax;
 
         [Header("Fly Settings")]
         [SerializeField] private Vector3 _targetDirection;
@@ -27,10 +31,13 @@ namespace BlownAway.City
         [Header("Feedbacks")]
         [SerializeField] private GameObject _vfxFly;
 
+        private float _peckingAnimationTimer;
+
         private new void Awake()
         {
             base.Awake();
             OnEnterTrigger += StartFlying;
+            SetNewPickingTimer();
         }
 
         public void StartFlying()
@@ -78,6 +85,20 @@ namespace BlownAway.City
             Destroy(gameObject);
         }
 
+        private void Update() // Animations Randomness
+        {
+            _peckingAnimationTimer -= Time.deltaTime;
 
+            if (_peckingAnimationTimer < 0)
+            {
+                _animator.SetTrigger(_startPecking);
+                SetNewPickingTimer();
+            }
+        }
+
+        private void SetNewPickingTimer()
+        {
+            _peckingAnimationTimer = UnityEngine.Random.Range(_peckingWaitTimeMin, _peckingWaitTimeMax);
+        }
     }
 }
