@@ -20,11 +20,15 @@ namespace BlownAway.Character.States
             manager.MovementManager.GroundPoundCancelTime = manager.Data.PowerUpData.MinGroundPoundCancelTime;
             manager.MovementManager.HasBalloonGroundPound = false;
 
+            manager.Feedbacks.BumSlamDescent.Play();
+
         }
 
         public override void ExitState(CharacterManager manager)
         {
             manager.MovementManager.StartGroundPoundCoroutine(manager);
+
+            manager.Feedbacks.BumSlamDescent.Stop();
         }
 
         public override void UpdateState(CharacterManager manager)

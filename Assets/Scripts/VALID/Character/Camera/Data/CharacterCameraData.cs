@@ -40,8 +40,8 @@ namespace BlownAway.Camera.Data
         [field:SerializeField, Tooltip("The minimum scroll zoom distance from the focus point")] public float ZoomMin { get; private set; } = 3.5f;
         [field:SerializeField, Tooltip("The maximum scroll zoom distance from the focus point")] public float ZoomMax { get; private set; } = 15f;
         
-        [field:Header("Collisions")]
-        [field:SerializeField, Tooltip("The layer of the main character")] public LayerMask PlayerLayer;
+        [field: Header("Collisions")]
+        [field: SerializeField, Tooltip("The layer of the main character")] public LayerMask PlayerLayer { get; private set; }
         [field:SerializeField, Tooltip("The interpolation speed of the camera when collisioning")] public float CollisionSensitivity { get; private set; } = 0.1f;
         [field:SerializeField, Tooltip("The minimum thickness of a collider between the camera and the focus point to be taken into account")] public float MinCollisionThickness { get; private set; } = 1.5f;
 

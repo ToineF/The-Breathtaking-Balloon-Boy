@@ -309,7 +309,7 @@ namespace BlownAway.Character.Movements
             if (switchState) manager.States.SwitchState(manager.States.IdleState);
 
             // VFX
-            manager.Feedbacks.PlayFeedback(manager.Data.FeedbacksData.LandingFeedback, colliderPosition + Vector3.down * manager.Data.GroundDetectionData.TargetDistanceFromGround, manager.Data.FeedbacksData.LandingFeedback.VFX.transform.rotation, null);
+            manager.Feedbacks.PlayFeedback(manager.Data.FeedbacksData.LandingFeedback, LastGround.point, manager.Data.FeedbacksData.LandingFeedback.VFX.transform.rotation, null);
 
             //if (LastGround.collider != null)
             //{
