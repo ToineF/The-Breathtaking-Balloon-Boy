@@ -44,6 +44,7 @@ namespace BlownAway.Camera
             CenterCamera(manager, new Vector3(0, manager.CharacterVisual.transform.eulerAngles.y, 0), 0);
 
             CameraCenter.transform.position = new Vector3(FocusPoint.transform.position.x, FocusPoint.transform.position.y + Manager.Data.CameraData.YOffset, FocusPoint.transform.position.z);
+
         }
 
         private void LateUpdate()
@@ -90,13 +91,13 @@ namespace BlownAway.Camera
             GameObject obj = new GameObject();
             obj.transform.SetParent(Camera.transform.parent);
             obj.transform.localPosition = new Vector3(Camera.transform.localPosition.x, Camera.transform.localPosition.y,
-                Camera.transform.localPosition.z - Manager.Data.CameraData.CollisionSensitivity);
+                Camera.transform.localPosition.z - Manager.Data.CameraData.CollisionRaycastOffset);
 
             Vector3 direction = obj.transform.position - Camera.transform.position;
             direction.Normalize();
-            Debug.DrawLine(Camera.transform.position, CameraCenter.transform.position + direction * Manager.Data.CameraData.CollisionSensitivity, Color.red);
+            Debug.DrawLine(Camera.transform.position, CameraCenter.transform.position + direction * Manager.Data.CameraData.CollisionRaycastOffset, Color.red);
 
-            if (Physics.Linecast(CameraCenter.transform.position + direction * Manager.Data.CameraData.CollisionSensitivity, Camera.transform.position, out _camHit, ~Manager.Data.CameraData.PlayerLayer, QueryTriggerInteraction.Ignore))
+            if (Physics.Linecast(CameraCenter.transform.position + direction * Manager.Data.CameraData.CollisionRaycastOffset, Camera.transform.position, out _camHit, ~Manager.Data.CameraData.PlayerLayer, QueryTriggerInteraction.Ignore))
             {
                 Physics.Linecast(Camera.transform.position, CameraCenter.transform.position + direction * Manager.Data.CameraData.CollisionSensitivity, out _camHit2, ~Manager.Data.CameraData.PlayerLayer, QueryTriggerInteraction.Ignore);
                 //Debug.Log("Distance : " + Vector3.Distance(_camHit.point, _camHit2.point));

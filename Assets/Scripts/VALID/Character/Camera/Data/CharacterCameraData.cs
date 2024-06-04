@@ -43,6 +43,7 @@ namespace BlownAway.Camera.Data
         [field: Header("Collisions")]
         [field: SerializeField, Tooltip("The layer of the main character")] public LayerMask PlayerLayer { get; private set; }
         [field:SerializeField, Tooltip("The interpolation speed of the camera when collisioning")] public float CollisionSensitivity { get; private set; } = 0.1f;
+        [field:SerializeField, Tooltip("The offset of the raycast")] public float CollisionRaycastOffset { get; private set; }
         [field:SerializeField, Tooltip("The minimum thickness of a collider between the camera and the focus point to be taken into account")] public float MinCollisionThickness { get; private set; } = 1.5f;
 
     }

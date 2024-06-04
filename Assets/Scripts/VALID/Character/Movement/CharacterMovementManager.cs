@@ -375,12 +375,12 @@ namespace BlownAway.Character.Movements
         {
             if (LastGround.collider == null) return;
             if (LastGround.distance < 0.001f) return;
-            Debug.LogWarning(LastGround.collider.name);
+            //Debug.LogWarning(LastGround.collider.name);
 
             //CurrentVelocity += springForce;
             Vector3 rigidbodyPosition = manager.CharacterCollider.Rigidbody.transform.position;
             Vector3 targetPos = new Vector3(rigidbodyPosition.x, LastGround.point.y + manager.Data.GroundDetectionData.TargetDistanceFromGround, rigidbodyPosition.z);
-            Debug.LogWarning(LastGround.collider.name + ": " + targetPos);
+            //Debug.LogWarning(LastGround.collider.name + ": " + targetPos);
 
             TeleportPlayer(manager, targetPos);
 
