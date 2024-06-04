@@ -19,7 +19,10 @@ MonoBehaviour:
   <ControllerSensitivity>k__BackingField: 150
   <ZoomDefault>k__BackingField: 10
   <YOffset>k__BackingField: 1.7
-  <YOffsetUpLimit>k__BackingField: 1
+  <YOffsetDownLimit>k__BackingField: 1.7
+  <YOffsetUpLimit>k__BackingField: 0
+  <ZoomMin>k__BackingField: 0.1
+  <ZoomMax>k__BackingField: 18
   <YUpLimit>k__BackingField: 79.9
   <YDownLimit>k__BackingField: -59.9
   <CameraFollowLerpTime>k__BackingField: 0.756
@@ -31,10 +34,11 @@ MonoBehaviour:
   <CanScroll>k__BackingField: 0
   <ScrollSensitivity>k__BackingField: 5
   <ScrollDampening>k__BackingField: 6
-  <ZoomMin>k__BackingField: 0.1
-  <ZoomMax>k__BackingField: 1500
+  <ScrollZoomMin>k__BackingField: 3.5
+  <ScrollZoomMax>k__BackingField: 15
   <PlayerLayer>k__BackingField:
     serializedVersion: 2
     m_Bits: 64
   <CollisionSensitivity>k__BackingField: 1
+  <CollisionRaycastOffset>k__BackingField: 0
   <MinCollisionThickness>k__BackingField: 0

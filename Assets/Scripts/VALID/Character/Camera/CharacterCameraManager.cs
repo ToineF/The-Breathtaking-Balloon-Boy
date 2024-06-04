@@ -125,7 +125,9 @@ namespace BlownAway.Camera
 
         private void SetCameraAngle(CharacterManager manager)
         {
-            Vector3 focusPosition = new Vector3(FocusPoint.transform.position.x, FocusPoint.transform.position.y + Manager.Data.CameraData.YOffset, FocusPoint.transform.position.z);
+            float normalizedDistance = (Vector3.Distance(FocusPoint.transform.position, Camera.transform.position) - Manager.Data.CameraData.ZoomMin) / (Manager.Data.CameraData.ZoomMax - Manager.Data.CameraData.ZoomMin);
+            float yOffset = Mathf.Lerp(Manager.Data.CameraData.YOffsetDownLimit, Manager.Data.CameraData.YOffsetUpLimit, normalizedDistance);
+            Vector3 focusPosition = new Vector3(FocusPoint.transform.position.x, FocusPoint.transform.position.y + yOffset, FocusPoint.transform.position.z);
             CameraCenter.transform.position = Vector3.Lerp(CameraCenter.transform.position, focusPosition, manager.Data.CameraData.CameraFollowLerpTime);
 
             if (!_canMoveCamera || _cameraIsTopDown) return;
@@ -150,7 +152,7 @@ namespace BlownAway.Camera
                 var scrollAmount = Input.GetAxis("Mouse ScrollWheel") * Manager.Data.CameraData.ScrollSensitivity;
                 scrollAmount *= _zoomDistance * 0.3f;
                 _zoomDistance -= scrollAmount;
-                _zoomDistance = Mathf.Clamp(_zoomDistance, Manager.Data.CameraData.ZoomMin, Manager.Data.CameraData.ZoomMax);
+                _zoomDistance = Mathf.Clamp(_zoomDistance, Manager.Data.CameraData.ScrollZoomMin, Manager.Data.CameraData.ScrollZoomMax);
             }
         }
 
