@@ -21,6 +21,8 @@ namespace BlownAway.Character.States
 
             manager.MovementManager.LerpGravityTo(manager, manager.Data.FallData.BaseData);
 
+            manager.MovementManager.ToggleJacketInflate(manager, false);
+
         }
 
         public override void ExitState(CharacterManager manager)

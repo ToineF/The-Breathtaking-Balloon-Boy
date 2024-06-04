@@ -267,7 +267,7 @@ namespace BlownAway.Character.Movements
                 {
                     //if (!manager.States.IsInState(manager.States.JumpState))
                     //{
-                    Debug.LogWarning(IsMaxGrounded);
+                    //Debug.LogWarning(IsMaxGrounded);
                     IsMinGrounded = IsMaxGrounded;
                     LastGround = maxHit;
                     //}
