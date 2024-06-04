@@ -1,20 +1,17 @@
 using BlownAway.Character;
 using BlownAway.Cutscenes;
 using UnityEngine;
-using DG.Tweening;
 
 namespace BlownAway.Collectibles
 {
-    public class RareCollectible : Collectible
+    public class RareCollectible : MagneticCollectible
     {
         [Header("Rare Collectibles")]
         [SerializeField] private Cutscene _cutscene;
-        [SerializeField] private float _scaleTime;
-
 
         protected override void OnPickUp()
         {
-            transform.DOScale(Vector3.zero, _scaleTime).OnComplete(OnDeath);
+            LerpTowardsPlayer();
         }
 
         protected override void OnDeath()
@@ -29,6 +26,11 @@ namespace BlownAway.Collectibles
                 manager.Feedbacks.PlayFeedback(manager.Data.FeedbacksData.RareCollectibleFeedback, transform.position, Quaternion.identity, null);
             }
             base.OnDeath();
+        }
+
+        private void Update()
+        {
+            LerpTowardsPlayer();
         }
     }
 }
