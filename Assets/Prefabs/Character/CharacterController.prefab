@@ -603,10 +603,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71c1bfc589f6cc14aad70b045b750aa7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxDistance: 1
-  _plateformLayer:
-    serializedVersion: 2
-    m_Bits: 128
+  _manager: {fileID: 0}
+  _hideOnGrounded: 0
 --- !u!114 &8767097783703232575
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5850,10 +5848,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71c1bfc589f6cc14aad70b045b750aa7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxDistance: 1
-  _plateformLayer:
-    serializedVersion: 2
-    m_Bits: 128
+  _manager: {fileID: 0}
+  _hideOnGrounded: 0
 --- !u!114 &2312928204257318069
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11537,6 +11533,11 @@ PrefabInstance:
       propertyPath: AirManager
       value: 
       objectReference: {fileID: 4325485606811522093}
+    - target: {fileID: 678831966453164470, guid: cc28a9f69a9a4f34b844fe984c5f77ed,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 848261403425436524, guid: cc28a9f69a9a4f34b844fe984c5f77ed,
         type: 3}
       propertyPath: m_AnchorMax.y

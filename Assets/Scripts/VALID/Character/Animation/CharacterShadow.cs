@@ -19,7 +19,7 @@ namespace BlownAway.Character
 
         private void Update()
         {
-            _projector.enabled = !_manager.MovementManager.IsGrounded;
+            if (_manager != null) _projector.enabled = !_manager.MovementManager.IsGrounded;
         }
 
 

@@ -43,7 +43,7 @@ namespace BlownAway.Camera
 
             CenterCamera(manager, new Vector3(0, manager.CharacterVisual.transform.eulerAngles.y, 0), 0);
 
-            CameraCenter.transform.position = new Vector3(FocusPoint.transform.position.x, FocusPoint.transform.position.y + Manager.Data.CameraData.YOffset, FocusPoint.transform.position.z);
+            CameraCenter.transform.position = new Vector3(FocusPoint.transform.position.x, FocusPoint.transform.position.y + Manager.Data.CameraData.YOffsetUpLimit, FocusPoint.transform.position.z);
 
         }
 

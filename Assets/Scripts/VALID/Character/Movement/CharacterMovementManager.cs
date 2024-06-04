@@ -293,7 +293,7 @@ namespace BlownAway.Character.Movements
 
         private void ExitGround(CharacterManager manager, bool isPropulsing, bool changeState)
         {
-            Debug.LogWarning("Exit ground");
+            //Debug.LogWarning("Exit ground");
             if (!isPropulsing && changeState)
             {
                 manager.States.SwitchState(manager.States.FallingState); // IDLE, WALK & FALL
@@ -304,7 +304,7 @@ namespace BlownAway.Character.Movements
 
         private void EnterGround(CharacterManager manager, Vector3 colliderPosition, bool switchState = true)
         {
-            Debug.LogWarning("Enter ground");
+            //Debug.LogWarning("Enter ground");
 
             OnGroundEnter?.Invoke(manager);
             if (switchState) manager.States.SwitchState(manager.States.IdleState);

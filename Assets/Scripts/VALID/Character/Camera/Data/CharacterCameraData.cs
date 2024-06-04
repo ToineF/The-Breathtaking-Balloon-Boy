@@ -22,7 +22,6 @@ namespace BlownAway.Camera.Data
 
         [field:Header("Positions")]
         [field:SerializeField, Tooltip("The default zoom position at the start of the scene")] public float ZoomDefault { get; private set; } = 10f;
-        [field:SerializeField, Tooltip("The offset in the Y direction from the focus point")] public float YOffset { get; private set; } = 1f;
         [field:SerializeField, Tooltip("The offset in the Y direction from the focus point")] public float YOffsetDownLimit { get; private set; } = 1f;
         [field:SerializeField, Tooltip("The offset in the Y direction from the focus point")] public float YOffsetUpLimit { get; private set; } = 1f;
         [field:SerializeField, Tooltip("The minimum offset distance from the focus point")] public float ZoomMin { get; private set; } = .8f;
