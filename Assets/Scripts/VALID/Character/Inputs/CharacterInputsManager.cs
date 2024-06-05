@@ -53,7 +53,8 @@ namespace BlownAway.Character.Inputs
         public bool StartedGroundPound { get; private set; }
 
         // Cutscenes
-        public bool NextDialoguePressed { get; private set; }
+        public bool ConfirmMenuPressed { get; private set; }
+        public bool CancelMenuPressed { get; private set; }
         public bool SkipCutscene { get; private set; }
 
         // Inputs
@@ -117,7 +118,8 @@ namespace BlownAway.Character.Inputs
             _inputs.Player.Dash.performed += StartDash;
             _inputs.Player.GroundPound.performed += StartGroundPound;
 
-            _inputs.Player.NextDialogue.performed += PlayNextDialogue;
+            _inputs.Player.ConfirmMenu.performed += StartConfirmMenu;
+            _inputs.Player.CancelMenu.performed += StartCancelMenu;
             _inputs.Player.SkipCutscene.performed += StartSkipCutscene;
             _inputs.Player.SkipCutscene.canceled += StopSkipCutscene;
         }
@@ -152,7 +154,7 @@ namespace BlownAway.Character.Inputs
             _inputs.Player.Dash.performed -= StartDash;
             _inputs.Player.GroundPound.performed -= StartGroundPound;
 
-            _inputs.Player.NextDialogue.performed -= PlayNextDialogue;
+            _inputs.Player.ConfirmMenu.performed -= StartConfirmMenu;
         }
 
         public void EnableInputs(bool enabled)
@@ -275,7 +277,8 @@ namespace BlownAway.Character.Inputs
             CameraCenter = false;
             CameraTopDownPressed = false;
             CameraTopDownReleased = false;
-            NextDialoguePressed = false;
+            ConfirmMenuPressed = false;
+            CancelMenuPressed = false;
             StartPropulsion = false;
             StartedJumping = false;
 
@@ -340,9 +343,15 @@ namespace BlownAway.Character.Inputs
             UpdateControllerType(context);
         }
 
-        private void PlayNextDialogue(InputAction.CallbackContext context)
+        private void StartConfirmMenu(InputAction.CallbackContext context)
         {
-            NextDialoguePressed = true;
+            ConfirmMenuPressed = true;
+            UpdateControllerType(context);
+        }
+
+        private void StartCancelMenu(InputAction.CallbackContext context)
+        {
+            CancelMenuPressed = true;
             UpdateControllerType(context);
         }
 
@@ -359,8 +368,7 @@ namespace BlownAway.Character.Inputs
 
         private void UpdateControllerType(InputAction.CallbackContext context)
         {
-            string inputSource = context.control.path.Split('/')[1];
-            if (inputSource == "Keyboard" || inputSource == "Mouse") IsGamepad = false;
+            if (context.action.activeControl.device.name == "Keyboard" || context.action.activeControl.device.name == "Mouse") IsGamepad = false;
             else IsGamepad = true;
         }
     }

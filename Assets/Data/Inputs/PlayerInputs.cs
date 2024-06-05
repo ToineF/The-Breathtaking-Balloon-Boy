@@ -127,9 +127,18 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""NextDialogue"",
+                    ""name"": ""ConfirmMenu"",
                     ""type"": ""Button"",
                     ""id"": ""c48bb965-f789-4f8c-86e6-bf0a5c1b3032"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""CancelMenu"",
+                    ""type"": ""Button"",
+                    ""id"": ""4e59a140-10d6-46e0-a027-b377b71bcec3"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -849,7 +858,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
-                    ""action"": ""NextDialogue"",
+                    ""action"": ""ConfirmMenu"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -860,7 +869,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
-                    ""action"": ""NextDialogue"",
+                    ""action"": ""ConfirmMenu"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -871,7 +880,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Controller"",
-                    ""action"": ""NextDialogue"",
+                    ""action"": ""ConfirmMenu"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -882,7 +891,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Controller"",
-                    ""action"": ""NextDialogue"",
+                    ""action"": ""ConfirmMenu"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -938,6 +947,39 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Controller"",
                     ""action"": ""SkipCutscene"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""56a15239-efa6-4319-8938-4cd42ea7afa6"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""CancelMenu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""08e05564-06d2-4ea6-a226-df7b3c70678b"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""CancelMenu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3a6d6798-2427-4b84-b99d-76ba129f79c6"",
+                    ""path"": ""<Gamepad>/dpad/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""CancelMenu"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -2093,7 +2135,8 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         m_Player_BalloonBounce = m_Player.FindAction("BalloonBounce", throwIfNotFound: true);
         m_Player_GroundPound = m_Player.FindAction("GroundPound", throwIfNotFound: true);
         m_Player_InflateJacket = m_Player.FindAction("InflateJacket", throwIfNotFound: true);
-        m_Player_NextDialogue = m_Player.FindAction("NextDialogue", throwIfNotFound: true);
+        m_Player_ConfirmMenu = m_Player.FindAction("ConfirmMenu", throwIfNotFound: true);
+        m_Player_CancelMenu = m_Player.FindAction("CancelMenu", throwIfNotFound: true);
         m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
         m_Player_LateralPropulsion = m_Player.FindAction("LateralPropulsion", throwIfNotFound: true);
         m_Player_DownPropulsion = m_Player.FindAction("DownPropulsion", throwIfNotFound: true);
@@ -2191,7 +2234,8 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_BalloonBounce;
     private readonly InputAction m_Player_GroundPound;
     private readonly InputAction m_Player_InflateJacket;
-    private readonly InputAction m_Player_NextDialogue;
+    private readonly InputAction m_Player_ConfirmMenu;
+    private readonly InputAction m_Player_CancelMenu;
     private readonly InputAction m_Player_Pause;
     private readonly InputAction m_Player_LateralPropulsion;
     private readonly InputAction m_Player_DownPropulsion;
@@ -2212,7 +2256,8 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         public InputAction @BalloonBounce => m_Wrapper.m_Player_BalloonBounce;
         public InputAction @GroundPound => m_Wrapper.m_Player_GroundPound;
         public InputAction @InflateJacket => m_Wrapper.m_Player_InflateJacket;
-        public InputAction @NextDialogue => m_Wrapper.m_Player_NextDialogue;
+        public InputAction @ConfirmMenu => m_Wrapper.m_Player_ConfirmMenu;
+        public InputAction @CancelMenu => m_Wrapper.m_Player_CancelMenu;
         public InputAction @Pause => m_Wrapper.m_Player_Pause;
         public InputAction @LateralPropulsion => m_Wrapper.m_Player_LateralPropulsion;
         public InputAction @DownPropulsion => m_Wrapper.m_Player_DownPropulsion;
@@ -2260,9 +2305,12 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
             @InflateJacket.started += instance.OnInflateJacket;
             @InflateJacket.performed += instance.OnInflateJacket;
             @InflateJacket.canceled += instance.OnInflateJacket;
-            @NextDialogue.started += instance.OnNextDialogue;
-            @NextDialogue.performed += instance.OnNextDialogue;
-            @NextDialogue.canceled += instance.OnNextDialogue;
+            @ConfirmMenu.started += instance.OnConfirmMenu;
+            @ConfirmMenu.performed += instance.OnConfirmMenu;
+            @ConfirmMenu.canceled += instance.OnConfirmMenu;
+            @CancelMenu.started += instance.OnCancelMenu;
+            @CancelMenu.performed += instance.OnCancelMenu;
+            @CancelMenu.canceled += instance.OnCancelMenu;
             @Pause.started += instance.OnPause;
             @Pause.performed += instance.OnPause;
             @Pause.canceled += instance.OnPause;
@@ -2315,9 +2363,12 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
             @InflateJacket.started -= instance.OnInflateJacket;
             @InflateJacket.performed -= instance.OnInflateJacket;
             @InflateJacket.canceled -= instance.OnInflateJacket;
-            @NextDialogue.started -= instance.OnNextDialogue;
-            @NextDialogue.performed -= instance.OnNextDialogue;
-            @NextDialogue.canceled -= instance.OnNextDialogue;
+            @ConfirmMenu.started -= instance.OnConfirmMenu;
+            @ConfirmMenu.performed -= instance.OnConfirmMenu;
+            @ConfirmMenu.canceled -= instance.OnConfirmMenu;
+            @CancelMenu.started -= instance.OnCancelMenu;
+            @CancelMenu.performed -= instance.OnCancelMenu;
+            @CancelMenu.canceled -= instance.OnCancelMenu;
             @Pause.started -= instance.OnPause;
             @Pause.performed -= instance.OnPause;
             @Pause.canceled -= instance.OnPause;
@@ -2585,7 +2636,8 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         void OnBalloonBounce(InputAction.CallbackContext context);
         void OnGroundPound(InputAction.CallbackContext context);
         void OnInflateJacket(InputAction.CallbackContext context);
-        void OnNextDialogue(InputAction.CallbackContext context);
+        void OnConfirmMenu(InputAction.CallbackContext context);
+        void OnCancelMenu(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
         void OnLateralPropulsion(InputAction.CallbackContext context);
         void OnDownPropulsion(InputAction.CallbackContext context);

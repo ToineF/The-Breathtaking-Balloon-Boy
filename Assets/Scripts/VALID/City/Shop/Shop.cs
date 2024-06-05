@@ -22,6 +22,11 @@ namespace BlownAway.City
             UpdateAllItems(player);
         }
 
+        public void Close()
+        {
+            CloseMenu(CanvasGroup);
+        }
+
         private void UpdateAllItems(CharacterCollectiblesManager player)
         {
             foreach (var item in _items)

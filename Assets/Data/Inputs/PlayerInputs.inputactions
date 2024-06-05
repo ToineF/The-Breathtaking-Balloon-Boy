@@ -105,9 +105,18 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "NextDialogue",
+                    "name": "ConfirmMenu",
                     "type": "Button",
                     "id": "c48bb965-f789-4f8c-86e6-bf0a5c1b3032",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "CancelMenu",
+                    "type": "Button",
+                    "id": "4e59a140-10d6-46e0-a027-b377b71bcec3",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -827,7 +836,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
-                    "action": "NextDialogue",
+                    "action": "ConfirmMenu",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -838,7 +847,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
-                    "action": "NextDialogue",
+                    "action": "ConfirmMenu",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -849,7 +858,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Controller",
-                    "action": "NextDialogue",
+                    "action": "ConfirmMenu",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -860,7 +869,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Controller",
-                    "action": "NextDialogue",
+                    "action": "ConfirmMenu",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -916,6 +925,39 @@
                     "processors": "",
                     "groups": "Controller",
                     "action": "SkipCutscene",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "56a15239-efa6-4319-8938-4cd42ea7afa6",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "CancelMenu",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "08e05564-06d2-4ea6-a226-df7b3c70678b",
+                    "path": "<Gamepad>/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Controller",
+                    "action": "CancelMenu",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3a6d6798-2427-4b84-b99d-76ba129f79c6",
+                    "path": "<Gamepad>/dpad/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Controller",
+                    "action": "CancelMenu",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
