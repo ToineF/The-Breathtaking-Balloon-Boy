@@ -22,8 +22,6 @@ namespace BlownAway.Character
         private void Awake()
         {
             _inputs = new PlayerInputs();
-            OnPause.AddListener(() => Manager.CameraManager.SetCursorVisible(true));
-            OnResume.AddListener(() => Manager.CameraManager.SetCursorVisible(false));
         }
 
         private void OnEnable()
@@ -66,6 +64,7 @@ namespace BlownAway.Character
             {
                 CloseMenu(submenu.CanvasGroup);
             }
+            Manager.CameraManager.SetCursorVisible(false);
             OnResume?.Invoke();
         }
 
@@ -76,6 +75,7 @@ namespace BlownAway.Character
             GameIsPaused = true;
             OpenMenu(_globalPauseUIMenu);
             OpenMenu(CanvasGroup, FirstSelectedButton);
+            Manager.CameraManager.SetCursorVisible(true);
             OnPause?.Invoke();
         }
     }
