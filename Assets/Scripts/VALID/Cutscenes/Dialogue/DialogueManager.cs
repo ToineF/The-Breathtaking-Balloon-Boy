@@ -20,13 +20,13 @@ namespace BlownAway.Cutscenes
             {
                 if (_currentDialogue == null) return;
 
-                if (_hasCurrentTextEnded)
+                if (HasCurrentTextEnded)
                 {
                     _currentTextIndex = Mathf.Clamp(value, 0, _currentDialogue.Texts.Length - 1);
                     //AudioManager.Instance?.PlayClip(_dialogueContinueSound);
                 }
 
-                if ((value < 0 || value > _currentDialogue.Texts.Length - 1) && _hasCurrentTextEnded)
+                if ((value < 0 || value > _currentDialogue.Texts.Length - 1) && HasCurrentTextEnded)
                     EndDialogue();
                 else
                     StartNewText();
@@ -34,12 +34,20 @@ namespace BlownAway.Cutscenes
             }
         }
         [field:SerializeField] public CanvasGroup DialogueUI { get; private set; }
+        public bool HasCurrentTextEnded { get => _hasCurrentTextEnded; set
+            {
+                _hasCurrentTextEnded = value;
+                UpdateDialogueEndArrow();
+            }
+        }
 
         [SerializeField] private TMP_Text _dialogueTextboxText;
         [SerializeField] private CharacterFeedbacksManager _feedbackManager;
         [SerializeField] private Image _dialogueTextbox;
         [SerializeField] private TMP_Text _talkingCharacterNameText;
         [SerializeField] private Image _talkingCharacterSprite;
+        [SerializeField] private Animator _isDialoguePlayingArrow;
+        [SerializeField] private string _isDialoguePlayingArrowCondition;
 
         [Header("Text Effects")]
         [SerializeField] private TextEffectData _hiddenEffectData;
@@ -58,7 +66,7 @@ namespace BlownAway.Cutscenes
 
         public void SetNewDialogue(Dialogue newDialogue)
         {
-            _hasCurrentTextEnded = true;
+            HasCurrentTextEnded = true;
             _currentDialogue = newDialogue;
             CurrentTextIndex = 0;
             _dialogueTextbox.color = newDialogue.CharacterData.DialogueBoxColor;
@@ -81,7 +89,7 @@ namespace BlownAway.Cutscenes
         {
             string currentText = _currentDialogue.Texts[CurrentTextIndex];
 
-            if (!_hasCurrentTextEnded)
+            if (!HasCurrentTextEnded)
             {
                 FullyWriteText();
             }
@@ -94,7 +102,7 @@ namespace BlownAway.Cutscenes
 
         public IEnumerator WriteEachCharacter(TMP_Text dialogueTextbox, string finalText, DialogueCharacterData characterData)
         {
-            _hasCurrentTextEnded = false;
+            HasCurrentTextEnded = false;
             dialogueTextbox.text = finalText;
             _currentCharIndex = 0;
             _textEffectsByCharacters = new TextEffectData[finalText.Length];
@@ -117,7 +125,7 @@ namespace BlownAway.Cutscenes
                 //_textEffectsByCharacters[_currentCharIndex]?.TextEffect.CharacterApparitionTime ??
                 yield return new WaitForSeconds(_currentCharWaitTime);
             }
-            _hasCurrentTextEnded = true;
+            HasCurrentTextEnded = true;
             _currentCharIndex = -1;
         }
 
@@ -126,12 +134,17 @@ namespace BlownAway.Cutscenes
             if (_writingCharactersCoroutine != null)
                 StopCoroutine(_writingCharactersCoroutine);
             _currentCharIndex = -1;
-            _hasCurrentTextEnded = true;
+            HasCurrentTextEnded = true;
         }
 
         private void EndDialogue()
         {
             OnDialogueEnd?.Invoke();
+        }
+
+        private void UpdateDialogueEndArrow()
+        {
+            _isDialoguePlayingArrow.SetBool(_isDialoguePlayingArrowCondition, HasCurrentTextEnded);
         }
 
 
@@ -178,8 +191,8 @@ namespace BlownAway.Cutscenes
 
                 for (int i = minRange; i < maxRange; i++)
                 {
-                    if (!_hasCurrentTextEnded) _textEffectsByCharacters[i] = _baseEffectData;
-                    if (!_hasCurrentTextEnded && data.Role != TextEffectRole.HIDDEN) _textEffectsByCharacters[i] = data;
+                    if (!HasCurrentTextEnded) _textEffectsByCharacters[i] = _baseEffectData;
+                    if (!HasCurrentTextEnded && data.Role != TextEffectRole.HIDDEN) _textEffectsByCharacters[i] = data;
                     if (data.Role != TextEffectRole.HIDDEN) _characterApparitionTimers[i] += Time.deltaTime;
                     TMP_CharacterInfo charInfo = textInfo.characterInfo[i];
 
