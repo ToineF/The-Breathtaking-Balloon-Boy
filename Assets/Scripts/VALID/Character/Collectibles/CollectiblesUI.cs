@@ -30,6 +30,7 @@ namespace BlownAway.Collectibles
         [Header("Coin")]
         [SerializeField] private CanvasGroup _coinsUI;
         [SerializeField] private TMP_Text _coinsCountText;
+        [SerializeField] private TMP_Text _currentCoinsCountText;
         [SerializeField] private TMP_Text _maxCoinsCountText;
 
         [Header("Rare Collectible")]
@@ -49,6 +50,7 @@ namespace BlownAway.Collectibles
         private void Start()
         {
             _collectiblesManager.OnCoinGain += UpdateCoinUI;
+            _collectiblesManager.OnCoinRemove += UpdateCoinUI;
             _collectiblesManager.OnCoinGainPreview += ShowUICollectible;
             _collectiblesManager.OnRareCollectibleGain += UpdateRareCollectibleUI;
             _childrenManager.OnChildGain += UpdateChildrenUI;
@@ -61,18 +63,30 @@ namespace BlownAway.Collectibles
 
         private void UpdateMaxCollectiblesUI()
         {
-            _maxCoinsCountText.text = _collectiblesManager.MaxCoins.ToString();
-            _maxRareCollectibleCountText.text = _collectiblesManager.MaxRareCollectibles.ToString();
+            if (_maxCoinsCountText != null) _maxCoinsCountText.text = _collectiblesManager.MaxCoins.ToString();
+            if (_maxRareCollectibleCountText != null) _maxRareCollectibleCountText.text = _collectiblesManager.MaxRareCollectibles.ToString();
         }
 
         private void UpdateCoinUI()
         {
-            _coinsCountText.transform.DOComplete();
-            _coinsCountText.transform.DOPunchPosition(_coinFeedbacks.PunchDirection, _coinFeedbacks.PunchTime, _coinFeedbacks.PunchVibrato, _coinFeedbacks.PunchElasticity);
-            _coinsCountText.text = _collectiblesManager.Coins.ToString();
+            if (_coinsCountText != null)
+            {
+                _coinsCountText.transform.DOComplete();
+                _coinsCountText.transform.DOPunchPosition(_coinFeedbacks.PunchDirection, _coinFeedbacks.PunchTime, _coinFeedbacks.PunchVibrato, _coinFeedbacks.PunchElasticity);
+                _coinsCountText.text = _collectiblesManager.Coins.ToString();
+            }
+
+            if (_currentCoinsCountText != null)
+            {
+                _currentCoinsCountText.transform.DOComplete();
+                _currentCoinsCountText.transform.DOPunchPosition(_coinFeedbacks.PunchDirection, _coinFeedbacks.PunchTime, _coinFeedbacks.PunchVibrato, _coinFeedbacks.PunchElasticity);
+                _currentCoinsCountText.text = _collectiblesManager.CurrentCoins.ToString();
+            }
         }
         private void UpdateRareCollectibleUI()
         {
+            if (_rareCollectibleCountText == null) return;
+
             _rareCollectibleCountText.transform.DOComplete();
             _rareCollectibleCountText.transform.DOPunchPosition(_rareCollectibleFeedbacks.PunchDirection, _rareCollectibleFeedbacks.PunchTime, _rareCollectibleFeedbacks.PunchVibrato, _rareCollectibleFeedbacks.PunchElasticity);
             _rareCollectibleCountText.text = _collectiblesManager.RareCollectibles.ToString();

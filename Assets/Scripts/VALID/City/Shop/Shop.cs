@@ -1,4 +1,5 @@
 using BlownAway.Character;
+using BlownAway.Collectibles;
 using UnityEngine;
 
 namespace BlownAway.City
@@ -7,12 +8,25 @@ namespace BlownAway.City
     {
         [SerializeField] private ShopItem[] _items;
 
-        public void Open(int playerCoins)
+        private void Start()
         {
-            OpenMenu(CanvasGroup, FirstSelectedButton);
             foreach (var item in _items)
             {
-                item.UpdateUI(playerCoins);
+                item.OnBuy += UpdateAllItems;
+            }
+        }
+
+        public void Open(CharacterCollectiblesManager player)
+        {
+            OpenMenu(CanvasGroup, FirstSelectedButton);
+            UpdateAllItems(player);
+        }
+
+        private void UpdateAllItems(CharacterCollectiblesManager player)
+        {
+            foreach (var item in _items)
+            {
+                item.UpdateUI(player);
             }
         }
     }
