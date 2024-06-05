@@ -59,6 +59,8 @@ namespace BlownAway.City
 
             _player.Manager.States.SwitchState(_player.Manager.States.IdleState);
 
+            _shopIsInZonePreview.SetActive(true);
+
             _shop.Close();
         }
 
@@ -67,6 +69,8 @@ namespace BlownAway.City
             if (!_player.Manager.Inputs.ConfirmMenuPressed) return;
 
             _player.Manager.States.SwitchState(_player.Manager.States.MenuState);
+
+            _shopIsInZonePreview.SetActive(false);
 
             _shop.Open(_player.Manager.Collectibles);
         }
