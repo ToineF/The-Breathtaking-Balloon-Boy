@@ -9,11 +9,11 @@ namespace BlownAway.Collectibles
         public Action OnCoinGainPreview;
         public Action OnRareCollectibleGain;
 
-        public float Coins { get; private set; }
-        public float RareCollectibles { get; private set; }
+        public int Coins { get; private set; }
+        public int RareCollectibles { get; private set; }
 
-        public float MaxCoins { get; private set; }
-        public float MaxRareCollectibles { get; private set; }
+        public int MaxCoins { get; private set; }
+        public int MaxRareCollectibles { get; private set; }
 
         protected override void StartScript(CharacterManager manager)
         {

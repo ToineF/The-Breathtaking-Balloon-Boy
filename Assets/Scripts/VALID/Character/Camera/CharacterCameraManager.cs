@@ -242,7 +242,6 @@ namespace BlownAway.Camera
 
         public void SetCursorVisible(bool isVisible)
         {
-            Debug.LogError("VISIBLE : " + isVisible);
             Cursor.lockState = isVisible ? CursorLockMode.None : CursorLockMode.Locked;
             Cursor.visible = isVisible;
         }

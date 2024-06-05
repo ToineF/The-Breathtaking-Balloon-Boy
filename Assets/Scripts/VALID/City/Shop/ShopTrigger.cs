@@ -19,7 +19,7 @@ namespace BlownAway.City
             collider.Manager.States.SwitchState(collider.Manager.States.MenuState);
 
             _shop.CanvasGroup.alpha = 1;
-            _shop.Open();
+            _shop.Open(collider.Manager.Collectibles.Coins);
         }
     }
 }

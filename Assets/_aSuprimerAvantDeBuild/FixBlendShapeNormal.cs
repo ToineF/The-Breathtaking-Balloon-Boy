@@ -3,6 +3,7 @@ using UnityEditor;
 
 public class FixNormals
 {
+    #if UNITY_EDITOR
     /*
      * Set the normals for each blend shape frame to the
      * same normals as the base mesh and export a new mesh
@@ -72,5 +73,5 @@ public class FixNormals
 
         Debug.Log("Done!");
     }
+    #endif
 }
-
