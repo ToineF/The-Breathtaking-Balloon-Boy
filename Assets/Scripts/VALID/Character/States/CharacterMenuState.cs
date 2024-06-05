@@ -12,6 +12,8 @@ namespace BlownAway.Character.States
             manager.CameraManager.IsMovable = false;
             manager.UIManager.ShowUI(false);
             manager.MovementManager.LerpGravityTo(manager, manager.Data.FallData.BaseData);
+            manager.MovementManager.ToggleJacketInflate(manager, false);
+            manager.CameraManager.SetCursorVisible(true);
         }
 
         public override void ExitState(CharacterManager manager)
@@ -19,6 +21,8 @@ namespace BlownAway.Character.States
             manager.CameraManager.IsMovable = true;
             manager.CameraManager.ReactivateCamera();
             manager.UIManager.ShowUI(true);
+            manager.CameraManager.SetCursorVisible(false);
+
         }
 
         public override void UpdateState(CharacterManager manager)

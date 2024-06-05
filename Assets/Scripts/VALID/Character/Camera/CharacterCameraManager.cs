@@ -36,10 +36,9 @@ namespace BlownAway.Camera
             _zoomDistance = manager.Data.CameraData.ZoomDefault;
             _camDist.z = -_zoomDistance;
 
-            Cursor.lockState = manager.Data.CameraData.SetCursorVisible ? CursorLockMode.None : CursorLockMode.Locked;
-            Cursor.visible = manager.Data.CameraData.SetCursorVisible;
-
             _canMoveCamera = true;
+
+            SetCursorVisible(manager.Data.CameraData.SetCursorVisible);
 
             CenterCamera(manager, new Vector3(0, manager.CharacterVisual.transform.eulerAngles.y, 0), 0);
 
@@ -239,6 +238,13 @@ namespace BlownAway.Camera
         {
             Camera.SetActive(false);
             Camera.SetActive(true);
+        }
+
+        public void SetCursorVisible(bool isVisible)
+        {
+            Debug.LogError("VISIBLE : " + isVisible);
+            Cursor.lockState = isVisible ? CursorLockMode.None : CursorLockMode.Locked;
+            Cursor.visible = isVisible;
         }
     }
 }

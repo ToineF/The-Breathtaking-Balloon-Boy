@@ -18,10 +18,7 @@ namespace BlownAway.Cutscenes
 
             if (_cutscene != null)
             {
-                CharacterCollider character = _lastOtherCollider.GetComponent<CharacterCollider>();
-                if (character == null) return;
-
-                collider.Manager.CutsceneManager.StartNewSequence(_cutscene, character.Manager);
+                collider.Manager.CutsceneManager.StartNewSequence(_cutscene, collider.Manager);
             }
         }
     }

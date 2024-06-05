@@ -22,6 +22,8 @@ namespace BlownAway.Character
         private void Awake()
         {
             _inputs = new PlayerInputs();
+            OnPause.AddListener(() => Manager.CameraManager.SetCursorVisible(true));
+            OnResume.AddListener(() => Manager.CameraManager.SetCursorVisible(false));
         }
 
         private void OnEnable()

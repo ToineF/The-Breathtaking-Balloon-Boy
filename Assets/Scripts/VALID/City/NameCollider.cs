@@ -1,11 +1,7 @@
 using UnityEngine;
-using DG.Tweening;
-using BlownAway.Character;
-using System.Collections;
 
 public class NameCollider : BoxTrigger
 {
-    [SerializeField] private CanvasGroup _ui;
     [SerializeField] private Animation _animation;
 
     private new void Awake()
