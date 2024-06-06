@@ -59,6 +59,7 @@ namespace BlownAway.Character.Movements
         public float CurrentDashes { get; private set; }
         private float _dashTimer;
         private Vector3 _currentDashDirection;
+        public int BonusMaxDashes { get; set; } = 0;
 
         // Derive
         public float DeriveTimer { get; private set; }
@@ -691,6 +692,7 @@ namespace BlownAway.Character.Movements
             manager.MovementManager.LerpDeplacementSpeed(manager, manager.Data.LateralMovementData.JumpDescentData);
         }
 
+        #region Dash
         public void CheckForDashStart(CharacterManager manager, bool refreshDashes = false)
         {
             if (!manager.Inputs.StartedDash) return;
@@ -746,9 +748,14 @@ namespace BlownAway.Character.Movements
 
         public void RefreshDashes(CharacterManager manager)
         {
-            CurrentDashes = manager.Data.PowerUpData.MaxDashes;
+            CurrentDashes = manager.Data.PowerUpData.MaxDashes + BonusMaxDashes;
         }
 
+        public void AddBonusDash()
+        {
+            BonusMaxDashes++;
+        }
+        #endregion
         #endregion
 
         #region Air

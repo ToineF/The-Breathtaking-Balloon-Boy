@@ -14,7 +14,7 @@ namespace BlownAway.City
         {
             foreach (var item in _items)
             {
-                item.OnBuy += UpdateAllItems;
+                item.OnBuy.AddListener(UpdateAllItems);
                 item.OnSelectItem += UpdateDescription;
             }
         }

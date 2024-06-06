@@ -4,12 +4,13 @@ using BlownAway.Collectibles;
 using System;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEngine.Events;
 
 namespace BlownAway.City
 {
     public class ShopItem : MonoBehaviour, ISelectHandler
     {
-        public Action<CharacterCollectiblesManager> OnBuy;
+        public UnityEvent<CharacterCollectiblesManager> OnBuy;
         public Action<string> OnSelectItem;
 
         [SerializeField] private int[] _prices;
