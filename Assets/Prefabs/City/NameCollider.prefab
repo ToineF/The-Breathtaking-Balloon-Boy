@@ -60,7 +60,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -214,7 +214,6 @@ MonoBehaviour:
   _gizmoSelectedColor: {r: 1, g: 0, b: 0, a: 1}
   _gizmoWireColor: {r: 0, g: 0, b: 0, a: 1}
   _gizmoSelectedWireColor: {r: 1, g: 1, b: 1, a: 1}
-  _ui: {fileID: 6162954013912946143}
   _animation: {fileID: 5010640552365591667}
 --- !u!1 &6220982574571869876
 GameObject:
@@ -331,7 +330,7 @@ CanvasGroup:
   m_Enabled: 1
   m_Alpha: 0
   m_Interactable: 1
-  m_BlocksRaycasts: 1
+  m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
 --- !u!111 &5010640552365591667
 Animation:
@@ -443,7 +442,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
