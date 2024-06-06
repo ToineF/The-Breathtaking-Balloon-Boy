@@ -73,7 +73,10 @@ namespace BlownAway.City
             if (_isMoving)
             {
                 if (_canMove)
+                {
                     _timerMovements += Time.deltaTime;
+                    //_movingObject.transform.position = Vector3.SmoothDamp(_movingObject.transform.position, _movingPosition, ref _currentVelocity, .1f);
+                }
             }
             else
             {
@@ -84,7 +87,6 @@ namespace BlownAway.City
                 }
             }
 
-            _movingObject.transform.position = Vector3.SmoothDamp(_movingObject.transform.position, _movingPosition, ref _currentVelocity, .1f);
 
 
         }
@@ -96,7 +98,7 @@ namespace BlownAway.City
 
             float elapsedPercentage = _timerMovements / _currentSpeed;
             elapsedPercentage = Mathf.SmoothStep(0, 1, elapsedPercentage);
-            _movingPosition = Vector3.Lerp(_positions[(_index - 1).Modulo(_positions.Length)].position, _positions[_index].position, elapsedPercentage);
+            _movingObject.transform.position = Vector3.Lerp(_positions[(_index - 1).Modulo(_positions.Length)].position, _positions[_index].position, elapsedPercentage);
 
             if (elapsedPercentage >= 1)
             {
