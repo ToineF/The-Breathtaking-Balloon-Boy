@@ -1,0 +1,118 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &2518090962757705860
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 64e4fce755fadde408b18ed84733be1e,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 64e4fce755fadde408b18ed84733be1e,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 208.81586
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 64e4fce755fadde408b18ed84733be1e,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 131.94275
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 64e4fce755fadde408b18ed84733be1e,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 267.865
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 64e4fce755fadde408b18ed84733be1e,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 64e4fce755fadde408b18ed84733be1e,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 64e4fce755fadde408b18ed84733be1e,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 64e4fce755fadde408b18ed84733be1e,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 64e4fce755fadde408b18ed84733be1e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 64e4fce755fadde408b18ed84733be1e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 64e4fce755fadde408b18ed84733be1e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -2359721211177903240, guid: 64e4fce755fadde408b18ed84733be1e,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 2e015c5140362ef4ca56b48a413d59a6, type: 2}
+    - target: {fileID: 919132149155446097, guid: 64e4fce755fadde408b18ed84733be1e,
+        type: 3}
+      propertyPath: m_Name
+      value: PFB_Bird
+      objectReference: {fileID: 0}
+    - target: {fileID: 3947382573212473737, guid: 64e4fce755fadde408b18ed84733be1e,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: eec66cbd24fd359439a150276222b04d, type: 2}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 64e4fce755fadde408b18ed84733be1e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1164877038981695765}
+  m_SourcePrefab: {fileID: 100100000, guid: 64e4fce755fadde408b18ed84733be1e, type: 3}
+--- !u!1 &3329118564954562005 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 64e4fce755fadde408b18ed84733be1e,
+    type: 3}
+  m_PrefabInstance: {fileID: 2518090962757705860}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1164877038981695765
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3329118564954562005}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29a074d529cf945029ef7cf40540c9df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Target: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_LoopMode: 1
+  m_Method: 0
+  m_Duration: 10
+  m_MaxSpeed: 20.39948
+  m_EasingMode: 0
+  m_AlignmentMode: 1
+  m_ObjectForwardAxis: 2
+  m_ObjectUpAxis: 1
+  m_StartOffset: 0
