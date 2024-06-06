@@ -3,14 +3,17 @@ using TMPro;
 using BlownAway.Collectibles;
 using System;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 namespace BlownAway.City
 {
-    public class ShopItem : MonoBehaviour
+    public class ShopItem : MonoBehaviour, ISelectHandler
     {
         public Action<CharacterCollectiblesManager> OnBuy;
+        public Action<string> OnSelectItem;
 
         [SerializeField] private int[] _prices;
+        [SerializeField, TextArea] private string _description;
 
         [Header("References")]
         [SerializeField] private GameObject _priceUI;
@@ -66,6 +69,11 @@ namespace BlownAway.City
             }
 
             OnBuy?.Invoke(_player);
+        }
+
+        public void OnSelect(BaseEventData eventData)
+        {
+            OnSelectItem?.Invoke(_description);
         }
     }
 }

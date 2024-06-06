@@ -36,8 +36,8 @@ namespace BlownAway.Character.States
 
             manager.MovementManager.UpdateGroundPoundTimer(manager);
 
-            //if (manager.MovementManager.GroundPoundCancelTime < 0)
-            //    manager.MovementManager.CheckForPropulsionStartOnAir(manager);
+            if (manager.MovementManager.GroundPoundCancelTime < 0)
+                manager.MovementManager.CheckForPropulsionStartOnAir(manager);
 
             //manager.MovementManager.CheckForGroundPoundBalloon(manager);
         }
