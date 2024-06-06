@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ParentableCollider : MonoBehaviour
 {
-
+    public Vector3 LastPosition { get; set; }
 }

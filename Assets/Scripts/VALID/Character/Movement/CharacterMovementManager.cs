@@ -96,7 +96,7 @@ namespace BlownAway.Character.Movements
         public bool IsAboveBalloon { get; private set; }
         private RaycastHit _aboveBalloonHitPoint;
 
-        private Transform _parent;
+        private ParentableCollider _currentParent;
 
         // External Forces
         public Dictionary<GameObject, ForceData> ExternalForces { get; private set; } = new Dictionary<GameObject, ForceData>();
@@ -110,7 +110,6 @@ namespace BlownAway.Character.Movements
 
         protected override void StartScript(CharacterManager manager)
         {
-            _parent = manager.CharacterCollider.Rigidbody.transform.parent;
             //MaxGroundHitResults = new RaycastHit[1];
             //MinGroundHitResults = new RaycastHit[1];
             JumpBufferHitResults = new RaycastHit[2];
@@ -282,13 +281,14 @@ namespace BlownAway.Character.Movements
             }
 
             // Change Parenting
-            if (IsMinGrounded && LastGround.collider.GetComponent<ParentableCollider>())
+            if (IsMinGrounded && LastGround.collider.TryGetComponent(out ParentableCollider parentedCollider))
             {
-                manager.CharacterCollider.Rigidbody.transform.SetParent(LastGround.collider.transform);
+                _currentParent = parentedCollider;
+                _currentParent.LastPosition = _currentParent.transform.position;
             }
             else
             {
-                manager.CharacterCollider.Rigidbody.transform.SetParent(_parent);
+                _currentParent = null;
             }
         }
 
@@ -381,10 +381,17 @@ namespace BlownAway.Character.Movements
             //CurrentVelocity += springForce;
             Vector3 rigidbodyPosition = manager.CharacterCollider.Rigidbody.transform.position;
             Vector3 targetPos = new Vector3(rigidbodyPosition.x, LastGround.point.y + manager.Data.GroundDetectionData.TargetDistanceFromGround, rigidbodyPosition.z);
+
+            if (_currentParent != null)
+            {
+                var plateformSpeed = _currentParent.transform.position - _currentParent.LastPosition;
+                _currentParent.LastPosition = _currentParent.transform.position;
+                targetPos += plateformSpeed;
+            }
+
             //Debug.LogWarning(LastGround.collider.name + ": " + targetPos);
 
             TeleportPlayer(manager, targetPos);
-
         }
 
         public void ResetGravity(CharacterManager manager)

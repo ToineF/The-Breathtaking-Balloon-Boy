@@ -7,18 +7,18 @@ namespace BlownAway.City
 {
     public class MovingObject : MonoBehaviour
     {
-        [SerializeField] [Tooltip("A object to move")] private GameObject _movingObject;
-        [SerializeField] [Tooltip("A list of positions to travel to")] private Transform[] _positions;
-        [SerializeField] [Tooltip("The time it takes to travel from one point to another in seconds")] private float _timeByTravel;
-        [SerializeField] [Tooltip("Should the travel time take the distance into account")] private bool _speedByDistance;
-        [SerializeField] [Tooltip("The multiplication of the distance to create a travel time")] private float _timeByDistanceMultiplier = 1;
-        [SerializeField] [Tooltip("The ease between two points")] private Ease _ease;
-        [SerializeField] [Tooltip("Does it move on start")] private bool _moveOnStart;
-        [SerializeField] [Tooltip("Does the position list loops")] private bool _loopPositions;
-        [SerializeField] [Tooltip("Does the position list plays only one at a time")] private bool _playOnePosition;
-        [SerializeField] [Tooltip("Does it move again if collider is re-entered")] private bool _canBeReactivated;
-        [SerializeField] [Tooltip("The time between collisions in seconds if it take be reactivated")] private float _timeBetweenPlayerCollisions;
-        [SerializeField] [Tooltip("The wait time between positions")] private float _waitTimeBetweenPositions;
+        [SerializeField, Tooltip("The object to move")] private GameObject _movingObject;
+        [SerializeField, Tooltip("A list of positions to travel to")] private Transform[] _positions;
+        [SerializeField, Tooltip("The time it takes to travel from one point to another in seconds")] private float _timeByTravel;
+        [SerializeField, Tooltip("Should the travel time take the distance into account")] private bool _speedByDistance;
+        [SerializeField, Tooltip("The multiplication of the distance to create a travel time")] private float _timeByDistanceMultiplier = 1;
+        [SerializeField, Tooltip("The ease between two points")] private Ease _ease;
+        [SerializeField, Tooltip("Does it move on start")] private bool _moveOnStart;
+        [SerializeField, Tooltip("Does the position list loops")] private bool _loopPositions;
+        [SerializeField, Tooltip("Does the position list plays only one at a time")] private bool _playOnePosition;
+        [SerializeField, Tooltip("Does it move again if collider is re-entered")] private bool _canBeReactivated;
+        [SerializeField, Tooltip("The time between collisions in seconds if it take be reactivated")] private float _timeBetweenPlayerCollisions;
+        [SerializeField, Tooltip("The wait time between positions")] private float _waitTimeBetweenPositions;
 
         private int _index = 0;
         private float _timerMovements = 0;
@@ -28,8 +28,11 @@ namespace BlownAway.City
         private bool _canMove = true;
         private bool _isWaiting = false;
 
+        private Vector3 _movingPosition;
+        private Vector3 _currentVelocity;
         private void Start()
         {
+            _movingPosition = _movingObject.transform.position;
             if (!_moveOnStart) return;
             StartMoving();
         }
@@ -80,6 +83,10 @@ namespace BlownAway.City
                     _canMove = true;
                 }
             }
+
+            _movingObject.transform.position = Vector3.SmoothDamp(_movingObject.transform.position, _movingPosition, ref _currentVelocity, .1f);
+
+
         }
 
         private void FixedUpdate()
@@ -89,7 +96,7 @@ namespace BlownAway.City
 
             float elapsedPercentage = _timerMovements / _currentSpeed;
             elapsedPercentage = Mathf.SmoothStep(0, 1, elapsedPercentage);
-            _movingObject.transform.position = Vector3.Lerp(_positions[(_index - 1).Modulo(_positions.Length)].position, _positions[_index].position, elapsedPercentage);
+            _movingPosition = Vector3.Lerp(_positions[(_index - 1).Modulo(_positions.Length)].position, _positions[_index].position, elapsedPercentage);
 
             if (elapsedPercentage >= 1)
             {
