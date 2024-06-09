@@ -53,8 +53,8 @@ namespace BlownAway.Character.Inputs
         public bool StartedGroundPound { get; private set; }
 
         // Cutscenes
-        public bool ConfirmMenuPressed { get; private set; }
-        public bool CancelMenuPressed { get; private set; }
+        public bool ConfirmUIPressed { get; private set; }
+        public bool CancelUIPressed { get; private set; }
         public bool SkipCutscene { get; private set; }
 
         // Inputs
@@ -68,7 +68,6 @@ namespace BlownAway.Character.Inputs
         }
         private PlayerInputs _inputs;
         private Gamepad _gamepad;
-        private ControllerType _gamepadType;
         private ControllerType _controllerType;
         public bool IsGamepad { get; private set; }
 
@@ -118,8 +117,9 @@ namespace BlownAway.Character.Inputs
             _inputs.Player.Dash.performed += StartDash;
             _inputs.Player.GroundPound.performed += StartGroundPound;
 
-            _inputs.Player.ConfirmMenu.performed += StartConfirmMenu;
-            _inputs.Player.CancelMenu.performed += StartCancelMenu;
+            _inputs.UnityUI.Submit.performed += UIConfirm;
+            _inputs.UnityUI.Cancel.performed += UICancel;
+
             _inputs.Player.SkipCutscene.performed += StartSkipCutscene;
             _inputs.Player.SkipCutscene.canceled += StopSkipCutscene;
         }
@@ -154,7 +154,7 @@ namespace BlownAway.Character.Inputs
             _inputs.Player.Dash.performed -= StartDash;
             _inputs.Player.GroundPound.performed -= StartGroundPound;
 
-            _inputs.Player.ConfirmMenu.performed -= StartConfirmMenu;
+            _inputs.UnityUI.Submit.performed -= UIConfirm;
         }
 
         public void EnableInputs(bool enabled)
@@ -277,8 +277,8 @@ namespace BlownAway.Character.Inputs
             CameraCenter = false;
             CameraTopDownPressed = false;
             CameraTopDownReleased = false;
-            ConfirmMenuPressed = false;
-            CancelMenuPressed = false;
+            ConfirmUIPressed = false;
+            CancelUIPressed = false;
             StartPropulsion = false;
             StartedJumping = false;
 
@@ -321,7 +321,6 @@ namespace BlownAway.Character.Inputs
                 ControllerType = ControllerType.SWITCH;
             }
             _gamepad = gamepad;
-            _gamepadType = ControllerType;
         }
 
 
@@ -343,15 +342,15 @@ namespace BlownAway.Character.Inputs
             UpdateControllerType(context);
         }
 
-        private void StartConfirmMenu(InputAction.CallbackContext context)
+        private void UIConfirm(InputAction.CallbackContext context)
         {
-            ConfirmMenuPressed = true;
+            ConfirmUIPressed = true;
             UpdateControllerType(context);
         }
 
-        private void StartCancelMenu(InputAction.CallbackContext context)
+        private void UICancel(InputAction.CallbackContext context)
         {
-            CancelMenuPressed = true;
+            CancelUIPressed = true;
             UpdateControllerType(context);
         }
 
@@ -368,8 +367,7 @@ namespace BlownAway.Character.Inputs
 
         private void UpdateControllerType(InputAction.CallbackContext context)
         {
-            if (context.action.activeControl.device.name == "Keyboard" || context.action.activeControl.device.name == "Mouse") IsGamepad = false;
-            else IsGamepad = true;
+            IsGamepad = (context.action.activeControl.device.name != "Keyboard" && context.action.activeControl.device.name != "Mouse");
         }
     }
 }

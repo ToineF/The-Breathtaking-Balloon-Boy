@@ -55,7 +55,7 @@ namespace BlownAway.City
 
         private void ExitShop()
         {
-            if (!_player.Manager.Inputs.CancelMenuPressed) return;
+            if (!_player.Manager.Inputs.CancelUIPressed) return;
 
             _player.Manager.States.SwitchState(_player.Manager.States.IdleState);
 
@@ -66,7 +66,7 @@ namespace BlownAway.City
 
         private void EnterShop()
         {
-            if (!_player.Manager.Inputs.ConfirmMenuPressed) return;
+            if (!_player.Manager.Inputs.ConfirmUIPressed) return;
 
             _player.Manager.States.SwitchState(_player.Manager.States.MenuState);
 

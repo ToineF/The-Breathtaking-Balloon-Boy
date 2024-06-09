@@ -34,7 +34,7 @@ namespace BlownAway.Character.States
 
         public override void UpdateState(CharacterManager manager)
         {
-            if (manager.Inputs.ConfirmMenuPressed)
+            if (manager.Inputs.ConfirmUIPressed)
                 manager.CutsceneManager.DialogueManager.GoToNextText();
 
             manager.CutsceneManager.SetSkipCutscene(manager.Inputs.SkipCutscene);
