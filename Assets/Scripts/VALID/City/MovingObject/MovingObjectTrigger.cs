@@ -7,6 +7,7 @@ namespace BlownAway.City
     {
         [Header("Moving Object Params")]
         [SerializeField] private MovingObject _object;
+        [SerializeField] private bool _resetOnDeath = true;
 
         private CharacterManager _characterManager;
 
@@ -44,6 +45,7 @@ namespace BlownAway.City
 
         private void OnDeath(CharacterManager manager)
         {
+            if (!_resetOnDeath) return;
             _object.ResetPosition();
             if (_characterManager != null) _characterManager.MovementManager.OnDeath -= OnDeath;
         }

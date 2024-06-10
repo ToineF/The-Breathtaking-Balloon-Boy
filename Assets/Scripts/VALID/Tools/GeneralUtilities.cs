@@ -5,7 +5,7 @@ public class GeneralUtilities : MonoBehaviour
 {
     private Transform _copiedTransform;
 
-    public void MoveObjectToCopiedPosition(Transform transform)
+    public void PastePosition(Transform transform)
     {
         GeneralPasteBlueprint(transform, () =>
         {
@@ -13,7 +13,7 @@ public class GeneralUtilities : MonoBehaviour
         }); 
     }
 
-    public void ScaleObjectToCopiedScale(Transform transform)
+    public void PasteScale(Transform transform)
     {
         GeneralPasteBlueprint(transform, () =>
         {
@@ -21,7 +21,7 @@ public class GeneralUtilities : MonoBehaviour
         });
     }
 
-    public void RotateObjectToCopiedRotation(Transform transform)
+    public void PasteRotation(Transform transform)
     {
         GeneralPasteBlueprint(transform, () =>
         {
@@ -33,15 +33,16 @@ public class GeneralUtilities : MonoBehaviour
     {
         if (_copiedTransform == null) return;
 
-        MoveObjectToCopiedPosition(transform);
-        RotateObjectToCopiedRotation(transform);
-        ScaleObjectToCopiedScale(transform);
+        PastePosition(transform);
+        PasteRotation(transform);
+        PasteScale(transform);
     }
 
     public void CopyTransform(Transform transform)
     {
         _copiedTransform = transform;
     }
+
     private void GeneralPasteBlueprint(Transform transform, Action action)
     {
         if (_copiedTransform == null) return;
