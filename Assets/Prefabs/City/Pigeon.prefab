@@ -684,7 +684,7 @@ Transform:
   m_Children:
   - {fileID: 7958296266368808285}
   m_Father: {fileID: 0}
-  m_RootOrder: 132
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: -13.265, z: 0}
 --- !u!114 &4321240657656257458
 MonoBehaviour:
@@ -717,7 +717,8 @@ MonoBehaviour:
   _peckingWaitTimeMax: 3
   _targetDirection: {x: 0, y: 200, z: 0}
   _directionRandomness: 200
-  _flySpeed: 26
+  _flySpeed: 15
+  _flyEase: 30
   _triggerOtherBirds: 0
   _vfxFly: {fileID: 2353600328335836179, guid: 86e0c700ebb9cd345a227fb9fdc635cd, type: 3}
 --- !u!135 &7311447137861623276

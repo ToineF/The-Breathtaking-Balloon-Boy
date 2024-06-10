@@ -26,6 +26,7 @@ namespace BlownAway.City
         [SerializeField] private Vector3 _targetDirection;
         [SerializeField] private float _directionRandomness;
         [SerializeField] private float _flySpeed;
+        [SerializeField] private Ease _flyEase;
         [SerializeField] private bool _triggerOtherBirds;
 
         [Header("Feedbacks")]
@@ -49,7 +50,7 @@ namespace BlownAway.City
 
             Vector2 randomCircle = UnityEngine.Random.insideUnitCircle * _directionRandomness;
             Vector3 targetDirection = transform.position + new Vector3(randomCircle.x, 0, randomCircle.y) + _targetDirection;
-            gameObject.transform.DOMove(targetDirection, _flySpeed).OnComplete(EndFly);
+            gameObject.transform.DOMove(targetDirection, _flySpeed).OnComplete(EndFly).SetEase(_flyEase);
 
 
             transform.LookAt(new Vector3(targetDirection.x, 0, targetDirection.z));
