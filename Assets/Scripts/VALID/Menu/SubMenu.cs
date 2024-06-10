@@ -13,7 +13,6 @@ namespace BlownAway.Character
         [field: Header("Top Menu")]
         [field: SerializeField] public SubMenu TopSubmenu { get; private set; }
         [field: SerializeField] public GameObject TopSelectedButton { get; private set; }
-        [field: SerializeField] public bool CanBeClosed { get; private set; } = true;
 
         public void OpenSubMenu(SubMenu submenu)
         {
@@ -59,22 +58,22 @@ namespace BlownAway.Character
             Inputs = new PlayerInputs();
         }
 
-        private void OnEnable()
+        protected void OnEnable()
         {
             Inputs.Enable();
             Inputs.UnityUI.Cancel.canceled += PressCancel;
 
         }
-        private void OnDisable()
+        protected void OnDisable()
         {
             Inputs.Disable();
             Inputs.UnityUI.Cancel.canceled -= PressCancel;
         }
 
-        private void TryCloseSubMenu(InputAction.CallbackContext context)
+        protected virtual void TryCloseSubMenu(InputAction.CallbackContext context)
         {
             //if (CanvasGroup.alpha == 0) return;
-            if (!CanBeClosed) return;
+            if (TopSubmenu == null) return;
             if (!CanPressCancel) return;
 
 

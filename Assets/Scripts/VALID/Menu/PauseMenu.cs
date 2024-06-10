@@ -16,23 +16,16 @@ namespace BlownAway.Character
         [Header("Options Menu")]
         [SerializeField] private SubMenu[] _subMenusToClose;
 
-        // Inputs
-        private PlayerInputs _inputs;
 
-        private void Awake()
+        private new void OnEnable()
         {
-            _inputs = new PlayerInputs();
+            base.OnEnable();
+            Inputs.Player.Pause.performed += StartTogglePause;
         }
 
-        private void OnEnable()
+        private new void OnDisable()
         {
-            _inputs.Enable();
-            _inputs.Player.Pause.performed += StartTogglePause;
-        }
-        private void OnDisable()
-        {
-            _inputs.Disable();
-            _inputs.Player.Pause.performed -= StartTogglePause;
+            Inputs.Player.Pause.performed -= StartTogglePause;
         }
 
         protected override void StartScript(CharacterManager manager)
@@ -60,6 +53,8 @@ namespace BlownAway.Character
             Manager.Inputs.EnableInputs(true);
             GameIsPaused = false;
             _globalPauseUIMenu.alpha = 0f;
+            _globalPauseUIMenu.interactable = false;
+            _globalPauseUIMenu.blocksRaycasts = false;
             foreach (var submenu in _subMenusToClose)
             {
                 CloseMenu(submenu);
@@ -74,9 +69,17 @@ namespace BlownAway.Character
             Manager.Inputs.EnableInputs(false);
             GameIsPaused = true;
             _globalPauseUIMenu.alpha = 1f;
+            _globalPauseUIMenu.interactable = true;
+            _globalPauseUIMenu.blocksRaycasts = true;
             OpenMenu(this, FirstSelectedButton);
             Manager.CameraManager.SetCursorVisible(true);
             OnPause?.Invoke();
+        }
+
+        protected override void TryCloseSubMenu(InputAction.CallbackContext context)
+        {
+            if (!CanPressCancel) return;
+            Resume();
         }
     }
 }

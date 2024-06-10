@@ -52,9 +52,10 @@ namespace BlownAway.Character.Inputs
         public bool StartedDash { get; private set; }
         public bool StartedGroundPound { get; private set; }
 
-        // Cutscenes
+        // Menu
         public bool ConfirmUIPressed { get; private set; }
         public bool CancelUIPressed { get; private set; }
+        public bool PausePressed { get; private set; }
         public bool SkipCutscene { get; private set; }
 
         // Inputs
@@ -120,6 +121,8 @@ namespace BlownAway.Character.Inputs
             _inputs.UnityUI.Submit.performed += UIConfirm;
             _inputs.UnityUI.Cancel.performed += UICancel;
 
+            _inputs.Player.Pause.performed += StartPausePressed;
+
             _inputs.Player.SkipCutscene.performed += StartSkipCutscene;
             _inputs.Player.SkipCutscene.canceled += StopSkipCutscene;
         }
@@ -155,6 +158,12 @@ namespace BlownAway.Character.Inputs
             _inputs.Player.GroundPound.performed -= StartGroundPound;
 
             _inputs.UnityUI.Submit.performed -= UIConfirm;
+            _inputs.UnityUI.Cancel.performed -= UICancel;
+
+            _inputs.Player.Pause.performed -= StartPausePressed;
+
+            _inputs.Player.SkipCutscene.performed -= StartSkipCutscene;
+            _inputs.Player.SkipCutscene.canceled -= StopSkipCutscene;
         }
 
         public void EnableInputs(bool enabled)
@@ -279,6 +288,7 @@ namespace BlownAway.Character.Inputs
             CameraTopDownReleased = false;
             ConfirmUIPressed = false;
             CancelUIPressed = false;
+            PausePressed = false;
             StartPropulsion = false;
             StartedJumping = false;
 
@@ -359,6 +369,13 @@ namespace BlownAway.Character.Inputs
             SkipCutscene = true;
             UpdateControllerType(context);
         }
+
+        private void StartPausePressed(InputAction.CallbackContext context)
+        {
+            PausePressed = true;
+            UpdateControllerType(context);
+        }
+
         private void StopSkipCutscene(InputAction.CallbackContext context)
         {
             SkipCutscene = false;
