@@ -11,6 +11,7 @@ namespace BlownAway.City
     public class ShopItem : MonoBehaviour, ISelectHandler
     {
         public UnityEvent<CharacterCollectiblesManager> OnBuy;
+        public UnityEvent<CharacterCollectiblesManager> OnBuyFirst;
         public Action<string> OnSelectItem;
 
         [SerializeField] private int[] _prices;
@@ -60,6 +61,9 @@ namespace BlownAway.City
 
             _player.RemoveCoin(_prices[_currentItem]);
 
+            if (_currentItem == 0) OnBuyFirst?.Invoke(_player);
+            OnBuy?.Invoke(_player);
+
             if (_currentItem >= _prices.Length - 1)
             {
                 _soldOut = true;
@@ -68,8 +72,6 @@ namespace BlownAway.City
             {
                 _currentItem++;
             }
-
-            OnBuy?.Invoke(_player);
         }
 
         public void OnSelect(BaseEventData eventData)

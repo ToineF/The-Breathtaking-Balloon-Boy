@@ -71,6 +71,7 @@ namespace BlownAway.Character
 
         // Accessibility
         [field: SerializeField, Tooltip("The reference to the class that contains the logic of the acessibility options")] public AccessibilityOptions AccessibilityOptions { get; private set; }
+        [field: SerializeField, Tooltip("The reference to the class that contains the logic of the acessibility options of the main menu")] public AccessibilityOptions AccessibilityOptionsMainMenu { get; private set; }
 
         // Debug Mode
         [field: SerializeField, Tooltip("The reference to the class that contains the logic of the transitions")] public DebugMode.DebugMode DebugMode { get; private set; }
@@ -93,6 +94,7 @@ namespace BlownAway.Character
             UIManager.InitScript(this);
             PauseMenu.InitScript(this);
             AccessibilityOptions.InitScript(this);
+            AccessibilityOptionsMainMenu.InitScript(this);
             CutsceneManager.InitScript(this);
             Feedbacks.InitScript(this);
         }

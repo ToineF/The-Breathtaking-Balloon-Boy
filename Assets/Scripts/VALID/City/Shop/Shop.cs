@@ -21,13 +21,13 @@ namespace BlownAway.City
 
         public void Open(CharacterCollectiblesManager player)
         {
-            OpenMenu(CanvasGroup, FirstSelectedButton);
+            OpenMenu(this, FirstSelectedButton);
             UpdateAllItems(player);
         }
 
         public void Close()
         {
-            CloseMenu(CanvasGroup);
+            CloseMenu(this);
         }
 
         private void UpdateAllItems(CharacterCollectiblesManager player)

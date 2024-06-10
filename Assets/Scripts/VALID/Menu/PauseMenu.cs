@@ -59,10 +59,10 @@ namespace BlownAway.Character
             Time.timeScale = 1f;
             Manager.Inputs.EnableInputs(true);
             GameIsPaused = false;
-            CloseMenu(_globalPauseUIMenu);
+            _globalPauseUIMenu.alpha = 0f;
             foreach (var submenu in _subMenusToClose)
             {
-                CloseMenu(submenu.CanvasGroup);
+                CloseMenu(submenu);
             }
             Manager.CameraManager.SetCursorVisible(false);
             OnResume?.Invoke();
@@ -73,8 +73,8 @@ namespace BlownAway.Character
             Time.timeScale = 0f;
             Manager.Inputs.EnableInputs(false);
             GameIsPaused = true;
-            OpenMenu(_globalPauseUIMenu);
-            OpenMenu(CanvasGroup, FirstSelectedButton);
+            _globalPauseUIMenu.alpha = 1f;
+            OpenMenu(this, FirstSelectedButton);
             Manager.CameraManager.SetCursorVisible(true);
             OnPause?.Invoke();
         }
