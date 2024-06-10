@@ -25,7 +25,7 @@ namespace BlownAway.City
 
             _object.StartMoving();
             _characterManager = collider.Manager;
-            _characterManager.MovementManager.OnDeath += OnDeath;
+            if (_resetOnDeath) _characterManager.MovementManager.OnDeath += OnDeath;
         }
 
         private new void OnDrawGizmos()
@@ -45,7 +45,6 @@ namespace BlownAway.City
 
         private void OnDeath(CharacterManager manager)
         {
-            if (!_resetOnDeath) return;
             _object.ResetPosition();
             if (_characterManager != null) _characterManager.MovementManager.OnDeath -= OnDeath;
         }
