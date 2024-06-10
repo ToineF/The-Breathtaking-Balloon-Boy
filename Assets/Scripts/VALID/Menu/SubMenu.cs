@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 
 namespace BlownAway.Character
 {
@@ -31,6 +32,7 @@ namespace BlownAway.Character
             group.alpha = 1;
             group.blocksRaycasts = true;
             if (firstSelected != null) EventSystem.current.SetSelectedGameObject(firstSelected);
+            //_inputs.UnityUI.Cancel.performed += TryCloseSubMenu;
         }
 
         protected void CloseMenu(CanvasGroup group, GameObject firstSelected = null)
@@ -39,6 +41,31 @@ namespace BlownAway.Character
             group.alpha = 0;
             group.blocksRaycasts = false;
             if (firstSelected != null) EventSystem.current.SetSelectedGameObject(firstSelected);
+            //_inputs.UnityUI.Cancel.performed -= TryCloseSubMenu;
         }
+
+        #region Cancel Input
+        // Inputs
+        private PlayerInputs _inputs;
+
+        private void Awake()
+        {
+            _inputs = new PlayerInputs();
+        }
+
+        private void OnEnable()
+        {
+            _inputs.Enable();
+        }
+        private void OnDisable()
+        {
+            _inputs.Disable();
+        }
+
+        private void TryCloseSubMenu(InputAction.CallbackContext context)
+        {
+
+        }
+        #endregion
     }
 }
