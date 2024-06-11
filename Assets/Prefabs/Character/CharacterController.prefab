@@ -230,6 +230,7 @@ MonoBehaviour:
   <Transition>k__BackingField: {fileID: 5340934570221708271}
   <PauseMenu>k__BackingField: {fileID: 8899682571292181363}
   <AccessibilityOptions>k__BackingField: {fileID: 6243132991213252608}
+  <AccessibilityOptionsMainMenu>k__BackingField: {fileID: 0}
   <DebugMode>k__BackingField: {fileID: 6195353828592389329}
 --- !u!114 &1215609012679441032
 MonoBehaviour:
@@ -569,7 +570,6 @@ GameObject:
   - component: {fileID: 3420685401940710011}
   - component: {fileID: 518870238385758459}
   - component: {fileID: 8767097783703232575}
-  - component: {fileID: 6428890035861360517}
   m_Layer: 6
   m_Name: Shadow
   m_TagString: Untagged
@@ -604,14 +604,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71c1bfc589f6cc14aad70b045b750aa7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_SendPointerHoverToParent: 1
-  m_HorizontalAxis: Horizontal
-  m_VerticalAxis: Vertical
-  m_SubmitButton: Submit
-  m_CancelButton: Cancel
-  m_InputActionsPerSecond: 10
-  m_RepeatDelay: 0.5
-  m_ForceModuleActive: 0
   _manager: {fileID: 0}
   _hideOnGrounded: 0
 --- !u!114 &8767097783703232575
@@ -638,21 +630,6 @@ MonoBehaviour:
   m_Offset: {x: 0, y: 0, z: 150}
   m_Size: {x: 0.5, y: 0.5, z: 300}
   m_FadeFactor: 0.609
---- !u!114 &6428890035861360517
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3282752408672406405}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_FirstSelected: {fileID: 0}
-  m_sendNavigationEvents: 1
-  m_DragThreshold: 10
 --- !u!1 &3855498825220720160
 GameObject:
   m_ObjectHideFlags: 0
@@ -5838,7 +5815,6 @@ GameObject:
   - component: {fileID: 5693640354643090094}
   - component: {fileID: 1089077784018871383}
   - component: {fileID: 2312928204257318069}
-  - component: {fileID: 7699953571924749437}
   m_Layer: 6
   m_Name: Shadow
   m_TagString: Untagged
@@ -5873,14 +5849,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71c1bfc589f6cc14aad70b045b750aa7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_SendPointerHoverToParent: 1
-  m_HorizontalAxis: Horizontal
-  m_VerticalAxis: Vertical
-  m_SubmitButton: Submit
-  m_CancelButton: Cancel
-  m_InputActionsPerSecond: 10
-  m_RepeatDelay: 0.5
-  m_ForceModuleActive: 0
   _manager: {fileID: 0}
   _hideOnGrounded: 0
 --- !u!114 &2312928204257318069
@@ -5907,21 +5875,6 @@ MonoBehaviour:
   m_Offset: {x: 0, y: 0, z: 150}
   m_Size: {x: 0.5, y: 0.5, z: 300}
   m_FadeFactor: 0.609
---- !u!114 &7699953571924749437
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5934499241986033235}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_FirstSelected: {fileID: 0}
-  m_sendNavigationEvents: 1
-  m_DragThreshold: 10
 --- !u!1 &5990117966750183052
 GameObject:
   m_ObjectHideFlags: 0
