@@ -1,3 +1,4 @@
+using BlownAway.Character;
 using System;
 using UnityEngine;
 
@@ -28,6 +29,17 @@ public class GeneralUtilities : MonoBehaviour
             transform.rotation = _copiedTransform.rotation;
         });
     }
+
+    public void PasteRotationPlayer(CharacterManager manager)
+    {
+        manager.MovementManager.SetCurrentDeplacementDirection(_copiedTransform);
+    }
+
+    //public void PasteRigidbodyTorque(Rigidbody rigidbody)
+    //{
+    //rigidbody.TORQ
+    //rigidbody.AddTorque(Vector3.up * Vector3.Dot(Vector3.forward, _copiedTransform.transform.forward));
+    //}
 
     public void PasteTransform(Transform transform)
     {

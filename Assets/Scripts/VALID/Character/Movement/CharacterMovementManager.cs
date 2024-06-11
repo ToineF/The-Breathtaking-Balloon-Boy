@@ -214,6 +214,15 @@ namespace BlownAway.Character.Movements
         {
             _currentDeplacementDirection = Vector3.zero;
         }
+        public void SetCurrentDeplacementDirection(Vector3 direction)
+        {
+            _currentDeplacementDirection = direction;
+        }
+        public void SetCurrentDeplacementDirection(Transform targetTransform)
+        {
+            _currentDeplacementDirection = targetTransform.forward;
+        }
+
 
         // Generalize this to be more reusable (DO THIS ON STATE START)
         public void LerpDeplacementSpeed(CharacterManager manager, Data.LateralData data)
