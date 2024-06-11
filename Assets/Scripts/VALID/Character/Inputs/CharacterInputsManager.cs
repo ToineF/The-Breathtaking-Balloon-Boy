@@ -56,6 +56,7 @@ namespace BlownAway.Character.Inputs
         public bool ConfirmUIPressed { get; private set; }
         public bool CancelUIPressed { get; private set; }
         public bool PausePressed { get; private set; }
+        public bool ShopEnterPressed { get; private set; }
         public bool SkipCutscene { get; private set; }
 
         // Inputs
@@ -125,6 +126,8 @@ namespace BlownAway.Character.Inputs
 
             _inputs.Player.SkipCutscene.performed += StartSkipCutscene;
             _inputs.Player.SkipCutscene.canceled += StopSkipCutscene;
+
+            _inputs.Player.ShopEntered.canceled += StartShopEntered;
         }
 
         private void OnDisable()
@@ -164,6 +167,8 @@ namespace BlownAway.Character.Inputs
 
             _inputs.Player.SkipCutscene.performed -= StartSkipCutscene;
             _inputs.Player.SkipCutscene.canceled -= StopSkipCutscene;
+
+            _inputs.Player.ShopEntered.canceled -= StartShopEntered;
         }
 
         public void EnableInputs(bool enabled)
@@ -289,6 +294,7 @@ namespace BlownAway.Character.Inputs
             ConfirmUIPressed = false;
             CancelUIPressed = false;
             PausePressed = false;
+            ShopEnterPressed = false;
             StartPropulsion = false;
             StartedJumping = false;
 
@@ -380,6 +386,11 @@ namespace BlownAway.Character.Inputs
         {
             SkipCutscene = false;
             UpdateControllerType(context);
+        }
+
+        private void StartShopEntered(InputAction.CallbackContext context)
+        {
+            ShopEnterPressed = true;
         }
 
         private void UpdateControllerType(InputAction.CallbackContext context)

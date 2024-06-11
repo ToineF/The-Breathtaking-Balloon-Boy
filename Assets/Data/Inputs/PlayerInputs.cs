@@ -170,6 +170,15 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ShopEntered"",
+                    ""type"": ""Button"",
+                    ""id"": ""b480bcb2-cecd-4a9c-91b4-ea2b08346be6"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -885,6 +894,28 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Controller"",
                     ""action"": ""SkipCutscene"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""054f8ee0-4493-4c45-a65d-7c618475f568"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""ShopEntered"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d50e395b-d363-4910-93dc-26ef4d013362"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""ShopEntered"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -2860,6 +2891,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         m_Player_DownPropulsion = m_Player.FindAction("DownPropulsion", throwIfNotFound: true);
         m_Player_CancelPropulsion = m_Player.FindAction("CancelPropulsion", throwIfNotFound: true);
         m_Player_SkipCutscene = m_Player.FindAction("SkipCutscene", throwIfNotFound: true);
+        m_Player_ShopEntered = m_Player.FindAction("ShopEntered", throwIfNotFound: true);
         // OLD_Player_Archive_2
         m_OLD_Player_Archive_2 = asset.FindActionMap("OLD_Player_Archive_2", throwIfNotFound: true);
         m_OLD_Player_Archive_2_Move = m_OLD_Player_Archive_2.FindAction("Move", throwIfNotFound: true);
@@ -2974,6 +3006,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_DownPropulsion;
     private readonly InputAction m_Player_CancelPropulsion;
     private readonly InputAction m_Player_SkipCutscene;
+    private readonly InputAction m_Player_ShopEntered;
     public struct PlayerActions
     {
         private @PlayerInputs m_Wrapper;
@@ -2994,6 +3027,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         public InputAction @DownPropulsion => m_Wrapper.m_Player_DownPropulsion;
         public InputAction @CancelPropulsion => m_Wrapper.m_Player_CancelPropulsion;
         public InputAction @SkipCutscene => m_Wrapper.m_Player_SkipCutscene;
+        public InputAction @ShopEntered => m_Wrapper.m_Player_ShopEntered;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -3051,6 +3085,9 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
             @SkipCutscene.started += instance.OnSkipCutscene;
             @SkipCutscene.performed += instance.OnSkipCutscene;
             @SkipCutscene.canceled += instance.OnSkipCutscene;
+            @ShopEntered.started += instance.OnShopEntered;
+            @ShopEntered.performed += instance.OnShopEntered;
+            @ShopEntered.canceled += instance.OnShopEntered;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -3103,6 +3140,9 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
             @SkipCutscene.started -= instance.OnSkipCutscene;
             @SkipCutscene.performed -= instance.OnSkipCutscene;
             @SkipCutscene.canceled -= instance.OnSkipCutscene;
+            @ShopEntered.started -= instance.OnShopEntered;
+            @ShopEntered.performed -= instance.OnShopEntered;
+            @ShopEntered.canceled -= instance.OnShopEntered;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -3540,6 +3580,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         void OnDownPropulsion(InputAction.CallbackContext context);
         void OnCancelPropulsion(InputAction.CallbackContext context);
         void OnSkipCutscene(InputAction.CallbackContext context);
+        void OnShopEntered(InputAction.CallbackContext context);
     }
     public interface IOLD_Player_Archive_2Actions
     {

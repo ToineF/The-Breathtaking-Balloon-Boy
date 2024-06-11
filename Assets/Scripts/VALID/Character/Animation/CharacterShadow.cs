@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.Rendering.Universal;
 
 namespace BlownAway.Character
@@ -13,15 +14,30 @@ namespace BlownAway.Character
 
         private void Awake()
         {
-            if (_hideOnGrounded) Destroy(this);
+            if (!_hideOnGrounded) Destroy(this);
             _projector = GetComponent<DecalProjector>();
         }
 
         private void Update()
         {
             if (_manager != null) _projector.enabled = !_manager.MovementManager.IsGrounded;
+            Debug.LogError( "dddd ! " + !_manager.MovementManager.IsGrounded);
+            //Debug.LogWarning("Update");
+            //Debug.LogError("Object: " + GetHovered());
         }
 
+        //public GameObject GetHovered() // Class must be derived from StandaloneInputModule
+        //   	{
+        //       	var mouseEvent = GetLastPointerEventData(-1);
+        //       	if (mouseEvent == null)
+        //           	return null;
+        //       	return mouseEvent.pointerCurrentRaycast.gameObject;
+        //   	}
+
+        //private void FixedUpdate()
+        //{
+        //    Debug.LogWarning("FixedUpdate");
+        //}
 
 
         //[SerializeField] private float _maxDistance;
