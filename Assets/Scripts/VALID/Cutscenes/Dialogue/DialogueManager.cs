@@ -22,11 +22,11 @@ namespace BlownAway.Cutscenes
 
                 if (HasCurrentTextEnded)
                 {
-                    _currentTextIndex = Mathf.Clamp(value, 0, _currentDialogue.Texts.Length - 1);
+                    _currentTextIndex = Mathf.Clamp(value, 0, _currentDialogue.Lines.Length - 1);
                     //AudioManager.Instance?.PlayClip(_dialogueContinueSound);
                 }
 
-                if ((value < 0 || value > _currentDialogue.Texts.Length - 1) && HasCurrentTextEnded)
+                if ((value < 0 || value > _currentDialogue.Lines.Length - 1) && HasCurrentTextEnded)
                     EndDialogue();
                 else
                     StartNewText();
@@ -87,7 +87,7 @@ namespace BlownAway.Cutscenes
 
         private void StartNewText()
         {
-            string currentText = _currentDialogue.Texts[CurrentTextIndex];
+            string currentText = _currentDialogue.Lines[CurrentTextIndex].Text;
 
             if (!HasCurrentTextEnded)
             {
@@ -102,6 +102,10 @@ namespace BlownAway.Cutscenes
 
         public IEnumerator WriteEachCharacter(TMP_Text dialogueTextbox, string finalText, DialogueCharacterData characterData)
         {
+            _talkingCharacterSprite.sprite = _currentDialogue.Lines[CurrentTextIndex].SpriteOverride;
+            if (_currentDialogue.Lines[CurrentTextIndex].SpriteOverride == null) _talkingCharacterSprite.sprite = _currentDialogue.CharacterData.Sprite;
+            //Debug.Log((_currentDialogue?.Lines[CurrentTextIndex].SpriteOverride) ?? (_currentDialogue.CharacterData.Sprite));
+
             HasCurrentTextEnded = false;
             dialogueTextbox.text = finalText;
             _currentCharIndex = 0;
@@ -203,7 +207,7 @@ namespace BlownAway.Cutscenes
 
                     TMP_MeshInfo meshInfo = textInfo.meshInfo[charInfo.materialReferenceIndex];
                     Vector3 upCenterPoint = new Vector2((meshInfo.vertices[charInfo.vertexIndex].x + meshInfo.vertices[charInfo.vertexIndex + 2].x) / 2, meshInfo.vertices[charInfo.vertexIndex].y);
-                    Vector3 middleCenterPoint = new Vector2((meshInfo.vertices[charInfo.vertexIndex].x + meshInfo.vertices[charInfo.vertexIndex + 2].x) / 2, (meshInfo.vertices[charInfo.vertexIndex].y + meshInfo.vertices[charInfo.vertexIndex].y+1)/2);
+                    Vector3 middleCenterPoint = new Vector2((meshInfo.vertices[charInfo.vertexIndex].x + meshInfo.vertices[charInfo.vertexIndex + 2].x) / 2, (meshInfo.vertices[charInfo.vertexIndex].y + meshInfo.vertices[charInfo.vertexIndex].y + 1) / 2);
                     Vector3 charData = data.CharMathDisplacement.GetTotalFunction(middleCenterPoint);
                     Vector3 characterScale = Vector3.zero;
                     if (data.Role != TextEffectRole.HIDDEN) characterScale = data.TextEffect.GetCurrentScale(_characterApparitionTimers[i]);
