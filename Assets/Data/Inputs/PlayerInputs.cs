@@ -558,8 +558,8 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""f9f67223-933c-4f98-82e6-1d9ce8b8c3dd"",
-                    ""path"": ""<Keyboard>/e"",
+                    ""id"": ""7db64417-a3d8-4ea8-80af-43fad2fe5c75"",
+                    ""path"": ""<Mouse>/middleButton"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",

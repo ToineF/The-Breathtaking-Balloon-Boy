@@ -62,7 +62,6 @@ namespace BlownAway.City
             _player.RemoveCoin(_prices[_currentItem]);
 
             if (_currentItem == 0) OnBuyFirst?.Invoke(_player);
-            OnBuy?.Invoke(_player);
 
             if (_currentItem >= _prices.Length - 1)
             {
@@ -72,6 +71,8 @@ namespace BlownAway.City
             {
                 _currentItem++;
             }
+
+            OnBuy?.Invoke(_player);
         }
 
         public void OnSelect(BaseEventData eventData)
