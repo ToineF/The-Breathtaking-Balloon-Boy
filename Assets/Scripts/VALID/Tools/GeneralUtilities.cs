@@ -1,3 +1,4 @@
+using AntoineFoucault.Utilities;
 using BlownAway.Character;
 using System;
 using UnityEngine;
@@ -35,6 +36,7 @@ public class GeneralUtilities : MonoBehaviour
         manager.MovementManager.SetCurrentDeplacementDirection(_copiedTransform);
     }
 
+
     //public void PasteRigidbodyTorque(Rigidbody rigidbody)
     //{
     //rigidbody.TORQ
@@ -65,5 +67,29 @@ public class GeneralUtilities : MonoBehaviour
 
 
         if (rb != null) transform.gameObject.SetActive(isActive);
+    }
+    public void ResetTransform(Transform transform)
+    {
+        transform.ResetTransform();
+    }
+
+    public void ResetPosition(Transform transform)
+    {
+        transform.ResetPosition();
+    }
+
+    public void ResetRotation(Transform transform)
+    {
+         transform.ResetRotation();
+    }
+
+    public void ResetEulerAngles(Transform transform)
+    {
+        transform.eulerAngles = Vector3.zero;
+    }
+
+    public void ResetScale(Transform transform)
+    {
+        transform.ResetScale();
     }
 }

@@ -576,8 +576,23 @@ namespace AntoineFoucault.Utilities
     {
         public static void ResetTransform(this Transform transform)
         {
+            ResetPosition(transform);
+            ResetRotation(transform);
+            ResetScale(transform);
+        }
+
+        public static void ResetPosition(this Transform transform)
+        {
             transform.position = Vector3.zero;
+        }
+
+        public static void ResetRotation(this Transform transform)
+        {
             transform.rotation = Quaternion.identity;
+        }
+
+        public static void ResetScale(this Transform transform)
+        {
             transform.localScale = Vector3.one;
         }
 
