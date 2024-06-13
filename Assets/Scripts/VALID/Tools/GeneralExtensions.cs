@@ -519,6 +519,15 @@ namespace AntoineFoucault.Utilities
             return list[UnityEngine.Random.Range(0, list.Count)];
         }
 
+	public static T GetRandomItemExcluding<T>(this IList<T> list, int excludedIndex)
+        {
+            int randomIndex = UnityEngine.Random.Range(0, list.Count);
+            if (randomIndex == excludedIndex)
+                return GetRandomItemExcluding(list, excludedIndex);
+            else
+                return list[randomIndex];
+        }
+
         public static IList<T> Shuffle<T>(this IList<T> list)
         {
             for (int i = 0; i < list.Count; i++)

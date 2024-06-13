@@ -720,7 +720,29 @@ MonoBehaviour:
   _flySpeed: 15
   _flyEase: 30
   _triggerOtherBirds: 0
-  _vfxFly: {fileID: 2353600328335836179, guid: 86e0c700ebb9cd345a227fb9fdc635cd, type: 3}
+  _vfxFly: {fileID: 0}
+  _flyFeedback:
+    HapticFeedback:
+      LowFrequency: 0
+      HighFrequency: 0
+      Time: 0
+    ShakeFeedback:
+      Strength: 0
+      Duration: 0
+    VFX: {fileID: 2353600328335836179, guid: 86e0c700ebb9cd345a227fb9fdc635cd, type: 3}
+    SFX:
+    - Guid:
+        Data1: 25820021
+        Data2: 1116064910
+        Data3: -313386306
+        Data4: 1516177942
+      Path: event:/SFX/Environment/Pigeons/enviro_pigeon_flap_01
+    - Guid:
+        Data1: 1832676651
+        Data2: 1318358341
+        Data3: 1631763626
+        Data4: -588532476
+      Path: event:/SFX/Environment/Pigeons/enviro_pigeon_flap_02
 --- !u!135 &7311447137861623276
 SphereCollider:
   m_ObjectHideFlags: 0

@@ -1,6 +1,6 @@
 using UnityEngine;
 using DG.Tweening;
-using System;
+using BlownAway.Character.Feedbacks;
 
 namespace BlownAway.City
 {
@@ -31,6 +31,7 @@ namespace BlownAway.City
 
         [Header("Feedbacks")]
         [SerializeField] private GameObject _vfxFly;
+        [SerializeField] private Feedback _flyFeedback;
 
         private float _peckingAnimationTimer;
 
@@ -57,7 +58,12 @@ namespace BlownAway.City
             transform.eulerAngles = new Vector3(0, transform.eulerAngles.y + 90, 0);
 
             // Feedbacks
-            if (_vfxFly != null) Instantiate(_vfxFly, transform.position, Quaternion.identity, null);
+            if (_lastOtherCollider.TryGetComponent(out CharacterCollider collider))
+            {
+                collider.Manager.Feedbacks.PlayFeedback(_flyFeedback, transform.position, Quaternion.identity, null);
+                if (_vfxFly != null) Instantiate(_vfxFly, transform.position, Quaternion.identity, null);
+            }
+
 
             SetNeighboursBirdsFree();
         }
