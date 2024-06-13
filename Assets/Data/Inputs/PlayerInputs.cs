@@ -179,6 +179,15 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""New action"",
+                    ""type"": ""Button"",
+                    ""id"": ""d1bf5fae-795a-4e8b-aa36-fc8fcd6327e3"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -916,6 +925,17 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Controller"",
                     ""action"": ""ShopEntered"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b15a6ef2-e4d5-4ebb-b262-d49e5fc0c53b"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""New action"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -2157,6 +2177,17 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 },
                 {
+                    ""name"": ""up"",
+                    ""id"": ""5f77afa4-9ae1-4bde-8e0e-464140336b32"",
+                    ""path"": ""<Gamepad>/dpad/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Navigate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
                     ""name"": ""down"",
                     ""id"": ""a5b49ae7-3269-452d-8f7a-e47330c4aa57"",
                     ""path"": ""<Gamepad>/leftStick/down"",
@@ -2174,6 +2205,17 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Gamepad"",
+                    ""action"": ""Navigate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""684b155d-6150-457d-a44a-f874435c3506"",
+                    ""path"": ""<Gamepad>/dpad/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
                     ""action"": ""Navigate"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -2201,6 +2243,17 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 },
                 {
+                    ""name"": ""left"",
+                    ""id"": ""47a4b111-a231-4ce0-aaa8-e1eafc3f91a4"",
+                    ""path"": ""<Gamepad>/dpad/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Navigate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
                     ""name"": ""right"",
                     ""id"": ""1be7b53e-8f52-4d7a-9a0c-1f94ea55d30c"",
                     ""path"": ""<Gamepad>/leftStick/right"",
@@ -2223,15 +2276,15 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": """",
-                    ""id"": ""774a0fcf-10f4-4915-a020-53a80c9a2f0e"",
-                    ""path"": ""<Gamepad>/dpad"",
+                    ""name"": ""right"",
+                    ""id"": ""0723bf73-a7d8-4c2f-a0bc-9f87d9e1df52"",
+                    ""path"": ""<Gamepad>/dpad/right"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": "";Gamepad"",
+                    ""groups"": """",
                     ""action"": ""Navigate"",
                     ""isComposite"": false,
-                    ""isPartOfComposite"": false
+                    ""isPartOfComposite"": true
                 },
                 {
                     ""name"": ""Joystick"",
@@ -2892,6 +2945,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         m_Player_CancelPropulsion = m_Player.FindAction("CancelPropulsion", throwIfNotFound: true);
         m_Player_SkipCutscene = m_Player.FindAction("SkipCutscene", throwIfNotFound: true);
         m_Player_ShopEntered = m_Player.FindAction("ShopEntered", throwIfNotFound: true);
+        m_Player_Newaction = m_Player.FindAction("New action", throwIfNotFound: true);
         // OLD_Player_Archive_2
         m_OLD_Player_Archive_2 = asset.FindActionMap("OLD_Player_Archive_2", throwIfNotFound: true);
         m_OLD_Player_Archive_2_Move = m_OLD_Player_Archive_2.FindAction("Move", throwIfNotFound: true);
@@ -3007,6 +3061,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_CancelPropulsion;
     private readonly InputAction m_Player_SkipCutscene;
     private readonly InputAction m_Player_ShopEntered;
+    private readonly InputAction m_Player_Newaction;
     public struct PlayerActions
     {
         private @PlayerInputs m_Wrapper;
@@ -3028,6 +3083,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         public InputAction @CancelPropulsion => m_Wrapper.m_Player_CancelPropulsion;
         public InputAction @SkipCutscene => m_Wrapper.m_Player_SkipCutscene;
         public InputAction @ShopEntered => m_Wrapper.m_Player_ShopEntered;
+        public InputAction @Newaction => m_Wrapper.m_Player_Newaction;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -3088,6 +3144,9 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
             @ShopEntered.started += instance.OnShopEntered;
             @ShopEntered.performed += instance.OnShopEntered;
             @ShopEntered.canceled += instance.OnShopEntered;
+            @Newaction.started += instance.OnNewaction;
+            @Newaction.performed += instance.OnNewaction;
+            @Newaction.canceled += instance.OnNewaction;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -3143,6 +3202,9 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
             @ShopEntered.started -= instance.OnShopEntered;
             @ShopEntered.performed -= instance.OnShopEntered;
             @ShopEntered.canceled -= instance.OnShopEntered;
+            @Newaction.started -= instance.OnNewaction;
+            @Newaction.performed -= instance.OnNewaction;
+            @Newaction.canceled -= instance.OnNewaction;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -3581,6 +3643,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         void OnCancelPropulsion(InputAction.CallbackContext context);
         void OnSkipCutscene(InputAction.CallbackContext context);
         void OnShopEntered(InputAction.CallbackContext context);
+        void OnNewaction(InputAction.CallbackContext context);
     }
     public interface IOLD_Player_Archive_2Actions
     {

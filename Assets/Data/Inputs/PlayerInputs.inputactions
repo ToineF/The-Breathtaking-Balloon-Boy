@@ -157,6 +157,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "New action",
+                    "type": "Button",
+                    "id": "d1bf5fae-795a-4e8b-aa36-fc8fcd6327e3",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -894,6 +903,17 @@
                     "processors": "",
                     "groups": "Controller",
                     "action": "ShopEntered",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b15a6ef2-e4d5-4ebb-b262-d49e5fc0c53b",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "New action",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -2135,6 +2155,17 @@
                     "isPartOfComposite": true
                 },
                 {
+                    "name": "up",
+                    "id": "5f77afa4-9ae1-4bde-8e0e-464140336b32",
+                    "path": "<Gamepad>/dpad/up",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Navigate",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
                     "name": "down",
                     "id": "a5b49ae7-3269-452d-8f7a-e47330c4aa57",
                     "path": "<Gamepad>/leftStick/down",
@@ -2152,6 +2183,17 @@
                     "interactions": "",
                     "processors": "",
                     "groups": ";Gamepad",
+                    "action": "Navigate",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "684b155d-6150-457d-a44a-f874435c3506",
+                    "path": "<Gamepad>/dpad/down",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
                     "action": "Navigate",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -2179,6 +2221,17 @@
                     "isPartOfComposite": true
                 },
                 {
+                    "name": "left",
+                    "id": "47a4b111-a231-4ce0-aaa8-e1eafc3f91a4",
+                    "path": "<Gamepad>/dpad/right",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Navigate",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
                     "name": "right",
                     "id": "1be7b53e-8f52-4d7a-9a0c-1f94ea55d30c",
                     "path": "<Gamepad>/leftStick/right",
@@ -2201,15 +2254,15 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "",
-                    "id": "774a0fcf-10f4-4915-a020-53a80c9a2f0e",
-                    "path": "<Gamepad>/dpad",
+                    "name": "right",
+                    "id": "0723bf73-a7d8-4c2f-a0bc-9f87d9e1df52",
+                    "path": "<Gamepad>/dpad/right",
                     "interactions": "",
                     "processors": "",
-                    "groups": ";Gamepad",
+                    "groups": "",
                     "action": "Navigate",
                     "isComposite": false,
-                    "isPartOfComposite": false
+                    "isPartOfComposite": true
                 },
                 {
                     "name": "Joystick",
