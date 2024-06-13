@@ -333,12 +333,12 @@ namespace BlownAway.Character.Movements
 
         private void CheckBalloonDown(CharacterManager manager, Vector3 colliderPosition, float maxFallSpeed)
         {
-            if (!manager.Data.PowerUpData.IsGroundPoundAvailable) return;
+            if (!manager.Data.PowerUpData.IsBalloonBounceAvailable) return;
             colliderPosition.y = manager.CharacterCollider.Collider.bounds.max.y;
             Ray ray = new Ray(colliderPosition + Vector3.up * maxFallSpeed, Vector3.down);
             bool wasAboveBalloon = IsAboveBalloon;
             IsAboveBalloon = false;
-            if (Physics.Raycast(ray, out _aboveBalloonHitPoint, Mathf.Max(manager.Data.PowerUpData.BalloonBounceCheckDistance, maxFallSpeed), ~manager.Data.CameraData.PlayerLayer))
+            if (Physics.Raycast(ray, out _aboveBalloonHitPoint, Mathf.Max(manager.Data.GroundDetectionData.BalloonBounceCheckDistance, maxFallSpeed), ~manager.Data.CameraData.PlayerLayer))
             {
                 IsAboveBalloon = (_aboveBalloonHitPoint.collider.GetComponent<BouncyBalloon>());
 
