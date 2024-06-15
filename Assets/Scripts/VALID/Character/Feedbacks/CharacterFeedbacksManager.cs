@@ -28,14 +28,14 @@ namespace BlownAway.Character.Feedbacks
             PlayFeedback(feedback, Vector3.zero, Quaternion.identity, transform);
         }
 
-        public void PlayFeedback(Feedback feedback, Vector3 position, Quaternion rotation, Transform transform)
+        public void PlayFeedback(Feedback feedback, Vector3 position, Quaternion rotation, Transform transform, bool muteAudio = false)
         {
             // VFX
             if (feedback.VFX != null) Instantiate(feedback.VFX, position, rotation, transform);
 
 
             // SFX
-            if (feedback.SFX.Length > 0) AudioManager?.PlayClip(feedback.SFX.GetRandomItem());
+            if (feedback.SFX.Length > 0 && !muteAudio) AudioManager?.PlayClip(feedback.SFX.GetRandomItem());
 
             // Haptic
             HapticManager?.VibrateForTime(feedback.HapticFeedback);

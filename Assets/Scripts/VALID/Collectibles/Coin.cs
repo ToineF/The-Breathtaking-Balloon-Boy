@@ -9,6 +9,7 @@ namespace BlownAway.Collectibles
         [Header("Coin")]
         [SerializeField] private float _turnSpeed;
         [SerializeField] private float _uiWinDelay;
+        [SerializeField] private bool _muteAudioFeedback;
 
         protected override void OnPickUp()
         {
@@ -17,7 +18,7 @@ namespace BlownAway.Collectibles
             {
                 CharacterManager manager = collider.Manager;
                 manager.Collectibles.AddCoinPreview();
-                manager.Feedbacks.PlayFeedback(manager.Data.FeedbacksData.CoinPreviewFeedback, transform.position, Quaternion.identity, null);
+                manager.Feedbacks.PlayFeedback(manager.Data.FeedbacksData.CoinPreviewFeedback, transform.position, Quaternion.identity, null, _muteAudioFeedback);
 
                 StartCoroutine(AddCoinToCount(manager));
             }
@@ -34,7 +35,7 @@ namespace BlownAway.Collectibles
         {
             yield return new WaitForSeconds(_uiWinDelay);
             _lastOtherCollider.GetComponent<CharacterCollider>()?.Manager.Collectibles.AddCoin();
-            manager.Feedbacks.PlayFeedback(manager.Data.FeedbacksData.CoinFeedback, transform.position, Quaternion.identity, null);
+            manager.Feedbacks.PlayFeedback(manager.Data.FeedbacksData.CoinFeedback, transform.position, Quaternion.identity, null, _muteAudioFeedback);
 
         }
     }

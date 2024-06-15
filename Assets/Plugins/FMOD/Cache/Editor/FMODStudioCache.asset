@@ -402,6 +402,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 400
+--- !u!114 &-4576465030988272552
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Collectibles/Coin/collectibles_coin_04
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Collectibles/Coin/collectibles_coin_04
+  Guid:
+    Data1: 1672031533
+    Data2: 1134797755
+    Data3: -600593267
+    Data4: 1612278549
+  Banks:
+  - {fileID: 7924125151239261790}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 500
 --- !u!114 &-4526357127147947402
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -726,6 +753,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 1900
+--- !u!114 &-2016682467305654412
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Collectibles/Coin/collectibles_coin_03
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Collectibles/Coin/collectibles_coin_03
+  Guid:
+    Data1: -363189532
+    Data2: 1110393456
+    Data3: 630724795
+    Data4: 2110505437
+  Banks:
+  - {fileID: 7924125151239261790}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 500
 --- !u!114 &-1968620507990746165
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1050,6 +1104,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 500
+--- !u!114 &-40939773134051233
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Collectibles/Big Coin/collectibles_big_coin_01
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Collectibles/Big Coin/collectibles_big_coin_01
+  Guid:
+    Data1: 2069708142
+    Data2: 1202347068
+    Data3: -12398716
+    Data4: 1913935278
+  Banks:
+  - {fileID: 7924125151239261790}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1750
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1152,12 +1233,15 @@ MonoBehaviour:
   - {fileID: -3860636437656437882}
   - {fileID: 8320434675627069125}
   - {fileID: 8780043186571089223}
+  - {fileID: -4576465030988272552}
+  - {fileID: -40939773134051233}
+  - {fileID: -2016682467305654412}
   EditorParameters: []
   MasterBanks:
   - {fileID: 7924125151239261790}
   StringsBanks:
   - {fileID: 3047809022776121466}
-  cacheTime: 638539188307443396
+  cacheTime: 638540645034627942
   cacheVersion: 131616
 --- !u!114 &88315621298956005
 MonoBehaviour:
@@ -1633,10 +1717,10 @@ MonoBehaviour:
   Path: Assets/Audio/FMOD/BlownAway_FMOD_Project/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638539188307443396
+  lastModified: 638540645034627942
   FileSizes:
   - Name: Desktop
-    Value: 4600
+    Value: 4728
   Exists: 1
 --- !u!114 &3100105845965189898
 MonoBehaviour:
@@ -2329,10 +2413,10 @@ MonoBehaviour:
   Path: Assets/Audio/FMOD/BlownAway_FMOD_Project/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638539188307332477
+  lastModified: 638540645034567941
   FileSizes:
   - Name: Desktop
-    Value: 9765760
+    Value: 9805792
   Exists: 1
 --- !u!114 &8278931844851821950
 MonoBehaviour:

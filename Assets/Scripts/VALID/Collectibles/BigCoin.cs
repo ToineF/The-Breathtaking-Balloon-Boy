@@ -35,8 +35,8 @@ namespace BlownAway.Collectibles
                 Instantiate(_coinPrefab, targetPosition, _coinPrefab.transform.rotation);
             }
 
-            CharacterManager manager = _lastOtherCollider.GetComponent<CharacterManager>();
-            if (manager != null) manager.Feedbacks.PlayFeedback(manager.Data.FeedbacksData.BigCoinFeedback);
+            CharacterCollider collider = _lastOtherCollider.GetComponent<CharacterCollider>();
+            if (collider != null) collider.Manager.Feedbacks.PlayFeedback(collider.Manager.Data.FeedbacksData.BigCoinFeedback);
         }
     }
 }
