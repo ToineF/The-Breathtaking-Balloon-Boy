@@ -33,7 +33,6 @@ namespace BlownAway.Character.Air
 
         void Update()
         {
-            Debug.Log(_movementManager.Manager.MovementManager.IsAboveBalloon ? 1f : 0f);
             Alpha = _movementManager.Manager.MovementManager.IsAboveBalloon ? 1f : 0f;
         }
     }

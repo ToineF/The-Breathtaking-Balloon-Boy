@@ -21,7 +21,7 @@ namespace BlownAway.Character
         private void Update()
         {
             if (_manager != null) _projector.enabled = !_manager.MovementManager.IsGrounded;
-            Debug.LogError( "dddd ! " + !_manager.MovementManager.IsGrounded);
+            //Debug.LogError( "dddd ! " + !_manager.MovementManager.IsGrounded);
             //Debug.LogWarning("Update");
             //Debug.LogError("Object: " + GetHovered());
         }

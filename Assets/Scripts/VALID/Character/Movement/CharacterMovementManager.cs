@@ -599,6 +599,8 @@ namespace BlownAway.Character.Movements
             if (manager.Inputs.JacketInflateToggle && DeriveTimer > 0.001f)
             {
                 IsJacketInflated = !IsJacketInflated;
+
+                if (IsJacketInflated == false) manager.Feedbacks.PlayFeedback(manager.Data.FeedbacksData.CancelFloatFeedback, manager.CharacterCollider.Rigidbody.transform.position, Quaternion.identity, manager.CharacterCollider.Rigidbody.transform);
             }
         }
 
@@ -639,7 +641,6 @@ namespace BlownAway.Character.Movements
             if (!IsJacketInflated)
             {
                 manager.States.SwitchState(manager.States.FallingState);
-                manager.Feedbacks.PlayFeedback(manager.Data.FeedbacksData.CancelFloatFeedback, manager.CharacterCollider.Rigidbody.transform.position, Quaternion.identity, manager.CharacterCollider.Rigidbody.transform);
             }
         }
 
