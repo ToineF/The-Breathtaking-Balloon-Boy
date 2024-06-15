@@ -40,6 +40,7 @@ namespace BlownAway.Character.Movements
 
         public float PropulsionTimer { get; private set; } // Minimum time after which the propulsion is allowed to end
         private float _currentPropulsionSpeed;
+        public Vector3 CurrentDeplacementDirection => _currentDeplacementDirection;
         private Vector3 _currentPropulsionDirection;
         private Coroutine _currentPropulsionCoroutine;
 

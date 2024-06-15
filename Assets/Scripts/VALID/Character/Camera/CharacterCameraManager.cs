@@ -180,6 +180,11 @@ namespace BlownAway.Camera
             CameraCenter.transform.DORotate(eulerAngles, rotateTime);
         }
 
+        public void CenterCameraImmediate(CharacterManager manager)
+        {
+            CameraCenter.transform.localEulerAngles = Vector3.zero;
+        }
+
         private void CheckForCameraTopDown(CharacterManager manager)
         {
             if (!manager.Data.CameraData.CanUseCameraTopDown) return;

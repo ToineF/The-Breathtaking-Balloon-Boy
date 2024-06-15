@@ -29,6 +29,7 @@ namespace BlownAway.Character.States
         {
             manager.CameraManager.IsMovable = true;
             manager.CameraManager.ReactivateCamera();
+            manager.CameraManager.CenterCameraImmediate(manager);
             manager.UIManager.ShowUI(true);
         }
 

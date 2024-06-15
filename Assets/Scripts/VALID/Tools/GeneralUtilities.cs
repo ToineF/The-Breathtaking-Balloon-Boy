@@ -85,7 +85,7 @@ public class GeneralUtilities : MonoBehaviour
 
     public void ResetEulerAngles(Transform transform)
     {
-        transform.eulerAngles = Vector3.zero;
+        transform.localEulerAngles = Vector3.zero;
     }
 
     public void ResetScale(Transform transform)
