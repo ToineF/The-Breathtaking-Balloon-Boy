@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8086575014303767110}
   - component: {fileID: 2453302112954747037}
   - component: {fileID: 6120911637576988504}
+  - component: {fileID: 7594136518184891860}
   m_Layer: 7
   m_Name: Prefab_Mur_simple
   m_TagString: Untagged
@@ -52,7 +53,7 @@ MeshCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 5
   m_Convex: 0
   m_CookingOptions: 30
@@ -82,6 +83,27 @@ LODGroup:
     renderers:
     - renderer: {fileID: 1588948894467415010}
   m_Enabled: 1
+--- !u!65 &7594136518184891860
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6923029926074493824}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.15, y: 3.04, z: 2.99}
+  m_Center: {x: -1, y: 0, z: 0}
 --- !u!1001 &129620566911502182
 PrefabInstance:
   m_ObjectHideFlags: 0
