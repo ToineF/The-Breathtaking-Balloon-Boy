@@ -57,7 +57,7 @@ namespace BlownAway.Character.Movements
         public CharacterJumpState.JumpState CurrentJumpState { get; private set; }
 
         // Dash
-        public float CurrentDashes { get; private set; }
+        public int CurrentDashes { get; private set; }
         private float _dashTimer;
         private Vector3 _currentDashDirection;
         public int BonusMaxDashes { get; set; } = 0;
