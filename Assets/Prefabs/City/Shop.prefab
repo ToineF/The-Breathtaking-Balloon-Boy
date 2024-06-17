@@ -2877,12 +2877,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4307097676447548644, guid: 0e6e11b37bd8d0449b535222d89202f6,
         type: 3}
+      propertyPath: OnBuyFail.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4307097676447548644, guid: 0e6e11b37bd8d0449b535222d89202f6,
+        type: 3}
       propertyPath: OnBuyFirst.m_PersistentCalls.m_Calls.Array.size
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4307097676447548644, guid: 0e6e11b37bd8d0449b535222d89202f6,
         type: 3}
       propertyPath: OnBuy.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4307097676447548644, guid: 0e6e11b37bd8d0449b535222d89202f6,
+        type: 3}
+      propertyPath: OnBuyFail.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4307097676447548644, guid: 0e6e11b37bd8d0449b535222d89202f6,
@@ -2902,6 +2912,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4307097676447548644, guid: 0e6e11b37bd8d0449b535222d89202f6,
         type: 3}
+      propertyPath: OnBuyFail.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 5074563183829128302}
+    - target: {fileID: 4307097676447548644, guid: 0e6e11b37bd8d0449b535222d89202f6,
+        type: 3}
+      propertyPath: OnBuyFail.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4307097676447548644, guid: 0e6e11b37bd8d0449b535222d89202f6,
+        type: 3}
+      propertyPath: OnBuyFail.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: PlayCancelSound
+      objectReference: {fileID: 0}
+    - target: {fileID: 4307097676447548644, guid: 0e6e11b37bd8d0449b535222d89202f6,
+        type: 3}
       propertyPath: OnBuyFirst.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
@@ -2917,12 +2942,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4307097676447548644, guid: 0e6e11b37bd8d0449b535222d89202f6,
         type: 3}
+      propertyPath: OnBuyFail.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: BlownAway.MenuAudioSettings, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4307097676447548644, guid: 0e6e11b37bd8d0449b535222d89202f6,
+        type: 3}
       propertyPath: OnBuyFirst.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: BlownAway.City.MovingObject, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 4307097676447548644, guid: 0e6e11b37bd8d0449b535222d89202f6,
         type: 3}
       propertyPath: OnBuy.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 4307097676447548644, guid: 0e6e11b37bd8d0449b535222d89202f6,
+        type: 3}
+      propertyPath: OnBuyFail.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 4307097676447548644, guid: 0e6e11b37bd8d0449b535222d89202f6,
@@ -3556,6 +3591,11 @@ PrefabInstance:
     - target: {fileID: 4307097676447548644, guid: 0e6e11b37bd8d0449b535222d89202f6,
         type: 3}
       propertyPath: OnBuy.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4307097676447548644, guid: 0e6e11b37bd8d0449b535222d89202f6,
+        type: 3}
+      propertyPath: OnBuyFail.m_PersistentCalls.m_Calls.Array.size
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4307097676447548644, guid: 0e6e11b37bd8d0449b535222d89202f6,
@@ -3570,7 +3610,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4307097676447548644, guid: 0e6e11b37bd8d0449b535222d89202f6,
         type: 3}
+      propertyPath: OnBuy.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4307097676447548644, guid: 0e6e11b37bd8d0449b535222d89202f6,
+        type: 3}
+      propertyPath: OnBuy.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 5074563183829128302}
+    - target: {fileID: 4307097676447548644, guid: 0e6e11b37bd8d0449b535222d89202f6,
+        type: 3}
+      propertyPath: OnBuyFail.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4307097676447548644, guid: 0e6e11b37bd8d0449b535222d89202f6,
+        type: 3}
       propertyPath: OnBuy.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4307097676447548644, guid: 0e6e11b37bd8d0449b535222d89202f6,
+        type: 3}
+      propertyPath: OnBuy.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4307097676447548644, guid: 0e6e11b37bd8d0449b535222d89202f6,
@@ -3582,6 +3642,26 @@ PrefabInstance:
         type: 3}
       propertyPath: OnBuy.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: AddBonusDash
+      objectReference: {fileID: 0}
+    - target: {fileID: 4307097676447548644, guid: 0e6e11b37bd8d0449b535222d89202f6,
+        type: 3}
+      propertyPath: OnBuy.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: PlayConfirmSound
+      objectReference: {fileID: 0}
+    - target: {fileID: 4307097676447548644, guid: 0e6e11b37bd8d0449b535222d89202f6,
+        type: 3}
+      propertyPath: OnBuyFail.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 5074563183829128302}
+    - target: {fileID: 4307097676447548644, guid: 0e6e11b37bd8d0449b535222d89202f6,
+        type: 3}
+      propertyPath: OnBuyFail.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4307097676447548644, guid: 0e6e11b37bd8d0449b535222d89202f6,
+        type: 3}
+      propertyPath: OnBuyFail.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: PlayCancelSound
       objectReference: {fileID: 0}
     - target: {fileID: 4307097676447548644, guid: 0e6e11b37bd8d0449b535222d89202f6,
         type: 3}
@@ -3600,12 +3680,32 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4307097676447548644, guid: 0e6e11b37bd8d0449b535222d89202f6,
         type: 3}
+      propertyPath: OnBuy.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: BlownAway.MenuAudioSettings, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4307097676447548644, guid: 0e6e11b37bd8d0449b535222d89202f6,
+        type: 3}
+      propertyPath: OnBuyFail.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: BlownAway.MenuAudioSettings, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4307097676447548644, guid: 0e6e11b37bd8d0449b535222d89202f6,
+        type: 3}
       propertyPath: OnBuyFirst.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: BlownAway.City.MovingObject, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 4307097676447548644, guid: 0e6e11b37bd8d0449b535222d89202f6,
         type: 3}
       propertyPath: OnBuy.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 4307097676447548644, guid: 0e6e11b37bd8d0449b535222d89202f6,
+        type: 3}
+      propertyPath: OnBuy.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 4307097676447548644, guid: 0e6e11b37bd8d0449b535222d89202f6,
+        type: 3}
+      propertyPath: OnBuyFail.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 4307097676447548644, guid: 0e6e11b37bd8d0449b535222d89202f6,
@@ -4891,12 +4991,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4307097676447548644, guid: 0e6e11b37bd8d0449b535222d89202f6,
         type: 3}
+      propertyPath: OnBuyFail.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4307097676447548644, guid: 0e6e11b37bd8d0449b535222d89202f6,
+        type: 3}
       propertyPath: OnBuyFirst.m_PersistentCalls.m_Calls.Array.size
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4307097676447548644, guid: 0e6e11b37bd8d0449b535222d89202f6,
         type: 3}
       propertyPath: OnBuy.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4307097676447548644, guid: 0e6e11b37bd8d0449b535222d89202f6,
+        type: 3}
+      propertyPath: OnBuyFail.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4307097676447548644, guid: 0e6e11b37bd8d0449b535222d89202f6,
@@ -4916,6 +5026,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4307097676447548644, guid: 0e6e11b37bd8d0449b535222d89202f6,
         type: 3}
+      propertyPath: OnBuyFail.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 5074563183829128302}
+    - target: {fileID: 4307097676447548644, guid: 0e6e11b37bd8d0449b535222d89202f6,
+        type: 3}
+      propertyPath: OnBuyFail.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4307097676447548644, guid: 0e6e11b37bd8d0449b535222d89202f6,
+        type: 3}
+      propertyPath: OnBuyFail.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: PlayCancelSound
+      objectReference: {fileID: 0}
+    - target: {fileID: 4307097676447548644, guid: 0e6e11b37bd8d0449b535222d89202f6,
+        type: 3}
       propertyPath: OnBuyFirst.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
@@ -4931,12 +5056,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4307097676447548644, guid: 0e6e11b37bd8d0449b535222d89202f6,
         type: 3}
+      propertyPath: OnBuyFail.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: BlownAway.MenuAudioSettings, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4307097676447548644, guid: 0e6e11b37bd8d0449b535222d89202f6,
+        type: 3}
       propertyPath: OnBuyFirst.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: BlownAway.City.MovingObject, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 4307097676447548644, guid: 0e6e11b37bd8d0449b535222d89202f6,
         type: 3}
       propertyPath: OnBuy.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 4307097676447548644, guid: 0e6e11b37bd8d0449b535222d89202f6,
+        type: 3}
+      propertyPath: OnBuyFail.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 4307097676447548644, guid: 0e6e11b37bd8d0449b535222d89202f6,

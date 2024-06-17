@@ -45,7 +45,7 @@ namespace BlownAway.City
                 _isAffordable = player.CurrentCoins >= _prices[_currentItem];
                 _priceText.color = _isAffordable ? _affordablePriceColor : _overpricedColor;
                 _priceText.text = _prices[_currentItem].ToString();
-            } 
+            }
             else
             {
                 _priceText.color = _soldOutColor;
@@ -71,7 +71,8 @@ namespace BlownAway.City
             {
                 _soldOut = true;
 
-            } else
+            }
+            else
             {
                 _currentItem++;
             }
