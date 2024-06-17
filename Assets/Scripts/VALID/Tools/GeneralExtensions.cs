@@ -705,6 +705,16 @@ namespace AntoineFoucault.Utilities
         }
     }
 
+    public static class ColliderExtensions
+    {
+        public static Vector3 right(this Bounds bounds) => new Vector3(bounds.max.x, bounds.center.y, bounds.center.z);
+        public static Vector3 left(this Bounds bounds) => new Vector3(bounds.max.x, bounds.center.y, bounds.center.z);
+        public static Vector3 top(this Bounds bounds) => new Vector3(bounds.center.x, bounds.max.y, bounds.center.z);
+        public static Vector3 bottom(this Bounds bounds) => new Vector3(bounds.center.x, bounds.min.y, bounds.center.z);
+        public static Vector3 forward(this Bounds bounds) => new Vector3(bounds.center.x, bounds.center.y, bounds.max.z);
+        public static Vector3 backward(this Bounds bounds) => new Vector3(bounds.center.x, bounds.center.y, bounds.min.z);
+    }
+
     public static class GizmoExtensions
     {
         public static void DrawSphereCast(Vector3 origin, float radius, Vector3 direction, float maxDistance, Color? color = null)

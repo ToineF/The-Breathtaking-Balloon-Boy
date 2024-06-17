@@ -59,6 +59,10 @@ namespace BlownAway.Character
             {
                 CloseMenu(submenu);
             }
+            for (int i = 0; i < transform.childCount; i++)
+            {
+                transform.GetChild(i).gameObject.SetActive(false);
+            }
             CloseMenu(this);
             Manager.CameraManager.SetCursorVisible(false);
             OnResume?.Invoke();
@@ -72,6 +76,10 @@ namespace BlownAway.Character
             _globalPauseUIMenu.alpha = 1f;
             _globalPauseUIMenu.interactable = true;
             _globalPauseUIMenu.blocksRaycasts = true;
+            for (int i = 0; i < transform.childCount; i++)
+            {
+                transform.GetChild(i).gameObject.SetActive(true);
+            }
             OpenMenu(this, FirstSelectedButton);
             Manager.CameraManager.SetCursorVisible(true);
             OnPause?.Invoke();

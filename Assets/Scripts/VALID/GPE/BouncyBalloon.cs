@@ -115,7 +115,7 @@ namespace BlownAway.GPE
             _visual.transform.DOPunchScale(Vector3.up * _scaleMultiplier, _scaleTime);
 
             // Feedbacks
-            manager.Feedbacks.PlayFeedback(manager.Data.FeedbacksData.BalloonBounceFeedback);
+            manager.Feedbacks.PlayFeedback(manager.Data.FeedbacksData.BalloonBounceFeedback, _collider.bounds.top(), Quaternion.identity, null);
 
         }
 
