@@ -59,6 +59,7 @@ namespace BlownAway.Character
             {
                 CloseMenu(submenu);
             }
+            CloseMenu(this);
             Manager.CameraManager.SetCursorVisible(false);
             OnResume?.Invoke();
         }

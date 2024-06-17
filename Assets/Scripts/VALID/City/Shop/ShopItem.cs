@@ -12,6 +12,7 @@ namespace BlownAway.City
     {
         public UnityEvent<CharacterCollectiblesManager> OnBuy;
         public UnityEvent<CharacterCollectiblesManager> OnBuyFirst;
+        public UnityEvent<CharacterCollectiblesManager> OnBuyFail;
         public Action<string> OnSelectItem;
 
         [SerializeField] private int[] _prices;
@@ -56,8 +57,11 @@ namespace BlownAway.City
 
         public void TryBuy()
         {
-            if (!_isAffordable) return;
-            if (_soldOut) return;
+            if (!_isAffordable || _soldOut)
+            {
+                OnBuyFail?.Invoke(_player);
+                return;
+            }
 
             _player.RemoveCoin(_prices[_currentItem]);
 
