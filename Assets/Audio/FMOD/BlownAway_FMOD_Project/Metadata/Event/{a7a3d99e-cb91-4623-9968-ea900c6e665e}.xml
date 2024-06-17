@@ -67,6 +67,8 @@
 		</relationship>
 		<relationship name="modules">
 			<destination>{cb49f59a-96d4-4db8-8345-d96127525f3a}</destination>
+			<destination>{b9c6af9b-0778-4685-8c2d-8a3223b7f1b5}</destination>
+			<destination>{34272bf7-0a3d-4095-9f9a-f7125790a450}</destination>
 		</relationship>
 		<relationship name="mixerGroup">
 			<destination>{9386f9e8-8639-4137-b342-9df5512d56a0}</destination>
@@ -75,9 +77,11 @@
 	<object class="Timeline" id="{5f28b3d4-3ef3-4e3b-8518-a8040a93eb27}">
 		<relationship name="modules">
 			<destination>{cb49f59a-96d4-4db8-8345-d96127525f3a}</destination>
+			<destination>{b9c6af9b-0778-4685-8c2d-8a3223b7f1b5}</destination>
+			<destination>{34272bf7-0a3d-4095-9f9a-f7125790a450}</destination>
 		</relationship>
 		<relationship name="markers">
-			<destination>{c5e487a7-2b25-415c-8794-7702db3f39ea}</destination>
+			<destination>{a59c68f8-c63d-485d-bfc3-fbbdc233fb6b}</destination>
 		</relationship>
 	</object>
 	<object class="ParameterProxy" id="{1859822b-b029-483d-b6af-381a18957a34}">
@@ -108,8 +112,30 @@
 		</relationship>
 	</object>
 	<object class="SingleSound" id="{cb49f59a-96d4-4db8-8345-d96127525f3a}">
+		<property name="start">
+			<value>18.105</value>
+		</property>
 		<property name="length">
 			<value>96.986312499999997</value>
+		</property>
+		<relationship name="audioFile">
+			<destination>{0375fa2d-a128-4ded-a7f2-d6a09fb9e6ca}</destination>
+		</relationship>
+	</object>
+	<object class="SingleSound" id="{b9c6af9b-0778-4685-8c2d-8a3223b7f1b5}">
+		<property name="length">
+			<value>23.013708333333334</value>
+		</property>
+		<relationship name="audioFile">
+			<destination>{ddfc9684-a169-4de3-8874-66990d62951b}</destination>
+		</relationship>
+	</object>
+	<object class="SingleSound" id="{34272bf7-0a3d-4095-9f9a-f7125790a450}">
+		<property name="start">
+			<value>108.52375329155637</value>
+		</property>
+		<property name="length">
+			<value>7.218465036610322</value>
 		</property>
 		<relationship name="audioFile">
 			<destination>{0375fa2d-a128-4ded-a7f2-d6a09fb9e6ca}</destination>
@@ -132,12 +158,12 @@
 			<destination>{ae7c9085-5698-46ef-8fe6-6d46deb179b5}</destination>
 		</relationship>
 	</object>
-	<object class="LoopRegion" id="{c5e487a7-2b25-415c-8794-7702db3f39ea}">
+	<object class="LoopRegion" id="{a59c68f8-c63d-485d-bfc3-fbbdc233fb6b}">
 		<property name="position">
-			<value>0</value>
+			<value>25.323</value>
 		</property>
 		<property name="length">
-			<value>96.986312499999997</value>
+			<value>90.419218328166707</value>
 		</property>
 		<relationship name="timeline">
 			<destination>{5f28b3d4-3ef3-4e3b-8518-a8040a93eb27}</destination>
