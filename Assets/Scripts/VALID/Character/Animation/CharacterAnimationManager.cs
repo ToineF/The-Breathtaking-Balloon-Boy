@@ -29,8 +29,15 @@ namespace BlownAway.Character.Animations
         [SerializeField] private float _lookAtLerp;
         [SerializeField, Range(0,1)] private float _jacketMorpherLerp;
 
+        [Header("Animation Randomness")]
+        [SerializeField] private string _startVariation;
+        [SerializeField] private float _variationWaitTimeMin;
+        [SerializeField] private float _variationWaitTimeMax;
+
         private Vector3 _lastDirection;
         private float _jacketMorpherWeight;
+
+        private float _variationAnimationTimer;
 
 
         private void Update()
@@ -39,8 +46,8 @@ namespace BlownAway.Character.Animations
             //ChangeCharacterAnimation();
             UpdateCharacterMorpher();
             UpdateAnimationParams(Manager);
+            UpdateIdleVariationRandomness();
         }
-
 
         private void LateUpdate()
         {
@@ -106,6 +113,26 @@ namespace BlownAway.Character.Animations
             }
             
         }
+
+        #region Variation
+        private void UpdateIdleVariationRandomness() // Animations Randomness
+        {
+            if (!Manager.States.IsInMovableState()) return;
+
+            _variationAnimationTimer -= Time.deltaTime;
+
+            if (_variationAnimationTimer < 0)
+            {
+                _characterAnimator.SetTrigger(_startVariation);
+                SetNewVariationTimer();
+            }
+        }
+
+        private void SetNewVariationTimer()
+        {
+            _variationAnimationTimer = UnityEngine.Random.Range(_variationWaitTimeMin, _variationWaitTimeMax);
+        }
+        #endregion
 
     }
 }
