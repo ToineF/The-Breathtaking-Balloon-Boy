@@ -23,11 +23,13 @@ namespace BlownAway.City
         {
             OpenMenu(this, FirstSelectedButton);
             UpdateAllItems(player);
+            CanvasGroup.gameObject.SetActive(true);
         }
 
         public void Close()
         {
             CloseMenu(this);
+            CanvasGroup.gameObject.SetActive(false);
         }
 
         private void UpdateAllItems(CharacterCollectiblesManager player)
