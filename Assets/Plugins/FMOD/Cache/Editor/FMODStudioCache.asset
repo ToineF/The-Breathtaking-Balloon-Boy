@@ -54,6 +54,30 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 500
+--- !u!114 &-8887301243013122641
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/music_drums_A_02/isActive
+  m_EditorClassIdentifier: 
+  Name: isActive
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 924888425
+    data2: 2994326300
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
 --- !u!114 &-8734183184881953445
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -81,6 +105,34 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 220
+--- !u!114 &-8727771542089261781
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music/Chords/music_chords_B_01
+  m_EditorClassIdentifier: 
+  Path: event:/Music/Chords/music_chords_B_01
+  Guid:
+    Data1: -681885007
+    Data2: 1074302459
+    Data3: 69477293
+    Data4: -1350551313
+  Banks:
+  - {fileID: 7924125151239261790}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: 3999097479181321264}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 115742
 --- !u!114 &-8420897022232213352
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -406,34 +458,6 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 500
---- !u!114 &-6189584539136807330
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Music/Base/music_main_01
-  m_EditorClassIdentifier: 
-  Path: event:/Music/Base/music_main_01
-  Guid:
-    Data1: -909136776
-    Data2: 1276296336
-    Data3: -1630122875
-    Data4: 1801969873
-  Banks:
-  - {fileID: 7924125151239261790}
-  IsStream: 1
-  Is3D: 0
-  IsOneShot: 0
-  Parameters:
-  - {fileID: -2063108522414947631}
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 115743
 --- !u!114 &-6048012943976533331
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -728,6 +752,34 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 1054
+--- !u!114 &-3986120974437388458
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music/Chords/music_chords_B_02
+  m_EditorClassIdentifier: 
+  Path: event:/Music/Chords/music_chords_B_02
+  Guid:
+    Data1: -1619101258
+    Data2: 1185429725
+    Data3: 1379436963
+    Data4: 1566249657
+  Banks:
+  - {fileID: 7924125151239261790}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: 4575528923323267558}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 115742
 --- !u!114 &-3860636437656437882
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -755,6 +807,34 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 416
+--- !u!114 &-3788341405269702779
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music/Bass/music_bass_B_02
+  m_EditorClassIdentifier: 
+  Path: event:/Music/Bass/music_bass_B_02
+  Guid:
+    Data1: 2078514579
+    Data2: 1205967293
+    Data3: 767162781
+    Data4: -346510962
+  Banks:
+  - {fileID: 7924125151239261790}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: 5145384287545241016}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 115742
 --- !u!114 &-3604196653309808550
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -998,30 +1078,6 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 1900
---- !u!114 &-2063108522414947631
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/music_main_01/isActive
-  m_EditorClassIdentifier: 
-  Name: isActive
-  StudioPath: 
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 924888425
-    data2: 2994326300
-  Type: 0
-  IsGlobal: 0
-  Labels: []
-  Exists: 1
 --- !u!114 &-2016682467305654412
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1076,6 +1132,30 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 432
+--- !u!114 &-1938628514618348436
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/music_main_A/isActive
+  m_EditorClassIdentifier: 
+  Name: isActive
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 924888425
+    data2: 2994326300
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
 --- !u!114 &-1933217744538055423
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1346,6 +1426,34 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 1299
+--- !u!114 &-1030823971456271818
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music/Drums/music_drums_A_01
+  m_EditorClassIdentifier: 
+  Path: event:/Music/Drums/music_drums_A_01
+  Guid:
+    Data1: -1826959074
+    Data2: 1280931624
+    Data3: 1948291488
+    Data4: -700218300
+  Banks:
+  - {fileID: 7924125151239261790}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: 8336873005241967657}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 115742
 --- !u!114 &-1020768241338436068
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1400,6 +1508,62 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 500
+--- !u!114 &-873642096483540918
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music/Bass/music_bass_B_01
+  m_EditorClassIdentifier: 
+  Path: event:/Music/Bass/music_bass_B_01
+  Guid:
+    Data1: 1179322844
+    Data2: 1342169720
+    Data3: 1528225922
+    Data4: 1776768812
+  Banks:
+  - {fileID: 7924125151239261790}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: 6537984196504353600}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 115742
+--- !u!114 &-591457633474089944
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music/Bass/music_bass_A_01
+  m_EditorClassIdentifier: 
+  Path: event:/Music/Bass/music_bass_A_01
+  Guid:
+    Data1: 1828448684
+    Data2: 1174685189
+    Data3: -1972264261
+    Data4: 1536320872
+  Banks:
+  - {fileID: 7924125151239261790}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: 2207867570723861104}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 115718
 --- !u!114 &-206968268145935593
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1427,6 +1591,30 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 96986
+--- !u!114 &-79782452391221168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/music_aux_B_01/isActive
+  m_EditorClassIdentifier: 
+  Name: isActive
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 924888425
+    data2: 2994326300
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
 --- !u!114 &-40939773134051233
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1568,17 +1756,24 @@ MonoBehaviour:
   - {fileID: -1368116111759990486}
   - {fileID: -7567758727964565206}
   - {fileID: 6115651775322913276}
-  - {fileID: 177214248965968571}
-  - {fileID: -6189584539136807330}
-  - {fileID: 5622238730233144886}
-  - {fileID: 7704270165432519494}
-  - {fileID: 6521878244231612243}
+  - {fileID: -1030823971456271818}
+  - {fileID: 5906035211525778692}
+  - {fileID: 2359196396305310144}
+  - {fileID: -3788341405269702779}
+  - {fileID: 9077701004575166972}
+  - {fileID: 966832653526690844}
+  - {fileID: -591457633474089944}
+  - {fileID: 7300307888028174810}
+  - {fileID: -8727771542089261781}
+  - {fileID: 265139548783999009}
+  - {fileID: -3986120974437388458}
+  - {fileID: -873642096483540918}
   EditorParameters: []
   MasterBanks:
   - {fileID: 7924125151239261790}
   StringsBanks:
   - {fileID: 3047809022776121466}
-  cacheTime: 638542661797410920
+  cacheTime: 638543101492592762
   cacheVersion: 131616
 --- !u!114 &50058888349956103
 MonoBehaviour:
@@ -1634,7 +1829,7 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 500
---- !u!114 &177214248965968571
+--- !u!114 &265139548783999009
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1644,21 +1839,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Music/Drums/music_drums_01
+  m_Name: event:/Music/AuxiliaryMelody/music_aux_B_01
   m_EditorClassIdentifier: 
-  Path: event:/Music/Drums/music_drums_01
+  Path: event:/Music/AuxiliaryMelody/music_aux_B_01
   Guid:
-    Data1: -1826959074
-    Data2: 1280931624
-    Data3: 1948291488
-    Data4: -700218300
+    Data1: -634914894
+    Data2: 1101225855
+    Data3: -398866247
+    Data4: 1158175197
   Banks:
   - {fileID: 7924125151239261790}
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: 6341526772959265380}
+  - {fileID: -79782452391221168}
   MinDistance: 1
   MaxDistance: 20
   Length: 115742
@@ -1851,6 +2046,34 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 500
+--- !u!114 &966832653526690844
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music/Drums/music_drums_A_02
+  m_EditorClassIdentifier: 
+  Path: event:/Music/Drums/music_drums_A_02
+  Guid:
+    Data1: -1482434146
+    Data2: 1176750993
+    Data3: -1863685991
+    Data4: 1583771148
+  Banks:
+  - {fileID: 7924125151239261790}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: -8887301243013122641}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 115742
 --- !u!114 &986814493145021919
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2121,6 +2344,30 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 872
+--- !u!114 &2207867570723861104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/music_bass_A_01/isActive
+  m_EditorClassIdentifier: 
+  Name: isActive
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 924888425
+    data2: 2994326300
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
 --- !u!114 &2207898581260981196
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2148,6 +2395,34 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 96986
+--- !u!114 &2359196396305310144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music/Base/music_main_A
+  m_EditorClassIdentifier: 
+  Path: event:/Music/Base/music_main_A
+  Guid:
+    Data1: -909136776
+    Data2: 1276296336
+    Data3: -1630122875
+    Data4: 1801969873
+  Banks:
+  - {fileID: 7924125151239261790}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: -1938628514618348436}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 115743
 --- !u!114 &2475517268557149148
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2218,10 +2493,10 @@ MonoBehaviour:
   Path: Assets/Audio/FMOD/BlownAway_FMOD_Project/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638542661797410920
+  lastModified: 638543101492592762
   FileSizes:
   - Name: Desktop
-    Value: 5416
+    Value: 5758
   Exists: 1
 --- !u!114 &3100105845965189898
 MonoBehaviour:
@@ -2358,6 +2633,30 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 500
+--- !u!114 &3999097479181321264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/music_chords_B_01/isActive
+  m_EditorClassIdentifier: 
+  Name: isActive
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 924888425
+    data2: 2994326300
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
 --- !u!114 &4048865366986985395
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2413,6 +2712,54 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 494
+--- !u!114 &4273608722301996480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/music_bass_A_02/isActive
+  m_EditorClassIdentifier: 
+  Name: isActive
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 924888425
+    data2: 2994326300
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &4418788098232143875
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/music_main_B/isActive
+  m_EditorClassIdentifier: 
+  Name: isActive
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 924888425
+    data2: 2994326300
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
 --- !u!114 &4433896913574422466
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2467,7 +2814,7 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 350
---- !u!114 &4665944286032295015
+--- !u!114 &4575528923323267558
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2477,7 +2824,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/music_drums_02/isActive
+  m_Name: parameter:/music_chords_B_02/isActive
   m_EditorClassIdentifier: 
   Name: isActive
   StudioPath: 
@@ -2545,30 +2892,6 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 408
---- !u!114 &4816713237165869487
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/music_bass_02/isActive
-  m_EditorClassIdentifier: 
-  Name: isActive
-  StudioPath: 
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 924888425
-    data2: 2994326300
-  Type: 0
-  IsGlobal: 0
-  Labels: []
-  Exists: 1
 --- !u!114 &4849946483866525563
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2623,6 +2946,30 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 240
+--- !u!114 &5145384287545241016
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/music_bass_B_02/isActive
+  m_EditorClassIdentifier: 
+  Name: isActive
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 924888425
+    data2: 2994326300
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
 --- !u!114 &5413904166759579547
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2704,34 +3051,6 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 171
---- !u!114 &5622238730233144886
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Music/Bass/music_bass_02
-  m_EditorClassIdentifier: 
-  Path: event:/Music/Bass/music_bass_02
-  Guid:
-    Data1: 810471322
-    Data2: 1130999022
-    Data3: 1628916898
-    Data4: -514120730
-  Banks:
-  - {fileID: 7924125151239261790}
-  IsStream: 1
-  Is3D: 0
-  IsOneShot: 0
-  Parameters:
-  - {fileID: 4816713237165869487}
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 115742
 --- !u!114 &5635802789800607067
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2759,6 +3078,34 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 1054
+--- !u!114 &5906035211525778692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music/Base/music_main_B
+  m_EditorClassIdentifier: 
+  Path: event:/Music/Base/music_main_B
+  Guid:
+    Data1: -223057884
+    Data2: 1260325648
+    Data3: 686825119
+    Data4: 978259386
+  Banks:
+  - {fileID: 7924125151239261790}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: 4418788098232143875}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 115742
 --- !u!114 &6050077213407120550
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2867,30 +3214,6 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 750
---- !u!114 &6341526772959265380
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/music_drums_01/isActive
-  m_EditorClassIdentifier: 
-  Name: isActive
-  StudioPath: 
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 924888425
-    data2: 2994326300
-  Type: 0
-  IsGlobal: 0
-  Labels: []
-  Exists: 1
 --- !u!114 &6515680315596521448
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2918,7 +3241,7 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 500
---- !u!114 &6521878244231612243
+--- !u!114 &6537984196504353600
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2927,25 +3250,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Music/Bass/music_bass_01
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/music_bass_B_01/isActive
   m_EditorClassIdentifier: 
-  Path: event:/Music/Bass/music_bass_01
-  Guid:
-    Data1: 1828448684
-    Data2: 1174685189
-    Data3: -1972264261
-    Data4: 1536320872
-  Banks:
-  - {fileID: 7924125151239261790}
-  IsStream: 1
-  Is3D: 0
-  IsOneShot: 0
-  Parameters:
-  - {fileID: 7514374181650231641}
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 115718
+  Name: isActive
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 924888425
+    data2: 2994326300
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
 --- !u!114 &6579813655661244050
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3054,6 +3373,58 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 750
+--- !u!114 &7300307888028174810
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music/AuxiliaryMelody/music_aux_B_02
+  m_EditorClassIdentifier: 
+  Path: event:/Music/AuxiliaryMelody/music_aux_B_02
+  Guid:
+    Data1: 1136435119
+    Data2: 1090469472
+    Data3: 1003839163
+    Data4: -71832472
+  Banks:
+  - {fileID: 7924125151239261790}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: 7381901107022173622}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 115742
+--- !u!114 &7381901107022173622
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/music_aux_B_02/isActive
+  m_EditorClassIdentifier: 
+  Name: isActive
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 924888425
+    data2: 2994326300
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
 --- !u!114 &7411004394164194261
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3081,30 +3452,6 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 72786
---- !u!114 &7514374181650231641
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/music_bass_01/isActive
-  m_EditorClassIdentifier: 
-  Name: isActive
-  StudioPath: 
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 924888425
-    data2: 2994326300
-  Type: 0
-  IsGlobal: 0
-  Labels: []
-  Exists: 1
 --- !u!114 &7628384428523049807
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3159,34 +3506,6 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 288
---- !u!114 &7704270165432519494
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Music/Drums/music_drums_02
-  m_EditorClassIdentifier: 
-  Path: event:/Music/Drums/music_drums_02
-  Guid:
-    Data1: -1482434146
-    Data2: 1176750993
-    Data3: -1863685991
-    Data4: 1583771148
-  Banks:
-  - {fileID: 7924125151239261790}
-  IsStream: 1
-  Is3D: 0
-  IsOneShot: 0
-  Parameters:
-  - {fileID: 4665944286032295015}
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 115742
 --- !u!114 &7924125151239261790
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3202,10 +3521,10 @@ MonoBehaviour:
   Path: Assets/Audio/FMOD/BlownAway_FMOD_Project/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638542661797340877
+  lastModified: 638543101492540641
   FileSizes:
   - Name: Desktop
-    Value: 16454336
+    Value: 22936384
   Exists: 1
 --- !u!114 &8170999769633499740
 MonoBehaviour:
@@ -3312,6 +3631,30 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 360
+--- !u!114 &8336873005241967657
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/music_drums_A_01/isActive
+  m_EditorClassIdentifier: 
+  Name: isActive
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 924888425
+    data2: 2994326300
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
 --- !u!114 &8529531383992211334
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3444,3 +3787,31 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 496
+--- !u!114 &9077701004575166972
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music/Bass/music_bass_A_02
+  m_EditorClassIdentifier: 
+  Path: event:/Music/Bass/music_bass_A_02
+  Guid:
+    Data1: 810471322
+    Data2: 1130999022
+    Data3: 1628916898
+    Data4: -514120730
+  Banks:
+  - {fileID: 7924125151239261790}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: 4273608722301996480}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 115742
