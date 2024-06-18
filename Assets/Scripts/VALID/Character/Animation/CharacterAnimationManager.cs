@@ -38,6 +38,7 @@ namespace BlownAway.Character.Animations
         private float _jacketMorpherWeight;
 
         private float _variationAnimationTimer;
+        private bool _hasResetVariationTimer;
 
 
         private void Update()
@@ -117,8 +118,14 @@ namespace BlownAway.Character.Animations
         #region Variation
         private void UpdateIdleVariationRandomness() // Animations Randomness
         {
-            if (!Manager.States.IsInMovableState()) return;
+            if (!Manager.States.IsInState(Manager.States.IdleState) && !_hasResetVariationTimer)
+            {
+                _hasResetVariationTimer = true;
+                SetNewVariationTimer();
+                return;
+            }
 
+            _hasResetVariationTimer = false;
             _variationAnimationTimer -= Time.deltaTime;
 
             if (_variationAnimationTimer < 0)
