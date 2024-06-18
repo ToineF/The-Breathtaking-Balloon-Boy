@@ -9,11 +9,11 @@ namespace BlownAway.GPE
     {
         [Header("Force")]
         [SerializeField] private float _force;
-        [SerializeField] [Range(0, 1)] private float _forceAccel;
-        [SerializeField] [Range(0, 1)] private float _forceDecel;
+        [SerializeField][Range(0, 1)] private float _forceAccel;
+        [SerializeField][Range(0, 1)] private float _forceDecel;
 
         [Header("Directions")]
-        [SerializeField] [Range(-1, 1)] private float _upThreshold;
+        [SerializeField][Range(-1, 1)] private float _upThreshold;
         [Range(-1, 0)] private float _downThreshold;
 
         [SerializeField] private float _UpVectorMultiplier;
@@ -95,19 +95,25 @@ namespace BlownAway.GPE
             if (manager.States.IsInState(manager.States.GroundPoundState)) // Ground Pound
             {
                 manager.MovementManager.GroundPoundOnBalloon(manager);
+
+                // Switch state
+                manager.MovementManager.ToggleJacketInflate(manager, true);
+
             }
             else // Base Balloon Bounce
             {
                 manager.MovementManager.AddExternalForce(gameObject, normalizedDirection * _force * repelForce, _forceAccel);
             }
 
-
-            //manager.Inputs.ResetLastPropulsionInputDirection();
-
+            // Switch state
             if (!manager.MovementManager.IsMinGrounded)
                 manager.States.SwitchState(manager.States.FloatingState);
             else
                 manager.States.SwitchState(manager.States.IdleState);
+
+
+            //manager.Inputs.ResetLastPropulsionInputDirection();
+
 
 
             // Visual

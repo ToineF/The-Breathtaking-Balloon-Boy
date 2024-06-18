@@ -1007,6 +1007,7 @@ namespace BlownAway.Character.Movements
             AddExternalForce(gameObject, Vector3.up * groundPoundForce, manager.Data.PowerUpData.GroundPoundStartLerp);
 
             // VFX
+            if (!IsMinGrounded) return;
             if (isSmallJump) manager.Feedbacks.PlayFeedback(manager.Data.FeedbacksData.GroundPoundLowLanding, LastGround.point, manager.Data.FeedbacksData.GroundPoundLowLanding.VFX.transform.rotation, null);
             else manager.Feedbacks.PlayFeedback(manager.Data.FeedbacksData.GroundPoundHighLanding, LastGround.point, manager.Data.FeedbacksData.GroundPoundHighLanding.VFX.transform.rotation, null);
         }
