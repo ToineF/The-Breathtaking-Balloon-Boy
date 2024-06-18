@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6961945896639714695}
   m_Layer: 9
-  m_Name: Box
+  m_Name: Box_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30,7 +30,7 @@ Transform:
   m_Children:
   - {fileID: 291263069206225362}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &252341537596720697
 PrefabInstance:
@@ -53,22 +53,22 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 6499c0a3be7435445a01c3b0910a41e1,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.08238433
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6499c0a3be7435445a01c3b0910a41e1,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0.08095519
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6499c0a3be7435445a01c3b0910a41e1,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.7071068
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6499c0a3be7435445a01c3b0910a41e1,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.7071068
+      value: -0.0000014603138
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6499c0a3be7435445a01c3b0910a41e1,
         type: 3}
@@ -83,7 +83,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 6499c0a3be7435445a01c3b0910a41e1,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: -90
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6499c0a3be7435445a01c3b0910a41e1,
         type: 3}
@@ -100,6 +100,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 134d025f20c64d8468a7b21b1dfd081b, type: 2}
+    - target: {fileID: -5182202917012545758, guid: 6499c0a3be7435445a01c3b0910a41e1,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 6942bb237dc8ea04cb5e8a875d68a390, type: 2}
     - target: {fileID: 919132149155446097, guid: 6499c0a3be7435445a01c3b0910a41e1,
         type: 3}
       propertyPath: m_Name
@@ -115,6 +120,11 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
+    - target: {fileID: 2838339233995600171, guid: 6499c0a3be7435445a01c3b0910a41e1,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 6942bb237dc8ea04cb5e8a875d68a390, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
