@@ -47,6 +47,14 @@ namespace AntoineFoucault.Utilities
         {
             return (x % m + m) % m;
         }
+
+        public static float SqrtDistance(Vector3 a, Vector3 b)
+        {
+            float num = a.x - b.x;
+            float num2 = a.y - b.y;
+            float num3 = a.z - b.z;
+            return (float)(num * num + num2 * num2 + num3 * num3);
+        }
     }
 
     public static class VectorExtensions
@@ -519,13 +527,18 @@ namespace AntoineFoucault.Utilities
             return list[UnityEngine.Random.Range(0, list.Count)];
         }
 
-	public static T GetRandomItemExcluding<T>(this IList<T> list, int excludedIndex)
+        public static T GetRandomItemExcluding<T>(this IList<T> list, int excludedIndex)
         {
             int randomIndex = UnityEngine.Random.Range(0, list.Count);
             if (randomIndex == excludedIndex)
                 return GetRandomItemExcluding(list, excludedIndex);
             else
                 return list[randomIndex];
+        }
+
+        public static T GetRandomBetween<T>(T arr1, T arr2)
+        {
+            return UnityEngine.Random.Range(0, 2) == 1 ? arr1 : arr2;
         }
 
         public static IList<T> Shuffle<T>(this IList<T> list)
