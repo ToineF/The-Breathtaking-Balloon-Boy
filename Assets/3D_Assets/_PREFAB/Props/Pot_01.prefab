@@ -118,6 +118,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -5568371526223589888, guid: d899b53e1d454bb41810f74287549374,
         type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: -5568371526223589888, guid: d899b53e1d454bb41810f74287549374,
+        type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
@@ -149,6 +154,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 6877525155994571769}
+    - targetCorrespondingSourceObject: {fileID: -5568371526223589888, guid: d899b53e1d454bb41810f74287549374,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7621373247175713526}
   m_SourcePrefab: {fileID: 100100000, guid: d899b53e1d454bb41810f74287549374, type: 3}
 --- !u!1 &538461090730818023 stripped
 GameObject:
@@ -182,6 +191,33 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 844871691328554166}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &4107491538670914230 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -5568371526223589888, guid: d899b53e1d454bb41810f74287549374,
+    type: 3}
+  m_PrefabInstance: {fileID: 844871691328554166}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &7621373247175713526
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4107491538670914230}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.02704112, y: 0.036789704, z: 0.01903243}
+  m_Center: {x: -4.6566126e-10, y: -3.637979e-12, z: 0.0069132224}
 --- !u!23 &7475020438771914829 stripped
 MeshRenderer:
   m_CorrespondingSourceObject: {fileID: -1439730007547781893, guid: d899b53e1d454bb41810f74287549374,
