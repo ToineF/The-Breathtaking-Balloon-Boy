@@ -32,11 +32,9 @@ public class ChildAnimatedCircle : MonoBehaviour
         Vector3 targetOffset = Random.insideUnitSphere;
         targetOffset = new Vector3(targetOffset.x, 0, targetOffset.y);
         Vector3 targetPosition = _startPosition + targetOffset * _walkRadius;
-        float distance = targetOffset.sqrMagnitude;
+        float distance = Vector3.Distance(transform.position, targetPosition);
 
-        _walkTween = transform.DOMove(targetPosition, _walkSpeed).OnComplete(StopWalking).SetEase(_walkEase);
-        Debug.Log(targetPosition.z - transform.position.z);
-        Debug.Log(targetPosition.x - transform.position.x);
+        _walkTween = transform.DOMove(targetPosition, distance / _walkSpeed).OnComplete(StopWalking).SetEase(_walkEase);
         var angle = Mathf.Atan2(targetPosition.x - transform.position.x, targetPosition.z - transform.position.z);   //radians
                                                                                                                                // you need to devide by PI, and MULTIPLY by 180:
         var degrees = 180 * angle / Mathf.PI;  //degrees
@@ -44,8 +42,8 @@ public class ChildAnimatedCircle : MonoBehaviour
         transform.eulerAngles = Vector3.up * degrees;
 
         Debug.Log(distance);
-        Debug.Log(angle);
-        Debug.Log(degrees);
+        Debug.Log(_walkSpeed);
+        Debug.Log(distance / _walkSpeed);
     }
 
 
