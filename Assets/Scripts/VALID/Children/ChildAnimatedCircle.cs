@@ -41,9 +41,9 @@ public class ChildAnimatedCircle : MonoBehaviour
         //round number, avoid decimal f
         transform.eulerAngles = Vector3.up * degrees;
 
-        Debug.Log(distance);
-        Debug.Log(_walkSpeed);
-        Debug.Log(distance / _walkSpeed);
+        //Debug.Log(distance);
+        //Debug.Log(_walkSpeed);
+        //Debug.Log(distance / _walkSpeed);
     }
 
 
