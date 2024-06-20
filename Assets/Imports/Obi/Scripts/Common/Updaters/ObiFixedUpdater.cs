@@ -22,6 +22,8 @@ namespace Obi
 
         [NonSerialized] private float accumulatedTime;
 
+   
+
         private void OnValidate()
         {
             substeps = Mathf.Max(1, substeps);
@@ -49,13 +51,15 @@ namespace Obi
 
             // Divide the step into multiple smaller substeps:
             for (int i = 0; i < substeps; ++i)
-                Substep(Time.fixedDeltaTime, substepDelta, substeps-i);
+            //    Substep(Time.fixedDeltaTime, substepDelta, substeps-i);
 
             EndStep(substepDelta);
 
             ObiProfiler.DisableProfiler();
 
             accumulatedTime -= Time.fixedDeltaTime;
+
+            enabled = false;
         }
 
         private void Update()
