@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5460839564915845409}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Tuyau_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -45,10 +45,25 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5460839564915845409}
     m_Modifications:
+    - target: {fileID: 2500699227471106419, guid: 3d780eef075ef87489994dacd711dc66,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 3026089891393649986, guid: 3d780eef075ef87489994dacd711dc66,
         type: 3}
       propertyPath: m_Name
       value: Tuyau_90_droit
+      objectReference: {fileID: 0}
+    - target: {fileID: 3026089891393649986, guid: 3d780eef075ef87489994dacd711dc66,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4940473672431824909, guid: 3d780eef075ef87489994dacd711dc66,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 5460839564915845409, guid: 3d780eef075ef87489994dacd711dc66,
         type: 3}
@@ -119,6 +134,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7295135278886277423, guid: 3d780eef075ef87489994dacd711dc66,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -313,8 +333,41 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3026089891393649986, guid: 63b8e27b8cb97d04294d03ae5c4ae95c,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7217025347475541556}
   m_SourcePrefab: {fileID: 100100000, guid: 63b8e27b8cb97d04294d03ae5c4ae95c, type: 3}
+--- !u!1 &2861534249336831355 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3026089891393649986, guid: 63b8e27b8cb97d04294d03ae5c4ae95c,
+    type: 3}
+  m_PrefabInstance: {fileID: 1029321572336189497}
+  m_PrefabAsset: {fileID: 0}
+--- !u!136 &7217025347475541556
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2861534249336831355}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 10.932839
+  m_Direction: 1
+  m_Center: {x: 0, y: -2.5562148, z: 0}
 --- !u!4 &5008053513436784920 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5460839564915845409, guid: 63b8e27b8cb97d04294d03ae5c4ae95c,
@@ -329,10 +382,25 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5460839564915845409}
     m_Modifications:
+    - target: {fileID: 2500699227471106419, guid: 3d780eef075ef87489994dacd711dc66,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 3026089891393649986, guid: 3d780eef075ef87489994dacd711dc66,
         type: 3}
       propertyPath: m_Name
       value: Tuyau_90_droit (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3026089891393649986, guid: 3d780eef075ef87489994dacd711dc66,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4940473672431824909, guid: 3d780eef075ef87489994dacd711dc66,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 5460839564915845409, guid: 3d780eef075ef87489994dacd711dc66,
         type: 3}
@@ -403,6 +471,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7295135278886277423, guid: 3d780eef075ef87489994dacd711dc66,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
