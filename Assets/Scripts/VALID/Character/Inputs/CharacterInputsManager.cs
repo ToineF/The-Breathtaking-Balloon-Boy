@@ -82,7 +82,7 @@ namespace BlownAway.Character.Inputs
             _inputs = new PlayerInputs();
 
             if (Gamepad.all.Count > 0)
-                _gamepad = Gamepad.all[0];
+                _gamepad = Gamepad.current;
             AssignControllerType();
         }
 
@@ -322,7 +322,7 @@ namespace BlownAway.Character.Inputs
         private void AssignControllerType()
         {
             if (Gamepad.all.Count <= 0) return;
-            var gamepad = Gamepad.all[0];
+            var gamepad = Gamepad.current;
 
             if (gamepad is UnityEngine.InputSystem.XInput.XInputController)
             {
