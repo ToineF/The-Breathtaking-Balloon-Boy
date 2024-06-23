@@ -87,18 +87,12 @@ namespace BlownAway.Camera
 
             Camera.transform.localPosition = _camDist;
 
-            GameObject obj = new GameObject();
-            obj.transform.SetParent(Camera.transform.parent);
-            obj.transform.localPosition = new Vector3(Camera.transform.localPosition.x, Camera.transform.localPosition.y,
-                Camera.transform.localPosition.z - Manager.Data.CameraData.CollisionRaycastOffset);
-
-            Vector3 direction = obj.transform.position - Camera.transform.position;
-            direction.Normalize();
+            Vector3 direction = Camera.transform.forward;
             Debug.DrawLine(Camera.transform.position, CameraCenter.transform.position + direction * Manager.Data.CameraData.CollisionRaycastOffset, Color.red);
 
             if (Physics.Linecast(CameraCenter.transform.position + direction * Manager.Data.CameraData.CollisionRaycastOffset, Camera.transform.position, out _camHit, ~Manager.Data.CameraData.PlayerLayer, QueryTriggerInteraction.Ignore))
             {
-                Physics.Linecast(Camera.transform.position, CameraCenter.transform.position + direction * Manager.Data.CameraData.CollisionSensitivity, out _camHit2, ~Manager.Data.CameraData.PlayerLayer, QueryTriggerInteraction.Ignore);
+                Physics.Linecast(Camera.transform.position, CameraCenter.transform.position + direction * Manager.Data.CameraData.CollisionRaycastOffset, out _camHit2, ~Manager.Data.CameraData.PlayerLayer, QueryTriggerInteraction.Ignore);
                 //Debug.Log("Distance : " + Vector3.Distance(_camHit.point, _camHit2.point));
 
                 if (Vector3.Distance(_camHit.point, _camHit2.point) > Manager.Data.CameraData.MinCollisionThickness)
@@ -114,12 +108,10 @@ namespace BlownAway.Camera
 
             }
 
-            Destroy(obj);
-
-            if (Camera.transform.localPosition.z > -1f)
-            {
-                Camera.transform.localPosition = new Vector3(Camera.transform.localPosition.x, Camera.transform.localPosition.y, -1f);
-            }
+            //if (Camera.transform.localPosition.z > -1f)
+            //{
+            //    Camera.transform.localPosition = new Vector3(Camera.transform.localPosition.x, Camera.transform.localPosition.y, -1f);
+            //}
         }
 
         private void SetCameraAngle(CharacterManager manager)
