@@ -2,9 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
-using static AntoineFoucault.Utilities.Tween;
 using System.Collections;
-using System;
 
 namespace BlownAway.Collectibles
 {
@@ -23,9 +21,10 @@ namespace BlownAway.Collectibles
         [SerializeField] private float _stayFadeTime;
 
         [Header("Children")]
-        [SerializeField] private Transform _childrenUIParent;
-        [SerializeField] private Image _childHiddenImagePrefab;
-        [SerializeField] private Image _childFoundImagePrefab;
+        //[SerializeField] private Transform _childrenUIParent;
+        //[SerializeField] private Image _childHiddenImagePrefab;
+        //[SerializeField] private Image _childFoundImagePrefab;
+        [SerializeField] private GameObject[] _childrenImages;
 
         [Header("Coin")]
         [SerializeField] private CanvasGroup _coinsUI;
@@ -39,8 +38,8 @@ namespace BlownAway.Collectibles
         [SerializeField] private TMP_Text _maxRareCollectibleCountText;
 
         [Header("Feedbacks")]
-        [SerializeField] private DoTweenPunchFeedback _coinFeedbacks;
-        [SerializeField] private DoTweenPunchFeedback _rareCollectibleFeedbacks;
+        [SerializeField] private AntoineFoucault.Utilities.Tween.DoTweenPunchFeedback _coinFeedbacks;
+        [SerializeField] private AntoineFoucault.Utilities.Tween.DoTweenPunchFeedback _rareCollectibleFeedbacks;
 
         private Image[] _collectiblesImage;
         private Coroutine _currentVisibilityCoroutine;
@@ -57,7 +56,7 @@ namespace BlownAway.Collectibles
 
             UpdateCoinUI();
             UpdateRareCollectibleUI();
-            CreateChildrenUI();
+            UpdateChildrenUI();
             UpdateMaxCollectiblesUI();
         }
 
@@ -92,29 +91,39 @@ namespace BlownAway.Collectibles
             _rareCollectibleCountText.text = _collectiblesManager.RareCollectibles.ToString();
             ShowUICollectible();
         }
+
         private void UpdateChildrenUI()
         {
-            for (int i = 0; i < _childrenManager.ChildrenCount; i++)
+            if (_childrenImages.Length < 1) return;
+            for (int i = 0; i < Mathf.Min(_childrenManager.ChildrenCount, _childrenManager.MaxChildrenCount); i++)
             {
-                Destroy(_collectiblesImage[i].gameObject);
-                _collectiblesImage[i] = Instantiate(_childFoundImagePrefab, _childrenUIParent);
+                //Destroy(_collectiblesImage[i].gameObject);
+                //_collectiblesImage[i] = Instantiate(_childFoundImagePrefab, _childrenUIParent);
+                _childrenImages[i].SetActive(true);
             }
-            for (int i = _childrenManager.ChildrenCount; i < _childrenManager.MaxChildrenCount; i++)
+            for (int i = Mathf.Min(_childrenManager.ChildrenCount, _childrenManager.MaxChildrenCount); i < _childrenManager.MaxChildrenCount; i++)
             {
-                Destroy(_collectiblesImage[i].gameObject);
-                _collectiblesImage[i] = Instantiate(_childHiddenImagePrefab, _childrenUIParent);
+                //Destroy(_collectiblesImage[i].gameObject);
+                //_collectiblesImage[i] = Instantiate(_childHiddenImagePrefab, _childrenUIParent);
+                _childrenImages[i].SetActive(false);
             }
             ShowUICollectible();
         }
-        private void CreateChildrenUI()
-        {
-            _collectiblesImage = new Image[_childrenManager.MaxChildrenCount];
 
-            for (int i = 0; i < _childrenManager.MaxChildrenCount; i++)
-            {
-                _collectiblesImage[i] = Instantiate(_childHiddenImagePrefab, _childrenUIParent);
-            }
-        }
+        //private void CreateChildrenUI()
+        //{
+        //    Debug.Log(_childrenImages);
+        //    Debug.Log(_childrenImages.Length);
+        //    Debug.Log(_childrenImages[0]);
+        //    Debug.Log(_childrenImages[1]);
+        //    Debug.Log(_childrenImages[2]);
+        //    _childrenImages = new GameObject[_childrenManager.MaxChildrenCount];
+
+        //    //for (int i = 0; i < _childrenManager.MaxChildrenCount; i++)
+        //    //{
+        //    //    _collectiblesImage[i] = Instantiate(_childHiddenImagePrefab, _childrenUIParent);
+        //    //}
+        //}
 
         private void Update()
         {
