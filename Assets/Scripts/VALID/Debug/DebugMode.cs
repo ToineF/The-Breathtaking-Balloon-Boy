@@ -1,6 +1,5 @@
 using BlownAway.Character;
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -14,7 +13,7 @@ namespace BlownAway.DebugMode
             if (transform.parent == null) DontDestroyOnLoad(this);
         }
 
-#if UNITY_EDITOR
+//#if UNITY_EDITOR
 
         private void Update()
         {
@@ -64,7 +63,7 @@ namespace BlownAway.DebugMode
             UnityEditor.AssetDatabase.Refresh();
         }
 
-#endif
+//#endif
 
     }
 }
