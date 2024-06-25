@@ -49,7 +49,7 @@ namespace BlownAway.DebugMode
             }
             if (Input.GetKeyDown(KeyCode.F8)) // Screenshot
             {
-                TakeScreenshot();
+                //TakeScreenshot();
             }
             if (Input.GetKeyDown(KeyCode.F9)) // God Mode
             {
@@ -57,11 +57,11 @@ namespace BlownAway.DebugMode
             }
         }
 
-        private void TakeScreenshot()
-        {
-            ScreenCapture.CaptureScreenshot(Application.dataPath + "/Screenshots/" + DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss") + ".png");
-            UnityEditor.AssetDatabase.Refresh();
-        }
+        //private void TakeScreenshot()
+        //{
+        //    ScreenCapture.CaptureScreenshot(Application.dataPath + "/Screenshots/" + DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss") + ".png");
+        //    UnityEditor.AssetDatabase.Refresh();
+        //}
 
 //#endif
 
